@@ -3,7 +3,18 @@
 @tailwind utilities;
 
 * {
+  font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
+  text-decoration: none;
   padding: 0;
   margin: 0;
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1360px] w-full px-3 mx-auto
+  }
+  .content {
+    @apply max-w-[1280px] w-full px-2 mx-auto
+  }
 }
