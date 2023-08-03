@@ -19,7 +19,7 @@ const Navbar = () => {
             <NavLink to='warehouses'>Наши склады</NavLink>
           </li>
         </ul>
-        <button className='bg-colYellow w-24 h-10 rounded-lg hover:opacity-90 duration-100'>
+        <button className='bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'>
           Войти
         </button>
       </div>

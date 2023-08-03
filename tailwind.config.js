@@ -8,7 +8,9 @@ export default {
     extend: {
       colors: {
         colYellow: '#FEDE2B',
+        colYellowHover: '#e3c205',
         colPurple: '#9176FF',
+        colGray: '#A7A9B7'
       }
     },
   },
