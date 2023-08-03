@@ -1,7 +1,10 @@
-import { MainSlider } from '../../components';
-import AboutUs from '../../components/Home/AboutUs';
-import OurGoals from '../../components/Home/OurGoals';
-import Services from '../../components/Home/Services';
+import {
+  AboutUs,
+  HowItWorks,
+  MainSlider,
+  OurGoals,
+  Services,
+} from '../../components';
 
 const Home = () => {
   return (
@@ -29,6 +32,7 @@ const Home = () => {
       <AboutUs />
       <Services />
       <OurGoals />
+      <HowItWorks />
     </>
   );
 };
