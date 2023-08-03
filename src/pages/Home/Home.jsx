@@ -1,12 +1,14 @@
 import { MainSlider } from '../../components';
 import AboutUs from '../../components/Home/AboutUs';
+import OurGoals from '../../components/Home/OurGoals';
+import Services from '../../components/Home/Services';
 
 const Home = () => {
   return (
     <>
       <div className='relative slider'>
         <MainSlider />
-        <div className='max-w-[885px] w-full min-h-[190px] shadow-md mx-auto px-12 py-6 bg-white absolute bottom-[-22%] z-[1] left-0 right-0'>
+        <div className='max-w-[885px] w-full min-h-[190px] shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_0px] rounded-md mx-auto px-12 py-6 bg-white absolute bottom-[-22%] z-[1] left-0 right-0'>
           <form>
             <h3 className='text-xl font-medium mb-8'>
               Введите ваш номер, чтобы найти вашу посылку
@@ -25,6 +27,8 @@ const Home = () => {
         </div>
       </div>
       <AboutUs />
+      <Services />
+      <OurGoals />
     </>
   );
 };

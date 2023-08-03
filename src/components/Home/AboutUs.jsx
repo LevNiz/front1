@@ -5,7 +5,7 @@ import vector from './../../assets/images/vector2.png';
 
 const AboutUs = () => {
   return (
-    <div className='min-h-[850px] pt-[200px] pb-32 container'>
+    <div className='min-h-[850px] pt-[200px] pb-32 content'>
       <h1 className='text-[40px] font-medium text-center'>[ О нас ]</h1>
       <h4 className='text-2xl font-medium text-center mt-3'>
         Мы всегда к вашим услугам
@@ -26,15 +26,16 @@ const AboutUs = () => {
               alt='*'
             />
           </div>
-          <div className='w-[190px] h-[171px] bg-black flex justify-center items-center absolute bottom-0 right-[25px] overflow-hidden'>
-            <img
-              src={aboutUsImg3}
-              alt='*'
-            />
+          <div className='w-[190px] h-[171px] bg-black flex justify-center items-center absolute bottom-0 right-0 overflow-hidden'>
+            <img src={aboutUsImg3} alt='*' />
           </div>
         </div>
         <div className='w-3/5 pl-14 pr-16 flex items-center relative'>
-            <img src={vector} className='absolute top-1/2 right-0 transform -translate-y-1/2 -z-[1]' alt="*" />
+          <img
+            src={vector}
+            className='absolute top-1/2 -right-[20px] transform -translate-y-1/2 -z-[1]'
+            alt='*'
+          />
           <p className='text-2xl font-medium'>
             Lorem ipsum dolor sit amet consectetur. Posuere id amet sit cras
             tellus eget felis magna a. Libero eleifend turpis aliquet pulvinar.
