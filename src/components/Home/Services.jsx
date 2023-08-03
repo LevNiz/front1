@@ -1,6 +1,11 @@
+import serviceVector1 from './../../assets/images/service-vector1.png';
+import serviceVector2 from './../../assets/images/service-vector2.png';
+
 const Services = () => {
   return (
-    <div className='min-h-[540px] py-20 bg-black'>
+    <div className='min-h-[540px] py-20 bg-black relative'>
+      <img className='absolute bottomC-0 left-0' src={serviceVector1} alt="*" />
+      <img className='absolute top-0 right-0' src={serviceVector2} alt="*" />
       <div className='content text-white'>
         <h1 className='text-[40px] font-medium text-center'>
           [ Наши услуги ]

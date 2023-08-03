@@ -3,7 +3,7 @@ import goalsImg from './../../assets/images/goals1.jpg';
 
 const OurGoals = () => {
   return (
-    <div className='py-20 content min-h-[955px]'>
+    <div className='pt-20 pb-40 content'>
       <h1 className='text-[40px] font-medium text-center'>[ Наши цели ]</h1>
       <h4 className='text-2xl font-medium text-center mt-3'>
         Наши цели, миссии, задачи
@@ -28,7 +28,7 @@ const OurGoals = () => {
           </p>
         </div>
         <div className='w-3/5 relative'>
-          <div className='shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_0px] mb-12 p-3 max-w-[268px]'>
+          <div className='shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_0px] mb-12 ml-24 p-3 max-w-[268px]'>
             <h4 className='text-xl font-bold text-colPurple'>Наша миссия</h4>
             <p className='text-lg font-medium'>
               Lorem ipsum dolor sit amet consectetur. Posuere id amet sit cras
@@ -39,8 +39,8 @@ const OurGoals = () => {
           <div className='max-w-[254px] absolute min-h-[350px] text-3xl top-0 right-0 p-8 text-white bg-[linear-gradient(180deg,_#9747FF_0%,_rgba(151,_71,_255,_0.00)_100%)]'>
           Lorem ipsum dolor sit<br/> amet consectetur. 
           </div>
-          <div>
-            <img src={goalsImg} alt='*' />
+          <div className='max-w-[470px] min-w-[470px] max-h-[230px] mx-auto pt-4 overflow-hidden'>
+            <img className='w-full h-full object-cover' src={goalsImg} alt='*' />
           </div>
         </div>
       </div>
