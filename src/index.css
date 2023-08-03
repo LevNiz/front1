@@ -10,14 +10,36 @@
   margin: 0;
 }
 .navbar li a.active {
-  color: #FEDE2B;
+  color: #fede2b;
 }
 
 @layer components {
   .container {
-    @apply max-w-[1360px] w-full px-2 mx-auto
+    @apply max-w-[1360px] w-full px-2 mx-auto;
   }
   .content {
-    @apply max-w-[1280px] w-full px-2 mx-auto
+    @apply max-w-[1280px] w-full px-2 mx-auto;
   }
+}
+.slider .swiper-button-next,
+.slider .swiper-button-prev {
+  top: auto !important;
+  bottom: 40px;
+  right: 40px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #fede2b !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slider .swiper-button-prev::after,
+.slider .swiper-button-next::after {
+  color: #000;
+  font-size: 18px;
+}
+.slider .swiper-button-prev {
+  right: 90px;
+  left: auto;
 }

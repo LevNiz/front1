@@ -1,10 +1,12 @@
+import { MainSlider } from "../../components";
 
 const Home = () => {
+
   return (
     <div>
-      <h1>Главная</h1>
+      <MainSlider />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
