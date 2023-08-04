@@ -19,7 +19,7 @@ const Testimonials = () => {
             className='flex items-center'
           >
             <div className='max-w-[1120px] w-full mx-auto text-center py-12'>
-              <div className='max-w-[168px] min-w-[168px] max-h-[168px] min-h-[168px] rounded-full overflow-hidden mx-auto'>
+              <div className='max-w-[168px] min-w-[168px] h-[168px] rounded-full overflow-hidden mx-auto'>
                 <img
                   className='w-full h-full object-cover'
                   src={el?.avatar}

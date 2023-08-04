@@ -7,8 +7,7 @@ export const testimonials = [
   },
   {
     id: 2,
-    avatar:
-      'https://img.freepik.com/free-photo/close-up-portrait-cheerful-glamour-girl-with-cute-make-up-smiling-white-teeth-looking-happy-camera-standing-blue-background_1258-70300.jpg?w=2000',
+    avatar: 'https://c.stocksy.com/a/8fc400/z9/1101934.jpg',
     desc: 'Недавно впервые воспользовалась услугами компании "Трекинг" для доставки подарка своей подруге на день рождения. Посылка была доставлена вовремя, а самое приятное - в отличном состоянии. Упаковка была надежной, и моя подруга осталась в восторге от подарка. Спасибо за прекрасный опыт!',
   },
   {
