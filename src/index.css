@@ -43,3 +43,12 @@
   right: 90px;
   left: auto;
 }
+.testimonials .swiper-button-next,
+.testimonials .swiper-button-prev {
+  background-color: #000 !important;
+  bottom: 0;
+}
+.testimonials .swiper-button-next::after,
+.testimonials .swiper-button-prev::after {
+  color: #fff;
+}

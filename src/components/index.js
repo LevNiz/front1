@@ -4,6 +4,7 @@ import OurGoals from "./Home/OurGoals";
 import Layout from "./Layout/Layout";
 import Services from "./Home/Services";
 import HowItWorks from "./Home/HowItWorks";
+import Testimonials from "./Home/Testimonials";
 
 export {
     Layout,
@@ -12,4 +13,5 @@ export {
     OurGoals,
     Services,
     HowItWorks,
+    Testimonials,
 }

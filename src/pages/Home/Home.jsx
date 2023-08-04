@@ -4,6 +4,7 @@ import {
   MainSlider,
   OurGoals,
   Services,
+  Testimonials,
 } from '../../components';
 
 const Home = () => {
@@ -33,6 +34,7 @@ const Home = () => {
       <Services />
       <OurGoals />
       <HowItWorks />
+      <Testimonials />
     </>
   );
 };
