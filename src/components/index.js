@@ -7,6 +7,7 @@ import HowItWorks from "./Home/HowItWorks";
 import Testimonials from "./Home/Testimonials";
 import WareHouseItem from "./Warehouses/WareHouseItem";
 import WareHouseDetail from "./Warehouses/WareHouseDetail";
+import Parcel from "./Tracking/Parcel";
 
 export {
     Layout,
@@ -18,4 +19,5 @@ export {
     Testimonials,
     WareHouseItem,
     WareHouseDetail,
+    Parcel,
 }

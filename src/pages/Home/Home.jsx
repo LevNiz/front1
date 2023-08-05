@@ -19,7 +19,7 @@ const Home = () => {
             </h3>
             <div className='flex'>
               <input
-                className='max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base'
+                className='max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
                 type='text'
                 placeholder='Ваш номер'
               />
