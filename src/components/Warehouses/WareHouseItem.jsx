@@ -17,19 +17,19 @@ const WareHouseItem = (warehouses) => {
               alt='*'
             />
           </div>
-          <div>
+          <div className='min-h-[128px]'>
             <h4 className='text-2xl font-medium text-colGray mb-8 text-center'>
               Склад
             </h4>
             <p className='text-2xl font-medium text-black'>{el?.name}</p>
           </div>
-          <div className='max-w-[275px] w-full'>
+          <div className='max-w-[275px] w-full min-h-[128px]'>
             <h4 className='text-2xl font-medium text-colGray mb-8 text-center'>
               Адрес
             </h4>
             <p className='text-2xl font-medium text-black'>{el?.address}</p>
           </div>
-          <div>
+          <div className='min-h-[128px]'>
             <h4 className='text-2xl font-medium text-colGray mb-8 text-center'>
               Режим работы
             </h4>

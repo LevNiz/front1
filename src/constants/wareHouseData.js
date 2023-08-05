@@ -27,11 +27,6 @@ export const warehouses = [
         image:
           'https://www.arendator.ru/data/editor_imgs/8/abc-editor_img-8801.jpg',
       },
-      {
-        id: 5,
-        image:
-          'https://www.skladsystems.com/wp-content/uploads/2020/01/f-sklad-8623-1.jpg',
-      },
     ],
   },
   {
@@ -59,11 +54,6 @@ export const warehouses = [
         id: 4,
         image:
           'https://www.arendator.ru/data/editor_imgs/8/abc-editor_img-8801.jpg',
-      },
-      {
-        id: 5,
-        image:
-          'https://www.skladsystems.com/wp-content/uploads/2020/01/f-sklad-8623-1.jpg',
       },
     ],
   },
@@ -93,11 +83,6 @@ export const warehouses = [
         image:
           'https://www.arendator.ru/data/editor_imgs/8/abc-editor_img-8801.jpg',
       },
-      {
-        id: 5,
-        image:
-          'https://www.skladsystems.com/wp-content/uploads/2020/01/f-sklad-8623-1.jpg',
-      },
     ],
   },
   {
@@ -125,11 +110,6 @@ export const warehouses = [
         id: 4,
         image:
           'https://www.arendator.ru/data/editor_imgs/8/abc-editor_img-8801.jpg',
-      },
-      {
-        id: 5,
-        image:
-          'https://www.skladsystems.com/wp-content/uploads/2020/01/f-sklad-8623-1.jpg',
       },
     ],
   },
@@ -159,11 +139,6 @@ export const warehouses = [
         image:
           'https://www.arendator.ru/data/editor_imgs/8/abc-editor_img-8801.jpg',
       },
-      {
-        id: 5,
-        image:
-          'https://www.skladsystems.com/wp-content/uploads/2020/01/f-sklad-8623-1.jpg',
-      },
     ],
   },
   {
@@ -191,11 +166,6 @@ export const warehouses = [
         id: 4,
         image:
           'https://www.arendator.ru/data/editor_imgs/8/abc-editor_img-8801.jpg',
-      },
-      {
-        id: 5,
-        image:
-          'https://www.skladsystems.com/wp-content/uploads/2020/01/f-sklad-8623-1.jpg',
       },
     ],
   },

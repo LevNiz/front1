@@ -10,7 +10,8 @@ export default {
         colYellow: '#FEDE2B',
         colYellowHover: '#e3c205',
         colPurple: '#9176FF',
-        colGray: '#A7A9B7'
+        colGray: '#A7A9B7',
+        colBgGray: '#F5F5F5',
       }
     },
   },
