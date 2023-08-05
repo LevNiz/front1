@@ -24,7 +24,7 @@ const WareHouseDetail = () => {
       <h1 className='text-4xl font-semibold text-center mt-4 mb-16'>
         Склад №1
       </h1>
-      <div className='flex'>
+      <div className='flex pb-12'>
         <div className='w-2/5'>
           <div className='max-w-[472px] min-w-[472px] h-[413px] overflow-hidden rounded-lg mx-auto'>
             <img src={mainIMG} alt='*' className='w-full h-full object-cover' />
@@ -41,7 +41,7 @@ const WareHouseDetail = () => {
             {images?.map((el, index) => (
               <SwiperSlide
                 key={el.id}
-                className='max-w-[80px] w-full h-[80px] rounded-lg overflow-hidden'
+                className='max-w-[80px] w-full h-[80px] rounded-lg overflow-hidden cursor-pointer'
                 onClick={() => {
                   handleClick(index);
                   setFade(!fade);
