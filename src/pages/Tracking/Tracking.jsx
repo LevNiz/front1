@@ -1,4 +1,4 @@
-import { Parcel } from '../../components';
+import { DetailInfo, Parcel } from '../../components';
 import { parcel } from '../../constants/parcelData';
 import rulesImg from './../../assets/images/rules.svg';
 
@@ -35,11 +35,11 @@ const Tracking = () => {
       </h3>
       <div className='flex'>
         <div className='w-3/5'>
-          
-            <Parcel parcel={parcel} />
-         
+          <Parcel parcel={parcel} />
         </div>
-        <div className='w-2/5'>Right side</div>
+        <div className='w-2/5'>
+          <DetailInfo />
+        </div>
       </div>
     </div>
   );
