@@ -27,7 +27,7 @@ const WareHouseItem = (warehouses) => {
             <h4 className='text-2xl font-medium text-colGray mb-8 text-center'>
               Адрес
             </h4>
-            <p className='text-2xl font-medium text-black'>{el?.address}</p>
+            <p className='text-2xl font-medium text-black'>{`${el?.country}, ${el?.city}, ${el?.street}`}</p>
           </div>
           <div className='min-h-[128px]'>
             <h4 className='text-2xl font-medium text-colGray mb-8 text-center'>

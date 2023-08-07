@@ -4,7 +4,9 @@ export const warehouses = [
   {
     id: 1,
     name: 'Склад №1',
-    address: 'Кыргызстан, Бишкек ул. Советская, 123',
+    country: 'Кыргызстан',
+    city: 'Бишкек',
+    street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
     icon: wareHouseIcon,
     images: [
@@ -32,7 +34,9 @@ export const warehouses = [
   {
     id: 2,
     name: 'Склад №2',
-    address: 'Кыргызстан, Бишкек ул. Советская, 123',
+    country: 'Россия',
+    city: 'Москва',
+    street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
     icon: wareHouseIcon,
     images: [
@@ -60,7 +64,9 @@ export const warehouses = [
   {
     id: 3,
     name: 'Склад №3',
-    address: 'Кыргызстан, Бишкек ул. Советская, 123',
+    country: 'Казахстан',
+    city: 'Астана',
+    street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
     icon: wareHouseIcon,
     images: [
@@ -88,7 +94,9 @@ export const warehouses = [
   {
     id: 4,
     name: 'Склад №4',
-    address: 'Кыргызстан, Бишкек ул. Советская, 123',
+    country: 'Германия',
+    city: 'Берлин',
+    street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
     icon: wareHouseIcon,
     images: [
@@ -116,7 +124,9 @@ export const warehouses = [
   {
     id: 5,
     name: 'Склад №5',
-    address: 'Кыргызстан, Бишкек ул. Советская, 123',
+    country: 'Япония',
+    city: 'Токио',
+    street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
     icon: wareHouseIcon,
     images: [
@@ -144,7 +154,9 @@ export const warehouses = [
   {
     id: 6,
     name: 'Склад №6',
-    address: 'Кыргызстан, Бишкек ул. Советская, 123',
+    country: 'Канада',
+    city: 'Оттава',
+    street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
     icon: wareHouseIcon,
     images: [
