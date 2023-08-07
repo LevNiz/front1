@@ -3,6 +3,7 @@ import mapImg from './../../assets/images/map.png';
 import sender from './../../assets/icons/sender.svg';
 import reciever from './../../assets/icons/reciever.svg';
 import cargo from './../../assets/icons/cargo.svg';
+import dollar from './../../assets/icons/dollar.svg';
 
 const DetailInfo = () => {
   return (
@@ -71,7 +72,7 @@ const DetailInfo = () => {
         <div className='flex items-center z-10 mt-5'>
           <div className='flex flex-col items-center'>
             <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
-              <img src={cargo} alt='*' />
+              <img src={dollar} alt='*' />
             </div>
           </div>
           <div className='ml-4'>

@@ -20,7 +20,7 @@ const Home = () => {
             <div className='flex'>
               <input
                 className='max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
-                type='text'
+                type='number'
                 placeholder='Ваш номер'
               />
               <button className='bg-colYellow w-full ml-5 h-[42px] font-medium rounded-lg hover:bg-colYellowHover duration-100'>

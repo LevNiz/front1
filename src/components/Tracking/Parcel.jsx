@@ -21,16 +21,16 @@ const Parcel = (parcel) => {
           </div>
           <div className='flex justify-between pt-8'>
             <div className='max-w-[33%] break-all'>
-              <span className='text-colGray2 text-xl'>Отправитель</span>
-              <h4 className='text-2xl font-medium mt-2'>{el?.sender}</h4>
+              <span className='text-colGray2 text-[18ox]'>Отправитель</span>
+              <h4 className='text-xl font-medium mt-2'>{el?.sender}</h4>
             </div>
             <div className='max-w-[33%] break-all'>
-              <span className='text-colGray2 text-xl'>Дата доставки</span>
-              <h4 className='text-2xl font-medium mt-2'>{el?.deliveryDate}</h4>
+              <span className='text-colGray2 text-[18px]'>Дата доставки</span>
+              <h4 className='text-xl font-medium mt-2'>{el?.deliveryDate}</h4>
             </div>
             <div className='max-w-[33%] break-all'>
-              <span className='text-colGray2 text-xl'>Получатель</span>
-              <h4 className='text-2xl font-medium mt-2'>{el?.reciever}</h4>
+              <span className='text-colGray2 text-[18px]'>Получатель</span>
+              <h4 className='text-xl font-medium mt-2'>{el?.reciever}</h4>
             </div>
           </div>
           <div className='flex justify-between items-center mt-8'>
