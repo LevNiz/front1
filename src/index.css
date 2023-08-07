@@ -21,6 +21,18 @@
     @apply max-w-[1280px] w-full px-2 mx-auto;
   }
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 24px;
+}
+::-webkit-scrollbar-thumb {
+  background: #777;
+}
+::-webkit-scrollbar-track  {
+  background: #BDBDBD; 
+}
+
 .slider .swiper-button-next,
 .slider .swiper-button-prev {
   top: auto !important;
