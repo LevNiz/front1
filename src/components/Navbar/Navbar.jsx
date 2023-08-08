@@ -56,10 +56,10 @@ const Navbar = () => {
             ref={modalRef}
             className='absolute top-[100px] right-10 max-w-[370px] w-full bg-white z-[999] p-8 flex flex-col space-y-5 rounded-2xl'
           >
-            <NavLink className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'>
+            <NavLink to='login' className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'>
               Войти
             </NavLink>
-            <NavLink className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'>
+            <NavLink to='register' className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'>
               Зарегистрироваться
             </NavLink>
           </div>
