@@ -12,6 +12,7 @@ export default {
         colPurple: '#9176FF',
         colGray: '#A7A9B7',
         colGray2: '#C3C3C3',
+        colGray3: '#8391A1',
         colBgGray: '#F5F5F5',
         colBgGray2: '#F2F2F2',
         colGreen: '#58FF90',

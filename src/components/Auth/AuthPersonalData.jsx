@@ -1,15 +1,20 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/logo2.svg';
 import call from '../../assets/icons/call3.svg';
 import profile from '../../assets/icons/profile.svg';
+import back from '../../assets/icons/back.svg';
 import { useState } from 'react';
 
 const AuthPersonalData = () => {
   const [isChecked, setIsChecked] = useState(true);
+  const navigate = useNavigate();
 
   return (
     <div className='flex w-full h-screen'>
-      <div className='w-2/6 bg-black flex justify-center items-center'>
+      <div className='relative w-2/6 bg-black flex justify-center items-center'>
+        <div onClick={() => navigate(-1)}>
+          <img className='absolute top-10 left-10 cursor-pointer' src={back} alt='*' />
+        </div>
         <img src={logo} alt='*' />
       </div>
       <div className='w-4/6 flex flex-col justify-around items-center py-20'>
@@ -88,7 +93,7 @@ const AuthPersonalData = () => {
             </label>
           </div>
           <NavLink
-            to='step-1'
+            to='/register/step-2'
             className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
           >
             Далее

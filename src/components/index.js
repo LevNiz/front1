@@ -10,6 +10,7 @@ import WareHouseDetail from "./Warehouses/WareHouseDetail";
 import Parcel from "./Tracking/Parcel";
 import DetailInfo from "./Tracking/DetailInfo";
 import AuthPersonalData from "./Auth/AuthPersonalData";
+import AuthPassword from "./Auth/AuthPassword";
 
 export {
     Layout,
@@ -24,4 +25,5 @@ export {
     Parcel,
     DetailInfo,
     AuthPersonalData,
+    AuthPassword,
 }
