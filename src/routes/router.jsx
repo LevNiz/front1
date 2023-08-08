@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { Layout, WareHouseDetail } from '../components';
+import { AuthPersonalData, Layout, WareHouseDetail } from '../components';
 import { Auth, Home, Tracking, Warehouses } from '../pages';
 
 export const router = createBrowserRouter(
@@ -11,6 +11,7 @@ export const router = createBrowserRouter(
     <Route>
       <Route path='register'>
         <Route index element={<Auth />} />
+        <Route path='step-1' element={<AuthPersonalData />} />
       </Route>
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
