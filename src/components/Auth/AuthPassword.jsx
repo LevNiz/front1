@@ -16,7 +16,9 @@ const AuthPassword = () => {
             alt='*'
           />
         </div>
-        <img src={logo} alt='*' />
+        <NavLink to='/'>
+          <img src={logo} alt='*' />
+        </NavLink>
       </div>
       <div className='w-4/6 flex flex-col justify-around items-center py-20'>
         <form className='max-w-[400px] w-full'>

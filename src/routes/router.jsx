@@ -3,7 +3,14 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { AuthConfirm, AuthPassword, AuthPersonalData, Layout, WareHouseDetail } from '../components';
+import {
+  AuthConfirm,
+  AuthPassword,
+  AuthPersonalData,
+  Layout,
+  Login,
+  WareHouseDetail,
+} from '../components';
 import { Auth, Home, Tracking, Warehouses } from '../pages';
 
 export const router = createBrowserRouter(
@@ -15,6 +22,7 @@ export const router = createBrowserRouter(
         <Route path='step-2' element={<AuthPassword />} />
         <Route path='confirm' element={<AuthConfirm />} />
       </Route>
+      <Route path='login' element={<Login />} />
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
         <Route path='tracking' element={<Tracking />} />

@@ -1,12 +1,23 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/logo2.svg';
+import back from '../../assets/icons/back.svg';
 import call from '../../assets/icons/call2.svg';
 
 const Auth = () => {
+  const navigate = useNavigate();
   return (
     <div className='flex w-full h-screen'>
       <div className='w-2/6 bg-black flex justify-center items-center'>
-        <img src={logo} alt='*' />
+        <div onClick={() => navigate(-1)}>
+          <img
+            className='absolute top-10 left-10 cursor-pointer'
+            src={back}
+            alt='*'
+          />
+        </div>
+        <NavLink to='/'>
+          <img src={logo} alt='*' />
+        </NavLink>
       </div>
       <div className='w-4/6 flex flex-col justify-around items-center py-20'>
         <h1 className='text-[32px] font-medium'>Регистрация</h1>
@@ -17,9 +28,16 @@ const Auth = () => {
               type='number'
               placeholder='Введите ваш номер'
             />
-            <img className='absolute top-[15px] left-[10px]' src={call} alt="*" />
+            <img
+              className='absolute top-[15px] left-[10px]'
+              src={call}
+              alt='*'
+            />
           </div>
-          <NavLink to='step-1' className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'>
+          <NavLink
+            to='step-1'
+            className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
+          >
             Зарегистрироваться
           </NavLink>
         </form>

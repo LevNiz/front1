@@ -15,7 +15,9 @@ const AuthConfirm = () => {
             alt='*'
           />
         </div>
-        <img src={logo} alt='*' />
+        <NavLink to='/'>
+          <img src={logo} alt='*' />
+        </NavLink>
       </div>
       <div className='w-4/6 flex flex-col justify-around items-center py-20'>
         <form className='max-w-[400px] w-full'>
@@ -60,7 +62,10 @@ const AuthConfirm = () => {
           </div>
           <div className='font-medium text-center font-[Outfit]'>02:39</div>
           <p className='text-center text-colGray my-10 text-sm'>
-            Не получили код? <NavLink to='#' className='text-black font-bold'>Отправить еще раз</NavLink>
+            Не получили код?{' '}
+            <NavLink to='#' className='text-black font-bold'>
+              Отправить еще раз
+            </NavLink>
           </p>
           <button className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'>
             Подтвердить
