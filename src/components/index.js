@@ -11,6 +11,7 @@ import Parcel from "./Tracking/Parcel";
 import DetailInfo from "./Tracking/DetailInfo";
 import AuthPersonalData from "./Auth/AuthPersonalData";
 import AuthPassword from "./Auth/AuthPassword";
+import AuthConfirm from "./Auth/AuthConfirm";
 
 export {
     Layout,
@@ -26,4 +27,5 @@ export {
     DetailInfo,
     AuthPersonalData,
     AuthPassword,
+    AuthConfirm,
 }

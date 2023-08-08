@@ -71,10 +71,10 @@ const AuthPassword = () => {
             </div>
           </div>
           <NavLink
-            to='step-1'
+            to='/register/confirm'
             className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
           >
-            Далее
+            Подтвердить
           </NavLink>
         </form>
       </div>

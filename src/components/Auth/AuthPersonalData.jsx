@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/logo2.svg';
-import call from '../../assets/icons/call3.svg';
+import location from '../../assets/icons/location2.svg';
 import profile from '../../assets/icons/profile.svg';
 import back from '../../assets/icons/back.svg';
 import { useState } from 'react';
@@ -13,7 +13,11 @@ const AuthPersonalData = () => {
     <div className='flex w-full h-screen'>
       <div className='relative w-2/6 bg-black flex justify-center items-center'>
         <div onClick={() => navigate(-1)}>
-          <img className='absolute top-10 left-10 cursor-pointer' src={back} alt='*' />
+          <img
+            className='absolute top-10 left-10 cursor-pointer'
+            src={back}
+            alt='*'
+          />
         </div>
         <img src={logo} alt='*' />
       </div>
@@ -44,7 +48,7 @@ const AuthPersonalData = () => {
               />
               <img
                 className='absolute top-[15px] left-[10px]'
-                src={call}
+                src={location}
                 alt='*'
               />
             </div>
@@ -61,7 +65,7 @@ const AuthPersonalData = () => {
               htmlFor='checkbox'
               className='text-sm flex items-center cursor-pointer'
             >
-              <div className='w-7 h-7 mr-1 flex justify-center items-center bg-yellow-300 border border-white rounded'>
+              <div className='w-7 h-7 mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
                 {isChecked ? (
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
