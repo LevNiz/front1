@@ -13,7 +13,7 @@ import AuthPersonalData from './Auth/AuthPersonalData';
 import AuthPassword from './Auth/AuthPassword';
 import AuthConfirm from './Auth/AuthConfirm';
 import Login from './Auth/Login';
-import Auth from './Auth/Auth';
+import Notifications from './Profile/Notifications/Notifications';
 
 export {
   Layout,
@@ -31,5 +31,5 @@ export {
   AuthPassword,
   AuthConfirm,
   Login,
-  Auth,
+  Notifications,
 };

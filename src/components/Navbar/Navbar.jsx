@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from './../../assets/icons/logo.svg';
+import user from './../../assets/icons/user.svg';
+import notification from './../../assets/icons/notification.svg';
 
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const modalRef = useRef();
+  const authorized = true;
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {
@@ -40,12 +43,27 @@ const Navbar = () => {
             <NavLink to='warehouses'>Наши склады</NavLink>
           </li>
         </ul>
-        <button
-          onClick={() => setLoginModal(true)}
-          className='bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
-        >
-          Войти
-        </button>
+        {authorized ? (
+          <ul className='flex items-center justify-end space-x-4'>
+            <li>
+              <NavLink to='profile'>
+                <img src={user} alt='*' />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='profile/notifications'>
+                <img src={notification} alt='*' />
+              </NavLink>
+            </li>
+          </ul>
+        ) : (
+          <button
+            onClick={() => setLoginModal(true)}
+            className='bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
+          >
+            Войти
+          </button>
+        )}
       </div>
       {loginModal ? (
         <div
@@ -56,10 +74,16 @@ const Navbar = () => {
             ref={modalRef}
             className='absolute top-[100px] right-10 max-w-[370px] w-full bg-white z-[999] p-8 flex flex-col space-y-5 rounded-2xl'
           >
-            <NavLink to='login' className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'>
+            <NavLink
+              to='login'
+              className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
+            >
               Войти
             </NavLink>
-            <NavLink to='register' className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'>
+            <NavLink
+              to='register'
+              className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
+            >
               Зарегистрироваться
             </NavLink>
           </div>

@@ -17,7 +17,9 @@ const Login = () => {
             alt='*'
           />
         </div>
-        <img src={logo} alt='*' />
+        <NavLink to='/'>
+          <img src={logo} alt='*' />
+        </NavLink>
       </div>
       <div className='w-4/6 flex flex-col justify-around items-center py-20'>
         <h1 className='text-[32px] font-medium'>Авторизация</h1>
@@ -58,7 +60,7 @@ const Login = () => {
           >
             Забыли пароль?
           </NavLink>
-          <button className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'>
+          <button onClick={(e) => e.preventDefault()} className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'>
             Войти
           </button>
           <p className='font-medium mt-5 mb-2 text-center'>Впервые у нас?</p>

@@ -9,9 +9,10 @@ import {
   AuthPersonalData,
   Layout,
   Login,
+  Notifications,
   WareHouseDetail,
 } from '../components';
-import { Auth, Home, Tracking, Warehouses } from '../pages';
+import { Auth, Home, Profile, Tracking, Warehouses } from '../pages';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,10 @@ export const router = createBrowserRouter(
         <Route path='warehouses'>
           <Route index element={<Warehouses />} />
           <Route path=':id' element={<WareHouseDetail />} />
+        </Route>
+        <Route path='profile'>
+          <Route index element={<Profile />} />
+          <Route path='notifications' element={<Notifications />} />
         </Route>
       </Route>
     </Route>
