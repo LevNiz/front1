@@ -14,6 +14,9 @@ import AuthPassword from './Auth/AuthPassword';
 import AuthConfirm from './Auth/AuthConfirm';
 import Login from './Auth/Login';
 import Notifications from './Profile/Notifications/Notifications';
+import ProfileSidebar from './Profile/ProfileSidebar';
+import MyParcels from './Profile/MyParcels/MyParcels';
+import PersonalData from './Profile/PersonalData/PersonalData';
 
 export {
   Layout,
@@ -32,4 +35,7 @@ export {
   AuthConfirm,
   Login,
   Notifications,
+  MyParcels,
+  PersonalData,
+  ProfileSidebar,
 };

@@ -1,7 +1,11 @@
+import { Outlet } from "react-router-dom";
+import { ProfileSidebar } from "../../components";
+
 const Profile = () => {
   return (
-    <div className='content py-12'>
-      <h1>Profile</h1>
+    <div className='content py-12 flex'>
+      <ProfileSidebar />
+      <Outlet />
     </div>
   );
 };

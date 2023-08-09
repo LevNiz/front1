@@ -46,7 +46,7 @@ const Navbar = () => {
         {authorized ? (
           <ul className='flex items-center justify-end space-x-4'>
             <li>
-              <NavLink to='profile'>
+              <NavLink to='profile/personal-data'>
                 <img src={user} alt='*' />
               </NavLink>
             </li>
