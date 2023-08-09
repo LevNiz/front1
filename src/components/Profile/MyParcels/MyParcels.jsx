@@ -2,6 +2,7 @@ import sort from './../../../assets/icons/sort.svg';
 import search from './../../../assets/icons/search.svg';
 import FilterParcel from './FilterParcel';
 import { useState } from 'react';
+import ParcelItem from './ParcelItem';
 
 const MyParcels = () => {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
@@ -43,6 +44,24 @@ const MyParcels = () => {
       <div className='relative'>
         <FilterParcel isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
+      <div className='flex mt-8 space-x-3'>
+        <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-black text-white'>
+          Все
+        </div>
+        <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colPurple2'>
+          Создан
+        </div>
+        <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colGreen2'>
+          В пути
+        </div>
+        <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colBlue'>
+          Готов к выдаче
+        </div>
+        <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colOrange'>
+          Завершен
+        </div>
+      </div>
+      <ParcelItem />
     </div>
   );
 };

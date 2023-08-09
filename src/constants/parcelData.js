@@ -6,7 +6,9 @@ export const parcel = [
     deliveryDate: '22 июнь 2023',
     reciever: 'Компания 2',
     status: 'в пути',
-},
+    country: 'Кыргызстан',
+    city: 'Бишкек',
+  },
   {
     id: 2,
     number: '№45452343445',
@@ -14,7 +16,9 @@ export const parcel = [
     deliveryDate: '21 июль 2023',
     reciever: 'Компания 4',
     status: 'в пути',
-},
+    country: 'Россия',
+    city: 'Москва',
+  },
   {
     id: 3,
     number: '№122453445',
@@ -22,7 +26,9 @@ export const parcel = [
     deliveryDate: '10 июль 2023',
     reciever: 'Компания 6',
     status: 'в пути',
-},
+    country: 'Казахстан',
+    city: 'Астана',
+  },
   {
     id: 4,
     number: '№1234343445',
@@ -30,7 +36,9 @@ export const parcel = [
     deliveryDate: '09 март 2023',
     reciever: 'Компания 8',
     status: 'в пути',
-},
+    country: 'Кыргызстан',
+    city: 'Бишкек',
+  },
   {
     id: 5,
     number: '№1226576445',
@@ -38,7 +46,9 @@ export const parcel = [
     deliveryDate: '29 апрель 2023',
     reciever: 'Компания 10',
     status: 'в пути',
-},
+    country: 'Кыргызстан',
+    city: 'Бишкек',
+  },
   {
     id: 6,
     number: '№1223433435',
@@ -46,5 +56,7 @@ export const parcel = [
     deliveryDate: '13 май 2023',
     reciever: 'Компания 12',
     status: 'в пути',
-},
+    country: 'Кыргызстан',
+    city: 'Бишкек',
+  },
 ];

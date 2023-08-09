@@ -10,6 +10,7 @@ export default {
         colYellow: '#FEDE2B',
         colYellowHover: '#e3c205',
         colPurple: '#9176FF',
+        colPurple2: '#C192FF',
         colGray: '#A7A9B7',
         colGray2: '#C3C3C3',
         colGray3: '#8391A1',
@@ -17,6 +18,8 @@ export default {
         colBgGray2: '#F2F2F2',
         colGreen: '#58FF90',
         colGreen2: '#AFF4C6',
+        colBlue: '#C1F0FF',
+        colOrange: '#FFC7C2',
       }
     },
   },
