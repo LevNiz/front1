@@ -10,6 +10,7 @@ import {
   Layout,
   Login,
   MyParcels,
+  NotificationDetail,
   Notifications,
   PersonalData,
   WareHouseDetail,
@@ -35,7 +36,9 @@ export const router = createBrowserRouter(
         </Route>
         <Route path='profile' element={<Profile />}>
           <Route path='personal-data' element={<PersonalData />} />
-          <Route path='notifications' element={<Notifications />} />
+          <Route path='notifications' element={<Notifications />}>
+            <Route path=':id' element={<NotificationDetail />} />
+          </Route>
           <Route path='my-parcels' element={<MyParcels />} />
         </Route>
       </Route>

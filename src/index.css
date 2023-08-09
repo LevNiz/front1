@@ -17,6 +17,10 @@
   background: #f2f2f2;
 }
 
+.sidebar.active {
+  background: #f2f2f2;
+}
+
 @layer components {
   .container {
     @apply max-w-[1360px] w-full px-2 mx-auto;

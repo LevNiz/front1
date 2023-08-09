@@ -17,6 +17,7 @@ import Notifications from './Profile/Notifications/Notifications';
 import ProfileSidebar from './Profile/ProfileSidebar';
 import MyParcels from './Profile/MyParcels/MyParcels';
 import PersonalData from './Profile/PersonalData/PersonalData';
+import NotificationDetail from './Profile/Notifications/NotificationDetail';
 
 export {
   Layout,
@@ -38,4 +39,5 @@ export {
   MyParcels,
   PersonalData,
   ProfileSidebar,
+  NotificationDetail,
 };
