@@ -31,7 +31,7 @@ const Warehouses = () => {
           </button>
         </div>
         <button
-          className='max-w-[255px] ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px]'
+          className='max-w-[255px] ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
           type='submit'
         >
           Поиск
