@@ -1,8 +1,17 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { notifications } from '../../../constants/notificationsData';
 import noNotifications from '../../../assets/images/no-notification.png';
+import { useState } from 'react';
+import Modal from '../../Modals/Modal';
 
 const Notifications = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState();
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       {notifications?.length > 0 ? (
@@ -15,7 +24,13 @@ const Notifications = () => {
                   4
                 </span>
               </div>
-              <div className='text-sm text-red-500 cursor-pointer'>
+              <div
+                onClick={() => {
+                  setModalOpen(true);
+                  setModalContent('deleteAllNotifications');
+                }}
+                className='text-sm text-red-500 cursor-pointer'
+              >
                 Удалить все
               </div>
             </div>
@@ -67,6 +82,7 @@ const Notifications = () => {
           </div>
         </div>
       )}
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
     </>
   );
 };

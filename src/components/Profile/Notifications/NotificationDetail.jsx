@@ -1,4 +1,13 @@
+import { useState } from 'react';
+import Modal from '../../Modals/Modal';
+
 const NotificationDetail = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState();
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   return (
     <>
       <div className='bg-colBgGray rounded-[18px] p-12'>
@@ -21,12 +30,17 @@ const NotificationDetail = () => {
       </div>
       <div className='flex justify-end mt-8'>
         <button
+          onClick={() => {
+            setModalOpen(true);
+            setModalContent('deleteNotification');
+          }}
           className='max-w-[255px] w-full bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
           type='submit'
         >
           Удалить
         </button>
       </div>
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
     </>
   );
 };

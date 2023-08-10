@@ -7,7 +7,7 @@ import notification from './../../assets/icons/notification.svg';
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const modalRef = useRef();
-  const authorized = true;
+  const authorized = false;
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {

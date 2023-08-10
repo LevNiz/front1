@@ -3,9 +3,17 @@ import logo from '../../assets/icons/logo2.svg';
 import lock from '../../assets/icons/lock.svg';
 import call from '../../assets/icons/call3.svg';
 import back from '../../assets/icons/back.svg';
+import { useState } from 'react';
+import Modal from '../Modals/Modal';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState();
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <div className='flex w-full h-screen'>
@@ -60,13 +68,26 @@ const Login = () => {
           >
             Забыли пароль?
           </NavLink>
-          <button onClick={(e) => e.preventDefault()} className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setModalOpen(true);
+              setModalContent('inCorrectNumber');
+            }}
+            className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
+          >
             Войти
           </button>
           <p className='font-medium mt-5 mb-2 text-center'>Впервые у нас?</p>
-          <NavLink className='text-[20px] font-semibold flex justify-center text-colYellow' to='/register'>Зарегистрироваться</NavLink>
+          <NavLink
+            className='text-[20px] font-semibold flex justify-center text-colYellow'
+            to='/register'
+          >
+            Зарегистрироваться
+          </NavLink>
         </form>
       </div>
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
     </div>
   );
 };
