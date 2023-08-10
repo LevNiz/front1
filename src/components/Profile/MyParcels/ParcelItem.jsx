@@ -1,10 +1,10 @@
 import location from './../../../assets/icons/location3.svg';
-import { parcel } from '../../../constants/parcelData';
 
-const ParcelItem = () => {
+const ParcelItem = (parcel) => {
+  const parcels = parcel?.parcel;
   return (
     <div className='py-8'>
-      {parcel?.map((el, index) => (
+      {parcels?.map((el, index) => (
         <div
           key={index}
           className='flex justify-between items-center bg-colBgGray2 p-8 rounded-lg my-6'
