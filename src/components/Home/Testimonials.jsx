@@ -8,8 +8,8 @@ import quotes from './../../assets/images/testimonial.png';
 const Testimonials = () => {
   return (
     <div className='py-16 testimonials slider'>
-      <h1 className='text-[40px] font-medium text-center'>[ Отзывы ]</h1>
-      <h4 className='text-2xl font-medium text-center mt-3'>
+      <h1 className='text-[40px] font-medium text-center px-4'>[ Отзывы ]</h1>
+      <h4 className='text-2xl font-medium text-center mt-3 px-4'>
         Отзывы наших постоянных клиентов
       </h4>
       <Swiper navigation={true} modules={[Navigation]} slidesPerView={1}>
@@ -26,10 +26,10 @@ const Testimonials = () => {
                   alt='*'
                 />
               </div>
-              <p className='text-2xl font-medium my-12 relative'>{el?.desc}
-              <img className='absolute top-[-40px] left-[-65px]' src={quotes} alt='*' />
+              <p className='text-xl px-5 xl:text-2xl font-medium my-12 relative'>{el?.desc}
+              <img className='absolute w-12 md:w-auto top-[-50px] xl:left-[-40px]' src={quotes} alt='*' />
               </p>
-              <div className='max-w-[338px] w-full h-5 bg-colPurple mx-auto'></div>
+              <div className='max-w-[338px] w-full h-3 md:h-5 bg-colPurple mx-auto'></div>
             </div>
           </SwiperSlide>
         ))}

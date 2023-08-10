@@ -19,11 +19,9 @@ const MyParcels = () => {
     setFilterModalOpen(false);
   };
 
-  const aa = [];
-
   return (
     <div className='py-5 pl-8 w-full'>
-      {aa?.length > 0 ? (
+      {parcel?.length > 0 ? (
         <>
           <form className='flex'>
             <div className='flex border border-colGray rounded-[10px] p-1 w-full'>

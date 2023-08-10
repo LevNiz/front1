@@ -36,7 +36,7 @@ const Navbar = () => {
       <header className='bg-black py-2 relative'>
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>
-            <img src={logo} alt='*' />
+            <img className='w-[120px] sm:w-auto' src={logo} alt='*' />
           </NavLink>
           {size >= 768 ? (
             <>

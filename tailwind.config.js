@@ -22,6 +22,14 @@ export default {
         colOrange: '#FFC7C2',
       }
     },
+    screens: {
+      xs: '320px',
+      sm: '480px',
+      md: '768px',
+      lg: '991px',
+      xl: '1200px',
+      xl2: '1360px',
+    }
   },
   plugins: [],
 }

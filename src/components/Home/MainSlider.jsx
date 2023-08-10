@@ -17,11 +17,11 @@ const MainSlider = () => {
           <div className='content'>
             <div className='relative mb-5'>
               <img src={vector} alt='*' />
-              <h1 className='text-5xl text-white font-semibold max-w-[310px] absolute top-[60px] left-[60px]'>
+              <h1 className='text-3xl sm:text-5xl text-white font-semibold max-w-[265px] sm:max-w-[310px] absolute top-[40px] sm:top-[60px] left-[40px] sm:left-[60px]'>
                 {el?.title}
               </h1>
             </div>
-            <button className='text-[18px] bg-black text-white rounded-lg px-5 py-1'>
+            <button className='text-[18px] bg-black text-white rounded-lg px-6 py-2'>
               Связаться с нами
             </button>
           </div>

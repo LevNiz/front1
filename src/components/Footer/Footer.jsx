@@ -7,12 +7,12 @@ import youtube from './../../assets/icons/YouTube.svg';
 
 const Footer = () => {
   return (
-    <footer className='bg-black min-h-[252px] flex justify-between items-center'>
-      <div className='flex justify-between items-center w-full container'>
+    <footer className='bg-black py-10 lg:py-0 lg:min-h-[252px] flex justify-between items-center'>
+      <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between md:items-center w-full container'>
         <NavLink to='/'>
           <img src={logo} alt='*' />
         </NavLink>
-        <div className='flex text-white space-x-12'>
+        <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Главная</li>
             <li>
@@ -45,7 +45,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <ul className='flex justify-end items-center space-x-3'>
+          <ul className='flex md:justify-end justify-center items-center mt-5 md:mt-0 space-x-3'>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink to='#' className='flex justify-center items-center w-full h-full'>
                 <img src={facebook} alt='*' />
