@@ -5,8 +5,8 @@ import rulesImg from './../../assets/images/rules.svg';
 const Tracking = () => {
   return (
     <div className='content py-12'>
-      <div className='flex items-center my-6'>
-        <div className='max-w-[885px] w-full min-h-[190px] shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_0px] rounded-md mx-auto px-12 py-6 bg-colYellow'>
+      <div className='lg:flex items-center lg:my-6'>
+        <div className='lg:max-w-[885px] w-full min-h-[190px] shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_0px] rounded-md mx-auto px-12 py-6 bg-colYellow'>
           <form>
             <h3 className='text-xl font-medium mb-8'>
               Введите ваш номер, чтобы найти вашу посылку
@@ -23,21 +23,21 @@ const Tracking = () => {
             </div>
           </form>
         </div>
-        <div className='max-w-[380px] h-[130px] rounded-[10px] flex justify-center items-center w-full bg-colPurple py-4 px-6 ml-10 text-center'>
+        <div className='max-w-[380px] h-[130px] hidden rounded-[10px] lg:flex justify-center items-center w-full bg-colPurple mt-0 py-4 px-6 lg:ml-10 text-center'>
           <img src={rulesImg} alt='*' />
           <p className='text-xl font-medium text-white ml-3'>
             Инструкция к оформлению нового заказа
           </p>
         </div>
       </div>
-      <h3 className='text-4xl font-semibold py-16 text-center'>
+      <h3 className='text-4xl font-semibold pb-4 pt-14 lg:py-16 text-center'>
         Мои текущие посылки
       </h3>
-      <div className='flex'>
-        <div className='w-3/5'>
+      <div className='xl2:flex'>
+        <div className='xl2:w-3/5 w-full'>
           <Parcel parcel={parcel} />
         </div>
-        <div className='w-2/5'>
+        <div className='xl2:w-2/5 w-full'>
           <DetailInfo />
         </div>
       </div>

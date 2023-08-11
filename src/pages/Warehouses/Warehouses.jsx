@@ -40,7 +40,9 @@ const Warehouses = () => {
       <div className='relative'>
         <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
-      <h1 className='text-2xl md:text-4xl font-semibold text-center my-8 md:my-14'>Склады</h1>
+      <h1 className='text-2xl md:text-4xl font-semibold text-center my-8 md:my-14'>
+        Склады
+      </h1>
       <WareHouseItem data={warehouses} />
     </div>
   );
