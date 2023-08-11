@@ -21,12 +21,12 @@ const WareHouseDetail = () => {
 
   return (
     <div className='py-12 content'>
-      <h1 className='text-4xl font-semibold text-center mt-4 mb-16'>
+      <h1 className='text-2xl sm:text-4xl font-semibold text-center mt-4 mb-16'>
         Склад №1
       </h1>
-      <div className='flex pb-12'>
-        <div className='w-2/5'>
-          <div className='max-w-[472px] min-w-[472px] h-[413px] overflow-hidden rounded-lg mx-auto'>
+      <div className='md:flex pb-12'>
+        <div className='w-full md:w-3/6 xl:w-2/5 mb-12 md:mb-0'>
+          <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto'>
             <img src={mainIMG} alt='*' className='w-full h-full object-cover' />
           </div>
           <Swiper
@@ -35,13 +35,13 @@ const WareHouseDetail = () => {
             mousewheel={true}
             modules={[Mousewheel]}
             noSwiping={true}
-            wrapperClass='swiper-wrapper justify-center space-x-8'
+            wrapperClass='swiper-wrapper justify-between sm:justify-center sm:space-x-4 lg:space-x-8'
             className='flex justify-around mt-5'
           >
             {images?.map((el, index) => (
               <SwiperSlide
                 key={el.id}
-                className='max-w-[80px] w-full h-[80px] rounded-lg overflow-hidden cursor-pointer'
+                className='sm:max-w-[80px] !w-[22%] h-[50px] xs:h-[70px] sm:w-full sm:h-[80px] rounded-lg overflow-hidden cursor-pointer'
                 onClick={() => {
                   handleClick(index);
                   setFade(!fade);
@@ -56,33 +56,33 @@ const WareHouseDetail = () => {
             ))}
           </Swiper>
         </div>
-        <div className='w-3/5'>
-          <div className='bg-colBgGray p-12 rounded-2xl ml-10'>
+        <div className='md:w-3/6 xl:w-3/5'>
+          <div className='bg-colBgGray p-6 xl:p-12 rounded-2xl md:ml-4 xl:ml-10'>
             <div className='flex items-center mb-8'>
-              <span className='w-[50px] h-[50px] rounded-xl flex items-center justify-center bg-white'>
+              <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
                 <img src={location} alt='*' />
               </span>
-              <p className='text-2xl font-medium ml-5'>
+              <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
                 ул. Советская, 123, Бишкек, Кыргызстан
               </p>
             </div>
             <div className='flex items-center my-8'>
-              <span className='w-[50px] h-[50px] rounded-xl flex items-center justify-center bg-white'>
+              <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
                 <img src={clock} alt='*' />
               </span>
-              <p className='text-2xl font-medium ml-5'>09:00 - 19:00</p>
+              <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>09:00 - 19:00</p>
             </div>
             <div className='flex items-center my-8'>
-              <span className='w-[50px] h-[50px] rounded-xl flex items-center justify-center bg-white'>
+              <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
                 <img src={call} alt='*' />
               </span>
-              <p className='text-2xl font-medium ml-5'>+996 123 456 678</p>
+              <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>+996 123 456 678</p>
             </div>
             <div className='flex items-center mt-8'>
-              <span className='w-[50px] h-[50px] rounded-xl flex items-center justify-center bg-white'>
+              <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
                 <img src={boxIcon} alt='*' />
               </span>
-              <p className='text-2xl font-medium ml-5'>300 кг </p>
+              <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>300 кг </p>
             </div>
           </div>
         </div>

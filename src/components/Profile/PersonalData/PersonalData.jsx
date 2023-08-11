@@ -5,9 +5,9 @@ import email from './../../../assets/icons/email.svg';
 
 const PersonalData = () => {
   return (
-    <div className='py-5 px-12 w-full'>
+    <div className='py-5 pl-3 sm:pl-5 lg:px-12 w-full'>
       <div className='flex'>
-        <div className='max-w-[110px] min-w-[110px] h-[110px] overflow-hidden rounded-full mr-6'>
+        <div className='sm:max-w-[110px] max-w-[80px] sm:min-w-[110px] min-w-[80px] h-[80px] sm:h-[110px] overflow-hidden rounded-full mr-3 sm:mr-6'>
           <img
             className='w-full h-full object-cover'
             src='https://www.pointpark.edu/news-education/education-media/Ava-Cook_1000_Natalie-Caine.jpg'
@@ -15,12 +15,12 @@ const PersonalData = () => {
           />
         </div>
         <div className='flex flex-col justify-center'>
-          <h4 className='text-xl font-bold'>Айнура Асанова</h4>
-          <p className='font-medium'>Бишкек</p>
+          <h4 className='text-lg sm:text-xl font-medium sm:font-bold'>Айнура Асанова</h4>
+          <p className='text-sm sm:font-medium'>Бишкек</p>
         </div>
       </div>
       <form>
-        <div className='grid grid-cols-2 gap-8 mt-12'>
+        <div className='grid lg:grid-cols-2 gap-4 lg:gap-8 mt-12'>
           <div>
             <p className='font-bold mb-2'>ФИО</p>
             <div className='mb-4 relative'>
@@ -86,8 +86,8 @@ const PersonalData = () => {
             </div>
           </div>
         </div>
-        <div className='flex justify-end mt-24'>
-          <button className='max-w-[255px] ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'>
+        <div className='flex justify-end mt-6 sm:mt-24'>
+          <button className='sm:max-w-[255px] sm:ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'>
             Сохранить
           </button>
         </div>

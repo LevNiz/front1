@@ -3,7 +3,7 @@ import { ProfileSidebar } from "../../components";
 
 const Profile = () => {
   return (
-    <div className='content py-24 flex'>
+    <div className='px-3 sm:content py-12 lg:py-24 flex'>
       <ProfileSidebar />
       <Outlet />
     </div>

@@ -38,8 +38,8 @@ const FilterParcel = ({ isOpen, onClose }) => {
         <div className='flex justify-end'>
           <span className='cursor-pointer'>Сбросить</span>
         </div>
-        <div className='flex justify-between pr-8'>
-          <div className='max-w-[340px] w-full'>
+        <div className='flex justify-between lg:pr-8'>
+          <div className='max-w-[340px] w-full mr-3'>
             <h3 className='text-xl font-semibold mb-3'>Место отправки</h3>
             <div className='relative w-full mb-5'>
               <select
@@ -155,8 +155,8 @@ const FilterParcel = ({ isOpen, onClose }) => {
           </div>
         </div>
         <h3 className='text-xl font-semibold mb-3 mt-5'>Время</h3>
-        <div className='flex justify-between pr-8'>
-          <div className='max-w-[340px] w-full'>
+        <div className='flex justify-between lg:pr-8'>
+          <div className='max-w-[340px] w-full mr-3'>
             <div className='relative'>
               <select
                 className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '

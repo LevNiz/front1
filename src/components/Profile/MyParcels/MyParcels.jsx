@@ -20,16 +20,16 @@ const MyParcels = () => {
   };
 
   return (
-    <div className='py-5 pl-8 w-full'>
+    <div className='py-5 pl-3 md:pl-8 w-full overflow-hidden'>
       {parcel?.length > 0 ? (
         <>
-          <form className='flex'>
-            <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
+          <form className='lg:flex'>
+            <div className='flex border border-colGray h-[50px] rounded-[10px] p-1 w-full'>
               <div className='flex justify-center items-center ml-2 cursor-pointer'>
                 <img src={search} alt='*' />
               </div>
               <input
-                className='px-2 w-full focus:outline-none'
+                className='px-2 text-sm sm:text-base w-full focus:outline-none'
                 type='text'
                 placeholder='Поиск по складам, странам...'
               />
@@ -41,7 +41,7 @@ const MyParcels = () => {
               </div>
             </div>
             <button
-              className='max-w-[255px] ml-3 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
+              className='lg:max-w-[255px] mt-3 lg:mt-0 lg:ml-3 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
               type='submit'
             >
               Поиск
@@ -53,20 +53,20 @@ const MyParcels = () => {
               onClose={closeFilterModal}
             />
           </div>
-          <div className='flex mt-8 space-x-3'>
-            <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-black text-white'>
+          <div className='scrollable flex relative space-x-3 items-center overflow-x-scroll lg:overflow-x-hidden mt-8 pb-3'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[180px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-black text-white'>
               Все
             </div>
-            <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colPurple2'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[150px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colPurple2'>
               Создан
             </div>
-            <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colGreen2'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[150px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colGreen2'>
               В пути
             </div>
-            <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colBlue'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[150px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colBlue'>
               Готов к выдаче
             </div>
-            <div className='py-[10px] cursor-pointer px-[34px] rounded-[50px] bg-colOrange'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[150px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colOrange'>
               Завершен
             </div>
           </div>
