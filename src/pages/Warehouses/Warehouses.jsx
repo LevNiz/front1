@@ -16,7 +16,7 @@ const Warehouses = () => {
   };
   return (
     <div className='content pb-12'>
-      <form className='pt-14 pb-6 flex'>
+      <form className='pt-14 pb-6 md:flex'>
         <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
           <input
             className='px-2 w-full focus:outline-none'
@@ -31,7 +31,7 @@ const Warehouses = () => {
           </button>
         </div>
         <button
-          className='max-w-[255px] ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
+          className='md:max-w-[255px] mt-4 md:mt-0 md:ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
           type='submit'
         >
           Поиск
@@ -40,7 +40,7 @@ const Warehouses = () => {
       <div className='relative'>
         <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
-      <h1 className='text-4xl font-semibold text-center mt-14 mb-16'>Склады</h1>
+      <h1 className='text-2xl md:text-4xl font-semibold text-center my-8 md:my-14'>Склады</h1>
       <WareHouseItem data={warehouses} />
     </div>
   );

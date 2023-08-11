@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { warehouses } from '../../constants/wareHouseData';
+import back from './../../assets/icons/arrow-left.svg';
 
 // eslint-disable-next-line react/prop-types
 const FilterModal = ({ isOpen, onClose }) => {
@@ -34,14 +35,22 @@ const FilterModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div>
-      <form className='absolute top-0 left-[7%] bg-white p-10 pt-6 pb-10 z-10 max-w-[890px] rounded-[20px] w-full shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
-        <div className='flex justify-end'>
-          <span className='cursor-pointer'>Сбросить</span>
+    <>
+      <form className='fixed w-full h-full sm:absolute top-0 left-0 xl:left-[7%] bg-white p-4 sm:p-6 md:p-10 pt-6 z-[9999] max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
+        <div className='flex justify-between sm:justify-end'>
+          <div onClick={() => onClose()}>
+            <img src={back} alt='*' />
+          </div>
+          <span
+            onClick={() => onClose()}
+            className='cursor-pointer font-medium'
+          >
+            Сбросить
+          </span>
         </div>
-        <div className='grid grid-cols-2 gap-8'>
+        <div className='grid sm:grid-cols-2 sm:gap-5 md:gap-8 sm:mt-0 mt-10'>
           <div className='relative'>
-            <p className='text-base font-medium mb-2'>Страна</p>
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>Страна</p>
             <select
               className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
               value={selectedCountry}
@@ -69,7 +78,7 @@ const FilterModal = ({ isOpen, onClose }) => {
             </div>
           </div>
           <div className='relative'>
-            <p className='text-base font-medium mb-2'>Город</p>
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>Город</p>
             <select
               className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
               value={selectedCity}
@@ -97,7 +106,9 @@ const FilterModal = ({ isOpen, onClose }) => {
             </div>
           </div>
           <div className='relative'>
-            <p className='text-base font-medium mb-2'>Приём посылок</p>
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>
+              Приём посылок
+            </p>
             <select
               className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
               value={selectedParcel}
@@ -125,7 +136,9 @@ const FilterModal = ({ isOpen, onClose }) => {
             </div>
           </div>
           <div className='relative'>
-            <p className='text-base font-medium mb-2'>Рабочие часы</p>
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>
+              Рабочие часы
+            </p>
             <select
               className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
               value={selectedTime}
@@ -159,7 +172,7 @@ const FilterModal = ({ isOpen, onClose }) => {
               e.preventDefault();
               onClose();
             }}
-            className='max-w-[330px] w-full bg-colYellow h-12 mt-12 rounded-lg hover:bg-colYellowHover duration-100'
+            className='sm:max-w-[330px] w-full bg-black text-white sm:text-black sm:bg-colYellow h-12 mt-6 sm:mt-12 rounded-lg hover:bg-colYellowHover duration-100'
           >
             Применить
           </button>
@@ -169,7 +182,7 @@ const FilterModal = ({ isOpen, onClose }) => {
         onClick={onClose}
         className='fixed top-0 left-0 w-full h-full z-[1]'
       ></div>
-    </div>
+    </>
   );
 };
 
