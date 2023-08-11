@@ -1,18 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import logo from './../../assets/icons/logo.svg';
 import user from './../../assets/icons/user.svg';
 import notification from './../../assets/icons/notification.svg';
 
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
-  const [size, setSize] = useState(window.innerWidth);
   const modalRef = useRef();
   const authorized = true;
-
-  window.addEventListener('resize', function () {
-    setSize(window.innerWidth);
-  });
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {
@@ -31,50 +26,61 @@ const Navbar = () => {
     };
   }, [loginModal]);
 
+  const { pathname } = useLocation();
+
   return (
     <>
       <header className='bg-black py-2 relative'>
-        <div className='container flex justify-between items-center'>
+        <div
+          className={`container flex ${
+            pathname === '/profile/notifications'
+              ? 'justify-between'
+              : pathname === '/warehouses'
+              ? 'justify-between'
+              : 'justify-center'
+          } md:justify-between items-center`}
+        >
           <NavLink to='/'>
             <img className='w-[120px] sm:w-auto' src={logo} alt='*' />
           </NavLink>
-          {size >= 768 ? (
-            <>
-              <ul className='flex space-x-5 items-center text-white navbar'>
-                <li>
-                  <NavLink to='/'>Главная</NavLink>
-                </li>
-                <li>
-                  <NavLink to='tracking'>Трекинг посылок</NavLink>
-                </li>
-                <li>
-                  <NavLink to='warehouses'>Наши склады</NavLink>
-                </li>
-              </ul>
-              {authorized ? (
-                <ul className='flex items-center justify-end space-x-4'>
-                  <li>
-                    <NavLink to='profile/personal-data'>
-                      <img src={user} alt='*' />
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to='profile/notifications'>
-                      <img src={notification} alt='*' />
-                    </NavLink>
-                  </li>
-                </ul>
-              ) : (
-                <button
-                  onClick={() => setLoginModal(true)}
-                  className='bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
-                >
-                  Войти
-                </button>
-              )}
-            </>
+          <div className='md:hidden text-white'>
+            {pathname === '/profile/notifications'
+              ? 'Уведомления'
+              : pathname === '/warehouses'
+              ? 'Наши склады'
+              : ''}
+          </div>
+          <ul className='hidden md:flex space-x-5 items-center text-white navbar'>
+            <li>
+              <NavLink to='/'>Главная</NavLink>
+            </li>
+            <li>
+              <NavLink to='tracking'>Трекинг посылок</NavLink>
+            </li>
+            <li>
+              <NavLink to='warehouses'>Наши склады</NavLink>
+            </li>
+          </ul>
+          {authorized ? (
+            <ul className='hidden md:flex items-center justify-end space-x-4'>
+              <li>
+                <NavLink to='profile/personal-data'>
+                  <img src={user} alt='*' />
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='profile/notifications'>
+                  <img src={notification} alt='*' />
+                </NavLink>
+              </li>
+            </ul>
           ) : (
-            ''
+            <button
+              onClick={() => setLoginModal(true)}
+              className='bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
+            >
+              Войти
+            </button>
           )}
         </div>
         {loginModal ? (

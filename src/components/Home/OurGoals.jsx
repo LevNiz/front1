@@ -4,8 +4,10 @@ import goalsImg from './../../assets/images/goals1.jpg';
 const OurGoals = () => {
   return (
     <div className='pt-20 pb-20 lg:pb-40 content'>
-      <h1 className='text-[40px] font-medium text-center'>[ Наши цели ]</h1>
-      <h4 className='text-2xl font-medium text-center mt-3 mb-10'>
+      <h1 className='text-3xl sm:text-[40px] font-medium text-center'>
+        [ Наши цели ]
+      </h1>
+      <h4 className='text-xl sm:text-2xl font-medium text-center mt-3 mb-10'>
         Наши цели, миссии, задачи
       </h4>
       <div className='lg:flex pt-8'>
@@ -37,10 +39,15 @@ const OurGoals = () => {
             </p>
           </div>
           <div className='sm:max-w-[254px] sm:absolute min-h-[200px] sm:min-h-[350px] text-3xl top-0 right-0 p-8 text-white bg-[linear-gradient(180deg,_#9747FF_0%,_rgba(151,_71,_255,_0.00)_100%)]'>
-          Lorem ipsum dolor sit<br/> amet consectetur. 
+            Lorem ipsum dolor sit
+            <br /> amet consectetur.
           </div>
           <div className='max-w-[470px] md:min-w-[470px] max-h-[230px] ml-auto lg:mx-auto -mt-6 sm:pt-4 overflow-hidden'>
-            <img className='w-full h-full object-cover' src={goalsImg} alt='*' />
+            <img
+              className='w-full h-full object-cover'
+              src={goalsImg}
+              alt='*'
+            />
           </div>
         </div>
       </div>
