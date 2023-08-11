@@ -7,6 +7,7 @@ import {
   AuthConfirm,
   AuthPassword,
   AuthPersonalData,
+  DetailInfo,
   Layout,
   Login,
   MyParcels,
@@ -29,7 +30,9 @@ export const router = createBrowserRouter(
       <Route path='login' element={<Login />} />
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path='tracking' element={<Tracking />} />
+        <Route path='tracking' element={<Tracking />} >
+          <Route path=':id' element={<DetailInfo />} />
+        </Route>
         <Route path='warehouses'>
           <Route index element={<Warehouses />} />
           <Route path=':id' element={<WareHouseDetail />} />
