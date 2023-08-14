@@ -15,12 +15,12 @@ const Auth = () => {
             alt='*'
           />
         </div>
-        <NavLink className='mm:hidden' to='/'>
+        <NavLink to='/'>
           <img src={logo} alt='*' />
         </NavLink>
       </div>
-      <div className='bg-black mm:bg-white w-full mm:w-3/5 lg:w-4/6 flex flex-col justify-around items-center px-4 py-20'>
-        <NavLink to='/' className='mm:hidden'>
+      <div className='bg-black mm:bg-white w-full h-full mm:w-3/5 lg:w-4/6 flex flex-col justify-around items-center px-4 py-20'>
+        <NavLink to='/' className='mm:hidden mb-10'>
           <img src={logo} alt='*' />
         </NavLink>
         <h1 className='hidden mm:block text-[32px] font-medium'>Регистрация</h1>
@@ -45,7 +45,7 @@ const Auth = () => {
           </NavLink>
         </form>
         <div className='text-center'>
-          <p className='text-[15px] text-white mm:text-black font-medium mb-1'>
+          <p className='text-[15px] text-white mm:text-black font-medium mt-5 mb-1'>
             У вас есть аккаунт?
           </p>
           <NavLink className='text-xl text-colYellow' to='/login'>

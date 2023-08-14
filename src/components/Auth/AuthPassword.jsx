@@ -3,8 +3,14 @@ import logo from '../../assets/icons/logo2.svg';
 import lock from '../../assets/icons/lock.svg';
 import back from '../../assets/icons/back.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
+import logoMobile from '../../assets/icons/logo3.svg';
+import showPass from '../../assets/icons/show-pass.svg';
+import { useState } from 'react';
 
 const AuthPassword = () => {
+  const [visiblePass, setVisiblePass] = useState(false);
+  const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
+
   const navigate = useNavigate();
 
   return (
@@ -17,12 +23,15 @@ const AuthPassword = () => {
             alt='*'
           />
         </div>
-        <NavLink to='/'>
+        <NavLink to='/' className='mb-8'>
           <img src={logo} alt='*' />
         </NavLink>
       </div>
-      <div className='w-full mm:w-3/5 flex flex-col justify-around items-center py-10 mm:py-20 px-4'>
-        <form className='mm:max-w-[400px] w-full'>
+      <div className='w-full mm:w-3/5 flex flex-col mm:justify-around items-center py-20 px-4'>
+        <NavLink className='mm:hidden mb-8' to='/'>
+          <img src={logoMobile} alt='*' />
+        </NavLink>
+        <form className='mm:max-w-[400px] w-full pb-5'>
           <div className='mm:hidden' onClick={() => navigate(-1)}>
             <img src={leftArrow} className='absolute top-4 left-4' alt='*' />
           </div>
@@ -34,8 +43,8 @@ const AuthPassword = () => {
             <p className='font-bold mb-2'>Пароль</p>
             <div className='mb-6 relative'>
               <input
-                className='w-full border border-colGray2 p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-                type='password'
+                className='w-full border border-colGray2 p-[15px_44px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                type={`${visiblePass ? 'text' : 'password'}`}
                 placeholder='Пароль'
               />
               <img
@@ -43,6 +52,13 @@ const AuthPassword = () => {
                 src={lock}
                 alt='*'
               />
+              <div
+                onClick={() => setVisiblePass(!visiblePass)}
+                className='absolute top-[15px] right-[10px] cursor-pointer'
+              >
+                <img src={showPass} alt='*' />
+                <span className={`${visiblePass ? 'block' : 'hidden'} absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}></span>
+              </div>
             </div>
           </div>
           <div>
@@ -50,7 +66,7 @@ const AuthPassword = () => {
             <div className='mb-6 relative'>
               <input
                 className='w-full border border-colGray2 p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-                type='password'
+                type={`${visiblePassConfirm ? 'text' : 'password'}`}
                 placeholder='Подтвердить пароль'
               />
               <img
@@ -58,6 +74,13 @@ const AuthPassword = () => {
                 src={lock}
                 alt='*'
               />
+              <div
+                onClick={() => setVisiblePassConfirm(!visiblePassConfirm)}
+                className='absolute top-[15px] right-[10px] cursor-pointer'
+              >
+                <img src={showPass} alt='*' />
+                <span className={`${visiblePassConfirm ? 'block' : 'hidden'} absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}></span>
+              </div>
             </div>
           </div>
           <div className='mb-7'>
