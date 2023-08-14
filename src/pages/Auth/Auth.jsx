@@ -7,7 +7,7 @@ const Auth = () => {
   const navigate = useNavigate();
   return (
     <div className='flex w-full h-screen'>
-      <div className='w-2/6 bg-black flex justify-center items-center'>
+      <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
         <div onClick={() => navigate(-1)}>
           <img
             className='absolute top-10 left-10 cursor-pointer'
@@ -15,12 +15,15 @@ const Auth = () => {
             alt='*'
           />
         </div>
-        <NavLink to='/'>
+        <NavLink className='mm:hidden' to='/'>
           <img src={logo} alt='*' />
         </NavLink>
       </div>
-      <div className='w-4/6 flex flex-col justify-around items-center py-20'>
-        <h1 className='text-[32px] font-medium'>Регистрация</h1>
+      <div className='bg-black mm:bg-white w-full mm:w-3/5 lg:w-4/6 flex flex-col justify-around items-center px-4 py-20'>
+        <NavLink to='/' className='mm:hidden'>
+          <img src={logo} alt='*' />
+        </NavLink>
+        <h1 className='hidden mm:block text-[32px] font-medium'>Регистрация</h1>
         <form className='max-w-[400px] w-full'>
           <div className='mb-8 relative'>
             <input
@@ -36,13 +39,15 @@ const Auth = () => {
           </div>
           <NavLink
             to='step-1'
-            className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
+            className='p-[17px] rounded-lg bg-colYellow mm:bg-black mm:text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
           >
             Зарегистрироваться
           </NavLink>
         </form>
         <div className='text-center'>
-          <p className='text-[15px] font-medium mb-1'>У вас есть аккаунт?</p>
+          <p className='text-[15px] text-white mm:text-black font-medium mb-1'>
+            У вас есть аккаунт?
+          </p>
           <NavLink className='text-xl text-colYellow' to='/login'>
             Войти
           </NavLink>

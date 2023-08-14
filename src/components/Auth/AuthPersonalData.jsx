@@ -3,6 +3,8 @@ import logo from '../../assets/icons/logo2.svg';
 import location from '../../assets/icons/location2.svg';
 import profile from '../../assets/icons/profile.svg';
 import back from '../../assets/icons/back.svg';
+import leftArrow from '../../assets/icons/arrow-left.svg';
+import logoMobile from '../../assets/icons/logo3.svg';
 import { useState } from 'react';
 
 const AuthPersonalData = () => {
@@ -11,7 +13,7 @@ const AuthPersonalData = () => {
 
   return (
     <div className='flex w-full h-screen'>
-      <div className='relative w-2/6 bg-black flex justify-center items-center'>
+      <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
         <div onClick={() => navigate(-1)}>
           <img
             className='absolute top-10 left-10 cursor-pointer'
@@ -23,18 +25,28 @@ const AuthPersonalData = () => {
           <img src={logo} alt='*' />
         </NavLink>
       </div>
-      <div className='w-4/6 flex flex-col justify-around items-center py-20'>
-        <form className='max-w-[400px] w-full'>
+      <div className='w-full mm:w-3/5 flex flex-col mm:justify-around items-center py-20 px-4'>
+        <div className='mm:hidden' onClick={() => navigate(-1)}>
+          <img
+            className='absolute top-4 left-4 cursor-pointer'
+            src={leftArrow}
+            alt='*'
+          />
+        </div>
+        <NavLink className='mm:hidden mb-8' to='/'>
+          <img src={logoMobile} alt='*' />
+        </NavLink>
+        <form className='mm:max-w-[400px] w-full'>
           <div>
             <p className='font-bold mb-2'>ФИО</p>
             <div className='mb-6 relative'>
               <input
-                className='w-full border border-colGray2 p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
                 type='text'
                 placeholder='Полное имя'
               />
               <img
-                className='absolute top-[15px] left-[10px]'
+                className='absolute top-[15px] left-[10px] hidden mm:block'
                 src={profile}
                 alt='*'
               />
@@ -44,12 +56,12 @@ const AuthPersonalData = () => {
             <p className='font-bold mb-2'>Адрес</p>
             <div className='mb-6 relative'>
               <input
-                className='w-full border border-colGray2 p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
                 type='text'
                 placeholder='Адрес проживания'
               />
               <img
-                className='absolute top-[15px] left-[10px]'
+                className='absolute top-[15px] left-[10px] hidden mm:block'
                 src={location}
                 alt='*'
               />

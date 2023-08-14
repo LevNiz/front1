@@ -2,13 +2,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/logo2.svg';
 import lock from '../../assets/icons/lock.svg';
 import back from '../../assets/icons/back.svg';
+import leftArrow from '../../assets/icons/arrow-left.svg';
 
 const AuthPassword = () => {
   const navigate = useNavigate();
 
   return (
     <div className='flex w-full h-screen'>
-      <div className='relative w-2/6 bg-black flex justify-center items-center'>
+      <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
         <div onClick={() => navigate(-1)}>
           <img
             className='absolute top-10 left-10 cursor-pointer'
@@ -20,10 +21,13 @@ const AuthPassword = () => {
           <img src={logo} alt='*' />
         </NavLink>
       </div>
-      <div className='w-4/6 flex flex-col justify-around items-center py-20'>
-        <form className='max-w-[400px] w-full'>
+      <div className='w-full mm:w-3/5 flex flex-col justify-around items-center py-10 mm:py-20 px-4'>
+        <form className='mm:max-w-[400px] w-full'>
+          <div className='mm:hidden' onClick={() => navigate(-1)}>
+            <img src={leftArrow} className='absolute top-4 left-4' alt='*' />
+          </div>
           <h2 className='text-black text-2xl font-bold'>Придумайте пароль</h2>
-          <p className='text-colGray3 my-4'>
+          <p className='text-colGray3 my-2 sm:my-4'>
             Придумайте пароль для входа в ваш аккаунт с вашим номером телефона
           </p>
           <div>
@@ -57,19 +61,23 @@ const AuthPassword = () => {
             </div>
           </div>
           <div className='mb-7'>
-            <div className='flex items-center'>
+            <div className='flex items-center my-2'>
               <span className='min-w-[10px] h-[10px] rounded-full bg-colYellow'></span>
-              <p className='text-[#AAA] ml-3'>
+              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
                 Прописные и строчные латинские буквы
               </p>
             </div>
-            <div className='flex items-center'>
+            <div className='flex items-center my-2'>
               <span className='min-w-[10px] h-[10px] rounded-full bg-colGray2'></span>
-              <p className='text-[#AAA] ml-3'>Минимум одна цифра</p>
+              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+                Минимум одна цифра
+              </p>
             </div>
-            <div className='flex items-center'>
+            <div className='flex items-center my-2'>
               <span className='min-w-[10px] h-[10px] rounded-full bg-colGray2'></span>
-              <p className='text-[#AAA] ml-3'>Минимум один спецсимвол</p>
+              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+                Минимум один спецсимвол
+              </p>
             </div>
           </div>
           <NavLink
