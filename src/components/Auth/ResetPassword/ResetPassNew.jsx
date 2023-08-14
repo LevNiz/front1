@@ -22,7 +22,7 @@ const ResetPassNew = () => {
             alt='*'
           />
         </div>
-        <NavLink to='/' className='mb-8'>
+        <NavLink to='/'>
           <img src={logo} alt='*' />
         </NavLink>
       </div>
