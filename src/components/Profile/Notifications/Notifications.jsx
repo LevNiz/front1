@@ -15,8 +15,8 @@ const Notifications = () => {
   return (
     <>
       {notifications?.length > 0 ? (
-        <div className='content py-4 grid grid-cols-2 gap-5'>
-          <div className='px-8'>
+        <div className='content pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
+          <div className='sl:px-8'>
             <div className='flex justify-between items-center pb-5'>
               <div className='flex items-center'>
                 <span className='font-medium'>Недавние</span>
@@ -40,7 +40,7 @@ const Notifications = () => {
                 key={index}
                 className='flex my-3 border-b sidebar border-colBgGray2 pb-3 hover:bg-colBgGray2 p-3 rounded-lg'
               >
-                <div className='max-w-[44px] min-w-[44px] h-[44px] rounded-full overflow-hidden'>
+                <div className='max-w-[36px] lg:max-w-[44px] min-w-[36px] lg:min-w-[44px] h-[36px] lg:h-[44px] rounded-full overflow-hidden'>
                   <img
                     className='w-full h-full object-cover'
                     src={el?.icon}
@@ -49,12 +49,12 @@ const Notifications = () => {
                 </div>
                 <div className='pl-3 w-full'>
                   <div className='flex justify-between items-center'>
-                    <h5 className='text-sm break-all line-clamp-1 pr-1'>
+                    <h5 className='text-xs lg:text-sm break-all line-clamp-1 pr-1'>
                       {el?.title}
                     </h5>
-                    <span className='text-xs text-colGray'>13.00</span>
+                    <span className='text-[8px] lg:text-xs text-colGray'>13.00</span>
                   </div>
-                  <p className='text-sm text-colGray break-all line-clamp-1 mt-[2px]'>
+                  <p className='text-xs lg:text-sm text-colGray break-all line-clamp-1 mt-[2px]'>
                     {el?.text}
                   </p>
                 </div>

@@ -7,7 +7,7 @@ const Modal = ({ isOpen, onClose, content }) => {
   if (!isOpen) return null;
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-50'>
+    <div className='fixed inset-0 flex items-center justify-center z-50 px-3'>
       <div
         onClick={onClose}
         className='absolute inset-0 bg-gray-800 opacity-50'
@@ -17,10 +17,10 @@ const Modal = ({ isOpen, onClose, content }) => {
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
-          <h3 className='text-center text-2xl font-medium'>
+          <h3 className='text-center text-xl mm:text-2xl font-medium'>
             Вы уверены, что хотите удалить все сообщения?
           </h3>
-          <div className='flex justify-center my-16 space-x-5'>
+          <div className='flex justify-center my-12 mm:my-16 space-x-5'>
             <button
               onClick={onClose}
               className='bg-black px-5 py-2 font-medium text-white rounded-[10px]'
@@ -37,10 +37,10 @@ const Modal = ({ isOpen, onClose, content }) => {
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
-          <h3 className='text-center text-2xl font-medium'>
+          <h3 className='text-center text-xl mm:text-2xl font-medium'>
             Вы уверены, что хотите удалить сообщениe?
           </h3>
-          <div className='flex justify-center my-16 space-x-5'>
+          <div className='flex justify-center my-12 mm:my-16 space-x-5'>
             <button
               onClick={onClose}
               className='bg-black px-5 py-2 font-medium text-white rounded-[10px]'

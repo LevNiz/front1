@@ -1,21 +1,34 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Modal from '../../Modals/Modal';
+import back from './../../../assets/icons/arrow-left.svg';
 
 const NotificationDetail = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
 
+  const navigate = useNavigate();
+
   const closeModal = () => {
     setModalOpen(false);
   };
+
   return (
-    <>
-      <div className='bg-colBgGray rounded-[18px] p-12'>
-        <h3 className='text-xl font-bold pb-2 break-all'>
+    <div className='fixed mm:static top-0 left-0 w-full h-full mm:w-auto mm:h-auto bg-white overflow-y-scroll pb-20 mm:pb-0 mm:overflow-y-hidden'>
+      <div className='bg-colBgGray mm:rounded-[18px] p-3 lg:py-6 lg:px-4 xl:p-12'>
+        <div className='mm:hidden flex justify-between items-center mt-3 mb-7'>
+          <img onClick={() => navigate(-1)} src={back} alt='*' />
+          <span className='font-semibold'>
+            Уведомления
+          </span>
+        </div>
+        <h3 className='text-base lg:text-xl font-bold pb-2 break-all text-center mm:text-left'>
           Вы получили сообщение
         </h3>
-        <div className='text-colGray2 font-medium mb-2'>12.07.2023</div>
-        <p className='text-sm font-medium break-all'>
+        <div className='text-xs mm:text-left text-right mm:text-[10px] lg:text-base text-colGray2 font-medium mb-2'>
+          12.07.2023
+        </div>
+        <p className='text-xs lg:text-sm font-medium break-all'>
           Lorem ipsum dolor sit amet consectetur. Tincidunt enim feugiat porta
           elit venenatis mauris convallis venenatis massa. Rhoncus gravida est
           pharetra tristique. Faucibus egestas arcu sed morbi integer. Blandit
@@ -28,20 +41,20 @@ const NotificationDetail = () => {
           amet sollicitudin placerat eget.
         </p>
       </div>
-      <div className='flex justify-end mt-8'>
+      <div className='flex justify-end mt-8 mx-3'>
         <button
           onClick={() => {
             setModalOpen(true);
             setModalContent('deleteNotification');
           }}
-          className='max-w-[255px] w-full bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
+          className='sm:max-w-[200px] lg:max-w-[255px] w-full text-xs lg:text-base bg-black h-[36px] lg:h-[48px] font-medium text-white rounded-md lg:rounded-[10px] hover:opacity-80 duration-150'
           type='submit'
         >
           Удалить
         </button>
       </div>
       <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
-    </>
+    </div>
   );
 };
 
