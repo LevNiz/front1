@@ -15,7 +15,7 @@ const Tracking = () => {
             <div className='sm:flex'>
               <input
                 className='sm:max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
-                type='number'
+                type='text'
                 placeholder='Ваш номер'
               />
               <button className='bg-black text-white w-full mt-4 sm:mt-0 sm:ml-5 h-[42px] font-medium rounded-lg hover:opacity-80 duration-100'>
