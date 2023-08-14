@@ -14,6 +14,10 @@ import {
   NotificationDetail,
   Notifications,
   PersonalData,
+  ResetPass,
+  ResetPassConfirm,
+  ResetPassNew,
+  ResetPassSuccess,
   WareHouseDetail,
 } from '../components';
 import { Auth, Home, Profile, Tracking, Warehouses } from '../pages';
@@ -28,9 +32,15 @@ export const router = createBrowserRouter(
         <Route path='confirm' element={<AuthConfirm />} />
       </Route>
       <Route path='login' element={<Login />} />
+      <Route path='reset-password'>
+        <Route index element={<ResetPass />} />
+        <Route path='step-1' element={<ResetPassConfirm />} />
+        <Route path='step-2' element={<ResetPassNew />} />
+        <Route path='success' element={<ResetPassSuccess />} />
+      </Route>
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path='tracking' element={<Tracking />} >
+        <Route path='tracking' element={<Tracking />}>
           <Route path=':id' element={<DetailInfo />} />
         </Route>
         <Route path='warehouses'>

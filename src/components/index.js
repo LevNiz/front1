@@ -19,6 +19,10 @@ import MyParcels from './Profile/MyParcels/MyParcels';
 import PersonalData from './Profile/PersonalData/PersonalData';
 import NotificationDetail from './Profile/Notifications/NotificationDetail';
 import Modal from './Modals/Modal';
+import ResetPass from './Auth/ResetPassword/ResetPass';
+import ResetPassConfirm from './Auth/ResetPassword/ResetPassConfirm';
+import ResetPassNew from './Auth/ResetPassword/ResetPassNew';
+import ResetPassSuccess from './Auth/ResetPassword/ResetPassSuccess';
 
 export {
   Layout,
@@ -42,4 +46,8 @@ export {
   ProfileSidebar,
   NotificationDetail,
   Modal,
+  ResetPass,
+  ResetPassConfirm,
+  ResetPassNew,
+  ResetPassSuccess,
 };

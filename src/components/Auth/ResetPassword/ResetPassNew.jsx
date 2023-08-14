@@ -1,13 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import logo from '../../assets/icons/logo2.svg';
-import lock from '../../assets/icons/lock.svg';
-import back from '../../assets/icons/back.svg';
-import leftArrow from '../../assets/icons/arrow-left.svg';
-import logoMobile from '../../assets/icons/logo3.svg';
-import showPass from '../../assets/icons/show-pass.svg';
+import logo from '../../../assets/icons/logo2.svg';
+import back from '../../../assets/icons/back.svg';
+import leftArrow from '../../../assets/icons/arrow-left.svg';
+import logoMobile from '../../../assets/icons/logo3.svg';
+import showPass from '../../../assets/icons/show-pass.svg';
 import { useState } from 'react';
 
-const AuthPassword = () => {
+const ResetPassNew = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
 
@@ -37,7 +36,8 @@ const AuthPassword = () => {
           </div>
           <h2 className='text-black text-2xl font-bold'>Придумайте пароль</h2>
           <p className='text-colGray3 my-2 sm:my-4'>
-            Придумайте пароль для входа в ваш аккаунт с вашим номером телефона
+            Придумайте пароль для следующего входа в ваш аккаунт с вашим номером
+            телефона
           </p>
           <div>
             <p className='font-bold mb-2'>Пароль</p>
@@ -47,17 +47,16 @@ const AuthPassword = () => {
                 type={`${visiblePass ? 'text' : 'password'}`}
                 placeholder='Пароль'
               />
-              <img
-                className='absolute top-[15px] left-[10px]'
-                src={lock}
-                alt='*'
-              />
               <div
                 onClick={() => setVisiblePass(!visiblePass)}
                 className='absolute top-[15px] right-[10px] cursor-pointer'
               >
                 <img src={showPass} alt='*' />
-                <span className={`${visiblePass ? 'block' : 'hidden'} absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}></span>
+                <span
+                  className={`${
+                    visiblePass ? 'block' : 'hidden'
+                  } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                ></span>
               </div>
             </div>
           </div>
@@ -65,21 +64,20 @@ const AuthPassword = () => {
             <p className='font-bold mb-2'>Подтвердить пароль</p>
             <div className='mb-6 relative'>
               <input
-                className='w-full border border-colGray2 p-[15px_44px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                className='w-full border border-colGray2 p-[15px_44px_15px_20px] rounded-lg focus:border-black focus:outline-none'
                 type={`${visiblePassConfirm ? 'text' : 'password'}`}
                 placeholder='Подтвердить пароль'
-              />
-              <img
-                className='absolute top-[15px] left-[10px]'
-                src={lock}
-                alt='*'
               />
               <div
                 onClick={() => setVisiblePassConfirm(!visiblePassConfirm)}
                 className='absolute top-[15px] right-[10px] cursor-pointer'
               >
                 <img src={showPass} alt='*' />
-                <span className={`${visiblePassConfirm ? 'block' : 'hidden'} absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}></span>
+                <span
+                  className={`${
+                    visiblePassConfirm ? 'block' : 'hidden'
+                  } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                ></span>
               </div>
             </div>
           </div>
@@ -104,7 +102,7 @@ const AuthPassword = () => {
             </div>
           </div>
           <NavLink
-            to='/register/confirm'
+            to='/reset-password/success'
             className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
           >
             Подтвердить
@@ -115,4 +113,4 @@ const AuthPassword = () => {
   );
 };
 
-export default AuthPassword;
+export default ResetPassNew;

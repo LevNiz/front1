@@ -81,7 +81,7 @@ const Login = () => {
           </div>
           <NavLink
             className='text-colGray3 text-sm font-medium flex justify-end mb-6'
-            to='#'
+            to='/reset-password'
           >
             Забыли пароль?
           </NavLink>
