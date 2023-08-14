@@ -27,7 +27,7 @@ const Auth = () => {
         <form className='mm:max-w-[400px] w-full'>
           <div className='mb-8 relative'>
             <input
-              className='w-full border border-colBgGray2 p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+              className='w-full border border-colGray2 p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type='number'
               placeholder='Введите ваш номер'
             />
