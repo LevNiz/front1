@@ -34,12 +34,19 @@ const FilterParcel = ({ isOpen, onClose }) => {
 
   return (
     <div>
-      <form className='absolute top-0 left-0 bg-white p-10 pt-6 pb-10 z-10 max-w-[890px] rounded-[20px] w-full shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
+      <form className='fixed w-full overflow-y-scroll z-[9999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 sm:p-6 pb-6 md:p-10 pt-6 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
         <div className='flex justify-end'>
-          <span className='cursor-pointer'>Сбросить</span>
+          <span
+            onClick={() => {
+              onClose();
+            }}
+            className='cursor-pointer mb-3'
+          >
+            Сбросить
+          </span>
         </div>
-        <div className='flex justify-between lg:pr-8'>
-          <div className='max-w-[340px] w-full mr-3'>
+        <div className='md:flex justify-between lg:pr-8'>
+          <div className='md:max-w-[340px] w-full mr-3'>
             <h3 className='text-xl font-semibold mb-3'>Место отправки</h3>
             <div className='relative w-full mb-5'>
               <select
@@ -96,8 +103,10 @@ const FilterParcel = ({ isOpen, onClose }) => {
               </div>
             </div>
           </div>
-          <div className='max-w-[340px] w-full'>
-            <h3 className='text-xl font-semibold mb-3'>Место прибытия</h3>
+          <div className='md:max-w-[340px] w-full'>
+            <h3 className='text-xl font-semibold mt-5 md:mt-0 mb-3'>
+              Место прибытия
+            </h3>
             <div className='relative w-full mb-5'>
               <select
                 className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
@@ -155,8 +164,8 @@ const FilterParcel = ({ isOpen, onClose }) => {
           </div>
         </div>
         <h3 className='text-xl font-semibold mb-3 mt-5'>Время</h3>
-        <div className='flex justify-between lg:pr-8'>
-          <div className='max-w-[340px] w-full mr-3'>
+        <div className='md:flex justify-between lg:pr-8'>
+          <div className='md:max-w-[340px] w-full mr-3'>
             <div className='relative'>
               <select
                 className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
@@ -185,13 +194,13 @@ const FilterParcel = ({ isOpen, onClose }) => {
               </div>
             </div>
           </div>
-          <div className='max-w-[340px] w-full'>
+          <div className='md:max-w-[340px] w-full'>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 onClose();
               }}
-              className='max-w-[330px] w-full bg-colYellow h-12 rounded-lg hover:bg-colYellowHover duration-100'
+              className='md:max-w-[330px] w-full bg-colYellow mt-7 md:mt-0 h-12 rounded-lg hover:bg-colYellowHover duration-100'
             >
               Применить
             </button>

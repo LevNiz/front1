@@ -36,7 +36,7 @@ const FilterModal = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <form className='fixed w-full h-full sm:absolute top-0 left-0 xl:left-[7%] bg-white p-4 sm:p-6 md:p-10 pt-6 z-[9999] max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
+      <form className='fixed w-full h-screen sm:h-auto sm:absolute top-0 left-0 xl:left-[7%] bg-white p-4 sm:p-6 md:p-10 pt-6 z-[9999] max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
         <div className='flex justify-between sm:justify-end'>
           <div onClick={() => onClose()}>
             <img src={back} alt='*' />
@@ -48,7 +48,7 @@ const FilterModal = ({ isOpen, onClose }) => {
             Сбросить
           </span>
         </div>
-        <div className='grid sm:grid-cols-2 sm:gap-5 md:gap-8 sm:mt-0 mt-10'>
+        <div className='grid sm:grid-cols-2 sm:gap-5 md:gap-8 sm:mt-0 xs:mt-8 mt-0'>
           <div className='relative'>
             <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>Страна</p>
             <select
