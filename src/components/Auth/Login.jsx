@@ -24,12 +24,12 @@ const Login = () => {
       <h1 className='mb-8 text-3xl mm:text-[32px] font-medium'>Авторизация</h1>
       <form className='mm:max-w-[400px] w-full pb-8'>
         <div>
-          <p className='font-bold mb-2'>Номер телефона</p>
+          <p className='font-bold mb-2'>Ваш email</p>
           <div className='mb-6 relative'>
             <input
               className='w-full border border-colGray2 p-3 mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-              type='text'
-              placeholder='Номер телефона'
+              type='email'
+              placeholder='E-mail'
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
