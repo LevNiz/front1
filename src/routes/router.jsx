@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import {
   AuthPassword,
+  AuthPersonalData,
   DetailInfo,
   Layout,
   Login,
@@ -23,16 +24,16 @@ import { Auth, Home, Profile, Tracking, Warehouses } from '../pages';
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path='register'>
-        <Route index element={<Auth />} />
+      <Route path='auth' element={<Auth />}>
+        <Route path='sign-up' element={<AuthPersonalData />} />
         <Route path='password' element={<AuthPassword />} />
-      </Route>
-      <Route path='login' element={<Login />} />
-      <Route path='reset-password'>
-        <Route index element={<ResetPass />} />
-        <Route path='step-1' element={<ResetPassConfirm />} />
-        <Route path='step-2' element={<ResetPassNew />} />
-        <Route path='success' element={<ResetPassSuccess />} />
+        <Route path='sign-in' element={<Login />} />
+        <Route path='reset-password'>
+          <Route index element={<ResetPass />} />
+          <Route path='step-1' element={<ResetPassConfirm />} />
+          <Route path='step-2' element={<ResetPassNew />} />
+          <Route path='success' element={<ResetPassSuccess />} />
+        </Route>
       </Route>
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />

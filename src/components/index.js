@@ -9,6 +9,7 @@ import WareHouseItem from './Warehouses/WareHouseItem';
 import WareHouseDetail from './Warehouses/WareHouseDetail';
 import Parcel from './Tracking/Parcel';
 import DetailInfo from './Tracking/DetailInfo';
+import AuthPersonalData from './Auth/AuthPersonalData';
 import AuthPassword from './Auth/AuthPassword';
 import Login from './Auth/Login';
 import Notifications from './Profile/Notifications/Notifications';
@@ -46,4 +47,5 @@ export {
   ResetPassConfirm,
   ResetPassNew,
   ResetPassSuccess,
+  AuthPersonalData,
 };
