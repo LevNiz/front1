@@ -5,8 +5,27 @@ import profile from '../../assets/icons/profile.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 
 const AuthPersonalData = () => {
-  const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [values, setValue] = useState({
+    fullName: '',
+    email: '',
+    address: '',
+  });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setValue({ ...values, [name]: value });
+  };
+
+  const handleNextForm = (e) => {
+    e.preventDefault();
+    navigate('/auth/password')
+    localStorage.removeItem('Register');
+    localStorage.setItem('Register', JSON.stringify(values));
+  }
+
   return (
     <>
       <div className='mm:hidden' onClick={() => navigate('/')}>
@@ -24,6 +43,9 @@ const AuthPersonalData = () => {
             <input
               className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type='text'
+              name='fullName'
+              value={values?.fullName}
+              onChange={handleInput}
               placeholder='Полное имя'
             />
             <img
@@ -39,6 +61,9 @@ const AuthPersonalData = () => {
             <input
               className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type='email'
+              name='email'
+              value={values?.email}
+              onChange={handleInput}
               placeholder='Введите ваш email'
             />
             <img
@@ -54,6 +79,9 @@ const AuthPersonalData = () => {
             <input
               className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type='text'
+              name='address'
+              value={values?.address}
+              onChange={handleInput}
               placeholder='Адрес проживания'
             />
             <img
@@ -106,12 +134,13 @@ const AuthPersonalData = () => {
             Политика конфиденциальности
           </label>
         </div>
-        <NavLink
-          to='/auth/password'
-          className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
+        <button
+          disabled={isDisabled}
+          onClick={handleNextForm}
+          className={`${isDisabled ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-80'} p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold duration-150`}
         >
           Далее
-        </NavLink>
+        </button>
       </form>
       <div className='text-center'>
         <p className='text-base text-black font-medium mt-5 mb-1'>
