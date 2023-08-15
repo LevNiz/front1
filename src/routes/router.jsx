@@ -4,9 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import {
-  AuthConfirm,
   AuthPassword,
-  AuthPersonalData,
   DetailInfo,
   Layout,
   Login,
@@ -27,9 +25,7 @@ export const router = createBrowserRouter(
     <Route>
       <Route path='register'>
         <Route index element={<Auth />} />
-        <Route path='step-1' element={<AuthPersonalData />} />
-        <Route path='step-2' element={<AuthPassword />} />
-        <Route path='confirm' element={<AuthConfirm />} />
+        <Route path='password' element={<AuthPassword />} />
       </Route>
       <Route path='login' element={<Login />} />
       <Route path='reset-password'>

@@ -3,7 +3,6 @@ import logo from '../../assets/icons/logo2.svg';
 import lock from '../../assets/icons/lock.svg';
 import back from '../../assets/icons/back.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
-import logoMobile from '../../assets/icons/logo3.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import { useState } from 'react';
 
@@ -27,23 +26,22 @@ const AuthPassword = () => {
           <img src={logo} alt='*' />
         </NavLink>
       </div>
-      <div className='w-full mm:w-3/5 flex flex-col mm:justify-around items-center py-20 px-4'>
-        <NavLink className='mm:hidden mb-8' to='/'>
-          <img src={logoMobile} alt='*' />
-        </NavLink>
+      <div className='w-full mm:w-3/5 lg:w-4/6 flex flex-col mm:justify-around items-center py-20 px-4'>
         <form className='mm:max-w-[400px] w-full pb-5'>
           <div className='mm:hidden' onClick={() => navigate(-1)}>
             <img src={leftArrow} className='absolute top-4 left-4' alt='*' />
           </div>
-          <h2 className='text-black text-2xl font-bold'>Придумайте пароль</h2>
-          <p className='text-colGray3 my-2 sm:my-4'>
+          <h2 className='text-2xl mm:text-[32px] font-medium'>
+            Придумайте пароль
+          </h2>
+          <p className='text-colGray3 my-2 sm:my-4 pb-3'>
             Придумайте пароль для входа в ваш аккаунт с вашим номером телефона
           </p>
           <div>
             <p className='font-bold mb-2'>Пароль</p>
             <div className='mb-6 relative'>
               <input
-                className='w-full border border-colGray2 p-[15px_44px_15px_20px] rounded-lg focus:border-black focus:outline-none'
+                className='w-full border border-colGray2 p-[15px_44px_15px_44px] rounded-lg focus:border-black focus:outline-none'
                 type={`${visiblePass ? 'text' : 'password'}`}
                 placeholder='Пароль'
               />
@@ -57,7 +55,11 @@ const AuthPassword = () => {
                 className='absolute top-[15px] right-[10px] cursor-pointer'
               >
                 <img src={showPass} alt='*' />
-                <span className={`${visiblePass ? 'block' : 'hidden'} absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}></span>
+                <span
+                  className={`${
+                    visiblePass ? 'block' : 'hidden'
+                  } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                ></span>
               </div>
             </div>
           </div>
@@ -79,7 +81,11 @@ const AuthPassword = () => {
                 className='absolute top-[15px] right-[10px] cursor-pointer'
               >
                 <img src={showPass} alt='*' />
-                <span className={`${visiblePassConfirm ? 'block' : 'hidden'} absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}></span>
+                <span
+                  className={`${
+                    visiblePassConfirm ? 'block' : 'hidden'
+                  } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                ></span>
               </div>
             </div>
           </div>
@@ -103,12 +109,12 @@ const AuthPassword = () => {
               </p>
             </div>
           </div>
-          <NavLink
-            to='/register/confirm'
+          <button
+            type='submit'
             className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
           >
-            Подтвердить
-          </NavLink>
+            Зарегистрироваться
+          </button>
         </form>
       </div>
     </div>
