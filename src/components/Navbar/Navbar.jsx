@@ -7,7 +7,7 @@ import notification from './../../assets/icons/notification.svg';
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const modalRef = useRef();
-  const authorized = true;
+  const authorized = false;
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {
@@ -93,13 +93,13 @@ const Navbar = () => {
               className='absolute top-[100px] right-10 max-w-[370px] w-full bg-white z-[999] p-8 flex flex-col space-y-5 rounded-2xl'
             >
               <NavLink
-                to='login'
+                to='auth/sign-in'
                 className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
               >
                 Войти
               </NavLink>
               <NavLink
-                to='register'
+                to='auth/sign-up'
                 className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
               >
                 Зарегистрироваться

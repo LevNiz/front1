@@ -6,7 +6,7 @@ import showPass from '../../assets/icons/show-pass.svg';
 import { useState } from 'react';
 import Modal from '../Modals/Modal';
 
-const Login = () => {
+const SignIn = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -21,8 +21,10 @@ const Login = () => {
       <div className='mm:hidden' onClick={() => navigate(-1)}>
         <img src={leftArrow} className='absolute top-4 left-4' alt='*' />
       </div>
-      <h1 className='mb-8 text-3xl mm:text-[32px] font-medium'>Авторизация</h1>
       <form className='mm:max-w-[400px] w-full pb-8'>
+        <h1 className='mb-8 mm:mb-12 text-3xl mm:text-[32px] font-medium text-center'>
+          Авторизация
+        </h1>
         <div>
           <p className='font-bold mb-2'>Ваш email</p>
           <div className='mb-6 relative'>
@@ -93,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;

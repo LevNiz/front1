@@ -4,11 +4,10 @@ import {
   Route,
 } from 'react-router-dom';
 import {
-  AuthPassword,
-  AuthPersonalData,
+  SignUp,
   DetailInfo,
   Layout,
-  Login,
+  SignIn,
   MyParcels,
   NotificationDetail,
   Notifications,
@@ -25,9 +24,8 @@ export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='auth' element={<Auth />}>
-        <Route path='sign-up' element={<AuthPersonalData />} />
-        <Route path='password' element={<AuthPassword />} />
-        <Route path='sign-in' element={<Login />} />
+        <Route path='sign-up' element={<SignUp />} />
+        <Route path='sign-in' element={<SignIn />} />
         <Route path='reset-password'>
           <Route index element={<ResetPass />} />
           <Route path='step-1' element={<ResetPassConfirm />} />

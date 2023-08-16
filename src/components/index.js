@@ -9,9 +9,8 @@ import WareHouseItem from './Warehouses/WareHouseItem';
 import WareHouseDetail from './Warehouses/WareHouseDetail';
 import Parcel from './Tracking/Parcel';
 import DetailInfo from './Tracking/DetailInfo';
-import AuthPersonalData from './Auth/AuthPersonalData';
-import AuthPassword from './Auth/AuthPassword';
-import Login from './Auth/Login';
+import SignUp from './Auth/SignUp';
+import SignIn from './Auth/SignIn';
 import Notifications from './Profile/Notifications/Notifications';
 import ProfileSidebar from './Profile/ProfileSidebar';
 import MyParcels from './Profile/MyParcels/MyParcels';
@@ -35,8 +34,7 @@ export {
   WareHouseDetail,
   Parcel,
   DetailInfo,
-  AuthPassword,
-  Login,
+  SignIn,
   Notifications,
   MyParcels,
   PersonalData,
@@ -47,5 +45,5 @@ export {
   ResetPassConfirm,
   ResetPassNew,
   ResetPassSuccess,
-  AuthPersonalData,
+  SignUp,
 };

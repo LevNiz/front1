@@ -1,9 +1,13 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/logo2.svg';
 import back from '../../assets/icons/back.svg';
 
 const Auth = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  console.log(pathname);
+
   return (
     <div className='flex w-full h-screen'>
       <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
@@ -18,7 +22,11 @@ const Auth = () => {
           <img src={logo} alt='*' />
         </NavLink>
       </div>
-      <div className='w-full mm:w-3/5 lg:w-4/6 flex flex-col mm:justify-around items-center py-14 mm:py-20 px-4 overflow-y-scroll'>
+      <div
+        className={`${
+          pathname !== '/auth/sign-up' ? 'justify-around' : ''
+        } w-full mm:w-3/5 lg:w-4/6 flex flex-col items-center py-14 mm:py-20 px-4 overflow-y-scroll`}
+      >
         <Outlet />
       </div>
     </div>

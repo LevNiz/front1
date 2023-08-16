@@ -40,7 +40,7 @@ const ResetPass = () => {
           <p className='text-base text-black font-medium mr-2'>
             Помните пароль?
           </p>
-          <NavLink className='text-base text-colYellow' to='/login'>
+          <NavLink className='text-base text-colYellow' to='/auth/sign-in'>
             Войти
           </NavLink>
         </div>
