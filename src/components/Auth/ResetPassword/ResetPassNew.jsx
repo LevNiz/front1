@@ -40,7 +40,7 @@ const ResetPassNew = () => {
               <span
                 className={`${
                   visiblePass ? 'block' : 'hidden'
-                } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                } absolute top-[11px] -left-[2px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
               ></span>
             </div>
           </div>
@@ -61,7 +61,7 @@ const ResetPassNew = () => {
               <span
                 className={`${
                   visiblePassConfirm ? 'block' : 'hidden'
-                } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                } absolute top-[11px] -left-[2px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
               ></span>
             </div>
           </div>

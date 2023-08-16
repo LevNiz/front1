@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import location from '../../assets/icons/location2.svg';
 import profile from '../../assets/icons/profile.svg';
 import lock from '../../assets/icons/lock.svg';
+import call from '../../assets/icons/call3.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import { useForm } from 'react-hook-form';
@@ -10,43 +11,26 @@ import { useState } from 'react';
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
-  const [password, setPassword] = useState('');
-  const [passValid, setPassValid] = useState(true);
-  const [hasUpperAndLowercase, setHasUpperAndLowercase] = useState(false);
-  const [hasNumbercase, setHasNumbercase] = useState(false);
-  const [hasSymbolcase, setHasSymbolcase] = useState(false);
 
   const navigate = useNavigate();
 
-  const handlePassword = (event) => {
-    const newPassword = event.target.value;
-    setPassword(newPassword);
-    setPassValid(validatePassword(newPassword));
-  };
-
-  const validatePassword = (password) => {
-    const uppercaseLowercaseRegex = /^(?=.*[a-z])(?=.*[A-Z])/;
-    const digitRegex = /[0-9]/;
-    const specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/;
-
-    const hasUppercaseLowercase = uppercaseLowercaseRegex.test(password);
-    const hasDigit = digitRegex.test(password);
-    const hasSpecialChar = specialCharRegex.test(password);
-
-    setHasUpperAndLowercase(hasUppercaseLowercase);
-    setHasNumbercase(hasDigit);
-    setHasSymbolcase(hasSpecialChar);
-
-    return hasUppercaseLowercase && hasDigit && hasSpecialChar;
-  };
-
   const {
     register,
+    watch,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: 'onBlur',
   });
+
+  const password = watch('password', '');
+  const confirmPass = watch('confirmPassword', '');
+  const privacyPolicy = watch('privacyPolicy', '');
+
+  const hasLowerCaseUpperCase = /^(?=.*[a-z])(?=.*[A-Z])/.test(password);
+  const hasNumber = /^(?=.*\d)/.test(password);
+  const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
+  const hasSamePassword = password !== '' && password === confirmPass;
 
   const onSubmit = (data) => {
     console.log(data);
@@ -64,11 +48,11 @@ const SignUp = () => {
       <h1 className='text-3xl mm:text-[32px] font-medium mb-8'>Регистрация</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='mm:max-w-[400px] w-full'
+        className='mm:max-w-[460px] w-full'
       >
-        <div>
+        <div className='mb-4'>
           <p className='font-bold mb-2'>ФИО</p>
-          <div className='mb-6 relative'>
+          <div className='relative mb-1'>
             <input
               className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               placeholder='Полное имя'
@@ -81,18 +65,26 @@ const SignUp = () => {
               src={profile}
               alt='*'
             />
-            {errors?.fullName && <p>{errors?.fullName.message || 'Error!'}</p>}
+            {errors?.fullName && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.fullName.message || 'Error!'}
+              </p>
+            )}
           </div>
         </div>
-        <div>
+        <div className='mb-4'>
           <p className='font-bold mb-2'>Ваш email</p>
-          <div className='mb-6 relative'>
+          <div className='relative mb-1'>
             <input
               className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type='email'
               placeholder='Введите ваш email'
               {...register('email', {
                 required: 'Поле обязательно к заполнению!',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Введите корректный адрес электронной почты',
+                },
               })}
             />
             <img
@@ -100,12 +92,42 @@ const SignUp = () => {
               src={profile}
               alt='*'
             />
-            {errors?.email && <p>{errors?.email.message || 'Error!'}</p>}
+            {errors?.email && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.email.message || 'Error!'}
+              </p>
+            )}
           </div>
         </div>
-        <div>
+        <div className='mb-4'>
+          <p className='font-bold mb-2'>Ваш телефон</p>
+          <div className='relative mb-1'>
+            <input
+              className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+              placeholder='Введите ваш телефон'
+              {...register('phone', {
+                required: 'Поле обязательно к заполнению!',
+                pattern: {
+                  value: /^[0-9+]+$/,
+                  message: 'Введите только цифры!',
+                },
+              })}
+            />
+            <img
+              className='absolute top-[15px] left-[10px] hidden mm:block'
+              src={call}
+              alt='*'
+            />
+            {errors?.phone && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.phone.message || 'Error!'}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className='mb-4'>
           <p className='font-bold mb-2'>Адрес</p>
-          <div className='mb-6 relative'>
+          <div className='relative mb-1'>
             <input
               className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               placeholder='Адрес проживания'
@@ -118,20 +140,35 @@ const SignUp = () => {
               src={location}
               alt='*'
             />
-            {errors?.address && <p>{errors?.address.message || 'Error!'}</p>}
+            {errors?.address && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.address.message || 'Error!'}
+              </p>
+            )}
           </div>
         </div>
-        <div>
+        <div className='mb-4'>
           <p className='font-bold mb-2'>Пароль</p>
-          <div className='mb-6 relative'>
+          <div className='relative mb-1'>
             <input
-              className={`w-full border ${
-                passValid ? 'border-colGray2' : 'border-red-500'
-              } p-3 mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none`}
+              className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type={`${visiblePass ? 'text' : 'password'}`}
               placeholder='Пароль'
-              value={password}
-              onChange={handlePassword}
+              {...register('password', {
+                required: 'Поле обязательно к заполнению!',
+                validate: (value) => {
+                  if (!/^(?=.*[a-z])(?=.*[A-Z])/.test(value)) {
+                    return 'Требуется хотя бы одна строчная и прописная буква!';
+                  }
+                  if (!/(?=.*\d)/.test(value)) {
+                    return 'Требуется хотя бы одна цифра!';
+                  }
+                  if (!/(?=.*[@$!%*?&#])/.test(value)) {
+                    return 'Требуется хотя бы один специальный символ!';
+                  }
+                  return true;
+                },
+              })}
             />
             <img
               className='absolute top-[15px] left-[10px]'
@@ -146,18 +183,28 @@ const SignUp = () => {
               <span
                 className={`${
                   visiblePass ? 'block' : 'hidden'
-                } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                } absolute top-[11px] -left-[2px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
               ></span>
             </div>
           </div>
+          {errors?.password && (
+            <p className='text-red-500 text-sm'>
+              {errors?.password.message || 'Error!'}
+            </p>
+          )}
         </div>
-        <div>
+        <div className='mb-4'>
           <p className='font-bold mb-2'>Подтвердить пароль</p>
-          <div className='mb-6 relative'>
+          <div className='relative mb-1'>
             <input
-              className='w-full border border-colGray2 p-[15px_44px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+              className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type={`${visiblePassConfirm ? 'text' : 'password'}`}
               placeholder='Подтвердить пароль'
+              {...register('confirmPassword', {
+                required: 'Поле обязательно к заполнению!',
+                validate: (value) =>
+                  value === password || 'Пароли не совпадают',
+              })}
             />
             <img
               className='absolute top-[15px] left-[10px]'
@@ -172,16 +219,21 @@ const SignUp = () => {
               <span
                 className={`${
                   visiblePassConfirm ? 'block' : 'hidden'
-                } absolute top-[11px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
+                } absolute top-[11px] -left-[2px] -rotate-[35deg] w-7 h-[1.5px] bg-colGray3`}
               ></span>
             </div>
           </div>
+          {errors?.confirmPassword && (
+            <p className='text-red-500 text-sm'>
+              {errors?.confirmPassword.message || 'Error!'}
+            </p>
+          )}
         </div>
         <div className='mb-7'>
           <div className='flex items-center my-2'>
             <span
               className={`min-w-[10px] h-[10px] rounded-full ${
-                hasUpperAndLowercase ? 'bg-colYellow' : 'bg-colGray2'
+                hasLowerCaseUpperCase ? 'bg-colYellow' : 'bg-colGray2'
               }`}
             ></span>
             <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
@@ -191,7 +243,7 @@ const SignUp = () => {
           <div className='flex items-center my-2'>
             <span
               className={`min-w-[10px] h-[10px] rounded-full ${
-                hasNumbercase ? 'bg-colYellow' : 'bg-colGray2'
+                hasNumber ? 'bg-colYellow' : 'bg-colGray2'
               }`}
             ></span>
             <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
@@ -201,11 +253,21 @@ const SignUp = () => {
           <div className='flex items-center my-2'>
             <span
               className={`min-w-[10px] h-[10px] rounded-full ${
-                hasSymbolcase ? 'bg-colYellow' : 'bg-colGray2'
+                hasSpecialChar ? 'bg-colYellow' : 'bg-colGray2'
               }`}
             ></span>
             <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
               Минимум один спецсимвол
+            </p>
+          </div>
+          <div className='flex items-center my-2'>
+            <span
+              className={`min-w-[10px] h-[10px] rounded-full ${
+                hasSamePassword ? 'bg-colYellow' : 'bg-colGray2'
+              }`}
+            ></span>
+            <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+              Пароли совпадают
             </p>
           </div>
         </div>
@@ -216,7 +278,7 @@ const SignUp = () => {
             id='checkbox'
             placeholder='Адрес проживания'
             {...register('privacyPolicy', {
-              required: 'Поле обязательно к заполнению!',
+              required: 'Обязательное согласие с политикой конфиденциальности!',
             })}
           />
           <label
@@ -224,7 +286,7 @@ const SignUp = () => {
             className='text-sm flex items-center cursor-pointer'
           >
             <div className='w-7 h-7 mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
-              {isValid ? (
+              {privacyPolicy ? (
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   xmlnsXlink='http://www.w3.org/1999/xlink'
@@ -253,13 +315,15 @@ const SignUp = () => {
             </div>
             Политика конфиденциальности
           </label>
+          {errors?.privacyPolicy && (
+            <p className='text-red-500 text-xs mt-2'>
+              {errors?.privacyPolicy.message || 'Error!'}
+            </p>
+          )}
         </div>
         <button
-          disabled={!isValid}
           type='submit'
-          className={`${
-            isValid ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
-          } p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold duration-150`}
+          className='hover:opacity-80 p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold duration-150'
         >
           Зарегистрироваться
         </button>

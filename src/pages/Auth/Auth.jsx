@@ -6,8 +6,6 @@ const Auth = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  console.log(pathname);
-
   return (
     <div className='flex w-full h-screen'>
       <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
@@ -24,8 +22,8 @@ const Auth = () => {
       </div>
       <div
         className={`${
-          pathname !== '/auth/sign-up' ? 'justify-around' : ''
-        } w-full mm:w-3/5 lg:w-4/6 flex flex-col items-center py-14 mm:py-20 px-4 overflow-y-scroll`}
+          pathname !== '/auth/sign-up' ? 'justify-around mm:py-20' : ''
+        } w-full mm:w-3/5 lg:w-4/6 flex flex-col items-center py-14  px-4 overflow-y-scroll`}
       >
         <Outlet />
       </div>
