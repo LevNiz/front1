@@ -23,7 +23,7 @@ const Auth = () => {
       <div
         className={`${
           pathname !== '/auth/sign-up' ? 'justify-around mm:py-20' : ''
-        } w-full mm:w-3/5 lg:w-4/6 flex flex-col items-center py-14  px-4 overflow-y-scroll`}
+        } w-full mm:w-3/5 lg:w-4/6 flex flex-col items-center py-12  px-4 overflow-y-scroll`}
       >
         <Outlet />
       </div>

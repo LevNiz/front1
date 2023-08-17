@@ -66,7 +66,7 @@ const SignUp = () => {
     <>
       <div className='mm:hidden' onClick={() => navigate('/')}>
         <img
-          className='absolute top-4 left-4 cursor-pointer'
+          className='cursor-pointer mb-5'
           src={leftArrow}
           alt='*'
         />
@@ -268,7 +268,7 @@ const SignUp = () => {
               })}
             />
             <img
-              className='absolute top-[15px] left-[10px]'
+              className='absolute top-[15px] left-[10px] hidden mm:block'
               src={lock}
               alt='*'
             />
@@ -304,7 +304,7 @@ const SignUp = () => {
               })}
             />
             <img
-              className='absolute top-[15px] left-[10px]'
+              className='absolute top-[15px] left-[10px] hidden mm:block'
               src={lock}
               alt='*'
             />

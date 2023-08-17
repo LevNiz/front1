@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const modalRef = useRef();
-  const user = useSelector((state) => state?.user?.user?.access)
+  const user = useSelector((state) => state?.user?.user?.access);
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {

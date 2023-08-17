@@ -91,7 +91,7 @@ const SignIn = () => {
               })}
             />
             <img
-              className='absolute top-[15px] left-[10px]'
+              className='absolute top-[15px] left-[10px] hidden mm:block'
               src={lock}
               alt='*'
             />
