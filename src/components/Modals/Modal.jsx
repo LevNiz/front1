@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, content }) => {
         className='absolute inset-0 bg-gray-800 opacity-50'
       ></div>
       {content == 'deleteAllNotifications' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px]'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -33,7 +33,7 @@ const Modal = ({ isOpen, onClose, content }) => {
           </div>
         </div>
       ) : content == 'deleteNotification' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px]'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -53,24 +53,25 @@ const Modal = ({ isOpen, onClose, content }) => {
           </div>
         </div>
       ) : (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] text-center'>
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
           <div className='flex justify-center py-5'>
             <img src={inCorrectImg} alt='*' />
           </div>
           <h3 className='text-lg font-semibold'>
-            Учетная запись с указанным номером уже существует!
+            Неверный логин или пароль
           </h3>
-          <p className='text-lg my-8'>Если забыли пароль?</p>
+          <p className='text-base mt-8 mb-4'>Забыли пароль?</p>
           <div className='flex px-8 mb-8'>
             <NavLink
               className='bg-colYellow w-full py-3 rounded-lg hover:bg-colYellowHover duration-100'
-              to='#'
+              to='/reset-password'
             >
               Восстановить
             </NavLink>
           </div>
-          <NavLink to='/register' className='text-lg underline'>
-            Регистрировать другой номер
+          <p className='text-sm mt-8 mb-1'>У вас нет аккаунта?</p>
+          <NavLink to='/register' className='text-base underline'>
+          Зарегистрироваться
           </NavLink>
         </div>
       )}

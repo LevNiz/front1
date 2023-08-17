@@ -10,8 +10,7 @@ export const fetchCountries = async () => {
   }
 };
 
-// Fetch countries:
-
+// Fetch cities:
 export const fetchCities = async () => {
   try {
     const res = await request.get('category/city/');

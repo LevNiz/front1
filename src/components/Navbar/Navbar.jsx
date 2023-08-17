@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from './../../assets/icons/logo.svg';
-import user from './../../assets/icons/user.svg';
+import userImg from './../../assets/icons/user.svg';
 import notification from './../../assets/icons/notification.svg';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const modalRef = useRef();
-  const authorized = false;
+  const user = useSelector((state) => state?.user?.user?.access)
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {
@@ -61,11 +62,11 @@ const Navbar = () => {
               <NavLink to='warehouses'>Наши склады</NavLink>
             </li>
           </ul>
-          {authorized ? (
+          {user ? (
             <ul className='hidden md:flex items-center justify-end space-x-4'>
               <li>
                 <NavLink to='profile/personal-data'>
-                  <img src={user} alt='*' />
+                  <img src={userImg} alt='*' />
                 </NavLink>
               </li>
               <li>

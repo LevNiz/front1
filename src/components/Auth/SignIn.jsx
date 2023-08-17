@@ -5,12 +5,36 @@ import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import { useState } from 'react';
 import Modal from '../Modals/Modal';
+import { useForm } from 'react-hook-form';
+import { loginUser } from '../../api/auth';
+import { useDispatch } from 'react-redux';
 
 const SignIn = () => {
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [visiblePass, setVisiblePass] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const onSubmit = async (data) => {
+    const { success } = await loginUser(dispatch, data);
+    if(success) {
+      navigate('/');
+    } else {
+      setModalOpen(true);
+      setModalContent('inCorrectData');
+    }
+  };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -21,7 +45,10 @@ const SignIn = () => {
       <div className='mm:hidden' onClick={() => navigate(-1)}>
         <img src={leftArrow} className='absolute top-4 left-4' alt='*' />
       </div>
-      <form className='mm:max-w-[400px] w-full pb-8'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='mm:max-w-[400px] w-full pb-8'
+      >
         <h1 className='mb-8 mm:mb-12 text-3xl mm:text-[32px] font-medium text-center'>
           Авторизация
         </h1>
@@ -29,27 +56,42 @@ const SignIn = () => {
           <p className='font-bold mb-2'>Ваш email</p>
           <div className='mb-6 relative'>
             <input
-              className='w-full border border-colGray2 p-3 mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+              className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type='email'
-              placeholder='E-mail'
+              placeholder='Введите ваш email'
+              {...register('email', {
+                required: 'Поле обязательно к заполнению!',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Введите корректный адрес электронной почты',
+                },
+              })}
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
               src={call}
               alt='*'
             />
+            {errors?.email && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.email.message || 'Error!'}
+              </p>
+            )}
           </div>
         </div>
         <div>
           <p className='font-bold mb-2'>Пароль</p>
           <div className='mb-4 relative'>
             <input
-              className='w-full border border-colGray2 p-3 mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+              className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type={`${visiblePass ? 'text' : 'password'}`}
               placeholder='Пароль'
+              {...register('password', {
+                required: 'Поле обязательно к заполнению!',
+              })}
             />
             <img
-              className='absolute top-[15px] left-[10px] hidden mm:block'
+              className='absolute top-[15px] left-[10px]'
               src={lock}
               alt='*'
             />
@@ -73,11 +115,12 @@ const SignIn = () => {
           Забыли пароль?
         </NavLink>
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            setModalOpen(true);
-            setModalContent('inCorrectNumber');
-          }}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   setModalOpen(true);
+          //   setModalContent('inCorrectNumber');
+          // }}
+          type='submit'
           className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
         >
           Войти
