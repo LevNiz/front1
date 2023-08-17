@@ -5,14 +5,21 @@ import lock from '../../assets/icons/lock.svg';
 import call from '../../assets/icons/call3.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
+import down from '../../assets/icons/down.svg';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchCities, fetchCountries } from '../../api/tempAPI';
+import { registerUser } from '../../api/auth';
+import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState([]);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -32,8 +39,27 @@ const SignUp = () => {
   const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
   const hasSamePassword = password !== '' && password === confirmPass;
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const getCountriesFetch = async () => {
+    const { success, data } = await fetchCountries();
+    if (success) {
+      setCountries(data);
+    }
+  };
+
+  const getCitiesFetch = async () => {
+    const { success, data } = await fetchCities();
+    if (success) {
+      setCities(data);
+    }
+  };
+
+  useEffect(() => {
+    getCountriesFetch();
+    getCitiesFetch();
+  }, []);
+
+  const onSubmit = async (data) => {
+    const { success } = await registerUser(dispatch, data);
   };
 
   return (
@@ -143,6 +169,74 @@ const SignUp = () => {
             {errors?.address && (
               <p className='text-red-500 mt-1 text-sm'>
                 {errors?.address.message || 'Error!'}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className='mb-4'>
+          <p className='font-bold mb-2'>Страна</p>
+          <div className='relative mb-1'>
+            <select
+              className='w-full appearance-none border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+              defaultValue='sdcsccds'
+              {...register('country', {
+                required: 'Поле обязательно к заполнению!',
+              })}
+            >
+              <option value=''>Выберите страну</option>
+              {countries?.map((el) => (
+                <option value={el?.id} key={el?.id}>
+                  {el?.nameRu}
+                </option>
+              ))}
+            </select>
+            <img
+              className='absolute top-[15px] left-[10px] hidden mm:block'
+              src={location}
+              alt='*'
+            />
+            <img
+              className='absolute top-[24px] right-[10px] w-3 opacity-70'
+              src={down}
+              alt='*'
+            />
+            {errors?.country && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.country.message || 'Error!'}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className='mb-4'>
+          <p className='font-bold mb-2'>Город</p>
+          <div className='relative mb-1'>
+            <select
+              className='w-full appearance-none border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+              defaultValue=''
+              {...register('city', {
+                required: 'Поле обязательно к заполнению!',
+              })}
+            >
+              <option value='0'>Выберите город</option>
+              {cities?.map((el) => (
+                <option value={el?.id} key={el?.id}>
+                  {el?.nameRu}
+                </option>
+              ))}
+            </select>
+            <img
+              className='absolute top-[15px] left-[10px] hidden mm:block'
+              src={location}
+              alt='*'
+            />
+            <img
+              className='absolute top-[24px] right-[10px] w-3 opacity-70'
+              src={down}
+              alt='*'
+            />
+            {errors?.city && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.city.message || 'Error!'}
               </p>
             )}
           </div>
