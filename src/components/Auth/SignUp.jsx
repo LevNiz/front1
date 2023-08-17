@@ -20,7 +20,7 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const password = watch('password', '');
@@ -165,6 +165,9 @@ const SignUp = () => {
                   }
                   if (!/(?=.*[@$!%*?&#])/.test(value)) {
                     return 'Требуется хотя бы один специальный символ!';
+                  }
+                  if (value.length < 6) {
+                    return 'Минимальная длина пароля - 6 символов!';
                   }
                   return true;
                 },
