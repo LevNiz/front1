@@ -34,7 +34,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
 
   return (
     <div>
-      <form className='fixed w-full overflow-y-scroll z-[9999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 sm:p-6 pb-6 md:p-10 pt-6 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
+      <form className='fixed w-full overflow-y-scroll sm:overflow-y-hidden z-[9999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 sm:p-6 pb-6 md:p-10 pt-6 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
         <div className='flex justify-end'>
           <span
             onClick={() => {

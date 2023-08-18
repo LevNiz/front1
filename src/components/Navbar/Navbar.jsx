@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className='bg-black py-2 relative'>
+      <header className='bg-black py-4 md:py-2 relative'>
         <div
           className={`container flex ${
             pathname === '/profile/notifications'
@@ -78,7 +78,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => setLoginModal(true)}
-              className='bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
+              className='hidden md:block bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
             >
               Войти
             </button>

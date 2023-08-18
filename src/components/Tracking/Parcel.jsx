@@ -4,7 +4,6 @@ import parcelCar from './../../assets/images/parcel-car.svg';
 import parcelIcon from './../../assets/images/parcel-icon.png';
 
 const Parcel = (parcel) => {
-  console.log(parcel.parcel)
   return (
     <>
       {parcel?.parcel?.map((el, index) => (

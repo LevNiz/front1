@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import { registerUser } from '../../api/auth';
 import { useDispatch } from 'react-redux';
+import { Loading } from '../../helpers/Loader/Loader';
 
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
@@ -62,9 +63,9 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     const { success } = await registerUser(dispatch, data);
-    if(success) {
+    if (success) {
       setIsLoading(false);
-      navigate('/')
+      navigate('/');
     }
     setIsLoading(false);
   };
@@ -72,11 +73,7 @@ const SignUp = () => {
   return (
     <>
       <div className='mm:hidden' onClick={() => navigate('/')}>
-        <img
-          className='cursor-pointer mb-5'
-          src={leftArrow}
-          alt='*'
-        />
+        <img className='cursor-pointer mb-5' src={leftArrow} alt='*' />
       </div>
       <h1 className='text-3xl mm:text-[32px] font-medium mb-8'>Регистрация</h1>
       <form
@@ -440,6 +437,7 @@ const SignUp = () => {
           Войти
         </NavLink>
       </div>
+      {isLoading ? <Loading /> : ''}
     </>
   );
 };

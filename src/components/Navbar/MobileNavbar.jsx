@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import SvgAlaket from './Icons/SvgAlaket';
 import SvgNotification from './Icons/SvgNotification';
@@ -6,6 +7,9 @@ import SvgTracking from './Icons/SvgTracking';
 import SvgWarehouse from './Icons/SvgWarehouse';
 
 const MobileNavbar = () => {
+  
+  const user = useSelector((state) => state?.user?.user);
+
   return (
     <ul className='md:hidden mobile-navbar fixed flex justify-between items-center h-16 px-4 w-full bottom-0 left-0 bg-white shadow-[0px_4px_120px_0px_rgba(193,_193,_197,_0.15)] z-[9999]'>
       <li>
@@ -35,7 +39,9 @@ const MobileNavbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to='/profile/personal-data'>
+        <NavLink
+          to={`${user !== null ? '/profile/personal-data' : '/auth/sign-in'}`}
+        >
           <SvgProfile className='mx-auto' />
           <span className='text-[10px] text-colGray font-medium'>Профиль</span>
         </NavLink>

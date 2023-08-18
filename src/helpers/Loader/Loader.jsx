@@ -1,6 +1,6 @@
 import Loader from 'react-js-loader';
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div className='App fixed w-full h-full top-0 left-0 z-[99999] bg-black bg-opacity-30'>
       <div className='flex justify-center items-center h-full'>
@@ -17,4 +17,19 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export const ContentLoading = () => {
+  return (
+    <div className='w-full'>
+      <div className='flex justify-center items-center w-full h-full'>
+        <div className={'item'}>
+          <Loader
+            type='bubble-loop'
+            bgColor={'#FEDE2B'}
+            color={'#000'}
+            size={100}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};

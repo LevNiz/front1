@@ -20,12 +20,12 @@ export const registerUser = async (dispatch, data) => {
     country: parseInt(data.country),
     city: parseInt(data.city),
     password: data.password,
-    avatar: 'https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg',
+    avatar:
+      'https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg',
     wallet: [],
   };
   try {
     const res = await request.post('user/client/', userData);
-    console.log(res?.data);
     dispatch(registerSuccess(res?.data));
     return { success: true };
   } catch (error) {

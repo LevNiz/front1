@@ -8,7 +8,7 @@ import Modal from '../../helpers/Modals/Modal';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../../api/auth';
 import { useDispatch } from 'react-redux';
-import Loading from '../../helpers/Loader/Loader';
+import { Loading } from '../../helpers/Loader/Loader';
 
 const SignIn = () => {
   const navigate = useNavigate();
