@@ -10,8 +10,8 @@ import { useNavigate } from 'react-router-dom';
 const DetailInfo = () => {
   const navigate = useNavigate();
   return (
-    <div className='bg-colBgGray2 fixed lg:static w-full h-full overflow-y-scroll top-0 left-0 z-[9999] lg:rounded-[20px] lg:h-[fit-content] p-4 lg:p-7 mlg:l-6 xl:ml-auto lg:w-3/6 xl:w-2/5'>
-      <img onClick={() => navigate(-1)} className='mb-4' src={back} alt="*" />
+    <div className='bg-colBgGray2 fixed lg:static w-full h-full overflow-y-scroll lg:overflow-y-hidden top-0 left-0 z-[9999] lg:rounded-[20px] lg:h-[fit-content] p-4 lg:p-7 mlg:l-6 xl:ml-auto lg:w-3/6 xl:w-2/5'>
+      <img onClick={() => navigate(-1)} className='mb-4 lg:hidden' src={back} alt="*" />
       <div className='flex justify-center items-center mb-5'>
         <img src={nounBox} alt='*' />
         <h2 className='text-2xl font-medium ml-6'>ММ09564738</h2>

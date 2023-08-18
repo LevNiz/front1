@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../../Modals/Modal';
+import Modal from '../../../helpers/Modals/Modal';
 import back from './../../../assets/icons/arrow-left.svg';
 
 const NotificationDetail = () => {

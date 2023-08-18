@@ -2,7 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { notifications } from '../../../constants/notificationsData';
 import noNotifications from '../../../assets/images/no-notification.png';
 import { useState } from 'react';
-import Modal from '../../Modals/Modal';
+import Modal from '../../../helpers/Modals/Modal';
 
 const Notifications = () => {
   const [modalOpen, setModalOpen] = useState(false);

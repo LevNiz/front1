@@ -4,16 +4,17 @@ import call from '../../assets/icons/call3.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import { useState } from 'react';
-import Modal from '../Modals/Modal';
+import Modal from '../../helpers/Modals/Modal';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../../api/auth';
 import { useDispatch } from 'react-redux';
+import Loading from '../../helpers/Loader/Loader';
 
 const SignIn = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [visiblePass, setVisiblePass] = useState(false);
@@ -27,10 +28,13 @@ const SignIn = () => {
   });
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     const { success } = await loginUser(dispatch, data);
-    if(success) {
+    if (success) {
       navigate('/');
+      setIsLoading(false);
     } else {
+      setIsLoading(false);
       setModalOpen(true);
       setModalContent('inCorrectData');
     }
@@ -115,11 +119,6 @@ const SignIn = () => {
           Забыли пароль?
         </NavLink>
         <button
-          // onClick={(e) => {
-          //   e.preventDefault();
-          //   setModalOpen(true);
-          //   setModalContent('inCorrectNumber');
-          // }}
           type='submit'
           className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
         >
@@ -134,6 +133,7 @@ const SignIn = () => {
         </NavLink>
       </form>
       <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      {isLoading ? <Loading /> : ''}
     </>
   );
 };

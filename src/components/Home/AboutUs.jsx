@@ -39,16 +39,16 @@ const AboutUs = () => {
             alt='*'
           />
           <p className='text-xl xl:text-2xl font-medium'>
-            Lorem ipsum dolor sit amet consectetur. Posuere id amet sit cras
-            tellus eget felis magna a. Libero eleifend turpis aliquet pulvinar.
-            Elementum vitae dignissim convallis eget iaculis integer nam sit in.
-            Orci sed auctor pharetra placerat cras integer vitae.
+            Мы рады представить Вам наш сервис GivBox по доставке и покупке
+            товаров в зарубежных магазинах и маркетплейсах. Вы совершаете
+            покупку, а дальше все сделаем мы. Так же для вас предоставляем
+            сервис по поиску людей для передачи посылок по пути. 
             <br />
             <br />
-            Lorem ipsum dolor sit amet consectetur. Posuere id amet sit cras
-            tellus eget felis magna a. Libero eleifend turpis aliquet pulvinar.
-            Elementum vitae dignissim convallis eget iaculis integer nam sit in.
-            Orci sed auctor pharetra placerat cras integer vitae.
+            Для юридических
+            лиц мы доставляем любые коммерческие грузы под ключ. Мы сплоченная
+            команда единомышленников, которая работает с удовольствием и
+            интересом.
           </p>
         </div>
       </div>

@@ -17,6 +17,7 @@ const SignUp = () => {
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,7 +60,13 @@ const SignUp = () => {
   }, []);
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     const { success } = await registerUser(dispatch, data);
+    if(success) {
+      setIsLoading(false);
+      navigate('/')
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -217,7 +224,7 @@ const SignUp = () => {
                 required: 'Поле обязательно к заполнению!',
               })}
             >
-              <option value='0'>Выберите город</option>
+              <option value=''>Выберите город</option>
               {cities?.map((el) => (
                 <option value={el?.id} key={el?.id}>
                   {el?.nameRu}
