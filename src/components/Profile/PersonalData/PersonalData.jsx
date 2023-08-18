@@ -4,14 +4,13 @@ import profile from './../../../assets/icons/profile.svg';
 import call from './../../../assets/icons/call3.svg';
 import email from './../../../assets/icons/email.svg';
 import down from './../../../assets/icons/down.svg';
+import noImg from './../../../assets/images/no-ava.jpeg';
 import jwt_decode from 'jwt-decode';
 import { useSelector } from 'react-redux';
 import { fetchUser } from '../../../api/client';
 import { useForm } from 'react-hook-form';
 import { fetchCities, fetchCountries } from '../../../api/tempAPI';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { NavLink } from 'react-router-dom';
-import noNotifications from '../../../assets/images/no-notification.png';
 
 const PersonalData = () => {
   const userToken = useSelector((state) => state?.user?.user?.access);
@@ -68,15 +67,21 @@ const PersonalData = () => {
     <>
       {isLoading ? (
         <ContentLoading />
-      ) : userToken ? (
+      ) : (
         <div className='py-5 pl-3 sm:pl-5 lg:px-12 w-full'>
           <div className='flex'>
-            <div className='sm:max-w-[110px] max-w-[80px] sm:min-w-[110px] min-w-[80px] h-[80px] sm:h-[110px] overflow-hidden rounded-full mr-3 sm:mr-6'>
-              <img
-                className='w-full h-full object-cover'
-                src={userData?.avatar}
-                alt='*'
-              />
+            <div className='relative sm:max-w-[110px] max-w-[80px] border border-colGray2 sm:min-w-[110px] min-w-[80px] h-[80px] sm:h-[110px] overflow-hidden rounded-full mr-3 sm:mr-6'>
+              <input className='hidden' accept='image/*' type='file' id='ava' />
+              <label className='cursor-pointer' htmlFor='ava'>
+                <img
+                  className='w-full h-full object-cover'
+                  src={userData?.avatar ? userData?.avatar : noImg}
+                  alt='*'
+                />
+                <span className='absolute bottom-2 right-5 w-5 h-5 flex justify-center items-center rounded-full text-green-500 text-3xl bg-white'>
+                  +
+                </span>
+              </label>
             </div>
             <div className='flex flex-col justify-center'>
               <h4 className='text-lg sm:text-xl font-medium sm:font-bold'>
@@ -237,22 +242,6 @@ const PersonalData = () => {
               </button>
             </div>
           </form>
-        </div>
-      ) : (
-        <div className='flex justify-center items-center w-full'>
-          <div>
-            <img className='mx-auto' src={noNotifications} alt='*' />
-            <h4 className='text-2xl font-semibold py-12'>
-              У вас еще нет уведомлений
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-              type='submit'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
         </div>
       )}
     </>
