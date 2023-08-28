@@ -88,6 +88,8 @@ const SignUp = () => {
     label: el?.nameRu,
   }));
 
+  console.log(selectedCity)
+
   return (
     <>
       <div className='mm:hidden' onClick={() => navigate('/')}>
@@ -229,11 +231,9 @@ const SignUp = () => {
           <p className='font-bold mb-2'>Город</p>
           <div className='relative mb-1'>
             <Select
-              className='w-full'
-              value={cityOptions?.find((city) => city?.value === selectedCity)}
+              selected={selectedCity}
               options={cityOptions}
               placeholder='Выберите город'
-              defaultValue=''
               isSearchable={true}
               {...register('city', {
                 required: 'Поле обязательно к заполнению!',
