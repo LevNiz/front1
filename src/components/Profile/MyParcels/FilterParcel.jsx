@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { warehouses } from '../../../constants/wareHouseData';
+import back from './../../../assets/icons/arrow-left.svg'
 
 // eslint-disable-next-line react/prop-types
 const FilterParcel = ({ isOpen, onClose }) => {
@@ -35,7 +36,10 @@ const FilterParcel = ({ isOpen, onClose }) => {
   return (
     <div>
       <form className='fixed w-full overflow-y-scroll sm:overflow-y-hidden z-[9999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 sm:p-6 pb-6 md:p-10 pt-6 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
-        <div className='flex justify-end'>
+        <div className='flex justify-between mb-5'>
+        <div onClick={() => onClose()}>
+            <img src={back} alt='*' />
+          </div>
           <span
             onClick={() => {
               onClose();
