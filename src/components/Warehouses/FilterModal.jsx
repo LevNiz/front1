@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { warehouses } from '../../constants/wareHouseData';
+import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import back from './../../assets/icons/arrow-left.svg';
 
 // eslint-disable-next-line react/prop-types
@@ -10,26 +10,26 @@ const FilterModal = ({ isOpen, onClose }) => {
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedParcel, setSelectedParcel] = useState('');
 
-  const [completedCountries, setCompletedCountries] = useState();
-  const [completedCities, setCompletedCities] = useState();
-  const [completedTimes, setCompletedTimes] = useState();
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  const getCountriesFetch = async () => {
+    const { success, data } = await fetchCountries();
+    if (success) {
+      setCountries(data);
+    }
+  };
+
+  const getCitiesFetch = async () => {
+    const { success, data } = await fetchCities();
+    if (success) {
+      setCities(data);
+    }
+  };
 
   useEffect(() => {
-    const mappedCountries = warehouses?.map((el) => ({
-      id: el?.id,
-      label: el?.country,
-    }));
-    const mappedCities = warehouses?.map((el) => ({
-      id: el?.id,
-      label: el?.city,
-    }));
-    const mappedTimes = warehouses?.map((el) => ({
-      id: el?.id,
-      label: el?.workTime,
-    }));
-    setCompletedCountries(mappedCountries);
-    setCompletedCities(mappedCities);
-    setCompletedTimes(mappedTimes);
+    getCountriesFetch();
+    getCitiesFetch();
   }, []);
 
   if (!isOpen) return null;
@@ -38,7 +38,7 @@ const FilterModal = ({ isOpen, onClose }) => {
     <>
       <form className='fixed w-full h-screen sm:h-auto sm:absolute top-0 left-0 xl:left-[7%] bg-white p-4 sm:p-6 md:p-10 pt-6 z-[9999] max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
         <div className='flex justify-between sm:justify-end'>
-          <div onClick={() => onClose()}>
+          <div className='block sm:hidden' onClick={() => onClose()}>
             <img src={back} alt='*' />
           </div>
           <span
@@ -57,9 +57,9 @@ const FilterModal = ({ isOpen, onClose }) => {
               onChange={(e) => setSelectedCountry(e.target.value)}
             >
               <option value=''>Выберите страну</option>
-              {completedCountries.map((el) => (
-                <option key={el.id} value={el.id}>
-                  {el.label}
+              {countries?.map((el) => (
+                <option key={el?.id} value={el?.id}>
+                  {el?.nameRu}
                 </option>
               ))}
             </select>
@@ -85,9 +85,9 @@ const FilterModal = ({ isOpen, onClose }) => {
               onChange={(e) => setSelectedCity(e.target.value)}
             >
               <option value=''>Выберите город</option>
-              {completedCities.map((el) => (
-                <option key={el.id} value={el.id}>
-                  {el.label}
+              {cities?.map((el) => (
+                <option key={el?.id} value={el?.id}>
+                  {el?.nameRu}
                 </option>
               ))}
             </select>
@@ -115,9 +115,9 @@ const FilterModal = ({ isOpen, onClose }) => {
               onChange={(e) => setSelectedParcel(e.target.value)}
             >
               <option value=''>{`</> 30 кг`}</option>
-              {completedCountries.map((el) => (
-                <option key={el.id} value={el.id}>
-                  {el.label}
+              {countries?.map((el) => (
+                <option key={el?.id} value={el?.id}>
+                  {el?.nameRu}
                 </option>
               ))}
             </select>
@@ -145,11 +145,8 @@ const FilterModal = ({ isOpen, onClose }) => {
               onChange={(e) => setSelectedTime(e.target.value)}
             >
               <option value=''>Выходные</option>
-              {completedTimes.map((el) => (
-                <option key={el.id} value={el.id}>
-                  {el.label}
-                </option>
-              ))}
+              <option value='1'>09:00 - 19:00</option>
+              <option value='2'>10:00 - 18:00</option>
             </select>
             <div className='pointer-events-none absolute top-[40%] inset-y-0 right-0 flex items-center px-2 text-gray-700'>
               <svg

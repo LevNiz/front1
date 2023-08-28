@@ -3,12 +3,11 @@ import { NavLink, useLocation } from 'react-router-dom';
 import logo from './../../assets/icons/logo.svg';
 import userImg from './../../assets/icons/user.svg';
 import notification from './../../assets/icons/notification.svg';
-import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const modalRef = useRef();
-  const user = useSelector((state) => state?.user?.user?.access);
+  const user = localStorage.getItem('accessToken');
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {
@@ -31,7 +30,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className='bg-black py-4 md:py-2 relative'>
+      <header className='bg-black py-4 md:py-2 md:sticky top-0 z-[99999]'>
         <div
           className={`container flex ${
             pathname === '/profile/notifications'
