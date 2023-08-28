@@ -12,7 +12,9 @@ const ProfileSidebar = () => {
 
   const logOutUser = async () => {
     await logOut(dispatch);
-    navigate('/')
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    navigate('/');
   };
 
   return (

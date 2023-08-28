@@ -12,7 +12,7 @@ import axios from 'axios';
 
 // Access & Refresh token:
 axios.interceptors.request.use((config) => {
-  const access = JSON.parse(localStorage.getItem('access'));
+  const access = JSON.parse(localStorage.getItem('accessToken'));
   const authorizationToken = access ? `Bearer ${access}` : '';
   config.headers.Authorization = authorizationToken;
   return config;
@@ -94,6 +94,8 @@ export const registerUser = async (dispatch, data) => {
   try {
     const res = await request.post('user/client/', userData);
     dispatch(registerSuccess(res?.data));
+    localStorage.setItem('accessToken', res.data.access);
+    localStorage.setItem('refreshToken', res.data.refresh);
     return { success: true };
   } catch (error) {
     dispatch(registerFailure(error));

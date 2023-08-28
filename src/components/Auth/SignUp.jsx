@@ -414,7 +414,11 @@ const SignUp = () => {
                 ''
               )}
             </div>
-            Я согласен (на) с<NavLink className='ml-1 underline' to='/' target='blank'> условиями пользовательского соглашения</NavLink>
+            Я согласен (на) с
+            <NavLink className='ml-1 underline' to='/' target='blank'>
+              {' '}
+              условиями пользовательского соглашения
+            </NavLink>
           </label>
           {errors?.privacyPolicy && (
             <p className='text-red-500 text-xs mt-2'>
