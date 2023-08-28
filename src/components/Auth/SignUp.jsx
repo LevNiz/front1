@@ -5,9 +5,10 @@ import lock from '../../assets/icons/lock.svg';
 import call from '../../assets/icons/call3.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
-import down from '../../assets/icons/down.svg';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import Select from 'react-select';
+import ReactFlagsSelect from 'react-flags-select';
 import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import { registerUser } from '../../api/auth';
 import { useDispatch } from 'react-redux';
@@ -19,6 +20,8 @@ const SignUp = () => {
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedCity, setSelectedCity] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -69,6 +72,21 @@ const SignUp = () => {
     }
     setIsLoading(false);
   };
+
+  const countryNamesInRussian = {};
+
+  countries.forEach((country) => {
+    countryNamesInRussian[country?.code] = country.nameRu;
+  });
+
+  const filteredCities = cities?.filter(
+    (el) => el?.country?.code === selectedCountry
+  );
+
+  const cityOptions = filteredCities?.map((el) => ({
+    value: el?.id,
+    label: el?.nameRu,
+  }));
 
   return (
     <>
@@ -180,28 +198,24 @@ const SignUp = () => {
         <div className='mb-4'>
           <p className='font-bold mb-2'>Страна</p>
           <div className='relative mb-1'>
-            <select
-              className='w-full appearance-none border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-              defaultValue='sdcsccds'
-              {...register('country', {
-                required: 'Поле обязательно к заполнению!',
-              })}
-            >
-              <option value=''>Выберите страну</option>
-              {countries?.map((el) => (
-                <option value={el?.id} key={el?.id}>
-                  {el?.nameRu}
-                </option>
-              ))}
-            </select>
+            <ReactFlagsSelect
+              selected={selectedCountry}
+              onSelect={(countryCode) => {
+                setSelectedCountry(countryCode);
+                setSelectedCity('');
+              }}
+              countries={countries?.map((country) => country?.code)}
+              customLabels={countryNamesInRussian}
+              placeholder='Выберите страну'
+              searchable={true}
+              searchPlaceholder='Поиск...'
+              customStyle={{
+                padding: '11px 20px 11px 44px !important',
+              }}
+            />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
               src={location}
-              alt='*'
-            />
-            <img
-              className='absolute top-[24px] right-[10px] w-3 opacity-70'
-              src={down}
               alt='*'
             />
             {errors?.country && (
@@ -214,28 +228,20 @@ const SignUp = () => {
         <div className='mb-4'>
           <p className='font-bold mb-2'>Город</p>
           <div className='relative mb-1'>
-            <select
-              className='w-full appearance-none border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+            <Select
+              className='w-full'
+              value={cityOptions?.find((city) => city?.value === selectedCity)}
+              options={cityOptions}
+              placeholder='Выберите город'
               defaultValue=''
+              isSearchable={true}
               {...register('city', {
                 required: 'Поле обязательно к заполнению!',
               })}
-            >
-              <option value=''>Выберите город</option>
-              {cities?.map((el) => (
-                <option value={el?.id} key={el?.id}>
-                  {el?.nameRu}
-                </option>
-              ))}
-            </select>
+            />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
               src={location}
-              alt='*'
-            />
-            <img
-              className='absolute top-[24px] right-[10px] w-3 opacity-70'
-              src={down}
               alt='*'
             />
             {errors?.city && (

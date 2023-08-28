@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import logo from './../../assets/icons/logo.svg';
+import logo from './../../assets/images/header-logo.svg';
 import userImg from './../../assets/icons/user.svg';
 import notification from './../../assets/icons/notification.svg';
 
