@@ -29,9 +29,9 @@ const WareHouseItem = (warehouses) => {
           </div>
           <div className='flex md:block max-w-[275px] w-full md:min-h-[128px] my-2 md:my-0'>
             <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
-              Адрес:
+              Город / Страна:
             </h4>
-            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>{el?.address}</p>
+            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>{el?.city?.nameRu}, {el?.country?.nameRu}</p>
           </div>
           <div className='flex md:block md:min-h-[128px]'>
             <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
