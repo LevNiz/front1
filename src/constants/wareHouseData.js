@@ -1,4 +1,3 @@
-import wareHouseIcon from './../assets/images/warehouse.png';
 
 export const warehouses = [
   {
@@ -8,7 +7,6 @@ export const warehouses = [
     city: 'Бишкек',
     street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
-    icon: wareHouseIcon,
     images: [
       {
         id: 1,
@@ -38,7 +36,6 @@ export const warehouses = [
     city: 'Москва',
     street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
-    icon: wareHouseIcon,
     images: [
       {
         id: 1,
@@ -68,7 +65,6 @@ export const warehouses = [
     city: 'Астана',
     street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
-    icon: wareHouseIcon,
     images: [
       {
         id: 1,
@@ -98,7 +94,6 @@ export const warehouses = [
     city: 'Берлин',
     street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
-    icon: wareHouseIcon,
     images: [
       {
         id: 1,
@@ -128,7 +123,6 @@ export const warehouses = [
     city: 'Токио',
     street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
-    icon: wareHouseIcon,
     images: [
       {
         id: 1,
@@ -158,7 +152,6 @@ export const warehouses = [
     city: 'Оттава',
     street: 'ул. Советская, 123',
     workTime: '09:00 - 19:00',
-    icon: wareHouseIcon,
     images: [
       {
         id: 1,

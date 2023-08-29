@@ -1,10 +1,18 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchWareHouses } from '../../api/warehouses';
 import { WareHouseItem } from '../../components';
 import FilterModal from '../../components/Warehouses/FilterModal';
-import { warehouses } from '../../constants/wareHouseData';
+import { ContentLoading } from '../../helpers/Loader/Loader';
 
 const Warehouses = () => {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
+  const { warehouses, loading, error } = useSelector(
+    (state) => state?.warehouses
+  );
+
+  const dispatch = useDispatch();
 
   const openFilterModal = (e) => {
     e.preventDefault();
@@ -14,6 +22,13 @@ const Warehouses = () => {
   const closeFilterModal = () => {
     setFilterModalOpen(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      await fetchWareHouses(dispatch);
+    })();
+  }, []);
+
   return (
     <div className='content pb-12'>
       <form className='pt-14 pb-6 md:flex'>
@@ -43,7 +58,13 @@ const Warehouses = () => {
       <h1 className='text-2xl md:text-4xl font-semibold text-center my-8 md:my-14'>
         Склады
       </h1>
-      <WareHouseItem data={warehouses} />
+      {loading ? (
+        <ContentLoading />
+      ) : error ? (
+        'Error'
+      ) : (
+        <WareHouseItem data={warehouses} />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import wareHouseIcon from './../../assets/images/warehouse-icon.jpg';
 import wareHouseIcon2 from './../../assets/icons/wareHouseIcon2.svg';
+import warehouseIcon3 from './../../assets/images/warehouse.svg';
 
 const WareHouseItem = (warehouses) => {
   return (
@@ -14,7 +15,7 @@ const WareHouseItem = (warehouses) => {
           <div className='lg:w-[107px] w-16 lg:h-107px hidden md:block overflow-hidden'>
             <img
               className='w-full h-full object-cover'
-              src={el?.icon}
+              src={warehouseIcon3}
               alt='*'
             />
           </div>
@@ -23,14 +24,14 @@ const WareHouseItem = (warehouses) => {
               Склад:
             </h4>
             <p className='text-base lg:text-2xl md:text-center font-medium text-black'>
-              {el?.name}
+              {el?.nameRu}
             </p>
           </div>
           <div className='flex md:block max-w-[275px] w-full md:min-h-[128px] my-2 md:my-0'>
             <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
               Адрес:
             </h4>
-            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>{`${el?.country}, ${el?.city}, ${el?.street}`}</p>
+            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>{el?.address}</p>
           </div>
           <div className='flex md:block md:min-h-[128px]'>
             <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
