@@ -53,6 +53,7 @@ const PersonalData = () => {
               code: data.country.code,
             }
           : {};
+        setSelectedCountry(countryDefaults?.code);
         return {
           fullName: data?.fullname,
           phone: data?.phone,

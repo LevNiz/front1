@@ -17,6 +17,7 @@ import {
   ResetPassNew,
   ResetPassSuccess,
   WareHouseDetail,
+  PrivateRoute,
 } from '../components';
 import { Auth, Home, Profile, Tracking, Warehouses } from '../pages';
 
@@ -42,12 +43,14 @@ export const router = createBrowserRouter(
           <Route index element={<Warehouses />} />
           <Route path=':id' element={<WareHouseDetail />} />
         </Route>
-        <Route path='profile' element={<Profile />}>
-          <Route path='personal-data' element={<PersonalData />} />
-          <Route path='notifications' element={<Notifications />}>
-            <Route path=':id' element={<NotificationDetail />} />
+        <Route element={<PrivateRoute />}>
+          <Route path='profile' element={<Profile />}>
+            <Route path='personal-data' element={<PersonalData />} />
+            <Route path='notifications' element={<Notifications />}>
+              <Route path=':id' element={<NotificationDetail />} />
+            </Route>
+            <Route path='my-parcels' element={<MyParcels />} />
           </Route>
-          <Route path='my-parcels' element={<MyParcels />} />
         </Route>
       </Route>
     </Route>

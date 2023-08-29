@@ -21,6 +21,7 @@ import ResetPass from './Auth/ResetPassword/ResetPass';
 import ResetPassConfirm from './Auth/ResetPassword/ResetPassConfirm';
 import ResetPassNew from './Auth/ResetPassword/ResetPassNew';
 import ResetPassSuccess from './Auth/ResetPassword/ResetPassSuccess';
+import PrivateRoute from '../helpers/Private/PrivateRoute';
 
 export {
   Layout,
@@ -46,4 +47,5 @@ export {
   ResetPassNew,
   ResetPassSuccess,
   SignUp,
+  PrivateRoute,
 };
