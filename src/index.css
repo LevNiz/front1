@@ -67,11 +67,16 @@
 
 .ReactFlagsSelect-module_selectBtn__19wW7 {
   padding: 11px 20px 11px 38px !important;
+  border-radius: 0.5rem !important;
+}
+.css-123m4i6-control {
+  border-radius: 0.5rem !important;
 }
 
-.css-13cymwt-control,
-.css-13ipsp-control {
-  padding: 8px 8px 8px 34px !important;
+@media screen and (max-width: 576px) {
+  .ReactFlagsSelect-module_selectBtn__19wW7 {
+    padding: 11px 20px 11px 8px !important;
+  }
 }
 
 .slider .swiper-button-next,

@@ -5,7 +5,7 @@ import lock from '../../assets/icons/lock.svg';
 import call from '../../assets/icons/call3.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import ReactFlagsSelect from 'react-flags-select';
@@ -21,13 +21,19 @@ const SignUp = () => {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('');
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [size, setSize] = useState(window.innerWidth);
+
+  window.addEventListener('resize', function () {
+    setSize(window.innerWidth);
+  });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
+    control,
     register,
+    setValue,
     watch,
     handleSubmit,
     formState: { errors },
@@ -35,6 +41,7 @@ const SignUp = () => {
     mode: 'onChange',
   });
 
+  const countrySelect = watch('country');
   const password = watch('password', '');
   const confirmPass = watch('confirmPassword', '');
   const privacyPolicy = watch('privacyPolicy', '');
@@ -87,8 +94,6 @@ const SignUp = () => {
     value: el?.id,
     label: el?.nameRu,
   }));
-
-  console.log(selectedCity)
 
   return (
     <>
@@ -200,20 +205,36 @@ const SignUp = () => {
         <div className='mb-4'>
           <p className='font-bold mb-2'>Страна</p>
           <div className='relative mb-1'>
-            <ReactFlagsSelect
-              selected={selectedCountry}
-              onSelect={(countryCode) => {
-                setSelectedCountry(countryCode);
-                setSelectedCity('');
-              }}
-              countries={countries?.map((country) => country?.code)}
-              customLabels={countryNamesInRussian}
-              placeholder='Выберите страну'
-              searchable={true}
-              searchPlaceholder='Поиск...'
-              customStyle={{
-                padding: '11px 20px 11px 44px !important',
-              }}
+            <Controller
+              name='country'
+              control={control}
+              rules={{ required: 'Поле обязательно к заполнению!' }}
+              defaultValue=''
+              render={({ field }) => (
+                <ReactFlagsSelect
+                  selected={field.value?.code}
+                  onSelect={(selectedOption) => {
+                    field.onChange(selectedOption);
+                    const selectedCountryObject = countries?.find(
+                      (country) => country?.code === selectedOption
+                    );
+
+                    if (selectedCountryObject) {
+                      setValue('country', selectedCountryObject);
+                    }
+                    setSelectedCountry(selectedOption);
+                    setValue('city', '');
+                  }}
+                  countries={countries?.map((country) => country?.code)}
+                  customLabels={countryNamesInRussian}
+                  placeholder='Выберите страну'
+                  searchable={true}
+                  searchPlaceholder='Поиск...'
+                  customStyle={{
+                    padding: '11px 20px 11px 44px !important',
+                  }}
+                />
+              )}
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
@@ -230,14 +251,27 @@ const SignUp = () => {
         <div className='mb-4'>
           <p className='font-bold mb-2'>Город</p>
           <div className='relative mb-1'>
-            <Select
-              selected={selectedCity}
-              options={cityOptions}
-              placeholder='Выберите город'
-              isSearchable={true}
-              {...register('city', {
-                required: 'Поле обязательно к заполнению!',
-              })}
+            <Controller
+              name='city'
+              control={control}
+              rules={{ required: 'Поле обязательно к заполнению!' }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  options={cityOptions}
+                  placeholder='Выберите город'
+                  isDisabled={!countrySelect}
+                  onChange={(selectedOption) => {
+                    field.onChange(selectedOption);
+                  }}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                    }),
+                  }}
+                />
+              )}
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'

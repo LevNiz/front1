@@ -3,26 +3,36 @@ import location from './../../../assets/icons/location2.svg';
 import profile from './../../../assets/icons/profile.svg';
 import call from './../../../assets/icons/call3.svg';
 import email from './../../../assets/icons/email.svg';
-import down from './../../../assets/icons/down.svg';
 import noImg from './../../../assets/images/no-ava.jpeg';
 import jwt_decode from 'jwt-decode';
 import { useSelector } from 'react-redux';
 import { fetchUser } from '../../../api/client';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { fetchCities, fetchCountries } from '../../../api/tempAPI';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
+import ReactFlagsSelect from 'react-flags-select';
+import Select from 'react-select';
 
 const PersonalData = () => {
   const userToken = useSelector((state) => state?.user?.user?.access);
   const decoded = jwt_decode(userToken);
   const [userData, setUserData] = useState();
   const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState('');
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [size, setSize] = useState(window.innerWidth);
+
+  window.addEventListener('resize', function () {
+    setSize(window.innerWidth);
+  });
 
   const {
     register,
-    // handleSubmit,
+    setValue,
+    control,
+    watch,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     mode: 'onChange',
@@ -31,12 +41,24 @@ const PersonalData = () => {
       if (success) {
         setUserData(data);
         setIsLoading(false);
+        const cityDefaults = data?.city
+          ? {
+              value: data.city.id,
+              label: data.city.nameRu,
+            }
+          : {};
+        const countryDefaults = data?.country
+          ? {
+              id: data.country.id,
+              code: data.country.code,
+            }
+          : {};
         return {
           fullName: data?.fullname,
           phone: data?.phone,
           email: data?.login,
-          country: data?.country?.id,
-          city: data?.city?.id,
+          country: countryDefaults,
+          city: cityDefaults,
           address: data?.address,
         };
       }
@@ -62,6 +84,26 @@ const PersonalData = () => {
     getCountriesFetch();
     getCitiesFetch();
   }, []);
+
+  const countrySelect = watch('country');
+  const countryNamesInRussian = {};
+
+  countries.forEach((country) => {
+    countryNamesInRussian[country?.code] = country.nameRu;
+  });
+
+  const filteredCities = cities?.filter(
+    (el) => el?.country?.code === selectedCountry
+  );
+
+  const cityOptions = filteredCities?.map((el) => ({
+    value: el?.id,
+    label: el?.nameRu,
+  }));
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -90,7 +132,7 @@ const PersonalData = () => {
               <p className='text-sm sm:font-medium'>{userData?.city?.nameRu}</p>
             </div>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className='grid lg:grid-cols-2 gap-4 lg:gap-8 mt-12'>
               <div>
                 <p className='font-bold mb-2'>ФИО</p>
@@ -172,27 +214,36 @@ const PersonalData = () => {
               <div>
                 <p className='font-bold mb-2'>Страна</p>
                 <div className='relative mb-1'>
-                  <select
-                    className='w-full appearance-none border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-                    {...register('country', {
-                      required: 'Поле обязательно к заполнению!',
-                    })}
-                  >
-                    <option value=''>Выберите страну</option>
-                    {countries?.map((el) => (
-                      <option value={el?.id} key={el?.id}>
-                        {el?.nameRu}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name='country'
+                    control={control}
+                    rules={{ required: 'Поле обязательно к заполнению!' }}
+                    render={({ field }) => (
+                      <ReactFlagsSelect
+                        selected={field.value?.code}
+                        onSelect={(selectedOption) => {
+                          field.onChange(selectedOption);
+                          const selectedCountryObject = countries?.find(
+                            (country) => country?.code === selectedOption
+                          );
+
+                          if (selectedCountryObject) {
+                            setValue('country', selectedCountryObject);
+                          }
+                          setSelectedCountry(selectedOption);
+                          setValue('city', '');
+                        }}
+                        countries={countries?.map((country) => country?.code)}
+                        customLabels={countryNamesInRussian}
+                        placeholder='Выберите страну'
+                        searchable={true}
+                        searchPlaceholder='Поиск...'
+                      />
+                    )}
+                  />
                   <img
                     className='absolute top-[15px] left-[10px] hidden mm:block'
                     src={location}
-                    alt='*'
-                  />
-                  <img
-                    className='absolute top-[24px] right-[10px] w-3 opacity-70'
-                    src={down}
                     alt='*'
                   />
                   {errors?.country && (
@@ -205,27 +256,31 @@ const PersonalData = () => {
               <div>
                 <p className='font-bold mb-2'>Город</p>
                 <div className='relative mb-1'>
-                  <select
-                    className='w-full appearance-none border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-                    {...register('city', {
-                      required: 'Поле обязательно к заполнению!',
-                    })}
-                  >
-                    <option value='0'>Выберите город</option>
-                    {cities?.map((el) => (
-                      <option value={el?.id} key={el?.id}>
-                        {el?.nameRu}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name='city'
+                    control={control}
+                    rules={{ required: 'Поле обязательно к заполнению!' }}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={cityOptions}
+                        placeholder='Выберите город'
+                        isDisabled={!countrySelect}
+                        onChange={(selectedOption) => {
+                          field.onChange(selectedOption);
+                        }}
+                        styles={{
+                          control: (provided) => ({
+                            ...provided,
+                            padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                          }),
+                        }}
+                      />
+                    )}
+                  />
                   <img
                     className='absolute top-[15px] left-[10px] hidden mm:block'
                     src={location}
-                    alt='*'
-                  />
-                  <img
-                    className='absolute top-[24px] right-[10px] w-3 opacity-70'
-                    src={down}
                     alt='*'
                   />
                   {errors?.city && (

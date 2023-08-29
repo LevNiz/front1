@@ -84,8 +84,8 @@ export const registerUser = async (dispatch, data) => {
     phone: data.phone,
     fullname: data.fullName,
     address: data.address,
-    country: parseInt(data.country),
-    city: parseInt(data.city),
+    country: parseInt(data.country.id),
+    city: parseInt(data.city.value),
     password: data.password,
     avatar:
       'https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg',
