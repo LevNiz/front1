@@ -7,7 +7,8 @@ import HowItWorks from './Home/HowItWorks';
 import Testimonials from './Home/Testimonials';
 import WareHouseItem from './Warehouses/WareHouseItem';
 import WareHouseDetail from './Warehouses/WareHouseDetail';
-import Parcel from './Tracking/Parcel';
+import AuthParcel from './Tracking/AuthParcel';
+import UnAuthParcel from './Tracking/UnAuthParcel';
 import DetailInfo from './Tracking/DetailInfo';
 import SignUp from './Auth/SignUp';
 import SignIn from './Auth/SignIn';
@@ -33,7 +34,8 @@ export {
   Testimonials,
   WareHouseItem,
   WareHouseDetail,
-  Parcel,
+  AuthParcel,
+  UnAuthParcel,
   DetailInfo,
   SignIn,
   Notifications,

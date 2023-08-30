@@ -16,3 +16,13 @@ export const FetchParcels = async (dispatch) => {
     dispatch(fetchParcelsFailure(error));
   }
 };
+
+// Find parcel:
+export const fetchSearchParcel = async (orderNum) => {
+  try {
+    const res = await request.get(`core/package/?orderNumber=${orderNum}`);
+    return { success: true, parcelData: res?.data?.results }
+} catch (error) {
+    return { success: false, parcelData: error }
+  }
+};

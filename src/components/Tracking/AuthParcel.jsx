@@ -10,8 +10,8 @@ import parcelIcon from './../../assets/images/parcel-icon.png';
 
 const Parcel = () => {
   const { parcels, loading, error } = useSelector((state) => state?.parcels);
-  const userToken = useSelector((state) => state?.user?.user?.access);
-  const decoded = jwt_decode(userToken);
+  const token = useSelector((state) => state?.user?.user?.access);
+  const decoded = jwt_decode(token);
   const dispatch = useDispatch();
 
   const userParcels = parcels?.filter(
