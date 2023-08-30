@@ -1,5 +1,4 @@
 import { Parcel } from '../../components';
-import { parcel } from '../../constants/parcelData';
 import rulesImg from './../../assets/images/rules.svg';
 
 const Tracking = () => {
@@ -33,9 +32,9 @@ const Tracking = () => {
       <h3 className='text-2xl sm:text-4xl font-semibold pb-4 pt-14 lg:py-16 text-center'>
         Мои текущие посылки
       </h3>
-      <div className='flex justify-center'>
+      <div className='flex justify-center mb-10'>
         <div className='max-w-[991px] w-full flex flex-col space-y-8'>
-          <Parcel parcel={parcel} />
+          <Parcel />
         </div>
       </div>
     </div>

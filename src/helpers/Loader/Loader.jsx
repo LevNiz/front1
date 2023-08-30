@@ -19,7 +19,7 @@ export const Loading = () => {
 
 export const ContentLoading = () => {
   return (
-    <div className='w-full h-[50vh]'>
+    <div className='w-full py-20'>
       <div className='flex justify-center items-center w-full h-full'>
         <div className={'item'}>
           <Loader
