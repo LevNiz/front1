@@ -36,7 +36,8 @@ export const router = createBrowserRouter(
       </Route>
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path='tracking' element={<Tracking />}>
+        <Route path='tracking'>
+          <Route index element={<Tracking />} />
           <Route path=':id' element={<DetailInfo />} />
         </Route>
         <Route path='warehouses'>

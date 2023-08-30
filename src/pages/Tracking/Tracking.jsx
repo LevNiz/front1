@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router-dom';
 import { Parcel } from '../../components';
 import { parcel } from '../../constants/parcelData';
 import rulesImg from './../../assets/images/rules.svg';
@@ -35,10 +34,9 @@ const Tracking = () => {
         Мои текущие посылки
       </h3>
       <div className='flex justify-center'>
-        <div className='w-full lg:w-3/6 xl:w-3/5 flex flex-col space-y-8'>
+        <div className='max-w-[991px] w-full flex flex-col space-y-8'>
           <Parcel parcel={parcel} />
         </div>
-        <Outlet />
       </div>
     </div>
   );

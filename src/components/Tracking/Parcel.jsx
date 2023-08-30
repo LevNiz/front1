@@ -10,7 +10,7 @@ const Parcel = (parcel) => {
         <NavLink
           to={`${el?.id}`}
           key={index}
-          className='max-w-[712px] mx-auto w-full shadow-[0px_15px_30px_0px_rgba(204,_204,_204,_0.40)] hover:shadow-[0px_20px_30px_0px_rgba(204,_204,_204,_0.90)] duration-150 rounded-[18px] p-4 md:p-8'
+          className='w-full shadow-[0px_15px_30px_0px_rgba(204,_204,_204,_0.40)] hover:shadow-[0px_20px_30px_0px_rgba(204,_204,_204,_0.90)] duration-150 rounded-[18px] p-4 md:p-8'
         >
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
