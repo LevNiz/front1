@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
 const Parcel = () => {
-  const parcels = useSelector((state) => state?.parcels?.parcels);
+  const { parcels, loading, error } = useSelector((state) => state?.parcels);
   const token = useSelector((state) => state?.user?.user?.access);
   const decoded = jwt_decode(token);
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Parcel = () => {
   const [userParcels, setUserParcels] = useState(
     parcels?.filter((parcel) => parcel?.client?.id === decoded?.user_id)
   );
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
 
   const {
@@ -31,14 +31,14 @@ const Parcel = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    setLoading(true);
+    setIsLoading(true);
     const { success, parcelData } = await fetchSearchParcel(data.orderNumber);
     if (success) {
       setUserParcels(parcelData);
-      setLoading(false);
+      setIsLoading(false);
       setIsSearched(true);
     }
-    setLoading(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const Parcel = () => {
           </p>
         </div>
       </div>
-      {loading ? (
+      {isLoading ? (
         <ContentLoading />
       ) : isSearched && userParcels?.length < 1 ? (
         <div className='py-10'>
@@ -92,6 +92,12 @@ const Parcel = () => {
           <h4 className='text-center font-medium mt-5 text-xl'>
             По вашему запросу ничего не нашли...
           </h4>
+        </div>
+      ) : loading ? (
+        <ContentLoading />
+      ) : error ? (
+        <div className="bg-red-500 text-white px-4 py-2 rounded-md mt-12 w-max mx-auto">
+          Произошла ошибка во время выполнения операции. Пожалуйста, повторите попытку позже... 
         </div>
       ) : (
         <div className='flex justify-center my-16'>

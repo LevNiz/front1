@@ -17,12 +17,22 @@ export const FetchParcels = async (dispatch) => {
   }
 };
 
+// Fetch Parcels detail:
+export const fetchParcelDetail = async (id) => {
+  try {
+    const res = await request.get(`core/package/${id}/`);
+    return { success: true, data: res?.data };
+  } catch (error) {
+    return { success: false, data: error };
+  }
+};
+
 // Find parcel:
 export const fetchSearchParcel = async (orderNum) => {
   try {
     const res = await request.get(`core/package/?orderNumber=${orderNum}`);
-    return { success: true, parcelData: res?.data?.results }
-} catch (error) {
-    return { success: false, parcelData: error }
+    return { success: true, parcelData: res?.data?.results };
+  } catch (error) {
+    return { success: false, parcelData: error };
   }
 };
