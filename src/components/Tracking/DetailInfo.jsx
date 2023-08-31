@@ -167,9 +167,7 @@ const DetailInfo = () => {
                 </div>
               </div>
               <div className='bg-white w-full p-6 sm:p-10 rounded-[20px] col-span-2'>
-                <h3 className='mb-2 font-medium'>
-                  Комментарии
-                </h3>
+                <h3 className='mb-2 font-medium'>Комментарии</h3>
                 <p>{parcelDetail?.comment}</p>
               </div>
             </div>

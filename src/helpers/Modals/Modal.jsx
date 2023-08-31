@@ -52,14 +52,21 @@ const Modal = ({ isOpen, onClose, content }) => {
             </button>
           </div>
         </div>
+      ) : content == 'notFound' ? (
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
+          <div className='py-10'>
+            <img className='mx-auto' src={inCorrectImg} alt='*' />
+            <h4 className='text-center font-medium mt-5 text-xl'>
+              По вашему запросу ничего не нашли...
+            </h4>
+          </div>
+        </div>
       ) : (
         <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
           <div className='flex justify-center py-5'>
             <img src={inCorrectImg} alt='*' />
           </div>
-          <h3 className='text-lg font-semibold'>
-            Неверный логин или пароль
-          </h3>
+          <h3 className='text-lg font-semibold'>Неверный логин или пароль</h3>
           <p className='text-base mt-8 mb-4'>Забыли пароль?</p>
           <div className='flex px-8 mb-8'>
             <NavLink
@@ -71,7 +78,7 @@ const Modal = ({ isOpen, onClose, content }) => {
           </div>
           <p className='text-sm mt-8 mb-1'>У вас нет аккаунта?</p>
           <NavLink to='/register' className='text-base underline'>
-          Зарегистрироваться
+            Зарегистрироваться
           </NavLink>
         </div>
       )}
