@@ -5,10 +5,19 @@ import parcel from './../../assets/icons/my-parcel.svg';
 import notification from './../../assets/icons/notification2.svg';
 import { logOut } from '../../api/auth';
 import { useDispatch } from 'react-redux';
+import Modal from '../../helpers/Modals/Modal';
+import { useState } from 'react';
 
 const ProfileSidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState();
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const logOutUser = async () => {
     await logOut(dispatch);
@@ -49,7 +58,10 @@ const ProfileSidebar = () => {
         </li>
         <li className='mt-24'>
           <button
-            onClick={logOutUser}
+            onClick={() => {
+              setModalOpen(true);
+              setModalContent('logout');
+            }}
             className='text-xl flex items-center p-2 rounded-lg'
           >
             <img className='md:pr-3' src={logout} alt='*' />
@@ -57,6 +69,7 @@ const ProfileSidebar = () => {
           </button>
         </li>
       </ul>
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} logOutUser={logOutUser} />
     </div>
   );
 };

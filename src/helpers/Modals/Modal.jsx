@@ -3,7 +3,7 @@ import inCorrectImg from './../../assets/images/404.svg';
 import { NavLink } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-const Modal = ({ isOpen, onClose, content }) => {
+const Modal = ({ isOpen, onClose, content, logOutUser }) => {
   if (!isOpen) return null;
 
   return (
@@ -48,6 +48,29 @@ const Modal = ({ isOpen, onClose, content }) => {
               Нет
             </button>
             <button className='bg-white px-5 py-2 font-medium text-black border border-black rounded-[10px]'>
+              Да
+            </button>
+          </div>
+        </div>
+      ) : content == 'logout' ? (
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+          <div className='flex justify-center py-5'>
+            <img src={sosImg} alt='*' />
+          </div>
+          <h3 className='text-center text-xl mm:text-2xl font-medium'>
+            Вы действительно хотите выйти из аккаунта?
+          </h3>
+          <div className='flex justify-center my-12 mm:my-16 space-x-5'>
+            <button
+              onClick={onClose}
+              className='bg-black px-5 py-2 font-medium text-white rounded-[10px]'
+            >
+              Нет
+            </button>
+            <button
+              onClick={logOutUser}
+              className='bg-white px-5 py-2 font-medium text-black border border-black rounded-[10px]'
+            >
               Да
             </button>
           </div>
