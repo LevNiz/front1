@@ -9,31 +9,31 @@ import boxIcon from './../../assets/icons/package.svg';
 import noImg from './../../assets/images/no-image.svg';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { fetchWareHousesDetail } from '../../api/warehouses';
+import { fetchDepotsDetail } from '../../api/depots';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 
-const WareHouseDetail = () => {
-  const [warehouseItem, setWarehouseItem] = useState();
+const DepotDetail = () => {
+  const [depotItem, setDepotItem] = useState();
   const [loading, setLoading] = useState(false);
+  const [images, setImages] = useState();
   const { id } = useParams();
 
-  const images = warehouseItem?.images;
-  const [mainImg, setMainImg] = useState(
-    images == null ? '' : images[0]?.image
-  );
+  const [mainImg, setMainImg] = useState();
 
   const handleClick = (index) => {
-    const main = images[index]?.image;
+    const main = images[index];
     setMainImg(main);
   };
 
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const { success, data } = await fetchWareHousesDetail(id);
+      const { success, data } = await fetchDepotsDetail(id);
       if (success) {
-        setWarehouseItem(data);
+        setDepotItem(data);
         setLoading(false);
+        setMainImg(data?.images[0])
+        setImages(data?.images);
       }
       setLoading(false);
     })();
@@ -46,14 +46,14 @@ const WareHouseDetail = () => {
       ) : (
         <>
           <h1 className='text-2xl sm:text-4xl font-semibold text-center mt-4 mb-16'>
-            {warehouseItem?.nameRu}
+            {depotItem?.nameRu}
           </h1>
 
           <div className='md:flex pb-12'>
             <div className='w-full md:w-3/6 xl:w-2/5 mb-12 md:mb-0'>
               <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto'>
                 <img
-                  src={warehouseItem?.images == null ? noImg : mainImg}
+                  src={depotItem?.images == null ? noImg : mainImg}
                   alt='*'
                   className='w-full h-full object-cover'
                 />
@@ -67,17 +67,17 @@ const WareHouseDetail = () => {
                 wrapperClass='swiper-wrapper justify-between sm:justify-center sm:space-x-4 lg:space-x-8'
                 className='flex justify-around mt-5'
               >
-                {warehouseItem?.images !== null
+                {depotItem?.images !== null
                   ? images?.map((el, index) => (
                       <SwiperSlide
-                        key={el.id}
+                        key={index}
                         className='sm:max-w-[80px] !w-[22%] h-[50px] xs:h-[70px] sm:w-full sm:h-[80px] rounded-lg overflow-hidden cursor-pointer'
                         onClick={() => {
                           handleClick(index);
                         }}
                       >
                         <img
-                          src={el?.image}
+                          src={el}
                           alt='*'
                           className='w-full h-full object-cover'
                         />
@@ -93,7 +93,7 @@ const WareHouseDetail = () => {
                     <img src={location} alt='*' />
                   </span>
                   <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {`${warehouseItem?.address}, ${warehouseItem?.city?.nameRu}, ${warehouseItem?.country?.nameRu}`}
+                    {`${depotItem?.address}, ${depotItem?.city?.nameRu}, ${depotItem?.country?.nameRu}`}
                   </p>
                 </div>
                 <div className='flex items-center my-8'>
@@ -101,7 +101,7 @@ const WareHouseDetail = () => {
                     <img src={call} alt='*' />
                   </span>
                   <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {warehouseItem?.contacts?.phone}
+                    {depotItem?.contacts?.phone}
                   </p>
                 </div>
                 <div className='flex items-center mt-8'>
@@ -109,7 +109,7 @@ const WareHouseDetail = () => {
                     <img src={boxIcon} alt='*' />
                   </span>
                   <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {warehouseItem?.maxAmount} кг
+                    {depotItem?.maxAmount} кг
                   </p>
                 </div>
                 <div className='flex my-8'>
@@ -117,7 +117,7 @@ const WareHouseDetail = () => {
                     <img src={clock} alt='*' />
                   </span>
                   <div className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {warehouseItem?.workingHours?.map((el, index) => (
+                    {depotItem?.workingHours?.map((el, index) => (
                       <div className='grid grid-cols-2' key={index}>
                         <div className='flex'>
                           <span className='mr-2'>Пн: </span>
@@ -168,4 +168,4 @@ const WareHouseDetail = () => {
   );
 };
 
-export default WareHouseDetail;
+export default DepotDetail;

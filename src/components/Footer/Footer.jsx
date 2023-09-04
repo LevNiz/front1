@@ -25,7 +25,7 @@ const Footer = () => {
             </li>
             <li>
               <NavLink
-                to='warehouses'
+                to='depots'
                 className='text-base hover:text-colYellow duration-100'
               >
                 Наши склады

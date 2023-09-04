@@ -18,9 +18,7 @@ const NotificationDetail = () => {
       <div className='bg-colBgGray mm:rounded-[18px] p-3 lg:py-6 lg:px-4 xl:p-12'>
         <div className='mm:hidden flex justify-between items-center mt-3 mb-7'>
           <img onClick={() => navigate(-1)} src={back} alt='*' />
-          <span className='font-semibold'>
-            Уведомления
-          </span>
+          <span className='font-semibold'>Уведомления</span>
         </div>
         <h3 className='text-base lg:text-xl font-bold pb-2 break-all text-center mm:text-left'>
           Вы получили сообщение

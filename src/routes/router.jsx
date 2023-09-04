@@ -16,10 +16,10 @@ import {
   ResetPassConfirm,
   ResetPassNew,
   ResetPassSuccess,
-  WareHouseDetail,
+  DepotDetail,
   PrivateRoute,
 } from '../components';
-import { Auth, Home, Profile, Tracking, Warehouses } from '../pages';
+import { Auth, Home, Profile, Tracking, Depots } from '../pages';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,9 +40,9 @@ export const router = createBrowserRouter(
           <Route index element={<Tracking />} />
           <Route path=':id' element={<DetailInfo />} />
         </Route>
-        <Route path='warehouses'>
-          <Route index element={<Warehouses />} />
-          <Route path=':id' element={<WareHouseDetail />} />
+        <Route path='depots'>
+          <Route index element={<Depots />} />
+          <Route path=':id' element={<DepotDetail />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>

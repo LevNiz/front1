@@ -4,10 +4,9 @@ import SvgAlaket from './Icons/SvgAlaket';
 import SvgNotification from './Icons/SvgNotification';
 import SvgProfile from './Icons/SvgProfile';
 import SvgTracking from './Icons/SvgTracking';
-import SvgWarehouse from './Icons/SvgWarehouse';
+import SvgDepot from './Icons/SvgDepot';
 
 const MobileNavbar = () => {
-  
   const user = useSelector((state) => state?.user?.user);
 
   return (
@@ -19,8 +18,8 @@ const MobileNavbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to='/warehouses'>
-          <SvgWarehouse className='mx-auto' />
+        <NavLink to='/depots'>
+          <SvgDepot className='mx-auto' />
           <span className='text-[10px] text-colGray font-medium'>Склады</span>
         </NavLink>
       </li>

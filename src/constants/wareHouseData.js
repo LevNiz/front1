@@ -1,5 +1,4 @@
-
-export const warehouses = [
+export const depots = [
   {
     id: 1,
     name: 'Склад №1',

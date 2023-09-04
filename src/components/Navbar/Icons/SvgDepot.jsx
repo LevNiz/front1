@@ -1,4 +1,4 @@
-const SvgWarehouse = (props) => {
+const SvgDepot = (props) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -23,4 +23,4 @@ const SvgWarehouse = (props) => {
   );
 };
 
-export default SvgWarehouse;
+export default SvgDepot;

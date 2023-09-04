@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import wareHouseIcon from './../../assets/images/warehouse-icon.jpg';
-import wareHouseIcon2 from './../../assets/icons/wareHouseIcon2.svg';
-import warehouseIcon3 from './../../assets/images/warehouse.svg';
+import depotIcon from './../../assets/images/warehouse-icon.jpg';
+import depotIcon2 from './../../assets/icons/wareHouseIcon2.svg';
+import depotIcon3 from './../../assets/images/warehouse.svg';
 
-const WareHouseItem = (warehouses) => {
+const DepotItem = (depots) => {
   return (
     <>
-      {warehouses?.data?.map((el, index) => (
+      {depots?.data?.map((el, index) => (
         <NavLink
           to={`${el?.id}`}
           key={index}
@@ -15,7 +15,7 @@ const WareHouseItem = (warehouses) => {
           <div className='lg:w-[107px] w-16 lg:h-107px hidden md:block overflow-hidden'>
             <img
               className='w-full h-full object-cover'
-              src={warehouseIcon3}
+              src={depotIcon3}
               alt='*'
             />
           </div>
@@ -31,7 +31,9 @@ const WareHouseItem = (warehouses) => {
             <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
               Город / Страна:
             </h4>
-            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>{el?.city?.nameRu}, {el?.country?.nameRu}</p>
+            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>
+              {el?.city?.nameRu}, {el?.country?.nameRu}
+            </p>
           </div>
           <div className='flex md:block md:min-h-[128px]'>
             <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
@@ -42,10 +44,10 @@ const WareHouseItem = (warehouses) => {
             </p>
           </div>
           <div className='md:h-[150px] lg:h-[192px] hidden md:flex justify-end items-end'>
-            <img className='w-6 md:w-10' src={wareHouseIcon} alt='*' />
+            <img className='w-6 md:w-10' src={depotIcon} alt='*' />
           </div>
           <img
-            src={wareHouseIcon2}
+            src={depotIcon2}
             className='md:hidden absolute bottom-[10px] right-[10px] w-[25px]'
             alt='*'
           />
@@ -55,4 +57,4 @@ const WareHouseItem = (warehouses) => {
   );
 };
 
-export default WareHouseItem;
+export default DepotItem;

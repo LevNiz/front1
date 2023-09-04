@@ -69,7 +69,12 @@ const ProfileSidebar = () => {
           </button>
         </li>
       </ul>
-      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} logOutUser={logOutUser} />
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        content={modalContent}
+        logOutUser={logOutUser}
+      />
     </div>
   );
 };

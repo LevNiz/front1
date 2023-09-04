@@ -1,16 +1,14 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWareHouses } from '../../api/warehouses';
-import { WareHouseItem } from '../../components';
-import FilterModal from '../../components/Warehouses/FilterModal';
+import { fetchDepots } from '../../api/depots';
+import { DepotItem } from '../../components';
+import FilterModal from '../../components/Depots/FilterModal';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 
-const Warehouses = () => {
+const Depots = () => {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
-  const { warehouses, loading, error } = useSelector(
-    (state) => state?.warehouses
-  );
+  const { depots, loading, error } = useSelector((state) => state?.depots);
 
   const dispatch = useDispatch();
 
@@ -25,7 +23,7 @@ const Warehouses = () => {
 
   useEffect(() => {
     (async () => {
-      await fetchWareHouses(dispatch);
+      await fetchDepots(dispatch);
     })();
   }, []);
 
@@ -63,10 +61,10 @@ const Warehouses = () => {
       ) : error ? (
         'Error'
       ) : (
-        <WareHouseItem data={warehouses} />
+        <DepotItem data={depots} />
       )}
     </div>
   );
 };
 
-export default Warehouses;
+export default Depots;

@@ -35,7 +35,7 @@ const Navbar = () => {
           className={`container flex ${
             pathname === '/profile/notifications'
               ? 'justify-between'
-              : pathname === '/warehouses'
+              : pathname === '/depots'
               ? 'justify-between'
               : 'justify-center'
           } md:justify-between items-center`}
@@ -46,7 +46,7 @@ const Navbar = () => {
           <div className='md:hidden text-white'>
             {pathname === '/profile/notifications'
               ? 'Уведомления'
-              : pathname === '/warehouses'
+              : pathname === '/depots'
               ? 'Наши склады'
               : ''}
           </div>
@@ -58,7 +58,7 @@ const Navbar = () => {
               <NavLink to='tracking'>Трекинг посылок</NavLink>
             </li>
             <li>
-              <NavLink to='warehouses'>Наши склады</NavLink>
+              <NavLink to='depots'>Наши склады</NavLink>
             </li>
           </ul>
           {user ? (
