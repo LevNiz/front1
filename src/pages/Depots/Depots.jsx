@@ -1,16 +1,27 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDepots } from '../../api/depots';
+import { fetchDepots, searchDepot } from '../../api/depots';
 import { DepotItem } from '../../components';
 import FilterModal from '../../components/Depots/FilterModal';
 import { ContentLoading } from '../../helpers/Loader/Loader';
+import notFound from './../../assets/images/404.svg';
 
 const Depots = () => {
-  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
   const { depots, loading, error } = useSelector((state) => state?.depots);
 
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
+  const [depotData, setDepotData] = useState(depots);
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const openFilterModal = (e) => {
     e.preventDefault();
@@ -27,14 +38,26 @@ const Depots = () => {
     })();
   }, []);
 
+  const onSubmit = async (value) => {
+    setIsLoading(true);
+    const { success, data } = await searchDepot(value.searchDepot);
+    if (success) {
+      setDepotData(data);
+      setIsLoading(false);
+    }
+    setIsLoading(false);
+  };
+
   return (
     <div className='content pb-12'>
-      <form className='pt-14 pb-6 md:flex'>
+      <form className='pt-14 pb-2 md:flex'>
         <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
           <input
             className='px-2 w-full focus:outline-none'
-            type='text'
-            placeholder='Страна, город, склад...'
+            placeholder='Поиск по названию...'
+            {...register('searchDepot', {
+              required: 'Введите название склада...',
+            })}
           />
           <button
             onClick={(e) => openFilterModal(e)}
@@ -44,12 +67,18 @@ const Depots = () => {
           </button>
         </div>
         <button
+          onClick={handleSubmit(onSubmit)}
           className='md:max-w-[255px] mt-4 md:mt-0 md:ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
           type='submit'
         >
           Поиск
         </button>
       </form>
+      {errors?.searchDepot && (
+        <p className='text-red-500 text-sm'>
+          {errors?.searchDepot.message || 'Error!'}
+        </p>
+      )}
       <div className='relative'>
         <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
@@ -59,9 +88,21 @@ const Depots = () => {
       {loading ? (
         <ContentLoading />
       ) : error ? (
-        'Error'
+        <div className='bg-red-500 text-white px-4 py-2 rounded-md mt-12 w-max mx-auto'>
+          Произошла ошибка во время выполнения операции. Пожалуйста, повторите
+          попытку позже...
+        </div>
+      ) : isLoading ? (
+        <ContentLoading />
+      ) : depotData?.length > 0 ? (
+        <DepotItem depotData={depotData} />
       ) : (
-        <DepotItem data={depots} />
+        <div className='py-10'>
+          <img className='mx-auto' src={notFound} alt='*' />
+          <p className='text-center font-medium text-xl mt-5'>
+            По вашему запросу ничего не нашли...
+          </p>
+        </div>
       )}
     </div>
   );

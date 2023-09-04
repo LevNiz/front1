@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from 'react-router-dom';
 import depotIcon from './../../assets/images/warehouse-icon.jpg';
 import depotIcon2 from './../../assets/icons/wareHouseIcon2.svg';
 import depotIcon3 from './../../assets/images/warehouse.svg';
 
-const DepotItem = (depots) => {
+const DepotItem = ({depotData}) => {
   return (
     <>
-      {depots?.data?.map((el, index) => (
+      {depotData?.map((el, index) => (
         <NavLink
           to={`${el?.id}`}
           key={index}
