@@ -33,3 +33,16 @@ export const ContentLoading = () => {
     </div>
   );
 };
+
+export const ButtonLoading = () => {
+  return (
+    <div>
+      <Loader
+        type='bubble-loop'
+        bgColor={'#fff'}
+        color={'#000'}
+        size={50}
+      />
+    </div>
+  );
+};

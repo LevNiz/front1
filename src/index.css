@@ -72,6 +72,13 @@
 .css-123m4i6-control {
   border-radius: 0.5rem !important;
 }
+.filterSelect .ReactFlagsSelect-module_selectBtn__19wW7,
+.filterSelect .css-uyzb06-control {
+  min-height: 52px;
+  padding: 8px !important;
+  background: rgb(242 242 242);
+  border: none;
+}
 
 @media screen and (max-width: 576px) {
   .ReactFlagsSelect-module_selectBtn__19wW7 {

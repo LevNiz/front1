@@ -35,3 +35,24 @@ export const searchDepot = async (depotName) => {
     return { success: false, data: error };
   }
 };
+
+// Filter depots:
+export const filterDepot = async (filterData) => {
+  const { country, city } = filterData;
+  const countryID = country?.id;
+  const cityID = city?.value;
+
+  const params = new URLSearchParams({
+    country: countryID || '',
+    city: cityID || '',
+    maxAmount_min: '',
+    maxAmount_max: '',
+  });
+
+  try {
+    const response = await request.get(`core/depot/?${params}`);
+    return { success: true, data: response.data.results };
+  } catch (error) {
+    return { success: false, data: error };
+  }
+};

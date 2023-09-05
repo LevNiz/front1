@@ -48,6 +48,10 @@ const Depots = () => {
     setIsLoading(false);
   };
 
+  const receiveDataFromChild = (data) => {
+    setDepotData(data);
+  };
+
   return (
     <div className='content pb-12'>
       <form className='pt-14 pb-2 md:flex'>
@@ -80,7 +84,11 @@ const Depots = () => {
         </p>
       )}
       <div className='relative'>
-        <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
+        <FilterModal
+          isOpen={isFilterModalOpen}
+          onClose={closeFilterModal}
+          dataFromChild={receiveDataFromChild}
+        />
       </div>
       <h1 className='text-2xl md:text-4xl font-semibold text-center my-8 md:my-14'>
         Склады
