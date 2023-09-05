@@ -12,7 +12,7 @@ const Depots = () => {
   const { depots, loading, error } = useSelector((state) => state?.depots);
 
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
-  const [depotData, setDepotData] = useState(depots);
+  const [depotData, setDepotData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -37,6 +37,10 @@ const Depots = () => {
       await fetchDepots(dispatch);
     })();
   }, []);
+
+  useEffect(() => {
+    setDepotData(depots);
+  }, [depots]);
 
   const onSubmit = async (value) => {
     setIsLoading(true);

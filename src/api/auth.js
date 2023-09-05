@@ -5,7 +5,7 @@ import {
   loginStart,
   loginSuccess,
   loginFailure,
-  logOutSuccess,
+  logOut,
 } from '../redux/slices/userSlice';
 import { request } from './axios';
 // import axios from 'axios';
@@ -123,6 +123,6 @@ export const loginUser = async (dispatch, data) => {
 };
 
 // LogOut:
-export const logOut = async (dispatch) => {
-  dispatch(logOutSuccess());
+export const logOutFetch = async (dispatch) => {
+  dispatch(logOut());
 };

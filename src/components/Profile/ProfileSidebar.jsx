@@ -3,7 +3,7 @@ import logout from './../../assets/icons/logout.svg';
 import profile from './../../assets/icons/profile2.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
 import notification from './../../assets/icons/notification2.svg';
-import { logOut } from '../../api/auth';
+import { logOutFetch } from '../../api/auth';
 import { useDispatch } from 'react-redux';
 import Modal from '../../helpers/Modals/Modal';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ const ProfileSidebar = () => {
   };
 
   const logOutUser = async () => {
-    await logOut(dispatch);
+    await logOutFetch(dispatch);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     navigate('/');

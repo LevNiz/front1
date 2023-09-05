@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logOut } from './userSlice';
 
 const initialState = {
   parcels: null,
@@ -23,6 +24,13 @@ export const parcelsSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(logOut, (state) => {
+      state.parcels = null;
+      state.loading = false;
+      state.error = null;
+    });
   },
 });
 
