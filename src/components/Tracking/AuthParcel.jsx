@@ -18,9 +18,7 @@ const Parcel = () => {
   const decoded = jwt_decode(token);
   const dispatch = useDispatch();
 
-  const [userParcels, setUserParcels] = useState(
-    parcels?.filter((parcel) => parcel?.client?.id === decoded?.user_id)
-  );
+  const [userParcels, setUserParcels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
 
@@ -40,6 +38,13 @@ const Parcel = () => {
     }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    const filteredUserParcels = parcels?.filter(
+      (parcel) => parcel?.client?.id === decoded?.user_id
+    );
+    setUserParcels(filteredUserParcels);
+  }, [parcels, decoded?.user_id]);
 
   useEffect(() => {
     (async () => {
@@ -96,8 +101,9 @@ const Parcel = () => {
       ) : loading ? (
         <ContentLoading />
       ) : error ? (
-        <div className="bg-red-500 text-white px-4 py-2 rounded-md mt-12 w-max mx-auto">
-          Произошла ошибка во время выполнения операции. Пожалуйста, повторите попытку позже... 
+        <div className='bg-red-500 text-white px-4 py-2 rounded-md mt-12 w-max mx-auto'>
+          Произошла ошибка во время выполнения операции. Пожалуйста, повторите
+          попытку позже...
         </div>
       ) : (
         <div className='flex justify-center my-16'>

@@ -32,7 +32,7 @@ const DepotDetail = () => {
       if (success) {
         setDepotItem(data);
         setLoading(false);
-        setMainImg(data?.images[0])
+        setMainImg(data?.images[0]);
         setImages(data?.images);
       }
       setLoading(false);
@@ -49,7 +49,7 @@ const DepotDetail = () => {
             {depotItem?.nameRu}
           </h1>
 
-          <div className='md:flex pb-12'>
+          <div className='md:flex pb-12 min-h-[576px]'>
             <div className='w-full md:w-3/6 xl:w-2/5 mb-12 md:mb-0'>
               <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto'>
                 <img
@@ -71,7 +71,7 @@ const DepotDetail = () => {
                   ? images?.map((el, index) => (
                       <SwiperSlide
                         key={index}
-                        className='sm:max-w-[80px] !w-[22%] h-[50px] xs:h-[70px] sm:w-full sm:h-[80px] rounded-lg overflow-hidden cursor-pointer'
+                        className='sm:max-w-[80px] !w-[22%] h-[50px] bg-gray-300 xs:h-[70px] sm:w-full sm:h-[80px] rounded-lg overflow-hidden cursor-pointer'
                         onClick={() => {
                           handleClick(index);
                         }}
