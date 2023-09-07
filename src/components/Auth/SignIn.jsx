@@ -6,7 +6,7 @@ import showPass from '../../assets/icons/show-pass.svg';
 import { useState } from 'react';
 import Modal from '../../helpers/Modals/Modal';
 import { useForm } from 'react-hook-form';
-import { loginUser } from '../../api/auth';
+import { loginUser } from '../../api/user';
 import { useDispatch } from 'react-redux';
 import { Loading } from '../../helpers/Loader/Loader';
 

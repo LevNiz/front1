@@ -196,7 +196,7 @@ const FilterModal = ({ isOpen, onClose, dataFromChild }) => {
           </div>
         </div>
         <div className='text-center'>
-          <button className='sm:max-w-[330px] w-full bg-black text-white sm:text-black sm:bg-colYellow h-12 mt-6 sm:mt-12 rounded-lg hover:bg-colYellowHover duration-100'>
+          <button className='sm:max-w-[330px] w-full bg-black text-white sm:text-black sm:bg-colYellow h-12 mt-6 sm:mt-12 rounded-lg sm:hover:bg-colYellowHover duration-100'>
             {isLoading ? <ButtonLoading /> : 'Применить'}
           </button>
         </div>

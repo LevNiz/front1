@@ -126,3 +126,21 @@ export const loginUser = async (dispatch, data) => {
 export const logOutFetch = async (dispatch) => {
   dispatch(logOut());
 };
+
+// Update profile:
+export const UpdateProfile = async (id, data) => {
+  const userData = {
+    address: data?.address,
+    city: data?.city?.value,
+    country: data?.country?.id,
+    email: data?.email,
+    fullname: data?.fullName,
+    phone: data?.phone,
+  };
+  try {
+    const res = await request.patch(`user/client/${id}/`, userData);
+    console.log(res?.data);
+  } catch (error) {
+    console.log(error);
+  }
+};

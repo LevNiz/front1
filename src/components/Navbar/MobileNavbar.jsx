@@ -10,7 +10,7 @@ const MobileNavbar = () => {
   const user = useSelector((state) => state?.user?.user);
 
   return (
-    <ul className='md:hidden mobile-navbar fixed flex justify-between items-center h-16 px-4 w-full bottom-0 left-0 bg-white shadow-[0px_4px_120px_0px_rgba(193,_193,_197,_0.15)] z-[9999]'>
+    <ul className='md:hidden mobile-navbar pt-1 fixed flex justify-between items-center h-16 px-4 w-full bottom-0 left-0 bg-white shadow-[0px_4px_120px_0px_rgba(193,_193,_197,_0.15)] z-[9999]'>
       <li>
         <NavLink to='/tracking'>
           <SvgTracking className='mx-auto' />

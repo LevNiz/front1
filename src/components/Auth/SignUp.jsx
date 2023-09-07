@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import ReactFlagsSelect from 'react-flags-select';
 import { fetchCities, fetchCountries } from '../../api/tempAPI';
-import { registerUser } from '../../api/auth';
+import { registerUser } from '../../api/user';
 import { useDispatch } from 'react-redux';
 import { Loading } from '../../helpers/Loader/Loader';
 

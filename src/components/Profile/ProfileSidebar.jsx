@@ -3,7 +3,7 @@ import logout from './../../assets/icons/logout.svg';
 import profile from './../../assets/icons/profile2.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
 import notification from './../../assets/icons/notification2.svg';
-import { logOutFetch } from '../../api/auth';
+import { logOutFetch } from '../../api/user';
 import { useDispatch } from 'react-redux';
 import Modal from '../../helpers/Modals/Modal';
 import { useState } from 'react';

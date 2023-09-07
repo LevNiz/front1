@@ -12,6 +12,7 @@ import { fetchCities, fetchCountries } from '../../../api/tempAPI';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import ReactFlagsSelect from 'react-flags-select';
 import Select from 'react-select';
+import { UpdateProfile } from '../../../api/user';
 
 const PersonalData = () => {
   const userToken = useSelector((state) => state?.user?.user?.access);
@@ -67,23 +68,16 @@ const PersonalData = () => {
     },
   });
 
-  const getCountriesFetch = async () => {
-    const { success, data } = await fetchCountries();
+  const fetchAndSetData = async (fetchFunction, setDataFunction) => {
+    const { success, data } = await fetchFunction();
     if (success) {
-      setCountries(data);
+      setDataFunction(data);
     }
   };
-
-  const getCitiesFetch = async () => {
-    const { success, data } = await fetchCities();
-    if (success) {
-      setCities(data);
-    }
-  };
-
+  
   useEffect(() => {
-    getCountriesFetch();
-    getCitiesFetch();
+    fetchAndSetData(fetchCountries, setCountries);
+    fetchAndSetData(fetchCities, setCities);
   }, []);
 
   const countrySelect = watch('country');
@@ -103,7 +97,9 @@ const PersonalData = () => {
   }));
 
   const onSubmit = (data) => {
-    console.log(data);
+    (async () => {
+      await UpdateProfile(decoded?.user_id, data);
+    })();
   };
 
   return (
