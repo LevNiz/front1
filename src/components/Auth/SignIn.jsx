@@ -124,9 +124,9 @@ const SignIn = () => {
         >
           Войти
         </button>
-        <p className='font-medium mt-5 mb-2 text-center'>Впервые у нас?</p>
+        <p className='mt-5 mb-2 text-center text-colGray3'>Впервые у нас?</p>
         <NavLink
-          className='text-[20px] font-semibold flex justify-center text-colYellow'
+          className='text-xl font-semibold flex justify-center'
           to='/auth/sign-up'
         >
           Зарегистрироваться

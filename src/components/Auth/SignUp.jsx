@@ -474,10 +474,10 @@ const SignUp = () => {
         </button>
       </form>
       <div className='text-center'>
-        <p className='text-base text-black font-medium mt-5 mb-1'>
+        <p className='text-base text-colGray3 mt-5 mb-1'>
           У вас есть аккаунт?
         </p>
-        <NavLink to='/auth/sign-in' className='text-xl text-colYellow'>
+        <NavLink to='/auth/sign-in' className='text-xl font-medium'>
           Войти
         </NavLink>
       </div>
