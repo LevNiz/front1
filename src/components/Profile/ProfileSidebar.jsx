@@ -4,6 +4,7 @@ import profile from './../../assets/icons/profile2.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
 import logo from './../../assets/icons/logo-mob.svg';
 import burger from './../../assets/icons/burger.svg';
+import wallet from './../../assets/icons/wallet.svg';
 import notification from './../../assets/icons/notification2.svg';
 import { logOutFetch } from '../../api/user';
 import { useDispatch } from 'react-redux';
@@ -77,6 +78,19 @@ const ProfileSidebar = () => {
                 alt='*'
               />
               <span className='md:block sm:hidden'>Уведомления</span>
+            </NavLink>
+          </li>
+          <li onClick={() => setShowSidebar(false)} className='my-10'>
+            <NavLink
+              to='my-wallet'
+              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
+            >
+              <img
+                className='pr-2 sm:pr-0 md:pr-3'
+                src={wallet}
+                alt='*'
+              />
+              <span className='md:block sm:hidden'>Мой кошелёк</span>
             </NavLink>
           </li>
           <li

@@ -22,7 +22,7 @@ const Parcel = () => {
   const decoded = jwt_decode(token);
   const dispatch = useDispatch();
 
-  const [userParcels, setUserParcels] = useState(parcels);
+  const [userParcels, setUserParcels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
 
@@ -42,6 +42,10 @@ const Parcel = () => {
     }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    setUserParcels(parcels);
+  }, [parcels]);
 
   useEffect(() => {
     (async () => {

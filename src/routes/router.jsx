@@ -18,6 +18,7 @@ import {
   ResetPassSuccess,
   DepotDetail,
   PrivateRoute,
+  MyWallet,
 } from '../components';
 import { Auth, Home, Profile, Tracking, Depots, Alaket } from '../pages';
 
@@ -47,6 +48,7 @@ export const router = createBrowserRouter(
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>
             <Route path='personal-data' element={<PersonalData />} />
+            <Route path='my-wallet' element={<MyWallet />} />
             <Route path='notifications' element={<Notifications />}>
               <Route path=':id' element={<NotificationDetail />} />
             </Route>

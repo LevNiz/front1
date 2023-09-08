@@ -16,6 +16,7 @@ import Notifications from './Profile/Notifications/Notifications';
 import ProfileSidebar from './Profile/ProfileSidebar';
 import MyParcels from './Profile/MyParcels/MyParcels';
 import PersonalData from './Profile/PersonalData/PersonalData';
+import MyWallet from './Profile/MyWallet/MyWallet';
 import NotificationDetail from './Profile/Notifications/NotificationDetail';
 import Modal from '../helpers/Modals/Modal';
 import ResetPass from './Auth/ResetPassword/ResetPass';
@@ -50,4 +51,5 @@ export {
   ResetPassSuccess,
   SignUp,
   PrivateRoute,
+  MyWallet,
 };
