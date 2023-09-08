@@ -6,12 +6,14 @@ import {
 } from '../redux/slices/parcelSlice';
 
 // Fetch all Parcels:
-export const FetchParcels = async (dispatch) => {
+export const FetchParcels = async (dispatch, user_id) => {
   dispatch(fetchParcelsStart());
   try {
     const res = await request.get(`core/package/`);
-    dispatch(fetchParcelsSuccess(res?.data?.results));
-    return { success: true, data: res?.data };
+    const filteredParcels = res?.data?.results?.filter(
+      (parcel) => parcel?.client?.id === user_id
+    );
+    dispatch(fetchParcelsSuccess(filteredParcels));
   } catch (error) {
     dispatch(fetchParcelsFailure(error));
   }

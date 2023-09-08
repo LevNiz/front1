@@ -13,12 +13,16 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
 const Parcel = () => {
-  const { parcels, loading, error } = useSelector((state) => state?.parcels);
+  const {
+    parcels = [],
+    loading,
+    error,
+  } = useSelector((state) => state?.parcels);
   const token = useSelector((state) => state?.user?.user?.access);
   const decoded = jwt_decode(token);
   const dispatch = useDispatch();
 
-  const [userParcels, setUserParcels] = useState([]);
+  const [userParcels, setUserParcels] = useState(parcels);
   const [isLoading, setIsLoading] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
 
@@ -40,17 +44,10 @@ const Parcel = () => {
   };
 
   useEffect(() => {
-    const filteredUserParcels = parcels?.filter(
-      (parcel) => parcel?.client?.id === decoded?.user_id
-    );
-    setUserParcels(filteredUserParcels);
-  }, [parcels, decoded?.user_id]);
-
-  useEffect(() => {
     (async () => {
-      await FetchParcels(dispatch);
+      await FetchParcels(dispatch, decoded?.user_id);
     })();
-  }, []);
+  }, [dispatch, decoded?.user_id]);
 
   return (
     <>
