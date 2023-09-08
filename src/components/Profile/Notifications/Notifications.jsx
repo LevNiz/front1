@@ -15,8 +15,8 @@ const Notifications = () => {
   return (
     <>
       {notifications?.length > 0 ? (
-        <div className='content pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
-          <div className='sl:px-8'>
+        <div className='content pl-0 sm:pl-4 pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
+          <div>
             <div className='flex justify-between items-center pb-5'>
               <div className='flex items-center'>
                 <span className='font-medium'>Недавние</span>
@@ -38,7 +38,7 @@ const Notifications = () => {
               <NavLink
                 to={`${el.id}`}
                 key={index}
-                className='flex my-3 border-b sidebar border-colBgGray2 pb-3 hover:bg-colBgGray2 p-3 rounded-lg'
+                className='flex my-3 border-b sidebar border-colBgGray2 pb-3 hover:bg-colBgGray2 py-2 sm:p-3 rounded-lg'
               >
                 <div className='max-w-[36px] lg:max-w-[44px] min-w-[36px] lg:min-w-[44px] h-[36px] lg:h-[44px] rounded-full overflow-hidden'>
                   <img

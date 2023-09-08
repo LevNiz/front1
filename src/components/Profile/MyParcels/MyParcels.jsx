@@ -20,7 +20,7 @@ const MyParcels = () => {
   };
 
   return (
-    <div className='py-5 pl-3 md:pl-8 w-full overflow-hidden'>
+    <div className='py-5 sm:pl-3 md:pl-8 w-full overflow-hidden'>
       {parcel?.length > 0 ? (
         <>
           <form className='lg:flex'>

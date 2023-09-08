@@ -33,7 +33,7 @@ const ProfileSidebar = () => {
     <>
       <button
         onClick={() => setShowSidebar(true)}
-        className='absolute top-1 right-2'
+        className='absolute top-1 right-2 sm:hidden'
       >
         <img src={burger} alt='*' />
       </button>
@@ -79,7 +79,10 @@ const ProfileSidebar = () => {
               <span className='md:block sm:hidden'>Уведомления</span>
             </NavLink>
           </li>
-          <li onClick={() => setShowSidebar(false)} className='mt-24'>
+          <li
+            onClick={() => setShowSidebar(false)}
+            className='mt-24 absolute sm:static bottom-[20px] sm:bottom-auto'
+          >
             <button
               onClick={() => {
                 setModalOpen(true);

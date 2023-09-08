@@ -138,9 +138,8 @@ export const UpdateProfile = async (id, data) => {
     phone: data?.phone,
   };
   try {
-    const res = await request.patch(`user/client/${id}/`, userData);
-    console.log(res?.data);
+    await request.patch(`user/client/${id}/`, userData);
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };

@@ -108,8 +108,8 @@ const PersonalData = () => {
         <ContentLoading />
       ) : (
         <div className='py-5 sm:pl-5 lg:px-12 w-full'>
-          <div className='flex'>
-            <div className='relative sm:max-w-[110px] max-w-[80px] border border-colGray2 sm:min-w-[110px] min-w-[80px] h-[80px] sm:h-[110px] overflow-hidden rounded-full mr-3 sm:mr-6'>
+          <div className='flex flex-col items-center sm:flex-row'>
+            <div className='relative max-w-[110px] border border-colGray2 min-w-[110px] h-[110px] overflow-hidden rounded-full mr-3 sm:mr-6'>
               <input className='hidden' accept='image/*' type='file' id='ava' />
               <label className='cursor-pointer' htmlFor='ava'>
                 <img
@@ -117,12 +117,12 @@ const PersonalData = () => {
                   src={userData?.avatar ? userData?.avatar : noImg}
                   alt='*'
                 />
-                <span className='absolute bottom-2 right-5 w-5 h-5 flex justify-center items-center rounded-full text-green-500 text-3xl bg-white'>
+                <span className='absolute bottom-2 right-4 w-6 h-6 flex justify-center items-center rounded-full text-green-500 text-3xl bg-white'>
                   +
                 </span>
               </label>
             </div>
-            <div className='flex flex-col justify-center'>
+            <div className='flex flex-col justify-center mt-2 sm:mt-0 text-center sm:text-left'>
               <h4 className='text-lg sm:text-xl font-medium sm:font-bold'>
                 {userData?.fullname}
               </h4>
@@ -130,7 +130,7 @@ const PersonalData = () => {
             </div>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='grid lg:grid-cols-2 gap-4 lg:gap-8 mt-12'>
+            <div className='grid lg:grid-cols-2 gap-4 lg:gap-8 mt-6 sm:mt-12'>
               <div>
                 <p className='font-bold mb-2'>ФИО</p>
                 <div className='relative'>
