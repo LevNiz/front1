@@ -107,7 +107,7 @@ const PersonalData = () => {
       {isLoading ? (
         <ContentLoading />
       ) : (
-        <div className='py-5 pl-3 sm:pl-5 lg:px-12 w-full'>
+        <div className='py-5 sm:pl-5 lg:px-12 w-full'>
           <div className='flex'>
             <div className='relative sm:max-w-[110px] max-w-[80px] border border-colGray2 sm:min-w-[110px] min-w-[80px] h-[80px] sm:h-[110px] overflow-hidden rounded-full mr-3 sm:mr-6'>
               <input className='hidden' accept='image/*' type='file' id='ava' />
