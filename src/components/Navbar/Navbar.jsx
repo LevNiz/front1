@@ -31,15 +31,7 @@ const Navbar = () => {
   return (
     <>
       <header className='bg-black py-4 md:py-2 md:sticky top-0 z-[99999]'>
-        <div
-          className={`container flex ${
-            pathname === '/profile/notifications'
-              ? 'justify-between'
-              : pathname === '/depots'
-              ? 'justify-between'
-              : 'justify-center'
-          } md:justify-between items-center`}
-        >
+        <div className='container flex justify-between items-center'>
           <NavLink to='/'>
             <img className='w-[120px] sm:w-auto' src={logo} alt='*' />
           </NavLink>
@@ -48,7 +40,15 @@ const Navbar = () => {
               ? 'Уведомления'
               : pathname === '/depots'
               ? 'Наши склады'
-              : ''}
+              : pathname === '/profile/personal-data'
+              ? 'Личные данные'
+              : pathname === '/profile/my-parcels'
+              ? 'Мои посылки'
+              : pathname === '/alaket'
+              ? 'Алакет'
+              : pathname === '/tracking'
+              ? 'Трекинг'
+              : 'Главная'}
           </div>
           <ul className='hidden md:flex space-x-5 items-center text-white navbar'>
             <li>
