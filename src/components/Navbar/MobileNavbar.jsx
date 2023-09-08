@@ -5,34 +5,45 @@ import SvgNotification from './Icons/SvgNotification';
 import SvgProfile from './Icons/SvgProfile';
 import SvgTracking from './Icons/SvgTracking';
 import SvgDepot from './Icons/SvgDepot';
+import SvgHome from './Icons/SvgHome';
 
 const MobileNavbar = () => {
   const user = useSelector((state) => state?.user?.user);
 
   return (
     <ul className='md:hidden mobile-navbar pt-1 fixed flex justify-between items-center h-16 px-4 w-full bottom-0 left-0 bg-white shadow-[0px_4px_120px_0px_rgba(193,_193,_197,_0.15)] z-[9999]'>
+      <li className='home'>
+        <NavLink to='/'>
+          <SvgHome className='mx-auto' />
+          <span className='text-[8px] ss:text-[10px] text-colGray'>
+            Главная
+          </span>
+        </NavLink>
+      </li>
       <li>
         <NavLink to='/tracking'>
           <SvgTracking className='mx-auto' />
-          <span className='text-[10px] text-colGray font-medium'>Трекинг</span>
+          <span className='text-[8px] ss:text-[10px] text-colGray'>
+            Трекинг
+          </span>
         </NavLink>
       </li>
       <li>
         <NavLink to='/depots'>
           <SvgDepot className='mx-auto' />
-          <span className='text-[10px] text-colGray font-medium'>Склады</span>
+          <span className='text-[8px] ss:text-[10px] text-colGray'>Склады</span>
         </NavLink>
       </li>
       <li>
-        <NavLink to='/'>
+        <NavLink to='/alaket'>
           <SvgAlaket className='mx-auto' />
-          <span className='text-[10px] text-colGray font-medium'>Алакет</span>
+          <span className='text-[8px] ss:text-[10px] text-colGray'>Алакет</span>
         </NavLink>
       </li>
       <li>
         <NavLink to='/profile/notifications'>
           <SvgNotification className='mx-auto' />
-          <span className='text-[10px] text-colGray font-medium'>
+          <span className='text-[8px] ss:text-[10px] text-colGray'>
             Уведомления
           </span>
         </NavLink>
@@ -42,7 +53,9 @@ const MobileNavbar = () => {
           to={`${user !== null ? '/profile/personal-data' : '/auth/sign-in'}`}
         >
           <SvgProfile className='mx-auto' />
-          <span className='text-[10px] text-colGray font-medium'>Профиль</span>
+          <span className='text-[8px] ss:text-[10px] text-colGray'>
+            Профиль
+          </span>
         </NavLink>
       </li>
     </ul>

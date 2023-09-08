@@ -54,19 +54,19 @@ const MyParcels = () => {
             />
           </div>
           <div className='scrollable flex relative space-x-3 items-center overflow-x-scroll lg:overflow-x-hidden mt-8 pb-3'>
-            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-black text-white'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-2 lg:px-6 text-center cursor-pointer rounded-[50px] bg-black text-white'>
               Все
             </div>
-            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colPurple2'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-2 lg:px-6 text-center cursor-pointer rounded-[50px] bg-colPurple2'>
               Создан
             </div>
-            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colGreen2'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-2 lg:px-6 text-center cursor-pointer rounded-[50px] bg-colGreen2'>
               В пути
             </div>
-            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colBlue'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-2 lg:px-6 text-center cursor-pointer rounded-[50px] bg-colBlue'>
               Готов к выдаче
             </div>
-            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-6 text-center cursor-pointer rounded-[50px] bg-colOrange'>
+            <div className='py-2 sm:py-[10px] text-sm min-w-[120px] lg:min-w-0 md:px-2 lg:px-6 text-center cursor-pointer rounded-[50px] bg-colOrange'>
               Завершен
             </div>
           </div>

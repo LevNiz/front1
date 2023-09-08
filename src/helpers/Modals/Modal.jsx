@@ -100,7 +100,7 @@ const Modal = ({ isOpen, onClose, content, logOutUser }) => {
             </NavLink>
           </div>
           <p className='text-sm mt-8 mb-1'>У вас нет аккаунта?</p>
-          <NavLink to='/register' className='text-base underline'>
+          <NavLink to='/auth/sign-up' className='text-base underline'>
             Зарегистрироваться
           </NavLink>
         </div>

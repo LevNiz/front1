@@ -19,7 +19,7 @@ import {
   DepotDetail,
   PrivateRoute,
 } from '../components';
-import { Auth, Home, Profile, Tracking, Depots } from '../pages';
+import { Auth, Home, Profile, Tracking, Depots, Alaket } from '../pages';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,6 +52,7 @@ export const router = createBrowserRouter(
             </Route>
             <Route path='my-parcels' element={<MyParcels />} />
           </Route>
+          <Route path='alaket' element={<Alaket />} />
         </Route>
       </Route>
     </Route>

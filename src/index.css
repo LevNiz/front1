@@ -20,6 +20,12 @@
 .sidebar.active {
   background: #f2f2f2;
 }
+.mobile-navbar .home a.active svg {
+  fill: #020105 !important;  
+}
+.mobile-navbar .home a.active svg path {
+  stroke: none;
+}
 .mobile-navbar li a.active svg path {
   stroke: #020105;
 }

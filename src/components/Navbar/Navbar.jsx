@@ -55,7 +55,7 @@ const Navbar = () => {
               <NavLink to='/'>Главная</NavLink>
             </li>
             <li>
-              <NavLink to='depots'>Алакет</NavLink>
+              <NavLink to='alaket'>Алакет</NavLink>
             </li>
             <li>
               <NavLink to='tracking'>Трекинг посылок</NavLink>
