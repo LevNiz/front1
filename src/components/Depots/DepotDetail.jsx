@@ -14,7 +14,7 @@ import { ContentLoading } from '../../helpers/Loader/Loader';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [images, setImages] = useState();
   const { id } = useParams();
 
@@ -42,7 +42,7 @@ const DepotDetail = () => {
   return (
     <div className='py-12 content'>
       {loading ? (
-        <ContentLoading />
+        <ContentLoading height='85vh' />
       ) : (
         <>
           <h1 className='text-2xl sm:text-4xl font-semibold text-center mt-4 mb-16'>

@@ -77,7 +77,7 @@ const Parcel = () => {
             </div>
             {errors?.orderNumber && (
               <p className='text-red-500 mt-3 text-sm'>
-                {errors?.orderNumber.message || 'Error!'}
+                {errors?.orderNumber?.message || 'Error!'}
               </p>
             )}
           </form>
@@ -90,7 +90,7 @@ const Parcel = () => {
         </div>
       </div>
       {isLoading ? (
-        <ContentLoading />
+        <ContentLoading height='140px' />
       ) : isSearched && userParcels?.length < 1 ? (
         <div className='py-10'>
           <img className='mx-auto' src={notFound} alt='*' />
@@ -99,14 +99,21 @@ const Parcel = () => {
           </h4>
         </div>
       ) : loading ? (
-        <ContentLoading />
+        <ContentLoading height='140px' />
+      ) : userParcels?.length < 1 ? (
+        <div className='py-10'>
+          <img className='mx-auto' src={notFound} alt='*' />
+          <h4 className='text-center font-medium mt-5 text-xl'>
+            У Вас нет посылок...
+          </h4>
+        </div>
       ) : error ? (
         <div className='bg-red-500 text-white px-4 py-2 rounded-md mt-12 w-max mx-auto'>
           Произошла ошибка во время выполнения операции. Пожалуйста, повторите
           попытку позже...
         </div>
       ) : (
-        <div className='flex justify-center my-16'>
+        <div className='flex justify-center my-6 sm:my-16'>
           <div className='max-w-[991px] w-full flex flex-col space-y-8'>
             {userParcels?.map((el, index) => (
               <NavLink

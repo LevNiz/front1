@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Loader from 'react-js-loader';
 
 export const Loading = () => {
@@ -17,9 +18,9 @@ export const Loading = () => {
   );
 };
 
-export const ContentLoading = () => {
+export const ContentLoading = ({ height }) => {
   return (
-    <div className='w-full py-20'>
+    <div className={`w-full h-[${height}] py-5`}>
       <div className='flex justify-center items-center w-full h-full'>
         <div className={'item'}>
           <Loader
@@ -37,12 +38,7 @@ export const ContentLoading = () => {
 export const ButtonLoading = () => {
   return (
     <div>
-      <Loader
-        type='bubble-loop'
-        bgColor={'#fff'}
-        color={'#000'}
-        size={50}
-      />
+      <Loader type='bubble-loop' bgColor={'#fff'} color={'#000'} size={50} />
     </div>
   );
 };

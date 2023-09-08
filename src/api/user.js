@@ -139,7 +139,8 @@ export const UpdateProfile = async (id, data) => {
   };
   try {
     await request.patch(`user/client/${id}/`, userData);
+    return { success: true }; 
   } catch (error) {
-    throw new Error(error);
+    return { success: false }; 
   }
 };

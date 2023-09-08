@@ -21,7 +21,7 @@ const PersonalData = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [size, setSize] = useState(window.innerWidth);
 
   window.addEventListener('resize', function () {
@@ -41,7 +41,7 @@ const PersonalData = () => {
       const { success, data } = await fetchUser(decoded?.user_id);
       if (success) {
         setUserData(data);
-        setIsLoading(false);
+        setIsLoading(true);
         const cityDefaults = data?.city
           ? {
               value: data.city.id,
@@ -74,7 +74,7 @@ const PersonalData = () => {
       setDataFunction(data);
     }
   };
-  
+
   useEffect(() => {
     fetchAndSetData(fetchCountries, setCountries);
     fetchAndSetData(fetchCities, setCities);
@@ -98,14 +98,19 @@ const PersonalData = () => {
 
   const onSubmit = (data) => {
     (async () => {
-      await UpdateProfile(decoded?.user_id, data);
+      setIsLoading(false);
+      const { success } = await UpdateProfile(decoded?.user_id, data);
+      if (success) {
+        setIsLoading(true);
+      }
+      setIsLoading(true);
     })();
   };
 
   return (
     <>
-      {isLoading ? (
-        <ContentLoading />
+      {!isLoading ? (
+        <ContentLoading height='85vh' />
       ) : (
         <div className='py-5 sm:pl-5 lg:px-12 w-full'>
           <div className='flex flex-col items-center sm:flex-row'>
