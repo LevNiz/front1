@@ -1,9 +1,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css/effect-cube';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import { slidesData } from '../../constants/slidesData';
-import vector from './../../assets/images/vector.png';
 
 const MainSlider = () => {
   return (
@@ -11,17 +11,31 @@ const MainSlider = () => {
       {slidesData?.map((el, index) => (
         <SwiperSlide
           key={index}
-          className='min-h-[560px] sm:min-h-[625px] flex items-center'
+          className='min-h-[560px] sm:min-h-[625px] flex items-center bg-no-repeat'
           style={{ backgroundImage: el?.backgroundImage }}
         >
           <div className='content'>
-            <div className='relative mb-5'>
-              <img src={vector} alt='*' />
-              <h1 className='text-4xl sm:text-5xl text-white font-semibold max-w-[265px] sm:max-w-[310px] absolute top-[40px] sm:top-[60px] left-[40px] sm:left-[60px]'>
+            <div className='mb-5'>
+              <h1
+                className={`text-4xl sm:text-8xl ${
+                  el?.textStyle ? el?.textStyle : 'text-white'
+                } font-bold max-w-[265px] sm:max-w-[600px]`}
+              >
                 {el?.title}
               </h1>
+              <p
+                className={`${el?.descStyle} w-full text-2xl ${
+                  el?.textStyle ? el?.textStyle : 'text-white'
+                } my-8`}
+              >
+                {el?.description}
+              </p>
             </div>
-            <button className='text-[18px] bg-black text-white rounded-lg px-6 py-2'>
+            <button
+              className={`'ext-[18px] ${
+                el?.buttonStyle ? el?.buttonStyle : 'bg-colPurple text-white'
+              } rounded-lg px-6 py-2 mt-2`}
+            >
               Связаться с нами
             </button>
           </div>
