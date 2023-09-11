@@ -1,20 +1,41 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css/effect-cube';
 import 'swiper/css';
+import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { Navigation, EffectFade, Autoplay } from 'swiper/modules';
 import { slidesData } from '../../constants/slidesData';
 
 const MainSlider = () => {
   return (
-    <Swiper navigation={true} modules={[Navigation]} slidesPerView={1}>
+    <Swiper
+      navigation={true}
+      modules={[EffectFade, Navigation, Autoplay]}
+      effect='fade'
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: true,
+      }}
+      slidesPerView={1}
+    >
       {slidesData?.map((el, index) => (
         <SwiperSlide
           key={index}
-          className='min-h-[560px] sm:min-h-[625px] flex items-center bg-no-repeat'
+          className='min-h-[560px] sm:min-h-[625px] flex items-center'
           style={{ backgroundImage: el?.backgroundImage }}
+          effect={'fade'}
+          modules={[Navigation, EffectFade]}
         >
           <div className='content'>
+            <img
+              src={el?.extraImg}
+              className='absolute top-0 left-0 z-[-1]'
+              alt='*'
+            />
+            <img
+              src={el?.arrowImg}
+              className='absolute left-[35%] bottom-[100px]'
+              alt='*'
+            />
             <div className='mb-5'>
               <h1
                 className={`text-4xl sm:text-8xl ${
