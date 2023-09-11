@@ -46,8 +46,8 @@ const SignIn = () => {
 
   return (
     <>
-      <div className='mm:hidden' onClick={() => navigate(-1)}>
-        <img src={leftArrow} className='absolute top-4 left-4' alt='*' />
+      <div className='mm:hidden absolute top-4 left-4' onClick={() => navigate(-1)}>
+        <img src={leftArrow} alt='*' />
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}

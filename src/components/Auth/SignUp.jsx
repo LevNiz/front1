@@ -98,9 +98,15 @@ const SignUp = () => {
   return (
     <>
       <div className='mm:hidden' onClick={() => navigate('/')}>
-        <img className='cursor-pointer mb-5' src={leftArrow} alt='*' />
+        <img
+          className='absolute top-4 left-4 cursor-pointer mb-5'
+          src={leftArrow}
+          alt='*'
+        />
       </div>
-      <h1 className='text-3xl mm:text-[32px] font-medium mb-8'>Регистрация</h1>
+      <h1 className='text-3xl mm:text-[32px] pt-5 font-medium mb-8'>
+        Регистрация
+      </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='mm:max-w-[460px] w-full'
@@ -422,11 +428,8 @@ const SignUp = () => {
               required: 'Обязательное согласие с политикой конфиденциальности!',
             })}
           />
-          <label
-            htmlFor='checkbox'
-            className='text-sm flex items-center cursor-pointer'
-          >
-            <div className='w-7 h-7 mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
+          <label htmlFor='checkbox' className='text-sm flex cursor-pointer'>
+            <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
               {privacyPolicy ? (
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -454,11 +457,13 @@ const SignUp = () => {
                 ''
               )}
             </div>
-            Я согласен (на) с
-            <NavLink className='ml-1 underline' to='/' target='blank'>
-              {' '}
-              условиями пользовательского соглашения
-            </NavLink>
+            <p>
+              Я согласен (на) с
+              <NavLink className='ml-1 underline' to='/' target='blank'>
+                {' '}
+                условиями пользовательского соглашения
+              </NavLink>
+            </p>
           </label>
           {errors?.privacyPolicy && (
             <p className='text-red-500 text-xs mt-2'>
@@ -474,9 +479,7 @@ const SignUp = () => {
         </button>
       </form>
       <div className='text-center'>
-        <p className='text-base text-colGray3 mt-5 mb-1'>
-          У вас есть аккаунт?
-        </p>
+        <p className='text-base text-colGray3 mt-5 mb-1'>У вас есть аккаунт?</p>
         <NavLink to='/auth/sign-in' className='text-xl font-medium'>
           Войти
         </NavLink>

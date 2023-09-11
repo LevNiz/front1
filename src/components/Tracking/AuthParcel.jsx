@@ -91,7 +91,7 @@ const Parcel = () => {
         </div>
       </div>
       {isLoading ? (
-        <ContentLoading height='140px' />
+        <ContentLoading extraStyle='140px' />
       ) : isSearched && userParcels?.length < 1 ? (
         <div className='py-10'>
           <img className='mx-auto' src={notFound} alt='*' />
@@ -100,7 +100,7 @@ const Parcel = () => {
           </h4>
         </div>
       ) : loading ? (
-        <ContentLoading height='140px' />
+        <ContentLoading extraStyle='140px' />
       ) : userParcels?.length < 1 ? (
         <div className='py-10'>
           <img className='mx-auto' src={notFound} alt='*' />

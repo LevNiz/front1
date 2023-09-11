@@ -98,14 +98,14 @@ const Depots = () => {
         Склады
       </h1>
       {loading ? (
-        <ContentLoading height='140px' />
+        <ContentLoading extraStyle='140px' />
       ) : error ? (
         <div className='bg-red-500 text-white px-4 py-2 rounded-md mt-12 w-max mx-auto'>
           Произошла ошибка во время выполнения операции. Пожалуйста, повторите
           попытку позже...
         </div>
       ) : isLoading ? (
-        <ContentLoading height='140px' />
+        <ContentLoading extraStyle='140px' />
       ) : depotData?.length > 0 ? (
         <DepotItem depotData={depotData} />
       ) : (

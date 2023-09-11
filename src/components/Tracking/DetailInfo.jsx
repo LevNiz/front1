@@ -29,7 +29,7 @@ const DetailInfo = () => {
   return (
     <div className='bg-colBgGray2'>
       {loading ? (
-        <ContentLoading height='85vh' />
+        <ContentLoading extraStyle='85vh' />
       ) : (
         <div className='pt-12 pb-20 content'>
           <div className='flex justify-center items-center mb-12'>

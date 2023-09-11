@@ -110,7 +110,7 @@ const PersonalData = () => {
   return (
     <>
       {!isLoading ? (
-        <ContentLoading height='85vh' />
+        <ContentLoading extraStyle='85vh' />
       ) : (
         <div className='py-5 sm:pl-5 lg:px-12 w-full'>
           <div className='flex flex-col items-center sm:flex-row'>

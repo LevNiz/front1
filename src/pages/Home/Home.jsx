@@ -52,13 +52,20 @@ const Home = () => {
               Введите ваш номер, чтобы найти вашу посылку
             </h3>
             <div className='md:flex'>
-              <input
-                className='md:max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
-                placeholder='Ваш номер'
-                {...register('orderNumber', {
-                  required: 'Поле обязательно к заполнению!',
-                })}
-              />
+              <div>
+                <input
+                  className='md:max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
+                  placeholder='Ваш номер'
+                  {...register('orderNumber', {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                />
+                {errors?.orderNumber && (
+                  <p className='text-red-500 mt-3 text-sm'>
+                    {errors?.orderNumber?.message || 'Error!'}
+                  </p>
+                )}
+              </div>
               <button
                 type='submit'
                 className='bg-colYellow w-full mt-4 md:mt-0 md:ml-5 h-[42px] font-medium rounded-lg hover:bg-colYellowHover duration-100'
@@ -66,11 +73,6 @@ const Home = () => {
                 Отследить
               </button>
             </div>
-            {errors?.orderNumber && (
-              <p className='text-red-500 mt-3 text-sm'>
-                {errors?.orderNumber?.message || 'Error!'}
-              </p>
-            )}
           </form>
         </div>
       </div>

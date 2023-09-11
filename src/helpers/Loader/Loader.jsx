@@ -18,9 +18,9 @@ export const Loading = () => {
   );
 };
 
-export const ContentLoading = ({ height }) => {
+export const ContentLoading = ({ extraStyle }) => {
   return (
-    <div className={`w-full h-[${height}] py-5`}>
+    <div style={{ height: extraStyle }} className={`w-full py-5`}>
       <div className='flex justify-center items-center w-full h-full'>
         <div className={'item'}>
           <Loader

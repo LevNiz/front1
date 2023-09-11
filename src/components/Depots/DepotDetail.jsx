@@ -42,7 +42,7 @@ const DepotDetail = () => {
   return (
     <div className='py-12 content'>
       {loading ? (
-        <ContentLoading height='85vh' />
+        <ContentLoading extraStyle='85vh' />
       ) : (
         <>
           <h1 className='text-2xl sm:text-4xl font-semibold text-center mt-4 mb-16'>

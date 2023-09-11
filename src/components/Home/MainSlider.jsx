@@ -33,7 +33,7 @@ const MainSlider = () => {
             />
             <img
               src={el?.arrowImg}
-              className='absolute left-[35%] bottom-[100px]'
+              className='absolute right-[20px] sm:right-auto sm:left-[35%] bottom-[100px] z-[-1] w-24 sm:w-auto'
               alt='*'
             />
             <div className='mb-5'>
