@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import SvgAlaket from './Icons/SvgAlaket';
-import SvgNotification from './Icons/SvgNotification';
+// import SvgNotification from './Icons/SvgNotification';
 import SvgProfile from './Icons/SvgProfile';
 import SvgTracking from './Icons/SvgTracking';
 import SvgDepot from './Icons/SvgDepot';
@@ -15,7 +15,7 @@ const MobileNavbar = () => {
       <li className='home'>
         <NavLink to='/'>
           <SvgHome className='mx-auto' />
-          <span className='text-[8px] ss:text-[10px] text-colGray'>
+          <span className='text-[10px] text-colGray'>
             Главная
           </span>
         </NavLink>
@@ -23,37 +23,39 @@ const MobileNavbar = () => {
       <li>
         <NavLink to='/tracking'>
           <SvgTracking className='mx-auto' />
-          <span className='text-[8px] ss:text-[10px] text-colGray'>
+          <span className='text-[10px] text-colGray'>
             Трекинг
           </span>
+        </NavLink>
+      </li>
+      <li className='relative h-12'>
+        <NavLink className='flex flex-col justify-end h-full' to='/alaket'>
+          <div className='absolute top-[-25px] left-1/2 -translate-x-1/2 bg-colYellow w-12 h-12 rounded-full flex justify-center items-center'>
+            <SvgAlaket className='mx-auto' />
+          </div>
+          <span className='text-[10px] text-colGray mb-[2px]'>Алакет</span>
         </NavLink>
       </li>
       <li>
         <NavLink to='/depots'>
           <SvgDepot className='mx-auto' />
-          <span className='text-[8px] ss:text-[10px] text-colGray'>Склады</span>
+          <span className='text-[10px] text-colGray'>Склады</span>
         </NavLink>
       </li>
-      <li>
-        <NavLink to='/alaket'>
-          <SvgAlaket className='mx-auto' />
-          <span className='text-[8px] ss:text-[10px] text-colGray'>Алакет</span>
-        </NavLink>
-      </li>
-      <li>
+      {/* <li>
         <NavLink to='/profile/notifications'>
           <SvgNotification className='mx-auto' />
-          <span className='text-[8px] ss:text-[10px] text-colGray'>
+          <span className='text-[10px] text-colGray'>
             Уведомления
           </span>
         </NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink
           to={`${user !== null ? '/profile/personal-data' : '/auth/sign-in'}`}
         >
           <SvgProfile className='mx-auto' />
-          <span className='text-[8px] ss:text-[10px] text-colGray'>
+          <span className='text-[10px] text-colGray'>
             Профиль
           </span>
         </NavLink>

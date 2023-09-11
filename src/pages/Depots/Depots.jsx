@@ -57,7 +57,7 @@ const Depots = () => {
   };
 
   return (
-    <div className='content pb-12'>
+    <div className='content pb-12 min-h-[768px]'>
       <form className='pt-14 pb-2 md:flex'>
         <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
           <input

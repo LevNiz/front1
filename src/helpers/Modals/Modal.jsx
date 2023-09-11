@@ -7,7 +7,7 @@ const Modal = ({ isOpen, onClose, content, logOutUser }) => {
   if (!isOpen) return null;
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-50 px-3'>
+    <div className='fixed inset-0 flex items-center justify-center px-3 z-[99999]'>
       <div
         onClick={onClose}
         className='absolute inset-0 bg-gray-800 opacity-50'
