@@ -8,6 +8,7 @@ import nounBox from './../../assets/icons/noun-box.svg';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import rulesImg from './../../assets/images/rules.svg';
 import notFound from './../../assets/images/404.svg';
+import errorImg from './../../assets/images/error.svg';
 import parcelIcon from './../../assets/images/parcel-icon.png';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
@@ -109,9 +110,19 @@ const Parcel = () => {
           </h4>
         </div>
       ) : error ? (
-        <div className='bg-red-500 text-white px-4 py-2 rounded-md mt-12 w-max mx-auto'>
-          Произошла ошибка во время выполнения операции. Пожалуйста, повторите
-          попытку позже...
+        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
+          <div>
+            <img className='mx-auto w-32 sm:w-40' src={errorImg} alt='*' />
+            <h4 className='text-2xl font-semibold py-12 text-center'>
+              Произошла ошибка, повторите попытку позже!
+            </h4>
+            <NavLink
+              to='/'
+              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
+            >
+              Перейти на главную
+            </NavLink>
+          </div>
         </div>
       ) : (
         <div className='flex justify-center my-6 sm:my-16'>

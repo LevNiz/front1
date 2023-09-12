@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className='bg-black py-4 md:py-2 md:sticky top-0 z-[99999]'>
+      <header className='bg-black py-4 md:py-2 md:sticky top-0 z-[999999]'>
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>
             <img className='w-[120px] sm:w-auto' src={logo} alt='*' />

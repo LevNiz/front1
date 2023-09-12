@@ -52,9 +52,9 @@ const Home = () => {
               Введите ваш номер, чтобы найти вашу посылку
             </h3>
             <div className='md:flex'>
-              <div>
+              <div className='md:max-w-[405px] w-full'>
                 <input
-                  className='md:max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
+                  className='w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
                   placeholder='Ваш номер'
                   {...register('orderNumber', {
                     required: 'Поле обязательно к заполнению!',
