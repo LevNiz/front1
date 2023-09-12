@@ -63,13 +63,20 @@ const Parcel = () => {
               Введите ваш номер, чтобы найти вашу посылку
             </h3>
             <div className='sm:flex'>
-              <input
-                className='sm:max-w-[405px] w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
-                placeholder='Ваш номер'
-                {...register('orderNumber', {
-                  required: 'Поле обязательно к заполнению!',
-                })}
-              />
+              <div className='sm:max-w-[405px] w-full'>
+                <input
+                  className='w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
+                  placeholder='Ваш номер'
+                  {...register('orderNumber', {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                />
+                {errors?.orderNumber && (
+                  <p className='text-red-500 mt-3 text-sm'>
+                    {errors?.orderNumber?.message || 'Error!'}
+                  </p>
+                )}
+              </div>
               <button
                 type='submit'
                 className='bg-black text-white w-full mt-4 sm:mt-0 sm:ml-5 h-[42px] font-medium rounded-lg hover:opacity-80 duration-100'
@@ -77,11 +84,6 @@ const Parcel = () => {
                 Отследить
               </button>
             </div>
-            {errors?.orderNumber && (
-              <p className='text-red-500 mt-3 text-sm'>
-                {errors?.orderNumber?.message || 'Error!'}
-              </p>
-            )}
           </form>
         </div>
         <div className='max-w-[380px] h-[130px] hidden rounded-[10px] lg:flex justify-center items-center w-full bg-colPurple mt-0 py-4 px-6 lg:ml-10 text-center'>

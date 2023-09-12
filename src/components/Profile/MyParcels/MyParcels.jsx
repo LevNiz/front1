@@ -8,8 +8,13 @@ import { NavLink } from 'react-router-dom';
 import notFound from './../../../assets/images/404.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { FetchParcels, fetchSortParcels } from '../../../api/parcels';
+import {
+  FetchParcels,
+  fetchSearchMyParcels,
+  fetchSortParcels,
+} from '../../../api/parcels';
 import jwt_decode from 'jwt-decode';
+import { useForm } from 'react-hook-form';
 
 const MyParcels = () => {
   const { parcels, loading, error } = useSelector((state) => state?.parcels);
@@ -32,6 +37,16 @@ const MyParcels = () => {
     await fetchSortParcels(param, decoded?.user_id, dispatch);
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    await fetchSearchMyParcels(data.orderNumber, decoded?.user_id, dispatch);
+  };
+
   useEffect(() => {
     (async () => {
       await FetchParcels(dispatch, decoded?.user_id);
@@ -40,22 +55,31 @@ const MyParcels = () => {
 
   return (
     <div className='py-5 sm:pl-3 md:pl-8 w-full overflow-hidden'>
-      <form className='lg:flex'>
-        <div className='flex border border-colGray h-[50px] rounded-[10px] p-1 w-full'>
-          <div className='flex justify-center items-center ml-2 cursor-pointer'>
-            <img src={search} alt='*' />
+      <form onSubmit={handleSubmit(onSubmit)} className='lg:flex'>
+        <div className='w-full'>
+          <div className='flex border border-colGray h-[50px] rounded-[10px] p-1 w-full'>
+            <div className='flex justify-center items-center ml-2 cursor-pointer'>
+              <img src={search} alt='*' />
+            </div>
+            <input
+              className='px-2 text-sm sm:text-base w-full focus:outline-none'
+              placeholder='Поиск по номеру посылки...'
+              {...register('orderNumber', {
+                required: 'Введите номер вашей посылки!',
+              })}
+            />
+            <div
+              className='flex justify-center items-center mr-2 cursor-pointer'
+              onClick={(e) => openFilterModal(e)}
+            >
+              <img src={sort} alt='*' />
+            </div>
           </div>
-          <input
-            className='px-2 text-sm sm:text-base w-full focus:outline-none'
-            type='text'
-            placeholder='Поиск по названию...'
-          />
-          <div
-            className='flex justify-center items-center mr-2 cursor-pointer'
-            onClick={(e) => openFilterModal(e)}
-          >
-            <img src={sort} alt='*' />
-          </div>
+          {errors?.orderNumber && (
+            <p className='text-red-500 mt-3 text-sm'>
+              {errors?.orderNumber?.message || 'Error!'}
+            </p>
+          )}
         </div>
         <button
           className='lg:max-w-[255px] mt-3 lg:mt-0 lg:ml-3 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'

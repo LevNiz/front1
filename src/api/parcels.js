@@ -39,6 +39,19 @@ export const fetchSearchParcel = async (orderNum) => {
   }
 };
 
+export const fetchSearchMyParcels = async (orderNum, user_id, dispatch) => {
+  dispatch(fetchParcelsStart());
+  try {
+    const res = await request.get(`core/package/?orderNumber=${orderNum}`);
+    const filteredParcels = res?.data?.results?.filter(
+      (parcel) => parcel?.client?.id === user_id
+    );
+    dispatch(fetchParcelsSuccess(filteredParcels));
+  } catch (error) {
+    dispatch(fetchParcelsFailure(error));
+  }
+};
+
 // Sort parcels:
 export const fetchSortParcels = async (param, user_id, dispatch) => {
   dispatch(fetchParcelsStart());
