@@ -39,16 +39,29 @@ export const fetchSearchParcel = async (orderNum) => {
   }
 };
 
-export const fetchSearchMyParcels = async (orderNum, user_id, dispatch) => {
+export const fetchFilterMyParcels = async (
+  orderNum,
+  user_id,
+  dispatch,
+  data,
+) => {
   dispatch(fetchParcelsStart());
   try {
-    const res = await request.get(`core/package/?orderNumber=${orderNum}`);
+    const senderCity = data.senderCity.value || '';
+    const senderCountry = data.senderCountry.id || '';
+    const receiverCity = data.receiverCity.value || '';
+    const receiverCountry = data.receiverCountry.id || '';
+    const res = await request.get(
+      `core/package/?senderCountry=${senderCountry}&senderCity=${senderCity}&receiverCountry=${receiverCountry}&receiverCity=${receiverCity}&orderNumber=${orderNum}`
+    );
     const filteredParcels = res?.data?.results?.filter(
       (parcel) => parcel?.client?.id === user_id
     );
     dispatch(fetchParcelsSuccess(filteredParcels));
+    return { success: true }
   } catch (error) {
     dispatch(fetchParcelsFailure(error));
+    return { success: false }
   }
 };
 
