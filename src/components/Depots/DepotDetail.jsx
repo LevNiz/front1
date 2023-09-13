@@ -7,6 +7,7 @@ import clock from './../../assets/icons/clock.svg';
 import call from './../../assets/icons/call.svg';
 import boxIcon from './../../assets/icons/package.svg';
 import noImg from './../../assets/images/no-image.svg';
+import map from './../../assets/images/map.jpg';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchDepotsDetail } from '../../api/depots';
@@ -45,7 +46,7 @@ const DepotDetail = () => {
         <ContentLoading extraStyle='85vh' />
       ) : (
         <>
-          <h1 className='text-2xl sm:text-4xl font-semibold text-center mt-4 mb-16'>
+          <h1 className='text-2xl sm:text-4xl font-semibold text-center sm:mt-4 mb-12 sm:mb-16'>
             {depotItem?.nameRu}
           </h1>
 
@@ -71,7 +72,7 @@ const DepotDetail = () => {
                   ? images?.map((el, index) => (
                       <SwiperSlide
                         key={index}
-                        className='sm:max-w-[80px] !w-[22%] h-[50px] bg-gray-300 xs:h-[70px] sm:w-full sm:h-[80px] rounded-lg overflow-hidden cursor-pointer'
+                        className='sm:max-w-[80px] !w-[22%] h-[50px] bg-colBgGray xs:h-[70px] sm:w-full sm:h-[80px] rounded-lg overflow-hidden cursor-pointer'
                         onClick={() => {
                           handleClick(index);
                         }}
@@ -87,76 +88,81 @@ const DepotDetail = () => {
               </Swiper>
             </div>
             <div className='md:w-3/6 xl:w-3/5'>
-              <div className='bg-colBgGray p-6 xl:p-12 rounded-2xl md:ml-4 xl:ml-10'>
-                <div className='flex items-center mb-8'>
-                  <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
-                    <img src={location} alt='*' />
-                  </span>
-                  <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {`${depotItem?.address}, ${depotItem?.city?.nameRu}, ${depotItem?.country?.nameRu}`}
-                  </p>
+              <div className='max-w-[630px] w-full mx-auto mm:px-5 pb-5'>
+                <div>
+                  <img src={map} alt='*' />
                 </div>
-                <div className='flex items-center my-8'>
-                  <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
-                    <img src={call} alt='*' />
-                  </span>
-                  <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {depotItem?.contacts?.phone}
-                  </p>
-                </div>
-                <div className='flex items-center mt-8'>
-                  <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
-                    <img src={boxIcon} alt='*' />
-                  </span>
-                  <p className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {depotItem?.maxAmount} кг
-                  </p>
-                </div>
-                <div className='flex my-8'>
-                  <span className='min-w-[40px] md:min-w-[50px] h-[40px] md:h-[50px] rounded-xl flex items-center justify-center bg-white'>
-                    <img src={clock} alt='*' />
-                  </span>
-                  <div className='text-base sm:text-xl xl:text-2xl font-medium ml-5'>
-                    {depotItem?.workingHours?.map((el, index) => (
-                      <div className='grid grid-cols-2' key={index}>
-                        <div className='flex'>
-                          <span className='mr-2'>Пн: </span>
-                          <span>
-                            {el?.mondayStart} - {el?.mondayEnd}
-                          </span>
+                <div className='rounded-2xl grid lg:grid-cols-2 gap-5 mt-8'>
+                  <div className='flex items-start'>
+                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-0'>
+                      <img src={call} alt='*' />
+                    </span>
+                    <p className='text-base sm:text-xl xl:text-2xl font-medium ml-3'>
+                      {depotItem?.contacts?.phone}
+                    </p>
+                  </div>
+                  <div className='flex items-start'>
+                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-1'>
+                      <img src={boxIcon} alt='*' />
+                    </span>
+                    <p className='text-base sm:text-xl xl:text-2xl font-medium ml-3'>
+                      {depotItem?.maxAmount} кг
+                    </p>
+                  </div>
+                  <div className='flex items-start'>
+                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-1'>
+                      <img src={location} alt='*' />
+                    </span>
+                    <p className='text-base sm:text-xl xl:text-2xl font-medium ml-3'>
+                      {`${depotItem?.address}, ${depotItem?.city?.nameRu}, ${depotItem?.country?.nameRu}`}
+                    </p>
+                  </div>
+                  <div className='flex items-start'>
+                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-1'>
+                      <img src={clock} alt='*' />
+                    </span>
+                    <div className='text-base sm:text-xl xl:text-2xl font-medium ml-3'>
+                      {depotItem?.workingHours?.map((el, index) => (
+                        <div key={index}>
+                          <div className='flex'>
+                            <span className='mr-2'>Пн: </span>
+                            <span>
+                              {el?.mondayStart} - {el?.mondayEnd}
+                            </span>
+                          </div>
+                          <div className='flex'>
+                            <span className='mr-2'>Вт: </span>
+                            <span>
+                              {el?.tuesdayStart} - {el?.tuesdayEnd}
+                            </span>
+                          </div>
+                          <div className='flex'>
+                            <span className='mr-2'>Ср: </span>
+                            <span>
+                              {el?.wednesdayStart} - {el?.wednesdayEnd}
+                            </span>
+                          </div>
+                          <div className='flex'>
+                            <span className='mr-2'>Чт: </span>
+                            <span>
+                              {el?.thursdayStart} - {el?.thursdayEnd}
+                            </span>
+                          </div>
+                          <div className='flex'>
+                            <span className='mr-2'>Пт: </span>
+                            <span>
+                              {el?.fridayStart} - {el?.fridayEnd}
+                            </span>
+                          </div>
+                          <div className='flex'>
+                            <span className='mr-2'>Сб: </span>
+                            <span>
+                              {el?.satStart} - {el?.satEnd}
+                            </span>
+                          </div>
                         </div>
-                        <div className='flex ml-4'>
-                          <span className='mr-2'>Вт: </span>
-                          <span>
-                            {el?.tuesdayStart} - {el?.tuesdayEnd}
-                          </span>
-                        </div>
-                        <div className='flex'>
-                          <span className='mr-2'>Ср: </span>
-                          <span>
-                            {el?.wednesdayStart} - {el?.wednesdayEnd}
-                          </span>
-                        </div>
-                        <div className='flex ml-4'>
-                          <span className='mr-2'>Чт: </span>
-                          <span>
-                            {el?.thursdayStart} - {el?.thursdayEnd}
-                          </span>
-                        </div>
-                        <div className='flex'>
-                          <span className='mr-2'>Пт: </span>
-                          <span>
-                            {el?.fridayStart} - {el?.fridayEnd}
-                          </span>
-                        </div>
-                        <div className='flex ml-4'>
-                          <span className='mr-2'>Сб: </span>
-                          <span>
-                            {el?.satStart} - {el?.satEnd}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
