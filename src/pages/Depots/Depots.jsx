@@ -59,22 +59,23 @@ const Depots = () => {
   };
 
   return (
-    <div className='content pb-12 min-h-[768px]'>
-      <form className='pt-14 pb-2 md:flex'>
+    <div className='content pb-16 min-h-[768px]'>
+      <div className='max-w-[1120px] w-full mx-auto'>
+      <form className='pt-4 sm:pt-14 pb-2 md:flex'>
         <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
           <input
             className='px-2 w-full focus:outline-none'
             placeholder='Поиск по названию...'
             {...register('searchDepot', {
-              required: 'Введите название склада...',
+              required: 'Введите название склада!',
             })}
           />
-          <button
+          <div
             onClick={(e) => openFilterModal(e)}
-            className='w-[116px] h-10 bg-colYellow rounded-lg hover:bg-colYellowHover duration-100'
+            className='cursor-pointer flex justify-center items-center w-[116px] h-10 bg-colYellow rounded-lg hover:bg-colYellowHover duration-100'
           >
             Фильтр
-          </button>
+          </div>
         </div>
         <button
           onClick={handleSubmit(onSubmit)}
@@ -89,6 +90,7 @@ const Depots = () => {
           {errors?.searchDepot.message || 'Error!'}
         </p>
       )}
+      </div>
       <div className='relative'>
         <FilterModal
           isOpen={isFilterModalOpen}
@@ -96,11 +98,11 @@ const Depots = () => {
           dataFromChild={receiveDataFromChild}
         />
       </div>
-      <h1 className='text-2xl md:text-4xl font-semibold text-center my-8 md:my-14'>
-        Склады
+      <h1 className='text-2xl md:text-4xl font-semibold my-6 md:my-10'>
+        Наши склады
       </h1>
       {loading ? (
-        <ContentLoading extraStyle='140px' />
+        <ContentLoading extraStyle='340px' />
       ) : error ? (
         <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
           <div>
@@ -117,9 +119,11 @@ const Depots = () => {
           </div>
         </div>
       ) : isLoading ? (
-        <ContentLoading extraStyle='140px' />
+        <ContentLoading extraStyle='340px' />
       ) : depotData?.length > 0 ? (
-        <DepotItem depotData={depotData} />
+        <div className="grid ss:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+          <DepotItem depotData={depotData} />
+        </div>
       ) : (
         <div className='py-10'>
           <img className='mx-auto' src={notFound} alt='*' />

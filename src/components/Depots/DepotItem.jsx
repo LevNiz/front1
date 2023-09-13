@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from 'react-router-dom';
-import depotIcon from './../../assets/images/warehouse-icon.jpg';
-import depotIcon2 from './../../assets/icons/wareHouseIcon2.svg';
-import depotIcon3 from './../../assets/images/warehouse.svg';
+import time from './../../assets/icons/time.svg';
+import local from './../../assets/icons/location-outline.svg';
 
 const DepotItem = ({depotData}) => {
   return (
@@ -11,47 +10,29 @@ const DepotItem = ({depotData}) => {
         <NavLink
           to={`${el?.id}`}
           key={index}
-          className='shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] relative hover:shadow-[0px_10px_20px_10px_rgba(204,_204,_204,_0.40)] duration-150 md:flex-row flex-col flex md:justify-between md:items-center p-4 md:p-6 lg:p-10 my-5 md:my-10 rounded-2xl'
+          className='shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] relative hover:shadow-[0px_10px_20px_10px_rgba(204,_204,_204,_0.40)] duration-150 overflow-hidden rounded-lg sm:rounded-2xl my-2 ss:my-0'
         >
-          <div className='lg:w-[107px] w-16 lg:h-107px hidden md:block overflow-hidden'>
+          <div className='h-[220px] ss:h-[160px] sm:h-[220px] lg:h-[280px] overflow-hidden'>
             <img
               className='w-full h-full object-cover'
-              src={depotIcon3}
+              src={el?.images[0]}
               alt='*'
             />
           </div>
-          <div className='md:min-h-[128px]'>
-            <h4 className='hidden md:block text-lg lg:text-2xl font-medium text-colGray mb-3 lg:mb-8 md:text-center'>
-              Склад:
-            </h4>
-            <p className='text-base lg:text-2xl md:text-center font-medium text-black'>
-              {el?.nameRu}
-            </p>
+          <div className='p-3 lg:p-4'>
+            <h3 className='sm:text-lg lg:text-xl font-medium text-black line-clamp-1 break-all'>
+              {el?.nameRu || 'Не указан'}
+            </h3>
+            <div className="flex items-center mt-2 mm:mt-3 mb-1 mm:mb-2">
+              <img className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]' src={time} alt="*" />
+              <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>08:00 - 18:00</p>
+            </div>
+            <div className="flex items-center">
+              <img className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]' src={local} alt="*" />
+              <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>{el?.address ? el?.address : 'Не указан'}</p>
+            </div>
           </div>
-          <div className='flex md:block max-w-[275px] w-full md:min-h-[128px] my-2 md:my-0'>
-            <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
-              Город / Страна:
-            </h4>
-            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>
-              {el?.city?.nameRu}, {el?.country?.nameRu}
-            </p>
-          </div>
-          <div className='flex md:block md:min-h-[128px]'>
-            <h4 className='text-xs md:text-xl lg:text-2xl font-semibold md:font-medium md:text-colGray md:mb-3 lg:mb-8 md:text-center'>
-              Режим работы:
-            </h4>
-            <p className='text-xs md:text-base lg:text-2xl md:text-center ml-2 md:ml-0 md:font-medium text-black'>
-              {el?.workTime}
-            </p>
-          </div>
-          <div className='md:h-[150px] lg:h-[192px] hidden md:flex justify-end items-end'>
-            <img className='w-6 md:w-10' src={depotIcon} alt='*' />
-          </div>
-          <img
-            src={depotIcon2}
-            className='md:hidden absolute bottom-[10px] right-[10px] w-[25px]'
-            alt='*'
-          />
+          
         </NavLink>
       ))}
     </>

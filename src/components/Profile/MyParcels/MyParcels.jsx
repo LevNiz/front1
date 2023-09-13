@@ -40,11 +40,7 @@ const MyParcels = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await fetchSearchMyParcels(
-      data.orderNumber,
-      decoded?.user_id,
-      dispatch,
-    );
+    await fetchSearchMyParcels(data.orderNumber, decoded?.user_id, dispatch);
   };
 
   const handleSort = async (param) => {
