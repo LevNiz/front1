@@ -13,6 +13,7 @@ import { ButtonLoading } from '../../../helpers/Loader/Loader';
 const FilterParcel = ({ isOpen, onClose }) => {
   const token = useSelector((state) => state?.user?.user?.access);
   const decoded = jwt_decode(token);
+  const dispatch = useDispatch();
 
   const [selectedCountry, setSelectedCountry] = useState('');
   const [countries, setCountries] = useState([]);
@@ -20,7 +21,6 @@ const FilterParcel = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { control, setValue, watch, handleSubmit } = useForm();
-  const dispatch = useDispatch();
 
   const fetchData = async (fetchFunction, setDataFunction) => {
     const { success, data } = await fetchFunction();
@@ -35,9 +35,8 @@ const FilterParcel = ({ isOpen, onClose }) => {
   }, []);
 
   const onSubmit = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
     const { success } = await fetchFilterMyParcels(
-      '',
       decoded.user_id,
       dispatch,
       data
@@ -51,7 +50,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
   };
 
   const senderCountry = watch('senderCountry');
-  const receiverCountry = watch('senderCountry');
+  const receiverCountry = watch('receiverCountry');
   const countryNamesInRussian = {};
 
   countries.forEach((country) => {
@@ -217,7 +216,10 @@ const FilterParcel = ({ isOpen, onClose }) => {
           </div>
         </div>
         <div className='md:max-w-[340px] mt-5 mx-auto w-full'>
-          <button className='md:max-w-[330px] w-full bg-colYellow mt-7 md:mt-0 h-12 rounded-lg hover:bg-colYellowHover duration-100'>
+          <button
+            type='submit'
+            className='md:max-w-[330px] w-full bg-colYellow mt-7 md:mt-0 h-12 rounded-lg hover:bg-colYellowHover duration-100'
+          >
             {isLoading ? <ButtonLoading /> : 'Применить'}
           </button>
         </div>

@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import {
   FetchParcels,
-  fetchFilterMyParcels,
-  fetchSortParcels,
+  fetchSortMyParcels,
+  fetchSearchMyParcels,
 } from '../../../api/parcels';
 import jwt_decode from 'jwt-decode';
 import { useForm } from 'react-hook-form';
@@ -40,11 +40,15 @@ const MyParcels = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await fetchFilterMyParcels(data.orderNumber, decoded?.user_id, dispatch, '');
+    await fetchSearchMyParcels(
+      data.orderNumber,
+      decoded?.user_id,
+      dispatch,
+    );
   };
 
   const handleSort = async (param) => {
-    await fetchSortParcels(param, decoded?.user_id, dispatch);
+    await fetchSortMyParcels(param, decoded?.user_id, dispatch);
   };
 
   useEffect(() => {

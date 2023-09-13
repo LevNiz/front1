@@ -39,40 +39,59 @@ export const fetchSearchParcel = async (orderNum) => {
   }
 };
 
-export const fetchFilterMyParcels = async (
-  orderNum,
-  user_id,
-  dispatch,
-  data,
-) => {
+// Filter My parcels:
+export const fetchFilterMyParcels = async (user_id, dispatch, data) => {
   dispatch(fetchParcelsStart());
   try {
-    const senderCity = data.senderCity.value || '';
-    const senderCountry = data.senderCountry.id || '';
-    const receiverCity = data.receiverCity.value || '';
-    const receiverCountry = data.receiverCountry.id || '';
-    const res = await request.get(
-      `core/package/?senderCountry=${senderCountry}&senderCity=${senderCity}&receiverCountry=${receiverCountry}&receiverCity=${receiverCity}&orderNumber=${orderNum}`
-    );
+    const { senderCity, senderCountry, receiverCity, receiverCountry } = data;
+    const queryParams = new URLSearchParams({
+      senderCountry: senderCountry?.id || '',
+      senderCity: senderCity?.value || '',
+      receiverCountry: receiverCountry?.id || '',
+      receiverCity: receiverCity?.value || '',
+    });
+    const res = await request.get(`core/package/?${queryParams.toString()}`);
     const filteredParcels = res?.data?.results?.filter(
       (parcel) => parcel?.client?.id === user_id
     );
     dispatch(fetchParcelsSuccess(filteredParcels));
-    return { success: true }
+    return { success: true };
   } catch (error) {
     dispatch(fetchParcelsFailure(error));
-    return { success: false }
+    return { success: false };
+  }
+};
+
+// Search My parcels:
+export const fetchSearchMyParcels = async (orderNum, user_id, dispatch) => {
+  dispatch(fetchParcelsStart());
+  try {
+    const queryParams = new URLSearchParams({
+      orderNumber: orderNum,
+    });
+    const res = await request.get(`core/package/?${queryParams.toString()}`);
+    const filteredParcels =
+      res?.data?.results?.filter((parcel) => parcel?.client?.id === user_id) ||
+      [];
+    dispatch(fetchParcelsSuccess(filteredParcels));
+    return { success: true };
+  } catch (error) {
+    dispatch(fetchParcelsFailure(error));
+    return { success: false };
   }
 };
 
 // Sort parcels:
-export const fetchSortParcels = async (param, user_id, dispatch) => {
+export const fetchSortMyParcels = async (param, user_id, dispatch) => {
   dispatch(fetchParcelsStart());
   try {
-    const res = await request.get(`core/package/?status=${param}`);
-    const filteredParcels = res?.data?.results?.filter(
-      (parcel) => parcel?.client?.id === user_id
-    );
+    const queryParams = new URLSearchParams({
+      status: param,
+    });
+    const res = await request.get(`core/package/?${queryParams.toString()}`);
+    const filteredParcels =
+      res?.data?.results?.filter((parcel) => parcel?.client?.id === user_id) ||
+      [];
     dispatch(fetchParcelsSuccess(filteredParcels));
   } catch (error) {
     dispatch(fetchParcelsFailure(error));
