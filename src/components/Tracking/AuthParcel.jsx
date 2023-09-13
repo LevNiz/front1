@@ -94,28 +94,32 @@ const Parcel = () => {
         </div>
       </div>
       {isLoading ? (
-        <ContentLoading extraStyle='140px' />
+        <ContentLoading extraStyle='420px' />
       ) : isSearched && userParcels?.length < 1 ? (
-        <div className='py-10'>
+        <div className="flex flex-col justify-center items-center min-h-[400px]">
+          <div className='py-10'>
           <img className='mx-auto' src={notFound} alt='*' />
           <h4 className='text-center font-medium mt-5 text-xl'>
             По вашему запросу ничего не нашли...
           </h4>
         </div>
+        </div>
       ) : loading ? (
-        <ContentLoading extraStyle='140px' />
+        <ContentLoading extraStyle='420px' />
       ) : userParcels?.length < 1 ? (
-        <div className='py-10'>
-          <img className='mx-auto' src={notFound} alt='*' />
-          <h4 className='text-center font-medium mt-5 text-xl'>
-            У Вас нет посылок...
-          </h4>
+        <div className="flex flex-col justify-center items-center min-h-[400px]">
+          <div className='py-10'>
+            <img className='mx-auto' src={notFound} alt='*' />
+            <h4 className='text-center font-medium mt-5 text-xl'>
+              У Вас нет посылок...
+            </h4>
+          </div>
         </div>
       ) : error ? (
         <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
           <div>
-            <img className='mx-auto w-32 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-2xl font-semibold py-12 text-center'>
+            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
+            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
               Произошла ошибка, повторите попытку позже!
             </h4>
             <NavLink

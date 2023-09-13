@@ -139,8 +139,8 @@ export const UpdateProfile = async (id, data) => {
   };
   try {
     await request.patch(`user/client/${id}/`, userData);
-    return { success: true }; 
+    return { success: true };
   } catch (error) {
-    return { success: false }; 
+    return { success: false };
   }
 };

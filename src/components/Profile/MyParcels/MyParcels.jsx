@@ -128,13 +128,13 @@ const MyParcels = () => {
       ) : error ? (
         <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
           <div>
-            <img className='mx-auto w-28 sm:w-32' src={errorImg} alt='*' />
-            <h4 className='text-2xl font-medium py-6 text-center'>
+            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
+            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
               Произошла ошибка, повторите попытку позже!
             </h4>
             <NavLink
               to='/'
-              className='max-w-[255px] mx-auto w-full flex sm:hidden justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
+              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
             >
               Перейти на главную
             </NavLink>
@@ -150,7 +150,7 @@ const MyParcels = () => {
         <div className='flex justify-center items-center w-full min-h-[380px]'>
           <div>
             <img className='mx-auto' src={notFound} alt='*' />
-            <h4 className='text-2xl font-medium py-6 text-center'>
+            <h4 className='text-xl sm:text-2xl font-medium py-6 text-center'>
               К сожалению ничего не нашли...
             </h4>
           </div>

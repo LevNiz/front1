@@ -106,8 +106,8 @@ const Depots = () => {
       ) : error ? (
         <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
           <div>
-            <img className='mx-auto w-32 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-2xl font-semibold py-12 text-center'>
+            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
+            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
               Произошла ошибка, повторите попытку позже!
             </h4>
             <NavLink
