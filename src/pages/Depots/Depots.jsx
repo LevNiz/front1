@@ -12,12 +12,10 @@ import errorImg from './../../assets/images/error.svg';
 
 const Depots = () => {
   const { depots, loading, error } = useSelector((state) => state?.depots);
+  const dispatch = useDispatch();
 
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
   const [depotData, setDepotData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const dispatch = useDispatch();
 
   const {
     register,
@@ -44,59 +42,45 @@ const Depots = () => {
     setDepotData(depots);
   }, [depots]);
 
-  const onSubmit = async (value) => {
-    setIsLoading(true);
-    const { success, data } = await searchDepot(value.searchDepot);
-    if (success) {
-      setDepotData(data);
-      setIsLoading(false);
-    }
-    setIsLoading(false);
-  };
-
-  const receiveDataFromChild = (data) => {
-    setDepotData(data);
+  const onSubmit = async (data) => {
+    await searchDepot(data.searchDepot, dispatch);
   };
 
   return (
     <div className='content pb-16 min-h-[768px]'>
       <div className='max-w-[1120px] w-full mx-auto'>
-      <form className='pt-4 sm:pt-14 pb-2 md:flex'>
-        <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
-          <input
-            className='px-2 w-full focus:outline-none'
-            placeholder='Поиск по названию...'
-            {...register('searchDepot', {
-              required: 'Введите название склада!',
-            })}
-          />
-          <div
-            onClick={(e) => openFilterModal(e)}
-            className='cursor-pointer flex justify-center items-center w-[116px] h-10 bg-colYellow rounded-lg hover:bg-colYellowHover duration-100'
-          >
-            Фильтр
+        <form className='pt-4 sm:pt-14 pb-2 md:flex'>
+          <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
+            <input
+              className='px-2 w-full focus:outline-none'
+              placeholder='Поиск по названию...'
+              {...register('searchDepot', {
+                required: 'Введите название склада!',
+              })}
+            />
+            <div
+              onClick={(e) => openFilterModal(e)}
+              className='cursor-pointer flex justify-center items-center w-[116px] h-10 bg-colYellow rounded-lg hover:bg-colYellowHover duration-100'
+            >
+              Фильтр
+            </div>
           </div>
-        </div>
-        <button
-          onClick={handleSubmit(onSubmit)}
-          className='md:max-w-[255px] mt-4 md:mt-0 md:ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
-          type='submit'
-        >
-          Поиск
-        </button>
-      </form>
-      {errors?.searchDepot && (
-        <p className='text-red-500 text-sm'>
-          {errors?.searchDepot.message || 'Error!'}
-        </p>
-      )}
+          <button
+            onClick={handleSubmit(onSubmit)}
+            className='md:max-w-[255px] mt-4 md:mt-0 md:ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
+            type='submit'
+          >
+            Поиск
+          </button>
+        </form>
+        {errors?.searchDepot && (
+          <p className='text-red-500 text-sm'>
+            {errors?.searchDepot.message || 'Error!'}
+          </p>
+        )}
       </div>
       <div className='relative'>
-        <FilterModal
-          isOpen={isFilterModalOpen}
-          onClose={closeFilterModal}
-          dataFromChild={receiveDataFromChild}
-        />
+        <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
       <h1 className='text-2xl md:text-4xl font-semibold my-6 md:my-10'>
         Наши склады
@@ -118,11 +102,11 @@ const Depots = () => {
             </NavLink>
           </div>
         </div>
-      ) : isLoading ? (
-        <ContentLoading extraStyle='340px' />
-      ) : depotData?.length > 0 ? (
-        <div className="grid ss:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-          <DepotItem depotData={depotData} />
+      ) : depotData?.length ? (
+        <div className='grid ss:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6'>
+          {depotData?.map((el, index) => (
+            <DepotItem key={index} el={el} />
+          ))}
         </div>
       ) : (
         <div className='py-10'>

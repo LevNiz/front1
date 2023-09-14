@@ -27,17 +27,18 @@ export const fetchDepotsDetail = async (id) => {
 };
 
 // Search depot:
-export const searchDepot = async (depotName) => {
+export const searchDepot = async (depotName, dispatch) => {
+  dispatch(fetchDepotsStart());
   try {
     const res = await request.get(`core/depot/?search=${depotName}`);
-    return { success: true, data: res?.data?.results };
+    dispatch(fetchDepotsSuccess(res?.data?.results));
   } catch (error) {
-    return { success: false, data: error };
+    dispatch(fetchDepotsFailure(error));
   }
 };
 
 // Filter depots:
-export const filterDepot = async (filterData) => {
+export const filterDepot = async (filterData, dispatch) => {
   const { country, city, maxAmountStart, maxAmountEnd } = filterData;
   const countryID = country?.id;
   const cityID = city?.value;
@@ -50,11 +51,11 @@ export const filterDepot = async (filterData) => {
     maxAmount_min: minAmount || '',
     maxAmount_max: maxAmount || '',
   });
-
+  dispatch(fetchDepotsStart());
   try {
-    const response = await request.get(`core/depot/?${params}`);
-    return { success: true, data: response.data.results };
+    const res = await request.get(`core/depot/?${params}`);
+    dispatch(fetchDepotsSuccess(res?.data?.results));
   } catch (error) {
-    return { success: false, data: error };
+    dispatch(fetchDepotsFailure(error));
   }
 };

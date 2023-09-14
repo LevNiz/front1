@@ -7,15 +7,17 @@ import { Controller, useForm } from 'react-hook-form';
 import ReactFlagsSelect from 'react-flags-select';
 import { filterDepot } from '../../api/depots';
 import { ButtonLoading } from '../../helpers/Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
 
 // eslint-disable-next-line react/prop-types
-const FilterModal = ({ isOpen, onClose, dataFromChild }) => {
+const FilterModal = ({ isOpen, onClose }) => {
+  const { loading } = useSelector((state) => state?.depots);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const { control, register, setValue, watch, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const fetchData = async (fetchFunction, setDataFunction) => {
     const { success, data } = await fetchFunction();
@@ -29,21 +31,16 @@ const FilterModal = ({ isOpen, onClose, dataFromChild }) => {
     fetchData(fetchCities, setCities);
   }, []);
 
-  const onSubmit = async (filterData) => {
-    setIsLoading(true);
-    const { success, data } = await filterDepot(filterData);
-    if (success) {
-      dataFromChild(data);
-      setIsLoading(false);
-      onClose();
-    }
-    setIsLoading(false);
+  const onSubmit = async (data) => {
+    await filterDepot(data, dispatch);
     onClose();
   };
 
   const clearFilter = async () => {
     setValue('country', '');
     setValue('city', '');
+    setValue('maxAmountStart', '');
+    setValue('maxAmountEnd', '');
   };
 
   const countrySelect = watch('country');
@@ -166,7 +163,7 @@ const FilterModal = ({ isOpen, onClose, dataFromChild }) => {
         </div>
         <div className='text-center'>
           <button className='sm:max-w-[330px] w-full bg-black text-white sm:text-black sm:bg-colYellow h-12 mt-6 sm:mt-12 rounded-lg sm:hover:bg-colYellowHover duration-100'>
-            {isLoading ? <ButtonLoading /> : 'Применить'}
+            {loading ? <ButtonLoading /> : 'Применить'}
           </button>
         </div>
       </form>
