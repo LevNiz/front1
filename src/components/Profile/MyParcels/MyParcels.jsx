@@ -124,7 +124,7 @@ const MyParcels = () => {
         </div>
       </div>
       {loading ? (
-        <ContentLoading extraStyle='70vh' />
+        <ContentLoading extraStyle='350px' />
       ) : error ? (
         <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
           <div>

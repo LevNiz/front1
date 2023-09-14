@@ -71,7 +71,7 @@ const UnAuthParcel = () => {
         </div>
       </div>
       {loading ? (
-        <ContentLoading extraStyle='420px' />
+        <ContentLoading extraStyle='320px' />
       ) : isSearched && findParcel?.length < 1 ? (
         <div className='py-10'>
           <img className='mx-auto' src={notFound} alt='*' />

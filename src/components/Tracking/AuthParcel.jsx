@@ -94,7 +94,7 @@ const Parcel = () => {
         </div>
       </div>
       {isLoading ? (
-        <ContentLoading extraStyle='420px' />
+        <ContentLoading extraStyle='320px' />
       ) : isSearched && userParcels?.length < 1 ? (
         <div className="flex flex-col justify-center items-center min-h-[400px]">
           <div className='py-10'>
@@ -105,7 +105,7 @@ const Parcel = () => {
         </div>
         </div>
       ) : loading ? (
-        <ContentLoading extraStyle='420px' />
+        <ContentLoading extraStyle='320px' />
       ) : userParcels?.length < 1 ? (
         <div className="flex flex-col justify-center items-center min-h-[400px]">
           <div className='py-10'>
