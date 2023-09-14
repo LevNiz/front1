@@ -14,7 +14,7 @@ const Notifications = () => {
 
   return (
     <>
-      {notifications?.length > 0 ? (
+      {notifications?.length ? (
         <div className='content pl-0 sm:pl-4 pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
           <div>
             <div className='flex justify-between items-center pb-5'>
@@ -66,10 +66,10 @@ const Notifications = () => {
           </div>
         </div>
       ) : (
-        <div className='flex justify-center items-center w-full'>
+        <div className='flex justify-center items-center w-full min-h-[400px]'>
           <div>
-            <img className='mx-auto' src={noNotifications} alt='*' />
-            <h4 className='text-2xl font-semibold py-12'>
+            <img className='mx-auto sm:w-auto w-[120px]' src={noNotifications} alt='*' />
+            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12'>
               У вас еще нет уведомлений
             </h4>
             <NavLink
