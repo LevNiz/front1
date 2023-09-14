@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import time from './../../assets/icons/time.svg';
 import local from './../../assets/icons/location-outline.svg';
 
-const DepotItem = ({depotData}) => {
+const DepotItem = ({ depotData }) => {
   return (
     <>
       {depotData?.map((el, index) => (
@@ -19,20 +19,39 @@ const DepotItem = ({depotData}) => {
               alt='*'
             />
           </div>
-          <div className='p-3 lg:p-4'>
+          <div className='p-3 lg:p-4 relative'>
+            <div className='absolute -top-3 md:-top-6 right-2 md:right-5 w-6 md:w-12 h-6 md:h-12 rounded-full overflow-hidden'>
+              <img
+                className='w-full h-full object-cover'
+                src={el?.country?.icon}
+                alt='*'
+              />
+            </div>
             <h3 className='sm:text-lg lg:text-xl font-medium text-black line-clamp-1 break-all'>
               {el?.nameRu || 'Не указан'}
             </h3>
-            <div className="flex items-center mt-2 mm:mt-3 mb-1 mm:mb-2">
-              <img className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]' src={time} alt="*" />
-              <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>08:00 - 18:00</p>
+            <div className='flex items-center mt-2 mm:mt-3 mb-1 mm:mb-2'>
+              <img
+                className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]'
+                src={time}
+                alt='*'
+              />
+              <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>
+                {el?.workingHours[0]?.mondayStart} -{' '}
+                {el?.workingHours[0]?.mondayEnd}
+              </p>
             </div>
-            <div className="flex items-center">
-              <img className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]' src={local} alt="*" />
-              <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>{el?.address ? el?.address : 'Не указан'}</p>
+            <div className='flex items-center'>
+              <img
+                className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]'
+                src={local}
+                alt='*'
+              />
+              <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>
+                {el?.address ? el?.address : 'Не указан'}
+              </p>
             </div>
           </div>
-          
         </NavLink>
       ))}
     </>

@@ -96,18 +96,18 @@ const Parcel = () => {
       {isLoading ? (
         <ContentLoading extraStyle='320px' />
       ) : isSearched && userParcels?.length < 1 ? (
-        <div className="flex flex-col justify-center items-center min-h-[400px]">
+        <div className='flex flex-col justify-center items-center min-h-[400px]'>
           <div className='py-10'>
-          <img className='mx-auto' src={notFound} alt='*' />
-          <h4 className='text-center font-medium mt-5 text-xl'>
-            По вашему запросу ничего не нашли...
-          </h4>
-        </div>
+            <img className='mx-auto' src={notFound} alt='*' />
+            <h4 className='text-center font-medium mt-5 text-xl'>
+              По вашему запросу ничего не нашли...
+            </h4>
+          </div>
         </div>
       ) : loading ? (
         <ContentLoading extraStyle='320px' />
       ) : userParcels?.length < 1 ? (
-        <div className="flex flex-col justify-center items-center min-h-[400px]">
+        <div className='flex flex-col justify-center items-center min-h-[400px]'>
           <div className='py-10'>
             <img className='mx-auto' src={notFound} alt='*' />
             <h4 className='text-center font-medium mt-5 text-xl'>

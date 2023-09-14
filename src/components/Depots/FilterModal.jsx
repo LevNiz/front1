@@ -15,7 +15,7 @@ const FilterModal = ({ isOpen, onClose, dataFromChild }) => {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { control, setValue, watch, handleSubmit } = useForm();
+  const { control, register, setValue, watch, handleSubmit } = useForm();
 
   const fetchData = async (fetchFunction, setDataFunction) => {
     const { success, data } = await fetchFunction();
@@ -141,58 +141,27 @@ const FilterModal = ({ isOpen, onClose, dataFromChild }) => {
           </div>
           <div className='relative'>
             <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>
-              Приём посылок
+              Минимальный вес
             </p>
-            <select
-              className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
-              defaultValue=''
-            >
-              <option value=''>{`</> 30 кг`}</option>
-              {countries?.map((el) => (
-                <option key={el?.id} value={el?.id}>
-                  {el?.nameRu}
-                </option>
-              ))}
-            </select>
-            <div className='pointer-events-none absolute top-[40%] inset-y-0 right-0 flex items-center px-2 text-gray-700'>
-              <svg
-                className='fill-current h-4 w-4'
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 20 20'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z'
-                  clipRule='evenodd'
-                />
-              </svg>
-            </div>
+            <input
+              className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none'
+              placeholder='Введите минимальный вес'
+              {...register('maxAmountStart', {
+                required: false,
+              })}
+            />
           </div>
           <div className='relative'>
             <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>
-              Рабочие часы
+              Максимальный вес
             </p>
-            <select
-              className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none '
-              defaultValue=''
-            >
-              <option value=''>Выходные</option>
-              <option value='1'>09:00 - 19:00</option>
-              <option value='2'>10:00 - 18:00</option>
-            </select>
-            <div className='pointer-events-none absolute top-[40%] inset-y-0 right-0 flex items-center px-2 text-gray-700'>
-              <svg
-                className='fill-current h-4 w-4'
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 20 20'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z'
-                  clipRule='evenodd'
-                />
-              </svg>
-            </div>
+            <input
+              className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none'
+              placeholder='Введите максимальный вес'
+              {...register('maxAmountEnd', {
+                required: false,
+              })}
+            />
           </div>
         </div>
         <div className='text-center'>

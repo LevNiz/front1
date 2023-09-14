@@ -38,15 +38,17 @@ export const searchDepot = async (depotName) => {
 
 // Filter depots:
 export const filterDepot = async (filterData) => {
-  const { country, city } = filterData;
+  const { country, city, maxAmountStart, maxAmountEnd } = filterData;
   const countryID = country?.id;
   const cityID = city?.value;
+  const minAmount = maxAmountStart;
+  const maxAmount = maxAmountEnd;
 
   const params = new URLSearchParams({
     country: countryID || '',
     city: cityID || '',
-    maxAmount_min: '',
-    maxAmount_max: '',
+    maxAmount_min: minAmount || '',
+    maxAmount_max: maxAmount || '',
   });
 
   try {
