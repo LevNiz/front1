@@ -20,7 +20,7 @@ const MainSlider = () => {
       {slidesData?.map((el, index) => (
         <SwiperSlide
           key={index}
-          className='min-h-[560px] sm:min-h-[625px] flex items-center'
+          className='min-h-[560px] sm:min-h-[625px] flex items-center bg-cover bg-no-repeat'
           style={{ backgroundImage: el?.backgroundImage }}
           effect={'fade'}
           modules={[Navigation, EffectFade]}
