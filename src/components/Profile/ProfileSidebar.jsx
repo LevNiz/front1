@@ -85,11 +85,7 @@ const ProfileSidebar = () => {
               to='my-wallet'
               className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
             >
-              <img
-                className='pr-2 sm:pr-0 md:pr-3'
-                src={wallet}
-                alt='*'
-              />
+              <img className='pr-2 sm:pr-0 md:pr-3' src={wallet} alt='*' />
               <span className='md:block sm:hidden'>Мой кошелёк</span>
             </NavLink>
           </li>
