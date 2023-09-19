@@ -26,7 +26,6 @@ const Parcel = () => {
   const [userParcels, setUserParcels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
-
   const {
     register,
     handleSubmit,

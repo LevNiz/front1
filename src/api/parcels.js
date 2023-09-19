@@ -1,4 +1,4 @@
-import { request } from './axios';
+import { axiosInstance, request } from './axios';
 import {
   fetchParcelsStart,
   fetchParcelsSuccess,
@@ -95,5 +95,15 @@ export const fetchSortMyParcels = async (param, user_id, dispatch) => {
     dispatch(fetchParcelsSuccess(filteredParcels));
   } catch (error) {
     dispatch(fetchParcelsFailure(error));
+  }
+};
+
+// Save parcel:
+export const fetchSaveParcel = async (data) => {
+  try {
+    await axiosInstance.post('core/savePackage/', data);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
   }
 };
