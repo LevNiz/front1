@@ -94,7 +94,7 @@ const Modal = ({ isOpen, onClose, content, logOutUser }) => {
           <div className='flex px-8 mb-8'>
             <NavLink
               className='bg-colYellow w-full py-3 rounded-lg hover:bg-colYellowHover duration-100'
-              to='/reset-password'
+              to='/auth/reset-password'
             >
               Восстановить
             </NavLink>
