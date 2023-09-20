@@ -37,10 +37,11 @@ const ResetPass = () => {
           </NavLink>
         </form>
         <div className='flex justify-center mt-12'>
-          <p className='text-base text-black font-medium mr-2'>
-            Помните пароль?
-          </p>
-          <NavLink className='text-base text-colYellow' to='/auth/sign-in'>
+          <p className='text-base text-colGray3 mr-2'>Помните пароль?</p>
+          <NavLink
+            className='text-base text-black font-medium'
+            to='/auth/sign-in'
+          >
             Войти
           </NavLink>
         </div>

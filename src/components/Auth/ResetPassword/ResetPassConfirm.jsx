@@ -48,10 +48,8 @@ const ResetPassConfirm = () => {
           Подтвердить
         </NavLink>
         <div className='flex justify-center flex-wrap mt-12'>
-          <p className='text-base text-black font-medium mr-2'>
-            Не получили код?
-          </p>
-          <NavLink to='#' className='text-base text-colYellow'>
+          <p className='text-base text-colGray3 mr-2'>Не получили код?</p>
+          <NavLink to='#' className='text-base text-black font-medium'>
             Отправить еще раз
           </NavLink>
         </div>

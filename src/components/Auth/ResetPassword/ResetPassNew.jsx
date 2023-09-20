@@ -2,13 +2,32 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import leftArrow from '../../../assets/icons/arrow-left.svg';
 import logoMobile from '../../../assets/icons/logo3.svg';
 import showPass from '../../../assets/icons/show-pass.svg';
+import lock from '../../../assets/icons/lock.svg';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const ResetPassNew = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
 
   const navigate = useNavigate();
+
+  const {
+    register,
+    watch,
+    // handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const password = watch('password', '');
+  const confirmPass = watch('confirmPassword', '');
+
+  const hasLowerCaseUpperCase = /^(?=.*[a-z])(?=.*[A-Z])/.test(password);
+  const hasNumber = /^(?=.*\d)/.test(password);
+  const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
+  const hasSamePassword = password !== '' && password === confirmPass;
 
   return (
     <>
@@ -25,12 +44,35 @@ const ResetPassNew = () => {
           телефона
         </p>
         <div>
-          <p className='font-bold mb-2'>Пароль</p>
-          <div className='mb-6 relative'>
+          <p className='font-bold mb-2'>Новый пароль</p>
+          <div className='relative'>
+            <img
+              className='absolute top-[15px] left-[10px] hidden mm:block'
+              src={lock}
+              alt='*'
+            />
             <input
-              className='w-full border border-colGray2 p-[15px_44px_15px_20px] rounded-lg focus:border-black focus:outline-none'
+              className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type={`${visiblePass ? 'text' : 'password'}`}
-              placeholder='Пароль'
+              placeholder='Введите новый пароль'
+              {...register('password', {
+                required: 'Поле обязательно к заполнению!',
+                validate: (value) => {
+                  if (!/^(?=.*[a-z])(?=.*[A-Z])/.test(value)) {
+                    return 'Требуется хотя бы одна строчная и прописная буква!';
+                  }
+                  if (!/(?=.*\d)/.test(value)) {
+                    return 'Требуется хотя бы одна цифра!';
+                  }
+                  if (!/(?=.*[@$!%*?&#])/.test(value)) {
+                    return 'Требуется хотя бы один специальный символ!';
+                  }
+                  if (value.length < 6) {
+                    return 'Минимальная длина пароля - 6 символов!';
+                  }
+                  return true;
+                },
+              })}
             />
             <div
               onClick={() => setVisiblePass(!visiblePass)}
@@ -44,14 +86,29 @@ const ResetPassNew = () => {
               ></span>
             </div>
           </div>
+          {errors?.password && (
+            <p className='text-red-500 text-sm mt-2'>
+              {errors?.password.message || 'Error!'}
+            </p>
+          )}
         </div>
         <div>
-          <p className='font-bold mb-2'>Подтвердить пароль</p>
-          <div className='mb-6 relative'>
+          <p className='font-bold mb-2 mt-5'>Подтвердить пароль</p>
+          <div className='relative'>
+            <img
+              className='absolute top-[15px] left-[10px] hidden mm:block'
+              src={lock}
+              alt='*'
+            />
             <input
-              className='w-full border border-colGray2 p-[15px_44px_15px_20px] rounded-lg focus:border-black focus:outline-none'
+              className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
               type={`${visiblePassConfirm ? 'text' : 'password'}`}
               placeholder='Подтвердить пароль'
+              {...register('confirmPassword', {
+                required: 'Поле обязательно к заполнению!',
+                validate: (value) =>
+                  value === password || 'Пароли не совпадают',
+              })}
             />
             <div
               onClick={() => setVisiblePassConfirm(!visiblePassConfirm)}
@@ -66,23 +123,50 @@ const ResetPassNew = () => {
             </div>
           </div>
         </div>
-        <div className='mb-7'>
+        {errors?.confirmPassword && (
+          <p className='text-red-500 text-sm mt-2'>
+            {errors?.confirmPassword.message || 'Error!'}
+          </p>
+        )}
+        <div className='mb-7 mt-4'>
           <div className='flex items-center my-2'>
-            <span className='min-w-[10px] h-[10px] rounded-full bg-colYellow'></span>
+            <span
+              className={`min-w-[10px] h-[10px] rounded-full ${
+                hasLowerCaseUpperCase ? 'bg-colYellow' : 'bg-colGray2'
+              }`}
+            ></span>
             <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
               Прописные и строчные латинские буквы
             </p>
           </div>
           <div className='flex items-center my-2'>
-            <span className='min-w-[10px] h-[10px] rounded-full bg-colGray2'></span>
+            <span
+              className={`min-w-[10px] h-[10px] rounded-full ${
+                hasNumber ? 'bg-colYellow' : 'bg-colGray2'
+              }`}
+            ></span>
             <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
               Минимум одна цифра
             </p>
           </div>
           <div className='flex items-center my-2'>
-            <span className='min-w-[10px] h-[10px] rounded-full bg-colGray2'></span>
+            <span
+              className={`min-w-[10px] h-[10px] rounded-full ${
+                hasSpecialChar ? 'bg-colYellow' : 'bg-colGray2'
+              }`}
+            ></span>
             <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
               Минимум один спецсимвол
+            </p>
+          </div>
+          <div className='flex items-center my-2'>
+            <span
+              className={`min-w-[10px] h-[10px] rounded-full ${
+                hasSamePassword ? 'bg-colYellow' : 'bg-colGray2'
+              }`}
+            ></span>
+            <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+              Пароли совпадают
             </p>
           </div>
         </div>
