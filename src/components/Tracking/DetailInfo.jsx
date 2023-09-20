@@ -4,17 +4,16 @@ import sender from './../../assets/icons/sender.svg';
 import receiver from './../../assets/icons/receiver.svg';
 import cargo from './../../assets/icons/cargo.svg';
 import dollar from './../../assets/icons/dollar.svg';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import jwt_decode from 'jwt-decode';
 import { fetchParcelDetail, fetchSaveParcel } from '../../api/parcels';
 import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
 
 const DetailInfo = (props) => {
-  const token = useSelector((state) => state?.user?.user?.access);
-  const decoded = jwt_decode(token);
+  const userID = useSelector((state) => state?.user?.userID);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [parcelDetail, setParcelDetail] = useState();
   const [loading, setLoading] = useState(false);
@@ -24,13 +23,17 @@ const DetailInfo = (props) => {
   const saveParcel = async () => {
     setButtonLoading(true);
     const data = {
-      clients: decoded?.user_id,
+      clients: userID,
       package: parseInt(id),
     };
-    const { success } = await fetchSaveParcel(data);
-    if (success) {
-      setButtonLoading(false);
-      setSaved(true)
+    if (userID !== null) {
+      const { success } = await fetchSaveParcel(data);
+      if (success) {
+        setButtonLoading(false);
+        setSaved(true);
+      }
+    } else {
+      navigate('/auth/sign-in');
     }
     setButtonLoading(false);
   };
@@ -43,7 +46,7 @@ const DetailInfo = (props) => {
         parcelDetail?.client?.id
       );
       if (success) {
-        if (data?.clients?.includes(decoded.user_id)) {
+        if (data?.clients?.includes(userID)) {
           setSaved(true);
         }
         setParcelDetail(data);

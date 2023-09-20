@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FetchParcels, fetchSearchParcel } from '../../api/parcels';
-import jwt_decode from 'jwt-decode';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import nounBox from './../../assets/icons/noun-box.svg';
 import parcelCar from './../../assets/images/parcel-car.svg';
@@ -19,8 +18,7 @@ const Parcel = () => {
     loading,
     error,
   } = useSelector((state) => state?.parcels);
-  const token = useSelector((state) => state?.user?.user?.access);
-  const decoded = jwt_decode(token);
+  const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
 
   const [userParcels, setUserParcels] = useState([]);
@@ -49,9 +47,9 @@ const Parcel = () => {
 
   useEffect(() => {
     (async () => {
-      await FetchParcels(dispatch, decoded?.user_id);
+      await FetchParcels(dispatch, userID);
     })();
-  }, [dispatch, decoded?.user_id]);
+  }, [dispatch, userID]);
 
   return (
     <>

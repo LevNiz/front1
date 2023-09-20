@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: null,
+  userID: null,
   loading: false,
   error: null,
 };
@@ -16,7 +17,8 @@ export const AuthSlice = createSlice({
     },
     registerSuccess: (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.userID = action.payload.userID;
       state.error = false;
     },
     registerFailure: (state) => {
@@ -29,7 +31,8 @@ export const AuthSlice = createSlice({
     },
     loginSuccess: (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.userID = action.payload.userID;
       state.error = false;
     },
     loginFailure: (state) => {
@@ -38,6 +41,7 @@ export const AuthSlice = createSlice({
     },
     logOut: (state) => {
       state.user = null;
+      state.userID = null;
     },
   },
 });

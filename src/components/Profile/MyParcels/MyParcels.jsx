@@ -13,13 +13,13 @@ import {
   fetchSearchSavedParcels,
   fetchSortSavedParcels,
 } from '../../../api/parcels';
-import jwt_decode from 'jwt-decode';
 import { useForm } from 'react-hook-form';
 
 const MyParcels = () => {
-  const { savedParcels, loading, error } = useSelector((state) => state?.parcels);
-  const token = useSelector((state) => state?.user?.user?.access);
-  const decoded = jwt_decode(token);
+  const { savedParcels, loading, error } = useSelector(
+    (state) => state?.parcels
+  );
+  const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
 
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
@@ -40,18 +40,18 @@ const MyParcels = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await fetchSearchSavedParcels(data.orderNumber, decoded?.user_id, dispatch);
+    await fetchSearchSavedParcels(data.orderNumber, userID, dispatch);
   };
 
   const handleSort = async (param) => {
-    await fetchSortSavedParcels(param, decoded?.user_id, dispatch);
+    await fetchSortSavedParcels(param, userID, dispatch);
   };
 
   useEffect(() => {
     (async () => {
-      await FetchSavedParcels(dispatch, decoded?.user_id);
+      await FetchSavedParcels(dispatch, userID);
     })();
-  }, [dispatch, decoded?.user_id]);
+  }, [dispatch, userID]);
 
   return (
     <div className='py-5 sm:pl-3 md:pl-8 w-full overflow-hidden'>

@@ -8,6 +8,7 @@ import {
   logOut,
 } from '../redux/slices/userSlice';
 import { request } from './axios';
+import jwt_decode from 'jwt-decode';
 
 // Register:
 export const registerUser = async (dispatch, data) => {
@@ -26,7 +27,8 @@ export const registerUser = async (dispatch, data) => {
   };
   try {
     const res = await request.post('user/client/', userData);
-    dispatch(registerSuccess(res?.data));
+    const userID = jwt_decode(res?.data.access);
+    dispatch(registerSuccess({ user: res?.data, userID: userID?.user_id }));
     localStorage.setItem('accessToken', res.data.access);
     localStorage.setItem('refreshToken', res.data.refresh);
     return { success: true };
@@ -45,7 +47,8 @@ export const loginUser = async (dispatch, data) => {
   };
   try {
     const res = await request.post('api/user/login/', userData);
-    dispatch(loginSuccess(res?.data));
+    const userID = jwt_decode(res?.data.access);
+    dispatch(loginSuccess({ user: res?.data, userID: userID?.user_id }));
     localStorage.setItem('accessToken', res.data.access);
     localStorage.setItem('refreshToken', res.data.refresh);
     return { success: true };

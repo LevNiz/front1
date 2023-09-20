@@ -5,14 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchFilterSavedParcels } from '../../../api/parcels';
 import { fetchCities, fetchCountries } from '../../../api/tempAPI';
-import jwt_decode from 'jwt-decode';
 import back from './../../../assets/icons/arrow-left.svg';
 import { ButtonLoading } from '../../../helpers/Loader/Loader';
 
 // eslint-disable-next-line react/prop-types
 const FilterParcel = ({ isOpen, onClose }) => {
-  const token = useSelector((state) => state?.user?.user?.access);
-  const decoded = jwt_decode(token);
+  const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
 
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -36,11 +34,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    const { success } = await fetchFilterSavedParcels(
-      decoded.user_id,
-      dispatch,
-      data
-    );
+    const { success } = await fetchFilterSavedParcels(userID, dispatch, data);
     if (success) {
       setIsLoading(false);
       onClose();

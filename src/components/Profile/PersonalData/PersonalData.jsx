@@ -4,7 +4,6 @@ import profile from './../../../assets/icons/profile.svg';
 import call from './../../../assets/icons/call3.svg';
 import email from './../../../assets/icons/email.svg';
 import noImg from './../../../assets/images/no-ava.jpeg';
-import jwt_decode from 'jwt-decode';
 import { useSelector } from 'react-redux';
 import { fetchUser } from '../../../api/client';
 import { Controller, useForm } from 'react-hook-form';
@@ -15,8 +14,7 @@ import Select from 'react-select';
 import { UpdateProfile } from '../../../api/user';
 
 const PersonalData = () => {
-  const userToken = useSelector((state) => state?.user?.user?.access);
-  const decoded = jwt_decode(userToken);
+  const userID = useSelector((state) => state?.user?.userID);
   const [userData, setUserData] = useState();
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -38,7 +36,7 @@ const PersonalData = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: async () => {
-      const { success, data } = await fetchUser(decoded?.user_id);
+      const { success, data } = await fetchUser(userID);
       if (success) {
         setUserData(data);
         setIsLoading(true);
@@ -99,7 +97,7 @@ const PersonalData = () => {
   const onSubmit = (data) => {
     (async () => {
       setIsLoading(false);
-      const { success } = await UpdateProfile(decoded?.user_id, data);
+      const { success } = await UpdateProfile(userID, data);
       if (success) {
         setIsLoading(true);
       }
