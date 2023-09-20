@@ -3,7 +3,7 @@ import ReactFlagsSelect from 'react-flags-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
-import { fetchFilterMyParcels } from '../../../api/parcels';
+import { fetchFilterSavedParcels } from '../../../api/parcels';
 import { fetchCities, fetchCountries } from '../../../api/tempAPI';
 import jwt_decode from 'jwt-decode';
 import back from './../../../assets/icons/arrow-left.svg';
@@ -36,7 +36,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    const { success } = await fetchFilterMyParcels(
+    const { success } = await fetchFilterSavedParcels(
       decoded.user_id,
       dispatch,
       data

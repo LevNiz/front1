@@ -3,6 +3,7 @@ import { logOut } from './userSlice';
 
 const initialState = {
   parcels: null,
+  savedParcels: null,
   loading: false,
   error: null,
 };
@@ -24,6 +25,19 @@ export const parcelsSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+    fetchSavedParcelsStart: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    fetchSavedParcelsSuccess: (state, action) => {
+      state.loading = false;
+      state.savedParcels = action.payload;
+      state.error = false;
+    },
+    fetchSavedParcelsFailure: (state) => {
+      state.loading = false;
+      state.error = true;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(logOut, (state) => {
@@ -34,7 +48,13 @@ export const parcelsSlice = createSlice({
   },
 });
 
-export const { fetchParcelsStart, fetchParcelsSuccess, fetchParcelsFailure } =
-  parcelsSlice.actions;
+export const {
+  fetchParcelsStart,
+  fetchParcelsSuccess,
+  fetchParcelsFailure,
+  fetchSavedParcelsStart,
+  fetchSavedParcelsSuccess,
+  fetchSavedParcelsFailure,
+} = parcelsSlice.actions;
 
 export default parcelsSlice.reducer;

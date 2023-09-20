@@ -9,15 +9,15 @@ import notFound from './../../../assets/images/404.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import {
-  FetchParcels,
-  fetchSortMyParcels,
-  fetchSearchMyParcels,
+  FetchSavedParcels,
+  fetchSearchSavedParcels,
+  fetchSortSavedParcels,
 } from '../../../api/parcels';
 import jwt_decode from 'jwt-decode';
 import { useForm } from 'react-hook-form';
 
 const MyParcels = () => {
-  const { parcels, loading, error } = useSelector((state) => state?.parcels);
+  const { savedParcels, loading, error } = useSelector((state) => state?.parcels);
   const token = useSelector((state) => state?.user?.user?.access);
   const decoded = jwt_decode(token);
   const dispatch = useDispatch();
@@ -40,16 +40,16 @@ const MyParcels = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await fetchSearchMyParcels(data.orderNumber, decoded?.user_id, dispatch);
+    await fetchSearchSavedParcels(data.orderNumber, decoded?.user_id, dispatch);
   };
 
   const handleSort = async (param) => {
-    await fetchSortMyParcels(param, decoded?.user_id, dispatch);
+    await fetchSortSavedParcels(param, decoded?.user_id, dispatch);
   };
 
   useEffect(() => {
     (async () => {
-      await FetchParcels(dispatch, decoded?.user_id);
+      await FetchSavedParcels(dispatch, decoded?.user_id);
     })();
   }, [dispatch, decoded?.user_id]);
 
@@ -140,9 +140,9 @@ const MyParcels = () => {
             </NavLink>
           </div>
         </div>
-      ) : parcels?.length ? (
+      ) : savedParcels?.length ? (
         <>
-          {parcels?.map((el, index) => (
+          {savedParcels?.map((el, index) => (
             <ParcelItem key={index} parcel={el} />
           ))}
         </>
