@@ -30,6 +30,7 @@ const DetailInfo = (props) => {
     const { success } = await fetchSaveParcel(data);
     if (success) {
       setButtonLoading(false);
+      setSaved(true)
     }
     setButtonLoading(false);
   };
