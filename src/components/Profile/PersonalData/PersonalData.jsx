@@ -3,6 +3,7 @@ import location from './../../../assets/icons/location2.svg';
 import profile from './../../../assets/icons/profile.svg';
 import call from './../../../assets/icons/call3.svg';
 import email from './../../../assets/icons/email.svg';
+import edit from './../../../assets/icons/edit.svg';
 import noImg from './../../../assets/images/no-ava.jpeg';
 import errorImg from './../../../assets/images/error.svg';
 import { useSelector } from 'react-redux';
@@ -133,16 +134,21 @@ const PersonalData = () => {
       ) : (
         <div className='py-5 sm:pl-5 lg:px-12 w-full'>
           <div className='flex flex-col items-center sm:flex-row'>
-            <div className='relative max-w-[110px] border border-colGray2 min-w-[110px] h-[110px] overflow-hidden rounded-full mr-3 sm:mr-6'>
-              <input className='hidden' accept='image/*' type='file' id='ava' />
-              <label className='cursor-pointer' htmlFor='ava'>
+            <div className='relative mr-3 sm:mr-6'>
+              <div className='max-w-[110px] border-2 p-[2px] border-colYellow min-w-[110px] h-[110px] overflow-hidden rounded-full'>
                 <img
-                  className='w-full h-full object-cover'
+                  className='w-full h-full object-cover rounded-full'
                   src={userData?.avatar ? userData?.avatar : noImg}
                   alt='*'
                 />
-                <span className='absolute bottom-2 right-4 w-6 h-6 flex justify-center items-center rounded-full text-green-500 text-3xl bg-white'>
-                  +
+              </div>
+              <input className='hidden' accept='image/*' type='file' id='ava' />
+              <label
+                className='cursor-pointer absolute bottom-1 right-3'
+                htmlFor='ava'
+              >
+                <span className='w-7 h-7 flex justify-center items-center rounded-full bg-white border border-gray-200'>
+                  <img className='w-5' src={edit} alt='*' />
                 </span>
               </label>
             </div>
