@@ -8,8 +8,8 @@ import youtube from './../../assets/icons/YouTube.svg';
 const Footer = () => {
   return (
     <footer className='bg-black py-10 lg:py-0 lg:min-h-[252px] flex justify-between items-center pb-28 md:pb-10'>
-      <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between md:items-center w-full container'>
-        <NavLink to='/'>
+      <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between w-full container'>
+        <NavLink className='pr-5' to='/'>
           <img src={logo} alt='*' />
         </NavLink>
         <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
@@ -29,6 +29,22 @@ const Footer = () => {
                 className='text-base hover:text-colYellow duration-100'
               >
                 Наши склады
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='gb-buyer'
+                className='text-base hover:text-colYellow duration-100'
+              >
+                GB-Байер
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='gb-business'
+                className='text-base hover:text-colYellow duration-100'
+              >
+                GB-Бизнес
               </NavLink>
             </li>
           </ul>

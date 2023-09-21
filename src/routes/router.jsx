@@ -20,7 +20,16 @@ import {
   PrivateRoute,
   MyWallet,
 } from '../components';
-import { Auth, Home, Profile, Tracking, Depots, Alaket } from '../pages';
+import {
+  Auth,
+  Home,
+  Profile,
+  Tracking,
+  Depots,
+  Alaket,
+  GbBuyer,
+  GbBusiness,
+} from '../pages';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,6 +53,12 @@ export const router = createBrowserRouter(
         <Route path='depots'>
           <Route index element={<Depots />} />
           <Route path=':id' element={<DepotDetail />} />
+        </Route>
+        <Route path='gb-buyer'>
+          <Route index element={<GbBuyer />} />
+        </Route>
+        <Route path='gb-business'>
+          <Route index element={<GbBusiness />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>

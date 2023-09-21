@@ -54,14 +54,20 @@ const Navbar = () => {
             <li>
               <NavLink to='/'>Главная</NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to='alaket'>Алакет</NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink to='tracking'>Трекинг посылок</NavLink>
             </li>
             <li>
               <NavLink to='depots'>Наши склады</NavLink>
+            </li>
+            <li>
+              <NavLink to='gb-buyer'>GB-Байер</NavLink>
+            </li>
+            <li>
+              <NavLink to='gb-business'>GB-Бизнес</NavLink>
             </li>
           </ul>
           {user ? (

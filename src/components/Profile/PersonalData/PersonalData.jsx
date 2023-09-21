@@ -20,6 +20,7 @@ const PersonalData = () => {
   const userID = useSelector((state) => state?.user?.userID);
   const [userData, setUserData] = useState();
   const [error, setError] = useState(false);
+  const [ava, setAva] = useState(null);
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [cities, setCities] = useState([]);
@@ -138,11 +139,23 @@ const PersonalData = () => {
               <div className='max-w-[110px] border-2 p-[2px] border-colYellow min-w-[110px] h-[110px] overflow-hidden rounded-full'>
                 <img
                   className='w-full h-full object-cover rounded-full'
-                  src={userData?.avatar ? userData?.avatar : noImg}
+                  src={
+                    ava
+                      ? URL.createObjectURL(ava)
+                      : userData?.avatar
+                      ? userData?.avatar
+                      : noImg
+                  }
                   alt='*'
                 />
               </div>
-              <input className='hidden' accept='image/*' type='file' id='ava' />
+              <input
+                className='hidden'
+                onChange={(e) => setAva(e.target.files[0])}
+                accept='image/*'
+                type='file'
+                id='ava'
+              />
               <label
                 className='cursor-pointer absolute bottom-1 right-3'
                 htmlFor='ava'
