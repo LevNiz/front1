@@ -4,6 +4,7 @@ import profile from './../../../assets/icons/profile.svg';
 import call from './../../../assets/icons/call3.svg';
 import email from './../../../assets/icons/email.svg';
 import noImg from './../../../assets/images/no-ava.jpeg';
+import errorImg from './../../../assets/images/error.svg';
 import { useSelector } from 'react-redux';
 import { fetchUser } from '../../../api/client';
 import { Controller, useForm } from 'react-hook-form';
@@ -12,10 +13,12 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import ReactFlagsSelect from 'react-flags-select';
 import Select from 'react-select';
 import { UpdateProfile } from '../../../api/user';
+import { NavLink } from 'react-router-dom';
 
 const PersonalData = () => {
   const userID = useSelector((state) => state?.user?.userID);
   const [userData, setUserData] = useState();
+  const [error, setError] = useState(false);
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [cities, setCities] = useState([]);
@@ -36,10 +39,10 @@ const PersonalData = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: async () => {
+      setIsLoading(true);
       const { success, data } = await fetchUser(userID);
       if (success) {
         setUserData(data);
-        setIsLoading(true);
         const cityDefaults = data?.city
           ? {
               value: data.city.id,
@@ -53,6 +56,7 @@ const PersonalData = () => {
             }
           : {};
         setSelectedCountry(countryDefaults?.code);
+        setIsLoading(false);
         return {
           fullName: data?.fullname,
           phone: data?.phone,
@@ -61,8 +65,10 @@ const PersonalData = () => {
           city: cityDefaults,
           address: data?.address,
         };
+      } else {
+        setIsLoading(false);
+        setError(true);
       }
-      setIsLoading(false);
     },
   });
 
@@ -107,8 +113,23 @@ const PersonalData = () => {
 
   return (
     <>
-      {!isLoading ? (
+      {isLoading ? (
         <ContentLoading extraStyle='85vh' />
+      ) : error ? (
+        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
+          <div>
+            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
+            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
+              Произошла ошибка, повторите попытку позже!
+            </h4>
+            <NavLink
+              to='/'
+              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
+            >
+              Перейти на главную
+            </NavLink>
+          </div>
+        </div>
       ) : (
         <div className='py-5 sm:pl-5 lg:px-12 w-full'>
           <div className='flex flex-col items-center sm:flex-row'>
