@@ -9,12 +9,12 @@ import {
 } from '../redux/slices/parcelSlice';
 
 // Fetch all Parcels:
-export const FetchParcels = async (dispatch, user_id) => {
+export const FetchParcels = async (dispatch, userID) => {
   dispatch(fetchParcelsStart());
   try {
     const res = await request.get(`core/package/`);
     const filteredParcels = res?.data?.results?.filter(
-      (parcel) => parcel?.client?.id === user_id
+      (parcel) => parcel?.client?.id === userID
     );
     dispatch(fetchParcelsSuccess(filteredParcels));
   } catch (error) {
@@ -43,7 +43,7 @@ export const fetchSearchParcel = async (orderNum) => {
 };
 
 // Filter My parcels:
-export const fetchFilterSavedParcels = async (user_id, dispatch, data) => {
+export const fetchFilterSavedParcels = async (userID, dispatch, data) => {
   dispatch(fetchSavedParcelsStart());
   try {
     const { senderCity, senderCountry, receiverCity, receiverCountry } = data;
@@ -53,11 +53,10 @@ export const fetchFilterSavedParcels = async (user_id, dispatch, data) => {
       receiverCountry: receiverCountry?.id || '',
       receiverCity: receiverCity?.value || '',
     });
-    const res = await request.get(`core/package/?${queryParams.toString()}`);
-    const filteredParcels = res?.data?.results?.filter((parcel) =>
-      parcel?.clients?.includes(user_id)
+    const res = await request.get(
+      `core/package/?${queryParams.toString()}&clients=${userID}&ordering=-dateCreated`
     );
-    dispatch(fetchSavedParcelsSuccess(filteredParcels));
+    dispatch(fetchSavedParcelsSuccess(res?.data?.results));
     return { success: true };
   } catch (error) {
     dispatch(fetchSavedParcelsFailure(error));
@@ -66,17 +65,16 @@ export const fetchFilterSavedParcels = async (user_id, dispatch, data) => {
 };
 
 // Search My parcels:
-export const fetchSearchSavedParcels = async (orderNum, user_id, dispatch) => {
+export const fetchSearchSavedParcels = async (orderNum, userID, dispatch) => {
   dispatch(fetchSavedParcelsStart());
   try {
     const queryParams = new URLSearchParams({
       orderNumber: orderNum,
     });
-    const res = await request.get(`core/package/?${queryParams.toString()}`);
-    const filteredParcels = res?.data?.results?.filter((parcel) =>
-      parcel?.clients?.includes(user_id)
+    const res = await request.get(
+      `core/package/?${queryParams.toString()}&clients=${userID}`
     );
-    dispatch(fetchSavedParcelsSuccess(filteredParcels));
+    dispatch(fetchSavedParcelsSuccess(res?.data?.results));
     return { success: true };
   } catch (error) {
     dispatch(fetchSavedParcelsFailure(error));
@@ -85,29 +83,28 @@ export const fetchSearchSavedParcels = async (orderNum, user_id, dispatch) => {
 };
 
 // Sort parcels:
-export const fetchSortSavedParcels = async (param, user_id, dispatch) => {
+export const fetchSortSavedParcels = async (param, userID, dispatch) => {
   dispatch(fetchSavedParcelsStart());
   try {
     const queryParams = new URLSearchParams({
       status: param,
     });
-    const res = await request.get(`core/package/?${queryParams.toString()}`);
-    const filteredParcels = res?.data?.results?.filter((parcel) =>
-      parcel?.clients?.includes(user_id)
+    const res = await request.get(
+      `core/package/?${queryParams.toString()}&clients=${userID}&ordering=-dateCreated`
     );
-    dispatch(fetchSavedParcelsSuccess(filteredParcels));
+    dispatch(fetchSavedParcelsSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchSavedParcelsFailure(error));
   }
 };
 
 // Fetch all Parcels:
-export const FetchSavedParcels = async (dispatch, user_id) => {
+export const FetchSavedParcels = async (dispatch, userID) => {
   dispatch(fetchSavedParcelsStart());
   try {
     const res = await request.get(`core/package/`);
     const filteredParcels = res?.data?.results?.filter((parcel) =>
-      parcel?.clients?.includes(user_id)
+      parcel?.clients?.includes(userID)
     );
     dispatch(fetchSavedParcelsSuccess(filteredParcels));
   } catch (error) {
