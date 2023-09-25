@@ -7,14 +7,14 @@ import { useState } from 'react';
 import Modal from '../../helpers/Modals/Modal';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../../api/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../helpers/Loader/Loader';
 
 const SignIn = () => {
+  const { loading } = useSelector((state) => state?.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [visiblePass, setVisiblePass] = useState(false);
@@ -28,13 +28,10 @@ const SignIn = () => {
   });
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
     const { success } = await loginUser(dispatch, data);
     if (success) {
       navigate('/');
-      setIsLoading(false);
     } else {
-      setIsLoading(false);
       setModalOpen(true);
       setModalContent('inCorrectData');
     }
@@ -46,7 +43,10 @@ const SignIn = () => {
 
   return (
     <>
-      <div className='mm:hidden absolute top-4 left-4' onClick={() => navigate(-1)}>
+      <div
+        className='mm:hidden absolute top-4 left-4'
+        onClick={() => navigate(-1)}
+      >
         <img src={leftArrow} alt='*' />
       </div>
       <form
@@ -133,7 +133,7 @@ const SignIn = () => {
         </NavLink>
       </form>
       <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
-      {isLoading ? <Loading /> : ''}
+      {loading ? <Loading /> : ''}
     </>
   );
 };

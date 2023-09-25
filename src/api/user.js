@@ -21,6 +21,7 @@ export const registerUser = async (dispatch, data) => {
     country: parseInt(data.country.id),
     city: parseInt(data.city.value),
     password: data.password,
+    user_type: 'client',
     avatar:
       'https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg',
     wallet: [],
@@ -40,18 +41,22 @@ export const registerUser = async (dispatch, data) => {
 
 // Login:
 export const loginUser = async (dispatch, data) => {
-  dispatch(loginStart());
   const userData = {
     login: data.email,
     password: data.password,
   };
   try {
+    dispatch(loginStart());
     const res = await request.post('api/user/login/', userData);
-    const userID = jwt_decode(res?.data.access);
-    dispatch(loginSuccess({ user: res?.data, userID: userID?.user_id }));
-    localStorage.setItem('accessToken', res.data.access);
-    localStorage.setItem('refreshToken', res.data.refresh);
-    return { success: true };
+    const client = jwt_decode(res?.data.access);
+    if (client?.user_type === 'client') {
+      dispatch(loginSuccess({ user: res?.data, userID: client?.user_id }));
+      localStorage.setItem('accessToken', res.data.access);
+      localStorage.setItem('refreshToken', res.data.refresh);
+      return { success: true };
+    }
+    dispatch(loginFailure());
+    return { success: false };
   } catch (error) {
     dispatch(loginFailure(error));
     return { success: false };

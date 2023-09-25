@@ -11,15 +11,16 @@ import Select from 'react-select';
 import ReactFlagsSelect from 'react-flags-select';
 import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import { registerUser } from '../../api/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../helpers/Loader/Loader';
 
 const SignUp = () => {
+  const { loading } = useSelector((state) => state?.user);
+
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [size, setSize] = useState(window.innerWidth);
 
@@ -71,13 +72,10 @@ const SignUp = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
     const { success } = await registerUser(dispatch, data);
     if (success) {
-      setIsLoading(false);
       navigate('/');
     }
-    setIsLoading(false);
   };
 
   const countryNamesInRussian = {};
@@ -484,7 +482,7 @@ const SignUp = () => {
           Войти
         </NavLink>
       </div>
-      {isLoading ? <Loading /> : ''}
+      {loading ? <Loading /> : ''}
     </>
   );
 };
