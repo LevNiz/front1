@@ -7,7 +7,7 @@ import {
   loginFailure,
   logOut,
 } from '../redux/slices/userSlice';
-import { request } from './axios';
+import { axiosInstance, request } from './axios';
 import jwt_decode from 'jwt-decode';
 
 // Register:
@@ -22,8 +22,7 @@ export const registerUser = async (dispatch, data) => {
     city: parseInt(data.city.value),
     password: data.password,
     user_type: 'client',
-    avatar:
-      'https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg',
+    avatar: null,
     wallet: [],
   };
   try {
@@ -69,7 +68,9 @@ export const logOutFetch = async (dispatch) => {
 };
 
 // Update profile:
-export const UpdateProfile = async (id, data) => {
+export const UpdateProfile = async ({ userID, data, ava }) => {
+  const milliseconds = new Date().getMilliseconds();
+  const formData = new FormData();
   const userData = {
     address: data?.address,
     city: data?.city?.value,
@@ -78,10 +79,22 @@ export const UpdateProfile = async (id, data) => {
     fullname: data?.fullName,
     phone: data?.phone,
   };
+
+  if (ava) {
+    formData.append('image', ava);
+    formData.append('title', milliseconds);
+    try {
+      const res = await axiosInstance.post('core/image/', formData);
+      userData.avatar = res?.data?.image;
+    } catch (imageError) {
+      return { success: false };
+    }
+  }
+
   try {
-    await request.patch(`user/client/${id}/`, userData);
+    await request.patch(`user/client/${userID}/`, userData);
     return { success: true };
-  } catch (error) {
+  } catch (patchError) {
     return { success: false };
   }
 };

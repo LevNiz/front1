@@ -3,10 +3,12 @@ import axios from 'axios';
 const baseURL = 'https://givbox.ru/givbox/';
 
 // Use only token not required requests:
+
 export const request = axios.create({
   baseURL: baseURL,
   headers: {
     'Content-type': 'application/json',
+    
   },
 });
 
@@ -14,7 +16,7 @@ export const request = axios.create({
 export const axiosInstance = axios.create({
   baseURL: baseURL,
   headers: {
-    'Content-type': 'application/json',
+    'Content-type': 'multipart/form-data',
   },
 });
 

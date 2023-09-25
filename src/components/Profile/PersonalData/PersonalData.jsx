@@ -104,12 +104,12 @@ const PersonalData = () => {
 
   const onSubmit = (data) => {
     (async () => {
-      setIsLoading(false);
-      const { success } = await UpdateProfile(userID, data);
-      if (success) {
-        setIsLoading(true);
-      }
       setIsLoading(true);
+      const { success } = await UpdateProfile({userID, data, ava});
+      if (success) {
+        setIsLoading(false);
+      }
+      setIsLoading(false);
     })();
   };
 
