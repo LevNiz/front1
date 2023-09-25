@@ -105,7 +105,7 @@ const PersonalData = () => {
   const onSubmit = (data) => {
     (async () => {
       setIsLoading(true);
-      const { success } = await UpdateProfile({userID, data, ava});
+      const { success } = await UpdateProfile({ userID, data, ava });
       if (success) {
         setIsLoading(false);
       }

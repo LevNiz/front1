@@ -7,11 +7,9 @@ import { useState } from 'react';
 import Modal from '../../helpers/Modals/Modal';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../../api/user';
-import { useDispatch, useSelector } from 'react-redux';
-import { Loading } from '../../helpers/Loader/Loader';
+import { useDispatch } from 'react-redux';
 
 const SignIn = () => {
-  const { loading } = useSelector((state) => state?.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -133,7 +131,6 @@ const SignIn = () => {
         </NavLink>
       </form>
       <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
-      {loading ? <Loading /> : ''}
     </>
   );
 };

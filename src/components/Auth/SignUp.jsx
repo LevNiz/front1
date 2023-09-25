@@ -11,12 +11,9 @@ import Select from 'react-select';
 import ReactFlagsSelect from 'react-flags-select';
 import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import { registerUser } from '../../api/user';
-import { useDispatch, useSelector } from 'react-redux';
-import { Loading } from '../../helpers/Loader/Loader';
+import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
-  const { loading } = useSelector((state) => state?.user);
-
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
   const [countries, setCountries] = useState([]);
@@ -426,7 +423,10 @@ const SignUp = () => {
               required: 'Обязательное согласие с политикой конфиденциальности!',
             })}
           />
-          <label htmlFor='checkbox' className='text-sm flex cursor-pointer'>
+          <label
+            htmlFor='checkbox'
+            className='text-sm flex cursor-pointer mm:items-center'
+          >
             <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
               {privacyPolicy ? (
                 <svg
@@ -482,7 +482,6 @@ const SignUp = () => {
           Войти
         </NavLink>
       </div>
-      {loading ? <Loading /> : ''}
     </>
   );
 };

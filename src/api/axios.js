@@ -8,7 +8,6 @@ export const request = axios.create({
   baseURL: baseURL,
   headers: {
     'Content-type': 'application/json',
-    
   },
 });
 
