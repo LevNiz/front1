@@ -7,8 +7,14 @@ const Services = () => {
       <img className='absolute bottomC-0 left-0' src={serviceVector1} alt='*' />
       <img className='absolute top-0 right-0' src={serviceVector2} alt='*' />
       <div className='content text-white'>
+      <div className='flex justify-center mb-5'>
+        <div className="flex relative bg-[#E8E8E8] w-max pr-2 rounded-sm text-black">
+          <span className='absolute w-1 h-full bg-colYellow'></span>
+          <h6 className='ml-3'>Что мы предлагаем</h6>
+        </div>
+      </div>
         <h1 className='text-3xl sm:text-[40px] font-medium text-center'>
-          [ Наши услуги ]
+          Наши услуги
         </h1>
         <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12'>
           <div className='flex sm:min-h-[96px]'>

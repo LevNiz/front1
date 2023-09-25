@@ -6,8 +6,14 @@ const HowItWorks = () => {
       className='min-h-[400px] bg-black bg-center bg-cover bg-no-repeat text-white py-10'
       style={{ backgroundImage: `url(${bgImage})` }}
     >
+      <div className='flex justify-center mb-5'>
+        <div className="flex relative bg-[#E8E8E8] w-max pr-2 rounded-sm">
+          <span className='absolute w-1 h-full bg-colYellow'></span>
+          <h6 className='ml-3'>Процесс работы</h6>
+        </div>
+      </div>
       <h1 className='text-3xl sm:text-[40px] font-medium text-center sm:mt-8'>
-        [ Как это работает ]
+        Как это работает
       </h1>
       <div className='md:flex-row flex-col flex justify-between mt-12 content space-y-5 md:space-y-0 md:space-x-5'>
         <div className='flex max-w-[415px] w-full'>

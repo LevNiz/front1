@@ -8,12 +8,15 @@ import quotes from './../../assets/images/testimonial.png';
 const Testimonials = () => {
   return (
     <div className='py-16 testimonials slider'>
+      <div className='flex justify-center mb-5'>
+        <div className="flex relative bg-[#E8E8E8] w-max pr-2 rounded-sm">
+          <span className='absolute w-1 h-full bg-colYellow'></span>
+          <h6 className='ml-3'>Отзывы наших постоянных клиентов</h6>
+        </div>
+      </div>
       <h1 className='text-3xl sm:text-[40px] font-medium text-center px-4'>
-        [ Отзывы ]
+        Отзывы
       </h1>
-      <h4 className='text-xl sm:text-2xl font-medium text-center mt-3 px-4'>
-        Отзывы наших постоянных клиентов
-      </h4>
       <Swiper navigation={true} modules={[Navigation]} slidesPerView={1}>
         {testimonials?.map((el, index) => (
           <SwiperSlide key={index} className='flex items-center'>

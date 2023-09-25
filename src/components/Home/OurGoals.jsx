@@ -4,8 +4,14 @@ import goalsImg from './../../assets/images/goals1.jpg';
 const OurGoals = () => {
   return (
     <div className='pt-20 pb-20 lg:pb-40 content'>
+      <div className='flex justify-center mb-5'>
+        <div className="flex relative bg-[#E8E8E8] w-max pr-2 rounded-sm">
+          <span className='absolute w-1 h-full bg-colYellow'></span>
+          <h6 className='ml-3'>Цели, миссии, задачи компании</h6>
+        </div>
+      </div>
       <h1 className='text-3xl sm:text-[40px] font-medium text-center'>
-        [ Наши цели ]
+        Наши цели
       </h1>
       <h4 className='text-xl sm:text-2xl font-medium text-center mt-3 mb-10'>
         Наши цели, миссии, ценности

@@ -6,12 +6,15 @@ import vector from './../../assets/images/vector2.png';
 const AboutUs = () => {
   return (
     <div className='min-h-[850px] pt-14 lg:pt-[200px] pb-14 md:pb-32 content'>
-      <h1 className='text-3xl sm:text-[40px] font-medium text-center'>
-        [ О нас ]
+      <div className='flex justify-center mb-5'>
+        <div className="flex relative bg-[#E8E8E8] w-max pr-2 rounded-sm">
+          <span className='absolute w-1 h-full bg-colYellow'></span>
+          <h6 className='ml-3'>Кто мы есть</h6>
+        </div>
+      </div>
+      <h1 className='text-3xl sm:text-[40px] font-medium text-center pb-10'>
+        О компании
       </h1>
-      <h4 className='text-lg sm:text-2xl font-medium text-center mt-3'>
-        Мы всегда к вашим услугам
-      </h4>
       <div className='lg:flex sm:min-h-[520px] mt-12'>
         <div className='w-full lg:w-2/5 min-h-[440px] sm:min-h-[520px] relative'>
           <div className='max-w-[200px] sm:max-w-[275px] sm:min-w-[275px] w-[275px] max-height-[308px] min-height-[308px] absolute top-0 z-30 right-0 md:right-[40px] overflow-hidden'>
