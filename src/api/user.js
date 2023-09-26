@@ -18,7 +18,7 @@ export const registerUser = async (dispatch, data) => {
     phone: data.phone,
     fullname: data.fullName,
     address: data.address,
-    country: parseInt(data.country.id),
+    country: parseInt(data.country.value),
     city: parseInt(data.city.value),
     password: data.password,
     user_type: 'client',
@@ -74,7 +74,7 @@ export const UpdateProfile = async ({ userID, data, ava }) => {
   const userData = {
     address: data?.address,
     city: data?.city?.value,
-    country: data?.country?.id,
+    country: data?.country?.value,
     email: data?.email,
     fullname: data?.fullName,
     phone: data?.phone,

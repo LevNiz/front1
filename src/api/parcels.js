@@ -48,7 +48,7 @@ export const fetchFilterSavedParcels = async (userID, dispatch, data) => {
   try {
     const { senderCity, senderCountry, receiverCity, receiverCountry } = data;
     const queryParams = new URLSearchParams({
-      senderCountry: senderCountry?.id || '',
+      senderCountry: senderCountry?.value || '',
       senderCity: senderCity?.value || '',
       receiverCountry: receiverCountry?.id || '',
       receiverCity: receiverCity?.value || '',

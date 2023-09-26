@@ -8,7 +8,6 @@ import showPass from '../../assets/icons/show-pass.svg';
 import { Controller, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
-import ReactFlagsSelect from 'react-flags-select';
 import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import { registerUser } from '../../api/user';
 import { useDispatch } from 'react-redux';
@@ -49,24 +48,26 @@ const SignUp = () => {
   const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
   const hasSamePassword = password !== '' && password === confirmPass;
 
-  const getCountriesFetch = async () => {
-    const { success, data } = await fetchCountries();
+  const fetchAndSetData = async (fetchFunction, setDataFunction) => {
+    const { success, data } = await fetchFunction();
     if (success) {
-      setCountries(data);
-    }
-  };
-
-  const getCitiesFetch = async () => {
-    const { success, data } = await fetchCities();
-    if (success) {
-      setCities(data);
+      setDataFunction(data);
     }
   };
 
   useEffect(() => {
-    getCountriesFetch();
-    getCitiesFetch();
+    fetchAndSetData(fetchCountries, setCountries);
+    fetchAndSetData(fetchCities, setCities);
   }, []);
+
+  const filteredCities = cities?.filter(
+    (el) => el?.country?.id === selectedCountry
+  );
+
+  const cityOptions = filteredCities?.map((el) => ({
+    value: el?.id,
+    label: el?.nameRu,
+  }));
 
   const onSubmit = async (data) => {
     const { success } = await registerUser(dispatch, data);
@@ -74,21 +75,6 @@ const SignUp = () => {
       navigate('/');
     }
   };
-
-  const countryNamesInRussian = {};
-
-  countries.forEach((country) => {
-    countryNamesInRussian[country?.code] = country.nameRu;
-  });
-
-  const filteredCities = cities?.filter(
-    (el) => el?.country?.code === selectedCountry
-  );
-
-  const cityOptions = filteredCities?.map((el) => ({
-    value: el?.id,
-    label: el?.nameRu,
-  }));
 
   return (
     <>
@@ -209,30 +195,33 @@ const SignUp = () => {
             <Controller
               name='country'
               control={control}
-              rules={{ required: 'Поле обязательно к заполнению!' }}
-              defaultValue=''
               render={({ field }) => (
-                <ReactFlagsSelect
-                  selected={field.value?.code}
-                  onSelect={(selectedOption) => {
-                    field.onChange(selectedOption);
-                    const selectedCountryObject = countries?.find(
-                      (country) => country?.code === selectedOption
-                    );
-
-                    if (selectedCountryObject) {
-                      setValue('country', selectedCountryObject);
-                    }
-                    setSelectedCountry(selectedOption);
-                    setValue('city', '');
-                  }}
-                  countries={countries?.map((country) => country?.code)}
-                  customLabels={countryNamesInRussian}
+                <Select
+                  {...field}
                   placeholder='Выберите страну'
-                  searchable={true}
-                  searchPlaceholder='Поиск...'
-                  customStyle={{
-                    padding: '11px 20px 11px 44px !important',
+                  options={countries?.map((country, index) => ({
+                    value: country?.id,
+                    label: (
+                      <div key={index} className='flex items-center'>
+                        <img
+                          src={country?.icon}
+                          alt={country?.nameRu}
+                          className='w-5 h-4 mr-2'
+                        />
+                        {country?.nameRu}
+                      </div>
+                    ),
+                  }))}
+                  onChange={(selectedOption) => {
+                    setValue('city', '');
+                    field.onChange(selectedOption);
+                    setSelectedCountry(selectedOption.value);
+                  }}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                    }),
                   }}
                 />
               )}

@@ -4,7 +4,6 @@ import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import back from './../../assets/icons/arrow-left.svg';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
-import ReactFlagsSelect from 'react-flags-select';
 import { filterDepot } from '../../api/depots';
 import { ButtonLoading } from '../../helpers/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,11 +30,6 @@ const FilterModal = ({ isOpen, onClose }) => {
     fetchData(fetchCities, setCities);
   }, []);
 
-  const onSubmit = async (data) => {
-    await filterDepot(data, dispatch);
-    onClose();
-  };
-
   const clearFilter = async () => {
     setValue('country', '');
     setValue('city', '');
@@ -44,20 +38,20 @@ const FilterModal = ({ isOpen, onClose }) => {
   };
 
   const countrySelect = watch('country');
-  const countryNamesInRussian = {};
-
-  countries.forEach((country) => {
-    countryNamesInRussian[country?.code] = country.nameRu;
-  });
 
   const filteredCities = cities?.filter(
-    (el) => el?.country?.code === selectedCountry
+    (el) => el?.country?.id === selectedCountry
   );
 
   const cityOptions = filteredCities?.map((el) => ({
     value: el?.id,
     label: el?.nameRu,
   }));
+
+  const onSubmit = async (data) => {
+    await filterDepot(data, dispatch);
+    onClose();
+  };
 
   if (!isOpen) return null;
 
@@ -81,30 +75,33 @@ const FilterModal = ({ isOpen, onClose }) => {
             <Controller
               name='country'
               control={control}
-              defaultValue=''
               render={({ field }) => (
-                <ReactFlagsSelect
-                  className='filterSelect'
-                  selected={field.value?.code}
-                  onSelect={(selectedOption) => {
-                    field.onChange(selectedOption);
-                    const selectedCountryObject = countries?.find(
-                      (country) => country?.code === selectedOption
-                    );
-
-                    if (selectedCountryObject) {
-                      setValue('country', selectedCountryObject);
-                    }
-                    setSelectedCountry(selectedOption);
-                    setValue('city', '');
-                  }}
-                  countries={countries?.map((country) => country?.code)}
-                  customLabels={countryNamesInRussian}
+                <Select
+                  {...field}
                   placeholder='Выберите страну'
-                  searchable={true}
-                  searchPlaceholder='Поиск...'
-                  customStyle={{
-                    padding: '11px 20px !important',
+                  options={countries?.map((country, index) => ({
+                    value: country?.id,
+                    label: (
+                      <div key={index} className='flex items-center'>
+                        <img
+                          src={country?.icon}
+                          alt={country?.nameRu}
+                          className='w-5 h-4 mr-2'
+                        />
+                        {country?.nameRu}
+                      </div>
+                    ),
+                  }))}
+                  onChange={(selectedOption) => {
+                    setValue('city', '');
+                    field.onChange(selectedOption);
+                    setSelectedCountry(selectedOption.value);
+                  }}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      padding: '8px',
+                    }),
                   }}
                 />
               )}
@@ -115,12 +112,11 @@ const FilterModal = ({ isOpen, onClose }) => {
             <Controller
               name='city'
               control={control}
-              defaultValue=''
+              rules={{ required: false }}
               render={({ field }) => (
                 <Select
                   {...field}
                   options={cityOptions}
-                  className='filterSelect'
                   placeholder='Выберите город'
                   isDisabled={!countrySelect}
                   onChange={(selectedOption) => {
@@ -141,7 +137,7 @@ const FilterModal = ({ isOpen, onClose }) => {
               Минимальный вес
             </p>
             <input
-              className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none'
+              className='appearance-none w-full border border-gray-300 p-3 min-h-[54px] rounded-[4px] focus:outline-none'
               placeholder='Введите минимальный вес'
               {...register('maxAmountStart', {
                 required: false,
@@ -153,7 +149,7 @@ const FilterModal = ({ isOpen, onClose }) => {
               Максимальный вес
             </p>
             <input
-              className='appearance-none w-full bg-colBgGray2 py-3 px-4 pr-8 rounded-[10px] focus:outline-none'
+              className='appearance-none w-full border border-gray-300 p-3 min-h-[54px] rounded-[4px] focus:outline-none'
               placeholder='Введите максимальный вес'
               {...register('maxAmountEnd', {
                 required: false,

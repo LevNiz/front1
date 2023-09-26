@@ -11,7 +11,6 @@ import { fetchUser } from '../../../api/client';
 import { Controller, useForm } from 'react-hook-form';
 import { fetchCities, fetchCountries } from '../../../api/tempAPI';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import ReactFlagsSelect from 'react-flags-select';
 import Select from 'react-select';
 import { UpdateProfile } from '../../../api/user';
 import { NavLink } from 'react-router-dom';
@@ -33,9 +32,9 @@ const PersonalData = () => {
 
   const {
     register,
-    setValue,
     control,
     watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -47,17 +46,17 @@ const PersonalData = () => {
         setUserData(data);
         const cityDefaults = data?.city
           ? {
-              value: data.city.id,
-              label: data.city.nameRu,
+              value: data?.city.id,
+              label: data?.city.nameRu,
             }
           : {};
         const countryDefaults = data?.country
           ? {
-              id: data.country.id,
-              code: data.country.code,
+              value: data?.country.id,
+              label: data?.country?.nameRu,
             }
           : {};
-        setSelectedCountry(countryDefaults?.code);
+        setSelectedCountry(countryDefaults?.value);
         setIsLoading(false);
         return {
           fullName: data?.fullname,
@@ -87,14 +86,9 @@ const PersonalData = () => {
   }, []);
 
   const countrySelect = watch('country');
-  const countryNamesInRussian = {};
-
-  countries.forEach((country) => {
-    countryNamesInRussian[country?.code] = country.nameRu;
-  });
 
   const filteredCities = cities?.filter(
-    (el) => el?.country?.code === selectedCountry
+    (el) => el?.country?.id === selectedCountry
   );
 
   const cityOptions = filteredCities?.map((el) => ({
@@ -257,27 +251,34 @@ const PersonalData = () => {
                   <Controller
                     name='country'
                     control={control}
-                    rules={{ required: 'Поле обязательно к заполнению!' }}
                     render={({ field }) => (
-                      <ReactFlagsSelect
-                        selected={field.value?.code}
-                        onSelect={(selectedOption) => {
-                          field.onChange(selectedOption);
-                          const selectedCountryObject = countries?.find(
-                            (country) => country?.code === selectedOption
-                          );
-
-                          if (selectedCountryObject) {
-                            setValue('country', selectedCountryObject);
-                          }
-                          setSelectedCountry(selectedOption);
-                          setValue('city', '');
-                        }}
-                        countries={countries?.map((country) => country?.code)}
-                        customLabels={countryNamesInRussian}
+                      <Select
+                        {...field}
                         placeholder='Выберите страну'
-                        searchable={true}
-                        searchPlaceholder='Поиск...'
+                        options={countries?.map((country, index) => ({
+                          value: country?.id,
+                          label: (
+                            <div key={index} className='flex items-center'>
+                              <img
+                                src={country?.icon}
+                                alt={country?.nameRu}
+                                className='w-5 h-4 mr-2'
+                              />
+                              {country?.nameRu}
+                            </div>
+                          ),
+                        }))}
+                        onChange={(selectedOption) => {
+                          setValue('city', '');
+                          field.onChange(selectedOption);
+                          setSelectedCountry(selectedOption.value);
+                        }}
+                        styles={{
+                          control: (provided) => ({
+                            ...provided,
+                            padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                          }),
+                        }}
                       />
                     )}
                   />

@@ -40,7 +40,7 @@ export const searchDepot = async (depotName, dispatch) => {
 // Filter depots:
 export const filterDepot = async (filterData, dispatch) => {
   const { country, city, maxAmountStart, maxAmountEnd } = filterData;
-  const countryID = country?.id;
+  const countryID = country?.value;
   const cityID = city?.value;
   const minAmount = maxAmountStart;
   const maxAmount = maxAmountEnd;

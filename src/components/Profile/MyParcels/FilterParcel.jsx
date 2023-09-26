@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import ReactFlagsSelect from 'react-flags-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
@@ -32,27 +31,11 @@ const FilterParcel = ({ isOpen, onClose }) => {
     fetchData(fetchCities, setCities);
   }, []);
 
-  const onSubmit = async (data) => {
-    setIsLoading(true);
-    const { success } = await fetchFilterSavedParcels(userID, dispatch, data);
-    if (success) {
-      setIsLoading(false);
-      onClose();
-    }
-    onClose();
-    setIsLoading(false);
-  };
-
   const senderCountry = watch('senderCountry');
   const receiverCountry = watch('receiverCountry');
-  const countryNamesInRussian = {};
-
-  countries.forEach((country) => {
-    countryNamesInRussian[country?.code] = country.nameRu;
-  });
 
   const filteredCities = cities?.filter(
-    (el) => el?.country?.code === selectedCountry
+    (el) => el?.country?.id === selectedCountry
   );
 
   const cityOptions = filteredCities?.map((el) => ({
@@ -65,6 +48,17 @@ const FilterParcel = ({ isOpen, onClose }) => {
     setValue('senderCity', '');
     setValue('receiverCountry', '');
     setValue('receiverCity', '');
+  };
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    const { success } = await fetchFilterSavedParcels(userID, dispatch, data);
+    if (success) {
+      setIsLoading(false);
+      onClose();
+    }
+    onClose();
+    setIsLoading(false);
   };
 
   if (!isOpen) return null;
@@ -90,30 +84,33 @@ const FilterParcel = ({ isOpen, onClose }) => {
               <Controller
                 name='senderCountry'
                 control={control}
-                defaultValue=''
                 render={({ field }) => (
-                  <ReactFlagsSelect
-                    className='filterSelect'
-                    selected={field.value?.code}
-                    onSelect={(selectedOption) => {
-                      field.onChange(selectedOption);
-                      const selectedCountryObject = countries?.find(
-                        (country) => country?.code === selectedOption
-                      );
-
-                      if (selectedCountryObject) {
-                        setValue('senderCountry', selectedCountryObject);
-                      }
-                      setSelectedCountry(selectedOption);
-                      setValue('senderCity', '');
-                    }}
-                    countries={countries?.map((country) => country?.code)}
-                    customLabels={countryNamesInRussian}
+                  <Select
+                    {...field}
                     placeholder='Выберите страну'
-                    searchable={true}
-                    searchPlaceholder='Поиск...'
-                    customStyle={{
-                      padding: '11px 20px !important',
+                    options={countries?.map((country) => ({
+                      value: country?.id,
+                      label: (
+                        <div key={country?.id} className='flex items-center'>
+                          <img
+                            src={country?.icon}
+                            alt={country?.nameRu}
+                            className='w-5 h-4 mr-2'
+                          />
+                          {country?.nameRu}
+                        </div>
+                      ),
+                    }))}
+                    onChange={(selectedOption) => {
+                      setValue('city', '');
+                      field.onChange(selectedOption);
+                      setSelectedCountry(selectedOption.value);
+                    }}
+                    styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        padding: '8px',
+                      }),
                     }}
                   />
                 )}
@@ -123,12 +120,11 @@ const FilterParcel = ({ isOpen, onClose }) => {
               <Controller
                 name='senderCity'
                 control={control}
-                defaultValue=''
+                rules={{ required: false }}
                 render={({ field }) => (
                   <Select
                     {...field}
                     options={cityOptions}
-                    className='filterSelect'
                     placeholder='Выберите город'
                     isDisabled={!senderCountry}
                     onChange={(selectedOption) => {
@@ -153,30 +149,33 @@ const FilterParcel = ({ isOpen, onClose }) => {
               <Controller
                 name='receiverCountry'
                 control={control}
-                defaultValue=''
                 render={({ field }) => (
-                  <ReactFlagsSelect
-                    className='filterSelect'
-                    selected={field.value?.code}
-                    onSelect={(selectedOption) => {
-                      field.onChange(selectedOption);
-                      const selectedCountryObject = countries?.find(
-                        (country) => country?.code === selectedOption
-                      );
-
-                      if (selectedCountryObject) {
-                        setValue('receiverCountry', selectedCountryObject);
-                      }
-                      setSelectedCountry(selectedOption);
-                      setValue('receiverCity', '');
-                    }}
-                    countries={countries?.map((country) => country?.code)}
-                    customLabels={countryNamesInRussian}
+                  <Select
+                    {...field}
                     placeholder='Выберите страну'
-                    searchable={true}
-                    searchPlaceholder='Поиск...'
-                    customStyle={{
-                      padding: '11px 20px !important',
+                    options={countries?.map((country) => ({
+                      value: country?.id,
+                      label: (
+                        <div key={country?.id} className='flex items-center'>
+                          <img
+                            src={country?.icon}
+                            alt={country?.nameRu}
+                            className='w-5 h-4 mr-2'
+                          />
+                          {country?.nameRu}
+                        </div>
+                      ),
+                    }))}
+                    onChange={(selectedOption) => {
+                      setValue('city', '');
+                      field.onChange(selectedOption);
+                      setSelectedCountry(selectedOption.value);
+                    }}
+                    styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        padding: '8px',
+                      }),
                     }}
                   />
                 )}
@@ -186,12 +185,11 @@ const FilterParcel = ({ isOpen, onClose }) => {
               <Controller
                 name='receiverCity'
                 control={control}
-                defaultValue=''
+                rules={{ required: false }}
                 render={({ field }) => (
                   <Select
                     {...field}
                     options={cityOptions}
-                    className='filterSelect'
                     placeholder='Выберите город'
                     isDisabled={!receiverCountry}
                     onChange={(selectedOption) => {
