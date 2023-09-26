@@ -1,10 +1,13 @@
-import bgImage from './../../assets/images/how-it-works.jpg';
+import icon1 from './../../assets/icons/how-works1.svg';
+import icon2 from './../../assets/icons/how-works2.svg';
+import icon3 from './../../assets/icons/how-works3.svg';
+import line1 from './../../assets/icons/how-works-line1.svg';
+import line2 from './../../assets/icons/how-works-line2.svg';
 
 const HowItWorks = () => {
   return (
     <div
-      className='min-h-[400px] bg-black bg-center bg-cover bg-no-repeat text-white py-10'
-      style={{ backgroundImage: `url(${bgImage})` }}
+      className='min-h-[400px] bg-colBgGray3 bg-center bg-cover bg-no-repeat py-16'
     >
       <div className='flex justify-center mb-5'>
         <div className="flex relative bg-[#E8E8E8] w-max pr-2 rounded-sm">
@@ -15,42 +18,42 @@ const HowItWorks = () => {
       <h1 className='text-3xl sm:text-[40px] font-medium text-center sm:mt-8'>
         Как это работает
       </h1>
-      <div className='md:flex-row flex-col flex justify-between mt-12 content space-y-5 md:space-y-0 md:space-x-5'>
-        <div className='flex max-w-[415px] w-full'>
-          <h1 className='text-3xl md:text-4xl lg:text-6xl font-bold mb-2'>
-            1.
-          </h1>
-          <div className='ml-3 md:ml-5'>
+      <div className='md:flex-row flex-col items-center flex justify-between mt-24 content space-y-5 md:space-y-0'>
+        <div className='max-w-[280px] min-h-[260px] w-full text-center'>
+          <img className='mx-auto' src={icon1} alt="*" />
+          <div className='mt-5'>
             <h3 className='text-2xl md:text-3xl mb-3 lg:text-[40px] font-bold lg:pt-2'>
               Заказ
             </h3>
-            <p className='text-base lg:text-xl font-medium'>
+            <p className='text-base lg:text-xl'>
               Заказ можете осуществить через сайт либо наше приложение
             </p>
           </div>
         </div>
-        <div className='flex max-w-[415px] w-full'>
-          <h1 className='text-3xl md:text-4xl lg:text-6xl font-bold mb-2'>
-            2.
-          </h1>
-          <div className='ml-3 md:ml-5'>
+        <div>
+          <img src={line1} alt="*" />
+        </div>
+        <div className='max-w-[280px] min-h-[260px] w-full text-center'>
+          <img className='mx-auto' src={icon2} alt="*" />
+          <div className='mt-5'>
             <h3 className='text-2xl md:text-3xl mb-3 lg:text-[40px] font-bold lg:pt-2'>
               Ожидание
             </h3>
-            <p className='text-base lg:text-xl font-medium'>
+            <p className='text-base lg:text-xl'>
               Срок доставки почты от 3 до 10 дней{' '}
             </p>
           </div>
         </div>
-        <div className='flex max-w-[415px] w-full'>
-          <h1 className='text-3xl md:text-4xl lg:text-6xl font-bold mb-2'>
-            3.
-          </h1>
-          <div className='ml-3 md:ml-5'>
+        <div>
+          <img src={line2} alt="*" />
+        </div>
+        <div className='max-w-[280px] min-h-[260px] w-full text-center'>
+          <img className='mx-auto' src={icon3} alt="*" />
+          <div className='mt-5'>
             <h3 className='text-2xl md:text-3xl mb-3 lg:text-[40px] font-bold lg:pt-2'>
               Доставка
             </h3>
-            <p className='text-base lg:text-xl font-medium'>
+            <p className='text-base lg:text-xl'>
               Доставляем прямо к вашему дому
             </p>
           </div>

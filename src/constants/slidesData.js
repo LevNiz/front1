@@ -1,10 +1,11 @@
-import slideImg2 from './../assets/images/slider/bg2-min.jpg';
-import slideImg3 from './../assets/images/slider/bg3-min.jpg';
-import slideImg4 from './../assets/images/slider/bg4-min.jpg';
-import slideImg5 from './../assets/images/slider/bg5-min.jpg';
-import slideImg6 from './../assets/images/slider/bg6-min.jpg';
-import slideImg7 from './../assets/images/slider/bg7-min.jpg';
-import extraImg1 from './../assets/images/slider/extra-img1.svg';
+// import slideImg2 from './../assets/images/slider/bg2-min.jpg';
+// import slideImg3 from './../assets/images/slider/bg3-min.jpg';
+// import slideImg4 from './../assets/images/slider/bg4-min.jpg';
+// import slideImg5 from './../assets/images/slider/bg5-min.jpg';
+import slideImg5 from './../assets/images/slider/gb-buissnes.jpg';
+// import slideImg6 from './../assets/images/slider/bg6-min.jpg';
+// import slideImg7 from './../assets/images/slider/bg7-min.jpg';
+// import extraImg1 from './../assets/images/slider/extra-img1.svg';
 import extraImg2 from './../assets/images/slider/extra-img2.svg';
 import extraImg3 from './../assets/images/slider/extra-img3.svg';
 import extraImg4 from './../assets/images/slider/extra-img4.svg';
@@ -21,12 +22,12 @@ export const slidesData = [
     title: 'GB-Business',
     description: 'Cервис для доставок международных коммерческих грузов',
     descStyle: 'max-w-[440px]',
-    extraImg: extraImg1,
-    arrowImg: arrow1,
+    extraImg: '',
+    arrowImg: '',
   },
   {
     id: 2,
-    backgroundImage: `url(${slideImg2}`,
+    backgroundImage: `url(${slideImg5}`,
     title: 'GB-Shop',
     description: 'Cервис по продаже брендовых товаров',
     extraImg: extraImg2,
@@ -34,7 +35,7 @@ export const slidesData = [
   },
   {
     id: 3,
-    backgroundImage: `url(${slideImg3}`,
+    backgroundImage: `url(${slideImg5}`,
     title: 'GB-Franchise ',
     description: 'Cервис по предоставлению франшизы',
     extraImg: extraImg3,
@@ -42,7 +43,7 @@ export const slidesData = [
   },
   {
     id: 4,
-    backgroundImage: `url(${slideImg4}`,
+    backgroundImage: `url(${slideImg5}`,
     title: 'GB-Alaket',
     description: 'сервис по поиску для отправок посылок по пути',
     descStyle: 'max-w-[463px]',
@@ -62,7 +63,7 @@ export const slidesData = [
   },
   {
     id: 6,
-    backgroundImage: `url(${slideImg6}`,
+    backgroundImage: `url(${slideImg5}`,
     title: 'GB-Chat',
     description:
       'Cервис для общения клиентов, продавцов, поставщиков, покупателей и людей желающих найти друг друга для передачи посылок по пути',
@@ -72,7 +73,7 @@ export const slidesData = [
   },
   {
     id: 7,
-    backgroundImage: `url(${slideImg7}`,
+    backgroundImage: `url(${slideImg5}`,
     title: 'GB-Coin',
     description:
       'Cервис для оплаты товаров, услуг и переводов денег по всему миру',

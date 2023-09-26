@@ -16,6 +16,7 @@ export default {
         colGray3: '#8391A1',
         colBgGray: '#F5F5F5',
         colBgGray2: '#F2F2F2',
+        colBgGray3: '#FBFBFB',
         colGreen: '#58FF90',
         colGreen2: '#AFF4C6',
         colBlue: '#C1F0FF',
