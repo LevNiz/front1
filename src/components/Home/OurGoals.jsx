@@ -13,7 +13,7 @@ const OurGoals = () => {
         Наши цели
       </h1>
       <div className='lg:flex pt-20'>
-        <div className='lg:w-2/5 relative pl-10 xl2:pl-0'>
+        <div className='lg:w-2/5 relative lg:pl-10 xl2:pl-0'>
           <h3 className='text-xl font-bold mb-3'>Наши ценности</h3>
           <ul>
             <li className='xl:text-lg font-medium mb-2'>
@@ -55,11 +55,11 @@ const OurGoals = () => {
               качества изо дня в день!
             </p>
           </div>
-          <div className='absolute -top-8 right-5 bg-colYellow w-[135px] h-[277px]'></div>
-          <div className='mm:max-w-[254px] mm:absolute min-h-[200px] mm:min-h-[300px] text-2xl mm:text-3xl top-0 right-14 p-6 text-white bg-[#020105]'>
+          <div className='absolute lg:-top-8 mm:top-0 ss:top-52 top-60 right-5 bg-colYellow w-[135px] h-48 lg:h-[277px]'></div>
+          <div className='lg:max-w-[230px] max-w-[190px] absolute top-[17rem] ss:top-60 mm:top-8 lg:top-0 right-14 text-xl mm:text-2xl lg:text-3xl p-6 text-white bg-[#020105]'>
             Цель нашей работы - доверие и хорошее настроение наших клиентов.
           </div>
-          <div className='max-w-[576px] md:min-w-[470px] max-h-[230px] ml-auto lg:mx-auto -mt-6 sm:pt-4 overflow-hidden'>
+          <div className='mm:max-w-[576px] min-h-[230px] pt-80 mm:pt-0 ml-auto lg:mx-auto overflow-hidden'>
             <img
               className='w-full h-full object-cover'
               src={goalsImg}

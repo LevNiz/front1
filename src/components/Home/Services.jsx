@@ -19,47 +19,47 @@ const Services = () => {
         <h1 className='text-3xl sm:text-[40px] font-medium text-center'>
           Наши услуги
         </h1>
-        <div className='flex flex-wrap justify-around mt-16'>
-          <div className='max-w-[280px] my-10 w-full text-center'>
+        <div className='flex flex-wrap justify-between md:justify-around mt-16'>
+          <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service1} alt='*' />
-            <p className='text-lg sm:text-xl text-[#1C1F35] pt-3'>
+            <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
               Предоставляем адреса для полкупки в 7 странах
             </p>
           </div>
-          <div className='max-w-[280px] my-10 w-full text-center'>
+          <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service2} alt='*' />
-            <p className='text-lg sm:text-xl text-[#1C1F35] pt-3'>
+            <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
               Доставляем ваши посылки до двери
             </p>
           </div>
-          <div className='max-w-[280px] my-10 w-full text-center'>
+          <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service3} alt='*' />
-            <p className='text-lg sm:text-xl text-[#1C1F35] pt-3'>
+            <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
               Выкупим за вас.
             </p>
           </div>
-          <div className='max-w-[280px] my-10 w-full text-center'>
+          <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service4} alt='*' />
-            <p className='text-lg sm:text-xl text-[#1C1F35] pt-3'>
+            <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
               Найдем попутчика для передачи посылки по пути.
             </p>
           </div>
-          <div className='max-w-[280px] my-10 w-full text-center'>
+          <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service5} alt='*' />
-            <p className='text-lg sm:text-xl text-[#1C1F35] pt-3'>
+            <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
               Всегда работает GB-Shop где вы можете сделать покупки оригинальных
               брендов
             </p>
           </div>
-          <div className='max-w-[280px] my-10 w-full text-center'>
+          <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service6} alt='*' />
-            <p className='text-lg sm:text-xl text-[#1C1F35] pt-3'>
+            <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
               Предоставим GB франшизу и вы сразу сможете заработать сразу
             </p>
           </div>
-          <div className='max-w-[280px] my-10 w-full text-center'>
+          <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service7} alt='*' />
-            <p className='text-lg sm:text-xl text-[#1C1F35] pt-3'>
+            <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
               Осуществляем перевозку коммерческих грузов для Юридических лиц
             </p>
           </div>

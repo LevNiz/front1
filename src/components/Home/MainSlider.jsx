@@ -51,7 +51,7 @@ const MainSlider = () => {
               >
                 {el?.description}
               </p>
-            </div>
+             </div>
             <button className='text-[18px] bg-colPurple text-white rounded-lg px-6 py-2 mt-2'>
               Связаться с нами
             </button>
