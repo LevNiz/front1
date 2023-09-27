@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import location from './../../../assets/icons/location2.svg';
-import profile from './../../../assets/icons/profile.svg';
-import call from './../../../assets/icons/call3.svg';
-import email from './../../../assets/icons/email.svg';
+import location from './../../../assets/icons/new-location.svg';
+import profile from './../../../assets/icons/new-profile.svg';
+import call from './../../../assets/icons/new-call.svg';
+import email from './../../../assets/icons/new-email.svg';
+import country from './../../../assets/icons/new-country.svg';
+import city from './../../../assets/icons/new-city.svg';
 import edit from './../../../assets/icons/edit.svg';
 import noImg from './../../../assets/images/no-ava.jpeg';
 import errorImg from './../../../assets/images/error.svg';
@@ -284,7 +286,7 @@ const PersonalData = () => {
                   />
                   <img
                     className='absolute top-[15px] left-[10px] hidden mm:block'
-                    src={location}
+                    src={country}
                     alt='*'
                   />
                   {errors?.country && (
@@ -321,7 +323,7 @@ const PersonalData = () => {
                   />
                   <img
                     className='absolute top-[15px] left-[10px] hidden mm:block'
-                    src={location}
+                    src={city}
                     alt='*'
                   />
                   {errors?.city && (

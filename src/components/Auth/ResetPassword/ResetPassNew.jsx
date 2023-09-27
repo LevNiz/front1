@@ -2,7 +2,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import leftArrow from '../../../assets/icons/arrow-left.svg';
 import logoMobile from '../../../assets/icons/logo3.svg';
 import showPass from '../../../assets/icons/show-pass.svg';
-import lock from '../../../assets/icons/lock.svg';
+import pass from '../../../assets/icons/new-password.svg';
+import pass2 from '../../../assets/icons/new-confirm-password.svg';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -48,7 +49,7 @@ const ResetPassNew = () => {
           <div className='relative'>
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={lock}
+              src={pass}
               alt='*'
             />
             <input
@@ -97,7 +98,7 @@ const ResetPassNew = () => {
           <div className='relative'>
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={lock}
+              src={pass2}
               alt='*'
             />
             <input

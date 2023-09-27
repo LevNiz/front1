@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import call from '../../../assets/icons/call2.svg';
+import call from '../../../assets/icons/new-call.svg';
 import leftArrow from '../../../assets/icons/arrow-left.svg';
 
 const ResetPass = () => {

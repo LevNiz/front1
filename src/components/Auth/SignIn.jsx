@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import lock from '../../assets/icons/lock.svg';
-import call from '../../assets/icons/call3.svg';
+import lock from '../../assets/icons/new-password.svg';
+import email from '../../assets/icons/new-email.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import { useState } from 'react';
@@ -71,7 +71,7 @@ const SignIn = () => {
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={call}
+              src={email}
               alt='*'
             />
             {errors?.email && (

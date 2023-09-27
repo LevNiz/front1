@@ -1,8 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import location from '../../assets/icons/location2.svg';
-import profile from '../../assets/icons/profile.svg';
-import lock from '../../assets/icons/lock.svg';
-import call from '../../assets/icons/call3.svg';
+import location from '../../assets/icons/new-location.svg';
+import profile from '../../assets/icons/new-profile.svg';
+import pass from '../../assets/icons/new-password.svg';
+import confirmPassw from '../../assets/icons/new-confirm-password.svg';
+import call from '../../assets/icons/new-call.svg';
+import email from '../../assets/icons/new-email.svg';
+import country from '../../assets/icons/new-country.svg';
+import city from '../../assets/icons/new-city.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import { Controller, useForm } from 'react-hook-form';
@@ -131,7 +135,7 @@ const SignUp = () => {
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={profile}
+              src={email}
               alt='*'
             />
             {errors?.email && (
@@ -228,7 +232,7 @@ const SignUp = () => {
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={location}
+              src={country}
               alt='*'
             />
             {errors?.country && (
@@ -265,7 +269,7 @@ const SignUp = () => {
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={location}
+              src={city}
               alt='*'
             />
             {errors?.city && (
@@ -303,7 +307,7 @@ const SignUp = () => {
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={lock}
+              src={pass}
               alt='*'
             />
             <div
@@ -339,7 +343,7 @@ const SignUp = () => {
             />
             <img
               className='absolute top-[15px] left-[10px] hidden mm:block'
-              src={lock}
+              src={confirmPassw}
               alt='*'
             />
             <div

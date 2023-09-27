@@ -31,7 +31,7 @@ const HowItWorks = () => {
           </div>
         </div>
         <div>
-          <img className='my-16 md:my-0 rotate-[40deg]' src={line1} alt="*" />
+          <img className='my-16 md:my-0 mm:rotate-0 rotate-[40deg]' src={line1} alt="*" />
         </div>
         <div className='max-w-[280px] md:min-h-[260px] mm:ml-[270px] lg:ml-0 w-full text-center'>
           <img className='mx-auto' src={icon2} alt="*" />
@@ -45,7 +45,7 @@ const HowItWorks = () => {
           </div>
         </div>
         <div>
-          <img className='my-16 md:my-0 rotate-[90deg]' src={line2} alt="*" />
+          <img className='my-16 md:my-0 mm:rotate-0 rotate-[90deg]' src={line2} alt="*" />
         </div>
         <div className='max-w-[280px] md:min-h-[260px] mm:mr-[270px] lg:mr-0 w-full text-center'>
           <img className='mx-auto' src={icon3} alt="*" />

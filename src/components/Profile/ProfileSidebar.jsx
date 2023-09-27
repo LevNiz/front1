@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import logout from './../../assets/icons/logout.svg';
-import profile from './../../assets/icons/profile2.svg';
+import profile from './../../assets/icons/new-profile.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
 import logo from './../../assets/icons/logo-mob.svg';
 import burger from './../../assets/icons/burger.svg';
