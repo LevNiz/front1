@@ -28,7 +28,7 @@ const MainSlider = () => {
               <div className='md:hidden max-w-[576px] w-full overflow-hidden py-8'>
                 <img className='mx-auto' src={el?.mobImage} alt='*' />
               </div>
-              <h1 className='text-4xl sm:text-8xl font-bold md:max-w-[265px]'>
+              <h1 className='text-4xl sm:text-8xl font-bold md:max-w-[520px]'>
                 {el?.title}
               </h1>
               <p className='max-w-[440px] lg:max-w-[540px] w-full text-lg md:text-2xl my-5 mm:my-8'>

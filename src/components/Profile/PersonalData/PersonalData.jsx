@@ -129,9 +129,9 @@ const PersonalData = () => {
           </div>
         </div>
       ) : (
-        <div className='py-5 sm:pl-5 lg:px-12 w-full'>
-          <div className='flex flex-col items-center sm:flex-row'>
-            <div className='relative mr-3 sm:mr-6'>
+        <div className='py-5 md:pl-4 lg:px-12 w-full'>
+          <div className='flex flex-col items-center md:flex-row'>
+            <div className='relative md:mr-3 mb-3 md:mb-0'>
               <div className='max-w-[110px] border-2 p-[2px] border-colYellow min-w-[110px] h-[110px] overflow-hidden rounded-full'>
                 <img
                   className='w-full h-full object-cover rounded-full'
@@ -161,7 +161,7 @@ const PersonalData = () => {
                 </span>
               </label>
             </div>
-            <div className='flex flex-col justify-center mt-2 sm:mt-0 text-center sm:text-left'>
+            <div className='flex flex-col justify-center mt-2 sm:mt-0 text-center md:text-left'>
               <h4 className='text-lg sm:text-xl font-medium sm:font-bold'>
                 {userData?.fullname}
               </h4>
@@ -260,7 +260,10 @@ const PersonalData = () => {
                         options={countries?.map((country) => ({
                           value: country?.id,
                           label: (
-                            <div key={country?.id} className='flex items-center'>
+                            <div
+                              key={country?.id}
+                              className='flex items-center'
+                            >
                               <img
                                 src={country?.icon}
                                 alt={country?.nameRu}

@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from './../../assets/images/header-logo.svg';
 import userImg from './../../assets/icons/user.svg';
 import notification from './../../assets/icons/notification.svg';
+import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
   const modalRef = useRef();
   const user = localStorage.getItem('accessToken');
 
@@ -13,6 +15,10 @@ const Navbar = () => {
     if (!modalRef.current.contains(e.target)) {
       setLoginModal(false);
     }
+  };
+
+  const handleCloseMenu = () => {
+    setShowSidebar(false);
   };
 
   useEffect(() => {
@@ -26,37 +32,29 @@ const Navbar = () => {
     };
   }, [loginModal]);
 
-  const { pathname } = useLocation();
-
   return (
     <>
-      <header className='bg-black py-4 md:py-2 md:sticky top-0 z-[999999]'>
+      <header className='bg-black py-4 lg:py-2 md:sticky top-0 z-[999999]'>
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>
-            <img className='w-[120px] sm:w-auto' src={logo} alt='*' />
+            <img
+              className='w-[120px] mm:w-[140px] lg:w-auto'
+              src={logo}
+              alt='*'
+            />
           </NavLink>
-          <div className='md:hidden text-white'>
-            {pathname === '/profile/notifications'
-              ? 'Уведомления'
-              : pathname === '/depots'
-              ? 'Наши склады'
-              : pathname === '/profile/personal-data'
-              ? 'Личные данные'
-              : pathname === '/profile/my-parcels'
-              ? 'Мои посылки'
-              : pathname === '/alaket'
-              ? 'Алакет'
-              : pathname === '/tracking'
-              ? 'Трекинг'
-              : 'Главная'}
+          <div
+            onClick={() => setShowSidebar(true)}
+            className='flex flex-col w-9 cursor-pointer md:hidden'
+          >
+            <span className='w-1/2 h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
+            <span className='w-full h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
+            <span className='w-1/2 h-[3px] rounded-sm bg-colYellow my-[3px] ml-auto'></span>
           </div>
-          <ul className='hidden md:flex space-x-5 items-center text-white navbar'>
+          <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white navbar'>
             <li>
               <NavLink to='/'>Главная</NavLink>
             </li>
-            {/* <li>
-              <NavLink to='alaket'>Алакет</NavLink>
-            </li> */}
             <li>
               <NavLink to='tracking'>Трекинг посылок</NavLink>
             </li>
@@ -119,6 +117,7 @@ const Navbar = () => {
           ''
         )}
       </header>
+      <MobileMenu isOpen={showSidebar} onClose={handleCloseMenu} />
     </>
   );
 };
