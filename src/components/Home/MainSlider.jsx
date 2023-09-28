@@ -20,22 +20,11 @@ const MainSlider = () => {
       {slidesData?.map((el, index) => (
         <SwiperSlide
           key={index}
-          className='min-h-[560px] sm:min-h-[625px] flex items-center bg-right bg-auto bg-no-repeat'
-          style={{ backgroundImage: el?.backgroundImage }}
+          className={`${el?.backgroundImage} min-h-[560px] sm:min-h-[625px] flex items-center bg-right bg-auto bg-no-repeat`}
           effect={'fade'}
           modules={[Navigation, EffectFade]}
         >
           <div className='content'>
-            {/* <img
-              src={el?.extraImg}
-              className='absolute top-0 left-0 z-[-1]'
-              alt='*'
-            />
-            <img
-              src={el?.arrowImg}
-              className='absolute right-[20px] sm:right-auto sm:left-[35%] bottom-[100px] z-[-1] w-24 sm:w-auto'
-              alt='*'
-            /> */}
             <div className='mb-5'>
               <h1
                 className={`text-4xl sm:text-8xl ${
@@ -45,13 +34,15 @@ const MainSlider = () => {
                 {el?.title}
               </h1>
               <p
-                className={`${el?.descStyle} w-full text-2xl ${
+                className={`${
+                  el?.descStyle
+                } max-w-[440px] lg:max-w-[540px] w-full text-2xl ${
                   el?.textStyle ? el?.textStyle : ''
                 } my-8`}
               >
                 {el?.description}
               </p>
-             </div>
+            </div>
             <button className='text-[18px] bg-colPurple text-white rounded-lg px-6 py-2 mt-2'>
               Связаться с нами
             </button>

@@ -1,11 +1,24 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        gbBuyer1: "url('./src/assets/images/slider/gb-business.jpg')",
+        gbBuyer2: "url('./src/assets/images/slider/gb-business.jpg')",
+        gbBuyer3: "url('./src/assets/images/slider/gb-business.jpg')",
+        gbBuyer4: "url('./src/assets/images/slider/gb-business.jpg')",
+        gbBuyer5: "url('./src/assets/images/slider/gb-business.jpg')",
+        gbBuyer6: "url('./src/assets/images/slider/gb-business.jpg')",
+        gbBuyer7: "url('./src/assets/images/slider/gb-business.jpg')",
+        // mobGbBuyer1: "./src/assets/images/slider/gb-businessMob.png",
+        // mobGbBuyer2: "./src/assets/images/slider/gb-businessMob.png",
+        // mobGbBuyer3: "./src/assets/images/slider/gb-businessMob.png",
+        // mobGbBuyer4: "./src/assets/images/slider/gb-businessMob.png",
+        // mobGbBuyer5: "./src/assets/images/slider/gb-businessMob.png",
+        // mobGbBuyer6: "./src/assets/images/slider/gb-businessMob.png",
+        // mobGbBuyer7: "./src/assets/images/slider/gb-businessMob.png",
+      },
       colors: {
         colYellow: '#FEDE2B',
         colYellowHover: '#e3c205',
@@ -21,7 +34,7 @@ export default {
         colGreen2: '#AFF4C6',
         colBlue: '#C1F0FF',
         colOrange: '#FFC7C2',
-      }
+      },
     },
     screens: {
       xs: '320px',
@@ -32,8 +45,7 @@ export default {
       lg: '991px',
       xl: '1200px',
       xl2: '1360px',
-    }
+    },
   },
   plugins: [],
-}
-
+};
