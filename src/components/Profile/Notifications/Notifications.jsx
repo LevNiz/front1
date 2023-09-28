@@ -34,10 +34,10 @@ const Notifications = () => {
                 Удалить все
               </div>
             </div>
-            {notifications?.map((el, index) => (
+            {notifications?.map((el) => (
               <NavLink
                 to={`${el.id}`}
-                key={index}
+                key={el?.id}
                 className='flex my-3 border-b sidebar border-colBgGray2 pb-3 hover:bg-colBgGray2 py-2 sm:p-3 rounded-lg'
               >
                 <div className='max-w-[36px] lg:max-w-[44px] min-w-[36px] lg:min-w-[44px] h-[36px] lg:h-[44px] rounded-full overflow-hidden'>

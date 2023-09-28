@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import { Navigation, EffectFade, Autoplay } from 'swiper/modules';
 import { slidesData } from '../../constants/slidesData';
@@ -10,40 +9,33 @@ const MainSlider = () => {
     <Swiper
       navigation={true}
       modules={[EffectFade, Navigation, Autoplay]}
-      effect='fade'
       autoplay={{
-        delay: 3000,
+        delay: 4000,
         disableOnInteraction: true,
       }}
       slidesPerView={1}
     >
-      {slidesData?.map((el, index) => (
+      {slidesData?.map((el) => (
         <SwiperSlide
-          key={index}
-          className={`${el?.backgroundImage} min-h-[560px] sm:min-h-[625px] flex items-center bg-right bg-auto bg-no-repeat`}
+          key={el.id}
+          className={`md:min-h-[560px] pb-20 md:pb-0 flex items-center bg-right bg-auto bg-no-repeat
+          ${el?.backgroundImage}`}
           effect={'fade'}
           modules={[Navigation, EffectFade]}
         >
           <div className='content'>
-            <div className='mb-5'>
-              <h1
-                className={`text-4xl sm:text-8xl ${
-                  el?.textStyle ? el?.textStyle : ''
-                } font-bold max-w-[265px] sm:max-w-[600px]`}
-              >
+            <div className='mb-5 text-center md:text-left'>
+              <div className='md:hidden max-w-[576px] w-full overflow-hidden py-8'>
+                <img className='mx-auto' src={el?.mobImage} alt='*' />
+              </div>
+              <h1 className='text-4xl sm:text-8xl font-bold md:max-w-[265px]'>
                 {el?.title}
               </h1>
-              <p
-                className={`${
-                  el?.descStyle
-                } max-w-[440px] lg:max-w-[540px] w-full text-2xl ${
-                  el?.textStyle ? el?.textStyle : ''
-                } my-8`}
-              >
+              <p className='max-w-[440px] lg:max-w-[540px] w-full text-lg md:text-2xl my-5 mm:my-8'>
                 {el?.description}
               </p>
             </div>
-            <button className='text-[18px] bg-colPurple text-white rounded-lg px-6 py-2 mt-2'>
+            <button className='text-[18px] bg-colPurple text-white rounded-lg px-6 py-2 mt-2 flex justify-center mx-auto md:mx-0 md:block'>
               Связаться с нами
             </button>
           </div>

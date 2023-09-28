@@ -257,10 +257,10 @@ const PersonalData = () => {
                       <Select
                         {...field}
                         placeholder='Выберите страну'
-                        options={countries?.map((country, index) => ({
+                        options={countries?.map((country) => ({
                           value: country?.id,
                           label: (
-                            <div key={index} className='flex items-center'>
+                            <div key={country?.id} className='flex items-center'>
                               <img
                                 src={country?.icon}
                                 alt={country?.nameRu}

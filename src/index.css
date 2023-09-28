@@ -21,11 +21,11 @@
   background: #f2f2f2;
 }
 .mobile-navbar .home a svg {
-  fill: #020105 !important;  
+  fill: #020105 !important;
 }
 .mobile-navbar .home a svg path {
   stroke: none;
-  fill: #020105 !important;  
+  fill: #020105 !important;
 }
 .mobile-navbar li a svg path {
   stroke: #020105;
@@ -101,7 +101,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #58FF90 !important;
+  background-color: #58ff90 !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,4 +123,15 @@
 .testimonials .swiper-button-next::after,
 .testimonials .swiper-button-prev::after {
   color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .slider .swiper-button-next {
+    right: 38%;
+    bottom: 16px;
+  }
+  .slider .swiper-button-prev {
+    right: auto;
+    left: 38%;
+    bottom: 16px;
+  }
 }

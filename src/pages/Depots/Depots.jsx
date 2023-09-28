@@ -104,8 +104,8 @@ const Depots = () => {
         </div>
       ) : depotData?.length ? (
         <div className='grid ss:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6'>
-          {depotData?.map((el, index) => (
-            <DepotItem key={index} el={el} />
+          {depotData?.map((el) => (
+            <DepotItem key={el?.id} el={el} />
           ))}
         </div>
       ) : (

@@ -130,10 +130,10 @@ const Parcel = () => {
       ) : (
         <div className='flex justify-center my-6 sm:my-16'>
           <div className='max-w-[991px] w-full flex flex-col space-y-8'>
-            {userParcels?.map((el, index) => (
+            {userParcels?.map((el) => (
               <NavLink
                 to={`${el?.id}`}
-                key={index}
+                key={el?.id}
                 className='w-full shadow-[0px_15px_30px_0px_rgba(204,_204,_204,_0.40)] hover:shadow-[0px_20px_30px_0px_rgba(204,_204,_204,_0.90)] duration-150 rounded-[18px] p-4 md:p-8'
               >
                 <div className='flex justify-between items-center'>

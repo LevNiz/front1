@@ -142,8 +142,8 @@ const MyParcels = () => {
         </div>
       ) : savedParcels?.length ? (
         <>
-          {savedParcels?.map((el, index) => (
-            <ParcelItem key={index} parcel={el} />
+          {savedParcels?.map((el) => (
+            <ParcelItem key={el?.id} parcel={el} />
           ))}
         </>
       ) : (

@@ -18,8 +18,8 @@ const Testimonials = () => {
         Отзывы
       </h1>
       <Swiper navigation={true} modules={[Navigation]} slidesPerView={1}>
-        {testimonials?.map((el, index) => (
-          <SwiperSlide key={index} className='flex items-center'>
+        {testimonials?.map((el) => (
+          <SwiperSlide key={el?.id} className='flex items-center'>
             <div className='max-w-[1120px] w-full mx-auto text-center py-12'>
               <div className='max-w-[168px] min-w-[168px] h-[168px] rounded-full overflow-hidden mx-auto'>
                 <img

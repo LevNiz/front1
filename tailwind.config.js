@@ -11,13 +11,6 @@ export default {
         gbBuyer5: "url('./src/assets/images/slider/gb-business.jpg')",
         gbBuyer6: "url('./src/assets/images/slider/gb-business.jpg')",
         gbBuyer7: "url('./src/assets/images/slider/gb-business.jpg')",
-        // mobGbBuyer1: "./src/assets/images/slider/gb-businessMob.png",
-        // mobGbBuyer2: "./src/assets/images/slider/gb-businessMob.png",
-        // mobGbBuyer3: "./src/assets/images/slider/gb-businessMob.png",
-        // mobGbBuyer4: "./src/assets/images/slider/gb-businessMob.png",
-        // mobGbBuyer5: "./src/assets/images/slider/gb-businessMob.png",
-        // mobGbBuyer6: "./src/assets/images/slider/gb-businessMob.png",
-        // mobGbBuyer7: "./src/assets/images/slider/gb-businessMob.png",
       },
       colors: {
         colYellow: '#FEDE2B',
