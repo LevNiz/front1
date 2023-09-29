@@ -3,15 +3,6 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      backgroundImage: {
-        gbBuyer1: "url('./src/assets/images/slider/gb-business.jpg')",
-        gbBuyer2: "url('./src/assets/images/slider/gb-business.jpg')",
-        gbBuyer3: "url('./src/assets/images/slider/gb-business.jpg')",
-        gbBuyer4: "url('./src/assets/images/slider/gb-business.jpg')",
-        gbBuyer5: "url('./src/assets/images/slider/gb-business.jpg')",
-        gbBuyer6: "url('./src/assets/images/slider/gb-business.jpg')",
-        gbBuyer7: "url('./src/assets/images/slider/gb-business.jpg')",
-      },
       colors: {
         colYellow: '#FEDE2B',
         colYellowHover: '#e3c205',

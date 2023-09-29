@@ -8,7 +8,7 @@ const MainSlider = () => {
   return (
     <Swiper
       navigation={true}
-      modules={[ Navigation, Autoplay]}
+      modules={[Navigation, Autoplay]}
       autoplay={{
         delay: 4000,
         disableOnInteraction: true,
@@ -17,11 +17,10 @@ const MainSlider = () => {
     >
       {slidesData?.map((el) => (
         <SwiperSlide
-          key={el.id}
-          className={`md:min-h-[720px] pb-20 md:pb-0 flex items-center bg-right bg-auto bg-no-repeat
-          ${el?.backgroundImage}`}
-          effect={'fade'}
+          key={el?.id}
+          className={`md:min-h-[720px] pb-20 md:pb-0 flex items-center bg-right bg-auto bg-no-repeat`}
           modules={[Navigation]}
+          style={{ backgroundImage: `url('${el?.backgroundImage}')` }}
         >
           <div className='content'>
             <div className='mb-5 text-center md:text-left'>
