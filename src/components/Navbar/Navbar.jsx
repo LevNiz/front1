@@ -8,6 +8,22 @@ import MobileMenu from './MobileMenu';
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    setPrevScrollPos(currentScrollPos);
+    setScrolling(prevScrollPos < currentScrollPos);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollPos]);
+
   const modalRef = useRef();
   const user = localStorage.getItem('accessToken');
 
@@ -34,7 +50,11 @@ const Navbar = () => {
 
   return (
     <>
-      <header className='bg-black py-4 lg:py-2 md:sticky top-0 z-[999999]'>
+      <header
+        className={`${
+          scrolling ? '-translate-y-full' : 'translate-y-0'
+        } bg-black py-4 lg:py-2 fixed top-0 w-full transition-transform duration-300 ease-in-out z-[999999]`}
+      >
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>
             <img

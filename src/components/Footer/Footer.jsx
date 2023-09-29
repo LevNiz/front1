@@ -7,7 +7,7 @@ import youtube from './../../assets/icons/YouTube.svg';
 
 const Footer = () => {
   return (
-    <footer className='bg-black py-10 lg:py-0 lg:min-h-[252px] flex justify-between items-center pb-28 md:pb-10'>
+    <footer className='bg-black py-10 lg:py-0 lg:min-h-[252px] flex justify-between items-center pb-12 md:pb-10'>
       <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between w-full container'>
         <NavLink className='pr-5' to='/'>
           <img src={logo} alt='*' />

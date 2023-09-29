@@ -41,7 +41,7 @@ const DepotDetail = () => {
   }, [id]);
 
   return (
-    <div className='py-12 content'>
+    <div className='pt-28 pb-12 content'>
       {loading ? (
         <ContentLoading extraStyle='85vh' />
       ) : (

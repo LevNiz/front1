@@ -57,7 +57,7 @@ const DetailInfo = (props) => {
   }, [id]);
 
   return (
-    <div className='bg-colBgGray2'>
+    <div className='bg-colBgGray2 pt-20'>
       {loading ? (
         <ContentLoading extraStyle='85vh' />
       ) : (

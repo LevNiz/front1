@@ -35,7 +35,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
       <div
         className={`
         fixed top-0 ${isOpen ? 'left-0' : 'left-[-100%]'}
-        w-[80%] ss:w-[70%] h-full transition-all duration-200 bg-white z-[99999] block md:hidden`}
+        w-[80%] ss:w-[70%] h-full transition-all duration-200 bg-white z-[9999999] block md:hidden`}
       >
         <div className='my-5 pb-5 border-b border-gray-400 mx-3'>
           <img className='mx-auto w-32' src={logo} alt='*' />
@@ -125,7 +125,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
         onClick={() => onClose()}
         className={`
           fixed ${isOpen ? 'visible opacity-100' : 'invisible opacity-0'}
-          top-0 right-0 w-full h-full bg-black bg-opacity-50 z-[9999] 
+          top-0 right-0 w-full h-full bg-black bg-opacity-50 z-[999999] 
           transition-opacity duration-300 ease-in-out block md:hidden
         `}
       ></div>
