@@ -1,12 +1,8 @@
 /* eslint-disable react/prop-types */
 import { NavLink, useNavigate } from 'react-router-dom';
 import logout from './../../assets/icons/logout.svg';
-import location from './../../assets/icons/new-location.svg';
-import parcel from './../../assets/icons/my-parcel.svg';
 import logo from './../../assets/icons/logo-mob.svg';
-import home from './../../assets/icons/home.svg';
-import profile from './../../assets/icons/new-profile.svg';
-import business from './../../assets/icons/business.svg';
+import arrow from './../../assets/icons/arrow.svg';
 import { logOutFetch } from '../../api/user';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../helpers/Modals/Modal';
@@ -19,6 +15,11 @@ const MobileMenu = ({ isOpen, onClose }) => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  const toggleProfileMenu = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen);
+  };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -43,82 +44,126 @@ const MobileMenu = ({ isOpen, onClose }) => {
         <div className='my-5 pb-5 border-b border-gray-400 mx-3'>
           <img className='mx-auto w-32' src={logo} alt='*' />
         </div>
-        <ul className='py-6 px-3'>
-          <li className='mb-5'>
-            <NavLink
-              to='/'
-              onClick={() => onClose()}
-              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
-            >
-              <img src={home} alt='*' />
-              <span className='ml-3'>Главная</span>
-            </NavLink>
-          </li>
-          <li className='my-5'>
-            <NavLink
-              to='/profile/personal-data'
-              onClick={() => onClose()}
-              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
-            >
-              <img src={profile} alt='*' />
-              <span className='ml-3'>Профиль</span>
-            </NavLink>
-          </li>
-          <li className='my-5'>
-            <NavLink
-              to='/tracking'
-              onClick={() => onClose()}
-              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
-            >
-              <img src={parcel} alt='*' />
-              <span className='ml-3'>Трекинг посылок</span>
-            </NavLink>
-          </li>
-          <li className='my-5'>
-            <NavLink
-              to='/depots'
-              onClick={() => onClose()}
-              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
-            >
-              <img src={location} alt='*' />
-              <span className='ml-3'>Наши склады</span>
-            </NavLink>
-          </li>
-          <li className='my-5'>
-            <NavLink
-              to='/gb-buyer'
-              onClick={() => onClose()}
-              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
-            >
-              <img src={profile} alt='*' />
-              <span className='ml-3'>GB-Байер</span>
-            </NavLink>
-          </li>
-          <li className='my-5'>
-            <NavLink
-              to='/gb-business'
-              onClick={() => onClose()}
-              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
-            >
-              <img src={business} alt='*' />
-              <span className='ml-3'>GB-Бизнес</span>
-            </NavLink>
-          </li>
+        <ul className='py-6 px-3 sidebar overflow-hidden overflow-y-scroll flex flex-col justify-between h-[calc(100%_-_102px)]'>
+          <div>
+            <li className='mb-3'>
+              <NavLink
+                to='/'
+                onClick={() => onClose()}
+                className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full'
+              >
+                Главная
+              </NavLink>
+            </li>
+            <li className='my-3'>
+              <div
+                onClick={toggleProfileMenu}
+                className='ss:text-lg sm:text-xl px-2 rounded-lg flex justify-between items-center w-full'
+              >
+                <span>Профиль</span>
+                <img
+                  className={`${
+                    isProfileMenuOpen ? 'rotate-180' : ''
+                  } duration-200`}
+                  src={arrow}
+                  alt='*'
+                />
+              </div>
+              <ul
+                className={`${
+                  isProfileMenuOpen ? 'block' : 'hidden'
+                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1`}
+              >
+                <li className='flex items-center mb-3'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/personal-data'
+                    className='text-base opacity-70'
+                  >
+                    - Личные данные
+                  </NavLink>
+                </li>
+                <li className='flex items-center my-3'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/my-parcels'
+                    className='text-base opacity-70'
+                  >
+                    - Мои посылки
+                  </NavLink>
+                </li>
+                <li className='flex items-center my-3'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/notifications'
+                    className='text-base opacity-70'
+                  >
+                    - Уведомления
+                  </NavLink>
+                </li>
+                <li className='flex items-center mt-3'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/my-wallet'
+                    className='text-base opacity-70'
+                  >
+                    - Мой кошелёк
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+            <li className='my-3'>
+              <NavLink
+                to='/tracking'
+                onClick={() => onClose()}
+                className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full'
+              >
+                Трекинг посылок
+              </NavLink>
+            </li>
+            <li className='my-3'>
+              <NavLink
+                to='/depots'
+                onClick={() => onClose()}
+                className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full'
+              >
+                Наши склады
+              </NavLink>
+            </li>
+            <li className='my-3'>
+              <NavLink
+                to='/gb-buyer'
+                onClick={() => onClose()}
+                className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full'
+              >
+                GB-Байер
+              </NavLink>
+            </li>
+            <li className='my-3'>
+              <NavLink
+                to='/gb-business'
+                onClick={() => onClose()}
+                className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full'
+              >
+                GB-Бизнес
+              </NavLink>
+            </li>
+          </div>
           {user ? (
-            <li className='mt-10 absolute bottom-4'>
+            <li className='mt-10'>
               <button
                 onClick={() => {
                   setModalOpen(true);
                   setModalContent('logout');
                 }}
-                className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
+                className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full flex items-center'
               >
                 <img src={logout} alt='*' />
                 <span className='ml-3'>Выйти</span>
               </button>
             </li>
           ) : (
-            <li className='mt-10 absolute bottom-4 ss:w-[92%] w-[90%]'>
+            <li className='mt-10 ss:w-[92%] w-[90%]'>
               <NavLink
                 to='/auth/sign-in'
                 className='p-4 rounded-lg bg-black text-white flex justify-center items-center font-bold hover:opacity-80 duration-150'
