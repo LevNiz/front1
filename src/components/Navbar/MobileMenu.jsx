@@ -8,11 +8,12 @@ import home from './../../assets/icons/home.svg';
 import profile from './../../assets/icons/new-profile.svg';
 import business from './../../assets/icons/business.svg';
 import { logOutFetch } from '../../api/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../helpers/Modals/Modal';
 import { useState } from 'react';
 
 const MobileMenu = ({ isOpen, onClose }) => {
+  const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,6 +28,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
     await logOutFetch(dispatch);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    setModalOpen(false);
+    onClose();
     navigate('/');
   };
 
@@ -101,18 +104,29 @@ const MobileMenu = ({ isOpen, onClose }) => {
               <span className='ml-3'>GB-Бизнес</span>
             </NavLink>
           </li>
-          <li className='mt-10 absolute bottom-4'>
-            <button
-              onClick={() => {
-                setModalOpen(true);
-                setModalContent('logout');
-              }}
-              className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
-            >
-              <img src={logout} alt='*' />
-              <span className='ml-3'>Выйти</span>
-            </button>
-          </li>
+          {user ? (
+            <li className='mt-10 absolute bottom-4'>
+              <button
+                onClick={() => {
+                  setModalOpen(true);
+                  setModalContent('logout');
+                }}
+                className='ss:text-lg sm:text-xl flex items-center p-2 rounded-lg'
+              >
+                <img src={logout} alt='*' />
+                <span className='ml-3'>Выйти</span>
+              </button>
+            </li>
+          ) : (
+            <li className='mt-10 absolute bottom-4 ss:w-[92%] w-[90%]'>
+              <NavLink
+                to='/auth/sign-in'
+                className='p-4 rounded-lg bg-black text-white flex justify-center items-center font-bold hover:opacity-80 duration-150'
+              >
+                Войти
+              </NavLink>
+            </li>
+          )}
         </ul>
         <Modal
           isOpen={modalOpen}

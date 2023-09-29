@@ -90,6 +90,9 @@ const Parcel = () => {
           </p>
         </div>
       </div>
+      <h2 className='text-center font-medium text-2xl mt-10'>
+        Мои текущие посылки
+      </h2>
       {isLoading ? (
         <ContentLoading extraStyle='320px' />
       ) : isSearched && userParcels?.length < 1 ? (
@@ -136,23 +139,28 @@ const Parcel = () => {
                 key={el?.id}
                 className='w-full shadow-[0px_15px_30px_0px_rgba(204,_204,_204,_0.40)] hover:shadow-[0px_20px_30px_0px_rgba(204,_204,_204,_0.90)] duration-150 rounded-[18px] p-4 md:p-8'
               >
-                <div className='flex justify-between items-center'>
-                  <div className='flex items-center'>
+                <span className='text-colGray2 text-xs sm:text-sm md:text-lg'>
+                  Номер посылки
+                </span>
+                <div className='flex justify-between items-center mt-1'>
+                  <div className='flex items-center ss:max-w-[auto] max-w-[80%] w-full'>
                     <img className='lg:block hidden' src={nounBox} alt='*' />
-                    <h4 className='text-lg md:text-2xl font-medium lg:ml-4'>
-                      {el?.orderNumber ? el?.orderNumber : 'Не указано'}
+                    <h4 className='text-base sm:text-2xl font-medium lg:ml-4 whitespace-nowrap text-ellipsis overflow-hidden'>
+                      {el?.orderNumber ? `№ ${el?.orderNumber}` : 'Не указано'}
                     </h4>
                   </div>
-                  <div className='sm:max-w-[140px] sm:w-full md:min-h-[50px] rounded-xl md:rounded-[18px] flex justify-center items-center text-xs font-medium bg-colGreen px-4 py-2 break-all'>
-                    {el?.status == 'done'
-                      ? 'Готово'
-                      : el?.status == 'on_way'
-                      ? 'В пути'
-                      : el?.status == 'arrived'
-                      ? 'Получено'
-                      : el?.status == 'created'
-                      ? 'Создан'
-                      : 'Не указано'}
+                  <div className='max-w-[20%] sm:max-w-[auto] rounded-lg md:rounded-2xl flex justify-center sm:px-5 sm:py-2 px-2 py-[2px] bg-colGreen'>
+                    <span className='text-[9px] sm:text-xs sm:font-medium text-ellipsis overflow-hidden whitespace-nowrap'>
+                      {el?.status == 'done'
+                        ? 'Готово'
+                        : el?.status == 'on_way'
+                        ? 'В пути'
+                        : el?.status == 'arrived'
+                        ? 'Получено'
+                        : el?.status == 'created'
+                        ? 'Создан'
+                        : 'Не указано'}
+                    </span>
                   </div>
                 </div>
                 <div className='flex justify-between pt-8'>
@@ -160,7 +168,7 @@ const Parcel = () => {
                     <span className='text-colGray2 text-xs sm:text-sm md:text-lg'>
                       Отправитель
                     </span>
-                    <h4 className='text-xs sm:text-base md:text-xl font-medium mt-2'>
+                    <h4 className='text-xs sm:text-base md:text-xl font-medium mt-1 sm:mt-2'>
                       {el?.senderName ? el?.senderName : 'Не указано'}
                     </h4>
                   </div>
@@ -168,7 +176,7 @@ const Parcel = () => {
                     <span className='text-colGray2 text-xs sm:text-sm md:text-lg'>
                       Дата доставки
                     </span>
-                    <h4 className='text-xs sm:text-base md:text-xl font-medium mt-2'>
+                    <h4 className='text-xs sm:text-base md:text-xl font-medium mt-1 sm:mt-2'>
                       {el?.dateArrived ? el?.dateArrived : 'Не указано'}
                     </h4>
                   </div>
@@ -176,7 +184,7 @@ const Parcel = () => {
                     <span className='text-colGray2 text-xs sm:text-sm md:text-lg'>
                       Получатель
                     </span>
-                    <h4 className='text-xs sm:text-base md:text-xl font-medium mt-2'>
+                    <h4 className='text-xs sm:text-base md:text-xl font-medium mt-1 sm:mt-2'>
                       {el?.receiverName ? el?.receiverName : 'Не указано'}
                     </h4>
                   </div>

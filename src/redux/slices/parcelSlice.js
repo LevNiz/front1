@@ -42,6 +42,7 @@ export const parcelsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(logOut, (state) => {
       state.parcels = null;
+      state.savedParcels = null;
       state.loading = false;
       state.error = null;
     });

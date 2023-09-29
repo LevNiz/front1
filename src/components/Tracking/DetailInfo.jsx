@@ -63,8 +63,12 @@ const DetailInfo = (props) => {
       ) : (
         <div className='pt-12 pb-20 content'>
           <div className='flex justify-center items-center mb-12'>
-            <img src={nounBox} alt='*' />
-            <h2 className='text-2xl font-medium ml-6'>
+            <img
+              className='sm:block hidden w-10 sm:w-auto'
+              src={nounBox}
+              alt='*'
+            />
+            <h2 className='text-xl sm:text-2xl font-medium ml-6 break-all bg-colPurple sm:bg-transparent text-white sm:text-black p-3 rounded-xl sm:p-3 sm:rounded-xl'>
               {parcelDetail?.orderNumber}
             </h2>
           </div>
