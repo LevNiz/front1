@@ -72,8 +72,8 @@ const DetailInfo = (props) => {
               {parcelDetail?.orderNumber}
             </h2>
           </div>
-          <div className='mm:flex'>
-            <div className='w-full mm:w-3/6 lg:w-2/5 mb-8 mm:mb-0 mm:mr-4 lg:mr-8'>
+          <div className='flex mm:flex-row flex-col'>
+            <div className='w-full mm:w-3/6 lg:w-2/5 mt-8 mm:mt-0 mm:mr-4 lg:mr-8 mm:order-none order-1'>
               <img className='w-full' src={mapImg} alt='*' />
             </div>
             <div className='w-full mm:w-3/6 lg:w-3/5'>
@@ -212,73 +212,73 @@ const DetailInfo = (props) => {
                   <p>{parcelDetail?.comment}</p>
                 </div>
               </div>
-              <div className='flex justify-end items-center'>
-                <button
-                  onClick={saveParcel}
-                  disabled={saved}
-                  className={`${
-                    saved
-                      ? 'opacity-50 hover:opacity-50 cursor-not-allowed'
-                      : ''
-                  } relative p-4 rounded-lg bg-black text-white flex justify-center items-center max-w-[280px] h-12 mt-8 w-full font-bold hover:opacity-80 duration-150`}
-                >
-                  {buttonLoading ? (
-                    <ButtonLoading />
-                  ) : saved ? (
-                    'Сохранен'
-                  ) : (
-                    'Сохранить'
-                  )}
-                  {saved ? (
-                    <svg
-                      className='absolute right-3'
-                      xmlns='http://www.w3.org/2000/svg'
-                      width={24}
-                      height={24}
-                      viewBox='0 0 256 256'
-                      {...props}
-                    >
-                      <path
-                        fill='#fff'
-                        strokeMiterlimit={10}
-                        d='M6 2a2.002 2.002 0 0 0-2 2v18l8-3 8 3V4a2.003 2.003 0 0 0-2-2z'
-                        fontFamily='none'
-                        fontSize='none'
-                        fontWeight='none'
-                        style={{
-                          mixBlendMode: 'normal',
-                        }}
-                        textAnchor='none'
-                        transform='scale(10.66667)'
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      className='absolute right-3'
-                      xmlns='http://www.w3.org/2000/svg'
-                      width={24}
-                      height={24}
-                      viewBox='0 0 256 256'
-                      {...props}
-                    >
-                      <path
-                        fill='#fff'
-                        strokeMiterlimit={10}
-                        d='M16.5 5C12.928 5 10 7.928 10 11.5v30a1.5 1.5 0 0 0 2.377 1.217L24 34.347l11.623 8.37A1.5 1.5 0 0 0 38 41.5v-30C38 7.928 35.072 5 31.5 5zm0 3h15c1.95 0 3.5 1.55 3.5 3.5v27.072l-10.123-7.289a1.5 1.5 0 0 0-1.754 0L13 38.573V11.5C13 9.55 14.55 8 16.5 8z'
-                        fontFamily='none'
-                        fontSize='none'
-                        fontWeight='none'
-                        style={{
-                          mixBlendMode: 'normal',
-                        }}
-                        textAnchor='none'
-                        transform='scale(5.33333)'
-                      />
-                    </svg>
-                  )}
-                </button>
-              </div>
             </div>
+          </div>
+          <div className='flex justify-end items-center'>
+            <button
+              onClick={saveParcel}
+              disabled={saved}
+              className={`${
+                saved
+                  ? 'opacity-50 hover:opacity-50 cursor-not-allowed'
+                  : 'hover:opacity-80'
+              } relative p-4 rounded-lg bg-black text-white flex justify-center items-center max-w-[280px] h-12 mt-8 w-full font-bold duration-150`}
+            >
+              {buttonLoading ? (
+                <ButtonLoading />
+              ) : saved ? (
+                'Сохранен'
+              ) : (
+                'Сохранить'
+              )}
+              {saved ? (
+                <svg
+                  className='absolute right-3'
+                  xmlns='http://www.w3.org/2000/svg'
+                  width={24}
+                  height={24}
+                  viewBox='0 0 256 256'
+                  {...props}
+                >
+                  <path
+                    fill='#fff'
+                    strokeMiterlimit={10}
+                    d='M6 2a2.002 2.002 0 0 0-2 2v18l8-3 8 3V4a2.003 2.003 0 0 0-2-2z'
+                    fontFamily='none'
+                    fontSize='none'
+                    fontWeight='none'
+                    style={{
+                      mixBlendMode: 'normal',
+                    }}
+                    textAnchor='none'
+                    transform='scale(10.66667)'
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className='absolute right-3'
+                  xmlns='http://www.w3.org/2000/svg'
+                  width={24}
+                  height={24}
+                  viewBox='0 0 256 256'
+                  {...props}
+                >
+                  <path
+                    fill='#fff'
+                    strokeMiterlimit={10}
+                    d='M16.5 5C12.928 5 10 7.928 10 11.5v30a1.5 1.5 0 0 0 2.377 1.217L24 34.347l11.623 8.37A1.5 1.5 0 0 0 38 41.5v-30C38 7.928 35.072 5 31.5 5zm0 3h15c1.95 0 3.5 1.55 3.5 3.5v27.072l-10.123-7.289a1.5 1.5 0 0 0-1.754 0L13 38.573V11.5C13 9.55 14.55 8 16.5 8z'
+                    fontFamily='none'
+                    fontSize='none'
+                    fontWeight='none'
+                    style={{
+                      mixBlendMode: 'normal',
+                    }}
+                    textAnchor='none'
+                    transform='scale(5.33333)'
+                  />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
       )}

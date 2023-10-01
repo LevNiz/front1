@@ -11,7 +11,7 @@ const DepotItem = ({ el }) => {
         to={`${el?.id}`}
         className='shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] relative hover:shadow-[0px_10px_20px_10px_rgba(204,_204,_204,_0.40)] duration-150 overflow-hidden rounded-lg sm:rounded-2xl my-2 ss:my-0'
       >
-        <div className='h-[220px] ss:h-[160px] sm:h-[220px] lg:h-[280px] overflow-hidden'>
+        <div className='h-[220px] ss:h-[160px] sm:h-[220px] lg:h-[280px] overflow-hidden bg-colBgGray'>
           <img
             className='w-full h-full object-cover'
             src={el?.images?.length ? el?.images[0] : noImg}

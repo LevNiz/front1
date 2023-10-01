@@ -52,7 +52,7 @@ const DepotDetail = () => {
 
           <div className='md:flex pb-12 min-h-[576px]'>
             <div className='w-full md:w-3/6 xl:w-2/5 mb-12 md:mb-0'>
-              <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto'>
+              <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
                 <img
                   src={depotItem?.images == null ? noImg : mainImg}
                   alt='*'

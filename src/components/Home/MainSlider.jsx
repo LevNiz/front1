@@ -3,8 +3,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { slidesData } from '../../constants/slidesData';
+import { useState } from 'react';
 
 const MainSlider = () => {
+  const [size, setSize] = useState(window.innerWidth);
+
+  window.addEventListener('resize', function () {
+    setSize(window.innerWidth);
+  });
+
   return (
     <Swiper
       navigation={true}
@@ -20,7 +27,9 @@ const MainSlider = () => {
           key={el?.id}
           className={`md:min-h-[720px] pb-20 md:pb-0 flex items-center bg-right bg-auto bg-no-repeat`}
           modules={[Navigation]}
-          style={{ backgroundImage: `url('${el?.backgroundImage}')` }}
+          style={{
+            backgroundImage: size > 768 ? `url('${el?.backgroundImage}')` : '',
+          }}
         >
           <div className='content'>
             <div className='mb-5 text-center md:text-left'>
