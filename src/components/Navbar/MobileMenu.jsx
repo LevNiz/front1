@@ -136,7 +136,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full'
               >
-                GB-Байер
+                GB-Buyer
               </NavLink>
             </li>
             <li className='my-3'>
@@ -145,7 +145,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl p-2 rounded-lg flex w-full'
               >
-                GB-Бизнес
+                GB-Business
               </NavLink>
             </li>
           </div>
@@ -163,7 +163,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
               </button>
             </li>
           ) : (
-            <li className='mt-10 ss:w-[92%] w-[90%]'>
+            <li className='mt-10 w-full'>
               <NavLink
                 to='/auth/sign-in'
                 className='p-4 rounded-lg bg-black text-white flex justify-center items-center font-bold hover:opacity-80 duration-150'

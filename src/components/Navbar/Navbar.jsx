@@ -82,10 +82,10 @@ const Navbar = () => {
               <NavLink to='depots'>Наши склады</NavLink>
             </li>
             <li>
-              <NavLink to='gb-buyer'>GB-Байер</NavLink>
+              <NavLink to='gb-buyer'>GB-Buyer</NavLink>
             </li>
             <li>
-              <NavLink to='gb-business'>GB-Бизнес</NavLink>
+              <NavLink to='gb-business'>GB-Business</NavLink>
             </li>
           </ul>
           {user ? (
