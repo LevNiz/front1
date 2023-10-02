@@ -134,4 +134,10 @@
     left: 38%;
     bottom: 16px;
   }
+  .testimonials .slider .swiper-button-next {
+    bottom: 0;
+  }
+  .testimonials .slider .swiper-button-prev {
+    bottom: 0;
+  }
 }

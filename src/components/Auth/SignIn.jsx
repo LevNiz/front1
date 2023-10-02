@@ -43,7 +43,7 @@ const SignIn = () => {
     <>
       <div
         className='mm:hidden absolute top-4 left-4'
-        onClick={() => navigate(-1)}
+        onClick={() => navigate('/')}
       >
         <img src={leftArrow} alt='*' />
       </div>

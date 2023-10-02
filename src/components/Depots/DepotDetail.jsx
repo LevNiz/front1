@@ -46,10 +46,9 @@ const DepotDetail = () => {
         <ContentLoading extraStyle='85vh' />
       ) : (
         <>
-          <h1 className='text-2xl sm:text-4xl font-semibold text-center sm:mt-4 mb-12 sm:mb-16'>
+          <h1 className='text-2xl sm:text-4xl font-semibold text-center sm:mt-4 mb-6 sm:mb-14'>
             {depotItem?.nameRu}
           </h1>
-
           <div className='md:flex pb-12 min-h-[576px]'>
             <div className='w-full md:w-3/6 xl:w-2/5 mb-12 md:mb-0'>
               <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
@@ -92,6 +91,16 @@ const DepotDetail = () => {
                 <div>
                   <img src={map} alt='*' />
                 </div>
+                <p className='text-center mt-4 mb-8 flex justify-center items-center'>
+                  <span className='mr-1 opacity-60'>Тип склада:</span>
+                  <span className='font-medium'>
+                    {depotItem?.types === 'both'
+                      ? 'Отправка / Приём'
+                      : depotItem?.types === 'in'
+                      ? 'Приём'
+                      : 'Отправка'}
+                  </span>
+                </p>
                 <div className='rounded-2xl grid lg:grid-cols-2 gap-5 mt-8'>
                   <div className='flex items-start'>
                     <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-0'>

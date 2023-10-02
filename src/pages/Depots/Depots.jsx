@@ -49,7 +49,7 @@ const Depots = () => {
   return (
     <div className='content pt-24 pb-12 min-h-[768px]'>
       <div className='max-w-[1120px] w-full mx-auto'>
-        <form className='pt-4 sm:pt-14 pb-2 md:flex'>
+        <form className='pt-4 sm:pt-4 pb-2 md:flex'>
           <div className='flex border border-colGray rounded-[10px] p-1 w-full'>
             <input
               className='px-2 w-full focus:outline-none'

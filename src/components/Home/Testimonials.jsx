@@ -17,7 +17,7 @@ const Testimonials = () => {
       <h1 className='text-3xl sm:text-[40px] font-medium text-center px-4'>
         Отзывы
       </h1>
-      <Swiper navigation={true} modules={[Navigation]} slidesPerView={1}>
+      <Swiper className='pb-10' navigation={true} modules={[Navigation]} slidesPerView={1}>
         {testimonials?.map((el) => (
           <SwiperSlide key={el?.id} className='flex items-center'>
             <div className='max-w-[1120px] w-full mx-auto text-center py-12'>
@@ -28,7 +28,7 @@ const Testimonials = () => {
                   alt='*'
                 />
               </div>
-              <p className='text-lg px-5 xl:text-2xl font-medium my-12 relative'>
+              <p className='text-lg px-5 xl:text-2xl font-medium my-6 md:my-12 relative'>
                 {el?.desc}
                 <img
                   className='absolute w-12 md:w-auto top-[-50px] xl:left-[-40px]'
