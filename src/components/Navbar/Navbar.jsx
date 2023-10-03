@@ -49,7 +49,7 @@ const Navbar = () => {
   }, [loginModal]);
 
   return (
-    <>
+    <div className='relative'>
       <header
         className={`${
           scrolling ? '-translate-y-full' : 'translate-y-0'
@@ -110,35 +110,35 @@ const Navbar = () => {
             </button>
           )}
         </div>
-        {loginModal ? (
-          <div
-            onClick={(e) => handleOutSideModal(e)}
-            className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 z-[99]'
-          >
-            <div
-              ref={modalRef}
-              className='absolute top-[100px] right-10 max-w-[370px] w-full bg-white z-[999] p-8 flex flex-col space-y-5 rounded-2xl'
-            >
-              <NavLink
-                to='auth/sign-in'
-                className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
-              >
-                Войти
-              </NavLink>
-              <NavLink
-                to='auth/sign-up'
-                className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
-              >
-                Зарегистрироваться
-              </NavLink>
-            </div>
-          </div>
-        ) : (
-          ''
-        )}
       </header>
+      {loginModal ? (
+        <div
+          onClick={(e) => handleOutSideModal(e)}
+          className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 z-[999999]'
+        >
+          <div
+            ref={modalRef}
+            className='absolute top-[100px] right-10 max-w-[370px] w-full bg-white z-[999] p-8 flex flex-col space-y-5 rounded-2xl'
+          >
+            <NavLink
+              to='auth/sign-in'
+              className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
+            >
+              Войти
+            </NavLink>
+            <NavLink
+              to='auth/sign-up'
+              className='w-full p-3 bg-black text-white rounded-lg text-center hover:opacity-80 duration-100'
+            >
+              Зарегистрироваться
+            </NavLink>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
       <MobileMenu isOpen={showSidebar} onClose={handleCloseMenu} />
-    </>
+    </div>
   );
 };
 

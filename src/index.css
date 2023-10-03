@@ -44,7 +44,7 @@
 }
 
 .no-scroll {
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .scrollable::-webkit-scrollbar {
