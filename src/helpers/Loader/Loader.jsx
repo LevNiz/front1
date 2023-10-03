@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Loader from 'react-js-loader';
 
 export const Loading = () => {

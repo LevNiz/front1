@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 export const DepotMap = ({ center }) => {
+  const googleMapsApiKey = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY;
+
   return (
-    <LoadScript googleMapsApiKey='AIzaSyBxtJT8nNPyZtL8zra0lnh7yiaYefU1lyM'>
+    <LoadScript googleMapsApiKey={googleMapsApiKey}>
       <GoogleMap
         mapContainerStyle={{ height: '320px' }}
         zoom={10}

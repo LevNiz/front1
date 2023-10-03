@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { NavLink } from 'react-router-dom';
 import time from './../../assets/icons/time.svg';
 import local from './../../assets/icons/location-outline.svg';

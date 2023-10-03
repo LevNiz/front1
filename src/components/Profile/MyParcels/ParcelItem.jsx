@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import location from './../../../assets/icons/location3.svg';
 
 const ParcelItem = ({ parcel }) => {

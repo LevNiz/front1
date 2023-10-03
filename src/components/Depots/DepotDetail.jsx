@@ -7,7 +7,6 @@ import clock from './../../assets/icons/clock.svg';
 import call from './../../assets/icons/call.svg';
 import boxIcon from './../../assets/icons/package.svg';
 import noImg from './../../assets/images/no-image.svg';
-// import map from './../../assets/images/map.jpg';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchDepotsDetail } from '../../api/depots';
@@ -94,15 +93,15 @@ const DepotDetail = () => {
                     center={{ lat: depotItem?.lat, lng: depotItem?.lon }}
                   />
                   <p className='text-center mt-4 mb-8 flex justify-center items-center px-4 mm:px-0'>
-                  <span className='mr-1 opacity-60'>Тип склада:</span>
-                  <span className='font-medium'>
-                    {depotItem?.types === 'both'
-                      ? 'Отправка / Приём'
-                      : depotItem?.types === 'in'
-                      ? 'Приём'
-                      : 'Отправка'}
-                  </span>
-                </p>
+                    <span className='mr-1 opacity-60'>Тип склада:</span>
+                    <span className='font-medium'>
+                      {depotItem?.types === 'both'
+                        ? 'Отправка / Приём'
+                        : depotItem?.types === 'in'
+                        ? 'Приём'
+                        : 'Отправка'}
+                    </span>
+                  </p>
                 </div>
                 <div className='rounded-2xl grid lg:grid-cols-2 gap-5 mt-8 px-4 mm:px-0'>
                   <div className='flex items-start'>

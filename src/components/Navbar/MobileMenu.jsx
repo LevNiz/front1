@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { NavLink, useNavigate } from 'react-router-dom';
 import logout from './../../assets/icons/logout.svg';
 import logo from './../../assets/icons/logo-mob.svg';
