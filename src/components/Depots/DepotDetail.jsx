@@ -7,11 +7,12 @@ import clock from './../../assets/icons/clock.svg';
 import call from './../../assets/icons/call.svg';
 import boxIcon from './../../assets/icons/package.svg';
 import noImg from './../../assets/images/no-image.svg';
-import map from './../../assets/images/map.jpg';
+// import map from './../../assets/images/map.jpg';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchDepotsDetail } from '../../api/depots';
 import { ContentLoading } from '../../helpers/Loader/Loader';
+import { DepotMap } from './DepotMap';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState();
@@ -41,7 +42,7 @@ const DepotDetail = () => {
   }, [id]);
 
   return (
-    <div className='pt-28 pb-12 content'>
+    <div className='pt-28 pb-12 mm:content'>
       {loading ? (
         <ContentLoading extraStyle='85vh' />
       ) : (
@@ -50,7 +51,7 @@ const DepotDetail = () => {
             {depotItem?.nameRu}
           </h1>
           <div className='md:flex pb-12 min-h-[576px]'>
-            <div className='w-full md:w-3/6 xl:w-2/5 mb-12 md:mb-0'>
+            <div className='w-full md:w-3/6 xl:w-2/5 mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0'>
               <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
                 <img
                   src={depotItem?.images == null ? noImg : mainImg}
@@ -87,11 +88,12 @@ const DepotDetail = () => {
               </Swiper>
             </div>
             <div className='md:w-3/6 xl:w-3/5'>
-              <div className='max-w-[630px] w-full mx-auto mm:px-5 pb-5'>
-                <div>
-                  <img src={map} alt='*' />
-                </div>
-                <p className='text-center mt-4 mb-8 flex justify-center items-center'>
+              <div className='max-w-[630px] w-full mx-auto mm:px-5 pb-5 flex mm:block flex-col'>
+                <div className='order-1 mt-10 mm:mt-0'>
+                  <DepotMap
+                    center={{ lat: depotItem?.lat, lng: depotItem?.lon }}
+                  />
+                  <p className='text-center mt-4 mb-8 flex justify-center items-center px-4 mm:px-0'>
                   <span className='mr-1 opacity-60'>Тип склада:</span>
                   <span className='font-medium'>
                     {depotItem?.types === 'both'
@@ -101,7 +103,8 @@ const DepotDetail = () => {
                       : 'Отправка'}
                   </span>
                 </p>
-                <div className='rounded-2xl grid lg:grid-cols-2 gap-5 mt-8'>
+                </div>
+                <div className='rounded-2xl grid lg:grid-cols-2 gap-5 mt-8 px-4 mm:px-0'>
                   <div className='flex items-start'>
                     <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-0'>
                       <img src={call} alt='*' />
