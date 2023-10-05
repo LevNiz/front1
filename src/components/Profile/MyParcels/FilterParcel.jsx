@@ -3,9 +3,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchFilterSavedParcels } from '../../../api/parcels';
-import { fetchCities, fetchCountries } from '../../../api/tempAPI';
 import back from './../../../assets/icons/arrow-left.svg';
 import { ButtonLoading } from '../../../helpers/Loader/Loader';
+import { fetchCountries } from '../../../api/countries';
+import { fetchCities } from '../../../api/cities';
 
 // eslint-disable-next-line react/prop-types
 const FilterParcel = ({ isOpen, onClose }) => {
@@ -13,22 +14,17 @@ const FilterParcel = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
 
   const [selectedCountry, setSelectedCountry] = useState('');
-  const [countries, setCountries] = useState([]);
-  const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { cities } = useSelector((state) => state?.cities);
+  const { countries } = useSelector((state) => state?.countries);
   const { control, setValue, watch, handleSubmit } = useForm();
 
-  const fetchData = async (fetchFunction, setDataFunction) => {
-    const { success, data } = await fetchFunction();
-    if (success) {
-      setDataFunction(data);
-    }
-  };
-
   useEffect(() => {
-    fetchData(fetchCountries, setCountries);
-    fetchData(fetchCities, setCities);
+    (async () => {
+      await fetchCountries(dispatch);
+      await fetchCities(dispatch);
+    })();
   }, []);
 
   const senderCountry = watch('senderCountry');

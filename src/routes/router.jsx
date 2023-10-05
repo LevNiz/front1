@@ -29,6 +29,7 @@ import {
   Alaket,
   GbBuyer,
   GbBusiness,
+  CalculateDelivery,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -59,6 +60,9 @@ export const router = createBrowserRouter(
         </Route>
         <Route path='gb-business'>
           <Route index element={<GbBusiness />} />
+        </Route>
+        <Route path='calculate'>
+          <Route index element={<CalculateDelivery />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>

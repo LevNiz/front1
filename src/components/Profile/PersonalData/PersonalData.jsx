@@ -8,29 +8,32 @@ import city from './../../../assets/icons/new-city.svg';
 import edit from './../../../assets/icons/edit.svg';
 import noImg from './../../../assets/images/no-ava.jpeg';
 import errorImg from './../../../assets/images/error.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../../api/client';
 import { Controller, useForm } from 'react-hook-form';
-import { fetchCities, fetchCountries } from '../../../api/tempAPI';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import Select from 'react-select';
 import { UpdateProfile } from '../../../api/user';
 import { NavLink } from 'react-router-dom';
+import { fetchCountries } from '../../../api/countries';
+import { fetchCities } from '../../../api/cities';
 
 const PersonalData = () => {
   const userID = useSelector((state) => state?.user?.userID);
   const [userData, setUserData] = useState();
   const [error, setError] = useState(false);
   const [ava, setAva] = useState(null);
-  const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
-  const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [size, setSize] = useState(window.innerWidth);
 
   window.addEventListener('resize', function () {
     setSize(window.innerWidth);
   });
+
+  const { cities } = useSelector((state) => state?.cities);
+  const { countries } = useSelector((state) => state?.countries);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -75,16 +78,11 @@ const PersonalData = () => {
     },
   });
 
-  const fetchAndSetData = async (fetchFunction, setDataFunction) => {
-    const { success, data } = await fetchFunction();
-    if (success) {
-      setDataFunction(data);
-    }
-  };
-
   useEffect(() => {
-    fetchAndSetData(fetchCountries, setCountries);
-    fetchAndSetData(fetchCities, setCities);
+    (async () => {
+      await fetchCountries(dispatch);
+      await fetchCities(dispatch);
+    })();
   }, []);
 
   const countrySelect = watch('country');
@@ -132,7 +130,7 @@ const PersonalData = () => {
         <div className='py-5 md:pl-4 lg:px-12 w-full'>
           <div className='flex flex-col items-center md:flex-row'>
             <div className='relative md:mr-3 mb-3 md:mb-0'>
-              <div className='max-w-[110px] border-2 p-[2px] border-colYellow min-w-[110px] h-[110px] overflow-hidden rounded-full'>
+              <div className='md:max-w-[110px] md:min-w-[110px] max-w-[160px] min-w-[160px] border-2 p-[2px] border-colYellow h-[160px] md:h-[110px] overflow-hidden rounded-full'>
                 <img
                   className='w-full h-full object-cover rounded-full'
                   src={
@@ -162,7 +160,7 @@ const PersonalData = () => {
               </label>
             </div>
             <div className='flex flex-col justify-center mt-2 sm:mt-0 text-center md:text-left'>
-              <h4 className='text-lg sm:text-xl font-medium sm:font-bold'>
+              <h4 className='text-xl font-medium sm:font-bold'>
                 {userData?.fullname}
               </h4>
               <p className='text-sm sm:font-medium'>{userData?.city?.nameRu}</p>

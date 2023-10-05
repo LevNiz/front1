@@ -12,15 +12,14 @@ import showPass from '../../assets/icons/show-pass.svg';
 import { Controller, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { fetchCities, fetchCountries } from '../../api/tempAPI';
 import { registerUser } from '../../api/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCountries } from '../../api/countries';
+import { fetchCities } from '../../api/cities';
 
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
-  const [countries, setCountries] = useState([]);
-  const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [size, setSize] = useState(window.innerWidth);
 
@@ -28,6 +27,9 @@ const SignUp = () => {
     setSize(window.innerWidth);
   });
 
+  const { cities } = useSelector((state) => state?.cities);
+  const { countries } = useSelector((state) => state?.countries);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -52,18 +54,13 @@ const SignUp = () => {
   const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
   const hasSamePassword = password !== '' && password === confirmPass;
 
-  const fetchAndSetData = async (fetchFunction, setDataFunction) => {
-    const { success, data } = await fetchFunction();
-    if (success) {
-      setDataFunction(data);
-    }
-  };
-
   useEffect(() => {
-    fetchAndSetData(fetchCountries, setCountries);
-    fetchAndSetData(fetchCities, setCities);
+    (async () => {
+      await fetchCountries(dispatch);
+      await fetchCities(dispatch);
+    })();
   }, []);
-
+  
   const filteredCities = cities?.filter(
     (el) => el?.country?.id === selectedCountry
   );

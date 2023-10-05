@@ -82,6 +82,9 @@ const Navbar = () => {
               <NavLink to='depots'>Наши склады</NavLink>
             </li>
             <li>
+              <NavLink to='calculate'>Рассчитать доставку</NavLink>
+            </li>
+            <li>
               <NavLink to='gb-buyer'>GB-Buyer</NavLink>
             </li>
             <li>

@@ -4,6 +4,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import depotReducer from './slices/depotSlice';
 import parcelReducer from './slices/parcelSlice';
+import countryReducer from './slices/countrySlice';
+import cityReducer from './slices/citySlice';
 
 const persistConfig = {
   key: 'root',
@@ -15,6 +17,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   depots: depotReducer,
   parcels: parcelReducer,
+  countries: countryReducer,
+  cities: cityReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

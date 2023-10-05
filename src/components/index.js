@@ -24,6 +24,7 @@ import ResetPassConfirm from './Auth/ResetPassword/ResetPassConfirm';
 import ResetPassNew from './Auth/ResetPassword/ResetPassNew';
 import ResetPassSuccess from './Auth/ResetPassword/ResetPassSuccess';
 import PrivateRoute from '../helpers/Private/PrivateRoute';
+import CalcDeliveryItem from './CalculateDelivery/CalcDeliveryItem';
 
 export {
   Layout,
@@ -52,4 +53,5 @@ export {
   SignUp,
   PrivateRoute,
   MyWallet,
+  CalcDeliveryItem,
 };

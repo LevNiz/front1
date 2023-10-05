@@ -6,5 +6,16 @@ import Profile from './Profile/Profile';
 import Alaket from './Alaket/Alaket';
 import GbBuyer from './GB-Buyer/GbBuyer';
 import GbBusiness from './GB-Business/GbBusiness';
+import CalculateDelivery from './CalculateDelivery/CalculateDelivery';
 
-export { Tracking, Depots, Home, Auth, Profile, Alaket, GbBuyer, GbBusiness };
+export {
+  Tracking,
+  Depots,
+  Home,
+  Auth,
+  Profile,
+  Alaket,
+  GbBuyer,
+  GbBusiness,
+  CalculateDelivery,
+};
