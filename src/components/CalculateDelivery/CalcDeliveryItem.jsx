@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
-import { fetchCities } from '../../api/cities';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { CalcDeliveryForm } from './CalcDeliveryForm';
+import { fetchCities } from '../../api/cities';
+import { fetchCountries } from '../../api/countries';
 
 const CalcDeliveryItem = () => {
   const { cities } = useSelector((state) => state?.cities);
@@ -10,16 +12,17 @@ const CalcDeliveryItem = () => {
 
   const cityOptions = cities?.map((el) => ({
     value: el?.id,
-    label: el?.nameRu,
+    label: `${el?.nameRu}, ${el?.country?.nameRu}`,
   }));
 
   const onSubmitCalc = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   useEffect(() => {
     (async () => {
       await fetchCities(dispatch);
+      await fetchCountries(dispatch);
     })();
   }, []);
 

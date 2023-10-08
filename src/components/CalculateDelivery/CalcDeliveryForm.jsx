@@ -91,7 +91,7 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
               <Select
                 {...field}
                 options={cityOptions}
-                placeholder='Выберите город'
+                placeholder='Выберите размер'
                 onChange={(selectedOption) => {
                   field.onChange(selectedOption);
                 }}
