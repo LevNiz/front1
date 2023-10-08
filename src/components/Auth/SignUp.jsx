@@ -239,9 +239,14 @@ const SignUp = () => {
                       setSelectedCountry(selectedOption.value);
                     }}
                     styles={{
-                      control: (provided) => ({
+                      control: (provided, state) => ({
                         ...provided,
                         padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                        boxShadow: state.isFocused ? 0 : 0,
+                        border: state.isFocused ? '1px solid #999' : '',
+                        '&:hover': {
+                          border: state.isFocused ? '1px solid #999' : '',
+                        },
                       }),
                     }}
                   />
@@ -276,9 +281,14 @@ const SignUp = () => {
                       field.onChange(selectedOption);
                     }}
                     styles={{
-                      control: (provided) => ({
+                      control: (provided, state) => ({
                         ...provided,
                         padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                        boxShadow: state.isFocused ? 0 : 0,
+                        border: state.isFocused ? '1px solid #999' : '',
+                        '&:hover': {
+                          border: state.isFocused ? '1px solid #999' : '',
+                        },
                       }),
                     }}
                   />

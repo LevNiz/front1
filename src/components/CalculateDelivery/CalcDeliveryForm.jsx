@@ -28,8 +28,13 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
                   field.onChange(selectedOption);
                 }}
                 styles={{
-                  control: (provided) => ({
+                  control: (provided, state) => ({
                     ...provided,
+                    boxShadow: state.isFocused ? 0 : 0,
+                    border: state.isFocused ? '1px solid #999' : '',
+                    '&:hover': {
+                      border: state.isFocused ? '1px solid #999' : '',
+                    },
                     padding: '8px',
                   }),
                 }}
@@ -57,8 +62,13 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
                   field.onChange(selectedOption);
                 }}
                 styles={{
-                  control: (provided) => ({
+                  control: (provided, state) => ({
                     ...provided,
+                    boxShadow: state.isFocused ? 0 : 0,
+                    border: state.isFocused ? '1px solid #999' : '',
+                    '&:hover': {
+                      border: state.isFocused ? '1px solid #999' : '',
+                    },
                     padding: '8px',
                   }),
                 }}
@@ -86,8 +96,13 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
                   field.onChange(selectedOption);
                 }}
                 styles={{
-                  control: (provided) => ({
+                  control: (provided, state) => ({
                     ...provided,
+                    boxShadow: state.isFocused ? 0 : 0,
+                    border: state.isFocused ? '1px solid #999' : '',
+                    '&:hover': {
+                      border: state.isFocused ? '1px solid #999' : '',
+                    },
                     padding: '8px',
                   }),
                 }}
