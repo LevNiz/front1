@@ -75,6 +75,7 @@ export const router = createBrowserRouter(
           </Route>
           <Route path='alaket' element={<Alaket />} />
         </Route>
+        <Route path='*' element={<Home />} />
       </Route>
     </Route>
   )
