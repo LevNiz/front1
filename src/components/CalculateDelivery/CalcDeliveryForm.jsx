@@ -20,38 +20,30 @@ const CalcDeliveryForm = ({ onSubmit }) => {
     formState: { errors },
   } = useForm();
 
-  const { length, width, height, weight } = watch([
-    'length',
-    'width',
-    'height',
-    'weight',
-  ]);
+  const length = watch('length');
+  const width = watch('width');
+  const height = watch('height');
+  const weight = watch('weight');
 
   useEffect(() => {
-    const calculateScopeWeight = () => {
-      if (
-        weight !== undefined &&
-        height !== undefined &&
-        width !== undefined &&
-        length !== undefined
-      ) {
-        const parcelWeight = (width * length * height) / 5000;
-        setScopeWeight(parcelWeight > weight ? parcelWeight : null);
-      }
-    };
-
-    calculateScopeWeight();
+    if (
+      weight !== undefined &&
+      height !== undefined &&
+      width !== undefined &&
+      length !== undefined
+    ) {
+      const parcelWeight = (width * length * height) / 5000;
+      setScopeWeight(parcelWeight > weight ? parcelWeight : null);
+    }
   }, [weight, height, width, length]);
 
   useEffect(() => {
-    const fetchParcelCategoriesData = async () => {
+    (async () => {
       const { success, data } = await fetchParcelCategories();
       if (success) {
         setParcelData(data);
       }
-    };
-
-    fetchParcelCategoriesData();
+    })();
   }, []);
 
   return (

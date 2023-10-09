@@ -26,13 +26,11 @@ const CalcDeliveryItem = () => {
     if (parcelCost) {
       const costPerKg = parcelCost.costPerKg;
       setParcelCost(data.parcelSize.value * costPerKg);
+
       const { width, length, height, weight } = data;
       const parcelWeight = (width * length * height) / 5000;
-      if (parcelWeight > weight) {
-        setScopeWeight(true);
-      } else {
-        setScopeWeight(false);
-      }
+
+      setScopeWeight(parcelWeight > weight);
     }
   };
 
