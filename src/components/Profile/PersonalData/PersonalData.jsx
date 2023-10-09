@@ -189,6 +189,7 @@ const PersonalData = () => {
                 <p className='font-bold mb-2'>Номер телефона</p>
                 <div className='relative'>
                   <input
+                    type='tel'
                     className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
                     placeholder='Введите ваш телефон'
                     {...register('phone', {

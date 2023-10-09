@@ -4,6 +4,8 @@ import { fetchCosts } from '../../api/costs';
 
 const CalcDeliveryItem = () => {
   const [costs, setCosts] = useState('');
+  const [parcelCost, setParcelCost] = useState('');
+  const [scopeWeight, setScopeWeight] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -14,21 +16,23 @@ const CalcDeliveryItem = () => {
     })();
   }, []);
 
-
-
   const onSubmitCalc = (data) => {
-    console.log(data)
-    const getCost = costs?.find(
+    const parcelCost = costs?.find(
       (cost) =>
         cost?.fromCity === data?.senderCity?.value &&
         cost?.toCity === data?.receiverCity?.value
     );
 
-    if (getCost) {
-      const costPerKg = getCost.costPerKg;
-      console.log(costPerKg);
-    } else {
-      console.log('Нет данных о стоимости доставки для данной пары городов.');
+    if (parcelCost) {
+      const costPerKg = parcelCost.costPerKg;
+      setParcelCost(data.parcelSize.value * costPerKg);
+      const { width, length, height, weight } = data;
+      const parcelWeight = (width * length * height) / 5000;
+      if (parcelWeight > weight) {
+        setScopeWeight(true);
+      } else {
+        setScopeWeight(false);
+      }
     }
   };
 

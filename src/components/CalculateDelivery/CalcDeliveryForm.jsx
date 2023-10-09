@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchParcelCategories } from '../../api/parcels';
-import { useSelector } from 'react-redux';
+import attention from './../../assets/icons/attention.svg';
 
 const CalcDeliveryForm = ({ onSubmit }) => {
   const [parcelData, setParcelData] = useState([]);
   const [parcelSize, setParcelSize] = useState('');
+  const [scopeWeight, setScopeWeight] = useState(null);
 
   const { cities } = useSelector((state) => state?.cities);
 
@@ -14,16 +16,42 @@ const CalcDeliveryForm = ({ onSubmit }) => {
     handleSubmit,
     control,
     register,
+    watch,
     formState: { errors },
   } = useForm();
 
+  const { length, width, height, weight } = watch([
+    'length',
+    'width',
+    'height',
+    'weight',
+  ]);
+
   useEffect(() => {
-    (async () => {
+    const calculateScopeWeight = () => {
+      if (
+        weight !== undefined &&
+        height !== undefined &&
+        width !== undefined &&
+        length !== undefined
+      ) {
+        const parcelWeight = (width * length * height) / 5000;
+        setScopeWeight(parcelWeight > weight ? parcelWeight : null);
+      }
+    };
+
+    calculateScopeWeight();
+  }, [weight, height, width, length]);
+
+  useEffect(() => {
+    const fetchParcelCategoriesData = async () => {
       const { success, data } = await fetchParcelCategories();
       if (success) {
         setParcelData(data);
       }
-    })();
+    };
+
+    fetchParcelCategoriesData();
   }, []);
 
   return (
@@ -106,7 +134,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
         <div>
           <p className='font-medium mb-2'>Размер посылки</p>
           <Controller
-            name='city'
+            name='parcelSize'
             control={control}
             rules={{ required: 'Поле обязательно к заполнению!' }}
             render={({ field }) => (
@@ -118,7 +146,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                     label: 'Точные',
                   },
                   ...(parcelData || []).map((el) => ({
-                    value: el?.id,
+                    value: el?.weight,
                     label: `${el?.nameRu} (${el?.length}x${el?.width}x${el?.height} см)`,
                   })),
                 ]}
@@ -142,13 +170,13 @@ const CalcDeliveryForm = ({ onSubmit }) => {
               />
             )}
           />
-          {errors?.city && (
+          {errors?.parcelSize && (
             <p className='text-red-500 mt-1 text-sm'>
-              {errors?.city.message || 'Error!'}
+              {errors?.parcelSize.message || 'Error!'}
             </p>
           )}
         </div>
-        {parcelSize?.value === 'custom' ? (
+        {parcelSize?.label === 'Точные' ? (
           <>
             <div>
               <p className='font-medium mb-2'>Габариты, см</p>
@@ -156,6 +184,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                   placeholder='Длина'
+                  type='number'
                   {...register('length', {
                     required: 'Поле обязательно к заполнению!',
                   })}
@@ -164,6 +193,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                   placeholder='Ширина'
+                  type='number'
                   {...register('width', {
                     required: 'Поле обязательно к заполнению!',
                   })}
@@ -172,6 +202,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                   placeholder='Высота'
+                  type='number'
                   {...register('height', {
                     required: 'Поле обязательно к заполнению!',
                   })}
@@ -197,12 +228,42 @@ const CalcDeliveryForm = ({ onSubmit }) => {
           ''
         )}
       </div>
-      <button
-        type='submit'
-        className='uppercase font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 max-w-[320px] w-full ml-auto flex justify-center items-center mt-5'
-      >
-        Рассчитать
-      </button>
+      <div className='flex justify-between items-end mt-5'>
+        <div>
+          {scopeWeight !== null ? (
+            <>
+              <p className='font-medium leading-4'>Объёмный вес, кг</p>
+              <p className='text-[12px]'>
+                Объёмный вес - рассчитывается по формуле: длина * ширина *
+                высота в см / 5000
+              </p>
+              <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
+                {scopeWeight}
+              </div>
+              <div className='flex items-start p-3 w-max rounded-lg bg-orange-200'>
+                <img className='mt-[2px]' src={attention} alt='*' />
+                <div className='ml-2'>
+                  <h5 className='text-red-500 font-medium text-sm'>
+                    Обратите внимание!
+                  </h5>
+                  <p className='text-xs'>
+                    По габаритам объёмный вес превышает физический, <br />
+                    поэтому услуги будут рассчитаны по объёмному весу.
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : (
+            ''
+          )}
+        </div>
+        <button
+          type='submit'
+          className='uppercase font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 max-w-[320px] w-full'
+        >
+          Рассчитать
+        </button>
+      </div>
     </form>
   );
 };
