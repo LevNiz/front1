@@ -1,34 +1,40 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { CalcDeliveryForm } from './CalcDeliveryForm';
-import { fetchCities } from '../../api/cities';
-import { fetchCountries } from '../../api/countries';
+import { useEffect, useState } from 'react';
+import CalcDeliveryForm from './CalcDeliveryForm';
+import { fetchCosts } from '../../api/costs';
 
 const CalcDeliveryItem = () => {
-  const { cities } = useSelector((state) => state?.cities);
-
-  const dispatch = useDispatch();
-
-  const cityOptions = cities?.map((el) => ({
-    value: el?.id,
-    label: `${el?.nameRu}, ${el?.country?.nameRu}`,
-  }));
-
-  const onSubmitCalc = (data) => {
-    console.log(data);
-  };
+  const [costs, setCosts] = useState('');
 
   useEffect(() => {
     (async () => {
-      await fetchCities(dispatch);
-      await fetchCountries(dispatch);
+      const { success, data } = await fetchCosts();
+      if (success) {
+        setCosts(data);
+      }
     })();
   }, []);
 
+
+
+  const onSubmitCalc = (data) => {
+    console.log(data)
+    const getCost = costs?.find(
+      (cost) =>
+        cost?.fromCity === data?.senderCity?.value &&
+        cost?.toCity === data?.receiverCity?.value
+    );
+
+    if (getCost) {
+      const costPerKg = getCost.costPerKg;
+      console.log(costPerKg);
+    } else {
+      console.log('Нет данных о стоимости доставки для данной пары городов.');
+    }
+  };
+
   return (
     <div className='shadow-[0_4px_15px_#00000026] p-8 rounded-xl'>
-      <CalcDeliveryForm onSubmit={onSubmitCalc} cityOptions={cityOptions} />
+      <CalcDeliveryForm onSubmit={onSubmitCalc} />
     </div>
   );
 };

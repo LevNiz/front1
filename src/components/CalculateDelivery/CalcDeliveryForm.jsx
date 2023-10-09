@@ -1,19 +1,35 @@
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
+import { fetchParcelCategories } from '../../api/parcels';
+import { useSelector } from 'react-redux';
 
-export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
+const CalcDeliveryForm = ({ onSubmit }) => {
+  const [parcelData, setParcelData] = useState([]);
+  const [parcelSize, setParcelSize] = useState('');
+
+  const { cities } = useSelector((state) => state?.cities);
+
   const {
     handleSubmit,
     control,
+    register,
     formState: { errors },
-  } = useForm({
-    mode: 'onChange',
-  });
+  } = useForm();
+
+  useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchParcelCategories();
+      if (success) {
+        setParcelData(data);
+      }
+    })();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='grid grid-cols-3 gap-6'>
-        <div className='mb-4'>
+        <div>
           <p className='font-medium mb-2'>Город отправки</p>
           <Controller
             name='senderCity'
@@ -22,7 +38,10 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
             render={({ field }) => (
               <Select
                 {...field}
-                options={cityOptions}
+                options={cities?.map((el) => ({
+                  value: el?.id,
+                  label: `${el?.nameRu}, ${el?.country?.nameRu}`,
+                }))}
                 placeholder='Выберите город'
                 onChange={(selectedOption) => {
                   field.onChange(selectedOption);
@@ -47,7 +66,7 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
             </p>
           )}
         </div>
-        <div className='mb-4'>
+        <div>
           <p className='font-medium mb-2'>Город назначения</p>
           <Controller
             name='receiverCity'
@@ -56,7 +75,10 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
             render={({ field }) => (
               <Select
                 {...field}
-                options={cityOptions}
+                options={cities?.map((el) => ({
+                  value: el?.id,
+                  label: `${el?.nameRu}, ${el?.country?.nameRu}`,
+                }))}
                 placeholder='Выберите город'
                 onChange={(selectedOption) => {
                   field.onChange(selectedOption);
@@ -81,7 +103,7 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
             </p>
           )}
         </div>
-        <div className='mb-4'>
+        <div>
           <p className='font-medium mb-2'>Размер посылки</p>
           <Controller
             name='city'
@@ -90,10 +112,21 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
             render={({ field }) => (
               <Select
                 {...field}
-                options={cityOptions}
+                options={[
+                  {
+                    value: 'custom',
+                    label: 'Точные',
+                  },
+                  ...(parcelData || []).map((el) => ({
+                    value: el?.id,
+                    label: `${el?.nameRu} (${el?.length}x${el?.width}x${el?.height} см)`,
+                  })),
+                ]}
                 placeholder='Выберите размер'
+                isSearchable={false}
                 onChange={(selectedOption) => {
                   field.onChange(selectedOption);
+                  setParcelSize(selectedOption);
                 }}
                 styles={{
                   control: (provided, state) => ({
@@ -115,6 +148,54 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
             </p>
           )}
         </div>
+        {parcelSize?.value === 'custom' ? (
+          <>
+            <div>
+              <p className='font-medium mb-2'>Габариты, см</p>
+              <div className='flex justify-between items-center'>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='Длина'
+                  {...register('length', {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                />
+                <span className='mx-2'>x</span>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='Ширина'
+                  {...register('width', {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                />
+                <span className='mx-2'>x</span>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='Высота'
+                  {...register('height', {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                />
+              </div>
+            </div>
+            <div>
+              <p className='font-medium mb-2'>Вес посылки, кг</p>
+              <div className='flex justify-between items-center max-w-[140px]'>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='Вес'
+                  type='number'
+                  defaultValue='0.1'
+                  {...register('weight', {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                />
+              </div>
+            </div>
+          </>
+        ) : (
+          ''
+        )}
       </div>
       <button
         type='submit'
@@ -125,3 +206,5 @@ export const CalcDeliveryForm = ({ cityOptions, onSubmit }) => {
     </form>
   );
 };
+
+export default CalcDeliveryForm;

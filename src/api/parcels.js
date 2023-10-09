@@ -121,3 +121,13 @@ export const fetchSaveParcel = async (data) => {
     return { success: false };
   }
 };
+
+// Parcel category:
+export const fetchParcelCategories = async () => {
+  try {
+    const res = await request.get('core/package_data');
+    return { success: true, data: res?.data?.results }
+  } catch (error) {
+    return { success: false, data: error }
+  }
+}
