@@ -268,7 +268,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
             </div>
           </div>
         ) : (
-          ''
+          <div></div>
         )}
         <button
           type='submit'

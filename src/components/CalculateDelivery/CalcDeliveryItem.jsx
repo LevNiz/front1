@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import CalcDeliveryForm from './CalcDeliveryForm';
 import { fetchCosts } from '../../api/costs';
+import DeliveryTariffs from './DeliveryTariffs';
 
 const CalcDeliveryItem = () => {
   const [costs, setCosts] = useState('');
@@ -37,12 +38,16 @@ const CalcDeliveryItem = () => {
     }
   };
 
-  console.log(parcelCost);
-
   return (
-    <div className='shadow-[0_4px_15px_#00000026] p-8 rounded-xl'>
-      <CalcDeliveryForm onSubmit={onSubmitCalc} />
-    </div>
+    <>
+      <div className='shadow-[0_8px_34px_#00000026] p-7 rounded-xl'>
+        <h3 className='text-xl text-[#6747e5] pb-3 font-medium'>
+          Основные параметры
+        </h3>
+        <CalcDeliveryForm onSubmit={onSubmitCalc} />
+      </div>
+      <DeliveryTariffs parcelCost={parcelCost} />
+    </>
   );
 };
 
