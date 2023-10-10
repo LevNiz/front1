@@ -20,6 +20,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
     formState: { errors },
   } = useForm();
 
+  const parcelSizeSelect = watch('parcelSize');
   const length = watch('length');
   const width = watch('width');
   const height = watch('height');
@@ -171,14 +172,20 @@ const CalcDeliveryForm = ({ onSubmit }) => {
         {parcelSize?.label === 'Точные' ? (
           <>
             <div>
-              <p className='font-medium mb-2'>Габариты, см</p>
+              <p className='font-medium mb-2'>
+                Габариты, см
+                <span className='text-xs ml-2 font-light'>
+                  (длина, ширина, высота)
+                </span>
+              </p>
               <div className='flex justify-between items-center'>
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                   placeholder='Длина'
                   type='number'
+                  step='0.000001'
                   {...register('length', {
-                    required: 'Поле обязательно к заполнению!',
+                    required: true,
                   })}
                 />
                 <span className='mx-2'>x</span>
@@ -186,8 +193,9 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                   placeholder='Ширина'
                   type='number'
+                  step='0.000001'
                   {...register('width', {
-                    required: 'Поле обязательно к заполнению!',
+                    required: true,
                   })}
                 />
                 <span className='mx-2'>x</span>
@@ -195,8 +203,9 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                   placeholder='Высота'
                   type='number'
+                  step='0.000001'
                   {...register('height', {
-                    required: 'Поле обязательно к заполнению!',
+                    required: true,
                   })}
                 />
               </div>
@@ -208,9 +217,10 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                   placeholder='Вес'
                   type='number'
+                  step='0.000001'
                   defaultValue='0.1'
                   {...register('weight', {
-                    required: 'Поле обязательно к заполнению!',
+                    required: true,
                   })}
                 />
               </div>
@@ -221,34 +231,45 @@ const CalcDeliveryForm = ({ onSubmit }) => {
         )}
       </div>
       <div className='flex justify-between items-end mt-5'>
-        <div>
-          {scopeWeight !== null ? (
-            <>
-              <p className='font-medium leading-4'>Объёмный вес, кг</p>
-              <p className='text-[12px]'>
-                Объёмный вес - рассчитывается по формуле: длина * ширина *
-                высота в см / 5000
-              </p>
-              <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
-                {scopeWeight}
-              </div>
-              <div className='flex items-start p-3 w-max rounded-lg bg-orange-200'>
-                <img className='mt-[2px]' src={attention} alt='*' />
-                <div className='ml-2'>
-                  <h5 className='text-red-500 font-medium text-sm'>
-                    Обратите внимание!
-                  </h5>
-                  <p className='text-xs'>
-                    По габаритам объёмный вес превышает физический, <br />
-                    поэтому услуги будут рассчитаны по объёмному весу.
-                  </p>
+        {parcelSize?.label === 'Точные' ? (
+          <div>
+            {scopeWeight !== null ? (
+              <>
+                <p className='font-medium leading-4'>Объёмный вес, кг</p>
+                <p className='text-[12px]'>
+                  Объёмный вес - рассчитывается по формуле: длина * ширина *
+                  высота в см / 5000
+                </p>
+                <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
+                  {scopeWeight}
                 </div>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
-        </div>
+                <div className='flex items-start p-3 w-max rounded-lg bg-orange-200'>
+                  <img className='mt-[2px]' src={attention} alt='*' />
+                  <div className='ml-2'>
+                    <h5 className='text-red-500 font-medium text-sm'>
+                      Обратите внимание!
+                    </h5>
+                    <p className='text-xs'>
+                      По габаритам объёмный вес превышает физический, <br />
+                      поэтому услуги будут рассчитаны по объёмному весу.
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              ''
+            )}
+          </div>
+        ) : parcelSizeSelect?.value ? (
+          <div>
+            <p className='font-medium leading-4'>Вес, кг</p>
+            <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
+              До {parcelSizeSelect?.value} кг
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
         <button
           type='submit'
           className='uppercase font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 max-w-[320px] w-full'
