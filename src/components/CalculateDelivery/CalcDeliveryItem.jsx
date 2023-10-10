@@ -6,6 +6,11 @@ import DeliveryTariffs from './DeliveryTariffs';
 const CalcDeliveryItem = () => {
   const [costs, setCosts] = useState('');
   const [parcelCost, setParcelCost] = useState('');
+  const [isClickedForm, setIsClickedForm] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsClickedForm(false);
+  };
 
   useEffect(() => {
     (async () => {
@@ -33,6 +38,7 @@ const CalcDeliveryItem = () => {
         parcelCost = data.parcelSize.value * costPerKg;
       }
       setParcelCost(parcelCost.toFixed(2));
+      setIsClickedForm(true);
     } else {
       alert('Цена доставки не указана! (из города / в город)');
     }
@@ -40,13 +46,22 @@ const CalcDeliveryItem = () => {
 
   return (
     <>
-      <div className='shadow-[0_8px_34px_#00000026] p-7 rounded-xl'>
+      <div
+        className={`${
+          isClickedForm ? 'pointer-events-none opacity-40' : ''
+        } shadow-[0_8px_34px_#00000026] p-7 rounded-xl`}
+      >
         <h3 className='text-xl text-[#6747e5] pb-3 font-medium'>
           Основные параметры
         </h3>
         <CalcDeliveryForm onSubmit={onSubmitCalc} />
       </div>
-      <DeliveryTariffs parcelCost={parcelCost} />
+      {isClickedForm && (
+        <DeliveryTariffs
+          onButtonClick={handleButtonClick}
+          parcelCost={parcelCost}
+        />
+      )}
     </>
   );
 };
