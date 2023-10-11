@@ -7,6 +7,7 @@ import Alaket from './Alaket/Alaket';
 import GbBuyer from './GB-Buyer/GbBuyer';
 import GbBusiness from './GB-Business/GbBusiness';
 import CalculateDelivery from './CalculateDelivery/CalculateDelivery';
+import OrderDelivery from './OrderDelivery/OrderDelivery';
 
 export {
   Tracking,
@@ -18,4 +19,5 @@ export {
   GbBuyer,
   GbBusiness,
   CalculateDelivery,
+  OrderDelivery,
 };

@@ -30,6 +30,7 @@ import {
   GbBuyer,
   GbBusiness,
   CalculateDelivery,
+  OrderDelivery,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -74,6 +75,7 @@ export const router = createBrowserRouter(
             <Route path='my-parcels' element={<MyParcels />} />
           </Route>
           <Route path='alaket' element={<Alaket />} />
+          <Route path='order-delivery' element={<OrderDelivery />} />
         </Route>
         <Route path='*' element={<Home />} />
       </Route>
