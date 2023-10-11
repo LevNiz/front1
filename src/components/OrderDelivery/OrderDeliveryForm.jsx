@@ -55,7 +55,7 @@ const OrderDeliveryForm = ({ state, onSubmit }) => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className='pl-10' onSubmit={handleSubmit(onSubmit)}>
       <div className='grid grid-cols-3 gap-6'>
         <div>
           <p className='font-medium mb-2'>Город отправки</p>
@@ -279,7 +279,7 @@ const OrderDeliveryForm = ({ state, onSubmit }) => {
         )}
         <button
           type='submit'
-          className='uppercase font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 max-w-[320px] w-full'
+          className='font-medium hover:opacity-80 p-3 flex justify-center items-center ml-auto rounded-lg bg-black text-white duration-150 max-w-[280px] w-full mt-5'
         >
           Рассчитать
         </button>

@@ -7,19 +7,18 @@ const OrderDeliveryTariffs = ({ state, parcelCost }) => {
   const choosedTariff = tariffsData?.filter(
     (tariff) => tariff?.id === state?.tariff
   );
-  const [activeTariff, setActiveTariff] = useState(choosedTariff[0].id);
+  const [activeTariff, setActiveTariff] = useState(choosedTariff[0]?.id);
 
   const handleTariffClick = (id) => {
     setActiveTariff(id);
   };
 
   return (
-    <div>
-      <h3 className='text-xl text-[#6747e5] pb-1 font-medium'>Выбор тарифа</h3>
+    <div className='pl-10'>
       <p className='mb-3 text-xs'>
         Выберите тариф <span className='text-red-500'>*</span>
       </p>
-      <div className='max-w-[991px] grid grid-cols-2 gap-5'>
+      <div className='max-w-[768px] grid grid-cols-2 gap-5'>
         {tariffsData.map((el) => (
           <div
             key={el.id}
@@ -55,8 +54,10 @@ const OrderDeliveryTariffs = ({ state, parcelCost }) => {
             </div>
             <div className='bg-[#6747e5] text-white p-2 rounded-md text-center text-lg font-bold'>
               {el?.status === 'Быстро'
-                ? (parseFloat(parcelCost) + 4).toFixed(2)
-                : parcelCost}{' '}
+                ? (parcelCost ? parseFloat(parcelCost) + 4 : 0).toFixed(2)
+                : parcelCost
+                ? parcelCost
+                : (0).toFixed(2)}
               $
             </div>
           </div>
