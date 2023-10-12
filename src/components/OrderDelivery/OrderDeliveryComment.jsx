@@ -1,10 +1,6 @@
-import { useForm } from 'react-hook-form';
-
-const OrderDeliveryComment = () => {
-  const { register } = useForm();
-
+const OrderDeliveryComment = ({ register, errors }) => {
   return (
-    <form className='pl-10'>
+    <div className='pl-10'>
       <div className='max-w-[768px]'>
         <p className='font-medium mb-2'>
           Дополнительная информация или комментарий
@@ -16,14 +12,13 @@ const OrderDeliveryComment = () => {
             required: 'Поле обязательно к заполнению!',
           })}
         />
+        {errors?.comment && (
+          <p className='text-red-500 mt-1 text-sm'>
+            {errors?.comment.message || 'Error!'}
+          </p>
+        )}
       </div>
-      <button
-        type='submit'
-        className='font-medium hover:opacity-80 p-3 flex justify-center items-center ml-auto rounded-lg bg-black text-white duration-150 max-w-[280px] w-full mt-5'
-      >
-        Далее
-      </button>
-    </form>
+    </div>
   );
 };
 

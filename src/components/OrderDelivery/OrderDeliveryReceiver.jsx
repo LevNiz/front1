@@ -1,12 +1,10 @@
-import { useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
 
-const OrderDeliveryReceiver = () => {
-  const { register } = useForm();
-
+const OrderDeliveryReceiver = ({ register, errors, control }) => {
   return (
-    <form className='pl-10'>
+    <div className='pl-10'>
       <div className='grid grid-cols-2 gap-6 max-w-[768px]'>
         <div>
           <p className='font-medium mb-2'>ФИО получателя</p>
@@ -17,31 +15,45 @@ const OrderDeliveryReceiver = () => {
               required: 'Поле обязательно к заполнению!',
             })}
           />
+          {errors?.receiverName && (
+            <p className='text-red-500 mt-1 text-sm'>
+              {errors?.receiverName.message || 'Error!'}
+            </p>
+          )}
         </div>
         <div>
           <p className='font-medium mb-2'>Номер получателя</p>
-          <PhoneInput
-            country={'kg'}
-            specialLabel={false}
-            inputProps={{
-              name: 'receiverPhone',
-              required: true,
-              className:
-                'w-full border border-colGray2 p-4 pl-[56px] rounded-lg focus:border-black focus:outline-none',
-            }}
-            {...register('receiverPhone', {
+          <Controller
+            name='receiverPhone'
+            className='w-full'
+            control={control}
+            defaultValue=''
+            rules={{
               required: 'Поле обязательно к заполнению!',
-            })}
+              validate: (value) => value !== '996',
+            }}
+            render={({ field }) => (
+              <PhoneInput
+                {...field}
+                placeholder='Введите номер телефона'
+                country={'kg'}
+                specialLabel={false}
+                inputProps={{
+                  className:
+                    'w-full border border-colGray2 p-4 pl-[56px] rounded-lg focus:border-black focus:outline-none',
+                }}
+              />
+            )}
           />
+          {errors?.receiverPhone && (
+            <p className='text-red-500 mt-1 text-sm'>
+              {errors?.receiverPhone?.message ||
+                'Поле обязательно к заполнению!'}
+            </p>
+          )}
         </div>
       </div>
-      <button
-        type='submit'
-        className='font-medium hover:opacity-80 p-3 flex justify-center items-center ml-auto rounded-lg bg-black text-white duration-150 max-w-[280px] w-full mt-5'
-      >
-        Далее
-      </button>
-    </form>
+    </div>
   );
 };
 

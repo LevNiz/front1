@@ -3,7 +3,7 @@ import vector from './../../assets/icons/vector.svg';
 import { tariffsData } from '../../constants/tariffsData';
 import { useState } from 'react';
 
-const OrderDeliveryTariffs = ({ state, parcelCost }) => {
+const OrderDeliveryTariffs = ({ state, parcelCost, onHandleTariff }) => {
   const choosedTariff = tariffsData?.filter(
     (tariff) => tariff?.id === state?.tariff
   );
@@ -22,7 +22,10 @@ const OrderDeliveryTariffs = ({ state, parcelCost }) => {
         {tariffsData.map((el) => (
           <div
             key={el.id}
-            onClick={() => handleTariffClick(el?.id)}
+            onClick={() => {
+              handleTariffClick(el?.id);
+              onHandleTariff(el?.id);
+            }}
             className={`border-4 ${
               activeTariff === el?.id ? 'border-colYellow' : 'border-gray-200'
             } p-4 rounded-xl cursor-pointer`}

@@ -1,10 +1,13 @@
-import { useForm } from 'react-hook-form';
+const OrderDeliveryDetail = ({ register, errors }) => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1
+  const day = String(today.getDate()).padStart(2, '0');
 
-const OrderDeliveryDetail = () => {
-  const { register } = useForm();
+  const todayDate = `${year}-${month}-${day}`;
 
   return (
-    <form className='pl-10'>
+    <div className='pl-10'>
       <div className='grid grid-cols-2 gap-6 max-w-[768px]'>
         <div>
           <p className='font-medium mb-2'>Трекинг номер</p>
@@ -24,11 +27,16 @@ const OrderDeliveryDetail = () => {
             className='w-full border border-colGray2 p-4 rounded-lg focus:border-black focus:outline-none'
             placeholder='Необязательно'
             type='date'
-            defaultValue='2023-09-11'
+            defaultValue={todayDate}
             {...register('dateArrival', {
-              required: false,
+              required: 'Поле обязательно к заполнению!',
             })}
           />
+          {errors?.dateArrival && (
+            <p className='text-red-500 mt-1 text-sm'>
+              {errors?.dateArrival?.message || 'Поле обязательно к заполнению!'}
+            </p>
+          )}
         </div>
         <div>
           <p className='font-medium mb-2'>
@@ -43,13 +51,7 @@ const OrderDeliveryDetail = () => {
           />
         </div>
       </div>
-      <button
-        type='submit'
-        className='font-medium hover:opacity-80 p-3 flex justify-center items-center ml-auto rounded-lg bg-black text-white duration-150 max-w-[280px] w-full mt-5'
-      >
-        Далее
-      </button>
-    </form>
+    </div>
   );
 };
 
