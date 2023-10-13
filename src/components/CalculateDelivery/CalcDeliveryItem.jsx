@@ -39,21 +39,31 @@ const CalcDeliveryItem = () => {
     );
     if (cityParcelCost) {
       const costPerKg = cityParcelCost.costPerKg;
-      let parcelCost;
+      let cost;
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
         const parcelWeight = (width * length * height) / 5000;
-        parcelCost = Math.max(parcelWeight, data.weight) * costPerKg;
+        if (tariff === 2) {
+          cost = Math.max(parcelWeight, data.weight) * costPerKg + 4;
+        } else {
+          cost = Math.max(parcelWeight, data.weight) * costPerKg;
+        }
       } else {
-        parcelCost = data.parcelSize.value * costPerKg;
+        if (tariff === 2) {
+          cost = Number(data.parcelSize.weight) * Number(costPerKg) + 4;
+        } else {
+          cost = Number(data.parcelSize.weight) * costPerKg;
+        }
       }
-      setParcelCost(parcelCost.toFixed(2));
+      setParcelCost(cost.toFixed(2));
       setIsClickedForm(true);
       setOrderData(data);
     } else {
       alert('Цена доставки не указана! (из города / в город)');
     }
   };
+
+  console.log(parcelCost)
 
   return (
     <>

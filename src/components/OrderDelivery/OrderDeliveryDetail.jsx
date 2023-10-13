@@ -45,7 +45,7 @@ const OrderDeliveryDetail = ({ register, errors }) => {
           <input
             className='w-full border border-colGray2 p-4 rounded-lg focus:border-black focus:outline-none'
             placeholder='Необязательно'
-            {...register('deliveryService', {
+            {...register('serviceName', {
               required: false,
             })}
           />

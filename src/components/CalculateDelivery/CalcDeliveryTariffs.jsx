@@ -54,7 +54,7 @@ const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
             <div className='bg-[#6747e5] text-white p-2 rounded-md text-center text-lg font-bold'>
               {el?.status === 'Быстро'
                 ? (parseFloat(parcelCost) + 4).toFixed(2)
-                : parcelCost}{' '}
+                : parcelCost}
               $
             </div>
           </div>

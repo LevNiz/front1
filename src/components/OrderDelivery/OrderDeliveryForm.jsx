@@ -73,6 +73,7 @@ const OrderDeliveryForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                   options={cities?.map((el) => ({
                     value: el?.id,
                     label: `${el?.nameRu}, ${el?.country?.nameRu}`,
+                    fromCountry: el?.country?.id,
                   }))}
                   placeholder='Выберите город'
                   onChange={(selectedOption) => {
@@ -110,6 +111,7 @@ const OrderDeliveryForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                   options={cities?.map((el) => ({
                     value: el?.id,
                     label: `${el?.nameRu}, ${el?.country?.nameRu}`,
+                    toCountry: el?.country?.id,
                   }))}
                   placeholder='Выберите город'
                   onChange={(selectedOption) => {
@@ -150,8 +152,9 @@ const OrderDeliveryForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                       label: 'Точные',
                     },
                     ...(parcelData || []).map((el) => ({
-                      value: el?.weight,
+                      value: el?.id,
                       label: `${el?.nameRu} (${el?.length}x${el?.width}x${el?.height} см)`,
+                      weight: el?.weight,
                     })),
                   ]}
                   placeholder='Выберите размер'
@@ -271,11 +274,11 @@ const OrderDeliveryForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                 ''
               )}
             </div>
-          ) : parcelSizeSelect?.value ? (
+          ) : parcelSizeSelect?.weight ? (
             <div>
               <p className='font-medium leading-4'>Вес, кг</p>
               <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
-                До {parcelSizeSelect?.value} кг
+                До {parcelSizeSelect?.weight} кг
               </div>
             </div>
           ) : (
