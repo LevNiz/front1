@@ -2,9 +2,8 @@ import { axiosInstance } from './axios';
 
 // post Request:
 export const postRequest = async (data, userID) => {
-
-  if(data.orderData) {
-    data = {...data.orderData, ...data}
+  if (data.orderData) {
+    data = { ...data.orderData, ...data };
   }
 
   const sendData = {
@@ -31,8 +30,7 @@ export const postRequest = async (data, userID) => {
     weight: Number(data.scopeWeight),
   };
   try {
-    const res = axiosInstance.post('core/request/', sendData);
-    console.log('Send data:', res?.data);
+    await axiosInstance.post('core/request/', sendData);
     return { success: true };
   } catch (error) {
     return { success: false };

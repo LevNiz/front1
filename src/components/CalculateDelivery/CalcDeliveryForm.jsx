@@ -6,11 +6,36 @@ import { fetchParcelCategories } from '../../api/parcels';
 import attention from './../../assets/icons/attention.svg';
 
 const CalcDeliveryForm = ({ onSubmit }) => {
+  const { cities } = useSelector((state) => state?.cities);
+
   const [parcelData, setParcelData] = useState([]);
   const [parcelSize, setParcelSize] = useState('');
   const [scopeWeight, setScopeWeight] = useState(null);
 
-  const { cities } = useSelector((state) => state?.cities);
+  const [selectedSenderCity, setSelectedSenderCity] = useState(null);
+  const [selectedReceiverCity, setSelectedReceiverCity] = useState(null);
+
+  const handleSenderCityChange = (selectedOption) => {
+    setSelectedSenderCity(selectedOption);
+  };
+
+  const handleReceiverCityChange = (selectedOption) => {
+    setSelectedReceiverCity(selectedOption);
+  };
+
+  const senderCityOptions = cities.map((el) => ({
+    value: el.id,
+    label: `${el.nameRu}, ${el.country.nameRu}`,
+    fromCountry: el.country.id,
+    isDisabled: selectedReceiverCity && el.id === selectedReceiverCity.value,
+  }));
+
+  const receiverCityOptions = cities.map((el) => ({
+    value: el.id,
+    label: `${el.nameRu}, ${el.country.nameRu}`,
+    toCountry: el.country.id,
+    isDisabled: selectedSenderCity && el.id === selectedSenderCity.value,
+  }));
 
   const {
     handleSubmit,
@@ -59,14 +84,11 @@ const CalcDeliveryForm = ({ onSubmit }) => {
             render={({ field }) => (
               <Select
                 {...field}
-                options={cities?.map((el) => ({
-                  value: el?.id,
-                  label: `${el?.nameRu}, ${el?.country?.nameRu}`,
-                  fromCountry: el?.country?.id,
-                }))}
+                options={senderCityOptions}
                 placeholder='Выберите город'
                 onChange={(selectedOption) => {
                   field.onChange(selectedOption);
+                  handleSenderCityChange(selectedOption);
                 }}
                 styles={{
                   control: (provided, state) => ({
@@ -97,14 +119,11 @@ const CalcDeliveryForm = ({ onSubmit }) => {
             render={({ field }) => (
               <Select
                 {...field}
-                options={cities?.map((el) => ({
-                  value: el?.id,
-                  label: `${el?.nameRu}, ${el?.country?.nameRu}`,
-                  toCountry: el?.country?.id,
-                }))}
+                options={receiverCityOptions}
                 placeholder='Выберите город'
                 onChange={(selectedOption) => {
                   field.onChange(selectedOption);
+                  handleReceiverCityChange(selectedOption);
                 }}
                 styles={{
                   control: (provided, state) => ({
