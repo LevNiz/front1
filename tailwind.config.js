@@ -25,6 +25,7 @@ export default {
       ss: '360px',
       sm: '480px',
       mm: '576px',
+      ld: '640px',
       md: '768px',
       lg: '991px',
       xl: '1200px',

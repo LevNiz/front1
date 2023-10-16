@@ -3,6 +3,7 @@ import CalcDeliveryForm from './CalcDeliveryForm';
 import { fetchCosts } from '../../api/costs';
 import CalcDeliveryTariffs from './CalcDeliveryTariffs';
 import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const CalcDeliveryItem = () => {
   const [costs, setCosts] = useState('');
@@ -60,7 +61,7 @@ const CalcDeliveryItem = () => {
       <div
         className={`${
           isClickedForm ? 'pointer-events-none opacity-40' : ''
-        } shadow-[0_8px_34px_#00000026] p-7 rounded-xl`}
+        } md:shadow-[0_8px_34px_#00000026] md:p-7 rounded-xl`}
       >
         <h3 className='text-xl text-[#6747e5] pb-3 font-medium'>
           Основные параметры
@@ -68,15 +69,18 @@ const CalcDeliveryItem = () => {
         <CalcDeliveryForm onSubmit={onSubmitCalc} />
       </div>
       {isClickedForm && (
-        <div className='flex mt-10'>
+        <div className='lg:flex mt-10'>
           <CalcDeliveryTariffs
             parcelCost={parcelCost}
             onHandleGetTariff={handleGetTariff}
           />
-          <div className='w-[33%] shadow-[0_8px_34px_#00000026] p-7 rounded-xl h-[fit-content]'>
+          <div className='lg:w-[33%] md:shadow-[0_8px_34px_#00000026] md:p-7 rounded-xl h-[fit-content]'>
             <button
-              onClick={handleButtonClick}
-              className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 max-w-[320px] w-full'
+              onClick={() => {
+                handleButtonClick();
+                scrollToTop();
+              }}
+              className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-[320px] w-full mr-4 lg:mr-0'
             >
               Изменить параматеры
             </button>
@@ -93,7 +97,7 @@ const CalcDeliveryItem = () => {
               }
               className={`${
                 !tariff ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80'
-              } font-medium p-4 rounded-lg bg-black text-white duration-150 max-w-[320px] w-full mt-4`}
+              } font-medium p-4 rounded-lg bg-black text-white duration-150 sm:max-w-[320px] w-full mt-4`}
             >
               Оформить заявку
             </button>

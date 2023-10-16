@@ -74,7 +74,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className='grid grid-cols-3 gap-6'>
+      <div className='grid ld:grid-cols-2 lg:grid-cols-3 gap-6'>
         <div>
           <p className='font-medium mb-2'>Город отправки</p>
           <Controller
@@ -194,12 +194,10 @@ const CalcDeliveryForm = ({ onSubmit }) => {
         {parcelSize?.label === 'Точные' ? (
           <>
             <div>
-              <p className='font-medium mb-2'>
+              <p className='font-medium'>
                 Габариты, см
-                <span className='text-xs ml-2 font-light'>
-                  (длина, ширина, высота)
-                </span>
               </p>
+              <p className='text-xs mb-3 font-light opacity-70'>(длина, ширина, высота)</p>
               <div className='flex justify-between items-center'>
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
@@ -233,7 +231,7 @@ const CalcDeliveryForm = ({ onSubmit }) => {
               </div>
             </div>
             <div>
-              <p className='font-medium mb-2'>Вес посылки, кг</p>
+              <p className='font-medium mb-3 min-h-[40px] flex items-end'>Вес посылки, кг</p>
               <div className='flex justify-between items-center max-w-[140px]'>
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
@@ -252,20 +250,20 @@ const CalcDeliveryForm = ({ onSubmit }) => {
           ''
         )}
       </div>
-      <div className='flex justify-between items-end mt-5'>
+      <div className='md:flex justify-between items-end mt-5'>
         {parcelSize?.label === 'Точные' ? (
           <div>
             {scopeWeight !== null ? (
               <>
                 <p className='font-medium leading-4'>Объёмный вес, кг</p>
-                <p className='text-[12px]'>
+                <p className='text-xs mt-1 opacity-70'>
                   Объёмный вес - рассчитывается по формуле: длина * ширина *
                   высота в см / 5000
                 </p>
                 <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
                   {scopeWeight}
                 </div>
-                <div className='flex items-start p-3 w-max rounded-lg bg-orange-200'>
+                <div className='flex items-start p-3 rounded-lg bg-orange-200 max-w-[362px] w-full'>
                   <img className='mt-[2px]' src={attention} alt='*' />
                   <div className='ml-2'>
                     <h5 className='text-red-500 font-medium text-sm'>
@@ -292,12 +290,14 @@ const CalcDeliveryForm = ({ onSubmit }) => {
         ) : (
           <div></div>
         )}
-        <button
-          type='submit'
-          className='uppercase font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 max-w-[320px] w-full'
-        >
-          Рассчитать
-        </button>
+        <div className='flex justify-end mt-10 md:mt-0 sm:max-w-[320px] w-full ld:pl-3 ml-auto'>
+          <button
+            type='submit'
+            className='uppercase font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 w-full'
+          >
+            Рассчитать
+          </button>
+        </div>
       </div>
     </form>
   );
