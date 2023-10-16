@@ -11,9 +11,11 @@ import editIcon from './../../assets/icons/edit.svg';
 import { postRequest } from '../../api/request';
 import { Loading } from '../../helpers/Loader/Loader';
 import Modal from '../../helpers/Modals/Modal';
+import { useSelector } from 'react-redux';
 
 const OrderDeliveryItem = () => {
   const { state } = useLocation();
+  const { userID } = useSelector((state) => state?.user);
   const {
     handleSubmit,
     register,
@@ -67,7 +69,14 @@ const OrderDeliveryItem = () => {
   const onSubmitCalc = (data) => {
     const orderData = {};
     Object.assign(orderData, data);
-    setParams({ orderData });
+    const parcelWeight = (data.width * data.length * data.height) / 5000;
+    const scopeWeight =
+      data.parcelSize.value === 'custom'
+        ? parcelWeight > data.weight
+          ? parcelWeight
+          : Number(data.weight)
+        : Number(data.parcelSize.weight);
+    setParams({ ...orderData, scopeWeight });
     setIsDisabled(false);
     const cityParcelCost = costs?.find(
       (cost) =>
@@ -76,43 +85,33 @@ const OrderDeliveryItem = () => {
     );
     if (cityParcelCost) {
       const costPerKg = cityParcelCost.costPerKg;
-      let cost;
+      let parCost;
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
         const parcelWeight = (width * length * height) / 5000;
-        if (tariff === 2) {
-          cost = Math.max(parcelWeight, data.weight) * costPerKg + 4;
-        } else {
-          cost = Math.max(parcelWeight, data.weight) * costPerKg;
-        }
+        parCost = Math.max(parcelWeight, data.weight) * costPerKg;
       } else {
-        if (tariff === 2) {
-          cost = data.parcelSize.weight * costPerKg + 4;
-        } else {
-          cost = data.parcelSize.weight * costPerKg;
-        }
+        parCost = data.parcelSize.weight * costPerKg;
       }
-      setParcelCost(cost.toFixed(2));
+      setParcelCost(parCost?.toFixed(2));
     } else {
       alert('Цена доставки не указана! (из города / в город)');
     }
   };
 
   const onSubmitForm = async (data) => {
-    // setIsLoading(true);
+    setIsLoading(true);
     const requestData = { ...params, ...data };
     requestData.cost = tariff === 2 ? Number(parcelCost) + 4 : parcelCost;
-    const { success } = await postRequest(requestData);
+    const { success } = await postRequest(requestData, userID);
     if (success) {
       setIsLoading(false);
-      // setModalOpen(true);
-      // setModalContent('successRequest');
+      setModalOpen(true);
+      setModalContent('successRequest');
     } else {
       setIsLoading(false);
     }
   };
-
-  console.log(state)
 
   return (
     <>
@@ -193,7 +192,10 @@ const OrderDeliveryItem = () => {
               <div className='flex items-center bg-colYellow w-max p-5'>
                 <span className='text-xl font-medium'>Общая стоимость:</span>
                 <span className='text-xl font-medium mx-1 '>
-                  {tariff === 2 ? Number(parcelCost) + 4 : parcelCost}$
+                  {tariff === 2
+                    ? (parseFloat(parcelCost) + 4).toFixed(2)
+                    : parcelCost}
+                  $
                 </span>
               </div>
               <div className='flex justify-end items-center max-w-[320px] w-full ml-auto'>

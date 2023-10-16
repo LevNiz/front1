@@ -1,5 +1,6 @@
 import sosImg from './../../assets/images/sos.svg';
 import inCorrectImg from './../../assets/images/404.svg';
+import success from './../../assets/images/success.jpg';
 import { NavLink } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
@@ -87,24 +88,19 @@ const Modal = ({ isOpen, onClose, content, logOutUser }) => {
       ) : content === 'successRequest' ? (
         <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
           <div className='flex justify-center py-5'>
-            <img src={inCorrectImg} alt='*' />
+            <img src={success} alt='*' />
           </div>
-          <h3 className='text-lg font-semibold'>
-            Ваша заявка успешна отправлена
+          <h3 className='text-xl font-medium mb-8'>
+            Ваша заявка успешна отправлена!
           </h3>
-          <p className='text-base mt-8 mb-4'>Забыли пароль?</p>
           <div className='flex px-8 mb-8'>
             <NavLink
-              className='bg-colYellow w-full py-3 rounded-lg hover:bg-colYellowHover duration-100'
-              to='/auth/reset-password'
+              className='bg-colYellow w-full py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
+              to='/'
             >
-              Восстановить
+              Перейти на главную
             </NavLink>
           </div>
-          <p className='text-sm mt-8 mb-1'>У вас нет аккаунта?</p>
-          <NavLink to='/auth/sign-up' className='text-base underline'>
-            Зарегистрироваться
-          </NavLink>
         </div>
       ) : (
         <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>

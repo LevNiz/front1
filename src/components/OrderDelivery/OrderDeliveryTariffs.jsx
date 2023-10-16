@@ -1,17 +1,26 @@
 import rightArrow from './../../assets/images/right-arrow.png';
 import vector from './../../assets/icons/vector.svg';
 import { tariffsData } from '../../constants/tariffsData';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const OrderDeliveryTariffs = ({ state, parcelCost, onHandleTariff }) => {
-  const choosedTariff = tariffsData?.filter(
+  const choseTariff = tariffsData?.filter(
     (tariff) => tariff?.id === state?.tariff
   );
-  const [activeTariff, setActiveTariff] = useState(choosedTariff[0]?.id);
+  const [activeTariff, setActiveTariff] = useState(choseTariff[0]?.id);
+  const [addedCost, setAddedCost] = useState(0);
 
   const handleTariffClick = (id) => {
     setActiveTariff(id);
   };
+
+  useEffect(() => {
+    if (state?.tariff === 2 && addedCost === 0) {
+      setAddedCost(4);
+    } else if (state?.tariff !== 2) {
+      setAddedCost(0);
+    }
+  }, [state?.tariff, addedCost]);
 
   return (
     <div className='pl-10'>
@@ -57,10 +66,8 @@ const OrderDeliveryTariffs = ({ state, parcelCost, onHandleTariff }) => {
             </div>
             <div className='bg-[#6747e5] text-white p-2 rounded-md text-center text-lg font-bold'>
               {el?.status === 'Быстро'
-                ? (parcelCost ? parseFloat(parcelCost) + 4 : 0).toFixed(2)
-                : parcelCost
-                ? parcelCost
-                : (0).toFixed(2)}
+                ? (parseFloat(parcelCost) + addedCost).toFixed(2)
+                : parcelCost}{' '}
               $
             </div>
           </div>
