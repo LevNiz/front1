@@ -23,11 +23,11 @@ const OrderDeliveryTariffs = ({ state, parcelCost, onHandleTariff }) => {
   }, [state?.tariff, addedCost]);
 
   return (
-    <div className='pl-10'>
+    <div className='md:pl-5 lg:pl-10'>
       <p className='mb-3 text-xs'>
         Выберите тариф <span className='text-red-500'>*</span>
       </p>
-      <div className='max-w-[768px] grid grid-cols-2 gap-5'>
+      <div className='lg:max-w-[768px] grid md:grid-cols-2 gap-5'>
         {tariffsData.map((el) => (
           <div
             key={el.id}

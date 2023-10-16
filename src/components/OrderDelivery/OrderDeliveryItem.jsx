@@ -116,7 +116,7 @@ const OrderDeliveryItem = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmitForm)}>
-        <div className='shadow-[0_8px_34px_#00000026] p-7 rounded-xl'>
+        <div className='lg:shadow-[0_8px_34px_#00000026] lg:p-7 rounded-xl'>
           <div className='flex items-center pb-5'>
             <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
               1
@@ -188,8 +188,8 @@ const OrderDeliveryItem = () => {
               </h3>
             </div>
             <OrderDeliveryComment register={register} errors={errors} />
-            <div className='flex justify-between items-center mt-12'>
-              <div className='flex items-center bg-colYellow w-max p-5'>
+            <div className='md:flex justify-between items-center mt-12'>
+              <div className='flex justify-end md:justify-start max-w-[287px] w-full md:ml-0 ml-auto items-center bg-colYellow p-5'>
                 <span className='text-xl font-medium'>Общая стоимость:</span>
                 <span className='text-xl font-medium mx-1 '>
                   {tariff === 2
@@ -198,7 +198,7 @@ const OrderDeliveryItem = () => {
                   $
                 </span>
               </div>
-              <div className='flex justify-end items-center max-w-[320px] w-full ml-auto'>
+              <div className='flex justify-end items-center mt-8 md:mt-0 sm:max-w-[320px] w-full ml-auto'>
                 <button
                   type='submit'
                   disabled={isButtonDisabled}

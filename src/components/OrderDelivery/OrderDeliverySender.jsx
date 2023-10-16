@@ -4,8 +4,8 @@ import 'react-phone-input-2/lib/material.css';
 
 const OrderDeliverySender = ({ register, errors, control }) => {
   return (
-    <div className='pl-10'>
-      <div className='grid grid-cols-2 gap-6 max-w-[768px]'>
+    <div className='md:pl-5 lg:pl-10'>
+      <div className='grid mm:grid-cols-2 gap-6 max-w-[768px]'>
         <div>
           <p className='font-medium mb-2'>ФИО отправителя</p>
           <input

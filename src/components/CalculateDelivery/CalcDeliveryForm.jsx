@@ -194,10 +194,10 @@ const CalcDeliveryForm = ({ onSubmit }) => {
         {parcelSize?.label === 'Точные' ? (
           <>
             <div>
-              <p className='font-medium'>
-                Габариты, см
+              <p className='font-medium'>Габариты, см</p>
+              <p className='text-xs mb-3 font-light opacity-70'>
+                (длина, ширина, высота)
               </p>
-              <p className='text-xs mb-3 font-light opacity-70'>(длина, ширина, высота)</p>
               <div className='flex justify-between items-center'>
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
@@ -231,7 +231,9 @@ const CalcDeliveryForm = ({ onSubmit }) => {
               </div>
             </div>
             <div>
-              <p className='font-medium mb-3 min-h-[40px] flex items-end'>Вес посылки, кг</p>
+              <p className='font-medium mb-3 ld:min-h-[40px] flex items-end'>
+                Вес посылки, кг
+              </p>
               <div className='flex justify-between items-center max-w-[140px]'>
                 <input
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'

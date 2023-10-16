@@ -1,6 +1,6 @@
 const OrderDeliveryComment = ({ register, errors }) => {
   return (
-    <div className='pl-10'>
+    <div className='md:pl-5 lg:pl-10'>
       <div className='max-w-[768px]'>
         <p className='font-medium mb-2'>
           Дополнительная информация или комментарий

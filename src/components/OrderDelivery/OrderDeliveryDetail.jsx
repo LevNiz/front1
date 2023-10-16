@@ -7,8 +7,8 @@ const OrderDeliveryDetail = ({ register, errors }) => {
   const todayDate = `${year}-${month}-${day}`;
 
   return (
-    <div className='pl-10'>
-      <div className='grid grid-cols-2 gap-6 max-w-[768px]'>
+    <div className='md:pl-5 lg:pl-10'>
+      <div className='grid md:grid-cols-2 gap-6 max-w-[768px]'>
         <div>
           <p className='font-medium mb-2'>Трекинг номер</p>
           <input
