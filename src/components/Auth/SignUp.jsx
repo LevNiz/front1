@@ -20,6 +20,7 @@ import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import logo from '../../assets/icons/logo2.svg';
 import back from '../../assets/icons/back.svg';
+import PhoneInput from 'react-phone-input-2';
 
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
@@ -161,30 +162,40 @@ const SignUp = () => {
           </div>
           <div className='mb-4'>
             <p className='font-bold mb-2'>Ваш телефон</p>
-            <div className='relative mb-1'>
-              <input
-                type='tel'
-                className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-                placeholder='Введите ваш телефон'
-                {...register('phone', {
+            <div className='relative mb-1 border border-colGray2 p-[16px] mm:p-[15px_20px_15px_36px] rounded-lg'>
+              <Controller
+                name='phone'
+                className='w-full'
+                control={control}
+                defaultValue=''
+                rules={{
                   required: 'Поле обязательно к заполнению!',
-                  pattern: {
-                    value: /^[0-9+]+$/,
-                    message: 'Введите только цифры!',
-                  },
-                })}
+                  validate: (value) => value !== '996',
+                }}
+                render={({ field }) => (
+                  <PhoneInput
+                    {...field}
+                    placeholder='Введите номер телефона'
+                    country={'kg'}
+                    specialLabel={false}
+                    inputProps={{
+                      className:
+                        'w-full focus:border-black focus:outline-none pl-14',
+                    }}
+                  />
+                )}
               />
               <img
                 className='absolute top-[15px] left-[10px] hidden mm:block'
                 src={call}
                 alt='*'
               />
-              {errors?.phone && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.phone.message || 'Error!'}
-                </p>
-              )}
             </div>
+            {errors?.phone && (
+              <p className='text-red-500 mt-1 text-sm'>
+                {errors?.phone.message || 'Error!'}
+              </p>
+            )}
           </div>
           <div className='mb-4'>
             <p className='font-bold mb-2'>Адрес</p>

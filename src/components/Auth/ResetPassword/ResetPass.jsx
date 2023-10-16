@@ -4,9 +4,21 @@ import call from '../../../assets/icons/new-call.svg';
 import leftArrow from '../../../assets/icons/arrow-left.svg';
 import logo from '../../../assets/icons/logo2.svg';
 import back from '../../../assets/icons/back.svg';
+import { Controller, useForm } from 'react-hook-form';
+import PhoneInput from 'react-phone-input-2';
 
 const ResetPass = () => {
   const navigate = useNavigate();
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className='flex w-full mm:h-screen'>
@@ -32,25 +44,57 @@ const ResetPass = () => {
             Не волнуйтесь! Такое случается. Пожалуйста, введите номер вашего
             телефона, связанный с вашей учетной записью
           </p>
-          <form>
-            <div className='mb-8 relative'>
-              <input
-                className='w-full border border-colGray2 p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-                type='tel'
-                placeholder='Ваш номер'
-              />
-              <img
-                className='absolute top-[15px] left-[10px]'
-                src={call}
-                alt='*'
-              />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='mb-8'>
+              <p className='font-medium mb-2'>Ваш телефон</p>
+              <div className='relative mb-1 border border-colGray2 p-[16px] mm:p-[15px_20px_15px_36px] rounded-lg'>
+                <Controller
+                  name='phone'
+                  className='w-full'
+                  control={control}
+                  defaultValue=''
+                  rules={{
+                    required: 'Поле обязательно к заполнению!',
+                    validate: (value) => {
+                      if (value === '') {
+                        return 'Поле обязательно к заполнению!';
+                      }
+                      return true;
+                    },
+                  }}
+                  render={({ field }) => (
+                    <PhoneInput
+                      {...field}
+                      countryCodeEditable={false}
+                      placeholder='Введите номер телефона'
+                      country={'kg'}
+                      specialLabel={false}
+                      inputProps={{
+                        className:
+                          'w-full focus:border-black focus:outline-none pl-14',
+                      }}
+                    />
+                  )}
+                />
+                <img
+                  className='absolute top-[15px] left-[10px] hidden mm:block'
+                  src={call}
+                  alt='*'
+                />
+              </div>
+              {errors?.phone && (
+                <p className='text-red-500 mt-1 text-sm'>
+                  {errors?.phone.message || 'Error!'}
+                </p>
+              )}
             </div>
-            <NavLink
-              to='step-1'
+            <button
+              type='submit'
+              // to='step-1'
               className='p-[17px] rounded-lg bg-colYellow mm:bg-black mm:text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
             >
               Отправить код
-            </NavLink>
+            </button>
           </form>
           <div className='flex justify-center mt-12'>
             <p className='text-base text-colGray3 mr-2'>Помните пароль?</p>
