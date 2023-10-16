@@ -67,9 +67,9 @@ const Navbar = () => {
             onClick={() => setShowSidebar(true)}
             className='flex flex-col w-9 cursor-pointer md:hidden'
           >
-            <span className='w-1/2 h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
             <span className='w-full h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
-            <span className='w-1/2 h-[3px] rounded-sm bg-colYellow my-[3px] ml-auto'></span>
+            <span className='w-full h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
+            <span className='w-full h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
           </div>
           <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white navbar'>
             <li>
