@@ -27,14 +27,14 @@ const OrderDeliveryForm = ({ state, onSubmit, onHandleTariff, cost }) => {
     setSelectedReceiverCity(selectedOption);
   };
 
-  const senderCityOptions = cities.map((el) => ({
+  const senderCityOptions = cities?.map((el) => ({
     value: el.id,
     label: `${el.nameRu}, ${el.country.nameRu}`,
     fromCountry: el.country.id,
     isDisabled: selectedReceiverCity && el.id === selectedReceiverCity.value,
   }));
 
-  const receiverCityOptions = cities.map((el) => ({
+  const receiverCityOptions = cities?.map((el) => ({
     value: el.id,
     label: `${el.nameRu}, ${el.country.nameRu}`,
     toCountry: el.country.id,
