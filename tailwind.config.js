@@ -31,6 +31,7 @@ export default {
       xl: '1200px',
       xl2: '1360px',
     },
+    display: ['group-hover'],
   },
   plugins: [],
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import OrderDeliveryForm from './OrderDeliveryForm';
 import { fetchCosts } from '../../api/costs';
@@ -11,7 +12,6 @@ import editIcon from './../../assets/icons/edit.svg';
 import { postRequest } from '../../api/request';
 import { Loading } from '../../helpers/Loader/Loader';
 import Modal from '../../helpers/Modals/Modal';
-import { useSelector } from 'react-redux';
 
 const OrderDeliveryItem = () => {
   const { state } = useLocation();
@@ -27,7 +27,7 @@ const OrderDeliveryItem = () => {
   const [parcelCost, setParcelCost] = useState(state?.parcelCost);
   const [costs, setCosts] = useState('');
   const [params, setParams] = useState(state);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(state === null ? true : false);
   const [tariff, setTariff] = useState(state?.tariff);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -115,7 +115,7 @@ const OrderDeliveryItem = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmitForm)}>
+      <div>
         <div className='lg:shadow-[0_8px_34px_#00000026] lg:p-7 rounded-xl'>
           <div className='flex items-center pb-5'>
             <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
@@ -202,6 +202,7 @@ const OrderDeliveryItem = () => {
                 <button
                   type='submit'
                   disabled={isButtonDisabled}
+                  onClick={handleSubmit(onSubmitForm)}
                   className={`${
                     isButtonDisabled
                       ? 'opacity-50 hover:opacity-50 cursor-not-allowed'
@@ -214,7 +215,7 @@ const OrderDeliveryItem = () => {
             </div>
           </div>
         </div>
-      </form>
+      </div>
       <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
       {isLoading ? <Loading /> : ''}
     </>

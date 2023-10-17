@@ -57,10 +57,11 @@ const OrderDeliveryTariffs = ({ state, parcelCost, onHandleTariff }) => {
               <img src={vector} alt='*' />
             </div>
             <div className='bg-[#6747e5] text-white p-2 rounded-md text-center text-lg font-bold'>
-              {el && el.status === 'Быстро'
-                ? (parseFloat(parcelCost) + addedCost).toFixed(2)
-                : parseFloat(parcelCost).toFixed(2)}
-              $
+              {parcelCost
+                ? el?.status === 'Быстро'
+                  ? `${(parseFloat(parcelCost) + addedCost)?.toFixed(2)} $`
+                  : `${parseFloat(parcelCost).toFixed(2)} $`
+                : '00.00 $'}
             </div>
           </div>
         ))}

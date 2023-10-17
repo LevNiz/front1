@@ -17,6 +17,7 @@ import profileUser from './../../assets/icons/mobile-menu/profile-user.svg';
 import profileBox from './../../assets/icons/mobile-menu/profile-box.svg';
 import profileNotif from './../../assets/icons/mobile-menu/profile-notification.svg';
 import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
+import sendBox from './../../assets/icons/mobile-menu/send-box.svg';
 
 const MobileMenu = ({ isOpen, onClose }) => {
   const { user } = useSelector((state) => state?.user);
@@ -150,6 +151,16 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
                 Наши склады
+              </NavLink>
+            </li>
+            <li className='my-3 flex items-center'>
+              <img src={sendBox} alt='*' />
+              <NavLink
+                to='/calculate'
+                onClick={() => onClose()}
+                className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
+              >
+                Отправка
               </NavLink>
             </li>
             <li className='my-3 flex items-center'>
