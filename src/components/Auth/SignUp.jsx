@@ -225,6 +225,7 @@ const SignUp = () => {
               <Controller
                 name='country'
                 control={control}
+                rules={{ required: 'Поле обязательно к заполнению!' }}
                 render={({ field }) => (
                   <Select
                     {...field}
@@ -410,7 +411,7 @@ const SignUp = () => {
                   hasLowerCaseUpperCase ? 'bg-colYellow' : 'bg-colGray2'
                 }`}
               ></span>
-              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+              <p className='text-[#AAA] ml-3 text-xs ss:text-sm sm:text-base'>
                 Прописные и строчные латинские буквы
               </p>
             </div>
@@ -420,7 +421,7 @@ const SignUp = () => {
                   hasNumber ? 'bg-colYellow' : 'bg-colGray2'
                 }`}
               ></span>
-              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+              <p className='text-[#AAA] ml-3 text-xs ss:text-sm sm:text-base'>
                 Минимум одна цифра
               </p>
             </div>
@@ -430,7 +431,7 @@ const SignUp = () => {
                   hasSpecialChar ? 'bg-colYellow' : 'bg-colGray2'
                 }`}
               ></span>
-              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+              <p className='text-[#AAA] ml-3 text-xs ss:text-sm sm:text-base'>
                 Минимум один спецсимвол
               </p>
             </div>
@@ -440,7 +441,7 @@ const SignUp = () => {
                   hasSamePassword ? 'bg-colYellow' : 'bg-colGray2'
                 }`}
               ></span>
-              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
+              <p className='text-[#AAA] ml-3 text-xs ss:text-sm sm:text-base'>
                 Пароли совпадают
               </p>
             </div>

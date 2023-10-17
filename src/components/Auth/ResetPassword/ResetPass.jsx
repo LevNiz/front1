@@ -11,14 +11,17 @@ const ResetPass = () => {
   const navigate = useNavigate();
 
   const {
+    watch,
     control,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.phone);
   };
+
+  const phone = watch('phone');
 
   return (
     <div className='flex w-full mm:h-screen'>
@@ -50,25 +53,22 @@ const ResetPass = () => {
               <div className='relative mb-1 border border-colGray2 p-[16px] mm:p-[15px_20px_15px_36px] rounded-lg'>
                 <Controller
                   name='phone'
-                  className='w-full'
                   control={control}
                   defaultValue=''
                   rules={{
                     required: 'Поле обязательно к заполнению!',
-                    validate: (value) => {
-                      if (value === '') {
-                        return 'Поле обязательно к заполнению!';
-                      }
-                      return true;
-                    },
                   }}
                   render={({ field }) => (
                     <PhoneInput
-                      {...field}
                       countryCodeEditable={false}
                       placeholder='Введите номер телефона'
                       country={'kg'}
-                      specialLabel={false}
+                      name='phone'
+                      specialLabel={true}
+                      onChange={(value) => {
+                        field.onChange(`+${value}`);
+                      }}
+                      value={field.value}
                       inputProps={{
                         className:
                           'w-full focus:border-black focus:outline-none pl-14',
@@ -89,9 +89,13 @@ const ResetPass = () => {
               )}
             </div>
             <button
+              disabled={phone === undefined ? true : false}
               type='submit'
-              // to='step-1'
-              className='p-[17px] rounded-lg bg-colYellow mm:bg-black mm:text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
+              className={`${
+                phone === undefined
+                  ? 'opacity-60 cursor-not-allowed'
+                  : 'hover:opacity-80'
+              } p-[17px] rounded-lg bg-colYellow mm:bg-black mm:text-white flex justify-center items-center w-full font-bold duration-150`}
             >
               Отправить код
             </button>
