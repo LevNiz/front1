@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import rightArrow from './../../assets/images/right-arrow.png';
 import vector from './../../assets/icons/vector.svg';
 import { tariffsData } from '../../constants/tariffsData';
-import { useState } from 'react';
+import { addedCost } from '../../constants/tariffsData';
 
 const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
   const [activeTariff, setActiveTariff] = useState(null);
@@ -53,7 +54,7 @@ const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
             </div>
             <div className='bg-[#6747e5] text-white p-2 rounded-md text-center text-lg font-bold'>
               {el?.status === 'Быстро'
-                ? (parseFloat(parcelCost) + 4).toFixed(2)
+                ? (parseFloat(parcelCost) + addedCost).toFixed(2)
                 : parcelCost}
               $
             </div>

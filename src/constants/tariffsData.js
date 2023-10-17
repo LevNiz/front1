@@ -17,3 +17,5 @@ export const tariffsData = [
     img: truck,
   },
 ];
+
+export const addedCost = 4;
