@@ -165,19 +165,22 @@ const SignUp = () => {
             <div className='relative mb-1 border border-colGray2 p-[16px] mm:p-[15px_20px_15px_36px] rounded-lg'>
               <Controller
                 name='phone'
-                className='w-full'
                 control={control}
                 defaultValue=''
                 rules={{
                   required: 'Поле обязательно к заполнению!',
-                  validate: (value) => value !== '996',
                 }}
                 render={({ field }) => (
                   <PhoneInput
-                    {...field}
+                    countryCodeEditable={false}
                     placeholder='Введите номер телефона'
                     country={'kg'}
-                    specialLabel={false}
+                    name='phone'
+                    specialLabel={true}
+                    onChange={(value) => {
+                      field.onChange(`+${value}`);
+                    }}
+                    value={field.value}
                     inputProps={{
                       className:
                         'w-full focus:border-black focus:outline-none pl-14',
