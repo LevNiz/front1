@@ -64,7 +64,7 @@ const ResetPass = () => {
                       placeholder='Введите номер телефона'
                       country={'kg'}
                       name='phone'
-                      specialLabel={true}
+                      specialLabel={false}
                       onChange={(value) => {
                         field.onChange(`+${value}`);
                       }}

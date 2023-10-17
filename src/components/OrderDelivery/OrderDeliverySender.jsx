@@ -30,14 +30,18 @@ const OrderDeliverySender = ({ register, errors, control }) => {
             defaultValue=''
             rules={{
               required: 'Поле обязательно к заполнению!',
-              validate: (value) => value !== '996',
             }}
             render={({ field }) => (
               <PhoneInput
                 {...field}
                 placeholder='Введите номер телефона'
                 country={'kg'}
+                countryCodeEditable={false}
                 specialLabel={false}
+                onChange={(value) => {
+                  field.onChange(`+${value}`);
+                }}
+                value={field.value}
                 inputProps={{
                   className:
                     'w-full border border-colGray2 p-4 pl-[56px] rounded-lg focus:border-black focus:outline-none',
