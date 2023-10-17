@@ -31,6 +31,7 @@ import {
   GbBusiness,
   CalculateDelivery,
   OrderDelivery,
+  MyApplications,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -62,9 +63,6 @@ export const router = createBrowserRouter(
         <Route path='gb-business'>
           <Route index element={<GbBusiness />} />
         </Route>
-        <Route path='calculate'>
-          <Route index element={<CalculateDelivery />} />
-        </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>
             <Route path='personal-data' element={<PersonalData />} />
@@ -75,7 +73,9 @@ export const router = createBrowserRouter(
             <Route path='my-parcels' element={<MyParcels />} />
           </Route>
           <Route path='alaket' element={<Alaket />} />
+          <Route path='my-applications' element={<MyApplications />} />
           <Route path='order-delivery' element={<OrderDelivery />} />
+          <Route path='calculate' element={<CalculateDelivery />} />
         </Route>
         <Route path='*' element={<Home />} />
       </Route>

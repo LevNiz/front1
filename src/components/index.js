@@ -26,6 +26,7 @@ import ResetPassSuccess from './Auth/ResetPassword/ResetPassSuccess';
 import PrivateRoute from '../helpers/Private/PrivateRoute';
 import CalcDeliveryItem from './CalculateDelivery/CalcDeliveryItem';
 import OrderDeliveryItem from './OrderDelivery/OrderDeliveryItem';
+import MyApplicationsItem from './MyApplications/MyApplicationsItem';
 
 export {
   Layout,
@@ -56,4 +57,5 @@ export {
   MyWallet,
   CalcDeliveryItem,
   OrderDeliveryItem,
+  MyApplicationsItem,
 };
