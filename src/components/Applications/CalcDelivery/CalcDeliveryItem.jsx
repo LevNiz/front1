@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import CalcDeliveryForm from './CalcDeliveryForm';
-import { fetchCosts } from '../../api/costs';
+import { fetchCosts } from '../../../api/costs';
 import CalcDeliveryTariffs from './CalcDeliveryTariffs';
 import { useNavigate } from 'react-router-dom';
-import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 
 const CalcDeliveryItem = () => {
   const [costs, setCosts] = useState('');

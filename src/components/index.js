@@ -24,9 +24,9 @@ import ResetPassConfirm from './Auth/ResetPassword/ResetPassConfirm';
 import ResetPassNew from './Auth/ResetPassword/ResetPassNew';
 import ResetPassSuccess from './Auth/ResetPassword/ResetPassSuccess';
 import PrivateRoute from '../helpers/Private/PrivateRoute';
-import CalcDeliveryItem from './CalculateDelivery/CalcDeliveryItem';
-import OrderDeliveryItem from './OrderDelivery/OrderDeliveryItem';
-import MyApplicationsItem from './MyApplications/MyApplicationsItem';
+import ApplicationsItem from './Applications/ApplicationsItem';
+import CalcDelivery from './Applications/CalcDelivery/CalcDelivery';
+import CalcDeliveryItem from './Applications/CalcDelivery/CalcDeliveryItem';
 
 export {
   Layout,
@@ -56,6 +56,6 @@ export {
   PrivateRoute,
   MyWallet,
   CalcDeliveryItem,
-  OrderDeliveryItem,
-  MyApplicationsItem,
+  ApplicationsItem,
+  CalcDelivery
 };

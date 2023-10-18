@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchApplications } from '../../api/applications';
 
-const MyApplicationsItem = () => {
+const ApplicationsItem = () => {
   const { userID } = useSelector((state) => state?.user);
   const { loading, error, applications } = useSelector(
     (state) => state?.applications
@@ -124,4 +124,4 @@ const MyApplicationsItem = () => {
   );
 };
 
-export default MyApplicationsItem;
+export default ApplicationsItem;

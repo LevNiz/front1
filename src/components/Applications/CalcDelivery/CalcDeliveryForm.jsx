@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
-import { fetchParcelCategories } from '../../api/parcels';
-import attention from './../../assets/icons/attention.svg';
+import { fetchParcelCategories } from '../../../api/parcels';
+import attention from '../../../assets/icons/attention.svg';
 
 const CalcDeliveryForm = ({ onSubmit }) => {
   const { cities } = useSelector((state) => state?.cities);

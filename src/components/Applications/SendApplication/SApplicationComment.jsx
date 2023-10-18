@@ -1,4 +1,4 @@
-const OrderDeliveryComment = ({ register, errors }) => {
+const SApplicationComment = ({ register, errors }) => {
   return (
     <div className='md:pl-5 lg:pl-10'>
       <div className='max-w-[768px]'>
@@ -22,4 +22,4 @@ const OrderDeliveryComment = ({ register, errors }) => {
   );
 };
 
-export default OrderDeliveryComment;
+export default SApplicationComment;

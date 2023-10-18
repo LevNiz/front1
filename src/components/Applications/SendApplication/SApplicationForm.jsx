@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
-import { fetchParcelCategories } from '../../api/parcels';
-import OrderDeliveryTariffs from './OrderDeliveryTariffs';
-import attention from './../../assets/icons/attention.svg';
-import info from './../../assets/icons/attention2.svg';
-import boxSize from './../../assets/images/box-size.jpeg';
+import { fetchParcelCategories } from '../../../api/parcels';
+import OrderDeliveryTariffs from './SApplicationTariffs';
+import attention from '../../../assets/icons/attention.svg';
+import info from '../../../assets/icons/attention2.svg';
+import boxSize from '../../../assets/images/box-size.jpeg';
 
-const OrderDeliveryForm = ({ state, onSubmit, onHandleTariff, cost }) => {
+const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
   const { cities } = useSelector((state) => state?.cities);
 
   const [parcelData, setParcelData] = useState([]);
@@ -347,4 +347,4 @@ const OrderDeliveryForm = ({ state, onSubmit, onHandleTariff, cost }) => {
   );
 };
 
-export default OrderDeliveryForm;
+export default SApplicationForm;

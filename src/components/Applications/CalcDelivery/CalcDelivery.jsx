@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { CalcDeliveryItem } from '../../components';
-import { fetchCities } from '../../api/cities';
-import { fetchCountries } from '../../api/countries';
+import { CalcDeliveryItem } from '../../../components';
+import { fetchCities } from '../../../api/cities';
+import { fetchCountries } from '../../../api/countries';
 import { useDispatch } from 'react-redux';
-import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 
-const CalculateDelivery = () => {
+const CalcDelivery = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const CalculateDelivery = () => {
   );
 };
 
-export default CalculateDelivery;
+export default CalcDelivery;

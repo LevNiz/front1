@@ -19,6 +19,7 @@ import {
   DepotDetail,
   PrivateRoute,
   MyWallet,
+  CalcDelivery,
 } from '../components';
 import {
   Auth,
@@ -29,10 +30,9 @@ import {
   Alaket,
   GbBuyer,
   GbBusiness,
-  CalculateDelivery,
-  OrderDelivery,
-  MyApplications,
+  Applications,
 } from '../pages';
+import SendApplication from '../components/Applications/SendApplication/SendApplication';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -73,9 +73,11 @@ export const router = createBrowserRouter(
             <Route path='my-parcels' element={<MyParcels />} />
           </Route>
           <Route path='alaket' element={<Alaket />} />
-          <Route path='applications' element={<MyApplications />} />
-          <Route path='order-delivery' element={<OrderDelivery />} />
-          <Route path='calculate' element={<CalculateDelivery />} />
+          <Route path='applications'>
+            <Route index element={<Applications />} />
+            <Route path='send-application' element={<SendApplication />} />
+            <Route path='calculate' element={<CalcDelivery />} />
+          </Route>
         </Route>
         <Route path='*' element={<Home />} />
       </Route>

@@ -2,29 +2,29 @@ import { Controller } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
 
-const OrderDeliveryReceiver = ({ register, errors, control }) => {
+const SApplicationSender = ({ register, errors, control }) => {
   return (
     <div className='md:pl-5 lg:pl-10'>
       <div className='grid mm:grid-cols-2 gap-6 max-w-[768px]'>
         <div>
-          <p className='font-medium mb-2'>ФИО получателя</p>
+          <p className='font-medium mb-2'>ФИО отправителя</p>
           <input
             className='w-full border border-colGray2 p-4 rounded-lg focus:border-black focus:outline-none'
-            placeholder='Имя получателя'
-            {...register('receiverName', {
+            placeholder='Имя отправителя'
+            {...register('senderName', {
               required: 'Поле обязательно к заполнению!',
             })}
           />
-          {errors?.receiverName && (
+          {errors?.senderName && (
             <p className='text-red-500 mt-1 text-sm'>
-              {errors?.receiverName.message || 'Error!'}
+              {errors?.senderName?.message || 'Поле обязательно к заполнению!'}
             </p>
           )}
         </div>
         <div>
-          <p className='font-medium mb-2'>Номер получателя</p>
+          <p className='font-medium mb-2'>Номер отправителя</p>
           <Controller
-            name='receiverPhone'
+            name='senderPhone'
             className='w-full'
             control={control}
             defaultValue=''
@@ -49,10 +49,9 @@ const OrderDeliveryReceiver = ({ register, errors, control }) => {
               />
             )}
           />
-          {errors?.receiverPhone && (
+          {errors?.senderPhone && (
             <p className='text-red-500 mt-1 text-sm'>
-              {errors?.receiverPhone?.message ||
-                'Поле обязательно к заполнению!'}
+              {errors?.senderPhone?.message || 'Поле обязательно к заполнению!'}
             </p>
           )}
         </div>
@@ -61,4 +60,4 @@ const OrderDeliveryReceiver = ({ register, errors, control }) => {
   );
 };
 
-export default OrderDeliveryReceiver;
+export default SApplicationSender;

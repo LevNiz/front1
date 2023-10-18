@@ -1,4 +1,4 @@
-const OrderDeliveryDetail = ({ register, errors }) => {
+const SApplicationDetail = ({ register, errors }) => {
   const today = new Date();
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1
@@ -55,4 +55,4 @@ const OrderDeliveryDetail = ({ register, errors }) => {
   );
 };
 
-export default OrderDeliveryDetail;
+export default SApplicationDetail;

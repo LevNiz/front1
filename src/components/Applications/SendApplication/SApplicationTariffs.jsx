@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import rightArrow from './../../assets/images/right-arrow.png';
-import vector from './../../assets/icons/vector.svg';
-import { tariffsData } from '../../constants/tariffsData';
-import { addedCost } from '../../constants/tariffsData';
+import rightArrow from '../../../assets/images/right-arrow.png';
+import vector from '../../../assets/icons/vector.svg';
+import { tariffsData } from '../../../constants/tariffsData';
+import { addedCost } from '../../../constants/tariffsData';
 
-const OrderDeliveryTariffs = ({ state, parcelCost, onHandleTariff }) => {
+const SApplicationTariffs = ({ state, parcelCost, onHandleTariff }) => {
   const choseTariff = tariffsData?.filter(
     (tariff) => tariff?.id === state?.tariff
   );
@@ -70,4 +70,4 @@ const OrderDeliveryTariffs = ({ state, parcelCost, onHandleTariff }) => {
   );
 };
 
-export default OrderDeliveryTariffs;
+export default SApplicationTariffs;

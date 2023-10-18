@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import OrderDeliveryForm from './OrderDeliveryForm';
-import { fetchCosts } from '../../api/costs';
-import OrderDeliveryDetail from './OrderDeliveryDetail';
-import OrderDeliverySender from './OrderDeliverySender';
-import OrderDeliveryReceiver from './OrderDeliveryReceiver';
-import OrderDeliveryComment from './OrderDeliveryComment';
+import { fetchCosts } from '../../../api/costs';
 import { useForm } from 'react-hook-form';
-import editIcon from './../../assets/icons/edit.svg';
-import { postApplications } from '../../api/applications';
-import { Loading } from '../../helpers/Loader/Loader';
-import Modal from '../../helpers/Modals/Modal';
+import editIcon from '../../../assets/icons/edit.svg';
+import { postApplications } from '../../../api/applications';
+import { Loading } from '../../../helpers/Loader/Loader';
+import Modal from '../../../helpers/Modals/Modal';
+import SApplicationForm from './SApplicationForm';
+import SApplicationDetail from './SApplicationDetail';
+import SApplicationSender from './SApplicationSender';
+import SApplicationReceiver from './SApplicationReceiver';
+import SApplicationComment from './SApplicationComment';
 
-const OrderDeliveryItem = () => {
+const SApplicationItem = () => {
   const { state } = useLocation();
   const { userID } = useSelector((state) => state?.user);
   const {
@@ -134,7 +134,7 @@ const OrderDeliveryItem = () => {
           <div
             className={`${!isDisabled ? 'pointer-events-none opacity-40' : ''}`}
           >
-            <OrderDeliveryForm
+            <SApplicationForm
               state={state}
               onSubmit={onSubmitCalc}
               onHandleTariff={onHandleTariff}
@@ -152,7 +152,7 @@ const OrderDeliveryItem = () => {
                 Детали посылки
               </h3>
             </div>
-            <OrderDeliveryDetail register={register} errors={errors} />
+            <SApplicationDetail register={register} errors={errors} />
             <div className='flex items-center pb-5 pt-8'>
               <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
                 3
@@ -161,7 +161,7 @@ const OrderDeliveryItem = () => {
                 Данные отправителя
               </h3>
             </div>
-            <OrderDeliverySender
+            <SApplicationSender
               register={register}
               errors={errors}
               control={control}
@@ -174,7 +174,7 @@ const OrderDeliveryItem = () => {
                 Данные получателя
               </h3>
             </div>
-            <OrderDeliveryReceiver
+            <SApplicationReceiver
               register={register}
               errors={errors}
               control={control}
@@ -187,7 +187,7 @@ const OrderDeliveryItem = () => {
                 Отправка
               </h3>
             </div>
-            <OrderDeliveryComment register={register} errors={errors} />
+            <SApplicationComment register={register} errors={errors} />
             <div className='md:flex justify-between items-center mt-12'>
               <div className='flex justify-end md:justify-start max-w-[287px] w-full md:ml-0 ml-auto items-center bg-colYellow p-5'>
                 <span className='text-xl font-medium'>Общая стоимость:</span>
@@ -222,4 +222,4 @@ const OrderDeliveryItem = () => {
   );
 };
 
-export default OrderDeliveryItem;
+export default SApplicationItem;

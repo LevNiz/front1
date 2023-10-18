@@ -6,9 +6,7 @@ import Profile from './Profile/Profile';
 import Alaket from './Alaket/Alaket';
 import GbBuyer from './GB-Buyer/GbBuyer';
 import GbBusiness from './GB-Business/GbBusiness';
-import CalculateDelivery from './CalculateDelivery/CalculateDelivery';
-import OrderDelivery from './OrderDelivery/OrderDelivery';
-import MyApplications from './MyApplications/MyApplications';
+import Applications from './Applications/Applications';
 
 export {
   Tracking,
@@ -19,7 +17,5 @@ export {
   Alaket,
   GbBuyer,
   GbBusiness,
-  CalculateDelivery,
-  OrderDelivery,
-  MyApplications,
+  Applications,
 };
