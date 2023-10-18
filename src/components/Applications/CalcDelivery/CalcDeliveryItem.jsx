@@ -87,7 +87,7 @@ const CalcDeliveryItem = () => {
             <button
               disabled={!tariff}
               onClick={() =>
-                navigate('/order-delivery', {
+                navigate('/applications/send-application', {
                   state: {
                     orderData: orderData,
                     tariff: tariff,

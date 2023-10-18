@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchCosts } from '../../../api/costs';
 import { useForm } from 'react-hook-form';
 import editIcon from '../../../assets/icons/edit.svg';
@@ -16,6 +16,7 @@ import SApplicationComment from './SApplicationComment';
 const SApplicationItem = () => {
   const { state } = useLocation();
   const { userID } = useSelector((state) => state?.user);
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -108,6 +109,7 @@ const SApplicationItem = () => {
       setIsLoading(false);
       setModalOpen(true);
       setModalContent('successRequest');
+      navigate('/applications')
     } else {
       setIsLoading(false);
     }

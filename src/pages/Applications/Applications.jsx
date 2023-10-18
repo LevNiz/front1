@@ -2,8 +2,14 @@ import { NavLink } from 'react-router-dom';
 import { ApplicationsItem } from '../../components';
 import calculator from './../../assets/icons/calculator.svg';
 import box from './../../assets/icons/my-parcel.svg';
+import { useEffect } from 'react';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const Applications = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <div className='py-24 content'>
       <div className='flex justify-center space-x-8 pt-8'>
