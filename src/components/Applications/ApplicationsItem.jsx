@@ -44,7 +44,8 @@ const ApplicationsItem = () => {
           {applications?.map((el) => (
             <NavLink
               key={el?.id}
-              to={`${el?.id}`}
+              to='javascript:void(0)'
+              onClick={() => alert('Детальная страница уже совсем скоро!')}
               className='w-full bg-colBgGray2 rounded-[18px] p-4 md:p-6'
             >
               <div className='flex justify-between items-center'>
