@@ -9,7 +9,7 @@ import OrderDeliveryReceiver from './OrderDeliveryReceiver';
 import OrderDeliveryComment from './OrderDeliveryComment';
 import { useForm } from 'react-hook-form';
 import editIcon from './../../assets/icons/edit.svg';
-import { postRequest } from '../../api/request';
+import { postApplications } from '../../api/applications';
 import { Loading } from '../../helpers/Loader/Loader';
 import Modal from '../../helpers/Modals/Modal';
 
@@ -103,7 +103,7 @@ const OrderDeliveryItem = () => {
     setIsLoading(true);
     const requestData = { ...params, ...data };
     requestData.cost = tariff === 2 ? Number(parcelCost) + 4 : parcelCost;
-    const { success } = await postRequest(requestData, userID);
+    const { success } = await postApplications(requestData, userID);
     if (success) {
       setIsLoading(false);
       setModalOpen(true);

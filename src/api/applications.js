@@ -1,7 +1,12 @@
-import { axiosInstance } from './axios';
+import { axiosInstance, request } from './axios';
+import {
+  fetchApplicationStart,
+  fetchApplicationSuccess,
+  fetchApplicationFailure,
+} from '../redux/slices/applicationSlice';
 
-// post Request:
-export const postRequest = async (data, userID) => {
+// post application:
+export const postApplications = async (data, userID) => {
   if (data.orderData) {
     data = { ...data.orderData, ...data };
   }
@@ -34,5 +39,19 @@ export const postRequest = async (data, userID) => {
     return { success: true };
   } catch (error) {
     return { success: false };
+  }
+};
+
+// Get applications:
+export const fetchApplications = async (userID, dispatch) => {
+  dispatch(fetchApplicationStart());
+  try {
+    const res = await request.get('core/request/');
+    const myApplications = res?.data?.results?.filter(
+      (el) => el?.client?.id === userID
+    );
+    dispatch(fetchApplicationSuccess(myApplications));
+  } catch (error) {
+    dispatch(fetchApplicationFailure(error));
   }
 };

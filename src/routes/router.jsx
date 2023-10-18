@@ -73,7 +73,7 @@ export const router = createBrowserRouter(
             <Route path='my-parcels' element={<MyParcels />} />
           </Route>
           <Route path='alaket' element={<Alaket />} />
-          <Route path='my-applications' element={<MyApplications />} />
+          <Route path='applications' element={<MyApplications />} />
           <Route path='order-delivery' element={<OrderDelivery />} />
           <Route path='calculate' element={<CalculateDelivery />} />
         </Route>

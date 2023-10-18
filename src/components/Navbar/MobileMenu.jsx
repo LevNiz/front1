@@ -92,7 +92,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1`}
               >
                 <li className='flex items-center mb-3'>
-                  <img className='w-5 mr-2' src={profileUser} alt="*" />
+                  <img className='w-5 mr-2' src={profileUser} alt='*' />
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/personal-data'
@@ -102,7 +102,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   </NavLink>
                 </li>
                 <li className='flex items-center my-3'>
-                  <img className='w-5 mr-2' src={profileBox} alt="*" />
+                  <img className='w-5 mr-2' src={profileBox} alt='*' />
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-parcels'
@@ -112,7 +112,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   </NavLink>
                 </li>
                 <li className='flex items-center my-3'>
-                  <img className='w-5 mr-2' src={profileNotif} alt="*" />
+                  <img className='w-5 mr-2' src={profileNotif} alt='*' />
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/notifications'
@@ -122,7 +122,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   </NavLink>
                 </li>
                 <li className='flex items-center mt-3'>
-                  <img className='w-5 mr-2' src={profileWallet} alt="*" />
+                  <img className='w-5 mr-2' src={profileWallet} alt='*' />
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-wallet'
@@ -156,7 +156,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
             <li className='my-3 flex items-center'>
               <img src={sendBox} alt='*' />
               <NavLink
-                to='/calculate'
+                to='/applications'
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
