@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchParcelCategories } from '../../../api/parcels';
 import attention from '../../../assets/icons/attention.svg';
+import info from '../../../assets/icons/attention2.svg';
+import boxSize from '../../../assets/images/box-size.jpeg';
 
 const CalcDeliveryForm = ({ onSubmit }) => {
   const { cities } = useSelector((state) => state?.cities);
@@ -194,7 +196,26 @@ const CalcDeliveryForm = ({ onSubmit }) => {
         {parcelSize?.label === 'Точные' ? (
           <>
             <div>
-              <p className='font-medium'>Габариты, см</p>
+              <div className='flex items-center'>
+                <p className='font-medium'>Габариты, см</p>
+                <div className='relative ml-2 group'>
+                  <img className='w-5 cursor-pointer' src={info} alt='*' />
+                  <div className='absolute w-64 sm:w-80 p-5 bg-white shadow-[0_8px_34px_#00000026] z-[9999] top-7 ld:top-5 -left-28 ss:-left-24 ld:-left-80 lg:left-5 hidden group-hover:block lg:rounded-2xl rounded-tl-none'>
+                    <img className='w-4/6 mx-auto' src={boxSize} alt='*' />
+                    <p className='text-xs sm:text-sm'>
+                      Стоимость доставки рассчитывается по наибольшему весу -{' '}
+                      <strong>физическому</strong> или{' '}
+                      <strong>объёмному</strong>.
+                      <br />
+                      Физический вес - это масса груза за кг.
+                      <br />
+                      Объёмный вес - это место, занимаемое отправлением при
+                      перевозке, рассчитывается по формуле: длина * ширина *
+                      высота в см / 5000.
+                    </p>
+                  </div>
+                </div>
+              </div>
               <p className='text-xs mb-3 font-light opacity-70'>
                 (длина, ширина, высота)
               </p>

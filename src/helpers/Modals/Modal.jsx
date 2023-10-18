@@ -7,8 +7,10 @@ import { NavLink } from 'react-router-dom';
 const Modal = ({ isOpen, onClose, content, logOutUser }) => {
   if (!isOpen) return null;
 
+  const addresses = [];
+
   return (
-    <div className='fixed inset-0 flex items-center justify-center px-3 z-[99999]'>
+    <div className='fixed inset-0 flex items-center justify-center px-3 z-[999999]'>
       <div
         onClick={onClose}
         className='absolute inset-0 bg-gray-800 opacity-50'
@@ -101,6 +103,26 @@ const Modal = ({ isOpen, onClose, content, logOutUser }) => {
               Перейти на главную
             </NavLink>
           </div>
+        </div>
+      ) : content === 'AddressModal' ? (
+        <div className='bg-white p-8 rounded-md h-[90vh] shadow-md z-10 max-w-[90%] w-full text-center'>
+          <h3 className='text-2xl font-medium mb-8'>Выберите адрес</h3>
+            <div>
+              {addresses?.length ? (
+                ''
+              ) : (
+                <div className='text-center max-w-[320px]'>
+                  <img className='mx-auto mb-5' src={inCorrectImg} alt="*" />
+                  <h3 className='text-xl font-medium max-w-[260px] mx-auto'>Здесь пока пусто!</h3>
+                  <p className='text-sm opacity-75 max-w-[260px] my-2'>Нажав на кнопку ниже, вы можете добавить свои адреса.</p>
+                </div>
+              )}
+              <div className='flex justify-end w-max ml-auto'>
+                <button className='bg-colYellow py-3 px-6 font-medium rounded-md hover:bg-colYellowHover duration-100'>
+                  + Добавить адрес
+                </button>
+              </div>
+            </div>
         </div>
       ) : (
         <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>

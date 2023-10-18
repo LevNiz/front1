@@ -4,12 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchCosts } from '../../../api/costs';
 import { useForm } from 'react-hook-form';
 import editIcon from '../../../assets/icons/edit.svg';
+import attention from '../../../assets/icons/attention2.svg';
+import attention2 from '../../../assets/icons/attention.svg';
 import { postApplications } from '../../../api/applications';
 import { Loading } from '../../../helpers/Loader/Loader';
 import Modal from '../../../helpers/Modals/Modal';
 import SApplicationForm from './SApplicationForm';
 import SApplicationDetail from './SApplicationDetail';
-import SApplicationSender from './SApplicationSender';
+// import SApplicationSender from './SApplicationSender';
 import SApplicationReceiver from './SApplicationReceiver';
 import SApplicationComment from './SApplicationComment';
 
@@ -109,7 +111,7 @@ const SApplicationItem = () => {
       setIsLoading(false);
       setModalOpen(true);
       setModalContent('successRequest');
-      navigate('/applications')
+      navigate('/applications');
     } else {
       setIsLoading(false);
     }
@@ -155,7 +157,7 @@ const SApplicationItem = () => {
               </h3>
             </div>
             <SApplicationDetail register={register} errors={errors} />
-            <div className='flex items-center pb-5 pt-8'>
+            {/* <div className='flex items-center pb-5 pt-8'>
               <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
                 3
               </span>
@@ -167,14 +169,35 @@ const SApplicationItem = () => {
               register={register}
               errors={errors}
               control={control}
-            />
-            <div className='flex items-center pb-5 pt-8'>
+            /> */}
+            <div className='flex items-center pt-8'>
               <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
-                4
+                3
               </span>
               <h3 className='text-xl text-[#6747e5] font-medium ml-2'>
                 Данные получателя
               </h3>
+            </div>
+            <div className='flex items-center pl-10 pt-1 pb-5 relative'>
+              <p className='text-sm text-gray-600 mr-2'>
+                Укажите данные получателя
+              </p>
+              <div className='group'>
+                <img
+                  className='w-5 cursor-pointer group'
+                  src={attention}
+                  alt='*'
+                />
+                <div className='absolute w-72 p-4 bg-white shadow-[0_8px_34px_#00000026] z-[9999] top-10 left-5 hidden group-hover:block lg:rounded-2xl'>
+                  <p className='text-xs sm:text-sm flex items-start'>
+                    <img src={attention2} alt='*' />
+                    <span className='ml-2'>
+                      Выберите адрес и данные получателя из ваших сохраненных
+                      адресов. Так же вы можете добавить новый адрес.
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
             <SApplicationReceiver
               register={register}
@@ -183,7 +206,7 @@ const SApplicationItem = () => {
             />
             <div className='flex items-center pb-5 pt-8'>
               <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
-                5
+                4
               </span>
               <h3 className='text-xl text-[#6747e5] font-medium ml-2'>
                 Отправка
@@ -191,12 +214,14 @@ const SApplicationItem = () => {
             </div>
             <SApplicationComment register={register} errors={errors} />
             <div className='md:flex justify-between items-center mt-12'>
-              <div className='flex justify-end md:justify-start max-w-[287px] w-full md:ml-0 ml-auto items-center bg-colYellow p-5'>
+              <div className='flex justify-end md:justify-start max-w-[287px] w-full md:ml-0 ml-auto items-center bg-[#c9fbc0] p-5'>
                 <span className='text-xl font-medium'>Общая стоимость:</span>
                 <span className='text-xl font-medium mx-1 '>
                   {tariff === 2
                     ? (parseFloat(parcelCost) + 4).toFixed(2)
-                    : parcelCost}
+                    : parcelCost
+                    ? parcelCost
+                    : '00.00'}
                   $
                 </span>
               </div>

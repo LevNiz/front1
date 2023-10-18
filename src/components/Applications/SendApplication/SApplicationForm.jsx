@@ -214,7 +214,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
               <div>
                 <div className='flex items-center'>
                   <p className='font-medium'>Габариты, см</p>
-                  <div className='relative ml-1 group'>
+                  <div className='relative ml-2 group'>
                     <img className='w-5 cursor-pointer' src={info} alt='*' />
                     <div className='absolute w-64 sm:w-80 p-5 bg-white shadow-[0_8px_34px_#00000026] z-[9999] top-7 ld:top-5 -left-28 ss:-left-24 ld:-left-80 lg:left-5 hidden group-hover:block lg:rounded-2xl rounded-tl-none'>
                       <img className='w-4/6 mx-auto' src={boxSize} alt='*' />

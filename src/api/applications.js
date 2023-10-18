@@ -12,8 +12,8 @@ export const postApplications = async (data, userID) => {
   }
 
   const sendData = {
-    senderName: data.senderName,
-    senderPhone: data.senderPhone,
+    senderName: data.serviceName,
+    senderPhone: '-',
     receiverName: data.receiverName,
     receiverPhone: data.receiverPhone,
     serviceName: data.serviceName,
