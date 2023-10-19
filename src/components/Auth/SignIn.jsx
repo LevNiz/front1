@@ -71,7 +71,7 @@ const SignIn = () => {
             Авторизация
           </h1>
           <div>
-            <p className='font-bold mb-2'>Ваш email</p>
+            <p className='font-medium mb-2'>Ваш email</p>
             <div className='mb-6 relative'>
               <input
                 className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
@@ -98,7 +98,7 @@ const SignIn = () => {
             </div>
           </div>
           <div>
-            <p className='font-bold mb-2'>Пароль</p>
+            <p className='font-medium mb-2'>Пароль</p>
             <div className='mb-4 relative'>
               <input
                 className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'

@@ -1,13 +1,25 @@
 import { useState } from 'react';
 import Modal from '../../../helpers/Modals/Modal';
+import { fetchAddresses } from '../../../api/addresses';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SApplicationReceiver = () => {
-  
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
 
+  const { userID } = useSelector((state) => state?.user);
+  const dispatch = useDispatch();
+
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const handleAddresses = async () => {
+    await fetchAddresses(userID, dispatch);
+  };
+
+  const getFormData = (data) => {
+    console.log(data);
   };
 
   return (
@@ -18,6 +30,7 @@ const SApplicationReceiver = () => {
             onClick={() => {
               setModalOpen(true);
               setModalContent('AddressModal');
+              handleAddresses();
             }}
             className='bg-colYellow max-w-[320px] w-full p-3 rounded-md hover:opacity-70 duration-150'
           >
@@ -25,7 +38,12 @@ const SApplicationReceiver = () => {
           </button>
         </div>
       </div>
-      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      <Modal
+        getFormData={getFormData}
+        isOpen={modalOpen}
+        onClose={closeModal}
+        content={modalContent}
+      />
     </>
   );
 };

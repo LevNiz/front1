@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCountries } from '../../api/countries';
 import { fetchCities } from '../../api/cities';
 
-// eslint-disable-next-line react/prop-types
 const FilterModal = ({ isOpen, onClose }) => {
   const { loading } = useSelector((state) => state?.depots);
   const [selectedCountry, setSelectedCountry] = useState('');

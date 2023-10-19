@@ -57,7 +57,7 @@ const ResetPassNew = () => {
             телефона
           </p>
           <div>
-            <p className='font-bold mb-2'>Новый пароль</p>
+            <p className='font-medium mb-2'>Новый пароль</p>
             <div className='relative'>
               <img
                 className='absolute top-[15px] left-[10px] hidden mm:block'
@@ -106,7 +106,7 @@ const ResetPassNew = () => {
             )}
           </div>
           <div>
-            <p className='font-bold mb-2 mt-5'>Подтвердить пароль</p>
+            <p className='font-medium mb-2 mt-5'>Подтвердить пароль</p>
             <div className='relative'>
               <img
                 className='absolute top-[15px] left-[10px] hidden mm:block'

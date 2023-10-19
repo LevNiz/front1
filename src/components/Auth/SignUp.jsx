@@ -21,6 +21,7 @@ import showPass from '../../assets/icons/show-pass.svg';
 import logo from '../../assets/icons/logo2.svg';
 import back from '../../assets/icons/back.svg';
 import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/material.css';
 
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
@@ -112,7 +113,7 @@ const SignUp = () => {
           className='mm:max-w-[460px] w-full'
         >
           <div className='mb-4'>
-            <p className='font-bold mb-2'>ФИО</p>
+            <p className='font-medium mb-2'>ФИО</p>
             <div className='relative mb-1'>
               <input
                 className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
@@ -134,7 +135,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className='mb-4'>
-            <p className='font-bold mb-2'>Ваш email</p>
+            <p className='font-medium mb-2'>Ваш email</p>
             <div className='relative mb-1'>
               <input
                 className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
@@ -161,7 +162,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className='mb-4'>
-            <p className='font-bold mb-2'>Ваш телефон</p>
+            <p className='font-medium mb-2'>Ваш телефон</p>
             <div className='relative mb-1 border border-colGray2 p-[16px] mm:p-[15px_20px_15px_36px] rounded-lg'>
               <Controller
                 name='phone'
@@ -201,7 +202,7 @@ const SignUp = () => {
             )}
           </div>
           <div className='mb-4'>
-            <p className='font-bold mb-2'>Адрес</p>
+            <p className='font-medium mb-2'>Адрес</p>
             <div className='relative mb-1'>
               <input
                 className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
@@ -223,7 +224,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className='mb-4'>
-            <p className='font-bold mb-2'>Страна</p>
+            <p className='font-medium mb-2'>Страна</p>
             <div className='relative mb-1'>
               <Controller
                 name='country'
@@ -281,7 +282,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className='mb-4'>
-            <p className='font-bold mb-2'>Город</p>
+            <p className='font-medium mb-2'>Город</p>
             <div className='relative mb-1'>
               <Controller
                 name='city'
@@ -323,7 +324,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className='mb-4'>
-            <p className='font-bold mb-2'>Пароль</p>
+            <p className='font-medium mb-2'>Пароль</p>
             <div className='relative mb-1'>
               <input
                 className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
@@ -372,7 +373,7 @@ const SignUp = () => {
             )}
           </div>
           <div className='mb-4'>
-            <p className='font-bold mb-2'>Подтвердить пароль</p>
+            <p className='font-medium mb-2'>Подтвердить пароль</p>
             <div className='relative mb-1'>
               <input
                 className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'

@@ -8,7 +8,6 @@ import { ButtonLoading } from '../../../helpers/Loader/Loader';
 import { fetchCountries } from '../../../api/countries';
 import { fetchCities } from '../../../api/cities';
 
-// eslint-disable-next-line react/prop-types
 const FilterParcel = ({ isOpen, onClose }) => {
   const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
