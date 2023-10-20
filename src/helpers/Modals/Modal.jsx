@@ -64,7 +64,7 @@ const Modal = ({
   if (!isOpen) return null;
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center px-3 z-[999999]'>
+    <div className='fixed inset-0 flex items-center justify-center z-[999999]'>
       <div
         onClick={onClose}
         className='absolute inset-0 bg-gray-800 opacity-50'
@@ -159,24 +159,32 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'AddressModal' ? (
-        <div className='bg-white p-8 rounded-md h-[90vh] shadow-md z-10 max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
+        <div className='bg-white p-4 md:p-8 md:rounded-md h-screen md:h-[90vh] shadow-md z-10 md:max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
           {addressForm ? (
             <>
               <div className='flex justify-between items-center mb-10'>
-                <h3 className='text-2xl font-medium'>Выберите адрес</h3>
+                <h3 className='hidden md:block text-2xl font-medium'>
+                  Выберите адрес
+                </h3>
                 <button
                   onClick={() => setAddressForm(false)}
                   className='bg-black text-white py-3 px-6 font-medium rounded-md hover:opacity-70 duration-100'
                 >
                   + Добавить адрес
                 </button>
+                <div
+                  onClick={onClose}
+                  className='md:hidden text-4xl cursor-pointer absolute top-4 right-7'
+                >
+                  &times;
+                </div>
               </div>
               {loading ? (
                 <ContentLoading extraStyle='380px' />
               ) : error ? (
                 'Error'
               ) : addresses?.length ? (
-                <div className='grid grid-cols-4 gap-4 h-full'>
+                <div className='grid xl:grid-cols-4 dd:grid-cols-3 mm:grid-cols-2 gap-4 md:h-full'>
                   {addresses?.map((el) => (
                     <div
                       key={el?.id}
@@ -256,17 +264,17 @@ const Modal = ({
           ) : (
             <>
               <img
-                className='w-6 cursor-pointer absolute top-8 left-8'
+                className='w-6 cursor-pointer sm:absolute top-auto sm:top-8 left-auto sm:left-8'
                 src={back}
                 alt='*'
                 onClick={() => setAddressForm(true)}
               />
-              <h2 className='text-xl font-medium mb-5'>Добавить новый адрес</h2>
+              <h2 className='text-xl font-medium mt-3 sm:mt-0 mb-5'>Добавить новый адрес</h2>
               {loading ? (
                 <ContentLoading extraStyle='380px' />
               ) : (
                 <form className='pt-5 flex flex-col justify-between'>
-                  <div className='grid grid-cols-3 gap-5 text-left'>
+                  <div className='grid lg:grid-cols-3 ld:grid-cols-2 gap-5 text-left'>
                     <div>
                       <p className='font-medium mb-2'>Имя получателя</p>
                       <input
@@ -318,7 +326,7 @@ const Modal = ({
                         </p>
                       )}
                     </div>
-                    <div className='col-span-3'>
+                    <div className='lg:col-span-3 ld:col-span-2'>
                       <p className='font-medium mb-2'>Тип адреса</p>
                       <div className='flex items-center'>
                         <label
@@ -575,7 +583,7 @@ const Modal = ({
                   <button
                     onClick={handleSubmit(onSubmit)}
                     type='submit'
-                    className='absolute bottom-[28px] right-[28px] font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-[280px] w-full'
+                    className='ld:absolute ld:bottom-[28px] ld:right-[28px] my-6 ld:my-0 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 sm:max-w-[280px] w-full'
                   >
                     Cохранить
                   </button>
