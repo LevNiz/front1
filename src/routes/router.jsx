@@ -20,6 +20,10 @@ import {
   PrivateRoute,
   MyWallet,
   CalcDelivery,
+  MyApplications,
+  GBChat,
+  TechChat,
+  SavedAddresses,
 } from '../components';
 import {
   Auth,
@@ -67,6 +71,10 @@ export const router = createBrowserRouter(
           <Route path='profile' element={<Profile />}>
             <Route path='personal-data' element={<PersonalData />} />
             <Route path='my-wallet' element={<MyWallet />} />
+            <Route path='my-applications' element={<MyApplications />} />
+            <Route path='gb-chat' element={<GBChat />} />
+            <Route path='tech-chat' element={<TechChat />} />
+            <Route path='saved-addresses' element={<SavedAddresses />} />
             <Route path='notifications' element={<Notifications />}>
               <Route path=':id' element={<NotificationDetail />} />
             </Route>

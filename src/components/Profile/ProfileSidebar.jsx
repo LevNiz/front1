@@ -55,7 +55,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to=''
+              to='my-applications'
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={time} alt='*' />
@@ -64,7 +64,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to=''
+              to='gb-chat'
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={gbChat} alt='*' />
@@ -73,7 +73,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to=''
+              to='tech-chat'
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={chat} alt='*' />
@@ -100,7 +100,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to=''
+              to='saved-addresses'
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={location} alt='*' />

@@ -27,6 +27,10 @@ import PrivateRoute from '../helpers/Private/PrivateRoute';
 import ApplicationsItem from './Applications/ApplicationsItem';
 import CalcDelivery from './Applications/CalcDelivery/CalcDelivery';
 import CalcDeliveryItem from './Applications/CalcDelivery/CalcDeliveryItem';
+import MyApplications from './Profile/MyApplications/MyApplications';
+import GBChat from './Profile/GBChat/GBChat';
+import TechChat from './Profile/TechChat/TechChat';
+import SavedAddresses from './Profile/SavedAddresses/SavedAddresses';
 
 export {
   Layout,
@@ -57,5 +61,9 @@ export {
   MyWallet,
   CalcDeliveryItem,
   ApplicationsItem,
-  CalcDelivery
+  CalcDelivery,
+  MyApplications,
+  GBChat,
+  TechChat,
+  SavedAddresses,
 };
