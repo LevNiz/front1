@@ -10,7 +10,6 @@ export const postApplications = async (data, userID) => {
   if (data.orderData) {
     data = { ...data.orderData, ...data };
   }
-
   const sendData = {
     senderName: data.serviceName,
     senderPhone: '-',
@@ -26,13 +25,16 @@ export const postApplications = async (data, userID) => {
       data.parcelSize.value !== 'custom' ? data.parcelSize.value : null,
     packageType: null,
     dateSending: data.dateArrival,
-    phone: data.senderPhone,
+    phone: data.receiverPhone,
     comment: data.comment,
     height: Number(data.height) || null,
     width: Number(data.width) || null,
     length: Number(data.length) || null,
     cost: Number(data.cost),
-    weight: Number(data.scopeWeight),
+    weight:
+      data.parcelSize.value === 'custom'
+        ? Number(data.scopeWeight)
+        : data.parcelSize.weight,
   };
   try {
     await axiosInstance.post('core/request/', sendData);

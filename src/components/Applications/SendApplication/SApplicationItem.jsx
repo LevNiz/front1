@@ -22,7 +22,6 @@ const SApplicationItem = () => {
   const {
     handleSubmit,
     register,
-    control,
     watch,
     formState: { errors },
   } = useForm();
@@ -34,23 +33,13 @@ const SApplicationItem = () => {
   const [tariff, setTariff] = useState(state?.tariff);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState();
+  const [modalContent, setModalContent] = useState('');
+  const [receiver, setReceiver] = useState('');
 
   const dateArrival = watch('dateArrival');
-  const senderName = watch('senderName');
-  const senderPhone = watch('senderPhone');
-  const receiverName = watch('receiverName');
-  const receiverPhone = watch('receiverPhone');
   const comment = watch('comment');
 
-  const isButtonDisabled = !(
-    dateArrival &&
-    senderName &&
-    senderPhone &&
-    receiverName &&
-    receiverPhone &&
-    comment
-  );
+  const isButtonDisabled = !(dateArrival && comment && receiver);
 
   useEffect(() => {
     (async () => {
@@ -67,6 +56,10 @@ const SApplicationItem = () => {
 
   const onHandleTariff = (data) => {
     setTariff(data);
+  };
+
+  const handleReceiverData = (data) => {
+    setReceiver(data);
   };
 
   const onSubmitCalc = (data) => {
@@ -104,7 +97,7 @@ const SApplicationItem = () => {
 
   const onSubmitForm = async (data) => {
     setIsLoading(true);
-    const requestData = { ...params, ...data };
+    const requestData = { ...params, ...data, ...receiver };
     requestData.cost = tariff === 2 ? Number(parcelCost) + 4 : parcelCost;
     const { success } = await postApplications(requestData, userID);
     if (success) {
@@ -199,11 +192,7 @@ const SApplicationItem = () => {
                 </div>
               </div>
             </div>
-            <SApplicationReceiver
-              register={register}
-              errors={errors}
-              control={control}
-            />
+            <SApplicationReceiver onReceiver={handleReceiverData} />
             <div className='flex items-center pb-5 pt-8'>
               <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
                 4

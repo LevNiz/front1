@@ -55,7 +55,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to='javascript:void(0)'
+              to=''
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={time} alt='*' />
@@ -64,7 +64,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to='javascript:void(0)'
+              to=''
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={gbChat} alt='*' />
@@ -73,7 +73,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to='javascript:void(0)'
+              to=''
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={chat} alt='*' />
@@ -100,7 +100,7 @@ const ProfileSidebar = () => {
           </li>
           <li className='my-6'>
             <NavLink
-              to='javascript:void(0)'
+              to=''
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={location} alt='*' />

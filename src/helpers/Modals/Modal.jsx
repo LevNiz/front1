@@ -12,7 +12,14 @@ import success from './../../assets/images/success.jpg';
 import back from './../../assets/icons/arrow-left.svg';
 import { fetchAddresses, postAddress } from '../../api/addresses';
 
-const Modal = ({ isOpen, onClose, content, logOutUser }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  content,
+  logOutUser,
+  onSelectAddress,
+  onReceiver,
+}) => {
   const { cities } = useSelector((state) => state?.cities);
   const { countries } = useSelector((state) => state?.countries);
   const { depots } = useSelector((state) => state?.depots);
@@ -218,7 +225,17 @@ const Modal = ({ isOpen, onClose, content, logOutUser }) => {
                           </h4>
                         </div>
                       </div>
-                      <button className='bg-colYellow hover:opacity-70 duration-200 w-full p-2 rounded-md mt-5 text-sm font-medium'>
+                      <button
+                        onClick={() => {
+                          onSelectAddress(el?.id);
+                          onClose();
+                          onReceiver({
+                            receiverName: el?.receiverName,
+                            receiverPhone: el?.phone,
+                          });
+                        }}
+                        className='bg-colYellow hover:opacity-70 duration-200 w-full p-2 rounded-md mt-5 text-sm font-medium'
+                      >
                         Выбрать
                       </button>
                     </div>

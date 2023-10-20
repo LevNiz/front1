@@ -44,7 +44,7 @@ const ApplicationsItem = () => {
           {applications?.map((el) => (
             <NavLink
               key={el?.id}
-              to='javascript:void(0)'
+              // to=''
               onClick={() => alert('Детальная страница уже совсем скоро!')}
               className='w-full bg-colBgGray2 rounded-[18px] p-4 md:p-6'
             >
