@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
@@ -10,16 +10,19 @@ import sosImg from './../../assets/images/sos.svg';
 import inCorrectImg from './../../assets/images/404.svg';
 import success from './../../assets/images/success.jpg';
 import back from './../../assets/icons/arrow-left.svg';
+import { fetchAddresses, postAddress } from '../../api/addresses';
 
-const Modal = ({ isOpen, onClose, content, logOutUser, getFormData }) => {
+const Modal = ({ isOpen, onClose, content, logOutUser }) => {
   const { cities } = useSelector((state) => state?.cities);
   const { countries } = useSelector((state) => state?.countries);
   const { depots } = useSelector((state) => state?.depots);
   const { loading, error, addresses } = useSelector(
     (state) => state?.addresses
   );
+  const { userID } = useSelector((state) => state?.user);
+  const dispatch = useDispatch();
 
-  const [addressFrom, setAddressForm] = useState(true);
+  const [addressForm, setAddressForm] = useState(true);
   const [addressType, setAddressType] = useState('custom');
   const [selectedCountry, setSelectedCountry] = useState('');
 
@@ -44,7 +47,11 @@ const Modal = ({ isOpen, onClose, content, logOutUser, getFormData }) => {
   }));
 
   const onSubmit = async (data) => {
-    getFormData(data);
+    const { success } = await postAddress(data, userID);
+    if (success) {
+      await fetchAddresses(userID, dispatch);
+      setAddressForm(true);
+    }
   };
 
   if (!isOpen) return null;
@@ -146,7 +153,7 @@ const Modal = ({ isOpen, onClose, content, logOutUser, getFormData }) => {
         </div>
       ) : content === 'AddressModal' ? (
         <div className='bg-white p-8 rounded-md h-[90vh] shadow-md z-10 max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
-          {addressFrom ? (
+          {addressForm ? (
             <>
               <div className='flex justify-between items-center mb-10'>
                 <h3 className='text-2xl font-medium'>Выберите адрес</h3>
@@ -238,111 +245,231 @@ const Modal = ({ isOpen, onClose, content, logOutUser, getFormData }) => {
                 onClick={() => setAddressForm(true)}
               />
               <h2 className='text-xl font-medium mb-5'>Добавить новый адрес</h2>
-              <form className='pt-5 flex flex-col justify-between'>
-                <div className='grid grid-cols-3 gap-5 text-left'>
-                  <div>
-                    <p className='font-medium mb-2'>Имя получателя</p>
-                    <input
-                      className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
-                      placeholder='Введите имя получателя'
-                      {...register('receiverName', {
-                        required: 'Поле обязательно к заполнению!',
-                      })}
-                    />
-                    {errors?.senderName && (
-                      <p className='text-red-500 mt-1 text-sm'>
-                        {errors?.senderName?.message ||
-                          'Поле обязательно к заполнению!'}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <p className='font-medium mb-2'>Номер телефона</p>
-                    <Controller
-                      name='phone'
-                      className='w-full'
-                      control={control}
-                      defaultValue=''
-                      rules={{
-                        required: 'Поле обязательно к заполнению!',
-                      }}
-                      render={({ field }) => (
-                        <PhoneInput
-                          {...field}
-                          placeholder='Введите номер телефона'
-                          country={'kg'}
-                          countryCodeEditable={false}
-                          specialLabel={true}
-                          onChange={(value) => {
-                            field.onChange(`+${value}`);
-                          }}
-                          value={field.value}
-                          inputProps={{
-                            className:
-                              'w-full border border-colGray2 p-[14px] pl-[56px] rounded-[4px] focus:border-black focus:outline-none',
-                          }}
-                        />
+              {loading ? (
+                <ContentLoading extraStyle='380px' />
+              ) : (
+                <form className='pt-5 flex flex-col justify-between'>
+                  <div className='grid grid-cols-3 gap-5 text-left'>
+                    <div>
+                      <p className='font-medium mb-2'>Имя получателя</p>
+                      <input
+                        className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                        placeholder='Введите имя получателя'
+                        {...register('receiverName', {
+                          required: 'Поле обязательно к заполнению!',
+                        })}
+                      />
+                      {errors?.receiverName && (
+                        <p className='text-red-500 mt-1 text-sm'>
+                          {errors?.receiverName?.message ||
+                            'Поле обязательно к заполнению!'}
+                        </p>
                       )}
-                    />
-                    {errors?.senderPhone && (
-                      <p className='text-red-500 mt-1 text-sm'>
-                        {errors?.senderPhone?.message ||
-                          'Поле обязательно к заполнению!'}
-                      </p>
-                    )}
-                  </div>
-                  <div className='col-span-3'>
-                    <p className='font-medium mb-2'>Тип адреса</p>
-                    <div className='flex items-center'>
-                      <label
-                        onClick={() => setAddressType('custom')}
-                        className='mr-3 flex items-center'
-                      >
-                        <Controller
-                          name='type'
-                          control={control}
-                          checked
-                          defaultValue='custom'
-                          rules={{
-                            required: 'Поле обязательно к заполнению!',
-                          }}
-                          render={({ field }) => (
-                            <input
-                              type='radio'
-                              {...field}
-                              value='custom'
-                              defaultChecked
-                            />
-                          )}
-                        />
-                        <span className='pl-1'>Кастомный</span>
-                      </label>
-                      <label
-                        onClick={() => setAddressType('depot')}
-                        className='mr-3 flex items-center'
-                      >
-                        <Controller
-                          name='type'
-                          control={control}
-                          defaultValue='depot'
-                          rules={{
-                            required: 'Поле обязательно к заполнению!',
-                          }}
-                          render={({ field }) => (
-                            <input type='radio' {...field} value='depot' />
-                          )}
-                        />
-                        <span className='pl-1'>Пункт выдачи GivBox</span>
-                      </label>
                     </div>
-                  </div>
-                  {addressType === 'custom' ? (
-                    <>
+                    <div>
+                      <p className='font-medium mb-2'>Номер телефона</p>
+                      <Controller
+                        name='phone'
+                        className='w-full'
+                        control={control}
+                        defaultValue=''
+                        rules={{
+                          required: 'Поле обязательно к заполнению!',
+                        }}
+                        render={({ field }) => (
+                          <PhoneInput
+                            {...field}
+                            placeholder='Введите номер телефона'
+                            country={'kg'}
+                            countryCodeEditable={false}
+                            specialLabel={true}
+                            onChange={(value) => {
+                              field.onChange(`+${value}`);
+                            }}
+                            value={field.value}
+                            inputProps={{
+                              className:
+                                'w-full border border-colGray2 p-[14px] pl-[56px] rounded-[4px] focus:border-black focus:outline-none',
+                            }}
+                          />
+                        )}
+                      />
+                      {errors?.phone && (
+                        <p className='text-red-500 mt-1 text-sm'>
+                          {errors?.phone?.message ||
+                            'Поле обязательно к заполнению!'}
+                        </p>
+                      )}
+                    </div>
+                    <div className='col-span-3'>
+                      <p className='font-medium mb-2'>Тип адреса</p>
+                      <div className='flex items-center'>
+                        <label
+                          onClick={() => setAddressType('custom')}
+                          className='mr-3 flex items-center'
+                        >
+                          <Controller
+                            name='type'
+                            control={control}
+                            checked
+                            defaultValue='custom'
+                            rules={{
+                              required: 'Поле обязательно к заполнению!',
+                            }}
+                            render={({ field }) => (
+                              <input
+                                type='radio'
+                                {...field}
+                                value='custom'
+                                defaultChecked
+                              />
+                            )}
+                          />
+                          <span className='pl-1'>Кастомный</span>
+                        </label>
+                        <label
+                          onClick={() => setAddressType('depot')}
+                          className='mr-3 flex items-center'
+                        >
+                          <Controller
+                            name='type'
+                            control={control}
+                            defaultValue='depot'
+                            rules={{
+                              required: 'Поле обязательно к заполнению!',
+                            }}
+                            render={({ field }) => (
+                              <input type='radio' {...field} value='depot' />
+                            )}
+                          />
+                          <span className='pl-1'>Пункт выдачи GivBox</span>
+                        </label>
+                      </div>
+                    </div>
+                    {addressType === 'custom' ? (
+                      <>
+                        <div>
+                          <p className='font-medium mb-2'>Страна</p>
+                          <div className='relative'>
+                            <Controller
+                              name='country'
+                              control={control}
+                              rules={{
+                                required: 'Поле обязательно к заполнению!',
+                              }}
+                              render={({ field }) => (
+                                <Select
+                                  {...field}
+                                  placeholder='Выберите страну'
+                                  options={countries?.map((country) => ({
+                                    value: country?.id,
+                                    label: (
+                                      <div
+                                        key={country?.country}
+                                        className='flex items-center'
+                                      >
+                                        <img
+                                          src={country?.icon}
+                                          alt={country?.nameRu}
+                                          className='w-5 h-4 mr-2'
+                                        />
+                                        {country?.nameRu}
+                                      </div>
+                                    ),
+                                  }))}
+                                  onChange={(selectedOption) => {
+                                    setValue('city', '');
+                                    field.onChange(selectedOption);
+                                    setSelectedCountry(selectedOption.value);
+                                  }}
+                                  styles={{
+                                    control: (provided, state) => ({
+                                      ...provided,
+                                      padding: '8px',
+                                      boxShadow: state.isFocused ? 0 : 0,
+                                      border: state.isFocused
+                                        ? '1px solid #999'
+                                        : '',
+                                      '&:hover': {
+                                        border: state.isFocused
+                                          ? '1px solid #999'
+                                          : '',
+                                      },
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
+                            {errors?.country && (
+                              <p className='text-red-500 mt-1 text-sm'>
+                                {errors?.country.message || 'Error!'}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <p className='font-medium mb-2'>Город</p>
+                          <div className='relative'>
+                            <Controller
+                              name='city'
+                              control={control}
+                              rules={{
+                                required: 'Поле обязательно к заполнению!',
+                              }}
+                              render={({ field }) => (
+                                <Select
+                                  {...field}
+                                  options={cityOptions}
+                                  placeholder='Выберите город'
+                                  isDisabled={!countrySelect}
+                                  styles={{
+                                    control: (provided, state) => ({
+                                      ...provided,
+                                      padding: '8px',
+                                      boxShadow: state.isFocused ? 0 : 0,
+                                      border: state.isFocused
+                                        ? '1px solid #999'
+                                        : '',
+                                      '&:hover': {
+                                        border: state.isFocused
+                                          ? '1px solid #999'
+                                          : '',
+                                      },
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
+                            {errors?.city && (
+                              <p className='text-red-500 mt-1 text-sm'>
+                                {errors?.city.message || 'Error!'}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <p className='font-medium mb-2'>Адрес</p>
+                          <input
+                            className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                            placeholder='Введите адрес'
+                            {...register('address', {
+                              required: 'Поле обязательно к заполнению!',
+                            })}
+                          />
+                          {errors?.address && (
+                            <p className='text-red-500 mt-1 text-sm'>
+                              {errors?.address?.message ||
+                                'Поле обязательно к заполнению!'}
+                            </p>
+                          )}
+                        </div>
+                      </>
+                    ) : (
                       <div>
-                        <p className='font-medium mb-2'>Страна</p>
+                        <p className='font-medium mb-2'>Пункт выдачи GivBox</p>
                         <div className='relative'>
                           <Controller
-                            name='country'
+                            name='depot'
                             control={control}
                             rules={{
                               required: 'Поле обязательно к заполнению!',
@@ -350,28 +477,40 @@ const Modal = ({ isOpen, onClose, content, logOutUser, getFormData }) => {
                             render={({ field }) => (
                               <Select
                                 {...field}
-                                placeholder='Выберите страну'
-                                options={countries?.map((country) => ({
-                                  value: country?.id,
+                                placeholder='Выберите пункт выдачи'
+                                options={depots?.map((el) => ({
+                                  value: el?.id,
+                                  city: el?.city?.id,
+                                  country: el?.country?.id,
+                                  address:
+                                    el?.city?.nameRu +
+                                    ', ' +
+                                    el?.country?.nameRu,
                                   label: (
                                     <div
-                                      key={country?.country}
+                                      key={el?.el}
                                       className='flex items-center'
                                     >
-                                      <img
-                                        src={country?.icon}
-                                        alt={country?.nameRu}
-                                        className='w-5 h-4 mr-2'
-                                      />
-                                      {country?.nameRu}
+                                      <div className='w-8 h-6 mr-2 overflow-hidden'>
+                                        <img
+                                          src={el?.images[0]}
+                                          alt='*'
+                                          className='w-full h-full object-cover'
+                                        />
+                                      </div>
+                                      <div>
+                                        <h4 className='text-sm font-medium leading-[14px]'>
+                                          {el?.nameRu}
+                                        </h4>
+                                        <p className='text-[11px]'>
+                                          {el?.city?.nameRu +
+                                            ', ' +
+                                            el?.country?.nameRu}
+                                        </p>
+                                      </div>
                                     </div>
                                   ),
                                 }))}
-                                onChange={(selectedOption) => {
-                                  setValue('city', '');
-                                  field.onChange(selectedOption);
-                                  setSelectedCountry(selectedOption.value);
-                                }}
                                 styles={{
                                   control: (provided, state) => ({
                                     ...provided,
@@ -397,158 +536,34 @@ const Modal = ({ isOpen, onClose, content, logOutUser, getFormData }) => {
                           )}
                         </div>
                       </div>
-                      <div>
-                        <p className='font-medium mb-2'>Город</p>
-                        <div className='relative'>
-                          <Controller
-                            name='city'
-                            control={control}
-                            rules={{
-                              required: 'Поле обязательно к заполнению!',
-                            }}
-                            render={({ field }) => (
-                              <Select
-                                {...field}
-                                options={cityOptions}
-                                placeholder='Выберите город'
-                                isDisabled={!countrySelect}
-                                styles={{
-                                  control: (provided, state) => ({
-                                    ...provided,
-                                    padding: '8px',
-                                    boxShadow: state.isFocused ? 0 : 0,
-                                    border: state.isFocused
-                                      ? '1px solid #999'
-                                      : '',
-                                    '&:hover': {
-                                      border: state.isFocused
-                                        ? '1px solid #999'
-                                        : '',
-                                    },
-                                  }),
-                                }}
-                              />
-                            )}
-                          />
-                          {errors?.city && (
-                            <p className='text-red-500 mt-1 text-sm'>
-                              {errors?.city.message || 'Error!'}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <div>
-                        <p className='font-medium mb-2'>Адрес</p>
-                        <input
-                          className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
-                          placeholder='Введите адрес'
-                          {...register('address', {
-                            required: 'Поле обязательно к заполнению!',
-                          })}
-                        />
-                        {errors?.senderName && (
-                          <p className='text-red-500 mt-1 text-sm'>
-                            {errors?.senderName?.message ||
-                              'Поле обязательно к заполнению!'}
-                          </p>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <div>
-                      <p className='font-medium mb-2'>Пункт выдачи GivBox</p>
-                      <div className='relative'>
-                        <Controller
-                          name='depot'
-                          control={control}
-                          rules={{
-                            required: 'Поле обязательно к заполнению!',
-                          }}
-                          render={({ field }) => (
-                            <Select
-                              {...field}
-                              placeholder='Выберите пункт выдачи'
-                              options={depots?.map((el) => ({
-                                value: el?.id,
-                                city: el?.city?.id,
-                                country: el?.country?.id,
-                                label: (
-                                  <div
-                                    key={el?.el}
-                                    className='flex items-center'
-                                  >
-                                    <div className='w-8 h-6 mr-2 overflow-hidden'>
-                                      <img
-                                        src={el?.images[0]}
-                                        alt='*'
-                                        className='w-full h-full object-cover'
-                                      />
-                                    </div>
-                                    <div>
-                                      <h4 className='text-sm font-medium leading-[14px]'>
-                                        {el?.nameRu}
-                                      </h4>
-                                      <p className='text-[11px]'>
-                                        {el?.city?.nameRu +
-                                          ', ' +
-                                          el?.country?.nameRu}
-                                      </p>
-                                    </div>
-                                  </div>
-                                ),
-                              }))}
-                              styles={{
-                                control: (provided, state) => ({
-                                  ...provided,
-                                  padding: '8px',
-                                  boxShadow: state.isFocused ? 0 : 0,
-                                  border: state.isFocused
-                                    ? '1px solid #999'
-                                    : '',
-                                  '&:hover': {
-                                    border: state.isFocused
-                                      ? '1px solid #999'
-                                      : '',
-                                  },
-                                }),
-                              }}
-                            />
-                          )}
-                        />
-                        {errors?.country && (
-                          <p className='text-red-500 mt-1 text-sm'>
-                            {errors?.country.message || 'Error!'}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                  <div>
-                    <p className='font-medium mb-2'>
-                      Доп. информация или комментарий
-                    </p>
-                    <input
-                      className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
-                      placeholder='Комментарий'
-                      {...register('nameAddress', {
-                        required: 'Поле обязательно к заполнению!',
-                      })}
-                    />
-                    {errors?.comment && (
-                      <p className='text-red-500 mt-1 text-sm'>
-                        {errors?.comment.message || 'Error!'}
-                      </p>
                     )}
+                    <div>
+                      <p className='font-medium mb-2'>
+                        Доп. информация или комментарий
+                      </p>
+                      <input
+                        className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                        placeholder='Комментарий'
+                        {...register('nameAddress', {
+                          required: 'Поле обязательно к заполнению!',
+                        })}
+                      />
+                      {errors?.nameAddress && (
+                        <p className='text-red-500 mt-1 text-sm'>
+                          {errors?.nameAddress.message || 'Error!'}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <button
-                  onClick={handleSubmit(onSubmit)}
-                  type='submit'
-                  className='absolute bottom-[28px] right-[28px] font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-[280px] w-full'
-                >
-                  Cохранить
-                </button>
-              </form>
+                  <button
+                    onClick={handleSubmit(onSubmit)}
+                    type='submit'
+                    className='absolute bottom-[28px] right-[28px] font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-[280px] w-full'
+                  >
+                    Cохранить
+                  </button>
+                </form>
+              )}
             </>
           )}
         </div>

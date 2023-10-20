@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SApplicationReceiver = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState();
+  const [modalContent, setModalContent] = useState('');
 
   const { userID } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
@@ -16,10 +16,6 @@ const SApplicationReceiver = () => {
 
   const handleAddresses = async () => {
     await fetchAddresses(userID, dispatch);
-  };
-
-  const getFormData = (data) => {
-    console.log(data);
   };
 
   return (
@@ -38,12 +34,7 @@ const SApplicationReceiver = () => {
           </button>
         </div>
       </div>
-      <Modal
-        getFormData={getFormData}
-        isOpen={modalOpen}
-        onClose={closeModal}
-        content={modalContent}
-      />
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
     </>
   );
 };
