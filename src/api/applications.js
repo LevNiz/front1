@@ -3,6 +3,9 @@ import {
   fetchApplicationStart,
   fetchApplicationSuccess,
   fetchApplicationFailure,
+  fetchArchiveApplicationStart,
+  fetchArchiveApplicationSuccess,
+  fetchArchiveApplicationFailure,
 } from '../redux/slices/applicationSlice';
 
 // post application:
@@ -55,5 +58,22 @@ export const fetchApplications = async (userID, dispatch) => {
     dispatch(fetchApplicationSuccess(myApplications));
   } catch (error) {
     dispatch(fetchApplicationFailure(error));
+  }
+};
+
+// Get applications:
+export const fetchArchiveApplications = async (userID, dispatch) => {
+  dispatch(fetchArchiveApplicationStart());
+  try {
+    const res = await request.get('core/request/');
+    const myApplications = res?.data?.results?.filter(
+      (el) => el?.client?.id === userID
+    );
+    const archiveApplications = myApplications?.filter(
+      (el) => el?.senderName === true
+    );
+    dispatch(fetchArchiveApplicationSuccess(archiveApplications));
+  } catch (error) {
+    dispatch(fetchArchiveApplicationFailure(error));
   }
 };

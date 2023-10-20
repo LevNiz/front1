@@ -18,6 +18,10 @@ import profileBox from './../../assets/icons/mobile-menu/profile-box.svg';
 import profileNotif from './../../assets/icons/mobile-menu/profile-notification.svg';
 import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
 import sendBox from './../../assets/icons/mobile-menu/send-box.svg';
+import location from './../../assets/icons/new-location.svg';
+import time from './../../assets/icons/timeSvg.svg';
+import chat from './../../assets/icons/chat.svg';
+import gbChat from './../../assets/icons/gb-chat.svg';
 
 const MobileMenu = ({ isOpen, onClose }) => {
   const { user } = useSelector((state) => state?.user);
@@ -129,6 +133,46 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     className='text-base font-medium opacity-70'
                   >
                     Мой кошелёк
+                  </NavLink>
+                </li>
+                <li className='flex items-center mt-3'>
+                  <img className='w-5 mr-2' src={time} alt='*' />
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/my-applications'
+                    className='text-base font-medium opacity-70'
+                  >
+                    Мои заявки
+                  </NavLink>
+                </li>
+                <li className='flex items-center mt-3'>
+                  <img className='w-5 mr-2' src={location} alt='*' />
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/saved-addresses'
+                    className='text-base font-medium opacity-70'
+                  >
+                    Сохраненные адреса
+                  </NavLink>
+                </li>
+                <li className='flex items-center mt-3'>
+                  <img className='w-5 mr-2' src={gbChat} alt='*' />
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/gb-chat'
+                    className='text-base font-medium opacity-70'
+                  >
+                    GB-Chat
+                  </NavLink>
+                </li>
+                <li className='flex items-center mt-3'>
+                  <img className='w-5 mr-2' src={chat} alt='*' />
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/tech-chat'
+                    className='text-base font-medium opacity-70'
+                  >
+                    Чат с поддержкой
                   </NavLink>
                 </li>
               </ul>
