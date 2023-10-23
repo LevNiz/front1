@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Modal from '../../../helpers/Modals/Modal';
 import { fetchAddresses } from '../../../api/addresses';
 import { useDispatch, useSelector } from 'react-redux';
+import ModalAddress from '../../../helpers/Modals/ModalAddress';
 
 const SApplicationReceiver = ({ onReceiver }) => {
   const { userID } = useSelector((state) => state?.user);
@@ -9,7 +9,6 @@ const SApplicationReceiver = ({ onReceiver }) => {
   const dispatch = useDispatch();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState('');
   const [addressID, setAddressID] = useState(null);
 
   const closeModal = () => {
@@ -74,7 +73,6 @@ const SApplicationReceiver = ({ onReceiver }) => {
           <button
             onClick={() => {
               setModalOpen(true);
-              setModalContent('AddressModal');
               handleAddresses();
             }}
             className='bg-colYellow max-w-[320px] w-full p-3 rounded-md hover:opacity-70 duration-150'
@@ -83,10 +81,9 @@ const SApplicationReceiver = ({ onReceiver }) => {
           </button>
         </div>
       </div>
-      <Modal
+      <ModalAddress
         isOpen={modalOpen}
         onClose={closeModal}
-        content={modalContent}
         onSelectAddress={handleChooseAddress}
         onReceiver={onReceiver}
       />

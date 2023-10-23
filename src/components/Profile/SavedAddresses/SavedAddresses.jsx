@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddresses } from '../../../api/addresses';
+import { deleteAddress, fetchAddresses } from '../../../api/addresses';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import inCorrectImg from '../../../assets/images/404.svg';
 import edit from '../../../assets/icons/editt.svg';
 import trash from '../../../assets/icons/trash.svg';
+import Modal from '../../../helpers/Modals/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const SavedAddresses = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -12,7 +14,24 @@ const SavedAddresses = () => {
     (state) => state?.addresses
   );
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('');
+  const [addressID, setAddressID] = useState('');
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onDeleteAddress = async () => {
+    const { success } = await deleteAddress(addressID);
+    if (success) {
+      setModalOpen(false);
+      await fetchAddresses(userID, dispatch);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -32,14 +51,14 @@ const SavedAddresses = () => {
           {addresses?.map((el, index) => (
             <div
               key={el?.id}
-              className='border border-gray-300 rounded-md p-4 text-left h-max'
+              className='border border-gray-300 rounded-md p-4 text-left h-max relative'
             >
               <div className='flex flex-col space-y-2'>
-                <div className='flex justify-between items-center'>
-                  <h3 className='text-sm font-medium'>
+                <div>
+                  <h3 className='text-sm font-medium max-w-[80%]'>
                     Сохраенный адрес {index + 1}
                   </h3>
-                  <div className='flex'>
+                  <div className='flex absolute top-3 right-3'>
                     <img
                       onClick={() => alert('Эта функция совсем скоро!')}
                       className='cursor-pointer w-6'
@@ -47,7 +66,11 @@ const SavedAddresses = () => {
                       alt='*'
                     />
                     <img
-                      onClick={() => alert('Эта функция совсем скоро!')}
+                      onClick={() => {
+                        setModalOpen(true);
+                        setModalContent('deleteAddress');
+                        setAddressID(el?.id);
+                      }}
                       className='cursor-pointer ml-1 w-[26px]'
                       src={trash}
                       alt='*'
@@ -91,9 +114,7 @@ const SavedAddresses = () => {
                 </div>
                 <div>
                   <p className='text-xs opacity-50'>Доп. по адресу</p>
-                  <h4 className='text-sm border-b-gray-300 border-b pb-1'>
-                    {el?.nameAddress || 'Не указана'}
-                  </h4>
+                  <h4 className='text-sm'>{el?.nameAddress || 'Не указана'}</h4>
                 </div>
               </div>
             </div>
@@ -108,8 +129,20 @@ const SavedAddresses = () => {
           <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2'>
             Нажав на кнопку ниже, вы можете добавить свои адреса.
           </p>
+          <button
+            onClick={() => navigate('new')}
+            className='bg-black text-white py-3 px-6 font-medium rounded-md hover:opacity-70 duration-100'
+          >
+            + Добавить адрес
+          </button>
         </div>
       )}
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        content={modalContent}
+        onDelAddress={onDeleteAddress}
+      />
     </div>
   );
 };

@@ -49,3 +49,13 @@ export const postAddress = async (data, userID) => {
     return { success: false };
   }
 };
+
+// Delete Address:
+export const deleteAddress = async (addressID) => {
+  try {
+    await axiosInstance.delete(`core/addresses/${addressID}`);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};

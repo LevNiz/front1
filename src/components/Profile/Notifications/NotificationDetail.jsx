@@ -5,7 +5,7 @@ import back from './../../../assets/icons/arrow-left.svg';
 
 const NotificationDetail = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState();
+  const [modalContent, setModalContent] = useState('');
 
   const navigate = useNavigate();
 

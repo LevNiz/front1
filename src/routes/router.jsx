@@ -24,6 +24,7 @@ import {
   GBChat,
   TechChat,
   SavedAddresses,
+  AddNewAddress,
 } from '../components';
 import {
   Auth,
@@ -74,7 +75,10 @@ export const router = createBrowserRouter(
             <Route path='my-applications' element={<MyApplications />} />
             <Route path='gb-chat' element={<GBChat />} />
             <Route path='tech-chat' element={<TechChat />} />
-            <Route path='saved-addresses' element={<SavedAddresses />} />
+            <Route path='saved-addresses'>
+              <Route index element={<SavedAddresses />} />
+              <Route path='new' element={<AddNewAddress />} />
+            </Route>
             <Route path='notifications' element={<Notifications />}>
               <Route path=':id' element={<NotificationDetail />} />
             </Route>
