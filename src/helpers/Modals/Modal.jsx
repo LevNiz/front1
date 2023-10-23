@@ -162,7 +162,7 @@ const Modal = ({
         <div className='bg-white p-4 md:p-8 md:rounded-md h-screen md:h-[90vh] shadow-md z-10 md:max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
           {addressForm ? (
             <>
-              <div className='flex justify-between items-center mb-10'>
+              <div className='flex justify-between items-center pt-5 md:pt-0 mb-10'>
                 <h3 className='hidden md:block text-2xl font-medium'>
                   Выберите адрес
                 </h3>
@@ -174,7 +174,7 @@ const Modal = ({
                 </button>
                 <div
                   onClick={onClose}
-                  className='md:hidden text-4xl cursor-pointer absolute top-4 right-7'
+                  className='md:hidden text-4xl cursor-pointer absolute top-9 md:top-4 right-7'
                 >
                   &times;
                 </div>
@@ -264,12 +264,14 @@ const Modal = ({
           ) : (
             <>
               <img
-                className='w-6 cursor-pointer sm:absolute top-auto sm:top-8 left-auto sm:left-8'
+                className='w-6 cursor-pointer sm:absolute top-5 mt-5 md:mt-0 sm:top-6 left-auto sm:left-8'
                 src={back}
                 alt='*'
                 onClick={() => setAddressForm(true)}
               />
-              <h2 className='text-xl font-medium mt-3 sm:mt-0 mb-5'>Добавить новый адрес</h2>
+              <h2 className='text-xl font-medium mt-3 sm:mt-0 mb-5'>
+                Добавить новый адрес
+              </h2>
               {loading ? (
                 <ContentLoading extraStyle='380px' />
               ) : (

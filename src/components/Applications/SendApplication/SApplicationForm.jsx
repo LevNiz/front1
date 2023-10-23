@@ -14,6 +14,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
   const [parcelData, setParcelData] = useState([]);
   const [parcelSize, setParcelSize] = useState(state?.orderData?.parcelSize);
   const [scopeWeight, setScopeWeight] = useState(null);
+  const [selectedTariff, setSelectedTariff] = useState(false);
   const [selectedSenderCity, setSelectedSenderCity] = useState(
     state?.orderData?.senderCity
   );
@@ -27,6 +28,10 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
 
   const handleReceiverCityChange = (selectedOption) => {
     setSelectedReceiverCity(selectedOption);
+  };
+
+  const onChoseTariff = (data) => {
+    setSelectedTariff(data);
   };
 
   const senderCityOptions = cities?.map((el) => ({
@@ -335,11 +340,15 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
         state={state}
         parcelCost={cost}
         onHandleTariff={onHandleTariff}
+        onChoseTariff={onChoseTariff}
       />
       <button
         onClick={handleSubmit(onSubmit)}
         type='submit'
-        className='font-medium hover:opacity-80 p-3 flex justify-center items-center ml-auto rounded-lg bg-black text-white duration-150 max-w-[280px] w-full mt-5'
+        disabled={!selectedTariff}
+        className={`${
+          !selectedTariff ? 'opacity-60 cursor-not-allowed' : 'hover:opacity-80'
+        } font-medium p-3 flex justify-center items-center ml-auto rounded-lg bg-black text-white duration-150 max-w-[280px] w-full mt-5`}
       >
         Рассчитать
       </button>

@@ -203,7 +203,7 @@ const SApplicationItem = () => {
             </div>
             <SApplicationComment register={register} errors={errors} />
             <div className='md:flex justify-between items-center mt-12'>
-              <div className='flex justify-end md:justify-start max-w-[287px] w-full md:ml-0 ml-auto items-center bg-[#c9fbc0] p-5'>
+              <div className='flex justify-end md:justify-start sm:max-w-[287px] w-full md:ml-0 ml-auto items-center bg-[#c9fbc0] p-5'>
                 <span className='text-xl font-medium'>Общая стоимость:</span>
                 <span className='text-xl font-medium mx-1 '>
                   {tariff === 2

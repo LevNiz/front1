@@ -4,7 +4,12 @@ import vector from '../../../assets/icons/vector.svg';
 import { tariffsData } from '../../../constants/tariffsData';
 import { addedCost } from '../../../constants/tariffsData';
 
-const SApplicationTariffs = ({ state, parcelCost, onHandleTariff }) => {
+const SApplicationTariffs = ({
+  state,
+  parcelCost,
+  onHandleTariff,
+  onChoseTariff,
+}) => {
   const choseTariff = tariffsData?.filter(
     (tariff) => tariff?.id === state?.tariff
   );
@@ -26,6 +31,7 @@ const SApplicationTariffs = ({ state, parcelCost, onHandleTariff }) => {
             onClick={() => {
               handleTariffClick(el?.id);
               onHandleTariff(el?.id);
+              onChoseTariff(true);
             }}
             className={`border-4 ${
               activeTariff === el?.id ? 'border-colYellow' : 'border-gray-200'
