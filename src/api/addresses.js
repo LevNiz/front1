@@ -42,6 +42,7 @@ export const postAddress = async (data, userID) => {
     nameAddress: nameAddress || '',
     user: userID,
   };
+  console.log(addressData)
   try {
     await axiosInstance.post('core/addresses/', addressData);
     return { success: true };

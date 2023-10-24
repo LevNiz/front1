@@ -7,6 +7,7 @@ import edit from '../../../assets/icons/editt.svg';
 import trash from '../../../assets/icons/trash.svg';
 import Modal from '../../../helpers/Modals/Modal';
 import { useNavigate } from 'react-router-dom';
+import { fetchDepots } from '../../../api/depots';
 
 const SavedAddresses = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -36,12 +37,23 @@ const SavedAddresses = () => {
   useEffect(() => {
     (async () => {
       await fetchAddresses(userID, dispatch);
+      await fetchDepots(dispatch);
     })();
   }, []);
 
   return (
     <div className='w-screen md:p-4'>
-      <h1 className='text-xl font-medium'>Сохраненные адреса</h1>
+      <div className='flex justify-between items-center'>
+        <h1 className='text-xl font-medium'>Сохраненные адреса</h1>
+        <button
+          onClick={() => navigate('new')}
+          className={`${
+            addresses?.length ? 'block' : 'hidden'
+          } bg-black text-white py-[10px] px-5 font-medium rounded-md hover:opacity-70 duration-100 text-sm`}
+        >
+          + Добавить новый
+        </button>
+      </div>
       {loading ? (
         <ContentLoading extraStyle='380px' />
       ) : error ? (
@@ -126,7 +138,7 @@ const SavedAddresses = () => {
           <h3 className='text-xl font-medium max-w-[260px] mx-auto'>
             Здесь пока пусто!
           </h3>
-          <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2'>
+          <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2 pb-3'>
             Нажав на кнопку ниже, вы можете добавить свои адреса.
           </p>
           <button
