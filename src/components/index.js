@@ -32,6 +32,7 @@ import GBChat from './Profile/GBChat/GBChat';
 import TechChat from './Profile/TechChat/TechChat';
 import SavedAddresses from './Profile/SavedAddresses/SavedAddresses';
 import AddNewAddress from './Profile/SavedAddresses/AddNewAddress';
+import UpdateAddress from './Profile/SavedAddresses/UpdateAddress';
 
 export {
   Layout,
@@ -68,4 +69,5 @@ export {
   TechChat,
   SavedAddresses,
   AddNewAddress,
+  UpdateAddress,
 };

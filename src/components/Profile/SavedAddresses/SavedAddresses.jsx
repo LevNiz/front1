@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAddress, fetchAddresses } from '../../../api/addresses';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Modal from '../../../helpers/Modals/Modal';
+import { deleteAddress, fetchAddresses } from '../../../api/addresses';
+import { fetchDepots } from '../../../api/depots';
 import inCorrectImg from '../../../assets/images/404.svg';
 import edit from '../../../assets/icons/editt.svg';
 import trash from '../../../assets/icons/trash.svg';
-import Modal from '../../../helpers/Modals/Modal';
-import { useNavigate } from 'react-router-dom';
-import { fetchDepots } from '../../../api/depots';
+import errorImg from '../../../assets/images/error.svg';
 
 const SavedAddresses = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -57,7 +58,20 @@ const SavedAddresses = () => {
       {loading ? (
         <ContentLoading extraStyle='380px' />
       ) : error ? (
-        'Error'
+        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
+          <div>
+            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
+            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
+              Произошла ошибка, повторите попытку позже!
+            </h4>
+            <NavLink
+              to='/'
+              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
+            >
+              Перейти на главную
+            </NavLink>
+          </div>
+        </div>
       ) : addresses?.length ? (
         <div className='grid sm:grid-cols-2 ld:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-5'>
           {addresses?.map((el, index) => (
@@ -67,12 +81,12 @@ const SavedAddresses = () => {
             >
               <div className='flex flex-col space-y-2'>
                 <div>
-                  <h3 className='text-sm font-medium max-w-[80%]'>
-                    Сохраенный адрес {index + 1}
+                  <h3 className='text-sm font-medium max-w-[80%] break-all line-clamp-1'>
+                    Сохранeный адрес {index + 1}
                   </h3>
                   <div className='flex absolute top-3 right-3'>
                     <img
-                      onClick={() => alert('Эта функция совсем скоро!')}
+                      onClick={() => navigate(`update/${el?.id}`)}
                       className='cursor-pointer w-6'
                       src={edit}
                       alt='*'
@@ -105,7 +119,7 @@ const SavedAddresses = () => {
                   <p className='text-xs opacity-50'>Тип адреса</p>
                   <h4 className='text-sm border-b-gray-300 border-b pb-1'>
                     {el?.type === 'custom'
-                      ? 'custom'
+                      ? 'Кастомный'
                       : el?.type === 'depot'
                       ? 'Пункт выдачи GivBox'
                       : '' || 'Не указана'}

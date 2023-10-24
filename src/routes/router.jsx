@@ -25,6 +25,7 @@ import {
   TechChat,
   SavedAddresses,
   AddNewAddress,
+  UpdateAddress,
 } from '../components';
 import {
   Auth,
@@ -78,6 +79,7 @@ export const router = createBrowserRouter(
             <Route path='saved-addresses'>
               <Route index element={<SavedAddresses />} />
               <Route path='new' element={<AddNewAddress />} />
+              <Route path='update/:id' element={<UpdateAddress />} />
             </Route>
             <Route path='notifications' element={<Notifications />}>
               <Route path=':id' element={<NotificationDetail />} />

@@ -1,26 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import PhoneInput from 'react-phone-input-2';
 import Select from 'react-select';
 import 'react-phone-input-2/lib/material.css';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { fetchAddresses, postAddress } from '../../../api/addresses';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  fetchAddresses,
+  fetchAddressesItem,
+  updateAddress,
+} from '../../../api/addresses';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import errorImg from '../../../assets/images/error.svg';
 
-const AddNewAddress = () => {
+const UpdateAddress = () => {
   const { cities } = useSelector((state) => state?.cities);
   const { countries } = useSelector((state) => state?.countries);
   const { depots } = useSelector((state) => state?.depots);
   const { userID } = useSelector((state) => state?.user);
-  const { loading, error } = useSelector((state) => state?.addresses);
 
-  const [addressType, setAddressType] = useState('custom');
+  const [addressType, setAddressType] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const {
     control,
@@ -29,7 +33,38 @@ const AddNewAddress = () => {
     setValue,
     formState: { errors },
     register,
-  } = useForm();
+  } = useForm({
+    defaultValues: async () => {
+      setIsLoading(true);
+      const { success, data } = await fetchAddressesItem(id);
+      if (success) {
+        const cityDefaults = data?.city
+          ? {
+              value: data?.city.id,
+              label: data?.city.nameRu,
+            }
+          : {};
+        const countryDefaults = data?.country
+          ? {
+              value: data?.country.id,
+              label: data?.country?.nameRu,
+            }
+          : {};
+        setAddressType(data?.type);
+        setIsLoading(false);
+        return {
+          receiverName: data?.receiverName,
+          phone: data?.phone,
+          type: data?.type,
+          country: data?.type === 'custom' ? countryDefaults : '',
+          city: data?.type === 'custom' ? cityDefaults : '',
+          address: data?.type === 'custom' ? data?.address : '',
+          nameAddress: data?.nameAddress,
+        };
+      }
+      setIsLoading(false);
+    },
+  });
 
   const countrySelect = watch('country');
 
@@ -42,34 +77,28 @@ const AddNewAddress = () => {
     label: el?.nameRu,
   }));
 
+  useEffect(() => {
+    (async () => {
+      await fetchAddressesItem(id);
+    })();
+  });
+
   const onSubmit = async (data) => {
-    const { success } = await postAddress(data, userID);
+    setIsLoading(true);
+    const { success } = await updateAddress(data, userID, id);
     if (success) {
+      setIsLoading(false);
       navigate(-1);
       await fetchAddresses(userID, dispatch);
     }
+    setIsLoading(false);
   };
 
   return (
     <div className='md:p-4 w-full'>
-      <h1 className='text-xl font-medium'>Добавить новый адрес</h1>
-      {loading ? (
+      <h1 className='text-xl font-medium'>Редактировать</h1>
+      {isLoading ? (
         <ContentLoading extraStyle='380px' />
-      ) : error ? (
-        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
-          <div>
-            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
-              Произошла ошибка, повторите попытку позже!
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
-        </div>
       ) : (
         <form className='pt-5 px-4'>
           <div className='grid ld:grid-cols-2 gap-5 text-left'>
@@ -133,7 +162,6 @@ const AddNewAddress = () => {
                   <Controller
                     name='type'
                     control={control}
-                    defaultValue='custom'
                     rules={{
                       required: 'Поле обязательно к заполнению!',
                     }}
@@ -142,7 +170,7 @@ const AddNewAddress = () => {
                         type='radio'
                         {...field}
                         value='custom'
-                        defaultChecked
+                        defaultChecked={field.value === 'custom'}
                       />
                     )}
                   />
@@ -155,12 +183,16 @@ const AddNewAddress = () => {
                   <Controller
                     name='type'
                     control={control}
-                    defaultValue='depot'
                     rules={{
                       required: 'Поле обязательно к заполнению!',
                     }}
                     render={({ field }) => (
-                      <input type='radio' {...field} value='depot' />
+                      <input
+                        type='radio'
+                        {...field}
+                        value='depot'
+                        defaultChecked={field.value === 'depot'}
+                      />
                     )}
                   />
                   <span className='pl-1'>Пункт выдачи GivBox</span>
@@ -298,7 +330,7 @@ const AddNewAddress = () => {
                           address:
                             el?.city?.nameRu + ', ' + el?.country?.nameRu,
                           label: (
-                            <div key={el?.el} className='flex items-center'>
+                            <div key={el?.id} className='flex items-center'>
                               <div className='w-8 h-6 mr-2 overflow-hidden'>
                                 <img
                                   src={el?.images[0]}
@@ -372,4 +404,4 @@ const AddNewAddress = () => {
   );
 };
 
-export default AddNewAddress;
+export default UpdateAddress;
