@@ -100,7 +100,7 @@ const UpdateAddress = () => {
       {isLoading ? (
         <ContentLoading extraStyle='380px' />
       ) : (
-        <form className='pt-5 px-4'>
+        <form className='pt-5 md:px-4'>
           <div className='grid ld:grid-cols-2 gap-5 text-left'>
             <div>
               <p className='font-medium mb-2'>Имя получателя</p>
@@ -154,10 +154,10 @@ const UpdateAddress = () => {
             </div>
             <div className='ld:col-span-2'>
               <p className='font-medium mb-2'>Тип адреса</p>
-              <div className='flex items-center'>
+              <div className='ss:flex items-center'>
                 <label
                   onClick={() => setAddressType('custom')}
-                  className='mr-3 flex items-center'
+                  className='mb-1 ss:mb-0 ss:mr-3 flex items-center'
                 >
                   <Controller
                     name='type'

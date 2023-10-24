@@ -45,14 +45,14 @@ const SavedAddresses = () => {
   return (
     <div className='w-screen md:p-4'>
       <div className='flex justify-between items-center'>
-        <h1 className='text-xl font-medium'>Сохраненные адреса</h1>
+        <h1 className='text-xl font-medium mr-2 sm:mr-0'>Сохраненные адреса</h1>
         <button
           onClick={() => navigate('new')}
           className={`${
             addresses?.length ? 'block' : 'hidden'
-          } bg-black text-white py-[10px] px-5 font-medium rounded-md hover:opacity-70 duration-100 text-sm`}
+          } bg-black text-white py-2 ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm`}
         >
-          + Добавить новый
+          Добавить новый
         </button>
       </div>
       {loading ? (
@@ -81,7 +81,7 @@ const SavedAddresses = () => {
             >
               <div className='flex flex-col space-y-2'>
                 <div>
-                  <h3 className='text-sm font-medium max-w-[80%] break-all line-clamp-1'>
+                  <h3 className='text-sm font-medium sm:max-w-[70%] md:max-w-[80%] break-all line-clamp-1'>
                     Сохранeный адрес {index + 1}
                   </h3>
                   <div className='flex absolute top-3 right-3'>

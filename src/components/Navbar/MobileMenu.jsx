@@ -59,22 +59,22 @@ const MobileMenu = ({ isOpen, onClose }) => {
         <div className='my-5 pb-5 border-b border-gray-400 mx-3'>
           <img className='mx-auto w-32' src={logo} alt='*' />
         </div>
-        <ul className='py-6 px-3 sidebar overflow-hidden overflow-y-scroll flex flex-col justify-between h-[calc(100%_-_102px)]'>
+        <ul className='py-6 px-1 sidebar overflow-hidden overflow-y-scroll flex flex-col justify-between h-[calc(100%_-_102px)]'>
           <div>
             <li className='mb-3 flex items-center'>
-              <img src={home} alt='*' />
               <NavLink
                 to='/'
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
-                Главная
+                <img src={home} alt='*' />
+                <span className='pl-2'>Главная</span>
               </NavLink>
             </li>
             <li className='my-3'>
               <div
                 onClick={toggleProfileMenu}
-                className='pr-2 rounded-lg flex justify-between items-center w-full'
+                className='p-2 rounded-lg flex justify-between items-center w-full'
               >
                 <div className='flex items-center'>
                   <img src={userIcon} alt='*' />
@@ -92,139 +92,139 @@ const MobileMenu = ({ isOpen, onClose }) => {
               </div>
               <ul
                 className={`${
-                  isProfileMenuOpen ? 'block' : 'hidden'
-                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1`}
+                  isProfileMenuOpen ? 'flex' : 'hidden'
+                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3`}
               >
-                <li className='flex items-center mb-3'>
-                  <img className='w-5 mr-2' src={profileUser} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/personal-data'
                     className='text-base font-medium opacity-70'
                   >
-                    Личные данные
+                    <img className='w-5 mr-2' src={profileUser} alt='*' />
+                    <span className='pl-2'>Личные данные</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center my-3'>
-                  <img className='w-5 mr-2' src={profileBox} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-parcels'
                     className='text-base font-medium opacity-70'
                   >
-                    Мои посылки
+                    <img className='w-5 mr-2' src={profileBox} alt='*' />
+                    <span className='pl-2'>Мои посылки</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center my-3'>
-                  <img className='w-5 mr-2' src={profileNotif} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/notifications'
                     className='text-base font-medium opacity-70'
                   >
-                    Уведомления
+                    <img className='w-5 mr-2' src={profileNotif} alt='*' />
+                    <span className='pl-2'>Уведомления</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center mt-3'>
-                  <img className='w-5 mr-2' src={profileWallet} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-wallet'
                     className='text-base font-medium opacity-70'
                   >
-                    Мой кошелёк
+                    <img className='w-5 mr-2' src={profileWallet} alt='*' />
+                    <span className='pl-2'>Мой кошелёк</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center mt-3'>
-                  <img className='w-5 mr-2' src={time} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-applications'
                     className='text-base font-medium opacity-70'
                   >
-                    Мои заявки
+                    <img className='w-5 mr-2' src={time} alt='*' />
+                    <span className='pl-2'>Мои заявки</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center mt-3'>
-                  <img className='w-5 mr-2' src={location} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/saved-addresses'
                     className='text-base font-medium opacity-70'
                   >
-                    Сохраненные адреса
+                    <img className='w-5 mr-2' src={location} alt='*' />
+                    <span className='pl-2'>Сохраненные адреса</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center mt-3'>
-                  <img className='w-5 mr-2' src={gbChat} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/gb-chat'
                     className='text-base font-medium opacity-70'
                   >
-                    GB-Chat
+                    <img className='w-5 mr-2' src={gbChat} alt='*' />
+                    <span className='pl-2'>GB-Chat</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center mt-3'>
-                  <img className='w-5 mr-2' src={chat} alt='*' />
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/tech-chat'
                     className='text-base font-medium opacity-70'
                   >
-                    Чат с поддержкой
+                    <img className='w-5 mr-2' src={chat} alt='*' />
+                    <span className='pl-2'>Чат с поддержкой</span>
                   </NavLink>
                 </li>
               </ul>
             </li>
             <li className='my-3 flex items-center'>
-              <img src={box} alt='*' />
               <NavLink
                 to='/tracking'
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
-                Трекинг посылок
+                <img src={box} alt='*' />
+                <span className='pl-2'>Трекинг посылок</span>
               </NavLink>
             </li>
             <li className='my-3 flex items-center'>
-              <img src={depot} alt='*' />
               <NavLink
                 to='/depots'
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
-                Наши склады
+                <img src={depot} alt='*' />
+                <span className='pl-2'>Наши склады</span>
               </NavLink>
             </li>
             <li className='my-3 flex items-center'>
-              <img src={sendBox} alt='*' />
               <NavLink
                 to='/applications'
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
-                Отправка
+                <img src={sendBox} alt='*' />
+                <span className='pl-2'>Отправка</span>
               </NavLink>
             </li>
             <li className='my-3 flex items-center'>
-              <img src={buyer} alt='*' />
               <NavLink
                 to='/gb-buyer'
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
-                GB-Buyer
+                <img src={buyer} alt='*' />
+                <span className='pl-2'>GB-Buyer</span>
               </NavLink>
             </li>
             <li className='my-3 flex items-center'>
-              <img src={bussines} alt='*' />
               <NavLink
                 to='/gb-business'
                 onClick={() => onClose()}
                 className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
               >
-                GB-Business
+                <img src={bussines} alt='*' />
+                <span className='pl-2'>GB-Business</span>
               </NavLink>
             </li>
           </div>
