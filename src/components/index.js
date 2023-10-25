@@ -33,6 +33,7 @@ import TechChat from './Profile/TechChat/TechChat';
 import SavedAddresses from './Profile/SavedAddresses/SavedAddresses';
 import AddNewAddress from './Profile/SavedAddresses/AddNewAddress';
 import UpdateAddress from './Profile/SavedAddresses/UpdateAddress';
+import GBBuyerItem from './GBBuyer/GBBuyerItem';
 
 export {
   Layout,
@@ -70,4 +71,5 @@ export {
   SavedAddresses,
   AddNewAddress,
   UpdateAddress,
+  GBBuyerItem,
 };
