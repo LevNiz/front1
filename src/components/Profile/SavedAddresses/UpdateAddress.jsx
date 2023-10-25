@@ -50,6 +50,31 @@ const UpdateAddress = () => {
               label: data?.country?.nameRu,
             }
           : {};
+        const depotDefaults = data?.depot
+          ? {
+              value: data?.depot.id,
+              address: data?.city?.nameRu + ', ' + data?.country?.nameRu,
+              label: (
+                <div className='flex items-center'>
+                  <div className='w-8 h-6 mr-2 overflow-hidden'>
+                    <img
+                      src={data?.depot?.images[0]}
+                      alt='*'
+                      className='w-full h-full object-cover'
+                    />
+                  </div>
+                  <div>
+                    <h4 className='text-sm font-medium leading-[14px]'>
+                      {data?.country?.nameRu}
+                    </h4>
+                    <p className='text-[11px]'>
+                      {data?.city?.nameRu + ', ' + data?.country?.nameRu}
+                    </p>
+                  </div>
+                </div>
+              ),
+            }
+          : {};
         setAddressType(data?.type);
         setIsLoading(false);
         return {
@@ -60,6 +85,7 @@ const UpdateAddress = () => {
           city: data?.type === 'custom' ? cityDefaults : '',
           address: data?.type === 'custom' ? data?.address : '',
           nameAddress: data?.nameAddress,
+          depot: data?.type === 'depot' ? depotDefaults : '',
         };
       }
       setIsLoading(false);
