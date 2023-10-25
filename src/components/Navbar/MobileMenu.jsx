@@ -59,7 +59,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
         <div className='my-5 pb-5 border-b border-gray-400 mx-3'>
           <img className='mx-auto w-32' src={logo} alt='*' />
         </div>
-        <ul className='py-6 px-1 sidebar overflow-hidden overflow-y-scroll flex flex-col justify-between h-[calc(100%_-_102px)]'>
+        <ul className='py-6 px-2 sidebar overflow-hidden overflow-y-scroll flex flex-col justify-between h-[calc(100%_-_102px)]'>
           <div>
             <li className='mb-3 flex items-center'>
               <NavLink
@@ -99,9 +99,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/personal-data'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={profileUser} alt='*' />
+                    <img className='w-5' src={profileUser} alt='*' />
                     <span className='pl-2'>Личные данные</span>
                   </NavLink>
                 </li>
@@ -109,9 +109,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-parcels'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={profileBox} alt='*' />
+                    <img className='w-5' src={profileBox} alt='*' />
                     <span className='pl-2'>Мои посылки</span>
                   </NavLink>
                 </li>
@@ -119,9 +119,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/notifications'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={profileNotif} alt='*' />
+                    <img className='w-5' src={profileNotif} alt='*' />
                     <span className='pl-2'>Уведомления</span>
                   </NavLink>
                 </li>
@@ -129,9 +129,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-wallet'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={profileWallet} alt='*' />
+                    <img className='w-5' src={profileWallet} alt='*' />
                     <span className='pl-2'>Мой кошелёк</span>
                   </NavLink>
                 </li>
@@ -139,9 +139,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-applications'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={time} alt='*' />
+                    <img className='w-5' src={time} alt='*' />
                     <span className='pl-2'>Мои заявки</span>
                   </NavLink>
                 </li>
@@ -149,9 +149,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/saved-addresses'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={location} alt='*' />
+                    <img className='w-5' src={location} alt='*' />
                     <span className='pl-2'>Сохраненные адреса</span>
                   </NavLink>
                 </li>
@@ -159,9 +159,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/gb-chat'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={gbChat} alt='*' />
+                    <img className='w-5' src={gbChat} alt='*' />
                     <span className='pl-2'>GB-Chat</span>
                   </NavLink>
                 </li>
@@ -169,9 +169,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/tech-chat'
-                    className='text-base font-medium opacity-70'
+                    className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5 mr-2' src={chat} alt='*' />
+                    <img className='w-5' src={chat} alt='*' />
                     <span className='pl-2'>Чат с поддержкой</span>
                   </NavLink>
                 </li>
