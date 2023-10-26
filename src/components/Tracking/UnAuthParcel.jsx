@@ -73,11 +73,14 @@ const UnAuthParcel = () => {
       {loading ? (
         <ContentLoading extraStyle='320px' />
       ) : isSearched && findParcel?.length < 1 ? (
-        <div className='py-10'>
-          <img className='mx-auto' src={notFound} alt='*' />
-          <h4 className='text-center font-medium mt-5 text-xl'>
-            По вашему запросу ничего не нашли...
-          </h4>
+        <div className='text-center max-w-[320px] min-h-[218px] mx-auto pt-20'>
+          <img className='mx-auto mb-5' src={notFound} alt='*' />
+          <h3 className='text-xl font-medium max-w-[260px] mx-auto'>
+            К сожалению, здесь пусто!
+          </h3>
+          <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2 pb-3'>
+            По вашему запросу ничего не нашли.
+          </p>
         </div>
       ) : (
         <div className='flex justify-center my-16'>

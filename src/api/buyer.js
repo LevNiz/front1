@@ -7,9 +7,20 @@ import {
 
 // Fetch buyers:
 export const fetchBuyers = async (dispatch) => {
-  dispatch(fetchBuyerStart);
+  dispatch(fetchBuyerStart());
   try {
     const res = await request.get('user/buyer/');
+    dispatch(fetchBuyerSuccess(res?.data?.results));
+  } catch (error) {
+    dispatch(fetchBuyerFailure(error));
+  }
+};
+
+// Search depot:
+export const searchBuyer = async (buyerName, dispatch) => {
+  dispatch(fetchBuyerStart());
+  try {
+    const res = await request.get(`user/buyer/?search=${buyerName}`);
     dispatch(fetchBuyerSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchBuyerFailure(error));

@@ -109,10 +109,13 @@ const Depots = () => {
           ))}
         </div>
       ) : (
-        <div className='py-10'>
-          <img className='mx-auto' src={notFound} alt='*' />
-          <p className='text-center font-medium text-xl mt-5'>
-            По вашему запросу ничего не нашли...
+        <div className='text-center max-w-[320px] min-h-[218px] mx-auto pt-20'>
+          <img className='mx-auto mb-5' src={notFound} alt='*' />
+          <h3 className='text-xl font-medium max-w-[260px] mx-auto'>
+            К сожалению, здесь пусто!
+          </h3>
+          <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2 pb-3'>
+            По вашему запросу ничего не нашли.
           </p>
         </div>
       )}
