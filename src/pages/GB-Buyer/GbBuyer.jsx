@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { GBBuyerItem } from '../../components';
 import { searchBuyer } from '../../api/buyer';
-import { useDispatch } from 'react-redux';
+import FilterModal from '../../components/GBBuyer/FilterModal';
 
 const GbBuyer = () => {
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -11,6 +14,15 @@ const GbBuyer = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const openFilterModal = (e) => {
+    e.preventDefault();
+    setFilterModalOpen(true);
+  };
+
+  const closeFilterModal = () => {
+    setFilterModalOpen(false);
+  };
 
   const onSubmit = async (data) => {
     await searchBuyer(data.buyer, dispatch);
@@ -29,7 +41,7 @@ const GbBuyer = () => {
               })}
             />
             <div
-              // onClick={(e) => openFilterModal(e)}
+              onClick={(e) => openFilterModal(e)}
               className='cursor-pointer flex justify-center items-center w-[116px] h-10 bg-colYellow rounded-lg hover:bg-colYellowHover duration-100'
             >
               Фильтр
@@ -48,6 +60,9 @@ const GbBuyer = () => {
             {errors?.buyer.message || 'Error!'}
           </p>
         )}
+      </div>
+      <div className='relative'>
+        <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
       <h1 className='text-3xl py-6 font-bold'>GB-Buyer</h1>
       <GBBuyerItem />

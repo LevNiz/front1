@@ -8,6 +8,7 @@ import inCorrectImg from '../../assets/images/404.svg';
 import errorImg from '../../assets/images/error.svg';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { NavLink } from 'react-router-dom';
+import { fetchWebsites } from '../../api/websites';
 
 const GBBuyerItem = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,8 @@ const GBBuyerItem = () => {
 
   useEffect(() => {
     (async () => {
-      fetchBuyers(dispatch);
+      await fetchBuyers(dispatch);
+      await fetchWebsites(dispatch);
     })();
   }, []);
 
@@ -41,7 +43,7 @@ const GBBuyerItem = () => {
       ) : buyers?.length ? (
         <div className='grid grid-cols-3 gap-6'>
           {buyers?.map((el) => (
-            <div key={el?.id} className='shadow-md relative'>
+            <NavLink to={`/${el?.id}`} key={el?.id} className='shadow-md relative'>
               <div className='bg-gray-100 py-6'>
                 <div className='flex'></div>
                 <div className='w-24 min-w-[96px] h-24 rounded-full overflow-hidden mx-auto border-2 border-colYellow p-[2px]'>
@@ -75,7 +77,7 @@ const GBBuyerItem = () => {
                     el?.websites?.map((website) => website?.name).join(', ')}
                 </div>
               </div>
-            </div>
+            </NavLink>
           ))}
         </div>
       ) : (
