@@ -16,6 +16,16 @@ export const fetchBuyers = async (dispatch) => {
   }
 };
 
+// Fetch buyers:
+export const fetchBuyersDetail = async (id) => {
+  try {
+    const res = await request.get(`user/buyer/${id}/`);
+    return { success: true, data: res?.data };
+  } catch (error) {
+    return { success: false, data: error };
+  }
+};
+
 // Search depot:
 export const searchBuyer = async (buyerName, dispatch) => {
   dispatch(fetchBuyerStart());

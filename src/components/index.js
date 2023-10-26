@@ -34,6 +34,7 @@ import SavedAddresses from './Profile/SavedAddresses/SavedAddresses';
 import AddNewAddress from './Profile/SavedAddresses/AddNewAddress';
 import UpdateAddress from './Profile/SavedAddresses/UpdateAddress';
 import GBBuyerItem from './GBBuyer/GBBuyerItem';
+import BGBuyerDetail from './GBBuyer/BGBuyerDetail';
 
 export {
   Layout,
@@ -72,4 +73,5 @@ export {
   AddNewAddress,
   UpdateAddress,
   GBBuyerItem,
+  BGBuyerDetail,
 };

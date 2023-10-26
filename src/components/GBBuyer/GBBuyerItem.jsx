@@ -41,12 +41,15 @@ const GBBuyerItem = () => {
           </div>
         </div>
       ) : buyers?.length ? (
-        <div className='grid grid-cols-3 gap-6'>
+        <div className='grid mm:grid-cols-2 lg:grid-cols-3 gap-6'>
           {buyers?.map((el) => (
-            <NavLink to={`/${el?.id}`} key={el?.id} className='shadow-md relative'>
-              <div className='bg-gray-100 py-6'>
-                <div className='flex'></div>
-                <div className='w-24 min-w-[96px] h-24 rounded-full overflow-hidden mx-auto border-2 border-colYellow p-[2px]'>
+            <NavLink
+              to={`${el?.id}`}
+              key={el?.id}
+              className='shadow-md relative flex mm:block rounded-xl overflow-hidden'
+            >
+              <div className='bg-gray-100 p-2 sm:py-6 min-w-[90px] ss:min-w-[110px] sm:w-[25%] mm:w-auto flex items-center'>
+                <div className='w-16 ss:w-20 sm:w-24 min-w-[64px] ss:min-w-[80px] sm:min-w-[96px] h-16 ss:h-20 sm:h-24 rounded-full overflow-hidden mx-auto border-2 border-colYellow p-[2px]'>
                   <img
                     className='w-full h-full object-cover rounded-full'
                     src={el?.avatar ? el?.avatar : noImg}
@@ -54,14 +57,14 @@ const GBBuyerItem = () => {
                   />
                 </div>
               </div>
-              <div className='py-5 px-4 text-center'>
-                <div className='flex justify-center items-center'>
-                  <h3 className='font-medium text-xl mr-1'>
+              <div className='p-3 sm:py-5 sm:px-4 mm:text-center w-[75%] mm:w-auto'>
+                <div className='flex mm:justify-center items-center'>
+                  <h3 className='font-medium sm:text-xl mr-1'>
                     {el?.fullname || 'Не указана'}
                   </h3>
                   <img className='w-8' src={instaTick} alt='*' />
                 </div>
-                <div className='flex items-center space-x-1 absolute top-3 right-3'>
+                <div className='flex mm:justify-center my-2 mm:my-0 items-center space-x-1 mm:absolute top-2 lg:top-3 right-3'>
                   <img className='w-4' src={star} alt='*' />
                   <img className='w-4' src={star} alt='*' />
                   <img className='w-4' src={star} alt='*' />

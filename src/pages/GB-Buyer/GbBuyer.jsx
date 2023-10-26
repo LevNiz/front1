@@ -64,7 +64,7 @@ const GbBuyer = () => {
       <div className='relative'>
         <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
-      <h1 className='text-3xl py-6 font-bold'>GB-Buyer</h1>
+      <h1 className='text-xl md:text-3xl py-6 font-bold'>GB-Buyer</h1>
       <GBBuyerItem />
     </div>
   );

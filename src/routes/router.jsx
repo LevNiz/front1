@@ -26,6 +26,7 @@ import {
   SavedAddresses,
   AddNewAddress,
   UpdateAddress,
+  BGBuyerDetail,
 } from '../components';
 import {
   Auth,
@@ -65,6 +66,7 @@ export const router = createBrowserRouter(
         </Route>
         <Route path='gb-buyer'>
           <Route index element={<GbBuyer />} />
+          <Route path=':id' element={<BGBuyerDetail />} />
         </Route>
         <Route path='gb-business'>
           <Route index element={<GbBusiness />} />
