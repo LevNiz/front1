@@ -1,69 +1,79 @@
 // import { db } from "../../../firebase/firebase";
+import chatBg from '../../../assets/images/chat-bg.jpeg';
 
 const TechChat = () => {
   return (
-    <div className='w-screen md:p-4 !pt-0'>
-      <div className='w-full h-full flex relative justify-between items-center rounded-[12px] flex-col px-3 py-3'>
-        <div className='w-full h-full'>
-          <div className='flex items-center w-full pb-3 border-b-[1px] border-gray-200'>
-            <div className='sm:hidden block mr-3'></div>
-            <div className='min-w-[50px] border-[1px] border-tpPurple2 w-[50px] h-[50px] p-[1.5px] rounded-[50%] overflow-hidden mr-3'>
-              <img
-                className='object-cover w-full h-full rounded-[50%]'
-                src='https://t3.ftcdn.net/jpg/02/39/63/06/360_F_239630622_lMzoP7BsTMLwIeDzFEvNfJisLJSYy0Wa.jpg'
-                // onError={(e) => {
-                //   e.target.onerror = null;
-                //   e.target.src = emptyImg;
-                // }}
-                alt='*'
-              />
-            </div>
-            <div className='flex flex-col'>
-              <h4 className='text-lg'>GivBox Support</h4>
-            </div>
+    <div className='w-screen scrollable'>
+      <div className='relative'>
+        <div className='flex items-center w-full p-2'>
+          <div className='min-w-[50px] border-2 border-colYellow w-[50px] h-[50px] p-[2px] rounded-full overflow-hidden mr-3'>
+            <img
+              className='object-cover w-full h-full rounded-[50%]'
+              src='https://cdn1.vectorstock.com/i/1000x1000/05/80/operator-man-avatar-customer-service-vector-9400580.jpg'
+              // onError={(e) => {
+              //   e.target.onerror = null;
+              //   e.target.src = emptyImg;
+              // }}
+              alt='*'
+            />
           </div>
-          <div className='w-full h-[calc(100vh_-_150px)] sm:h-[calc(100vh_-_180px)] overflow-y-scroll scrollable pr-2 pt-2 bg-[url(https://img.freepik.com/premium-vector/social-networks-dating-apps-vector-seamless-pattern_341076-469.jpg)]'>
-            {/* {messages?.map((message) => ( */}
-            <div
-              // key={message.id}
-              // className={`${
-              //    message?.data?.sender == currentUser?.id
-              //     ? 'ml-auto flex justify-end'
-              //     : ''
-              // } w-4/5`}
-              className='w-4/5'
-            >
-              <div className='text-right w-fit flex flex-col'>
-                <p
-                  // className={`${
-                  //   message?.data?.sender == currentUser?.id
-                  //     ? 'bg-tpPurple1 rounded-l-xl rounded-tr-xl'
-                  //     : 'bg-slate-500 rounded-r-xl rounded-tl-xl'
-                  // }  text-left text-white p-2 md:p-3 mb-1 text-[12px] mm:text-base break-all`}
-                  className='text-left text-white bg-slate-500 p-2 md:p-3 mb-1 text-[12px] mm:text-base break-all'
-                >
-                  {/* {message?.data?.text} */}lorem lorem
-                </p>
-                <span className='mr-3 text-[8px] mm:text-[12px] text-gray-500'>
-                  {/* {message?.data?.time
-                    ? formatDate(message?.data?.time)
-                    : '-- --'} */}
-                </span>
-              </div>
-            </div>
-            {/* ))} */}
-            {/* <div ref={messagesEndRef}></div> */}
+          <div className='flex flex-col'>
+            <h4 className='font-medium'>GivBox Support</h4>
           </div>
         </div>
+        <div
+          className='h-[calc(100vh_-_180px)] border border-gray-300 overflow-y-scroll p-2'
+          style={{
+            backgroundImage: `url('${chatBg}')`,
+          }}
+        >
+          {/* {messages?.map((message) => ( */}
+          <div
+            // key={message.id}
+            // className={`${
+            //    message?.data?.sender == currentUser?.id
+            //     ? 'ml-auto flex justify-end'
+            //     : ''
+            // } w-4/5`}
+            className='w-4/5'
+          >
+            <div className='text-right w-fit flex flex-col'>
+              <p
+                // className={`${
+                //   message?.data?.sender == currentUser?.id
+                //     ? 'bg-tpPurple1 rounded-l-xl rounded-tr-xl'
+                //     : 'bg-slate-500 rounded-r-xl rounded-tl-xl'
+                // }  text-left text-white p-2 md:p-3 mb-1 text-[12px] mm:text-base break-all`}
+                className='text-left text-white bg-slate-500 p-2 text-[12px] mm:text-base break-all rounded-xl rounded-tl-none '
+              >
+                {/* {message?.data?.text} */}lorem lorem
+              </p>
+              <span className='mr-3 mb-2 text-[8px] mm:text-[12px] text-gray-500'>
+                21:14
+              </span>
+            </div>
+          </div>
+          <div className='w-4/5 ml-auto flex justify-end'>
+            <div className='text-right w-fit flex flex-col'>
+              <p className='text-left text-black bg-green-200 rounded-xl rounded-br-none p-2 text-[12px] mm:text-base break-all'>
+                lorem lorem sdcscs sdocisocssc
+              </p>
+              <span className='mr-3 mb-2 text-[8px] mm:text-[12px] text-gray-500'>
+                12:00
+              </span>
+            </div>
+          </div>
+          {/* ))} */}
+          {/* <div ref={messagesEndRef}></div> */}
+        </div>
         <form className='w-full absolute bottom-0 left-0'>
-          <div className='flex items-center relative mx-3 mb-3'>
+          <div className='flex items-center relative m-2 mr-3'>
             <textarea
               id='chat'
-              type='text'
-              // maxRows={2}
+              type='textarea'
               // onChange={(e) => setInput(e.target.value)}
               // value={input}
-              className='pl-5 pr-10 py-3 w-full rounded-xl resize-none text-base text-gray-900 bg-white border border-gray-400'
+              className='pl-3 pr-10 py-3 w-full caret-gray-500 rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
               placeholder='Введите сообщение...'
               // onKeyDown={(e) => {
               //   if (e.key === 'Enter') {
