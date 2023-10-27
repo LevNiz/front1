@@ -1,7 +1,25 @@
-// import { db } from "../../../firebase/firebase";
 import chatBg from '../../../assets/images/chat-bg.jpeg';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { formatDate } from '../../../helpers/FormatDate/FormatDate';
+import { fetchSupportChats } from '../../../api/chats';
 
 const TechChat = () => {
+  const { userID } = useSelector((state) => state?.user);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const fetchMessages = fetchSupportChats(userID, (newDocData) => {
+      setMessages(newDocData);
+    });
+
+    return () => {
+      fetchMessages();
+    };
+  }, []);
+
+  console.log(messages)
+
   return (
     <div className='w-screen scrollable'>
       <div className='relative'>
@@ -10,10 +28,6 @@ const TechChat = () => {
             <img
               className='object-cover w-full h-full rounded-[50%]'
               src='https://cdn1.vectorstock.com/i/1000x1000/05/80/operator-man-avatar-customer-service-vector-9400580.jpg'
-              // onError={(e) => {
-              //   e.target.onerror = null;
-              //   e.target.src = emptyImg;
-              // }}
               alt='*'
             />
           </div>
@@ -22,49 +36,36 @@ const TechChat = () => {
           </div>
         </div>
         <div
-          className='h-[calc(100vh_-_180px)] border border-gray-300 overflow-y-scroll p-2'
-          style={{
-            backgroundImage: `url('${chatBg}')`,
-          }}
+          className='h-[calc(100vh_-_180px)] border border-gray-300 overflow-y-scroll p-2 pb-20 flex flex-col justify-end'
+          style={{ backgroundImage: `url('${chatBg}')` }}
         >
-          {/* {messages?.map((message) => ( */}
-          <div
-            // key={message.id}
-            // className={`${
-            //    message?.data?.sender == currentUser?.id
-            //     ? 'ml-auto flex justify-end'
-            //     : ''
-            // } w-4/5`}
-            className='w-4/5'
-          >
-            <div className='text-right w-fit flex flex-col'>
-              <p
-                // className={`${
-                //   message?.data?.sender == currentUser?.id
-                //     ? 'bg-tpPurple1 rounded-l-xl rounded-tr-xl'
-                //     : 'bg-slate-500 rounded-r-xl rounded-tl-xl'
-                // }  text-left text-white p-2 md:p-3 mb-1 text-[12px] mm:text-base break-all`}
-                className='text-left text-white bg-slate-500 p-2 text-[12px] mm:text-base break-all rounded-xl rounded-tl-none '
-              >
-                {/* {message?.data?.text} */}lorem lorem
-              </p>
-              <span className='mr-3 mb-2 text-[8px] mm:text-[12px] text-gray-500'>
-                21:14
-              </span>
+          {messages?.map((message) => (
+            <div
+              key={message.id}
+              className={`${
+                Number(message?.data?.senderUid) === userID
+                  ? 'ml-auto flex justify-end'
+                  : ''
+              } w-4/5`}
+            >
+              <div className='text-right w-fit flex flex-col'>
+                <p
+                  className={`${
+                    Number(message?.data?.senderUid) === userID
+                      ? 'bg-green-200 rounded-l-xl rounded-tr-xl ml-auto'
+                      : 'bg-slate-500 text-white rounded-r-xl rounded-tl-xl'
+                  }  text-left px-3 py-1 mb-1 text-[12px] mm:text-base break-all w-fit`}
+                >
+                  {message?.data?.text}
+                </p>
+                <span className='mr-3 mb-2 text-[8px] mm:text-[12px] text-gray-500'>
+                  {message?.data?.time
+                    ? formatDate(message?.data?.time)
+                    : '-- --'}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className='w-4/5 ml-auto flex justify-end'>
-            <div className='text-right w-fit flex flex-col'>
-              <p className='text-left text-black bg-green-200 rounded-xl rounded-br-none p-2 text-[12px] mm:text-base break-all'>
-                lorem lorem sdcscs sdocisocssc
-              </p>
-              <span className='mr-3 mb-2 text-[8px] mm:text-[12px] text-gray-500'>
-                12:00
-              </span>
-            </div>
-          </div>
-          {/* ))} */}
-          {/* <div ref={messagesEndRef}></div> */}
+          ))}
         </div>
         <form className='w-full absolute bottom-0 left-0'>
           <div className='flex items-center relative m-2 mr-3'>
