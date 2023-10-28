@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { formatDate } from '../../../helpers/FormatDate/FormatDate';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { fetchSupportChats, sendMessage } from '../../../api/chats';
 import { fetchUser } from '../../../api/client';
 import chatBg from '../../../assets/images/chat-bg.jpeg';
 import logo from '../../../assets/images/logo.png';
 import chatImg from '../../../assets/images/chat.png';
+import { FormatDate } from '../../../helpers/FormatDate/FormatDate';
 
 const TechChat = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -104,7 +104,7 @@ const TechChat = () => {
                     } mb-2 text-[8px] mm:text-[12px] text-gray-500`}
                   >
                     {message?.data?.time
-                      ? formatDate(message?.data?.time)
+                      ? FormatDate(message?.data?.time)
                       : '-- --'}
                   </span>
                 </div>
