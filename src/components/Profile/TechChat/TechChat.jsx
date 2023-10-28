@@ -2,11 +2,14 @@ import chatBg from '../../../assets/images/chat-bg.jpeg';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { formatDate } from '../../../helpers/FormatDate/FormatDate';
-import { fetchSupportChats } from '../../../api/chats';
+import { fetchSupportChats, sendMessage } from '../../../api/chats';
+import { fetchUser } from '../../../api/client';
 
 const TechChat = () => {
   const { userID } = useSelector((state) => state?.user);
   const [messages, setMessages] = useState([]);
+  const [inputVal, setInputVal] = useState('');
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const fetchMessages = fetchSupportChats(userID, (newDocData) => {
@@ -18,7 +21,19 @@ const TechChat = () => {
     };
   }, []);
 
-  console.log(messages)
+  const handleSendMessage = (e) => {
+    sendMessage(e, userID, inputVal, userData);
+    setInputVal('');
+  };
+
+  useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setUserData(data);
+      }
+    })();
+  }, []);
 
   return (
     <div className='w-screen scrollable'>
@@ -67,18 +82,21 @@ const TechChat = () => {
             </div>
           ))}
         </div>
-        <form className='w-full absolute bottom-0 left-0'>
+        <form
+          onSubmit={(e) => handleSendMessage(e)}
+          className='w-full absolute bottom-0 left-0'
+        >
           <div className='flex items-center relative m-2 mr-3'>
             <textarea
               id='chat'
               type='textarea'
-              // onChange={(e) => setInput(e.target.value)}
-              // value={input}
+              onChange={(e) => setInputVal(e.target.value)}
+              value={inputVal}
               className='pl-3 pr-10 py-3 w-full caret-gray-500 rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
               placeholder='Введите сообщение...'
               // onKeyDown={(e) => {
               //   if (e.key === 'Enter') {
-              //     sendMessage;
+              //     handleSendMessage
               //   }
               // }}
             ></textarea>
