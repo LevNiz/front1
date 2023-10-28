@@ -14,7 +14,6 @@ import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import logo from '../../assets/icons/logo2.svg';
 import back from '../../assets/icons/back.svg';
-import 'react-phone-input-2/lib/material.css';
 
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);

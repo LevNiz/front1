@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import 'react-phone-input-2/lib/material.css';
 import sosImg from './../../assets/images/sos.svg';
 import inCorrectImg from './../../assets/images/404.svg';
 import success from './../../assets/images/success.jpg';
