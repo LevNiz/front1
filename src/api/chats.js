@@ -13,7 +13,10 @@ import { db } from '../firebase/firebase.js';
 
 // Support Chat:
 export const fetchSupportChats = (userID, callback) => {
-  const q = query(collection(db, 'support_chat', `${userID}`, 'messages'), orderBy('time'));
+  const q = query(
+    collection(db, 'support_chat', `${userID}`, 'messages'),
+    orderBy('time')
+  );
   const querySnap = onSnapshot(q, (querySnapshot) => {
     const docData = querySnapshot.docs?.map((doc) => ({
       id: doc.id,

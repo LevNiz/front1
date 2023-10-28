@@ -172,7 +172,7 @@ const PersonalData = () => {
                 <p className='font-bold mb-2'>ФИО</p>
                 <div className='relative'>
                   <input
-                    className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
                     placeholder='Полное имя'
                     {...register('fullName', {
                       required: 'Поле обязательно к заполнению!',
@@ -190,7 +190,7 @@ const PersonalData = () => {
                 <div className='relative'>
                   <input
                     type='tel'
-                    className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-[4px] focus:border-black focus:outline-none'
                     placeholder='Введите ваш телефон'
                     {...register('phone', {
                       required: 'Поле обязательно к заполнению!',
@@ -211,7 +211,7 @@ const PersonalData = () => {
                 <p className='font-bold mb-2'>Электронная почта</p>
                 <div className='relative'>
                   <input
-                    className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
                     type='email'
                     placeholder='Введите ваш email'
                     {...register('email', {
@@ -233,7 +233,7 @@ const PersonalData = () => {
                 <p className='font-bold mb-2'>Место проживания</p>
                 <div className='relative'>
                   <input
-                    className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
                     placeholder='Адрес проживания'
                     {...register('address', {
                       required: 'Поле обязательно к заполнению!',

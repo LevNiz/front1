@@ -4,18 +4,17 @@ import call from '../../../assets/icons/new-call.svg';
 import leftArrow from '../../../assets/icons/arrow-left.svg';
 import logo from '../../../assets/icons/logo2.svg';
 import back from '../../../assets/icons/back.svg';
-import { Controller, useForm } from 'react-hook-form';
-import PhoneInput from 'react-phone-input-2';
+import { useForm } from 'react-hook-form';
 
 const ResetPass = () => {
   const navigate = useNavigate();
 
   const {
     watch,
-    control,
+    register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({ mode: 'onChange' });
 
   const onSubmit = (data) => {
     console.log(data.phone);
@@ -50,31 +49,18 @@ const ResetPass = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='mb-8'>
               <p className='font-medium mb-2'>Ваш телефон</p>
-              <div className='relative mb-1 border border-colGray2 p-[16px] mm:p-[15px_20px_15px_36px] rounded-lg'>
-                <Controller
-                  name='phone'
-                  control={control}
-                  defaultValue=''
-                  rules={{
+              <div className='relative mb-1'>
+                <input
+                  className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                  placeholder='Номер телефона'
+                  type='tel'
+                  {...register('phone', {
                     required: 'Поле обязательно к заполнению!',
-                  }}
-                  render={({ field }) => (
-                    <PhoneInput
-                      countryCodeEditable={false}
-                      placeholder='Введите номер телефона'
-                      country={'kg'}
-                      name='phone'
-                      specialLabel={false}
-                      onChange={(value) => {
-                        field.onChange(`+${value}`);
-                      }}
-                      value={field.value}
-                      inputProps={{
-                        className:
-                          'w-full focus:border-black focus:outline-none pl-14',
-                      }}
-                    />
-                  )}
+                    pattern: {
+                      value: /^[\d()+ -]+$/,
+                      message: 'Введите только цифры!',
+                    },
+                  })}
                 />
                 <img
                   className='absolute top-[15px] left-[10px] hidden mm:block'
@@ -89,7 +75,7 @@ const ResetPass = () => {
               )}
             </div>
             <button
-              disabled={phone === undefined ? true : false}
+              disabled={phone === '' ? true : false}
               type='submit'
               className={`${
                 phone === undefined

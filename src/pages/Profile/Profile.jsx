@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <div
       className={`${
-        firstPathSegment === 'tech-chat' ? '' : 'md:px-3 pb-12'
+        firstPathSegment === 'tech-chat' ? '' : 'px-3 pb-12'
       } sm:content pt-[70px] md:pt-24 flex relative`}
     >
       <ProfileSidebar />

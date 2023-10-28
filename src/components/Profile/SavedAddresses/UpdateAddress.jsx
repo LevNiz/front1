@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import PhoneInput from 'react-phone-input-2';
 import Select from 'react-select';
-import 'react-phone-input-2/lib/material.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   fetchAddresses,
@@ -146,31 +144,17 @@ const UpdateAddress = () => {
             </div>
             <div>
               <p className='font-medium mb-2'>Номер телефона</p>
-              <Controller
-                name='phone'
-                className='w-full'
-                control={control}
-                defaultValue=''
-                rules={{
+              <input
+                className='w-full border border-colGray2 p-[16px] mm:p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                placeholder='Номер телефона'
+                type='tel'
+                {...register('phone', {
                   required: 'Поле обязательно к заполнению!',
-                }}
-                render={({ field }) => (
-                  <PhoneInput
-                    {...field}
-                    placeholder='Введите номер телефона'
-                    country={'kg'}
-                    countryCodeEditable={false}
-                    specialLabel={true}
-                    onChange={(value) => {
-                      field.onChange(`+${value}`);
-                    }}
-                    value={field.value}
-                    inputProps={{
-                      className:
-                        'w-full border border-colGray2 p-[14px] pl-[56px] rounded-[4px] focus:border-black focus:outline-none',
-                    }}
-                  />
-                )}
+                  pattern: {
+                    value: /^[\d()+ -]+$/,
+                    message: 'Введите только цифры!',
+                  },
+                })}
               />
               {errors?.phone && (
                 <p className='text-red-500 mt-1 text-sm'>

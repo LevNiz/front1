@@ -1,48 +1,30 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import location from '../../assets/icons/new-location.svg';
 import profile from '../../assets/icons/new-profile.svg';
 import pass from '../../assets/icons/new-password.svg';
 import confirmPassw from '../../assets/icons/new-confirm-password.svg';
 import call from '../../assets/icons/new-call.svg';
-import { useState, useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { registerUser } from '../../api/user';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCountries } from '../../api/countries';
-import { fetchCities } from '../../api/cities';
-import Select from 'react-select';
+import { useDispatch } from 'react-redux';
 
 import email from '../../assets/icons/new-email.svg';
-import country from '../../assets/icons/new-country.svg';
-import city from '../../assets/icons/new-city.svg';
 import leftArrow from '../../assets/icons/arrow-left.svg';
 import showPass from '../../assets/icons/show-pass.svg';
 import logo from '../../assets/icons/logo2.svg';
 import back from '../../assets/icons/back.svg';
-import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
 
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const [size, setSize] = useState(window.innerWidth);
-
-  window.addEventListener('resize', function () {
-    setSize(window.innerWidth);
-  });
-
-  const { cities } = useSelector((state) => state?.cities);
-  const { countries } = useSelector((state) => state?.countries);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
-    control,
     register,
-    setValue,
     watch,
     handleSubmit,
     formState: { errors },
@@ -50,7 +32,6 @@ const SignUp = () => {
     mode: 'onChange',
   });
 
-  const countrySelect = watch('country');
   const password = watch('password', '');
   const confirmPass = watch('confirmPassword', '');
   const privacyPolicy = watch('privacyPolicy', '');
@@ -59,22 +40,6 @@ const SignUp = () => {
   const hasNumber = /^(?=.*\d)/.test(password);
   const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
   const hasSamePassword = password !== '' && password === confirmPass;
-
-  useEffect(() => {
-    (async () => {
-      await fetchCountries(dispatch);
-      await fetchCities(dispatch);
-    })();
-  }, []);
-
-  const filteredCities = cities?.filter(
-    (el) => el?.country?.id === selectedCountry
-  );
-
-  const cityOptions = filteredCities?.map((el) => ({
-    value: el?.id,
-    label: el?.nameRu,
-  }));
 
   const onSubmit = async (data) => {
     const { success } = await registerUser(dispatch, data);
@@ -163,31 +128,18 @@ const SignUp = () => {
           </div>
           <div className='mb-4'>
             <p className='font-medium mb-2'>Ваш телефон</p>
-            <div className='relative mb-1 border border-colGray2 p-[16px] mm:p-[15px_20px_15px_36px] rounded-lg'>
-              <Controller
-                name='phone'
-                control={control}
-                defaultValue=''
-                rules={{
+            <div className='relative mb-1'>
+              <input
+                className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
+                placeholder='Номер телефона'
+                type='tel'
+                {...register('phone', {
                   required: 'Поле обязательно к заполнению!',
-                }}
-                render={({ field }) => (
-                  <PhoneInput
-                    countryCodeEditable={false}
-                    placeholder='Введите номер телефона'
-                    country={'kg'}
-                    name='phone'
-                    specialLabel={true}
-                    onChange={(value) => {
-                      field.onChange(`+${value}`);
-                    }}
-                    value={field.value}
-                    inputProps={{
-                      className:
-                        'w-full focus:border-black focus:outline-none pl-14',
-                    }}
-                  />
-                )}
+                  pattern: {
+                    value: /^[\d()+ -]+$/,
+                    message: 'Введите только цифры!',
+                  },
+                })}
               />
               <img
                 className='absolute top-[15px] left-[10px] hidden mm:block'
@@ -200,128 +152,6 @@ const SignUp = () => {
                 {errors?.phone.message || 'Error!'}
               </p>
             )}
-          </div>
-          <div className='mb-4'>
-            <p className='font-medium mb-2'>Адрес</p>
-            <div className='relative mb-1'>
-              <input
-                className='w-full border border-colGray2 p-[16px] mm:p-[15px_20px_15px_44px] rounded-lg focus:border-black focus:outline-none'
-                placeholder='Адрес проживания'
-                {...register('address', {
-                  required: 'Поле обязательно к заполнению!',
-                })}
-              />
-              <img
-                className='absolute top-[15px] left-[10px] hidden mm:block'
-                src={location}
-                alt='*'
-              />
-              {errors?.address && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.address.message || 'Error!'}
-                </p>
-              )}
-            </div>
-          </div>
-          <div className='mb-4'>
-            <p className='font-medium mb-2'>Страна</p>
-            <div className='relative mb-1'>
-              <Controller
-                name='country'
-                control={control}
-                rules={{ required: 'Поле обязательно к заполнению!' }}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    placeholder='Выберите страну'
-                    options={countries?.map((country) => ({
-                      value: country?.id,
-                      label: (
-                        <div
-                          key={country?.country}
-                          className='flex items-center'
-                        >
-                          <img
-                            src={country?.icon}
-                            alt={country?.nameRu}
-                            className='w-5 h-4 mr-2'
-                          />
-                          {country?.nameRu}
-                        </div>
-                      ),
-                    }))}
-                    onChange={(selectedOption) => {
-                      setValue('city', '');
-                      field.onChange(selectedOption);
-                      setSelectedCountry(selectedOption.value);
-                    }}
-                    styles={{
-                      control: (provided, state) => ({
-                        ...provided,
-                        padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
-                        boxShadow: state.isFocused ? 0 : 0,
-                        border: state.isFocused ? '1px solid #999' : '',
-                        '&:hover': {
-                          border: state.isFocused ? '1px solid #999' : '',
-                        },
-                      }),
-                    }}
-                  />
-                )}
-              />
-              <img
-                className='absolute top-[15px] left-[10px] hidden mm:block'
-                src={country}
-                alt='*'
-              />
-              {errors?.country && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.country.message || 'Error!'}
-                </p>
-              )}
-            </div>
-          </div>
-          <div className='mb-4'>
-            <p className='font-medium mb-2'>Город</p>
-            <div className='relative mb-1'>
-              <Controller
-                name='city'
-                control={control}
-                rules={{ required: 'Поле обязательно к заполнению!' }}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    options={cityOptions}
-                    placeholder='Выберите город'
-                    isDisabled={!countrySelect}
-                    onChange={(selectedOption) => {
-                      field.onChange(selectedOption);
-                    }}
-                    styles={{
-                      control: (provided, state) => ({
-                        ...provided,
-                        padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
-                        boxShadow: state.isFocused ? 0 : 0,
-                        border: state.isFocused ? '1px solid #999' : '',
-                        '&:hover': {
-                          border: state.isFocused ? '1px solid #999' : '',
-                        },
-                      }),
-                    }}
-                  />
-                )}
-              />
-              <img
-                className='absolute top-[15px] left-[10px] hidden mm:block'
-                src={city}
-                alt='*'
-              />
-              {errors?.city && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.city.message || 'Error!'}
-                </p>
-              )}
-            </div>
           </div>
           <div className='mb-4'>
             <p className='font-medium mb-2'>Пароль</p>
