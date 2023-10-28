@@ -6,7 +6,7 @@ import { fetchUser } from '../../../api/client';
 import chatBg from '../../../assets/images/chat-bg.jpeg';
 import logo from '../../../assets/images/logo.png';
 import chatImg from '../../../assets/images/chat.png';
-import { FormatDate } from '../../../helpers/FormatDate/FormatDate';
+import FormatDate from './../../../helpers/FormatDate/FormatDate';
 
 const TechChat = () => {
   const { userID } = useSelector((state) => state?.user);

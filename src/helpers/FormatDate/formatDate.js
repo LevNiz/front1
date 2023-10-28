@@ -1,7 +1,7 @@
 import { format, isToday } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
-export const FormatDate = (dateFormat) => {
+const FormatDate = (dateFormat) => {
   const date = new Date(
     dateFormat?.seconds * 1000 + dateFormat?.nanoseconds / 1000000
   );
@@ -12,3 +12,5 @@ export const FormatDate = (dateFormat) => {
     return format(date, 'd MMMM yyyy', { locale: ru });
   }
 };
+
+export default FormatDate
