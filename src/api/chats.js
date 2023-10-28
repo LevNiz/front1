@@ -13,8 +13,7 @@ import { db } from '../firebase/firebase.js';
 
 // Support Chat:
 export const fetchSupportChats = (userID, callback) => {
-  const q = query(collection(db, 'support_chat', `${userID}`, 'messages'));
-  orderBy('time');
+  const q = query(collection(db, 'support_chat', `${userID}`, 'messages'), orderBy('time'));
   const querySnap = onSnapshot(q, (querySnapshot) => {
     const docData = querySnapshot.docs?.map((doc) => ({
       id: doc.id,
@@ -31,7 +30,7 @@ export const fetchSupportChats = (userID, callback) => {
 
 export const sendMessage = async (e, userID, inputVal, userData) => {
   e.preventDefault();
- 
+
   const trimmedInput = inputVal.trim();
   if (trimmedInput === '') {
     return;
@@ -47,7 +46,6 @@ export const sendMessage = async (e, userID, inputVal, userData) => {
       avatar: userData?.avatar,
     });
   }
-
 
   await addDoc(collection(userDocRef, 'messages'), {
     text: trimmedInput,

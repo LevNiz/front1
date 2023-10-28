@@ -1,25 +1,45 @@
-import chatBg from '../../../assets/images/chat-bg.jpeg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { formatDate } from '../../../helpers/FormatDate/FormatDate';
+import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { fetchSupportChats, sendMessage } from '../../../api/chats';
 import { fetchUser } from '../../../api/client';
+import chatBg from '../../../assets/images/chat-bg.jpeg';
+import logo from '../../../assets/images/logo.png';
+import chatImg from '../../../assets/images/chat.png';
 
 const TechChat = () => {
   const { userID } = useSelector((state) => state?.user);
+
   const [messages, setMessages] = useState([]);
   const [inputVal, setInputVal] = useState('');
   const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  const messagesEndRef = useRef();
 
   useEffect(() => {
     const fetchMessages = fetchSupportChats(userID, (newDocData) => {
       setMessages(newDocData);
+      setIsLoading(false);
     });
 
     return () => {
       fetchMessages();
     };
   }, []);
+
+  const scrollToBottom = () => {
+    const scrollable = messagesEndRef.current;
+    const atBottom =
+      scrollable.scrollHeight - scrollable.scrollTop ===
+      scrollable.clientHeight;
+    if (atBottom) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
+    }
+  };
+
+  useEffect(scrollToBottom, [messages]);
 
   const handleSendMessage = (e) => {
     sendMessage(e, userID, inputVal, userData);
@@ -39,10 +59,10 @@ const TechChat = () => {
     <div className='w-screen scrollable'>
       <div className='relative'>
         <div className='flex items-center w-full p-2'>
-          <div className='min-w-[50px] border-2 border-colYellow w-[50px] h-[50px] p-[2px] rounded-full overflow-hidden mr-3'>
+          <div className='min-w-[48px] border border-gray-400 w-12 h-12 rounded-full overflow-hidden mr-3'>
             <img
               className='object-cover w-full h-full rounded-[50%]'
-              src='https://cdn1.vectorstock.com/i/1000x1000/05/80/operator-man-avatar-customer-service-vector-9400580.jpg'
+              src={logo}
               alt='*'
             />
           </div>
@@ -51,36 +71,59 @@ const TechChat = () => {
           </div>
         </div>
         <div
-          className='h-[calc(100vh_-_180px)] border border-gray-300 overflow-y-scroll p-2 pb-20 flex flex-col justify-end'
+          className='h-[calc(100vh-133px)] md:h-[calc(100vh-180px)] border md:border-0 md:border-t border-gray-300 overflow-y-scroll p-2 pb-20'
           style={{ backgroundImage: `url('${chatBg}')` }}
         >
-          {messages?.map((message) => (
-            <div
-              key={message.id}
-              className={`${
-                Number(message?.data?.senderUid) === userID
-                  ? 'ml-auto flex justify-end'
-                  : ''
-              } w-4/5`}
-            >
-              <div className='text-right w-fit flex flex-col'>
-                <p
-                  className={`${
-                    Number(message?.data?.senderUid) === userID
-                      ? 'bg-green-200 rounded-l-xl rounded-tr-xl ml-auto'
-                      : 'bg-slate-500 text-white rounded-r-xl rounded-tl-xl'
-                  }  text-left px-3 py-1 mb-1 text-[12px] mm:text-base break-all w-fit`}
-                >
-                  {message?.data?.text}
+          {isLoading ? (
+            <ContentLoading extraStyle='100%' />
+          ) : messages?.length ? (
+            messages?.map((message) => (
+              <div
+                key={message.id}
+                className={`${
+                  message?.data?.senderUid === userID
+                    ? 'ml-auto justify-end'
+                    : ''
+                } w-4/5 flex`}
+              >
+                <div className='text-right w-fit flex flex-col'>
+                  <p
+                    className={`${
+                      message?.data?.senderUid === userID
+                        ? 'bg-green-200 rounded-l-xl rounded-tr-xl ml-auto'
+                        : 'bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1'
+                    }  text-left px-3 py-1 mb-1 text-[12px] mm:text-base break-all w-fit`}
+                  >
+                    {message?.data?.text}
+                  </p>
+                  <span
+                    className={`${
+                      message?.data?.senderUid === userID
+                        ? 'mr-3'
+                        : 'ml-3 text-left'
+                    } mb-2 text-[8px] mm:text-[12px] text-gray-500`}
+                  >
+                    {message?.data?.time
+                      ? formatDate(message?.data?.time)
+                      : '-- --'}
+                  </span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className='w-full h-full flex justify-center items-center pb-5 px-4'>
+              <div className='text-center'>
+                <img className='w-3/4 mx-auto' src={chatImg} alt='*' />
+                <h2 className='font-medium text-xl sm:text-2xl'>
+                  Добро пожаловать в чат техподдержки!
+                </h2>
+                <p className='opacity-60 max-w-[300px] mt-1 mx-auto text-sm'>
+                  Опишите вашу проблему, и администратор свяжется с вами.
                 </p>
-                <span className='mr-3 mb-2 text-[8px] mm:text-[12px] text-gray-500'>
-                  {message?.data?.time
-                    ? formatDate(message?.data?.time)
-                    : '-- --'}
-                </span>
               </div>
             </div>
-          ))}
+          )}
+          <div ref={messagesEndRef}></div>
         </div>
         <form
           onSubmit={(e) => handleSendMessage(e)}
@@ -90,19 +133,26 @@ const TechChat = () => {
             <textarea
               id='chat'
               type='textarea'
-              onChange={(e) => setInputVal(e.target.value)}
+              onChange={(e) => {
+                setInputVal(e.target.value);
+                const numLines = e.target.value.split('\n').length;
+                e.target.rows = numLines > 2 ? 2 : 1;
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage(e);
+                }
+              }}
               value={inputVal}
-              className='pl-3 pr-10 py-3 w-full caret-gray-500 rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
-              placeholder='Введите сообщение...'
-              // onKeyDown={(e) => {
-              //   if (e.key === 'Enter') {
-              //     handleSendMessage
-              //   }
-              // }}
+              rows='1'
+              className='pl-3 pr-10 py-3 w-full rounded-md sm:rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
+              placeholder='Введите сообщение'
             ></textarea>
+
             <button
               type='submit'
-              className='absolute top-[50%] -translate-y-[50%] right-0 inline-flex justify-center p-2 text-tpPurple2 cursor-pointer'
+              className='absolute top-[50%] -translate-y-[50%] right-0 inline-flex justify-center p-2 text-tpPurple2 cursor-pointer opacity-60'
             >
               <svg
                 aria-hidden='true'

@@ -16,7 +16,7 @@ const MyApplications = () => {
           onClick={() => handleButtonClick('active')}
           className={`${
             activeBtn === 'active' ? 'bg-colYellow border-colYellow' : ''
-          } px-4 py-2 border max-w-[200px] w-full`}
+          } px-4 py-2 border max-w-[200px] w-full rounded-md rounded-tr-none rounded-br-none`}
         >
           Активные
         </button>
@@ -24,7 +24,7 @@ const MyApplications = () => {
           onClick={() => handleButtonClick('archive')}
           className={`${
             activeBtn === 'archive' ? 'bg-colYellow border-colYellow' : ''
-          } px-4 py-2 border max-w-[200px] w-full`}
+          } px-4 py-2 border max-w-[200px] w-full rounded-md rounded-tl-none rounded-bl-none`}
         >
           Архив
         </button>

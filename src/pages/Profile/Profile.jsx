@@ -1,9 +1,18 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { ProfileSidebar } from '../../components';
 
 const Profile = () => {
+  const { pathname } = useLocation();
+  const pathParts = pathname.split('/');
+
+  const firstPathSegment = pathParts[2];
+
   return (
-    <div className='px-3 sm:content pt-20 md:pt-24 pb-12 flex relative'>
+    <div
+      className={`${
+        firstPathSegment === 'tech-chat' ? '' : 'md:px-3 pb-12'
+      } sm:content pt-[70px] md:pt-24 flex relative`}
+    >
       <ProfileSidebar />
       <Outlet />
     </div>
