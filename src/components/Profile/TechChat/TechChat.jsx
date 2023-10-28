@@ -6,7 +6,7 @@ import { fetchUser } from '../../../api/client';
 import chatBg from '../../../assets/images/chat-bg.jpeg';
 import logo from '../../../assets/images/logo.png';
 import chatImg from '../../../assets/images/chat.png';
-import FormatDate from '../../../helpers/FormatDate/FormatDate';
+import { FormatDate } from '../../../helpers/FormatDate/formatDate';
 
 const TechChat = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -103,9 +103,11 @@ const TechChat = () => {
                         : 'ml-3 text-left'
                     } mb-2 text-[8px] mm:text-[12px] text-gray-500`}
                   >
-                    {message?.data?.time
-                      ? FormatDate(message?.data?.time)
-                      : '-- --'}
+                    {message?.data?.time ? (
+                      <FormatDate dateFormat={message?.data?.time} />
+                    ) : (
+                      '-- --'
+                    )}
                   </span>
                 </div>
               </div>
