@@ -11,7 +11,7 @@ const MyApplications = () => {
 
   return (
     <div className='md:p-4 w-full'>
-      <div className='flex items-center pt-5 md:pt-0'>
+      <div className='flex items-center pt-6 md:pt-0'>
         <button
           onClick={() => handleButtonClick('active')}
           className={`${

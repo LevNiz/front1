@@ -119,7 +119,7 @@ const UpdateAddress = () => {
   };
 
   return (
-    <div className='md:p-4 w-full'>
+    <div className='md:p-4 pt-6 w-full'>
       <h1 className='text-xl font-medium'>Редактировать</h1>
       {isLoading ? (
         <ContentLoading extraStyle='380px' />

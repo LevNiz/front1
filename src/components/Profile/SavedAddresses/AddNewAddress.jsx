@@ -49,7 +49,7 @@ const AddNewAddress = () => {
   };
 
   return (
-    <div className='md:p-4 w-full'>
+    <div className='md:p-4 pt-6 w-full'>
       <h1 className='text-xl font-medium'>Добавить новый адрес</h1>
       {loading ? (
         <ContentLoading extraStyle='380px' />
@@ -69,7 +69,7 @@ const AddNewAddress = () => {
           </div>
         </div>
       ) : (
-        <form className='pt-5 px-4'>
+        <form className='pt-5 md:px-4'>
           <div className='grid ld:grid-cols-2 gap-5 text-left'>
             <div>
               <p className='font-medium mb-2'>Имя получателя</p>
@@ -109,10 +109,10 @@ const AddNewAddress = () => {
             </div>
             <div className='ld:col-span-2'>
               <p className='font-medium mb-2'>Тип адреса</p>
-              <div className='flex items-center'>
+              <div className='ss:flex items-center'>
                 <label
                   onClick={() => setAddressType('custom')}
-                  className='mr-3 flex items-center'
+                  className='mb-1 ss:mb-0 ss:mr-3 flex items-center'
                 >
                   <Controller
                     name='type'
@@ -346,7 +346,7 @@ const AddNewAddress = () => {
           <button
             onClick={handleSubmit(onSubmit)}
             type='submit'
-            className='mt-16 font-medium ml-auto flex justify-center hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 sm:max-w-[280px] w-full'
+            className='mt-8 sm:mt-16 font-medium ml-auto flex justify-center hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 sm:max-w-[280px] w-full'
           >
             Cохранить
           </button>
