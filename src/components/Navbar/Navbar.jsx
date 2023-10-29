@@ -13,8 +13,11 @@ const Navbar = () => {
 
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
+    const threshold = 900;
+    if (currentScrollPos > threshold) {
+      setScrolling(prevScrollPos < currentScrollPos);
+    }
     setPrevScrollPos(currentScrollPos);
-    setScrolling(prevScrollPos < currentScrollPos);
   };
 
   useEffect(() => {
