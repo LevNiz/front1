@@ -27,6 +27,7 @@ import {
   AddNewAddress,
   UpdateAddress,
   BGBuyerDetail,
+  SendApplication,
 } from '../components';
 import {
   Auth,
@@ -39,7 +40,6 @@ import {
   GbBusiness,
   Applications,
 } from '../pages';
-import SendApplication from '../components/Applications/SendApplication/SendApplication';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

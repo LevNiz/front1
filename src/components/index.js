@@ -35,6 +35,7 @@ import AddNewAddress from './Profile/SavedAddresses/AddNewAddress';
 import UpdateAddress from './Profile/SavedAddresses/UpdateAddress';
 import GBBuyerItem from './GBBuyer/GBBuyerItem';
 import BGBuyerDetail from './GBBuyer/BGBuyerDetail';
+import SendApplication from './Applications/SendApplication/SendApplication';
 
 export {
   Layout,
@@ -74,4 +75,5 @@ export {
   UpdateAddress,
   GBBuyerItem,
   BGBuyerDetail,
+  SendApplication,
 };
