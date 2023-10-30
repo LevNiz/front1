@@ -45,14 +45,14 @@ const TechChat = () => {
   useEffect(scrollToBottom, [messages]);
 
   const handleSendMessage = (e) => {
-    sendMessage(e, userID, inputVal, userData);
+    sendMessage(e, inputVal, userData);
     setInputVal('');
   };
 
   const handleSendImage = (e) => {
     const file = e.target.files[0];
     (async () => {
-      await sendImage(file);
+      await sendImage(file, userData);
     })();
   };
 

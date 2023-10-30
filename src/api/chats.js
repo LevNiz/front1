@@ -50,20 +50,19 @@ export const fetchSupportChats = (userID, callback) => {
   };
 };
 
-export const sendMessage = async (e, userID, inputVal, userData) => {
+export const sendMessage = async (e, inputVal, userData, imgLink) => {
   e.preventDefault();
-
   const trimmedInput = inputVal.trim();
   if (trimmedInput === '') {
     return;
   }
 
-  const userDocRef = doc(db, 'support_chat', `${userID}`);
+  const userDocRef = doc(db, 'support_chat', `${userData?.id}`);
   const userDocSnapshot = await getDoc(userDocRef);
 
   if (!userDocSnapshot.exists()) {
     await setDoc(userDocRef, {
-      clientId: userID,
+      clientId: userData?.id,
       clientName: userData?.fullname,
       avatar: userData?.avatar,
     });
@@ -71,29 +70,47 @@ export const sendMessage = async (e, userID, inputVal, userData) => {
 
   await addDoc(collection(userDocRef, 'messages'), {
     text: trimmedInput,
-    image: '',
+    image: imgLink || '',
     time: serverTimestamp(),
     read: false,
     receiverUid: 'admin',
-    senderUid: userID,
+    senderUid: userData?.id,
   });
 };
 
-export const sendImage = async (file, userID, inputVal, userData) => {
+export const sendImage = async (file, userData) => {
   if (!file) {
     return false;
   }
-
   const milliseconds = new Date().getMilliseconds();
   const formData = new FormData();
   formData.append('image', file);
   formData.append('title', milliseconds);
 
-  const imgLink = {};
-
   try {
     const res = await axiosInstance.post('core/image/', formData);
-    imgLink.image = res?.data?.image;
+    const imgLink = res?.data?.image;
+    if (imgLink) {
+      const userDocRef = doc(db, 'support_chat', `${userData?.id}`);
+      const userDocSnapshot = await getDoc(userDocRef);
+
+      if (!userDocSnapshot.exists()) {
+        await setDoc(userDocRef, {
+          clientId: userData?.id,
+          clientName: userData?.fullname,
+          avatar: userData?.avatar,
+        });
+      }
+
+      await addDoc(collection(userDocRef, 'messages'), {
+        text: '',
+        image: imgLink,
+        time: serverTimestamp(),
+        read: false,
+        receiverUid: 'admin',
+        senderUid: userData?.id,
+      });
+    }
   } catch (error) {
     return { success: false };
   }
