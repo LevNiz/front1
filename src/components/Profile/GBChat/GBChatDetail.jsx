@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { FormatDate } from '../../../helpers/FormatDate/formatDate';
 import chatBg from '../../../assets/images/chat-bg.jpeg';
 import chatImg from '../../../assets/images/chat.png';
-import { useSelector } from 'react-redux';
+import back from '../../../assets/icons/arrow-left.svg';
+import { useNavigate } from 'react-router-dom';
 
 const GBChatDetail = () => {
   const { userID } = useSelector((state) => state?.user);
+  const navigate = useNavigate();
 
   const [messages, setMessages] = useState([]);
   const [inputVal, setInputVal] = useState('');
@@ -31,6 +34,12 @@ const GBChatDetail = () => {
     <div className='w-full pt-1'>
       <div className='relative'>
         <div className='flex items-center w-full p-2'>
+          <img
+            onClick={() => navigate(-1)}
+            className='mr-2'
+            src={back}
+            alt='*'
+          />
           <div className='min-w-[48px] border border-gray-400 w-12 h-12 rounded-full overflow-hidden mr-3'>
             <img
               className='object-cover w-full h-full rounded-[50%]'

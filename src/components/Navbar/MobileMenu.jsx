@@ -19,9 +19,10 @@ import profileNotif from './../../assets/icons/mobile-menu/profile-notification.
 import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
 import sendBox from './../../assets/icons/mobile-menu/send-box.svg';
 import location from './../../assets/icons/new-location.svg';
-import time from './../../assets/icons/timeSvg.svg';
 import chat from './../../assets/icons/chat.svg';
 import gbChat from './../../assets/icons/gb-chat.svg';
+import applicationIcon from './../../assets/icons/box-tick.svg';
+import ordersIcon from './../../assets/icons/orders.svg';
 
 const MobileMenu = ({ isOpen, onClose }) => {
   const { user } = useSelector((state) => state?.user);
@@ -118,31 +119,31 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
-                    to='/profile/notifications'
-                    className='text-base font-medium opacity-70 flex items-center'
-                  >
-                    <img className='w-5' src={profileNotif} alt='*' />
-                    <span className='pl-2'>Уведомления</span>
-                  </NavLink>
-                </li>
-                <li className='flex items-center'>
-                  <NavLink
-                    onClick={() => onClose()}
-                    to='/profile/my-wallet'
-                    className='text-base font-medium opacity-70 flex items-center'
-                  >
-                    <img className='w-5' src={profileWallet} alt='*' />
-                    <span className='pl-2'>Мой кошелёк</span>
-                  </NavLink>
-                </li>
-                <li className='flex items-center'>
-                  <NavLink
-                    onClick={() => onClose()}
                     to='/profile/my-applications'
                     className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5' src={time} alt='*' />
+                    <img className='w-5' src={ordersIcon} alt='*' />
                     <span className='pl-2'>Мои заявки</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/buy-request'
+                    className='text-base font-medium opacity-70 flex items-center'
+                  >
+                    <img className='w-5' src={applicationIcon} alt='*' />
+                    <span className='pl-2'>Заявки на покупку</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/gb-chat'
+                    className='text-base font-medium opacity-70 flex items-center'
+                  >
+                    <img className='w-5' src={gbChat} alt='*' />
+                    <span className='pl-2'>GB-Чат</span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
@@ -158,11 +159,21 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
-                    to='/profile/gb-chat'
+                    to='/profile/notifications'
                     className='text-base font-medium opacity-70 flex items-center'
                   >
-                    <img className='w-5' src={gbChat} alt='*' />
-                    <span className='pl-2'>GB-Чат</span>
+                    <img className='w-5' src={profileNotif} alt='*' />
+                    <span className='pl-2'>Уведомления</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/my-wallet'
+                    className='text-base font-medium opacity-70 flex items-center'
+                  >
+                    <img className='w-5' src={profileWallet} alt='*' />
+                    <span className='pl-2'>Мой кошелёк</span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>

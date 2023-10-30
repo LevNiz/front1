@@ -28,13 +28,13 @@ const AddBuyRequest = () => {
   };
 
   return (
-    <div className='w-full md:p-4'>
-      <h3 className='text-xl'>Заполните форму для заявки.</h3>
+    <div className='w-full pt-5 md:p-4'>
+      <h3 className='text-lg ss:text-xl'>Заполните форму для заявки.</h3>
       <p className='text-sm opacity-70 mb-6'>
-        Наши buyer ы скоро свяжутся с вами
+        Наши buyer ы скоро свяжутся с вами.
       </p>
       {isLoading ? (
-        <ContentLoading extraStyle='80%' />
+        <ContentLoading extraStyle='480px' />
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='max-w-md'>

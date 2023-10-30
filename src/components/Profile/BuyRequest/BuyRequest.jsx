@@ -23,9 +23,9 @@ const BuyRequest = () => {
   }, []);
 
   return (
-    <div className='w-full md:p-4'>
+    <div className='w-full pt-5 md:p-4'>
       <div className='flex justify-between items-center'>
-        <h3 className='text-xl'>Заявка на покупку</h3>
+        <h3 className='ss:text-xl'>Заявка на покупку</h3>
         <button
           onClick={() => navigate('new')}
           className='bg-colYellow py-2 ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'
@@ -34,7 +34,7 @@ const BuyRequest = () => {
         </button>
       </div>
       {loading ? (
-        <ContentLoading extraStyle='80%' />
+        <ContentLoading extraStyle='480px' />
       ) : error ? (
         <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
           <div>
