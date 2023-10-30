@@ -50,7 +50,7 @@ const BuyRequest = () => {
             </NavLink>
           </div>
         </div>
-      ) : !buyRequests?.length ? (
+      ) : buyRequests?.length ? (
         buyRequests?.map((buyRequest) => (
           <BuyRequestItem key={buyRequest?.id} data={buyRequest} />
         ))
