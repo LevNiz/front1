@@ -21,19 +21,18 @@ export const fetchSupportChats = (userID, callback) => {
   );
 
   const querySnap = onSnapshot(q, (querySnapshot) => {
-    querySnapshot.docChanges().forEach((change) => {
-      if (change.type === 'added' || change.type === 'modified') {
-        const docData = change.doc.data();
-        if (docData.senderUid !== userID && !docData.read) {
-          const messageDoc = doc(
-            db,
-            'support_chat',
-            `${userID}`,
-            'messages',
-            change.doc.id
-          );
-          updateDoc(messageDoc, { read: true });
-        }
+    querySnapshot.forEach((doc) => {
+      const docData = doc.data();
+      if (docData.receiverUid === userID && docData.read === false) {
+        const messageDoc = doc(
+          db,
+          'support_chat',
+          `${userID}`,
+          'messages',
+          doc.id
+        );
+
+        updateDoc(messageDoc, { read: true });
       }
     });
 

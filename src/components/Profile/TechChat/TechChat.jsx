@@ -93,7 +93,7 @@ const TechChat = () => {
               message?.data?.senderUid === userID ? (
                 <div
                   key={message.id}
-                  className='ml-auto justify-end w-4/5 flex'
+                  className='ml-auto justify-end w-4/5 flex my-1'
                 >
                   <div className='text-right w-fit flex flex-col'>
                     <p
@@ -102,22 +102,9 @@ const TechChat = () => {
                       } text-[12px] mm:text-sm break-all w-fit flex items-end`}
                     >
                       {message?.data?.text}
-                      {message?.data?.read ? (
-                        <img
-                          className='w-[14px] ml-1'
-                          src={doubleTick}
-                          alt='*'
-                        />
-                      ) : (
-                        <img
-                          className='hidden w-[14px] ml-1'
-                          src={tick}
-                          alt='*'
-                        />
-                      )}
                     </p>
                     {message?.data?.image ? (
-                      <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden'>
+                      <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden mb-1'>
                         <img
                           className='w-full h-full object-cover cursor-zoom-in'
                           src={message?.data?.image}
@@ -131,17 +118,26 @@ const TechChat = () => {
                     ) : (
                       ''
                     )}
-                    <span className='mr-3 mb-2 text-[8px] mm:text-[12px] text-gray-500'>
+                    <span className='mr-3 mb-2 text-[8px] mm:text-[10px] text-gray-500 flex justify-end'>
                       {message?.data?.time ? (
                         <FormatDate dateFormat={message?.data?.time} />
                       ) : (
                         '-- --'
                       )}
+                      {message?.data?.read ? (
+                        <img
+                          className='w-[14px] ml-1'
+                          src={doubleTick}
+                          alt='*'
+                        />
+                      ) : (
+                        <img className='w-[14px] ml-1' src={tick} alt='*' />
+                      )}
                     </span>
                   </div>
                 </div>
               ) : (
-                <div key={message.id} className='w-4/5 flex'>
+                <div key={message.id} className='w-4/5 flex my-1'>
                   <div className='text-right w-fit flex flex-col'>
                     <p
                       className={`bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1 text-left ${
@@ -149,11 +145,6 @@ const TechChat = () => {
                       } text-[12px] mm:text-sm break-all w-fit flex items-end`}
                     >
                       {message?.data?.text}
-                      {message?.data?.read ? (
-                        <img className='hidden' src={doubleTick} alt='*' />
-                      ) : (
-                        <img className='hidden' src={tick} alt='*' />
-                      )}
                     </p>
                     {message?.data?.image ? (
                       <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden'>
@@ -170,7 +161,7 @@ const TechChat = () => {
                     ) : (
                       ''
                     )}
-                    <span className='ml-3 text-left mb-2 text-[8px] mm:text-[12px] text-gray-500'>
+                    <span className='ml-3 text-left mb-2 text-[8px] mm:text-[10px] text-gray-500'>
                       {message?.data?.time ? (
                         <FormatDate dateFormat={message?.data?.time} />
                       ) : (
