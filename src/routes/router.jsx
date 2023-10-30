@@ -30,6 +30,7 @@ import {
   SendApplication,
   GBChatDetail,
   BuyRequest,
+  AddBuyRequest,
 } from '../components';
 import {
   Auth,
@@ -94,6 +95,7 @@ export const router = createBrowserRouter(
             <Route path='my-parcels' element={<MyParcels />} />
             <Route path='buy-request'>
               <Route index element={<BuyRequest />} />
+              <Route path='new' element={<AddBuyRequest />} />
             </Route>
           </Route>
           <Route path='alaket' element={<Alaket />} />

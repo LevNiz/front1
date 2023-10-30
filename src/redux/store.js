@@ -10,6 +10,7 @@ import applicationReducer from './slices/applicationSlice';
 import addressReducer from './slices/addressesSlice';
 import buyerReducer from './slices/buyerSlice';
 import websiteReducer from './slices/websiteSlice';
+import buyRequestReducer from './slices/buyRequestSlice';
 
 const persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   addresses: addressReducer,
   buyers: buyerReducer,
   websites: websiteReducer,
+  buyRequests: buyRequestReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
