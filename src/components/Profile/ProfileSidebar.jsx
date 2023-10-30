@@ -68,7 +68,7 @@ const ProfileSidebar = () => {
               className='text-xl flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={gbChat} alt='*' />
-              <span>GB-Chat</span>
+              <span>GB-Чат</span>
             </NavLink>
           </li>
           <li className='my-6'>

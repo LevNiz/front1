@@ -162,7 +162,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     className='text-base font-medium opacity-70 flex items-center'
                   >
                     <img className='w-5' src={gbChat} alt='*' />
-                    <span className='pl-2'>GB-Chat</span>
+                    <span className='pl-2'>GB-Чат</span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
