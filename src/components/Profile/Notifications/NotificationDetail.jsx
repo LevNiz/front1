@@ -14,7 +14,7 @@ const NotificationDetail = () => {
   };
 
   return (
-    <div className='fixed z-[99999] mm:static top-0 left-0 w-full h-full mm:w-auto mm:h-auto bg-white overflow-y-scroll pt-16 mm:pt-0 pb-20 mm:pb-0 mm:overflow-y-hidden'>
+    <div className='fixed z-[99999] mm:static top-0 left-0 w-full h-full mm:w-auto mm:h-auto bg-white overflow-y-scroll pt-16 mm:pt-4 pb-20 mm:pb-0 mm:overflow-y-hidden'>
       <div className='bg-colBgGray mm:rounded-[18px] p-3 lg:py-6 lg:px-4 xl:p-12'>
         <div className='mm:hidden flex justify-between items-center mt-3 mb-7'>
           <img onClick={() => navigate(-1)} src={back} alt='*' />

@@ -15,8 +15,8 @@ const Notifications = () => {
   return (
     <>
       {notifications?.length ? (
-        <div className='content pl-0 sm:pl-4 pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
-          <div>
+        <div className='content pl-0 md:pl-4 pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
+          <div className='pt-5'>
             <div className='flex justify-between items-center pb-5'>
               <div className='flex items-center'>
                 <span className='font-medium'>Недавние</span>
@@ -38,7 +38,7 @@ const Notifications = () => {
               <NavLink
                 to={`${el.id}`}
                 key={el?.id}
-                className='flex my-3 border-b sidebar border-colBgGray2 pb-3 hover:bg-colBgGray2 py-2 sm:p-3 rounded-lg'
+                className='flex my-3 border-b sidebar border-colBgGray2 pb-3 hover:bg-colBgGray2 py-2 rounded-lg'
               >
                 <div className='max-w-[36px] lg:max-w-[44px] min-w-[36px] lg:min-w-[44px] h-[36px] lg:h-[44px] rounded-full overflow-hidden'>
                   <img
@@ -52,7 +52,9 @@ const Notifications = () => {
                     <h5 className='text-xs lg:text-sm break-all line-clamp-1 pr-1'>
                       {el?.title}
                     </h5>
-                    <span className='text-[8px] lg:text-xs text-colGray'>13.00</span>
+                    <span className='text-[8px] lg:text-xs text-colGray'>
+                      13.00
+                    </span>
                   </div>
                   <p className='text-xs lg:text-sm text-colGray break-all line-clamp-1 mt-[2px]'>
                     {el?.text}
@@ -68,7 +70,11 @@ const Notifications = () => {
       ) : (
         <div className='flex justify-center items-center w-full min-h-[400px]'>
           <div>
-            <img className='mx-auto sm:w-auto w-[120px]' src={noNotifications} alt='*' />
+            <img
+              className='mx-auto sm:w-auto w-[120px]'
+              src={noNotifications}
+              alt='*'
+            />
             <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12'>
               У вас еще нет уведомлений
             </h4>

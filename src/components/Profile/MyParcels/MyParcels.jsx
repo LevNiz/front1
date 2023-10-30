@@ -55,7 +55,7 @@ const MyParcels = () => {
   }, [dispatch, userID]);
 
   return (
-    <div className='py-5 sm:pl-3 md:pl-8 w-full overflow-hidden'>
+    <div className='py-5 sm:p-3 md:p-4 w-full overflow-hidden'>
       <form onSubmit={handleSubmit(onSubmit)} className='lg:flex'>
         <div className='w-full'>
           <div className='flex border border-colGray h-[50px] rounded-[10px] p-1 w-full'>

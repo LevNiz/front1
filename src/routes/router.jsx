@@ -28,6 +28,7 @@ import {
   UpdateAddress,
   BGBuyerDetail,
   SendApplication,
+  GBChatDetail,
 } from '../components';
 import {
   Auth,
@@ -76,7 +77,10 @@ export const router = createBrowserRouter(
             <Route path='personal-data' element={<PersonalData />} />
             <Route path='my-wallet' element={<MyWallet />} />
             <Route path='my-applications' element={<MyApplications />} />
-            <Route path='gb-chat' element={<GBChat />} />
+            <Route path='gb-chat'>
+              <Route index element={<GBChat />} />
+              <Route path=':id' element={<GBChatDetail />} />
+            </Route>
             <Route path='tech-chat' element={<TechChat />} />
             <Route path='saved-addresses'>
               <Route index element={<SavedAddresses />} />

@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 
 const GBChatSidebar = () => {
   return (
-    <div className='flex flex-col space-y-3 ld:h-[calc(100vh-190px)] ld:overflow-y-scroll ld:pr-3'>
-      <NavLink className='flex items-center'>
+    <div className='flex flex-col space-y-3 scrollable ld:h-[calc(100vh-190px)] ld:overflow-y-scroll ld:pr-3'>
+      <NavLink to='12' className='flex items-center'>
         <div className='w-12 sm:w-14 h-12 sm:h-14 min-w-[48px] sm:min-w-[56px] rounded-full overflow-hidden border border-colYellow'>
           <img
             className='w-full h-full object-cover rounded-full p-[2px]'

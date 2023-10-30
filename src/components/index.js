@@ -37,6 +37,7 @@ import GBBuyerItem from './GBBuyer/GBBuyerItem';
 import BGBuyerDetail from './GBBuyer/BGBuyerDetail';
 import SendApplication from './Applications/SendApplication/SendApplication';
 import GBChatItem from './Profile/GBChat/GBChatItem';
+import GBChatDetail from './Profile/GBChat/GBChatDetail';
 
 export {
   Layout,
@@ -78,4 +79,5 @@ export {
   BGBuyerDetail,
   SendApplication,
   GBChatItem,
+  GBChatDetail,
 };

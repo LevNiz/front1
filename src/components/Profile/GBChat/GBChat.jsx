@@ -4,7 +4,7 @@ import welcomeImg from '../../../assets/images/welcome-chat.png';
 
 const GBChat = () => {
   return (
-    <div className='flex items-center w-full md:p-4 pt-5'>
+    <div className='flex items-center w-full px-3 ss:px-4 py-5'>
       <div className='w-full ld:w-3/5 md:w-full lg:w-2/4 h-full'>
         <form className='mb-5'>
           <div className='flex border border-colGray rounded-md p-1 w-full relative'>

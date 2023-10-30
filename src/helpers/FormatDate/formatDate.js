@@ -9,6 +9,6 @@ export const FormatDate = ({ dateFormat }) => {
   if (isToday(date)) {
     return formattedTime;
   } else {
-    return format(date, 'd MMMM yyyy', { locale: ru });
+    return format(date, 'd MMM yyyy', { locale: ru });
   }
 };

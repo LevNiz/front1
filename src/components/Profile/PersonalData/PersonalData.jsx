@@ -127,7 +127,7 @@ const PersonalData = () => {
           </div>
         </div>
       ) : (
-        <div className='py-5 md:pl-4 lg:px-12 w-full'>
+        <div className='py-5 md:p-4 w-full'>
           <div className='flex flex-col items-center md:flex-row'>
             <div className='relative md:mr-3 mb-3 md:mb-0'>
               <div className='md:max-w-[110px] md:min-w-[110px] max-w-[160px] min-w-[160px] border-2 p-[2px] border-colYellow h-[160px] md:h-[110px] overflow-hidden rounded-full'>
