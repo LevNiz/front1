@@ -18,6 +18,8 @@ const TechChat = () => {
   const [inputVal, setInputVal] = useState('');
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [openImg, setOpenImg] = useState(false);
+  const [clickedImageUrl, setClickedImageUrl] = useState(null);
 
   const messagesEndRef = useRef();
 
@@ -117,9 +119,13 @@ const TechChat = () => {
                     {message?.data?.image ? (
                       <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden'>
                         <img
-                          className='w-full h-full object-cover'
+                          className='w-full h-full object-cover cursor-zoom-in'
                           src={message?.data?.image}
                           alt='*'
+                          onClick={(e) => {
+                            setOpenImg(true);
+                            setClickedImageUrl(e.target.getAttribute('src'));
+                          }}
                         />
                       </div>
                     ) : (
@@ -152,9 +158,13 @@ const TechChat = () => {
                     {message?.data?.image ? (
                       <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden'>
                         <img
-                          className='w-full h-full object-cover'
+                          className='w-full h-full object-cover cursor-zoom-in'
                           src={message?.data?.image}
                           alt='*'
+                          onClick={(e) => {
+                            setOpenImg(true);
+                            setClickedImageUrl(e.target.getAttribute('src'));
+                          }}
                         />
                       </div>
                     ) : (
@@ -239,6 +249,21 @@ const TechChat = () => {
             </button>
           </div>
         </form>
+      </div>
+      <div
+        className={`${
+          openImg ? '' : 'hidden'
+        } fixed top-0 left-0 w-full h-full z-[99999999] bg-[rgba(0,0,0,.8)] p-5`}
+      >
+        <span
+          onClick={() => setOpenImg(false)}
+          className='absolute top-0 right-0 flex items-center h-[70px] mm:h-[90px] p-5 mm:p-10 cursor-pointer text-white text-5xl z-10 bg-[rgba(0,0,0,.7)]'
+        >
+          &times;
+        </span>
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 md:px-10 w-full'>
+          <img className='mx-auto max-h-[90vh]' src={clickedImageUrl} alt='*' />
+        </div>
       </div>
     </div>
   );
