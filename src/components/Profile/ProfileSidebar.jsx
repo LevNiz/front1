@@ -1,17 +1,18 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logOutFetch } from '../../api/user';
+import Modal from '../../helpers/Modals/Modal';
 import logout from './../../assets/icons/logout.svg';
 import profile from './../../assets/icons/new-profile.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
 import wallet from './../../assets/icons/wallet.svg';
 import notification from './../../assets/icons/notification2.svg';
 import location from './../../assets/icons/new-location.svg';
-import time from './../../assets/icons/timeSvg.svg';
 import chat from './../../assets/icons/chat.svg';
 import gbChat from './../../assets/icons/gb-chat.svg';
-import { logOutFetch } from '../../api/user';
-import { useDispatch } from 'react-redux';
-import Modal from '../../helpers/Modals/Modal';
-import { useState } from 'react';
+import applicationIcon from './../../assets/icons/box-tick.svg';
+import ordersIcon from './../../assets/icons/orders.svg';
 
 const ProfileSidebar = () => {
   const dispatch = useDispatch();
@@ -34,8 +35,8 @@ const ProfileSidebar = () => {
   return (
     <>
       <div className='bg-white z-[99999] md:min-w-[240px] md:max-w-[240px] lg:min-w-[300px] lg:max-w-[300px] w-full hidden md:block'>
-        <ul className='border-r border-colGray2 pb-24 pt-6 sidebar pr-5 lg:pr-10 hidden md:block'>
-          <li className='mb-6'>
+        <ul className='border-r border-colGray2 pb-24 pt-6 sidebar pr-5 lg:pr-10 hidden md:flex flex-col space-y-4'>
+          <li>
             <NavLink
               to='personal-data'
               className='text-xl flex items-center p-2 rounded-lg'
@@ -44,7 +45,7 @@ const ProfileSidebar = () => {
               <span>Личные данные</span>
             </NavLink>
           </li>
-          <li className='my-6'>
+          <li>
             <NavLink
               to='my-parcels'
               className='text-xl flex items-center p-2 rounded-lg'
@@ -53,16 +54,25 @@ const ProfileSidebar = () => {
               <span>Мои посылки</span>
             </NavLink>
           </li>
-          <li className='my-6'>
+          <li>
             <NavLink
               to='my-applications'
               className='text-xl flex items-center p-2 rounded-lg'
             >
-              <img className='pr-3' src={time} alt='*' />
+              <img className='pr-3' src={ordersIcon} alt='*' />
               <span>Мои заявки</span>
             </NavLink>
           </li>
-          <li className='my-6'>
+          <li>
+            <NavLink
+              to='buy-request'
+              className='text-xl flex items-center p-2 rounded-lg'
+            >
+              <img className='pr-3' src={applicationIcon} alt='*' />
+              <span>Заявка на покупку</span>
+            </NavLink>
+          </li>
+          <li>
             <NavLink
               to='gb-chat'
               className='text-xl flex items-center p-2 rounded-lg'
@@ -71,7 +81,7 @@ const ProfileSidebar = () => {
               <span>GB-Чат</span>
             </NavLink>
           </li>
-          <li className='my-6'>
+          <li>
             <NavLink
               to='tech-chat'
               className='text-xl flex items-center p-2 rounded-lg'
@@ -80,7 +90,7 @@ const ProfileSidebar = () => {
               <span>Чат с поддержкой</span>
             </NavLink>
           </li>
-          <li className='my-6'>
+          <li>
             <NavLink
               to='notifications'
               className='text-xl flex items-center p-2 rounded-lg'
@@ -89,7 +99,7 @@ const ProfileSidebar = () => {
               <span>Уведомления</span>
             </NavLink>
           </li>
-          <li className='my-6'>
+          <li>
             <NavLink
               to='my-wallet'
               className='text-xl flex items-center p-2 rounded-lg'
@@ -98,7 +108,7 @@ const ProfileSidebar = () => {
               <span>Мой кошелёк</span>
             </NavLink>
           </li>
-          <li className='my-6'>
+          <li>
             <NavLink
               to='saved-addresses'
               className='text-xl flex items-center p-2 rounded-lg'
@@ -107,13 +117,13 @@ const ProfileSidebar = () => {
               <span>Сохранённые адреса</span>
             </NavLink>
           </li>
-          <li className='mt-10'>
+          <li>
             <button
               onClick={() => {
                 setModalOpen(true);
                 setModalContent('logout');
               }}
-              className='text-xl flex items-center p-2 rounded-lg'
+              className='text-xl flex items-center p-2 rounded-lg mt-5'
             >
               <img className='pr-3' src={logout} alt='*' />
               <span>Выйти</span>

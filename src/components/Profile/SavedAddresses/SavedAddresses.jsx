@@ -45,7 +45,7 @@ const SavedAddresses = () => {
   return (
     <div className='w-screen md:p-4 pt-6'>
       <div className='flex justify-between items-center'>
-        <h1 className='text-xl font-medium mr-2 sm:mr-0'>Сохраненные адреса</h1>
+        <h1 className='text-xl mr-2 sm:mr-0'>Сохраненные адреса</h1>
         <button
           onClick={() => navigate('new')}
           className={`${

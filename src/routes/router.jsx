@@ -29,6 +29,7 @@ import {
   BGBuyerDetail,
   SendApplication,
   GBChatDetail,
+  BuyRequest,
 } from '../components';
 import {
   Auth,
@@ -91,6 +92,9 @@ export const router = createBrowserRouter(
               <Route path=':id' element={<NotificationDetail />} />
             </Route>
             <Route path='my-parcels' element={<MyParcels />} />
+            <Route path='buy-request'>
+              <Route index element={<BuyRequest />} />
+            </Route>
           </Route>
           <Route path='alaket' element={<Alaket />} />
           <Route path='applications'>
