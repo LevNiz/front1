@@ -40,6 +40,7 @@ import GBChatItem from './Profile/GBChat/GBChatItem';
 import GBChatDetail from './Profile/GBChat/GBChatDetail';
 import BuyRequest from './Profile/BuyRequest/BuyRequest';
 import AddBuyRequest from './Profile/BuyRequest/AddBuyRequest';
+import UpdateBuyRequest from './Profile/BuyRequest/UpdateBuyRequest';
 
 export {
   Layout,
@@ -84,4 +85,5 @@ export {
   GBChatDetail,
   BuyRequest,
   AddBuyRequest,
+  UpdateBuyRequest,
 };

@@ -1,32 +1,75 @@
-import { NavLink } from 'react-router-dom';
-import arrow from '../../../assets/icons/arrow-left.svg';
+import { NavLink, useNavigate } from 'react-router-dom';
+import edit from '../../../assets/icons/update.svg';
+import trash from '../../../assets/icons/trash.svg';
+import Modal from '../../../helpers/Modals/Modal';
+import { useState } from 'react';
+import { FetchBuyRequests, deleteBuyRequest } from '../../../api/buyRequests';
+import { useDispatch, useSelector } from 'react-redux';
 
-const BuyRequestItem = ({ data }) => {
+const BuyRequestItem = ({ data = {} }) => {
+  const { userID } = useSelector((state) => state?.user);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('');
+  const [buyRequestID, setBuyRequestID] = useState('');
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onDeleteBuyRequest = async () => {
+    setModalOpen(true);
+    const { success } = await deleteBuyRequest(buyRequestID);
+    if (success) {
+      setModalOpen(false);
+      await FetchBuyRequests(dispatch, userID);
+    }
+    setModalOpen(false);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
-    <div className='py-8 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5'>
-      <NavLink
-        to=''
-        onClick={() => alert('Функция будет доступна в ближайшее время!')}
-        className='bg-colBgGray2 p-2 sm:p-4 rounded-lg border border-gray-300'
-      >
+    <>
+      <div className='bg-colBgGray2 p-2 sm:p-4 rounded-md'>
         <div className='w-full mb-3'>
           <div className='flex justify-between items-center'>
             <h4 className='font-medium break-all line-clamp-1 pr-2'>
               {data?.name || 'Не указана'}
             </h4>
-            <p className='text-xs text-colGray font-medium mt-1'>
-              {data?.dateCreated?.split('T')[0] || 'Не указана'}
-            </p>
+            <div className='flex space-x-1'>
+              <img
+                onClick={() => navigate(`update/${data?.id}`)}
+                className='cursor-pointer min-w-[28px]'
+                src={edit}
+                alt='*'
+              />
+              <img
+                onClick={() => {
+                  setModalOpen(true);
+                  setModalContent('deleteBuyRequest');
+                  setBuyRequestID(data?.id);
+                }}
+                className='cursor-pointer min-w-[30px]'
+                src={trash}
+                alt='*'
+              />
+            </div>
           </div>
           <div className='flex items-center'>
             <span className='text-sm my-1 pr-1'>Ссылка:</span>
-            <p className='text-sm text-blue-500 break-all line-clamp-1'>
+            <NavLink
+              to={data?.link || '#'}
+              target='_blank'
+              className='text-sm text-blue-500 break-all line-clamp-1'
+            >
               {data?.link || 'Не указана'}
-            </p>
+            </NavLink>
           </div>
         </div>
-        <div className='flex justify-between items-center'>
-          <div className='w-max px-3 py-1 text-center cursor-pointer text-[8px] sm:text-[10px] rounded-lg bg-colPurple2'>
+        <div className='flex justify-between items-end'>
+          <div className='w-max px-3 py-1 text-center cursor-pointer text-[10px] rounded-lg bg-colPurple2'>
             {data?.status == 'done'
               ? 'Готово'
               : data?.status == 'on_way'
@@ -37,10 +80,18 @@ const BuyRequestItem = ({ data }) => {
               ? 'Создан'
               : 'Не указано'}
           </div>
-          <img className='rotate-180' src={arrow} alt='*' />
+          <p className='text-xs text-colGray font-medium mt-1'>
+            {data?.dateCreated?.split('T')[0] || 'Не указана'}
+          </p>
         </div>
-      </NavLink>
-    </div>
+      </div>
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        content={modalContent}
+        onDelBuyRequest={onDeleteBuyRequest}
+      />
+    </>
   );
 };
 

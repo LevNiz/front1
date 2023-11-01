@@ -25,7 +25,7 @@ const BuyRequest = () => {
   return (
     <div className='w-full pt-5 md:p-4'>
       <div className='flex justify-between items-center'>
-        <h3 className='ss:text-xl'>Заявка на покупку</h3>
+        <h3 className='ss:text-xl sm:font-medium'>Заявки на покупку</h3>
         <button
           onClick={() => navigate('new')}
           className='bg-colYellow py-2 ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'
@@ -51,9 +51,11 @@ const BuyRequest = () => {
           </div>
         </div>
       ) : buyRequests?.length ? (
-        buyRequests?.map((buyRequest) => (
-          <BuyRequestItem key={buyRequest?.id} data={buyRequest} />
-        ))
+        <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3'>
+          {buyRequests?.map((buyRequest) => (
+            <BuyRequestItem key={buyRequest?.id} data={buyRequest} />
+          ))}
+        </div>
       ) : (
         <div className='flex flex-col justify-center items-center min-h-[400px]'>
           <div className='text-center'>

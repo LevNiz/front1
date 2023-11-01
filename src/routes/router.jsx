@@ -31,6 +31,7 @@ import {
   GBChatDetail,
   BuyRequest,
   AddBuyRequest,
+  UpdateBuyRequest,
 } from '../components';
 import {
   Auth,
@@ -96,6 +97,7 @@ export const router = createBrowserRouter(
             <Route path='buy-request'>
               <Route index element={<BuyRequest />} />
               <Route path='new' element={<AddBuyRequest />} />
+              <Route path='update/:id' element={<UpdateBuyRequest />} />
             </Route>
           </Route>
           <Route path='alaket' element={<Alaket />} />

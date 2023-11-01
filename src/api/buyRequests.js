@@ -19,6 +19,16 @@ export const FetchBuyRequests = async (dispatch, userID) => {
   }
 };
 
+// Fetch detail Buyer request:
+export const FetchBuyRequestsDetail = async (id) => {
+  try {
+    const res = await request.get(`core/buyer_request/${id}`);
+    return { success: true, data: res?.data };
+  } catch (error) {
+    return { success: false, data: error };
+  }
+};
+
 // Post Buyer requests:
 export const postBuyRequest = async (data, userID) => {
   try {
@@ -30,6 +40,31 @@ export const postBuyRequest = async (data, userID) => {
       status: 'created',
     };
     await axiosInstance.post('core/buyer_request/', sendData);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
+// Delete Address:
+export const deleteBuyRequest = async (id) => {
+  try {
+    await axiosInstance.delete(`core/buyer_request/${id}`);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
+// Update buyRequest:
+export const updateBuyRequest = async (data, id) => {
+  const sendData = {
+    name: data.name,
+    phone: data.phone,
+    link: data.link,
+  };
+  try {
+    await axiosInstance.patch(`core/buyer_request/${id}/`, sendData);
     return { success: true };
   } catch (error) {
     return { success: false };

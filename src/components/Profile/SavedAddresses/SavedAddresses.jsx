@@ -6,7 +6,7 @@ import Modal from '../../../helpers/Modals/Modal';
 import { deleteAddress, fetchAddresses } from '../../../api/addresses';
 import { fetchDepots } from '../../../api/depots';
 import inCorrectImg from '../../../assets/images/404.svg';
-import edit from '../../../assets/icons/editt.svg';
+import edit from '../../../assets/icons/update.svg';
 import trash from '../../../assets/icons/trash.svg';
 import errorImg from '../../../assets/images/error.svg';
 

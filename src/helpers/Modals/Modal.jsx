@@ -3,7 +3,14 @@ import sosImg from './../../assets/images/sos.svg';
 import inCorrectImg from './../../assets/images/404.svg';
 import success from './../../assets/images/success.jpg';
 
-const Modal = ({ isOpen, onClose, content, logOutUser, onDelAddress }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  content,
+  logOutUser,
+  onDelAddress,
+  onDelBuyRequest,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -118,6 +125,29 @@ const Modal = ({ isOpen, onClose, content, logOutUser, onDelAddress }) => {
             </button>
             <button
               onClick={onDelAddress}
+              className='bg-white px-5 py-2 font-medium text-black border border-black rounded-[10px]'
+            >
+              Да
+            </button>
+          </div>
+        </div>
+      ) : content === 'deleteBuyRequest' ? (
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+          <div className='flex justify-center py-5'>
+            <img src={sosImg} alt='*' />
+          </div>
+          <h3 className='text-center text-xl mm:text-2xl font-medium'>
+            Вы действительно хотите удалить данную заявку?
+          </h3>
+          <div className='flex justify-center my-12 mm:my-16 space-x-5'>
+            <button
+              onClick={onClose}
+              className='bg-black px-5 py-2 font-medium text-white rounded-[10px]'
+            >
+              Нет
+            </button>
+            <button
+              onClick={onDelBuyRequest}
               className='bg-white px-5 py-2 font-medium text-black border border-black rounded-[10px]'
             >
               Да
