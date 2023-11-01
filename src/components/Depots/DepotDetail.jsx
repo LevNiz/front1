@@ -64,14 +64,14 @@ const DepotDetail = () => {
                 mousewheel={true}
                 modules={[Mousewheel]}
                 noSwiping={true}
-                wrapperClass='swiper-wrapper justify-between sm:justify-center sm:space-x-4 lg:space-x-8'
+                wrapperClass='swiper-wrapper justify-center sm:space-x-4 space-x-3 lg:space-x-8'
                 className='flex justify-around mt-5'
               >
                 {depotItem?.images !== null
                   ? images?.map((el, index) => (
                       <SwiperSlide
                         key={index}
-                        className='sm:max-w-[80px] !w-[22%] h-[50px] bg-colBgGray xs:h-[70px] sm:w-full sm:h-[80px] rounded-lg overflow-hidden cursor-pointer'
+                        className='sm:max-w-[80px] !w-[22%] h-[50px] bg-colBgGray xs:h-[60px] sm:w-full sm:h-[75px] rounded-lg overflow-hidden cursor-pointer'
                         onClick={() => {
                           handleClick(index);
                         }}
