@@ -21,18 +21,19 @@ export const fetchSupportChats = (userID, callback) => {
   );
 
   const querySnap = onSnapshot(q, (querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      const docData = doc.data();
-      if (docData.receiverUid === userID && docData.read === false) {
-        const messageDoc = doc(
+    querySnapshot.forEach((chat) => {
+      const docData = chat.data();
+
+      if (docData.receiverUid == userID && !docData.read) {
+        const messageRef = doc(
           db,
           'support_chat',
           `${userID}`,
           'messages',
-          doc.id
+          `${chat.id}`
         );
 
-        updateDoc(messageDoc, { read: true });
+        updateDoc(messageRef, { read: true });
       }
     });
 
@@ -61,7 +62,7 @@ export const sendMessage = async (e, inputVal, userData, imgLink) => {
 
   if (!userDocSnapshot.exists()) {
     await setDoc(userDocRef, {
-      clientId: userData?.id,
+      clientId: `${userData?.id}`,
       clientName: userData?.fullname,
       avatar: userData?.avatar,
     });
