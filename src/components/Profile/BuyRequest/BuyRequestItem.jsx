@@ -5,6 +5,7 @@ import Modal from '../../../helpers/Modals/Modal';
 import { useState } from 'react';
 import { FetchBuyRequests, deleteBuyRequest } from '../../../api/buyRequests';
 import { useDispatch, useSelector } from 'react-redux';
+import { buyRequestStatus } from '../../../constants/statusData';
 
 const BuyRequestItem = ({ data = {} }) => {
   const { userID } = useSelector((state) => state?.user);
@@ -69,16 +70,12 @@ const BuyRequestItem = ({ data = {} }) => {
           </div>
         </div>
         <div className='flex justify-between items-end'>
-          <div className='w-max px-3 py-1 text-center cursor-pointer text-[10px] rounded-lg bg-colPurple2'>
-            {data?.status == 'done'
-              ? 'Готово'
-              : data?.status == 'on_way'
-              ? 'В пути'
-              : data?.status == 'arrived'
-              ? 'Получено'
-              : data?.status == 'created'
-              ? 'Создан'
-              : 'Не указано'}
+          <div
+            className={`w-max px-3 py-1 text-center cursor-pointer text-[10px] rounded-lg ${
+              buyRequestStatus[data?.status].style
+            }`}
+          >
+            {buyRequestStatus[data?.status].name || 'Не указан'}
           </div>
           <p className='text-xs text-colGray font-medium mt-1'>
             {data?.dateCreated?.split('T')[0] || 'Не указана'}
