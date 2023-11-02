@@ -3,43 +3,43 @@ import iconamoon from '../../assets/icons/iconamoon.svg';
 
 const GBBusinessItem = () => {
   return (
-    <div>
-      <div className='!bg-[#07AFE3] min-h-[240px] relative py-14'>
-        <img src={squire} className='absolute top-0 right-0' alt='*' />
-        <h3 className='text-3xl text-white leading-snug max-w-3xl mx-auto'>
+    <>
+      <div className='!bg-[#07AFE3] sm:min-h-[240px] px-4 md:px-0 relative py-8 sm:py-14'>
+        <img src={squire} className='absolute top-0 right-0 z-[1]' alt='*' />
+        <h3 className='text-xl mm:text-3xl text-white leading-snug max-w-3xl mx-auto z-[2] relative'>
           Уважаемые импортеры и экспортеры, наша команда поможет вам в решении
           задач по импорту/экспорту товаров из любых стран и континентов.{' '}
         </h3>
       </div>
       <div className='content py-8'>
-        <h2 className='text-2xl font-medium my-3 text-center'>
+        <h2 className='text-xl md:text-2xl font-medium my-3 text-center'>
           К Вашим услугам доставка любыми видами транспорта:
         </h2>
-        <div className='grid grid-cols-2 gap-5 p-5'>
+        <div className='grid md:grid-cols-2 gap-5 md:p-5'>
           <div className='flex items-start'>
             <img src={iconamoon} alt='*' />
-            <p className='ml-2 text-lg leading-6'>
+            <p className='ml-2 sm:text-lg sm:leading-6'>
               Морские контейнерные перевозки в том числе доставка негабаритных
               грузов;
             </p>
           </div>
           <div className='flex items-start'>
             <img src={iconamoon} alt='*' />
-            <p className='ml-2 text-lg leading-6'>Доставка автотранспортом;</p>
+            <p className='ml-2 sm:text-lg sm:leading-6'>Доставка автотранспортом;</p>
           </div>
           <div className='flex items-start'>
             <img src={iconamoon} alt='*' />
-            <p className='ml-2 text-lg leading-6'>Доставка Ж/Д</p>
+            <p className='ml-2 sm:text-lg sm:leading-6'>Доставка Ж/Д</p>
           </div>
           <div className='flex items-start'>
             <img src={iconamoon} alt='*' />
-            <p className='ml-2 text-lg leading-6'>Авиа доставка</p>
+            <p className='ml-2 sm:text-lg sm:leading-6'>Авиа доставка</p>
           </div>
         </div>
-        <h2 className='text-2xl font-medium mt-10 mb-3 text-center'>
+        <h2 className='text-xl md:text-2xl font-medium mt-10 mb-3 text-center'>
           Для ваших задач мы предлагаем:
         </h2>
-        <div className='grid grid-cols-3 gap-5 p-5'>
+        <div className='grid mm:grid-cols-2 md:grid-cols-3 gap-5 md:p-5'>
           <div className='flex items-start'>
             <span className='min-w-[12px] h-3 mt-[5px] bg-[#07AFE3] rounded-full mr-2'></span>
             <p>
@@ -89,7 +89,7 @@ const GBBusinessItem = () => {
           сделаем все необходимые расчеты.
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

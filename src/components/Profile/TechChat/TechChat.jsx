@@ -219,6 +219,7 @@ const TechChat = () => {
               <input
                 className='hidden'
                 name='image'
+                accept='image/*'
                 onChange={(e) => handleSendImage(e)}
                 type='file'
                 id='file'
