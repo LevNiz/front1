@@ -65,29 +65,20 @@ const ProfileSidebar = () => {
           </li>
           <li>
             <NavLink
+              to='my-wallet'
+              className='flex items-center p-2 rounded-lg'
+            >
+              <img className='pr-3' src={wallet} alt='*' />
+              <span className='text-lg'>Мой кошелёк</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to='buy-request'
               className='flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={applicationIcon} alt='*' />
               <span className='text-lg'>Заявка на покупку</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='gb-chat'
-              className='flex items-center p-2 rounded-lg'
-            >
-              <img className='pr-3' src={gbChat} alt='*' />
-              <span className='text-lg'>GB-Чат</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='tech-chat'
-              className='flex items-center p-2 rounded-lg'
-            >
-              <img className='pr-3' src={chat} alt='*' />
-              <span className='text-lg'>Чат с поддержкой</span>
             </NavLink>
           </li>
           <li>
@@ -100,12 +91,9 @@ const ProfileSidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to='my-wallet'
-              className='flex items-center p-2 rounded-lg'
-            >
-              <img className='pr-3' src={wallet} alt='*' />
-              <span className='text-lg'>Мой кошелёк</span>
+            <NavLink to='gb-chat' className='flex items-center p-2 rounded-lg'>
+              <img className='pr-3' src={gbChat} alt='*' />
+              <span className='text-lg'>GB-Чат</span>
             </NavLink>
           </li>
           <li>
@@ -115,6 +103,15 @@ const ProfileSidebar = () => {
             >
               <img className='pr-3' src={location} alt='*' />
               <span className='text-lg'>Сохранённые адреса</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='tech-chat'
+              className='flex items-center p-2 rounded-lg'
+            >
+              <img className='pr-3' src={chat} alt='*' />
+              <span className='text-lg'>Чат с поддержкой</span>
             </NavLink>
           </li>
           <li>
