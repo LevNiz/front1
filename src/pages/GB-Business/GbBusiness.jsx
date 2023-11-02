@@ -1,5 +1,4 @@
-import GBBusinessForm from "../../components/GBBusiness/GBBusinessForm";
-import GBBusinessItem from "../../components/GBBusiness/GBBusinessItem";
+import { GBBusinessForm, GBBusinessItem } from '../../components';
 
 const GbBusiness = () => {
   return (
