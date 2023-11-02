@@ -14,7 +14,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
   const [parcelData, setParcelData] = useState([]);
   const [parcelSize, setParcelSize] = useState(state?.orderData?.parcelSize);
   const [scopeWeight, setScopeWeight] = useState(null);
-  const [selectedTariff, setSelectedTariff] = useState(false);
+  const [selectedTariff, setSelectedTariff] = useState(state?.tariff);
   const [selectedSenderCity, setSelectedSenderCity] = useState(
     state?.orderData?.senderCity
   );

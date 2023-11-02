@@ -13,6 +13,7 @@ const SApplicationTariffs = ({
   const choseTariff = tariffsData?.filter(
     (tariff) => tariff?.id === state?.tariff
   );
+
   const [activeTariff, setActiveTariff] = useState(choseTariff[0]?.id);
 
   const handleTariffClick = (id) => {

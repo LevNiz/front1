@@ -11,7 +11,6 @@ import { Loading } from '../../../helpers/Loader/Loader';
 import Modal from '../../../helpers/Modals/Modal';
 import SApplicationForm from './SApplicationForm';
 import SApplicationDetail from './SApplicationDetail';
-// import SApplicationSender from './SApplicationSender';
 import SApplicationReceiver from './SApplicationReceiver';
 import SApplicationComment from './SApplicationComment';
 
@@ -76,8 +75,8 @@ const SApplicationItem = () => {
     setIsDisabled(false);
     const cityParcelCost = costs?.find(
       (cost) =>
-        cost?.fromCity === data?.senderCity?.value &&
-        cost?.toCity === data?.receiverCity?.value
+        cost?.fromCity?.id === data?.senderCity?.value &&
+        cost?.toCity?.id === data?.receiverCity?.value
     );
     if (cityParcelCost) {
       const costPerKg = cityParcelCost.costPerKg;
@@ -150,19 +149,6 @@ const SApplicationItem = () => {
               </h3>
             </div>
             <SApplicationDetail register={register} errors={errors} />
-            {/* <div className='flex items-center pb-5 pt-8'>
-              <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
-                3
-              </span>
-              <h3 className='text-xl text-[#6747e5] font-medium ml-2'>
-                Данные отправителя
-              </h3>
-            </div>
-            <SApplicationSender
-              register={register}
-              errors={errors}
-              control={control}
-            /> */}
             <div className='flex items-center pt-8'>
               <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
                 3

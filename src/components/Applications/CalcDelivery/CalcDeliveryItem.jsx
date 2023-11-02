@@ -35,8 +35,8 @@ const CalcDeliveryItem = () => {
   const onSubmitCalc = (data) => {
     const cityParcelCost = costs?.find(
       (cost) =>
-        cost?.fromCity === data?.senderCity?.value &&
-        cost?.toCity === data?.receiverCity?.value
+        cost?.fromCity?.id === data?.senderCity?.value &&
+        cost?.toCity?.id === data?.receiverCity?.value
     );
     if (cityParcelCost) {
       const costPerKg = cityParcelCost.costPerKg;
