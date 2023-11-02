@@ -1,3 +1,4 @@
+import { parcelStatus } from '../../../constants/statusData';
 import location from './../../../assets/icons/location3.svg';
 
 const ParcelItem = ({ parcel }) => {
@@ -37,16 +38,12 @@ const ParcelItem = ({ parcel }) => {
           </div>
         </div>
         <div>
-          <div className='lg:p-[10px] py-1 p-2 ml-3 text-center min-w-[70px] sm:min-w-[90px] lg:min-w-[120px] cursor-pointer text-[8px] sm:text-xs rounded-[50px] bg-colPurple2'>
-            {parcel?.status == 'done'
-              ? 'Готово'
-              : parcel?.status == 'on_way'
-              ? 'В пути'
-              : parcel?.status == 'arrived'
-              ? 'Получено'
-              : parcel?.status == 'created'
-              ? 'Создан'
-              : 'Не указано'}
+          <div
+            className={`lg:p-[10px] py-1 p-2 ml-3 text-center min-w-[70px] sm:min-w-[90px] lg:min-w-[120px] cursor-pointer text-[8px] sm:text-xs rounded-[50px] ${
+              parcelStatus[parcel?.status].statusStyle
+            }`}
+          >
+            {parcelStatus[parcel?.status].name || 'Не указан'}
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { ContentLoading } from '../../helpers/Loader/Loader';
 import rulesImg from './../../assets/images/rules.svg';
 import notFound from './../../assets/images/404.svg';
 import { useForm } from 'react-hook-form';
+import { parcelStatus } from '../../constants/statusData';
 
 const UnAuthParcel = () => {
   const [findParcel, setFindParcel] = useState([]);
@@ -101,17 +102,13 @@ const UnAuthParcel = () => {
                       {el?.orderNumber ? `№ ${el?.orderNumber}` : 'Не указано'}
                     </h4>
                   </div>
-                  <div className='max-w-[20%] sm:max-w-[auto] rounded-lg md:rounded-2xl flex justify-center sm:px-5 sm:py-2 px-2 py-[2px] bg-colGreen'>
+                  <div
+                    className={`max-w-[20%] sm:max-w-[auto] rounded-lg md:rounded-2xl flex justify-center sm:px-5 sm:py-2 px-2 py-[2px] bg-colGreen ${
+                      parcelStatus[el?.status].statusStyle
+                    }`}
+                  >
                     <span className='text-[9px] sm:text-xs sm:font-medium text-ellipsis overflow-hidden whitespace-nowrap'>
-                      {el?.status == 'done'
-                        ? 'Готово'
-                        : el?.status == 'on_way'
-                        ? 'В пути'
-                        : el?.status == 'arrived'
-                        ? 'Получено'
-                        : el?.status == 'created'
-                        ? 'Создан'
-                        : 'Не указано'}
+                      {parcelStatus[el?.status].name || 'Не указан'}
                     </span>
                   </div>
                 </div>

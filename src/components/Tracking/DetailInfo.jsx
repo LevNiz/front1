@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { fetchParcelDetail, fetchSaveParcel } from '../../api/parcels';
 import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
+import { paymentStatus } from '../../constants/statusData';
 
 const DetailInfo = (props) => {
   const userID = useSelector((state) => state?.user?.userID);
@@ -200,10 +201,14 @@ const DetailInfo = (props) => {
                     </span>
                   </div>
                   <div className='flex justify-end mt-2'>
-                    <span className='colGreen2 rounded-[10px] bg-colGreen2 px-6 py-2 font-medium'>
-                      {parcelDetail?.paymentStatus == 'paid'
-                        ? 'Оплачено'
-                        : 'Не оплачено'}
+                    <span
+                      className={`colGreen2 rounded-[10px] px-6 py-2 font-medium ${
+                        paymentStatus[parcelDetail?.paymentStatus]
+                          ?.statusStyle || ''
+                      }`}
+                    >
+                      {paymentStatus[parcelDetail?.paymentStatus]?.name ||
+                        'Не указан'}
                     </span>
                   </div>
                 </div>

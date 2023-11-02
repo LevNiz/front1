@@ -72,7 +72,7 @@ const BuyRequestItem = ({ data = {} }) => {
         <div className='flex justify-between items-end'>
           <div
             className={`w-max px-3 py-1 text-center cursor-pointer text-[10px] rounded-lg ${
-              buyRequestStatus[data?.status].style
+              buyRequestStatus[data?.status].statusStyle
             }`}
           >
             {buyRequestStatus[data?.status].name || 'Не указан'}
