@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { FetchParcels, fetchSearchParcel } from '../../api/parcels';
-import { ContentLoading } from '../../helpers/Loader/Loader';
-import nounBox from './../../assets/icons/noun-box.svg';
-import parcelCar from './../../assets/images/parcel-car.svg';
-import rulesImg from './../../assets/images/rules.svg';
-import notFound from './../../assets/images/404.svg';
-import errorImg from './../../assets/images/error.svg';
-import parcelIcon from './../../assets/images/parcel-icon.png';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { parcelStatus } from '../../constants/statusData';
+import { FetchParcels, fetchSearchParcel } from '../../api/parcels';
+import { ContentLoading } from '../../helpers/Loader/Loader';
+import { ErrorServer } from '../../helpers/Errors/ErrorServer';
+import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
+import nounBox from './../../assets/icons/noun-box.svg';
+import parcelCar from './../../assets/images/parcel-car.svg';
+import rulesImg from './../../assets/images/rules.svg';
+import parcelIcon from './../../assets/images/parcel-icon.png';
 
 const Parcel = () => {
   const {
@@ -24,7 +24,6 @@ const Parcel = () => {
 
   const [userParcels, setUserParcels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSearched, setIsSearched] = useState(false);
   const {
     register,
     handleSubmit,
@@ -37,7 +36,6 @@ const Parcel = () => {
     if (success) {
       setUserParcels(parcelData);
       setIsLoading(false);
-      setIsSearched(true);
     }
     setIsLoading(false);
   };
@@ -96,43 +94,11 @@ const Parcel = () => {
       </h2>
       {isLoading ? (
         <ContentLoading extraStyle='320px' />
-      ) : isSearched && userParcels?.length < 1 ? (
-        <div className='text-center max-w-[320px] min-h-[218px] mx-auto pt-20'>
-          <img className='mx-auto mb-5' src={notFound} alt='*' />
-          <h3 className='text-xl font-medium max-w-[260px] mx-auto'>
-            К сожалению, здесь пусто!
-          </h3>
-          <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2 pb-3'>
-            По вашему запросу ничего не нашли.
-          </p>
-        </div>
+      ) : error ? (
+        <ErrorServer />
       ) : loading ? (
         <ContentLoading extraStyle='320px' />
-      ) : userParcels?.length < 1 ? (
-        <div className='flex flex-col justify-center items-center min-h-[400px]'>
-          <div className='py-10'>
-            <img className='mx-auto' src={notFound} alt='*' />
-            <h4 className='text-center font-medium mt-5 text-xl'>
-              У Вас нет посылок...
-            </h4>
-          </div>
-        </div>
-      ) : error ? (
-        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
-          <div>
-            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
-              Произошла ошибка, повторите попытку позже!
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
-        </div>
-      ) : (
+      ) : userParcels?.length ? (
         <div className='flex justify-center my-6 sm:my-16'>
           <div className='max-w-[991px] w-full flex flex-col space-y-8'>
             {userParcels?.map((el) => (
@@ -215,6 +181,11 @@ const Parcel = () => {
             ))}
           </div>
         </div>
+      ) : (
+        <ErrorEmpty
+          title='Список пуст.'
+          desc='По вашему запросу ничего не нашли.'
+        />
       )}
     </>
   );

@@ -87,8 +87,9 @@ const Modal = ({
           <div className='py-10'>
             <img className='mx-auto' src={inCorrectImg} alt='*' />
             <h4 className='text-center font-medium mt-5 text-xl'>
-              По вашему запросу ничего не нашли...
+              Список пуст
             </h4>
+            <p className='text-gray-500'>По вашему запросу ничего не нашли.</p>
           </div>
         </div>
       ) : content === 'successRequest' ? (

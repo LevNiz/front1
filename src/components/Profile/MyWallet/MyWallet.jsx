@@ -1,11 +1,15 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { fetchWalletHistory } from '../../../api/wallet';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLoading } from '../../../helpers/Loader/Loader'
+import { fetchWalletHistory } from '../../../api/wallet';
+import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
+import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 
 const MyWallet = () => {
-  const { loading, error, walletHistory } = useSelector((state) => state?.walletHistory);
+  const { loading, error, walletHistory } = useSelector(
+    (state) => state?.walletHistory
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
@@ -32,14 +36,17 @@ const MyWallet = () => {
         </NavLink>
       </div>
       <h3 className='mt-8 mb-5 font-medium'>История операций</h3>
-      { loading ? (
+      {loading ? (
         <ContentLoading extraStyle='380px' />
       ) : error ? (
-        'error'
+        <ErrorServer />
       ) : walletHistory?.length ? (
         'Wallets'
       ) : (
-        'Empty'
+        <ErrorEmpty
+          title='Список пуст'
+          desc='Вы пока не делали операции по вашему кошелку'
+        />
       )}
     </div>
   );

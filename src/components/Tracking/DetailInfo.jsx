@@ -10,6 +10,7 @@ import { fetchParcelDetail, fetchSaveParcel } from '../../api/parcels';
 import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
 import { paymentStatus } from '../../constants/statusData';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const DetailInfo = (props) => {
   const userID = useSelector((state) => state?.user?.userID);
@@ -56,6 +57,10 @@ const DetailInfo = (props) => {
       setLoading(false);
     })();
   }, [id]);
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <div className='bg-colBgGray2 pt-20'>

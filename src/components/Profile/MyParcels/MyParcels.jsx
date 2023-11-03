@@ -1,22 +1,20 @@
-import sort from './../../../assets/icons/sort.svg';
-import search from './../../../assets/icons/search.svg';
-import errorImg from './../../../assets/images/error.svg';
-import FilterParcel from './FilterParcel';
 import { useEffect, useState } from 'react';
-import ParcelItem from './ParcelItem';
-import { NavLink } from 'react-router-dom';
-import notFound from './../../../assets/images/404.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { useForm } from 'react-hook-form';
 import {
   FetchSavedParcels,
   fetchSearchSavedParcels,
   fetchSortSavedParcels,
 } from '../../../api/parcels';
-import { useForm } from 'react-hook-form';
+import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
+import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
+import ParcelItem from './ParcelItem';
+import FilterParcel from './FilterParcel';
+import sort from './../../../assets/icons/sort.svg';
+import search from './../../../assets/icons/search.svg';
 
 const MyParcels = () => {
-
   const { savedParcels, loading, error } = useSelector(
     (state) => state?.parcels
   );
@@ -127,20 +125,7 @@ const MyParcels = () => {
       {loading ? (
         <ContentLoading extraStyle='350px' />
       ) : error ? (
-        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
-          <div>
-            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
-              Произошла ошибка, повторите попытку позже!
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
-        </div>
+        <ErrorServer />
       ) : savedParcels?.length ? (
         <>
           {savedParcels?.map((el) => (
@@ -148,14 +133,10 @@ const MyParcels = () => {
           ))}
         </>
       ) : (
-        <div className='flex justify-center items-center w-full min-h-[380px]'>
-          <div>
-            <img className='mx-auto' src={notFound} alt='*' />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 text-center'>
-              К сожалению ничего не нашли...
-            </h4>
-          </div>
-        </div>
+        <ErrorEmpty
+          title='По вашему запросу ничего не нашли.'
+          desc='Здесь будут ваши посылки'
+        />
       )}
     </div>
   );

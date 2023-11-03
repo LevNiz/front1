@@ -4,8 +4,8 @@ import { fetchArchiveApplications } from '../../../api/applications';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { NavLink } from 'react-router-dom';
 import parcelCar from '../../../assets/images/parcel-car.svg';
-import notFound from '../../../assets/images/404.svg';
-import errorImg from '../../../assets/images/error.svg';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
+import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 
 const ArchiveApplications = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -25,20 +25,7 @@ const ArchiveApplications = () => {
       {loading ? (
         <ContentLoading extraStyle='320px' />
       ) : error ? (
-        <div className='flex justify-center items-center w-full pt-10'>
-          <div>
-            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
-              Произошла ошибка, повторите попытку позже!
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
-        </div>
+        <ErrorServer />
       ) : archiveApplications?.length ? (
         <>
           {archiveApplications?.map((el) => (
@@ -111,15 +98,10 @@ const ArchiveApplications = () => {
           ))}
         </>
       ) : (
-        <div className='flex flex-col justify-center items-center min-h-[400px]'>
-          <div className='text-center'>
-            <img className='mx-auto' src={notFound} alt='*' />
-            <h4 className='text-center font-medium mt-5 text-xl'>
-              К сожалению, нет архивных заявок.
-            </h4>
-            <p className='text-gray-400'>Здесь будут ваши архивные заявки.</p>
-          </div>
-        </div>
+        <ErrorEmpty
+          title='К сожалению, нет архивных заявок.'
+          desc='Здесь будут ваши архивные заявки.'
+        />
       )}
     </div>
   );

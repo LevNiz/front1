@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { NavLink, useNavigate } from 'react-router-dom';
 import Modal from '../../../helpers/Modals/Modal';
 import { deleteAddress, fetchAddresses } from '../../../api/addresses';
 import { fetchDepots } from '../../../api/depots';
-import inCorrectImg from '../../../assets/images/404.svg';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
+import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import edit from '../../../assets/icons/update.svg';
 import trash from '../../../assets/icons/trash.svg';
-import errorImg from '../../../assets/images/error.svg';
 
 const SavedAddresses = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -58,21 +58,8 @@ const SavedAddresses = () => {
       {loading ? (
         <ContentLoading extraStyle='380px' />
       ) : error ? (
-        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
-          <div>
-            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
-              Произошла ошибка, повторите попытку позже!
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
-        </div>
-      ) : addresses?.length ? (
+        <ErrorServer />
+      ) : !addresses?.length ? (
         <div className='grid sm:grid-cols-2 ld:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-5'>
           {addresses?.map((el, index) => (
             <div
@@ -147,21 +134,10 @@ const SavedAddresses = () => {
           ))}
         </div>
       ) : (
-        <div className='text-center max-w-[320px] min-h-[218px] mx-auto pt-20'>
-          <img className='mx-auto mb-5' src={inCorrectImg} alt='*' />
-          <h3 className='text-xl font-medium max-w-[260px] mx-auto'>
-            Здесь пока пусто!
-          </h3>
-          <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2 pb-3'>
-            Нажав на кнопку ниже, вы можете добавить свои адреса.
-          </p>
-          <button
-            onClick={() => navigate('new')}
-            className='bg-black text-white py-3 px-6 font-medium rounded-md hover:opacity-70 duration-100'
-          >
-            + Добавить адрес
-          </button>
-        </div>
+        <ErrorEmpty
+          title='Здесь пока пусто!'
+          desc='Нажав на кнопку выше, вы можете добавить свои адреса.'
+        />
       )}
       <Modal
         isOpen={modalOpen}

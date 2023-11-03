@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
-import location from './../../../assets/icons/new-location.svg';
-import profile from './../../../assets/icons/new-profile.svg';
-import call from './../../../assets/icons/new-call.svg';
-import email from './../../../assets/icons/new-email.svg';
-import country from './../../../assets/icons/new-country.svg';
-import city from './../../../assets/icons/new-city.svg';
-import edit from './../../../assets/icons/edit.svg';
-import noImg from './../../../assets/images/no-ava.jpeg';
-import errorImg from './../../../assets/images/error.svg';
+import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../../api/client';
 import { Controller, useForm } from 'react-hook-form';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import Select from 'react-select';
 import { UpdateProfile } from '../../../api/user';
-import { NavLink } from 'react-router-dom';
 import { fetchCountries } from '../../../api/countries';
 import { fetchCities } from '../../../api/cities';
+import noImg from '../../../assets/images/no-ava.jpeg';
+import location from '../../../assets/icons/new-location.svg';
+import profile from '../../../assets/icons/new-profile.svg';
+import call from '../../../assets/icons/new-call.svg';
+import email from '../../../assets/icons/new-email.svg';
+import country from '../../../assets/icons/new-country.svg';
+import city from '../../../assets/icons/new-city.svg';
+import edit from '../../../assets/icons/edit.svg';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 
 const PersonalData = () => {
   const userID = useSelector((state) => state?.user?.userID);
@@ -112,20 +111,7 @@ const PersonalData = () => {
       {isLoading ? (
         <ContentLoading extraStyle='85vh' />
       ) : error ? (
-        <div className='flex justify-center items-center w-full pt-10 sm:pt-24'>
-          <div>
-            <img className='mx-auto w-24 sm:w-40' src={errorImg} alt='*' />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12 text-center'>
-              Произошла ошибка, повторите попытку позже!
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
-        </div>
+        <ErrorServer />
       ) : (
         <div className='py-5 md:p-4 w-full'>
           <div className='flex flex-col items-center md:flex-row'>

@@ -1,19 +1,18 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { parcelStatus } from '../../constants/statusData';
+import { ContentLoading } from '../../helpers/Loader/Loader';
+import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
+import { fetchSearchParcel } from '../../api/parcels';
 import nounBox from './../../assets/icons/noun-box.svg';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import parcelIcon from './../../assets/images/parcel-icon.png';
-import { useState } from 'react';
-import { fetchSearchParcel } from '../../api/parcels';
-import { ContentLoading } from '../../helpers/Loader/Loader';
 import rulesImg from './../../assets/images/rules.svg';
-import notFound from './../../assets/images/404.svg';
-import { useForm } from 'react-hook-form';
-import { parcelStatus } from '../../constants/statusData';
 
 const UnAuthParcel = () => {
   const [findParcel, setFindParcel] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [isSearched, setIsSearched] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -22,14 +21,13 @@ const UnAuthParcel = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    setLoading(true);
+    setIsLoading(true);
     const { success, parcelData } = await fetchSearchParcel(data.orderNumber);
     if (success) {
       setFindParcel(parcelData);
-      setLoading(false);
-      setIsSearched(true);
+      setIsLoading(false);
     }
-    setLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -71,19 +69,9 @@ const UnAuthParcel = () => {
           </p>
         </div>
       </div>
-      {loading ? (
+      {isLoading ? (
         <ContentLoading extraStyle='320px' />
-      ) : isSearched && findParcel?.length < 1 ? (
-        <div className='text-center max-w-[320px] min-h-[218px] mx-auto pt-20'>
-          <img className='mx-auto mb-5' src={notFound} alt='*' />
-          <h3 className='text-xl font-medium max-w-[260px] mx-auto'>
-            К сожалению, здесь пусто!
-          </h3>
-          <p className='text-sm opacity-75 max-w-[260px] mx-auto my-2 pb-3'>
-            По вашему запросу ничего не нашли.
-          </p>
-        </div>
-      ) : (
+      ) : findParcel?.length ? (
         <div className='flex justify-center my-16'>
           <div className='max-w-[991px] w-full flex flex-col space-y-8'>
             {findParcel?.map((el) => (
@@ -166,6 +154,11 @@ const UnAuthParcel = () => {
             ))}
           </div>
         </div>
+      ) : (
+        <ErrorEmpty
+          title='Список пуст.'
+          desc='По вашему запросу ничего не нашли.'
+        />
       )}
     </>
   );

@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { GBBuyerItem } from '../../components';
 import { searchBuyer } from '../../api/buyer';
 import FilterModal from '../../components/GBBuyer/FilterModal';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const GbBuyer = () => {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
@@ -27,6 +28,10 @@ const GbBuyer = () => {
   const onSubmit = async (data) => {
     await searchBuyer(data.buyer, dispatch);
   };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <div className='content py-20 min-h-[768px]'>

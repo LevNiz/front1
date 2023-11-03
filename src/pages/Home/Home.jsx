@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { fetchSearchParcel } from '../../api/parcels';
@@ -12,6 +12,7 @@ import {
   Testimonials,
 } from '../../components';
 import { Loading } from '../../helpers/Loader/Loader';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -41,6 +42,10 @@ const Home = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <>

@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper/modules';
+import { useParams } from 'react-router-dom';
+import { fetchDepotsDetail } from '../../api/depots';
+import { ContentLoading } from '../../helpers/Loader/Loader';
+import { DepotMap } from './DepotMap';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import 'swiper/css';
 import location from './../../assets/icons/location.svg';
 import clock from './../../assets/icons/clock.svg';
 import call from './../../assets/icons/call.svg';
 import boxIcon from './../../assets/icons/package.svg';
 import noImg from './../../assets/images/no-image.svg';
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { fetchDepotsDetail } from '../../api/depots';
-import { ContentLoading } from '../../helpers/Loader/Loader';
-import { DepotMap } from './DepotMap';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState();
@@ -25,6 +25,10 @@ const DepotDetail = () => {
     const main = images[index];
     setMainImg(main);
   };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     (async () => {
