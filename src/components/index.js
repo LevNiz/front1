@@ -43,6 +43,7 @@ import AddBuyRequest from './Profile/BuyRequest/AddBuyRequest';
 import UpdateBuyRequest from './Profile/BuyRequest/UpdateBuyRequest';
 import GBBusinessForm from './GBBusiness/GBBusinessForm';
 import GBBusinessItem from './GBBusiness/GBBusinessItem';
+import TopUpWallet from './Profile/MyWallet/TopUpWallet';
 
 export {
   Layout,
@@ -90,4 +91,5 @@ export {
   UpdateBuyRequest,
   GBBusinessForm,
   GBBusinessItem,
+  TopUpWallet,
 };

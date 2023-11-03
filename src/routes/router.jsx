@@ -32,6 +32,7 @@ import {
   BuyRequest,
   AddBuyRequest,
   UpdateBuyRequest,
+  TopUpWallet,
 } from '../components';
 import {
   Auth,
@@ -78,7 +79,10 @@ export const router = createBrowserRouter(
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>
             <Route path='personal-data' element={<PersonalData />} />
-            <Route path='my-wallet' element={<MyWallet />} />
+            <Route path='my-wallet'>
+              <Route index element={<MyWallet />} />
+              <Route path='top-up' element={<TopUpWallet />} />
+            </Route>
             <Route path='my-applications' element={<MyApplications />} />
             <Route path='gb-chat'>
               <Route index element={<GBChat />} />

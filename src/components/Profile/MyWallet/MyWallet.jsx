@@ -31,7 +31,10 @@ const MyWallet = () => {
             <span className='font-medium break-all'>0.0</span>
           </div>
         </div>
-        <NavLink className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-[240px] text-center w-full'>
+        <NavLink
+          to='top-up'
+          className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-[240px] text-center w-full'
+        >
           Пополнить баланс
         </NavLink>
       </div>
