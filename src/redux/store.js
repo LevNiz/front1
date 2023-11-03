@@ -11,6 +11,7 @@ import addressReducer from './slices/addressesSlice';
 import buyerReducer from './slices/buyerSlice';
 import websiteReducer from './slices/websiteSlice';
 import buyRequestReducer from './slices/buyRequestSlice';
+import walletHistoryReducer from './slices/walletsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   buyers: buyerReducer,
   websites: websiteReducer,
   buyRequests: buyRequestReducer,
+  walletHistory: walletHistoryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

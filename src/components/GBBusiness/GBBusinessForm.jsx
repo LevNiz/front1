@@ -91,7 +91,10 @@ const GBBusinessForm = () => {
         </label>
         <div className='flex justify-end'>
           <button
-            onClick={() => alert('Эта функция скоро будет доступна!')}
+            onClick={(e) => {
+              e.preventDefault();
+              alert('Эта функция скоро будет доступна!');
+            }}
             type='submit'
             className='mt-10 ml-auto font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 sm:max-w-[280px] w-full'
           >

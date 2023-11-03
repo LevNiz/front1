@@ -1,10 +1,48 @@
+import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { fetchWalletHistory } from '../../../api/wallet';
+import { useDispatch, useSelector } from 'react-redux';
+import { ContentLoading } from '../../../helpers/Loader/Loader'
 
 const MyWallet = () => {
-  return (
-    <div className="p-4">
-        <h1 className="text-xl font-medium">Мой кошелёк</h1>
-    </div>
-  )
-}
+  const { loading, error, walletHistory } = useSelector((state) => state?.walletHistory);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    (async () => {
+      await fetchWalletHistory(dispatch);
+    })();
+  }, []);
 
-export default MyWallet
+  return (
+    <div className='pt-6 md:p-4 w-full'>
+      <div className='flex justify-between items-center'>
+        <div className='flex justify-between max-w-sm w-full p-6 shadow-[0_0_12px_#00000026] rounded-md'>
+          <div className='text-center w-[48%]'>
+            <p className='opacity-60'>GivBox coins</p>
+            <span className='font-medium break-all'>0.0</span>
+          </div>
+          <div className='min-w-[2px] h-10 bg-gray-300'></div>
+          <div className='text-center w-[48%]'>
+            <p className='opacity-60'>Бонусы</p>
+            <span className='font-medium break-all'>0.0</span>
+          </div>
+        </div>
+        <NavLink className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-[240px] text-center w-full'>
+          Пополнить баланс
+        </NavLink>
+      </div>
+      <h3 className='mt-8 mb-5 font-medium'>История операций</h3>
+      { loading ? (
+        <ContentLoading extraStyle='380px' />
+      ) : error ? (
+        'error'
+      ) : walletHistory?.length ? (
+        'Wallets'
+      ) : (
+        'Empty'
+      )}
+    </div>
+  );
+};
+
+export default MyWallet;
