@@ -19,8 +19,8 @@ const MyWallet = () => {
 
   return (
     <div className='pt-6 md:p-4 w-full'>
-      <div className='flex justify-between items-center'>
-        <div className='flex justify-between max-w-sm w-full p-6 shadow-[0_0_12px_#00000026] rounded-md'>
+      <div className='lg:flex justify-between items-center'>
+        <div className='flex justify-between lg:max-w-sm w-full p-4 sm:p-6 shadow-[0_0_12px_#00000026] rounded-md mb-8 lg:mb-0'>
           <div className='text-center w-[48%]'>
             <p className='opacity-60'>GivBox coins</p>
             <span className='font-medium break-all'>0.0</span>
@@ -33,7 +33,7 @@ const MyWallet = () => {
         </div>
         <NavLink
           to='top-up'
-          className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-[240px] text-center w-full'
+          className='lg:block flex justify-center font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-[240px] text-center w-full'
         >
           Пополнить баланс
         </NavLink>
