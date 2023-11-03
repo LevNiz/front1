@@ -104,9 +104,9 @@ const TechChat = () => {
                       {message?.data?.text}
                     </p>
                     {message?.data?.image ? (
-                      <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden mb-1'>
+                      <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden mb-1 bg-green-200 p-1'>
                         <img
-                          className='w-full h-full object-cover cursor-zoom-in'
+                          className='w-full h-full object-cover cursor-zoom-in rounded-l-xl rounded-tr-xl'
                           src={message?.data?.image}
                           alt='*'
                           onClick={(e) => {
@@ -147,9 +147,9 @@ const TechChat = () => {
                       {message?.data?.text}
                     </p>
                     {message?.data?.image ? (
-                      <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden'>
+                      <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden p-1 bg-slate-500'>
                         <img
-                          className='w-full h-full object-cover cursor-zoom-in'
+                          className='w-full h-full object-cover cursor-zoom-in  rounded-r-xl rounded-bl-xl'
                           src={message?.data?.image}
                           alt='*'
                           onClick={(e) => {
