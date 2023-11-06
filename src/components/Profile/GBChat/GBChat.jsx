@@ -6,7 +6,7 @@ const GBChat = () => {
   return (
     <div className='flex items-center w-full px-3 ss:px-4 py-5'>
       <div className='w-full ld:w-3/5 md:w-full lg:w-2/4 h-full'>
-        <form className='mb-5'>
+        {/* <form className='mb-5'>
           <div className='flex border border-colGray rounded-md p-1 w-full relative'>
             <input
               className='pl-2 pr-8 py-1 w-full focus:outline-none'
@@ -19,7 +19,8 @@ const GBChat = () => {
               alt='*'
             />
           </div>
-        </form>
+        </form> */}
+        <h4 className='mb-5 text-2xl font-medium'>Чат</h4>
         <GBChatItem />
       </div>
       <div className='ld:2/5 lg:w-2/4 p-3 hidden ld:block md:p-8 md:hidden lg:block'>

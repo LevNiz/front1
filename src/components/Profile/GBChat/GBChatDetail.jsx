@@ -5,7 +5,8 @@ import { FormatDate } from '../../../helpers/FormatDate/formatDate';
 import chatBg from '../../../assets/images/chat-bg.jpeg';
 import chatImg from '../../../assets/images/chat.png';
 import back from '../../../assets/icons/arrow-left.svg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchChatMessages } from '../../../api/chats';
 
 const GBChatDetail = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -13,10 +14,10 @@ const GBChatDetail = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputVal, setInputVal] = useState('');
-  const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const messagesEndRef = useRef();
+  const { id } = useParams();
 
   const scrollToBottom = () => {
     const scrollable = messagesEndRef.current;
@@ -30,13 +31,24 @@ const GBChatDetail = () => {
 
   useEffect(scrollToBottom, [messages]);
 
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      await fetchChatMessages(id, (messagesData) => {
+        setMessages(messagesData);
+        setIsLoading(false);
+      });
+      setIsLoading(false);
+    })();
+  }, []);
+
   return (
     <div className='w-full pt-1'>
       <div className='relative'>
         <div className='flex items-center w-full p-2'>
           <img
             onClick={() => navigate(-1)}
-            className='mr-2'
+            className='mr-2 cursor-pointer'
             src={back}
             alt='*'
           />
@@ -52,17 +64,17 @@ const GBChatDetail = () => {
           </div>
         </div>
         <div
-          className='h-[calc(100vh-138px)] md:h-[calc(100vh-180px)] border md:border-0 md:border-t scrollable border-gray-300 overflow-y-scroll p-2 pb-20'
+          className='h-[calc(100vh-138px)] md:h-[calc(100vh-180px)] border md:border-0 md:border-t scrollable border-gray-300 overflow-y-scroll p-2 pb-20 flex flex-col justify-end'
           style={{ backgroundImage: `url('${chatBg}')` }}
         >
           {isLoading ? (
             <ContentLoading extraStyle='100%' />
-          ) : messages?.length ? (
+          ) : !messages?.length ? (
             messages?.map((message) => (
               <div
                 key={message.id}
                 className={`${
-                  message?.data?.senderUid === userID
+                  message?.data?.senderUid === `${userID}`
                     ? 'ml-auto justify-end'
                     : ''
                 } w-4/5 flex`}
@@ -70,7 +82,7 @@ const GBChatDetail = () => {
                 <div className='text-right w-fit flex flex-col'>
                   <p
                     className={`${
-                      message?.data?.senderUid === userID
+                      message?.data?.senderUid === `${userID}`
                         ? 'bg-green-200 rounded-l-xl rounded-tr-xl ml-auto'
                         : 'bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1'
                     }  text-left px-3 py-1 mb-1 text-[12px] mm:text-sm break-all w-fit`}
@@ -79,7 +91,7 @@ const GBChatDetail = () => {
                   </p>
                   <span
                     className={`${
-                      message?.data?.senderUid === userID
+                      message?.data?.senderUid === `${userID}`
                         ? 'mr-3'
                         : 'ml-3 text-left'
                     } mb-2 text-[8px] mm:text-[12px] text-gray-500`}
@@ -98,18 +110,15 @@ const GBChatDetail = () => {
               <div className='text-center'>
                 <img className='w-3/4 mx-auto' src={chatImg} alt='*' />
                 <h2 className='font-medium text-xl sm:text-2xl'>
-                  Добро пожаловать в чат техподдержки!
+                  Добро пожаловать в чат!
                 </h2>
-                <p className='opacity-60 max-w-[300px] mt-1 mx-auto text-sm'>
-                  Опишите вашу проблему, и администратор свяжется с вами.
-                </p>
               </div>
             </div>
           )}
           <div ref={messagesEndRef}></div>
         </div>
         <form
-          onSubmit={(e) => handleSendMessage(e)}
+          // onSubmit={(e) => handleSendMessage(e)}
           className='w-full absolute bottom-0 left-0'
         >
           <div className='flex items-center relative m-2 mr-3'>
@@ -124,7 +133,7 @@ const GBChatDetail = () => {
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault();
-                  handleSendMessage(e);
+                  // handleSendMessage(e);
                 }
               }}
               value={inputVal}
@@ -146,7 +155,6 @@ const GBChatDetail = () => {
               >
                 <path d='M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z'></path>
               </svg>
-              <span className='sr-only'>Send message</span>
             </button>
           </div>
         </form>

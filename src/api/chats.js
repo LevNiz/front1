@@ -9,6 +9,7 @@ import {
   getDoc,
   setDoc,
   updateDoc,
+  getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import { axiosInstance } from './axios.js';
@@ -114,4 +115,60 @@ export const sendImage = async (file, userData) => {
   } catch (error) {
     return { success: false };
   }
+};
+
+// ******** GB Chat **********
+
+export const fetchGBChats = async (userID, callBack) => {
+  const q = query(collection(db, 'chat'));
+  onSnapshot(q, async (querySnapshot) => {
+    const filteredChats = [];
+
+    for (const docChange of querySnapshot.docChanges()) {
+      if (docChange.type === 'added') {
+        const doc = docChange.doc;
+        const data = doc.data() || {};
+        const users = data.users || [];
+
+        if (users.includes(`${userID}`)) {
+          const chatId = doc.id;
+          const messagesCollectionRef = collection(db, 'chat', chatId, 'messages');
+          const messagesSnapshot = await getDocs(messagesCollectionRef);
+          const messages = [];
+
+          messagesSnapshot.forEach((messageDoc) => {
+            messages.push({
+              id: messageDoc.id,
+              data: messageDoc.data(),
+            });
+          });
+
+          filteredChats.push({
+            chatId: chatId,
+            data: data,
+            messages: messages,
+          });
+        }
+      }
+    }
+
+    callBack(filteredChats);
+  });
+};
+
+
+export const fetchChatMessages = async (chatId, callBack) => {
+  const messagesCollectionRef = collection(db, 'chat', chatId, 'messages');
+  const messagesSnapshot = await getDocs(messagesCollectionRef);
+  const messages = [];
+
+  messagesSnapshot.forEach((messageDoc) => {
+    messages.push({
+      id: messageDoc.id,
+      data: messageDoc.data(),
+    });
+  });
+
+  callBack(messages);
+  return messages;
 };

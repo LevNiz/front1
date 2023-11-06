@@ -59,7 +59,7 @@ const SavedAddresses = () => {
         <ContentLoading extraStyle='380px' />
       ) : error ? (
         <ErrorServer />
-      ) : !addresses?.length ? (
+      ) : addresses?.length ? (
         <div className='grid sm:grid-cols-2 ld:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-5'>
           {addresses?.map((el, index) => (
             <div
