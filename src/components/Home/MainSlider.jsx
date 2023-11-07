@@ -16,10 +16,10 @@ const MainSlider = () => {
     <Swiper
       navigation={true}
       modules={[Navigation, Autoplay]}
-      // autoplay={{
-      //   delay: 4000,
-      //   disableOnInteraction: true,
-      // }}
+      autoplay={{
+        delay: 4000,
+        disableOnInteraction: true,
+      }}
       slidesPerView={1}
     >
       {slidesData?.map((el) => (
