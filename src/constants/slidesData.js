@@ -7,7 +7,7 @@ import slideImg6 from './../assets/images/slider/mob-business.png';
 import slideImg7 from './../assets/images/slider/mob-business.png';
 import slideImgDesktop1 from './../assets/images/slider/gb-business.png';
 import slideImgDesktop2 from './../assets/images/slider/gb-shop.png';
-import slideImgDesktop3 from './../assets/images/slider/gb-Franchise.png';
+import slideImgDesktop3 from './../assets/images/slider/gb-franchise.png';
 import slideImgDesktop4 from './../assets/images/slider/gb-buyer.png';
 import slideImgDesktop5 from './../assets/images/slider/gb-coin.png';
 import slideImgDesktop6 from './../assets/images/slider/gb-chat.png';
