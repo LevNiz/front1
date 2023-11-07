@@ -1,5 +1,4 @@
 import {
-  query,
   collection,
   onSnapshot,
   serverTimestamp,
@@ -10,6 +9,8 @@ import {
   setDoc,
   updateDoc,
   getDocs,
+  where,
+  query,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import { axiosInstance } from './axios.js';
@@ -120,7 +121,11 @@ export const sendImage = async (file, userData) => {
 // ******** GB Chat **********
 
 export const fetchGBChats = async (userID, callBack) => {
-  const q = query(collection(db, 'chat'));
+  const q = query(
+    collection(db, 'chat'),
+    where('users', 'array-contains', `${userID}`),
+    orderBy('lastMessageTime', 'desc')
+  );
   onSnapshot(q, async (querySnapshot) => {
     const filteredChats = [];
 
@@ -132,7 +137,12 @@ export const fetchGBChats = async (userID, callBack) => {
 
         if (users.includes(`${userID}`)) {
           const chatId = doc.id;
-          const messagesCollectionRef = collection(db, 'chat', chatId, 'messages');
+          const messagesCollectionRef = collection(
+            db,
+            'chat',
+            chatId,
+            'messages'
+          );
           const messagesSnapshot = await getDocs(messagesCollectionRef);
           const messages = [];
 
@@ -156,19 +166,38 @@ export const fetchGBChats = async (userID, callBack) => {
   });
 };
 
+export const fetchChatMessages = (chatID, callback) => {
+  const q = query(
+    collection(db, 'chat', `${chatID}`, 'messages'),
+    orderBy('time')
+  );
 
-export const fetchChatMessages = async (chatId, callBack) => {
-  const messagesCollectionRef = collection(db, 'chat', chatId, 'messages');
-  const messagesSnapshot = await getDocs(messagesCollectionRef);
-  const messages = [];
+  const querySnap = onSnapshot(q, (querySnapshot) => {
+    // querySnapshot.forEach((chat) => {
+    //   const docData = chat.data();
 
-  messagesSnapshot.forEach((messageDoc) => {
-    messages.push({
-      id: messageDoc.id,
-      data: messageDoc.data(),
-    });
+    //   if (docData.receiverUid == chatID && !docData.read) {
+    //     const messageRef = doc(
+    //       db,
+    //       'support_chat',
+    //       `${chatID}`,
+    //       'messages',
+    //       `${chat.id}`
+    //     );
+
+    //     updateDoc(messageRef, { read: true });
+    //   }
+    // });
+
+    const docData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data() || {},
+    }));
+
+    callback(docData);
   });
 
-  callBack(messages);
-  return messages;
+  return () => {
+    querySnap();
+  };
 };

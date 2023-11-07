@@ -49,9 +49,9 @@ const Home = () => {
 
   return (
     <>
-      <div className='relative slider pt-20'>
+      <div className='relative slider pt-[70px] mm:pt-[72px]'>
         <MainSlider />
-        <div className='max-w-[885px] lg:w-full min-h-[190px] shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_4px] rounded-md lg:mx-auto mx-4 px-6 md:px-12 py-6 bg-white mt-3 md:mt-10 z-[1]'>
+        <div className='max-w-[885px] lg:w-full min-h-[190px] shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_4px] rounded-md lg:mx-auto mx-4 px-6 md:px-12 py-6 bg-white mt-3 md:-mt-8 relative z-[1]'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h3 className='text-xl font-medium mb-8'>
               Введите ваш номер, чтобы найти вашу посылку
@@ -73,7 +73,7 @@ const Home = () => {
               </div>
               <button
                 type='submit'
-                className='bg-colYellow w-full mt-4 md:mt-0 md:ml-5 h-[42px] font-medium rounded-lg hover:bg-colYellowHover duration-100'
+                className='bg-black text-white w-full mt-4 md:mt-0 md:ml-5 h-[42px] font-medium rounded-lg hover:bg-colYellowHover duration-100'
               >
                 Отследить
               </button>

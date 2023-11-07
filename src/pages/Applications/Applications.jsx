@@ -1,9 +1,9 @@
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { ApplicationsItem } from '../../components';
 import calculator from './../../assets/icons/calculator.svg';
-import box from './../../assets/icons/my-parcel.svg';
-import { useEffect } from 'react';
-import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import noun from './../../assets/icons/white-noun.svg';
 
 const Applications = () => {
   useEffect(() => {
@@ -12,19 +12,33 @@ const Applications = () => {
 
   return (
     <div className='py-24 content'>
-      <div className='flex justify-center space-x-8 pt-8'>
+      <div className='flex justify-center space-x-4 sm:space-x-8 pt-8'>
         <NavLink
-          className='shadow-[0_8px_34px_#00000026] p-5 rounded-lg max-w-[220px] w-full text-center'
+          className='p-5 rounded-2xl max-w-[200px] w-full bg-sky text-white'
           to='calculate'
         >
-          <img className='w-6 mx-auto' src={calculator} alt='*' />
+          <div className='flex justify-between items-start mb-3'>
+            <div className='w-10 h-10 flex justify-center items-center rounded-full bg-black bg-opacity-10'>
+              <img className='w-7' src={calculator} alt='*' />
+            </div>
+            <div className='w-8 h-8 flex justify-center items-center rounded-full bg-white bg-opacity-10'>
+              <img className='w-6' src={noun} alt='*' />
+            </div>
+          </div>
           <span className='font-medium'>Рассчитать</span>
         </NavLink>
         <NavLink
-          className='shadow-[0_8px_34px_#00000026] p-5 rounded-lg max-w-[220px] w-full text-center'
+          className='p-5 rounded-2xl max-w-[200px] w-full bg-orange text-white'
           to='send-application'
         >
-          <img className='w-6 mx-auto' src={box} alt='*' />
+          <div className='flex justify-between items-start mb-3'>
+            <div className='w-10 h-10 flex justify-center items-center rounded-full bg-black bg-opacity-10'>
+              <img className='w-7' src={calculator} alt='*' />
+            </div>
+            <div className='w-8 h-8 flex justify-center items-center rounded-full bg-white bg-opacity-10'>
+              <img className='w-6' src={noun} alt='*' />
+            </div>
+          </div>
           <span className='font-medium'>Отправка</span>
         </NavLink>
       </div>

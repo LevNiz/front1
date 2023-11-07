@@ -92,10 +92,17 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
-
+/* Background gradients => Start */
+.bg-sky {
+  background: linear-gradient(180deg, #87e6e9 -52.61%, #35abaf 100%);
+}
+.bg-orange {
+  background: linear-gradient(1deg, #df9600 0.83%, #f9c030 98.99%);
+}
+/* End */
 @media screen and (max-width: 576px) {
   .ReactFlagsSelect-module_selectBtn__19wW7 {
     padding: 11px 20px 11px 8px !important;

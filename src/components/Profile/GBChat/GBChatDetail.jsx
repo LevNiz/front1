@@ -14,7 +14,7 @@ const GBChatDetail = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputVal, setInputVal] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const messagesEndRef = useRef();
   const { id } = useParams();
@@ -32,14 +32,14 @@ const GBChatDetail = () => {
   useEffect(scrollToBottom, [messages]);
 
   useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      await fetchChatMessages(id, (messagesData) => {
-        setMessages(messagesData);
-        setIsLoading(false);
-      });
+    const fetchChats = fetchChatMessages(id, (messagesData) => {
+      setMessages(messagesData);
       setIsLoading(false);
-    })();
+    });
+
+    return () => {
+      fetchChats();
+    };
   }, []);
 
   return (
@@ -69,7 +69,7 @@ const GBChatDetail = () => {
         >
           {isLoading ? (
             <ContentLoading extraStyle='100%' />
-          ) : !messages?.length ? (
+          ) : messages?.length ? (
             messages?.map((message) => (
               <div
                 key={message.id}
