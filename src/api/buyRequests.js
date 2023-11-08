@@ -37,6 +37,7 @@ export const postBuyRequest = async (data, userID) => {
       phone: data.phone,
       link: data.link,
       client: Number(userID),
+      comment: data.comment,
       status: 'created',
     };
     await axiosInstance.post('core/buyer_request/', sendData);
@@ -62,6 +63,7 @@ export const updateBuyRequest = async (data, id) => {
     name: data.name,
     phone: data.phone,
     link: data.link,
+    comment: data.comment,
   };
   try {
     await axiosInstance.patch(`core/buyer_request/${id}/`, sendData);

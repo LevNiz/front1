@@ -88,6 +88,14 @@ const AddBuyRequest = () => {
                 </p>
               )}
             </div>
+            <div className='mt-4'>
+              <p className='font-medium mb-2'>Комментарий</p>
+              <textarea
+                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
+                placeholder='Комментарий'
+                {...register('comment')}
+              />
+            </div>
             <button
               type='submit'
               className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 w-full'

@@ -28,6 +28,7 @@ const UpdateBuyRequest = () => {
           name: data?.name,
           phone: data?.phone,
           link: data?.link,
+          comment: data?.comment,
         };
       }
       setIsLoading(false);
@@ -106,6 +107,14 @@ const UpdateBuyRequest = () => {
                   {errors?.link?.message || 'Поле обязательно к заполнению!'}
                 </p>
               )}
+            </div>
+            <div className='mt-4'>
+              <p className='font-medium mb-2'>Комментарий</p>
+              <textarea
+                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
+                placeholder='Комментарий'
+                {...register('comment')}
+              />
             </div>
             <button
               type='submit'
