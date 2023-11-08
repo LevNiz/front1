@@ -28,7 +28,6 @@ import ApplicationsItem from './Applications/ApplicationsItem';
 import CalcDelivery from './Applications/CalcDelivery/CalcDelivery';
 import CalcDeliveryItem from './Applications/CalcDelivery/CalcDeliveryItem';
 import MyApplications from './Profile/MyApplications/MyApplications';
-import GBChat from './Profile/GBChat/GBChat';
 import TechChat from './Profile/TechChat/TechChat';
 import SavedAddresses from './Profile/SavedAddresses/SavedAddresses';
 import AddNewAddress from './Profile/SavedAddresses/AddNewAddress';
@@ -77,7 +76,6 @@ export {
   ApplicationsItem,
   CalcDelivery,
   MyApplications,
-  GBChat,
   TechChat,
   SavedAddresses,
   AddNewAddress,

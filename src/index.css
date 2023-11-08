@@ -102,14 +102,39 @@ input[type='number'] {
 .bg-orange {
   background: linear-gradient(1deg, #df9600 0.83%, #f9c030 98.99%);
 }
-.bg-franchise {
-  background: var(--GB-Frinachise, linear-gradient(1deg, #D660F2 0.83%, #F897C7 98.99%));
-}
-.bg-coin {
-  background: var(--GB-Coin, linear-gradient(181deg, #7BD6FD -39.35%, #3793FE 99.93%));
+@media screen and (min-width: 991px) {
+  .bg-franchise {
+    background: var(
+      --GB-Frinachise,
+      linear-gradient(1deg, #d660f2 0.83%, #f897c7 98.99%)
+    );
+  }
+  .bg-coin {
+    background: var(
+      --GB-Coin,
+      linear-gradient(181deg, #7bd6fd -39.35%, #3793fe 99.93%)
+    );
+  }
 }
 .bg-alaket {
-  background: var(--Alaket, linear-gradient(181deg, #FFB061 -12.43%, #FF6125 99.91%));
+  background: var(
+    --Alaket,
+    linear-gradient(181deg, #ffb061 -12.43%, #ff6125 99.91%)
+  );
+}
+@media screen and (max-width: 991px) {
+  .bg-business {
+    background: var(
+      --Alaket,
+      linear-gradient(181deg, #0ab5eb -12.43%, #0795c0 99.91%)
+    );
+  }
+  .bg-buyer {
+    background: var(
+      --Alaket,
+      linear-gradient(181deg, #de4974 -12.43%, #d02f5d 99.91%)
+    );
+  }
 }
 /* End */
 @media screen and (max-width: 576px) {
