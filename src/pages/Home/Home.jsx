@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchSearchParcel } from '../../api/parcels';
 import {
   AboutUs,
+  GBServices,
   HowItWorks,
   MainSlider,
   Modal,
@@ -83,6 +84,7 @@ const Home = () => {
       </div>
       {loading ? <Loading /> : ''}
       <AboutUs />
+      <GBServices />
       <Services />
       <OurGoals />
       <HowItWorks />

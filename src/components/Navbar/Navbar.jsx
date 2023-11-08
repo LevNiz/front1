@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import logo from './../../assets/images/header-logo.svg';
 import userImg from './../../assets/icons/user.svg';
 import notification from './../../assets/icons/notification.svg';
@@ -10,17 +10,24 @@ const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-
-  const handleScroll = () => {
-    const currentScrollPos = window.pageYOffset;
-    const threshold = 900;
-    if (currentScrollPos > threshold) {
-      setScrolling(prevScrollPos < currentScrollPos);
-    }
-    setPrevScrollPos(currentScrollPos);
-  };
+  
+  const { pathname } = useLocation();
 
   useEffect(() => {
+    setScrolling(false);
+    setPrevScrollPos(0);
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const threshold = 900;
+      if (currentScrollPos > threshold) {
+        setScrolling(prevScrollPos < currentScrollPos);
+      }
+      setPrevScrollPos(currentScrollPos);
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -86,12 +93,6 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink to='applications'>Отправка</NavLink>
-            </li>
-            <li>
-              <NavLink to='gb-buyer'>GB-Buyer</NavLink>
-            </li>
-            <li>
-              <NavLink to='gb-business'>GB-Business</NavLink>
             </li>
           </ul>
           {user ? (

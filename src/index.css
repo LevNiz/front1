@@ -102,6 +102,15 @@ input[type='number'] {
 .bg-orange {
   background: linear-gradient(1deg, #df9600 0.83%, #f9c030 98.99%);
 }
+.bg-franchise {
+  background: var(--GB-Frinachise, linear-gradient(1deg, #D660F2 0.83%, #F897C7 98.99%));
+}
+.bg-coin {
+  background: var(--GB-Coin, linear-gradient(181deg, #7BD6FD -39.35%, #3793FE 99.93%));
+}
+.bg-alaket {
+  background: var(--Alaket, linear-gradient(181deg, #FFB061 -12.43%, #FF6125 99.91%));
+}
 /* End */
 @media screen and (max-width: 576px) {
   .ReactFlagsSelect-module_selectBtn__19wW7 {

@@ -2,7 +2,7 @@ import goalsImg from './../../assets/images/goals1.jpg';
 
 const OurGoals = () => {
   return (
-    <div className='pt-20 pb-20 lg:pb-40 content'>
+    <div className='pt-20 pb-20 lg:pb-24 content'>
       <div className='flex justify-center mb-5'>
         <div className="flex relative bg-[#E8E8E8] w-max pr-2 rounded-sm">
           <span className='absolute w-1 h-full bg-colYellow'></span>
