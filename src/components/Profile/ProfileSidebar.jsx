@@ -10,7 +10,6 @@ import wallet from './../../assets/icons/wallet.svg';
 import notification from './../../assets/icons/notification2.svg';
 import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
-import gbChat from './../../assets/icons/gb-chat.svg';
 import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
 
@@ -88,12 +87,6 @@ const ProfileSidebar = () => {
             >
               <img className='pr-3' src={notification} alt='*' />
               <span className='text-lg'>Уведомления</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='gb-chat' className='flex items-center p-2 rounded-lg'>
-              <img className='pr-3' src={gbChat} alt='*' />
-              <span className='text-lg'>GB-Чат</span>
             </NavLink>
           </li>
           <li>

@@ -36,8 +36,6 @@ import UpdateAddress from './Profile/SavedAddresses/UpdateAddress';
 import GBBuyerItem from './GBBuyer/GBBuyerItem';
 import BGBuyerDetail from './GBBuyer/BGBuyerDetail';
 import SendApplication from './Applications/SendApplication/SendApplication';
-import GBChatItem from './Profile/GBChat/GBChatItem';
-import GBChatDetail from './Profile/GBChat/GBChatDetail';
 import BuyRequest from './Profile/BuyRequest/BuyRequest';
 import AddBuyRequest from './Profile/BuyRequest/AddBuyRequest';
 import UpdateBuyRequest from './Profile/BuyRequest/UpdateBuyRequest';
@@ -45,6 +43,8 @@ import GBBusinessForm from './GBBusiness/GBBusinessForm';
 import GBBusinessItem from './GBBusiness/GBBusinessItem';
 import TopUpWallet from './Profile/MyWallet/TopUpWallet';
 import GBServices from './Home/GBServices';
+import GBChatItem from './GBChat/GBChatItem';
+import GBChatMessages from './GBChat/GBChatMessages';
 
 export {
   Layout,
@@ -86,7 +86,6 @@ export {
   BGBuyerDetail,
   SendApplication,
   GBChatItem,
-  GBChatDetail,
   BuyRequest,
   AddBuyRequest,
   UpdateBuyRequest,
@@ -94,4 +93,5 @@ export {
   GBBusinessItem,
   TopUpWallet,
   GBServices,
+  GBChatMessages,
 };

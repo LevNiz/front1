@@ -12,7 +12,13 @@ const Layout = () => {
     <>
       <Navbar />
       <Outlet />
-      {firstPathSegment === 'profile' ? '' : <Footer />}
+      {firstPathSegment === 'profile' ? (
+        ''
+      ) : firstPathSegment === 'gb-chat' ? (
+        ''
+      ) : (
+        <Footer />
+      )}
     </>
   );
 };

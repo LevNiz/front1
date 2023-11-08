@@ -21,18 +21,17 @@ import {
   MyWallet,
   CalcDelivery,
   MyApplications,
-  GBChat,
   TechChat,
   SavedAddresses,
   AddNewAddress,
   UpdateAddress,
   BGBuyerDetail,
   SendApplication,
-  GBChatDetail,
   BuyRequest,
   AddBuyRequest,
   UpdateBuyRequest,
   TopUpWallet,
+  GBChatMessages,
 } from '../components';
 import {
   Auth,
@@ -44,6 +43,7 @@ import {
   GbBuyer,
   GbBusiness,
   Applications,
+  GBChat,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -84,10 +84,6 @@ export const router = createBrowserRouter(
               <Route path='top-up' element={<TopUpWallet />} />
             </Route>
             <Route path='my-applications' element={<MyApplications />} />
-            <Route path='gb-chat'>
-              <Route index element={<GBChat />} />
-              <Route path=':id' element={<GBChatDetail />} />
-            </Route>
             <Route path='tech-chat' element={<TechChat />} />
             <Route path='saved-addresses'>
               <Route index element={<SavedAddresses />} />
@@ -103,6 +99,10 @@ export const router = createBrowserRouter(
               <Route path='new' element={<AddBuyRequest />} />
               <Route path='update/:id' element={<UpdateBuyRequest />} />
             </Route>
+          </Route>
+          <Route path='gb-chat' element={<GBChat />}>
+            <Route path='t/:id' element={<GBChatMessages />} />
+            <Route />
           </Route>
           <Route path='alaket' element={<Alaket />} />
           <Route path='applications'>

@@ -7,6 +7,7 @@ import Alaket from './Alaket/Alaket';
 import GbBuyer from './GB-Buyer/GbBuyer';
 import GbBusiness from './GB-Business/GbBusiness';
 import Applications from './Applications/Applications';
+import GBChat from './GBChat/GBChat';
 
 export {
   Tracking,
@@ -18,4 +19,5 @@ export {
   GbBuyer,
   GbBusiness,
   Applications,
+  GBChat,
 };

@@ -56,7 +56,7 @@ const GBServices = () => {
             <h3 className='font-bold text-3xl text-center mt-2'>Alaket</h3>
           </div>
         </NavLink>
-        <NavLink to='#' className='min-h-[224px] hover:opacity-70 hover:bg-opacity-70 duration-200 flex justify-center items-center'>
+        <NavLink to='/gb-chat' className='min-h-[224px] hover:opacity-70 hover:bg-opacity-70 duration-200 flex justify-center items-center'>
           <div>
             <img className='mx-auto' src={gbChat} alt='*' />
             <h3 className='font-bold text-3xl text-center mt-2'>GB-Chat</h3>

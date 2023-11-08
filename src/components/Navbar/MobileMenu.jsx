@@ -20,7 +20,6 @@ import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
 import sendBox from './../../assets/icons/mobile-menu/send-box.svg';
 import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
-import gbChat from './../../assets/icons/gb-chat.svg';
 import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
 
@@ -134,16 +133,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   >
                     <img className='w-5' src={applicationIcon} alt='*' />
                     <span className='pl-2'>Заявки на покупку</span>
-                  </NavLink>
-                </li>
-                <li className='flex items-center'>
-                  <NavLink
-                    onClick={() => onClose()}
-                    to='/profile/gb-chat'
-                    className='text-base font-medium opacity-70 flex items-center'
-                  >
-                    <img className='w-5' src={gbChat} alt='*' />
-                    <span className='pl-2'>GB-Чат</span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>

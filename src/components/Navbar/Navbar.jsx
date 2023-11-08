@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import MobileMenu from './MobileMenu';
 import logo from './../../assets/images/header-logo.svg';
 import userImg from './../../assets/icons/user.svg';
+import chat from './../../assets/icons/messages.svg';
 import notification from './../../assets/icons/notification.svg';
-import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  
+
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -73,14 +74,6 @@ const Navbar = () => {
               alt='*'
             />
           </NavLink>
-          <div
-            onClick={() => setShowSidebar(true)}
-            className='flex flex-col w-9 cursor-pointer md:hidden'
-          >
-            <span className='w-full h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
-            <span className='w-full h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
-            <span className='w-full h-[3px] rounded-sm bg-colYellow my-[3px]'></span>
-          </div>
           <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white navbar'>
             <li>
               <NavLink to='/'>Главная</NavLink>
@@ -95,27 +88,46 @@ const Navbar = () => {
               <NavLink to='applications'>Отправка</NavLink>
             </li>
           </ul>
-          {user ? (
-            <ul className='hidden md:flex items-center justify-end space-x-4'>
-              <li>
-                <NavLink to='profile/personal-data'>
-                  <img src={userImg} alt='*' />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='profile/notifications'>
-                  <img src={notification} alt='*' />
-                </NavLink>
-              </li>
-            </ul>
-          ) : (
-            <button
-              onClick={() => setLoginModal(true)}
-              className='hidden md:block bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
+          <div className='flex justify-end items-center'>
+            {user ? (
+              <ul className='flex items-center justify-end space-x-4'>
+                <li>
+                  <NavLink to='/gb-chat'>
+                    <img className='w-[27px] md:w-6' src={chat} alt='*' />
+                  </NavLink>
+                </li>
+                <li className='hidden sm:block'>
+                  <NavLink to='profile/notifications'>
+                    <img
+                      className='w-[27px] md:w-6'
+                      src={notification}
+                      alt='*'
+                    />
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to='profile/personal-data'>
+                    <img className='w-[27px] md:w-6' src={userImg} alt='*' />
+                  </NavLink>
+                </li>
+              </ul>
+            ) : (
+              <button
+                onClick={() => setLoginModal(true)}
+                className='hidden md:block bg-colYellow w-24 h-10 rounded-lg hover:bg-colYellowHover duration-100'
+              >
+                Войти
+              </button>
+            )}
+            <div
+              onClick={() => setShowSidebar(true)}
+              className='flex flex-col space-y-[7px] w-8 cursor-pointer md:hidden ml-5'
             >
-              Войти
-            </button>
-          )}
+              <span className='w-full h-[2.5px] rounded-md bg-colYellow'></span>
+              <span className='w-full h-[2.5px] rounded-md bg-colYellow'></span>
+              <span className='w-full h-[2.5px] rounded-md bg-colYellow'></span>
+            </div>
+          </div>
         </div>
       </header>
       {loginModal ? (

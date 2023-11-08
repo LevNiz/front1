@@ -39,7 +39,7 @@
     @apply max-w-[1360px] w-full px-4 mx-auto;
   }
   .content {
-    @apply max-w-[1280px] w-full px-4 mx-auto;
+    @apply max-w-[1280px] w-full px-3 mm:px-4 mx-auto;
   }
 }
 
