@@ -67,18 +67,30 @@ const Navbar = ({ hasNotification }) => {
               <NavLink to='/'>Главная</NavLink>
             </li>
             <li>
-              <NavLink to='tracking'>Трекинг посылок</NavLink>
+              <NavLink to='/tracking'>Трекинг посылок</NavLink>
             </li>
             <li>
-              <NavLink to='depots'>Наши склады</NavLink>
+              <NavLink to='/depots'>Наши склады</NavLink>
             </li>
             <li>
-              <NavLink to='applications'>Отправка</NavLink>
+              <NavLink to='/alaket'>Алакет</NavLink>
+            </li>
+            <li>
+              <NavLink to='/applications'>Отправка</NavLink>
             </li>
           </ul>
           <div className='flex justify-end items-center'>
             {user ? (
               <ul className='flex items-center justify-end space-x-4'>
+                <li className='hidden sm:block'>
+                  <NavLink to='profile/notifications'>
+                    <img
+                      className='w-[27px] md:w-6'
+                      src={notification}
+                      alt='*'
+                    />
+                  </NavLink>
+                </li>
                 <li className='relative'>
                   <NavLink to='/gb-chat'>
                     <img className='w-[27px] md:w-6' src={chat} alt='*' />
@@ -88,15 +100,6 @@ const Navbar = ({ hasNotification }) => {
                       hasNotification ? 'block' : 'hidden'
                     } absolute top-0 left-0 bg-red-500 h-2 w-2 rounded-full`}
                   ></span> */}
-                </li>
-                <li className='hidden sm:block'>
-                  <NavLink to='profile/notifications'>
-                    <img
-                      className='w-[27px] md:w-6'
-                      src={notification}
-                      alt='*'
-                    />
-                  </NavLink>
                 </li>
                 <li className='relative'>
                   <NavLink to='profile/personal-data'>

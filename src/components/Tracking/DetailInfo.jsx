@@ -1,7 +1,7 @@
 import nounBox from './../../assets/icons/noun-box.svg';
 import mapImg from './../../assets/images/map.png';
 import sender from './../../assets/icons/sender.svg';
-import receiver from './../../assets/icons/receiver.svg';
+import receiver from './../../assets/icons/location3.svg';
 import cargo from './../../assets/icons/cargo.svg';
 import dollar from './../../assets/icons/dollar.svg';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import { fetchParcelDetail, fetchSaveParcel } from '../../api/parcels';
 import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
-import { paymentStatus } from '../../constants/statusData';
+import { parcelStatus, paymentStatus } from '../../constants/statusData';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const DetailInfo = (props) => {
@@ -116,17 +116,9 @@ const DetailInfo = (props) => {
                       </div>
                       <div className='w-[2px] h-full bg-colYellow'></div>
                     </div>
-                    <div className='ml-4'>
-                      <h4 className='text-sm font-medium'>
-                        {parcelDetail?.status == 'done'
-                          ? 'Готово'
-                          : parcelDetail?.status == 'on_way'
-                          ? 'В пути'
-                          : parcelDetail?.status == 'arrived'
-                          ? 'Получено'
-                          : parcelDetail?.status == 'created'
-                          ? 'Создан'
-                          : 'Не указано'}
+                    <div className={`${parcelStatus[parcelDetail?.status]?.statusStyle} px-4 py-1 rounded-lg ml-4`}>
+                      <h4 className='text-sm'>
+                        {parcelStatus[parcelDetail?.status]?.name || 'Не указан'}
                       </h4>
                     </div>
                   </div>
@@ -195,14 +187,14 @@ const DetailInfo = (props) => {
                         Дополнительная плата
                       </h4>
                       <p className='text-xs mb-2'>
-                        {parcelDetail?.costPerKg} $
+                        {parcelDetail?.extraCost} $
                       </p>
                     </div>
                   </div>
                   <div className='flex justify-between items-center my-5'>
                     <h4 className='font-medium'>Итого</h4>
                     <span className='font-medium'>
-                      {parcelDetail?.extraCost} $
+                      {parcelDetail?.totalCost} $
                     </span>
                   </div>
                   <div className='flex justify-end mt-2'>
