@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { GBFranchiseForm, GBFranchiseItem } from '../../components';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import { GBFranchiseForm, GBFranchiseItem } from '../../components';
 
-const GBFranchise = () => {
+const GbFranchise = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -15,4 +15,4 @@ const GBFranchise = () => {
   );
 };
 
-export default GBFranchise;
+export default GbFranchise;
