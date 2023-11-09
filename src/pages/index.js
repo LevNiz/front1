@@ -8,7 +8,6 @@ import GbBuyer from './GB-Buyer/GbBuyer';
 import GBBusiness from './GBBusiness/GBBusiness';
 import Applications from './Applications/Applications';
 import GBChat from './GBChat/GBChat';
-import GbFranchise from './GBFranchise/GbFranchise';
 
 export {
   Tracking,
@@ -21,5 +20,4 @@ export {
   GBBusiness,
   Applications,
   GBChat,
-  GbFranchise,
 };

@@ -44,8 +44,8 @@ import {
   GBBusiness,
   Applications,
   GBChat,
-  GbFranchise,
 } from '../pages';
+import GBFranchise from '../pages/GBFranchise/GbFranchise';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -109,7 +109,7 @@ export const router = createBrowserRouter(
             <Route path='calculate' element={<CalcDelivery />} />
           </Route>
           <Route path='gb-business' element={<GBBusiness />} />
-          <Route path='gb-franchise' element={<GbFranchise />} />
+          <Route path='gb-franchise' element={<GBFranchise />} />
         </Route>
         <Route path='*' element={<Home />} />
       </Route>
