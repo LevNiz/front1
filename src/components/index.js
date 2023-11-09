@@ -44,6 +44,8 @@ import TopUpWallet from './Profile/MyWallet/TopUpWallet';
 import GBServices from './Home/GBServices';
 import GBChatItem from './GBChat/GBChatItem';
 import GBChatMessages from './GBChat/GBChatMessages';
+import GBFranchiseItem from './GBFranchise/GBFranchiseItem';
+import GBFranchiseForm from './GBFranchise/GBFranchiseForm';
 
 export {
   Layout,
@@ -92,4 +94,6 @@ export {
   TopUpWallet,
   GBServices,
   GBChatMessages,
+  GBFranchiseForm,
+  GBFranchiseItem,
 };

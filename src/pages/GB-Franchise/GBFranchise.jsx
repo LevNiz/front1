@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
-import { GBBusinessForm, GBBusinessItem } from '../../components';
+import { GBFranchiseForm, GBFranchiseItem } from '../../components';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
-const GBBusiness = () => {
+const GBFranchise = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
 
   return (
     <div className='pt-[70px]'>
-      <GBBusinessItem />
-      <GBBusinessForm />
+      <GBFranchiseItem />
+      <GBFranchiseForm />
     </div>
   );
 };
 
-export default GBBusiness;
+export default GBFranchise;

@@ -3,19 +3,20 @@ import iconamoon from '../../assets/icons/iconamoon.svg';
 
 const GBBusinessItem = () => {
   return (
-    <>
-      <div className='!bg-[#07AFE3] sm:min-h-[240px] px-4 md:px-0 relative py-8 sm:py-14'>
+    <div className='mm:content pt-10 mm:pt-16'>
+      <div className='!bg-[#07AFE3] px-4 md:px-6 py-8 sm:py-10 relative'>
         <img src={squire} className='absolute top-0 right-0 z-[1]' alt='*' />
-        <h3 className='text-xl mm:text-3xl text-white leading-snug max-w-3xl mx-auto z-[2] relative'>
+        <h3 className='text-xl mm:text-2xl text-white leading-snug max-w-5xl z-[2] relative'>
           Уважаемые импортеры и экспортеры, наша команда поможет вам в решении
           задач по импорту/экспорту товаров из любых стран и континентов.{' '}
         </h3>
       </div>
       <div className='content py-8'>
-        <h2 className='text-xl md:text-2xl font-medium my-3 text-center'>
-          К Вашим услугам доставка любыми видами транспорта:
+        <h2 className='text-xl md:text-2xl font-medium mt-3 mb-5'>
+          Начните зарабатывать на международной доставке и продаже брендовых
+          товаров.
         </h2>
-        <div className='grid md:grid-cols-2 gap-5 md:p-5'>
+        <div className='flex flex-col space-y-4'>
           <div className='flex items-start'>
             <img src={iconamoon} alt='*' />
             <p className='ml-2 sm:text-lg sm:leading-6'>
@@ -25,7 +26,9 @@ const GBBusinessItem = () => {
           </div>
           <div className='flex items-start'>
             <img src={iconamoon} alt='*' />
-            <p className='ml-2 sm:text-lg sm:leading-6'>Доставка автотранспортом;</p>
+            <p className='ml-2 sm:text-lg sm:leading-6'>
+              Доставка автотранспортом;
+            </p>
           </div>
           <div className='flex items-start'>
             <img src={iconamoon} alt='*' />
@@ -36,10 +39,10 @@ const GBBusinessItem = () => {
             <p className='ml-2 sm:text-lg sm:leading-6'>Авиа доставка</p>
           </div>
         </div>
-        <h2 className='text-xl md:text-2xl font-medium mt-10 mb-3 text-center'>
+        <h2 className='text-xl md:text-2xl font-medium mt-10 mb-3'>
           Для ваших задач мы предлагаем:
         </h2>
-        <div className='grid mm:grid-cols-2 md:grid-cols-3 gap-5 md:p-5'>
+        <div className='flex flex-col space-y-3 max-w-5xl'>
           <div className='flex items-start'>
             <span className='min-w-[12px] h-3 mt-[5px] bg-[#07AFE3] rounded-full mr-2'></span>
             <p>
@@ -83,13 +86,13 @@ const GBBusinessItem = () => {
             </p>
           </div>
         </div>
-        <div className='w-full mt-8 sm:max-w-md bg-[#FFA629] text-center mx-auto rounded-lg p-6 text-white'>
+        <div className='w-full mt-8 text-lg sm:text-xl bg-[#FFA629] text-center mx-auto rounded-lg px-6 py-5 text-white'>
           Для консультации по вашим грузам просим связываться с нашими
           менеджерами любым удобным для Вас способом, мы оперативно отметим и
           сделаем все необходимые расчеты.
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

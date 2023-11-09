@@ -41,9 +41,10 @@ import {
   Depots,
   Alaket,
   GbBuyer,
-  GbBusiness,
+  GBBusiness,
   Applications,
   GBChat,
+  GBFranchise,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -72,9 +73,6 @@ export const router = createBrowserRouter(
         <Route path='gb-buyer'>
           <Route index element={<GbBuyer />} />
           <Route path=':id' element={<BGBuyerDetail />} />
-        </Route>
-        <Route path='gb-business'>
-          <Route index element={<GbBusiness />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>
@@ -110,6 +108,8 @@ export const router = createBrowserRouter(
             <Route path='send-application' element={<SendApplication />} />
             <Route path='calculate' element={<CalcDelivery />} />
           </Route>
+          <Route path='gb-business' element={<GBBusiness />} />
+          <Route path='gb-franchise' element={<GBFranchise />} />
         </Route>
         <Route path='*' element={<Home />} />
       </Route>
