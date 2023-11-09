@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logOutFetch } from '../../api/user';
 import Modal from '../../helpers/Modals/Modal';
@@ -16,6 +16,7 @@ import ordersIcon from './../../assets/icons/orders.svg';
 const ProfileSidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { hasNotification } = useOutletContext();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -95,16 +96,29 @@ const ProfileSidebar = () => {
               className='flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={location} alt='*' />
-              <span className='text-lg'>Сохранённые адреса</span>
+              <span className='text-lg leading-[1.45rem]'>
+                Сохранённые адреса
+              </span>
             </NavLink>
           </li>
           <li>
             <NavLink
               to='tech-chat'
-              className='flex items-center p-2 rounded-lg'
+              className='flex justify-between items-center p-2 rounded-lg'
             >
-              <img className='pr-3' src={chat} alt='*' />
-              <span className='text-lg'>Чат с поддержкой</span>
+              <div className='flex items-center'>
+                <img className='pr-3' src={chat} alt='*' />
+                <span className='text-lg leading-[1.45rem]'>
+                  Чат с поддержкой
+                </span>
+              </div>
+              <span
+                className={`${
+                  hasNotification > 0 ? 'block' : 'hidden'
+                } bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-md px-1`}
+              >
+                {hasNotification}
+              </span>
             </NavLink>
           </li>
           <li>
