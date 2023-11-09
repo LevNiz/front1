@@ -5,10 +5,10 @@ import Auth from './Auth/Auth';
 import Profile from './Profile/Profile';
 import Alaket from './Alaket/Alaket';
 import GbBuyer from './GB-Buyer/GbBuyer';
-import GBBusiness from './GB-Business/GbBusiness';
+import GBBusiness from './GB-Business/GBBusiness';
 import Applications from './Applications/Applications';
 import GBChat from './GBChat/GBChat';
-import GBFranchise from './GB-Franchise/GbFranchise';
+import GBFranchise from './GB-Franchise/GBFranchise';
 
 export {
   Tracking,
