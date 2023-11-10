@@ -6,7 +6,7 @@ import { SupportChatsNewMessage } from '../../api/chats';
 import { useSelector } from 'react-redux';
 
 const Layout = () => {
-  const [hasNotification, setHasNotification] = useState([]);
+  const [hasNotification, setHasNotification] = useState(0);
 
   const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();

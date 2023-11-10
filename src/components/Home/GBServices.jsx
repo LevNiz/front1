@@ -79,8 +79,7 @@ const GBServices = () => {
           </div>
         </NavLink>
         <NavLink
-          to='#'
-          onClick={() => alert('В процессе разработки!')}
+          to='/alaket'
           className='min-h-[160px] ss:min-h-[180px] sm:min-h-[224px] hover:opacity-70 hover:bg-opacity-70 duration-200 flex justify-center items-center bg-alaket'
         >
           <div>
