@@ -32,6 +32,8 @@ import {
   UpdateBuyRequest,
   TopUpWallet,
   GBChatMessages,
+  AlaketDetail,
+  AlaketNew,
 } from '../components';
 import {
   Auth,
@@ -102,7 +104,11 @@ export const router = createBrowserRouter(
             <Route path='t/:id' element={<GBChatMessages />} />
             <Route />
           </Route>
-          <Route path='alaket' element={<Alaket />} />
+          <Route path='alaket'>
+            <Route index element={<Alaket />} />
+            <Route path=':id' element={<AlaketDetail />} />
+            <Route path='new' element={<AlaketNew />} />
+          </Route>
           <Route path='applications'>
             <Route index element={<Applications />} />
             <Route path='send-application' element={<SendApplication />} />

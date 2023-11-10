@@ -47,6 +47,8 @@ import GBChatMessages from './GBChat/GBChatMessages';
 import GBFranchiseItem from './GBFranchise/GBFranchiseItem';
 import GBFranchiseForm from './GBFranchise/GBFranchiseForm';
 import AlaketItem from './Alaket/AlaketItem';
+import AlaketNew from './Alaket/AlaketNew';
+import AlaketDetail from './Alaket/AlaketDetail';
 
 export {
   Layout,
@@ -98,4 +100,6 @@ export {
   GBFranchiseForm,
   GBFranchiseItem,
   AlaketItem,
+  AlaketNew,
+  AlaketDetail,
 };
