@@ -67,9 +67,7 @@ export const SupportChatsNewMessage = (userID, callback) => {
     callback(docData);
   });
 
-  return () => {
-    querySnap();
-  };
+  return querySnap
 };
 
 export const sendMessage = async (e, inputVal, userData, imgLink) => {
