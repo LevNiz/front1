@@ -16,15 +16,21 @@ const AlaketItem = () => {
     })();
   }, []);
 
+  const lastAlaketDatas = alaket?.slice()?.sort((a, b) => {
+    const dateA = new Date(a.dateCreated);
+    const dateB = new Date(b.dateCreated);
+    return dateB - dateA;
+  });
+
   return (
     <>
       {loading ? (
         <ContentLoading extraStyle='480px' />
       ) : error ? (
         <ErrorServer />
-      ) : alaket?.length ? (
+      ) : lastAlaketDatas?.length ? (
         <div className='grid grid-cols-4 gap-8 mt-10'>
-          {alaket?.map((el) => (
+          {lastAlaketDatas?.map((el) => (
             <AlaketCard key={el?.id} el={el} />
           ))}
         </div>

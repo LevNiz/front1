@@ -71,7 +71,6 @@ const GBFranchiseForm = () => {
               className='hidden'
               type='checkbox'
               id='checkbox'
-              placeholder='Адрес проживания'
               {...register('privacyPolicy', {
                 required:
                   'Обязательное согласие с политикой конфиденциальности!',
