@@ -4,18 +4,31 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { fetchUser } from '../../../api/client';
 
 const AddBuyRequest = () => {
   const { userID } = useSelector((state) => state?.user);
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const {
     handleSubmit,
     formState: { errors },
     register,
-  } = useForm({ mode: 'onChange' });
+  } = useForm({
+    defaultValues: async () => {
+      setIsLoading(true);
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setIsLoading(false);
+        return {
+          name: data?.fullname,
+          phone: data?.phone,
+        };
+      }
+    },
+  });
 
   const onSubmit = async (data) => {
     setIsLoading(true);
