@@ -29,7 +29,7 @@ const AlaketItem = () => {
       ) : error ? (
         <ErrorServer />
       ) : lastAlaketDatas?.length ? (
-        <div className='grid grid-cols-4 gap-8 mt-10'>
+        <div className='grid mm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-5 lg:gap-8 mt-10'>
           {lastAlaketDatas?.map((el) => (
             <AlaketCard key={el?.id} el={el} />
           ))}

@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FormatDate } from '../../helpers/FormatDate/formatDate';
+import noImg from '../../assets/images/no-ava.jpeg';
 
 const GBChatSidebar = ({ chat, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
@@ -15,6 +16,10 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
         <img
           className='w-full h-full object-cover rounded-full p-[2px]'
           src={chat?.data?.lastMessageReceiverAvatar}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = noImg;
+          }}
           alt='*'
         />
       </div>

@@ -11,7 +11,7 @@ const AlaketCard = ({ el }) => {
       to={`${el?.id}`}
       className='shadow-[0_0_24px_#d3d1d1] rounded-lg p-4 mb-6'
     >
-      <div className='w-[97%] -mt-9 mx-auto h-40 overflow-hidden rounded-lg bg-gray-100 border-2 border-[#f2efef]'>
+      <div className='w-[97%] -mt-9 mx-auto h-48 ss:h-56 sm:h-64 mm:h-40 overflow-hidden rounded-lg bg-gray-100 border-2 border-[#f2efef]'>
         <img
           className='w-full h-full object-cover'
           src={el?.photo}
