@@ -10,6 +10,7 @@ import chatImg from '../../../assets/images/chat.png';
 import tick from '../../../assets/icons/read.png';
 import doubleTick from '../../../assets/icons/read2.png';
 import clipFile from '../../../assets/icons/clip-file.svg';
+import noImg from '../../../assets/images/no-image.svg';
 
 const TechChat = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -108,6 +109,10 @@ const TechChat = () => {
                         <img
                           className='w-full h-full object-cover cursor-zoom-in rounded-l-xl rounded-tr-xl'
                           src={message?.data?.image}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = noImg;
+                          }}
                           alt='*'
                           onClick={(e) => {
                             setOpenImg(true);

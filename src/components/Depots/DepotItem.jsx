@@ -13,7 +13,11 @@ const DepotItem = ({ el }) => {
         <div className='h-[220px] ss:h-[160px] sm:h-[220px] lg:h-[280px] overflow-hidden bg-colBgGray'>
           <img
             className='w-full h-full object-cover'
-            src={el?.images?.length ? el?.images[0] : noImg}
+            src={el?.images[0]}
+            onError={(e) => {
+              e.target.onError = null;
+              e.target.src = noImg;
+            }}
             alt='*'
           />
         </div>
@@ -22,6 +26,10 @@ const DepotItem = ({ el }) => {
             <img
               className='w-full h-full object-cover'
               src={el?.country?.icon}
+              onError={(e) => {
+                e.target.onError = null;
+                e.target.src = noImg;
+              }}
               alt='*'
             />
           </div>

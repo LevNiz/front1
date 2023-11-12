@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchBuyersDetail } from '../../api/buyer';
 import { ContentLoading } from '../../helpers/Loader/Loader';
-import noImg from '../../assets/images/no-ava.jpeg';
+import noAva from '../../assets/images/no-ava.jpeg';
 import instaTick from '../../assets/icons/insta-tick.png';
 import star from '../../assets/icons/star.png';
 import web from '../../assets/icons/application.png';
@@ -36,7 +36,11 @@ const BGBuyerDetail = () => {
             <div className='w-36 min-w-[144px] h-36 rounded-full overflow-hidden p-[2px] border-2 border-colYellow mx-auto'>
               <img
                 className='w-full h-full object-cover rounded-full'
-                src={buyerItem?.avatar ? buyerItem?.avatar : noImg}
+                src={buyerItem?.avatar}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = noAva;
+                }}
                 alt='*'
               />
             </div>

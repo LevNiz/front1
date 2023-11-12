@@ -57,7 +57,11 @@ const DepotDetail = () => {
             <div className='w-full md:w-3/6 xl:w-2/5 mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0'>
               <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
                 <img
-                  src={depotItem?.images == null ? noImg : mainImg}
+                  src={mainImg}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = noImg;
+                  }}
                   alt='*'
                   className='w-full h-full object-cover'
                 />
@@ -82,6 +86,10 @@ const DepotDetail = () => {
                       >
                         <img
                           src={el}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = noImg;
+                          }}
                           alt='*'
                           className='w-full h-full object-cover'
                         />
