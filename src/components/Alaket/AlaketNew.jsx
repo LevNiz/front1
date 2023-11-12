@@ -204,7 +204,7 @@ const AlaketNew = () => {
             <div>
               <p className='font-medium mb-2'>Когда?</p>
               <input
-                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none bg-transparent'
                 placeholder='Выберите дату'
                 type='date'
                 {...register('date')}
@@ -262,7 +262,7 @@ const AlaketNew = () => {
                   />
                   <label
                     htmlFor='checkbox'
-                    className='text-sm flex cursor-pointer mm:items-center'
+                    className='text-sm flex cursor-pointer items-center'
                   >
                     <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
                       {negotiable ? (
