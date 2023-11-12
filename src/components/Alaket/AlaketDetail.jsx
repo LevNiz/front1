@@ -5,7 +5,6 @@ import { ContentLoading } from '../../helpers/Loader/Loader';
 import noImg from '../../assets/images/no-image.svg';
 import noAva from '../../assets/images/no-ava.jpeg';
 import location from '../../assets/icons/location3.svg';
-import dollarIcon from '../../assets/icons/dollarAlaket.svg';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 
@@ -47,25 +46,20 @@ const AlaketDetail = () => {
           </div>
           <div className='md:max-w-xl w-full pt-5 flex flex-col justify-between md:min-h-[512px]'>
             <div>
-              <div className='flex justify-between items-center'>
-                <div className='flex items-center'>
-                  <div className='min-w-[40px] w-10 h-10 rounded-full border border-gray-400 overflow-hidden p-[2px] mr-2'>
-                    <img
-                      className='w-full h-full rounded-full object-cover'
-                      src={alaket?.client?.avatar}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = noAva;
-                      }}
-                      alt='*'
-                    />
-                  </div>
-                  <span className='font-medium leading-4'>
-                    {alaket?.client?.fullname}
-                  </span>
+              <div className='flex items-center'>
+                <div className='min-w-[40px] w-10 h-10 rounded-full border border-gray-400 overflow-hidden p-[2px] mr-2'>
+                  <img
+                    className='w-full h-full rounded-full object-cover'
+                    src={alaket?.client?.avatar}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = noAva;
+                    }}
+                    alt='*'
+                  />
                 </div>
-                <span className='text-xs sm:text-sm opacity-60 ml-3 min-w-[71px]'>
-                  {alaket?.date || '-- --'}
+                <span className='font-medium leading-4'>
+                  {alaket?.client?.fullname}
                 </span>
               </div>
               <h4 className='font-medium text-lg sm:text-2xl mt-3 sm:mt-5 italic'>
@@ -96,14 +90,20 @@ const AlaketDetail = () => {
                 </div>
               </div>
               <div className='flex items-center py-2'>
-                <img src={dollarIcon} alt='*' />
-                <span className='text-lg ml-2 font-medium'>
+                <span className='opacity-60 mr-2'>Цена:</span>
+                <span className='font-medium'>
                   {alaket?.cost === 0 ? 'Договорная' : alaket?.cost}
                 </span>
               </div>
+              <div className='flex mb-2'>
+                <span className='opacity-60 mr-2'>Дата:</span>
+                <p className='font-medium'>{alaket?.date || 'Не указан'}</p>
+              </div>
               <div className='flex'>
-                <span className='text-sm opacity-60 mr-2'>Описание:</span>
-                <p className='text-sm'>{alaket?.description || 'Не указано'}</p>
+                <span className='opacity-60 mr-2'>Описание:</span>
+                <p className='font-medium'>
+                  {alaket?.description || 'Не указано'}
+                </p>
               </div>
             </div>
             <button
