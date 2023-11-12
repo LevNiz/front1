@@ -56,7 +56,7 @@ const AlaketNew = () => {
 
   return (
     <div className='w-full content py-20'>
-      <h3 className='text-lg sm:text-2xl pt-8 pb-6 font-medium'>
+      <h3 className='text-center mm:text-left text-2xl pt-8 pb-6 font-medium'>
         Опубликовать
       </h3>
       {isLoading ? (
@@ -70,7 +70,7 @@ const AlaketNew = () => {
                 alaketType === 'alaketem'
                   ? 'border-gray-300 bg-colYellow'
                   : 'border-gray-300'
-              } border w-full rounded-tl-md rounded-bl-md max-w-[180px] py-2 text-center border-r-0 cursor-pointer`}
+              } border w-full rounded-tl-md rounded-bl-md mm:max-w-[180px] py-2 text-center border-r-0 cursor-pointer`}
             >
               <input
                 className='hidden'
@@ -87,7 +87,7 @@ const AlaketNew = () => {
                 alaketType === 'alaket'
                   ? 'border-gray-300 bg-colYellow'
                   : 'border-gray-300'
-              } border max-w-[180px] w-full rounded-tr-md rounded-br-md py-2 text-center cursor-pointer`}
+              } border mm:max-w-[180px] w-full rounded-tr-md rounded-br-md py-2 text-center cursor-pointer`}
             >
               <input
                 className='hidden'
@@ -99,7 +99,7 @@ const AlaketNew = () => {
               Передаю
             </label>
           </div>
-          <div className='grid grid-cols-2 gap-6'>
+          <div className='grid mm:grid-cols-2 gap-6'>
             <div>
               <p className='font-medium mb-2'>Откуда?</p>
               <Controller
@@ -324,7 +324,7 @@ const AlaketNew = () => {
                 </div>
               </label>
             </div>
-            <div className='max-w-[116px] max-h-[116px] mt-8 flex justify-center items-center bg-gray-200 rounded-md overflow-hidden'>
+            <div className='max-w-[280px] mm:max-w-[116px] max-h-[280px] mm:max-h-[116px] mm:mt-8 flex justify-center items-center bg-gray-200 rounded-md overflow-hidden'>
               <img
                 className='w-full h-full object-contain'
                 src={photo ? URL.createObjectURL(photo) : noImg}
@@ -334,7 +334,7 @@ const AlaketNew = () => {
           </div>
           <button
             type='submit'
-            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-[280px] w-full'
+            className='mt-10 font-medium hover:opacity-80 p-4 mm:p-3 rounded-lg bg-black text-white duration-150 mm:max-w-[280px] w-full'
           >
             Опубликовать
           </button>
