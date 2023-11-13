@@ -1,11 +1,14 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FormatDate } from '../../helpers/FormatDate/formatDate';
+
 import noImg from '../../assets/images/no-ava.jpeg';
+import tick from '../../assets/icons/read.png';
+import doubleTick from '../../assets/icons/read2.png';
 
 const GBChatSidebar = ({ chat, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
-
+  
   return (
     <NavLink
       to={`t/${chat?.chatId}`}
@@ -26,9 +29,7 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
       <div className='ml-2 w-full'>
         <div className='flex justify-between items-center'>
           <h4 className='font-medium line-clamp-1 break-all text-sm md:text-base mm:text-xs'>
-            {chat?.data?.lastMessageSender === `${userID}`
-              ? 'Вы'
-              : chat?.data?.lastMessageSenderName}
+            {chat?.data?.lastMessageReceiverName ?? '-'}
           </h4>
           <span className='pl-1 text-[10px] leading-[10px] lg:leading-[14px] lg:text-xs text-right min-w-fit'>
             {chat?.data?.lastMessageTime ? (
@@ -38,9 +39,22 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
             )}
           </span>
         </div>
-        <p className='text-sm mm:text-xs md:text-sm opacity-70 line-clamp-1 break-all'>
-          {chat?.data?.lastMessage}
-        </p>
+        <div className='flex justify-between items-center'>
+          <p className='text-sm mm:text-xs md:text-sm opacity-70 line-clamp-1 break-all'>
+            {chat?.data?.lastMessage}
+          </p>
+          {chat?.data?.lastMessageSender === `${userID}` ? (
+            <>
+              {chat?.data?.lastMessageRead ? (
+                <img className='w-[14px] ml-1' src={doubleTick} alt='*' />
+              ) : (
+                <img className='w-[14px] ml-1' src={tick} alt='*' />
+              )}
+            </>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     </NavLink>
   );

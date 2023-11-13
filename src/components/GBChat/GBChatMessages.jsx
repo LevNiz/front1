@@ -4,24 +4,30 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { FormatDate } from '../../helpers/FormatDate/formatDate';
-import { fetchChatMessages } from '../../api/gbchat';
+import { fetchChatMessages, sendMessage } from '../../api/gbchat';
 
 import chatBg from '../../assets/images/chat-bg.jpeg';
 import chatImg from '../../assets/images/chat.png';
+import noImg from '../../assets/images/no-image.svg';
+import noAva from '../../assets/images/no-ava.jpeg';
 import back from '../../assets/icons/arrow-left.svg';
 import tick from '../../assets/icons/read.png';
 import doubleTick from '../../assets/icons/read2.png';
+import { fetchUser } from '../../api/client';
 
-const GBChatMessages = ({ setChatContent }) => {
+const GBChatMessages = ({ chats, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState([]);
+  const [userData, setUserData] = useState({});
   const [inputVal, setInputVal] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const messagesEndRef = useRef();
   const { id } = useParams();
+
+  const chatData = chats.find((chat) => chat?.chatId === id)?.data || {};
 
   const scrollToBottom = () => {
     const scrollable = messagesEndRef.current;
@@ -36,8 +42,17 @@ const GBChatMessages = ({ setChatContent }) => {
   useEffect(scrollToBottom, [messages]);
 
   useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setUserData(data);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     setIsLoading(true);
-    const fetchChats = fetchChatMessages(id, (messagesData) => {
+    const fetchChats = fetchChatMessages(id, userID, (messagesData) => {
       setMessages(messagesData);
       setIsLoading(false);
     });
@@ -46,6 +61,11 @@ const GBChatMessages = ({ setChatContent }) => {
       fetchChats();
     };
   }, [id]);
+
+  const handleSendMessage = async (e) => {
+    await sendMessage(e, inputVal, userData, chatData);
+    setInputVal('');
+  };
 
   return (
     <div className='relative w-full'>
@@ -63,12 +83,18 @@ const GBChatMessages = ({ setChatContent }) => {
           <div className='min-w-[48px] border border-gray-400 w-12 h-12 rounded-full overflow-hidden mr-3'>
             <img
               className='object-cover w-full h-full rounded-[50%]'
-              src='https://st3.depositphotos.com/3431221/13621/v/450/depositphotos_136216036-stock-illustration-man-avatar-icon-hipster-character.jpg'
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = noAva;
+              }}
+              src={chatData?.lastMessageReceiverAvatar}
               alt='*'
             />
           </div>
           <div className='flex flex-col'>
-            <h4 className='font-medium'>GivBox Support</h4>
+            <h4 className='font-medium'>
+              {chatData?.lastMessageReceiverName || '-'}
+            </h4>
           </div>
         </div>
         <div
@@ -78,46 +104,93 @@ const GBChatMessages = ({ setChatContent }) => {
           {isLoading ? (
             <ContentLoading extraStyle='100%' />
           ) : messages?.length ? (
-            messages?.map((message) => (
-              <div
-                key={message.id}
-                className={`${
-                  message?.data?.senderUid === `${userID}`
-                    ? 'ml-auto justify-end'
-                    : ''
-                } w-4/5 flex`}
-              >
-                <div className='text-right w-fit flex flex-col'>
-                  <p
-                    className={`${
-                      message?.data?.senderUid === `${userID}`
-                        ? 'bg-green-200 rounded-l-xl rounded-tr-xl ml-auto'
-                        : 'bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1'
-                    }  text-left px-3 py-1 mb-1 text-[12px] mm:text-sm break-all w-fit`}
-                  >
-                    {message?.data?.text}
-                  </p>
-                  <span
-                    className={`${
-                      message?.data?.senderUid === `${userID}`
-                        ? 'mr-3'
-                        : 'ml-3 text-left'
-                    } mb-2 text-[8px] mm:text-[12px] text-gray-500 flex justify-end`}
-                  >
-                    {message?.data?.time ? (
-                      <FormatDate dateFormat={message?.data?.time} />
+            messages?.map((message) =>
+              message?.data?.senderUid === `${userID}` ? (
+                <div
+                  key={message.id}
+                  className='ml-auto justify-end w-4/5 flex my-1'
+                >
+                  <div className='text-right w-fit flex flex-col'>
+                    <p
+                      className={`bg-green-200 rounded-l-xl rounded-tr-xl ml-auto ${
+                        message?.data?.text ? 'px-3 py-1 mb-1' : ''
+                      } text-[12px] mm:text-sm break-all w-fit flex items-end`}
+                    >
+                      {message?.data?.text}
+                    </p>
+                    {message?.data?.image ? (
+                      <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden mb-1 bg-green-200 p-1'>
+                        <img
+                          className='w-full h-full object-cover cursor-zoom-in rounded-l-xl rounded-tr-xl'
+                          src={message?.data?.image}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = noImg;
+                          }}
+                          alt='*'
+                          // onClick={(e) => {
+                          //   setOpenImg(true);
+                          //   setClickedImageUrl(e.target.getAttribute('src'));
+                          // }}
+                        />
+                      </div>
                     ) : (
-                      '-- --'
+                      ''
                     )}
-                    {message?.data?.read ? (
-                      <img className='w-[14px] ml-1' src={doubleTick} alt='*' />
-                    ) : (
-                      <img className='w-[14px] ml-1' src={tick} alt='*' />
-                    )}
-                  </span>
+                    <span className='mr-3 mb-2 text-[8px] mm:text-[10px] text-gray-500 flex justify-end'>
+                      {message?.data?.time ? (
+                        <FormatDate dateFormat={message?.data?.time} />
+                      ) : (
+                        '-- --'
+                      )}
+                      {message?.data?.read ? (
+                        <img
+                          className='w-[14px] ml-1'
+                          src={doubleTick}
+                          alt='*'
+                        />
+                      ) : (
+                        <img className='w-[14px] ml-1' src={tick} alt='*' />
+                      )}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))
+              ) : (
+                <div key={message.id} className='w-4/5 flex my-1'>
+                  <div className='text-right w-fit flex flex-col'>
+                    <p
+                      className={`bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1 text-left ${
+                        message?.data?.text ? 'px-3 py-1 mb-1' : ''
+                      } text-[12px] mm:text-sm break-all w-fit flex items-end`}
+                    >
+                      {message?.data?.text}
+                    </p>
+                    {message?.data?.image ? (
+                      <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden p-1 bg-slate-500'>
+                        <img
+                          className='w-full h-full object-cover cursor-zoom-in  rounded-r-xl rounded-bl-xl'
+                          src={message?.data?.image}
+                          alt='*'
+                          // onClick={(e) => {
+                          //   setOpenImg(true);
+                          //   setClickedImageUrl(e.target.getAttribute('src'));
+                          // }}
+                        />
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <span className='ml-3 text-left mb-2 text-[8px] mm:text-[10px] text-gray-500'>
+                      {message?.data?.time ? (
+                        <FormatDate dateFormat={message?.data?.time} />
+                      ) : (
+                        '-- --'
+                      )}
+                    </span>
+                  </div>
+                </div>
+              )
+            )
           ) : (
             <div className='w-full h-full flex justify-center items-center pb-5 px-4'>
               <div className='text-center'>
@@ -136,7 +209,7 @@ const GBChatMessages = ({ setChatContent }) => {
         </div>
       </>
       <form
-        // onSubmit={(e) => handleSendMessage(e)}
+        onSubmit={(e) => handleSendMessage(e)}
         className='w-full absolute bottom-0 left-0'
       >
         <div className='flex items-center relative m-2 mr-3'>
@@ -151,7 +224,7 @@ const GBChatMessages = ({ setChatContent }) => {
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                // handleSendMessage(e);
+                handleSendMessage(e);
               }
             }}
             value={inputVal}
@@ -162,7 +235,6 @@ const GBChatMessages = ({ setChatContent }) => {
 
           <button
             type='submit'
-            onClick={() => alert('В процессе разработки!')}
             className='absolute top-[50%] -translate-y-[50%] right-0 inline-flex justify-center p-2 text-tpPurple2 cursor-pointer opacity-60'
           >
             <svg

@@ -156,6 +156,10 @@ const TechChat = () => {
                         <img
                           className='w-full h-full object-cover cursor-zoom-in  rounded-r-xl rounded-bl-xl'
                           src={message?.data?.image}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = noImg;
+                          }}
                           alt='*'
                           onClick={(e) => {
                             setOpenImg(true);

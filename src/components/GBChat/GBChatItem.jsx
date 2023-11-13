@@ -59,7 +59,7 @@ const GBChatItem = () => {
           chatContent ? 'block' : 'hidden'
         } w-full mm:w-3/5 lg:w-4/6`}
       >
-        <GBChatMessages setChatContent={setChatContent} />
+        <GBChatMessages chats={chats} setChatContent={setChatContent} />
       </div>
     </div>
   );
