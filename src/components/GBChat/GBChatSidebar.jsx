@@ -10,7 +10,7 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
     <NavLink
       to={`t/${chat?.chatId}`}
       onClick={() => setChatContent(true)}
-      className='flex items-center'
+      className='flex items-center rounded-md p-2'
     >
       <div className='w-12 md:w-14 h-12 md:h-14 min-w-[48px] md:min-w-[56px] rounded-full overflow-hidden border border-colYellow'>
         <img

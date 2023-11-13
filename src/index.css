@@ -13,10 +13,10 @@
   color: #fede2b;
 }
 
-.sidebar li a.active {
+.sidebar li a.active,
+.chatSidebar a.active {
   background: #f2f2f2;
 }
-
 .sidebar.active {
   background: #f2f2f2;
 }

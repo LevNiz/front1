@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { ContentLoading } from '../../helpers/Loader/Loader';
-import { fetchGBChats } from '../../api/chats';
 import GBChatSidebar from './GBChatSidebar';
 import GBChatMessages from './GBChatMessages';
+import { fetchGBChats } from '../../api/gbchat';
 
 const GBChatItem = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -38,7 +38,7 @@ const GBChatItem = () => {
         <h4 className='text-xl font-medium bg-slate-100 p-3 ld:border-r-[3px] border-[#bdbdbd]'>
           GB-Chat
         </h4>
-        <div className='flex flex-col space-y-3 scrollable pt-4 mm:h-[calc(100vh-180px)] ld:overflow-y-scroll px-3 mm:pr-2 md:pr-4'>
+        <div className='chatSidebar flex flex-col space-y-3 scrollable pt-4 mm:h-[calc(100vh-180px)] ld:overflow-y-scroll mm:pr-2 md:pr-3'>
           {isLoading ? (
             <ContentLoading extraStyle='480px' />
           ) : chats?.length ? (
