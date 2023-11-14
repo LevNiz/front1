@@ -26,7 +26,7 @@ const GBChatItem = () => {
         setIsLoading(false);
       });
     })();
-  }, []);
+  }, [userID]);
 
   return (
     <div className='flex w-full'>

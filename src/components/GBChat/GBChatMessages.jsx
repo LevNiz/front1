@@ -22,7 +22,7 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
   const [messages, setMessages] = useState([]);
   const [userData, setUserData] = useState({});
   const [inputVal, setInputVal] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [openImg, setOpenImg] = useState(false);
   const [clickedImageUrl, setClickedImageUrl] = useState(null);
 
@@ -50,23 +50,25 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
         setUserData(data);
       }
     })();
-  }, []);
+  }, [userID]);
 
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchChats = fetchChatMessages(id, userID, (messagesData) => {
-      setMessages(messagesData);
-      setIsLoading(false);
-    });
-
-    return () => {
-      fetchChats();
-    };
-  }, [id]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   const unsubscribe = fetchChatMessages(
+  //     id,
+  //     userData,
+  //     receiver,
+  //     (messagesData) => {
+  //       setMessages(messagesData);
+  //       setIsLoading(false);
+  //     }
+  //   );
+  //   return () => unsubscribe();
+  // }, [id, userData, receiver]);
 
   const handleSendMessage = async (e) => {
-    await sendMessage(e, inputVal, userData, chatData);
     setInputVal('');
+    await sendMessage(e, inputVal, userData, chatData, receiver);
   };
 
   return (
@@ -200,7 +202,9 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
                 <h2 className='font-medium text-xl sm:text-2xl'>Чат создан!</h2>
                 <p className='text-gray-500 text-sm mt-1'>
                   Начните общаться с{' '}
-                  <span className='font-medium text-black'>{chatData?.lastMessageReceiverName}</span>
+                  <span className='font-medium text-black'>
+                    {chatData?.lastMessageReceiverName}
+                  </span>
                 </p>
               </div>
             </div>

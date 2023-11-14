@@ -8,19 +8,17 @@ import star from '../../assets/icons/star.png';
 import web from '../../assets/icons/application.png';
 import whatsapp from '../../assets/icons/new-call.svg';
 import { useSelector } from 'react-redux';
-import { fetchUser } from '../../api/client';
 
 const BGBuyerDetail = () => {
   const { userID } = useSelector((state) => state?.user);
-  const [buyerItem, setBuyerItem] = useState('');
+  const [buyerItem, setBuyerItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState({});
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/gb-chat/t/${userID + id}`, { state: user });
+    navigate(`/gb-chat/t/${userID + id}`, { state: buyerItem });
   };
 
   useEffect(() => {
@@ -34,43 +32,6 @@ const BGBuyerDetail = () => {
       setIsLoading(false);
     })();
   }, [id]);
-
-  useEffect(() => {
-    (async () => {
-      const { success, data } = await fetchUser(userID);
-      if (success) {
-        setUser(data);
-      }
-    })();
-  }, []);
-
-  // const handleNavigate = async () => {
-  //   const userDocRef = doc(db, 'chat', `${userID + id}`);
-  //   const userDocSnapshot = await getDoc(userDocRef);
-
-  //   try {
-  //     if (userDocSnapshot.exists) {
-  //       navigate(`/chat/${userID + id}`);
-  //     } else {
-  //       await setDoc(userDocRef, {
-  //         buyer: true,
-  //         lastMessage: 'Чат создан',
-  //         lastMessageRead: false,
-  //         lastMessageReceiverAvatar: buyerItem?.avatar,
-  //         lastMessageReceiverName: buyerItem?.fullname,
-  //         lastMessageSender: `${userID}`,
-  //         lastMessageSenderAvatar: user?.avatar,
-  //         lastMessageSenderName: user?.fullname,
-  //         lastMessageTime: serverTimestamp(),
-  //         uid: `${userID}`,
-  //         users: [`${userID}`, `${id}`],
-  //       });
-  //       navigate(`/chat/${userID + id}`);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error checking/creating chat document:', error);
-  //   }
-  // };
 
   return (
     <div className='content min-h-[728px] py-20'>

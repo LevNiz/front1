@@ -60,39 +60,61 @@ export const fetchGBChats = async (userID, callBack) => {
   });
 };
 
-export const fetchChatMessages = (chatID, userID, callback) => {
-  const q = query(
-    collection(db, 'chat', `${chatID}`, 'messages'),
-    orderBy('time')
-  );
+export const fetchChatMessages = async (
+  chatID,
+  senderData,
+  receiver,
+  callback
+) => {
+  const userDocRef = doc(db, 'chat', `${chatID}`);
+  const userDocSnapshot = await getDoc(userDocRef);
 
-  const querySnap = onSnapshot(q, (querySnapshot) => {
-    querySnapshot.forEach((chat) => {
-      const docData = chat.data();
-      if (docData.receiverUid == `${userID}` && !docData.read) {
-        const messageRef = doc(
-          db,
-          'chat',
-          `${chatID}`,
-          'messages',
-          `${chat.id}`
-        );
+  if (userDocSnapshot.exists()) {
+    const q = query(
+      collection(db, 'chat', `${chatID}`, 'messages'),
+      orderBy('time')
+    );
+    const querySnap = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((chat) => {
+        const docData = chat.data();
+        if (docData.receiverUid == `${senderData?.id}` && !docData.read) {
+          const messageRef = doc(
+            db,
+            'chat',
+            `${chatID}`,
+            'messages',
+            `${chat.id}`
+          );
 
-        updateDoc(messageRef, { read: true });
-      }
+          updateDoc(messageRef, { read: true });
+        }
+      });
+
+      const docData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data() || {},
+      }));
+
+      callback(docData);
     });
-
-    const docData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data() || {},
-    }));
-
-    callback(docData);
-  });
-
-  return () => {
-    querySnap();
-  };
+    return () => {
+      querySnap();
+    };
+  } else {
+    await setDoc(userDocRef, {
+      buyer: true,
+      lastMessage: 'Чат создан',
+      lastMessageRead: false,
+      lastMessageReceiverAvatar: receiver?.avatar,
+      lastMessageReceiverName: receiver?.fullname,
+      lastMessageSender: `${senderData?.id}`,
+      lastMessageSenderAvatar: senderData?.avatar,
+      lastMessageSenderName: senderData?.fullname,
+      lastMessageTime: serverTimestamp(),
+      uid: `${chatID}`,
+      users: [`${senderData?.id}`, `${receiver?.id}`],
+    });
+  }
 };
 
 export const sendMessage = async (e, inputVal, senderData, chatData) => {
@@ -103,25 +125,7 @@ export const sendMessage = async (e, inputVal, senderData, chatData) => {
     return;
   }
 
-  const userDocRef = doc(db, 'chat', chatData?.uid);
-  const userDocSnapshot = await getDoc(userDocRef);
-
-  if (!userDocSnapshot.exists()) {
-    await setDoc(userDocRef, {
-      lastMessage: trimmedInput,
-      lastMessageRead: false,
-      lastMessageReceiverAvatar: '',
-      lastMessageReceiverName: '',
-      lastMessageSender: '',
-      lastMessageSenderAvatar: '',
-      lastMessageSenderName: '',
-      lastMessageTime: serverTimestamp(),
-      uid: '',
-      users: [senderData?.id],
-    });
-  } else {
-    await updateChatDoc(userDocRef, trimmedInput, senderData);
-  }
+  const userDocRef = doc(db, 'chat', `${chatData?.uid}`);
 
   const receiverID = chatData?.users?.filter(
     (id) => id !== `${senderData?.id}`
@@ -135,13 +139,20 @@ export const sendMessage = async (e, inputVal, senderData, chatData) => {
     receiverUid: receiverID[0],
     senderUid: `${senderData?.id}`,
   });
-};
 
-const updateChatDoc = async (userDocRef, lastMessage, senderData) => {
-  await updateDoc(userDocRef, {
-    lastMessage,
-    lastMessageRead: false,
-    lastMessageSender: `${senderData?.id}`,
-    lastMessageTime: serverTimestamp(),
+  const unsubscribe = onSnapshot(userDocRef, () => {
+
+    const messageRef = doc(db, 'chat', `${chatData?.uid}`);
+
+    updateDoc(messageRef, {
+      lastMessage: trimmedInput,
+      lastMessageRead: true,
+      lastMessageSender: `${senderData?.id}`,
+      lastMessageTime: serverTimestamp(),
+    });
   });
+
+  return () => {
+    unsubscribe();
+  };
 };
