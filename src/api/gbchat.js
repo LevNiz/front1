@@ -108,9 +108,6 @@ export const sendMessage = async (e, inputVal, senderData, chatData) => {
 
   if (!userDocSnapshot.exists()) {
     await setDoc(userDocRef, {
-      clientId: `${senderData?.id}`,
-      clientName: senderData?.fullname,
-      avatar: senderData?.avatar,
       lastMessage: trimmedInput,
       lastMessageRead: false,
       lastMessageReceiverAvatar: '',

@@ -15,7 +15,7 @@ import tick from '../../assets/icons/read.png';
 import doubleTick from '../../assets/icons/read2.png';
 import { fetchUser } from '../../api/client';
 
-const GBChatMessages = ({ chats, setChatContent }) => {
+const GBChatMessages = ({ receiver, chats, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
   const navigate = useNavigate();
 
@@ -23,6 +23,8 @@ const GBChatMessages = ({ chats, setChatContent }) => {
   const [userData, setUserData] = useState({});
   const [inputVal, setInputVal] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [openImg, setOpenImg] = useState(false);
+  const [clickedImageUrl, setClickedImageUrl] = useState(null);
 
   const messagesEndRef = useRef();
   const { id } = useParams();
@@ -83,11 +85,11 @@ const GBChatMessages = ({ chats, setChatContent }) => {
           <div className='min-w-[48px] border border-gray-400 w-12 h-12 rounded-full overflow-hidden mr-3'>
             <img
               className='object-cover w-full h-full rounded-[50%]'
+              src={chatData?.lastMessageReceiverAvatar}
               onError={(e) => {
-                e.target.onerror = null;
+                e.target.onError = null;
                 e.target.src = noAva;
               }}
-              src={chatData?.lastMessageReceiverAvatar}
               alt='*'
             />
           </div>
@@ -128,10 +130,10 @@ const GBChatMessages = ({ chats, setChatContent }) => {
                             e.target.src = noImg;
                           }}
                           alt='*'
-                          // onClick={(e) => {
-                          //   setOpenImg(true);
-                          //   setClickedImageUrl(e.target.getAttribute('src'));
-                          // }}
+                          onClick={(e) => {
+                            setOpenImg(true);
+                            setClickedImageUrl(e.target.getAttribute('src'));
+                          }}
                         />
                       </div>
                     ) : (
@@ -171,10 +173,10 @@ const GBChatMessages = ({ chats, setChatContent }) => {
                           className='w-full h-full object-cover cursor-zoom-in  rounded-r-xl rounded-bl-xl'
                           src={message?.data?.image}
                           alt='*'
-                          // onClick={(e) => {
-                          //   setOpenImg(true);
-                          //   setClickedImageUrl(e.target.getAttribute('src'));
-                          // }}
+                          onClick={(e) => {
+                            setOpenImg(true);
+                            setClickedImageUrl(e.target.getAttribute('src'));
+                          }}
                         />
                       </div>
                     ) : (
@@ -198,9 +200,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
                 <h2 className='font-medium text-xl sm:text-2xl'>Чат создан!</h2>
                 <p className='text-gray-500 text-sm mt-1'>
                   Начните общаться с{' '}
-                  <span className='font-medium text-black'>
-                    Омурбек Аббдуллаев
-                  </span>
+                  <span className='font-medium text-black'>{chatData?.lastMessageReceiverName}</span>
                 </p>
               </div>
             </div>
@@ -249,6 +249,21 @@ const GBChatMessages = ({ chats, setChatContent }) => {
           </button>
         </div>
       </form>
+      <div
+        className={`${
+          openImg ? '' : 'hidden'
+        } fixed top-0 left-0 w-full h-full z-[99999999] bg-[rgba(0,0,0,.8)] p-5`}
+      >
+        <span
+          onClick={() => setOpenImg(false)}
+          className='absolute top-0 right-0 flex items-center h-[70px] mm:h-[90px] p-5 mm:p-10 cursor-pointer text-white text-5xl z-10 bg-[rgba(0,0,0,.7)]'
+        >
+          &times;
+        </span>
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 md:px-10 w-full'>
+          <img className='mx-auto max-h-[90vh]' src={clickedImageUrl} alt='*' />
+        </div>
+      </div>
     </div>
   );
 };

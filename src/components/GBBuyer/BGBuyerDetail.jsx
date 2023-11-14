@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchBuyersDetail } from '../../api/buyer';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import noAva from '../../assets/images/no-ava.jpeg';
@@ -7,12 +7,21 @@ import instaTick from '../../assets/icons/insta-tick.png';
 import star from '../../assets/icons/star.png';
 import web from '../../assets/icons/application.png';
 import whatsapp from '../../assets/icons/new-call.svg';
+import { useSelector } from 'react-redux';
+import { fetchUser } from '../../api/client';
 
 const BGBuyerDetail = () => {
+  const { userID } = useSelector((state) => state?.user);
   const [buyerItem, setBuyerItem] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState({});
 
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/gb-chat/t/${userID + id}`, { state: user });
+  };
 
   useEffect(() => {
     (async () => {
@@ -25,6 +34,43 @@ const BGBuyerDetail = () => {
       setIsLoading(false);
     })();
   }, [id]);
+
+  useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setUser(data);
+      }
+    })();
+  }, []);
+
+  // const handleNavigate = async () => {
+  //   const userDocRef = doc(db, 'chat', `${userID + id}`);
+  //   const userDocSnapshot = await getDoc(userDocRef);
+
+  //   try {
+  //     if (userDocSnapshot.exists) {
+  //       navigate(`/chat/${userID + id}`);
+  //     } else {
+  //       await setDoc(userDocRef, {
+  //         buyer: true,
+  //         lastMessage: 'Чат создан',
+  //         lastMessageRead: false,
+  //         lastMessageReceiverAvatar: buyerItem?.avatar,
+  //         lastMessageReceiverName: buyerItem?.fullname,
+  //         lastMessageSender: `${userID}`,
+  //         lastMessageSenderAvatar: user?.avatar,
+  //         lastMessageSenderName: user?.fullname,
+  //         lastMessageTime: serverTimestamp(),
+  //         uid: `${userID}`,
+  //         users: [`${userID}`, `${id}`],
+  //       });
+  //       navigate(`/chat/${userID + id}`);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking/creating chat document:', error);
+  //   }
+  // };
 
   return (
     <div className='content min-h-[728px] py-20'>
@@ -83,11 +129,7 @@ const BGBuyerDetail = () => {
             </div>
             <div className='w-full sm:max-w-[340px] mt-8'>
               <button
-                onClick={() =>
-                  alert(
-                    'Совсем скоро появится возможность отправлять сообщение!'
-                  )
-                }
+                onClick={handleNavigate}
                 className='uppercase font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 w-full'
               >
                 Написать сообщение

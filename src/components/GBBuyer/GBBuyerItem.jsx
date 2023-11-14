@@ -39,7 +39,10 @@ const GBBuyerItem = () => {
                 <div className='w-16 ss:w-20 sm:w-24 min-w-[64px] ss:min-w-[80px] sm:min-w-[96px] h-16 ss:h-20 sm:h-24 rounded-full overflow-hidden mx-auto border-2 border-colYellow p-[2px]'>
                   <img
                     className='w-full h-full object-cover rounded-full'
-                    src={el?.avatar ? el?.avatar : noImg}
+                    src={el?.avatar}
+                    onError={(e) => {
+                      (e.target.onError = null), (e.target.src = noImg);
+                    }}
                     alt='*'
                   />
                 </div>
