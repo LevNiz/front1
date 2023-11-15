@@ -8,7 +8,7 @@ import doubleTick from '../../assets/icons/read2.png';
 
 const GBChatSidebar = ({ chat, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
-  
+
   return (
     <NavLink
       to={`t/${chat?.chatId}`}

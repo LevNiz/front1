@@ -3,7 +3,6 @@ import {
   collection,
   doc,
   getDoc,
-  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -14,31 +13,25 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
-export const fetchGBChats = async (userID, callBack) => {
+export const fetchGBChats = (userID, callBack) => {
   const q = query(
     collection(db, 'chat'),
     where('users', 'array-contains', `${userID}`),
     orderBy('lastMessageTime', 'desc')
   );
 
-  try {
-    const querySnapshot = await getDocs(q);
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const changedChats = querySnapshot.docs
+      .filter((doc) => doc.data().users.includes(`${userID}`))
+      .map((doc) => ({
+        chatId: doc.id,
+        data: doc.data(),
+      }));
 
-    const filteredChats = await Promise.all(
-      querySnapshot.docs
-        .filter((doc) => doc.data()?.users.includes(`${userID}`))
-        .map(async (doc) => {
-          return {
-            chatId: doc.id,
-            data: doc.data(),
-          };
-        })
-    );
+    callBack(changedChats);
+  });
 
-    callBack(filteredChats);
-  } catch (error) {
-    throw new Error(error);
-  }
+  return unsubscribe;
 };
 
 export const fetchChatMessages = async (
@@ -121,18 +114,12 @@ export const sendMessage = async (e, inputVal, senderData, chatData) => {
     senderUid: `${senderData?.id}`,
   });
 
-  const unsubscribe = onSnapshot(userDocRef, () => {
-    const messageRef = doc(db, 'chat', `${chatData?.uid}`);
+  const messageRef = doc(db, 'chat', `${chatData?.uid}`);
 
-    updateDoc(messageRef, {
-      lastMessage: trimmedInput,
-      lastMessageRead: false,
-      lastMessageSender: `${senderData?.id}`,
-      // lastMessageTime: serverTimestamp(),
-    });
+  await updateDoc(messageRef, {
+    lastMessage: trimmedInput,
+    lastMessageRead: false,
+    lastMessageSender: `${senderData?.id}`,
+    lastMessageTime: serverTimestamp(),
   });
-
-  return () => {
-    unsubscribe;
-  };
 };
