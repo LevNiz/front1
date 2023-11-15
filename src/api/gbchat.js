@@ -28,23 +28,9 @@ export const fetchGBChats = async (userID, callBack) => {
       querySnapshot.docs
         .filter((doc) => doc.data()?.users.includes(`${userID}`))
         .map(async (doc) => {
-          const chatId = doc.id;
-          const messagesCollectionRef = collection(
-            db,
-            'chat',
-            chatId,
-            'messages'
-          );
-          const messagesSnapshot = await getDocs(messagesCollectionRef);
-          const messages = messagesSnapshot.docs.map((messageDoc) => ({
-            id: messageDoc.id,
-            data: messageDoc.data(),
-          }));
-
           return {
-            chatId,
+            chatId: doc.id,
             data: doc.data(),
-            messages,
           };
         })
     );
@@ -95,7 +81,7 @@ export const fetchChatMessages = async (
     return () => {
       querySnap();
     };
-  } else {
+  } else if (receiver !== null) {
     await setDoc(userDocRef, {
       buyer: true,
       lastMessage: 'Чат создан',

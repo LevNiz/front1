@@ -18,8 +18,6 @@ const GBChatItem = () => {
     setChatContent(pathname?.split('/')[2] === 't');
   }, [pathname]);
 
-  console.log(chats);
-
   useEffect(() => {
     const fetchChats = async () => {
       setIsLoading(true);
