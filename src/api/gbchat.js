@@ -60,7 +60,6 @@ export const fetchChatMessages = async (
             'messages',
             `${chat.id}`
           );
-          console.log('get messages snap');
           updateDoc(messageRef, { read: true });
         }
       });

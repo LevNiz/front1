@@ -58,7 +58,11 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
       setMessages(messagesData);
       setIsLoading(false);
     });
-    return () => res.then((unsubscribe) => unsubscribe());
+
+    return () =>
+      res.then((unsubscribe) =>
+        typeof unsubscribe !== 'undefined' ? unsubscribe() : unsubscribe
+      );
   }, [id]);
 
   const handleSendMessage = async (e) => {
