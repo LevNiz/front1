@@ -31,18 +31,29 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
           <h4 className='font-medium line-clamp-1 break-all text-sm md:text-base mm:text-xs'>
             {chat?.data?.lastMessageReceiverName ?? '-'}
           </h4>
-          <span className='pl-1 text-[10px] leading-[10px] lg:leading-[14px] lg:text-xs text-right min-w-fit'>
-            {chat?.data?.lastMessageTime ? (
-              <FormatDate dateFormat={chat?.data?.lastMessageTime} />
-            ) : (
-              '-- --'
-            )}
-          </span>
+          <div className='flex justify-end items-center'>
+            <span
+              className={`${
+                chat?.data?.buyerChat ? '' : 'hidden'
+              } text-[10px] ml-1 border border-gray-500 px-1.5 rounded-md bg-slate-100`}
+            >
+              {chat?.data?.buyerChat ? 'buyer' : ''}
+            </span>
+          </div>
         </div>
         <div className='flex justify-between items-center'>
-          <p className='text-sm mm:text-xs md:text-sm opacity-70 line-clamp-1 break-all'>
-            {chat?.data?.lastMessage}
-          </p>
+          <div className='flex justify-between items-center w-full'>
+            <p className='text-sm mm:text-xs md:text-sm opacity-70 line-clamp-1 break-all'>
+              {chat?.data?.lastMessage}
+            </p>
+            <span className='pl-2 text-[9px] leading-[10px] lg:leading-[14px] lg:text-[10px] text-right min-w-fit'>
+              {chat?.data?.lastMessageTime ? (
+                <FormatDate dateFormat={chat?.data?.lastMessageTime} />
+              ) : (
+                '-- --'
+              )}
+            </span>
+          </div>
           {chat?.data?.lastMessageSender === `${userID}` ? (
             <>
               {chat?.data?.lastMessageRead ? (

@@ -44,11 +44,12 @@ export const fetchChatMessages = async (
   const userDocSnapshot = await getDoc(userDocRef);
 
   if (userDocSnapshot.exists()) {
-    const q = query(
+    const queryMessages = query(
       collection(db, 'chat', `${chatID}`, 'messages'),
       orderBy('time')
     );
-    const querySnap = onSnapshot(q, (querySnapshot) => {
+
+    const querySnap = onSnapshot(queryMessages, (querySnapshot) => {
       querySnapshot.forEach((chat) => {
         const docData = chat.data();
         if (docData.receiverUid == `${senderData?.id}` && !docData.read) {
@@ -68,15 +69,18 @@ export const fetchChatMessages = async (
         id: doc.id,
         data: doc.data() || {},
       }));
-
       callback(docData);
+      if (!userDocSnapshot.data().lastMessageSender === `${senderData?.id}`) {
+        // updateDoc(userDocRef, { lastMessageRead: true });
+      }
     });
+
     return () => {
       querySnap();
     };
   } else if (receiver !== null) {
     await setDoc(userDocRef, {
-      buyer: true,
+      buyerChat: true,
       lastMessage: 'Чат создан',
       lastMessageRead: false,
       lastMessageReceiverAvatar: receiver?.avatar,
