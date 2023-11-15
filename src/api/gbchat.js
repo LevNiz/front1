@@ -70,14 +70,13 @@ export const fetchChatMessages = async (
         data: doc.data() || {},
       }));
       callback(docData);
-      if (!userDocSnapshot.data().lastMessageSender === `${senderData?.id}`) {
-        // updateDoc(userDocRef, { lastMessageRead: true });
-      }
     });
 
-    return () => {
-      querySnap();
-    };
+    if (userDocSnapshot.data().lastMessageSender !== `${senderData?.id}`) {
+      updateDoc(userDocRef, { lastMessageRead: true });
+    }
+
+    return querySnap;
   } else if (receiver !== null) {
     await setDoc(userDocRef, {
       buyerChat: true,
