@@ -60,7 +60,7 @@ export const fetchChatMessages = async (
             'messages',
             `${chat.id}`
           );
-
+          console.log('get messages snap');
           updateDoc(messageRef, { read: true });
         }
       });
@@ -71,7 +71,6 @@ export const fetchChatMessages = async (
       }));
       callback(docData);
     });
-
     if (userDocSnapshot.data().lastMessageSender !== `${senderData?.id}`) {
       updateDoc(userDocRef, { lastMessageRead: true });
     }

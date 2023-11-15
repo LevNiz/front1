@@ -54,17 +54,12 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const unsubscribe = fetchChatMessages(
-      id,
-      userData,
-      receiver,
-      (messagesData) => {
-        setMessages(messagesData);
-        setIsLoading(false);
-      }
-    );
-    return () => unsubscribe;
-  }, [id, userData, receiver]);
+    const res = fetchChatMessages(id, userData, receiver, (messagesData) => {
+      setMessages(messagesData);
+      setIsLoading(false);
+    });
+    return () => res.then((unsubscribe) => unsubscribe());
+  }, [id]);
 
   const handleSendMessage = async (e) => {
     setInputVal('');

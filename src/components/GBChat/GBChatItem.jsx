@@ -9,7 +9,7 @@ import { fetchGBChats } from '../../api/gbchat';
 const GBChatItem = () => {
   const { userID } = useSelector((state) => state?.user);
   const [chats, setChats] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [chatContent, setChatContent] = useState(false);
 
   const { pathname, state } = useLocation();
@@ -19,16 +19,11 @@ const GBChatItem = () => {
   }, [pathname]);
 
   useEffect(() => {
-    const fetchData = () => {
-      setIsLoading(true);
-      const unsubscribe = fetchGBChats(userID, (data) => {
-        setChats(data);
-        setIsLoading(false);
-      });
-      return () => unsubscribe;
-    };
-
-    fetchData();
+    const unsubscribe = fetchGBChats(userID, (data) => {
+      setIsLoading(false);
+      setChats(data);
+    });
+    return () => unsubscribe;
   }, [userID]);
 
   return (
