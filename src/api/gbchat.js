@@ -20,16 +20,14 @@ export const fetchGBChats = async (userID, callBack) => {
     where('users', 'array-contains', `${userID}`),
     orderBy('lastMessageTime', 'desc')
   );
-  onSnapshot(q, async (querySnapshot) => {
-    const filteredChats = [];
 
-    for (const docChange of querySnapshot.docChanges()) {
-      if (docChange.type === 'added') {
-        const doc = docChange.doc;
-        const data = doc.data() || {};
-        const users = data.users || [];
+  try {
+    const querySnapshot = await getDocs(q);
 
-        if (users.includes(`${userID}`)) {
+    const filteredChats = await Promise.all(
+      querySnapshot.docs
+        .filter((doc) => doc.data()?.users.includes(`${userID}`))
+        .map(async (doc) => {
           const chatId = doc.id;
           const messagesCollectionRef = collection(
             db,
@@ -38,26 +36,23 @@ export const fetchGBChats = async (userID, callBack) => {
             'messages'
           );
           const messagesSnapshot = await getDocs(messagesCollectionRef);
-          const messages = [];
+          const messages = messagesSnapshot.docs.map((messageDoc) => ({
+            id: messageDoc.id,
+            data: messageDoc.data(),
+          }));
 
-          messagesSnapshot.forEach((messageDoc) => {
-            messages.push({
-              id: messageDoc.id,
-              data: messageDoc.data(),
-            });
-          });
-
-          filteredChats.push({
-            chatId: chatId,
-            data: data,
-            messages: messages,
-          });
-        }
-      }
-    }
+          return {
+            chatId,
+            data: doc.data(),
+            messages,
+          };
+        })
+    );
 
     callBack(filteredChats);
-  });
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 export const fetchChatMessages = async (
@@ -141,7 +136,6 @@ export const sendMessage = async (e, inputVal, senderData, chatData) => {
   });
 
   const unsubscribe = onSnapshot(userDocRef, () => {
-
     const messageRef = doc(db, 'chat', `${chatData?.uid}`);
 
     updateDoc(messageRef, {

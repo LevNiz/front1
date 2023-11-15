@@ -19,13 +19,18 @@ const GBChatItem = () => {
   }, [pathname]);
 
   useEffect(() => {
-    setIsLoading(true);
-    (async () => {
-      await fetchGBChats(userID, (chatsData) => {
-        setChats(chatsData);
+    const fetchChats = async () => {
+      setIsLoading(true);
+      try {
+        await fetchGBChats(userID, (data) => setChats(data));
+      } catch (error) {
+        throw new Error(error);
+      } finally {
         setIsLoading(false);
-      });
-    })();
+      }
+    };
+
+    fetchChats();
   }, [userID]);
 
   return (
