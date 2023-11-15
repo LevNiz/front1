@@ -4,7 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { FormatDate } from '../../helpers/FormatDate/formatDate';
-import { fetchChatMessages, sendMessage } from '../../api/gbchat';
+import { fetchChatMessages, sendGBChatImage, sendMessage } from '../../api/gbchat';
+import { fetchUser } from '../../api/client';
 
 import chatBg from '../../assets/images/chat-bg.jpeg';
 import chatImg from '../../assets/images/chat.png';
@@ -13,14 +14,14 @@ import noAva from '../../assets/images/no-ava.jpeg';
 import back from '../../assets/icons/arrow-left.svg';
 import tick from '../../assets/icons/read.png';
 import doubleTick from '../../assets/icons/read2.png';
-import { fetchUser } from '../../api/client';
+import clipFile from '../../assets/icons/clip-file.svg';
 
 const GBChatMessages = ({ receiver, chats, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [senderData, setSenderData] = useState({});
   const [inputVal, setInputVal] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [openImg, setOpenImg] = useState(false);
@@ -47,14 +48,14 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
     (async () => {
       const { success, data } = await fetchUser(userID);
       if (success) {
-        setUserData(data);
+        setSenderData(data);
       }
     })();
   }, [userID]);
 
   useEffect(() => {
     setIsLoading(true);
-    const res = fetchChatMessages(id, userData, receiver, (messagesData) => {
+    const res = fetchChatMessages(id, senderData, receiver, (messagesData) => {
       setMessages(messagesData);
       setIsLoading(false);
     });
@@ -67,7 +68,14 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
 
   const handleSendMessage = async (e) => {
     setInputVal('');
-    await sendMessage(e, inputVal, userData, chatData, receiver);
+    await sendMessage(e, inputVal, senderData, chatData, receiver);
+  };
+
+  const handleSendImage = (e) => {
+    const file = e.target.files[0];
+    (async () => {
+      await sendGBChatImage(senderData, chatData, file);
+    })();
   };
 
   return (
@@ -232,10 +240,23 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
             }}
             value={inputVal}
             rows='1'
-            className='pl-3 pr-10 py-3 w-full rounded-md sm:rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
+            className='pl-8 pr-10 py-3 w-full rounded-md sm:rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
             placeholder='Введите сообщение'
           ></textarea>
-
+          <label
+            className='absolute top-1/2 -translate-y-1/2 cursor-pointer -left-1 w-10 opacity-70'
+            htmlFor='file'
+          >
+            <img className='opacity-70' src={clipFile} alt='*' />
+            <input
+              className='hidden'
+              name='image'
+              accept='image/*'
+              onChange={(e) => handleSendImage(e)}
+              type='file'
+              id='file'
+            />
+          </label>
           <button
             type='submit'
             className='absolute top-[50%] -translate-y-[50%] right-0 inline-flex justify-center p-2 text-tpPurple2 cursor-pointer opacity-60'

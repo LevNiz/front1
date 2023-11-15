@@ -42,8 +42,7 @@ export const postAlaket = async (data, photo, userID) => {
     }
   }
   try {
-    const res = await axiosInstance.post(`core/alaket/`, sendData);
-    console.log(res);
+    await axiosInstance.post(`core/alaket/`, sendData);
     return { success: true };
   } catch (error) {
     return { success: false };
