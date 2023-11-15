@@ -52,19 +52,19 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
     })();
   }, [userID]);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   const unsubscribe = fetchChatMessages(
-  //     id,
-  //     userData,
-  //     receiver,
-  //     (messagesData) => {
-  //       setMessages(messagesData);
-  //       setIsLoading(false);
-  //     }
-  //   );
-  //   return () => unsubscribe();
-  // }, [id, userData, receiver]);
+  useEffect(() => {
+    setIsLoading(true);
+    const unsubscribe = fetchChatMessages(
+      id,
+      userData,
+      receiver,
+      (messagesData) => {
+        setMessages(messagesData);
+        setIsLoading(false);
+      }
+    );
+    return () => unsubscribe;
+  }, [id, userData, receiver]);
 
   const handleSendMessage = async (e) => {
     setInputVal('');

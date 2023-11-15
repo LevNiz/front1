@@ -140,13 +140,13 @@ export const sendMessage = async (e, inputVal, senderData, chatData) => {
 
     updateDoc(messageRef, {
       lastMessage: trimmedInput,
-      lastMessageRead: true,
+      lastMessageRead: false,
       lastMessageSender: `${senderData?.id}`,
-      lastMessageTime: serverTimestamp(),
+      // lastMessageTime: serverTimestamp(),
     });
   });
 
   return () => {
-    unsubscribe();
+    unsubscribe;
   };
 };
