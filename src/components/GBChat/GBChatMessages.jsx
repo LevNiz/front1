@@ -20,7 +20,7 @@ import tick from '../../assets/icons/read.png';
 import doubleTick from '../../assets/icons/read2.png';
 import clipFile from '../../assets/icons/clip-file.svg';
 
-const GBChatMessages = ({ receiver, chats, setChatContent }) => {
+const GBChatMessages = ({ chats, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
   const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
   useEffect(() => {
     const fetchChats = async () => {
       setIsLoading(true);
-      await fetchChatMessages(id, senderData, receiver, (data) => {
+      await fetchChatMessages(id, senderData, (data) => {
         setMessages(data);
         setIsLoading(false);
       });
@@ -68,11 +68,11 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
     if (id) {
       fetchChats();
     }
-  }, [id, receiver, senderData, navigate]);
+  }, [id, senderData, navigate]);
 
   const handleSendMessage = async (e) => {
     setInputVal('');
-    await sendMessage(e, inputVal, senderData, chatData, receiver);
+    await sendMessage(e, inputVal, senderData, chatData);
   };
 
   const handleSendImage = (e) => {

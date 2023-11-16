@@ -12,7 +12,7 @@ const GBChatItem = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [chatContent, setChatContent] = useState(false);
 
-  const { pathname, state } = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     setChatContent(pathname?.split('/')[2] === 't');
@@ -57,11 +57,7 @@ const GBChatItem = () => {
           chatContent ? 'block' : 'hidden'
         } w-full mm:w-3/5 lg:w-4/6`}
       >
-        <GBChatMessages
-          receiver={state}
-          chats={chats}
-          setChatContent={setChatContent}
-        />
+        <GBChatMessages chats={chats} setChatContent={setChatContent} />
       </div>
     </div>
   );

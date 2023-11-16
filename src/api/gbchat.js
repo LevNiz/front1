@@ -35,30 +35,10 @@ export const fetchGBChats = (userID, callBack) => {
   return unsubscribe;
 };
 
-export const fetchChatMessages = async (
-  chatID,
-  senderData,
-  receiver,
-  callback
-) => {
+export const fetchChatMessages = async (chatID, senderData, callback) => {
   const userDocRef = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);
 
-  if (!userDocSnapshot.exists()) {
-    await setDoc(userDocRef, {
-      buyerChat: true,
-      lastMessage: 'Чат создан',
-      lastMessageRead: false,
-      lastMessageReceiverAvatar: receiver?.avatar || '',
-      lastMessageReceiverName: receiver?.fullname || '',
-      lastMessageSender: `${senderData?.id}` || '',
-      lastMessageSenderAvatar: senderData?.avatar || '',
-      lastMessageSenderName: senderData?.fullname || '',
-      lastMessageTime: serverTimestamp(),
-      uid: `${chatID}` || '',
-      users: [`${senderData?.id}`, `${receiver?.id}` || ''],
-    });
-  }
   if (userDocSnapshot?.data() && senderData?.id !== undefined) {
     if (userDocSnapshot?.data()?.lastMessageSender !== `${senderData?.id}`) {
       updateDoc(userDocRef, { lastMessageRead: true });
@@ -90,6 +70,28 @@ export const fetchChatMessages = async (
     }));
     callback(docData);
   });
+};
+
+export const createGBChat = async (chatID, receiver, senderData) => {
+  const userDocRef = doc(db, 'chat', `${chatID}`);
+  const userDocSnapshot = await getDoc(userDocRef);
+
+  if (!userDocSnapshot.exists()) {
+    await setDoc(userDocRef, {
+      buyerChat: true,
+      lastMessage: 'Чат создан',
+      lastMessageRead: false,
+      lastMessageReceiverAvatar: receiver?.avatar || '',
+      lastMessageReceiverName: receiver?.fullname || '',
+      lastMessageSender: `${senderData?.id}` || '',
+      lastMessageSenderAvatar: senderData?.avatar || '',
+      lastMessageSenderName: senderData?.fullname || '',
+      lastMessageTime: serverTimestamp(),
+      uid: `${chatID}` || '',
+      users: [`${senderData?.id}`, `${receiver?.id}` || ''],
+    });
+  }
+  return { success: true };
 };
 
 export const sendMessage = async (e, inputVal, senderData, chatData) => {
