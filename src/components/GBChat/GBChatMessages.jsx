@@ -4,7 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { FormatDate } from '../../helpers/FormatDate/formatDate';
-import { fetchChatMessages, sendGBChatImage, sendMessage } from '../../api/gbchat';
+import {
+  fetchChatMessages,
+  sendGBChatImage,
+  sendMessage,
+} from '../../api/gbchat';
 import { fetchUser } from '../../api/client';
 
 import chatBg from '../../assets/images/chat-bg.jpeg';
@@ -54,17 +58,17 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
   }, [userID]);
 
   useEffect(() => {
-    setIsLoading(true);
-    const res = fetchChatMessages(id, senderData, receiver, (messagesData) => {
-      setMessages(messagesData);
-      setIsLoading(false);
-    });
+    const fetchChats = async () => {
+      await fetchChatMessages(id, senderData, receiver, (data) => {
+        setMessages(data);
+        setIsLoading(false);
+      });
+    };
 
-    return () =>
-      res.then((unsubscribe) =>
-        typeof unsubscribe !== 'undefined' ? unsubscribe() : unsubscribe
-      );
-  }, [id]);
+    if (id) {
+      fetchChats();
+    }
+  }, [id, receiver, senderData, navigate]);
 
   const handleSendMessage = async (e) => {
     setInputVal('');

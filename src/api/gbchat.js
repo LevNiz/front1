@@ -44,53 +44,51 @@ export const fetchChatMessages = async (
   const userDocRef = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);
 
-  if (userDocSnapshot.exists()) {
-    const queryMessages = query(
-      collection(db, 'chat', `${chatID}`, 'messages'),
-      orderBy('time')
-    );
-
-    const querySnap = onSnapshot(queryMessages, (querySnapshot) => {
-      querySnapshot.forEach((chat) => {
-        const docData = chat.data();
-        if (docData.receiverUid == `${senderData?.id}` && !docData.read) {
-          const messageRef = doc(
-            db,
-            'chat',
-            `${chatID}`,
-            'messages',
-            `${chat.id}`
-          );
-          updateDoc(messageRef, { read: true });
-        }
-      });
-
-      const docData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data() || {},
-      }));
-      callback(docData);
-    });
-    if (userDocSnapshot.data().lastMessageSender !== `${senderData?.id}`) {
-      updateDoc(userDocRef, { lastMessageRead: true });
-    }
-
-    return querySnap;
-  } else if (receiver !== null) {
+  if (!userDocSnapshot.exists()) {
     await setDoc(userDocRef, {
       buyerChat: true,
       lastMessage: 'Чат создан',
       lastMessageRead: false,
-      lastMessageReceiverAvatar: receiver?.avatar,
-      lastMessageReceiverName: receiver?.fullname,
-      lastMessageSender: `${senderData?.id}`,
-      lastMessageSenderAvatar: senderData?.avatar,
-      lastMessageSenderName: senderData?.fullname,
+      lastMessageReceiverAvatar: receiver?.avatar || '',
+      lastMessageReceiverName: receiver?.fullname || '',
+      lastMessageSender: `${senderData?.id}` || '',
+      lastMessageSenderAvatar: senderData?.avatar || '',
+      lastMessageSenderName: senderData?.fullname || '',
       lastMessageTime: serverTimestamp(),
-      uid: `${chatID}`,
-      users: [`${senderData?.id}`, `${receiver?.id}`],
+      uid: `${chatID}` || '',
+      users: [`${senderData?.id}`, `${receiver?.id}` || ''],
     });
   }
+  if (userDocSnapshot.data().lastMessageSender !== `${senderData?.id}`) {
+    updateDoc(userDocRef, { lastMessageRead: true });
+  }
+
+  const queryMessages = query(
+    collection(db, 'chat', `${chatID}`, 'messages'),
+    orderBy('time')
+  );
+
+  onSnapshot(queryMessages, (querySnapshot) => {
+    querySnapshot.forEach((chat) => {
+      const docData = chat.data();
+      if (docData.receiverUid == `${senderData?.id}` && !docData.read) {
+        const messageRef = doc(
+          db,
+          'chat',
+          `${chatID}`,
+          'messages',
+          `${chat.id}`
+        );
+        updateDoc(messageRef, { read: true });
+      }
+    });
+
+    const docData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data() || {},
+    }));
+    callback(docData);
+  });
 };
 
 export const sendMessage = async (e, inputVal, senderData, chatData) => {
