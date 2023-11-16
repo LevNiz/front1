@@ -7,9 +7,11 @@ import noAva from '../../assets/images/no-ava.jpeg';
 import location from '../../assets/icons/location3.svg';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
+import { useSelector } from 'react-redux';
 
 const AlaketDetail = () => {
   const { id } = useParams();
+  const { userID } = useSelector((state) => state?.user);
 
   const [alaket, setAlaket] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -110,7 +112,9 @@ const AlaketDetail = () => {
               onClick={() =>
                 alert('Совсем скоро появится возможность отправлять сообщение!')
               }
-              className='uppercase font-bold hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-xs w-full mt-8'
+              className={`${
+                alaket?.client?.id === userID ? 'hidden' : ''
+              } uppercase font-bold hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-xs w-full mt-8`}
             >
               Написать сообщение
             </button>

@@ -82,18 +82,18 @@ const AlaketNew = () => {
               Возьму собой
             </label>
             <label
-              htmlFor='alaket'
+              htmlFor='berem'
               className={`${
-                alaketType === 'alaket'
+                alaketType === 'berem'
                   ? 'border-gray-300 bg-colYellow'
                   : 'border-gray-300'
               } border mm:max-w-[180px] w-full rounded-tr-md rounded-br-md py-2 text-center cursor-pointer`}
             >
               <input
                 className='hidden'
-                id='alaket'
+                id='berem'
                 type='radio'
-                value='alaket'
+                value='berem'
                 {...register('type')}
               />
               Передаю
