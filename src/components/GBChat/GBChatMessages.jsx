@@ -33,7 +33,6 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
 
   const messagesEndRef = useRef();
   const { id } = useParams();
-
   const chatData = chats.find((chat) => chat?.chatId === id)?.data || {};
 
   const scrollToBottom = () => {
@@ -59,6 +58,7 @@ const GBChatMessages = ({ receiver, chats, setChatContent }) => {
 
   useEffect(() => {
     const fetchChats = async () => {
+      setIsLoading(true);
       await fetchChatMessages(id, senderData, receiver, (data) => {
         setMessages(data);
         setIsLoading(false);

@@ -59,10 +59,11 @@ export const fetchChatMessages = async (
       users: [`${senderData?.id}`, `${receiver?.id}` || ''],
     });
   }
-  if (userDocSnapshot.data().lastMessageSender !== `${senderData?.id}`) {
-    updateDoc(userDocRef, { lastMessageRead: true });
+  if (userDocSnapshot?.data() && senderData?.id !== undefined) {
+    if (userDocSnapshot?.data()?.lastMessageSender !== `${senderData?.id}`) {
+      updateDoc(userDocRef, { lastMessageRead: true });
+    }
   }
-
   const queryMessages = query(
     collection(db, 'chat', `${chatID}`, 'messages'),
     orderBy('time')
