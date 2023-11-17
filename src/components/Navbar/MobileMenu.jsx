@@ -11,7 +11,8 @@ import home from './../../assets/icons/mobile-menu/home.svg';
 import depot from './../../assets/icons/mobile-menu/depot.svg';
 import userIcon from './../../assets/icons/mobile-menu/user.svg';
 import buyer from './../../assets/icons/mobile-menu/buyer.svg';
-import bussines from './../../assets/icons/mobile-menu/bussines.svg';
+import services from './../../assets/icons/services.svg';
+import business from './../../assets/icons/mobile-menu/bussines.svg';
 import box from './../../assets/icons/mobile-menu/box.svg';
 import profileUser from './../../assets/icons/mobile-menu/profile-user.svg';
 import profileBox from './../../assets/icons/mobile-menu/profile-box.svg';
@@ -22,12 +23,12 @@ import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
 import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
+import gbShop from './../../assets/icons/gb-shop.svg';
+import gbCoin from './../../assets/icons/gb-bitcoin.svg';
+import alaket from './../../assets/icons/alaket.svg';
+import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
-const MobileMenu = ({
-  isOpen,
-  onClose,
-  hasNotification,
-}) => {
+const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
   const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,9 +36,14 @@ const MobileMenu = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isServices, setIsServices] = useState(false);
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen);
+  };
+
+  const toggleServices = () => {
+    setIsServices(!isServices);
   };
 
   const closeModal = () => {
@@ -257,25 +263,113 @@ const MobileMenu = ({
                 <span className='pl-2'>Отправка</span>
               </NavLink>
             </li>
-            <li className='my-3 flex items-center'>
-              <NavLink
-                to='/gb-buyer'
-                onClick={() => onClose()}
-                className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
+            <li className='my-3'>
+              <div
+                onClick={toggleServices}
+                className='p-2 rounded-lg flex justify-between items-center w-full'
               >
-                <img src={buyer} alt='*' />
-                <span className='pl-2'>GB-Buyer</span>
-              </NavLink>
-            </li>
-            <li className='my-3 flex items-center'>
-              <NavLink
-                to='/gb-business'
-                onClick={() => onClose()}
-                className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
+                <div className='flex items-center'>
+                  <img src={services} alt='*' />
+                  <span className='ss:text-lg sm:text-xl font-medium pl-2'>
+                    Сервисы
+                  </span>
+                </div>
+                <img
+                  className={`${isServices ? 'rotate-180' : ''} duration-200`}
+                  src={arrow}
+                  alt='*'
+                />
+              </div>
+              <ul
+                className={`${
+                  isServices ? 'flex' : 'hidden'
+                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3`}
               >
-                <img src={bussines} alt='*' />
-                <span className='pl-2'>GB-Business</span>
-              </NavLink>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/gb-shop'
+                    className='text-sm ss:text-base flex items-center'
+                  >
+                    <img
+                      className='min-w-[18px] w-[18px]'
+                      src={gbShop}
+                      alt='*'
+                    />
+                    <span className='pl-1'>GB-Shop</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/gb-business'
+                    className='text-sm ss:text-base flex items-center'
+                  >
+                    <img
+                      className='min-w-[18px] w-[18px]'
+                      src={business}
+                      alt='*'
+                    />
+                    <span className='pl-1'>GB-Business</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/gb-franchise'
+                    className='text-sm ss:text-base flex items-center'
+                  >
+                    <img
+                      className='min-w-[18px] w-[18px]'
+                      src={gbFranchise}
+                      alt='*'
+                    />
+                    <span className='pl-1'>GB-Franchise</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/gb-coin'
+                    className='text-sm ss:text-base flex items-center'
+                  >
+                    <img
+                      className='min-w-[18px] w-[18px]'
+                      src={gbCoin}
+                      alt='*'
+                    />
+                    <span className='pl-1'>GB-Coin</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/gb-buyer'
+                    className='text-sm ss:text-base flex items-center'
+                  >
+                    <img
+                      className='min-w-[18px] w-[18px]'
+                      src={buyer}
+                      alt='*'
+                    />
+                    <span className='pl-1'>GB-Buyer</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/alaket'
+                    className='text-sm ss:text-base flex items-center'
+                  >
+                    <img
+                      className='min-w-[18px] w-[18px]'
+                      src={alaket}
+                      alt='*'
+                    />
+                    <span className='pl-1'>Alaket</span>
+                  </NavLink>
+                </li>
+              </ul>
             </li>
           </div>
           {user ? (

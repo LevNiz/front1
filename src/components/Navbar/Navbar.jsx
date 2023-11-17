@@ -4,7 +4,14 @@ import MobileMenu from './MobileMenu';
 import logo from './../../assets/images/header-logo.svg';
 import userImg from './../../assets/icons/user.svg';
 import chat from './../../assets/icons/messages.svg';
+import arrow from './../../assets/icons/arrow-white.svg';
 import notification from './../../assets/icons/notification.svg';
+import gbBusiness from './../../assets/icons/mobile-menu/bussines.svg';
+import gbShop from './../../assets/icons/gb-shop.svg';
+import gbCoin from './../../assets/icons/gb-bitcoin.svg';
+import gbBuyer from './../../assets/icons/mobile-menu/buyer.svg';
+import alaket from './../../assets/icons/alaket.svg';
+import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
 const Navbar = ({ hasNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -73,10 +80,67 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
               <NavLink to='/depots'>Наши склады</NavLink>
             </li>
             <li>
-              <NavLink to='/alaket'>Алакет</NavLink>
-            </li>
-            <li>
               <NavLink to='/applications'>Отправка</NavLink>
+            </li>
+            <li className='relative group cursor-pointer flex items-center'>
+              <span>Сервисы</span>
+              <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
+              <ul className='absolute left-4 hidden top-full p-3 bg-white shadow-md text-black group-hover:block w-44'>
+                <li className='my-2'>
+                  <NavLink
+                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    to='/gb-shop'
+                  >
+                    <img className='w-4 mr-[3px]' src={gbShop} alt='*' />
+                    GB-Shop
+                  </NavLink>
+                </li>
+                <li className='my-2'>
+                  <NavLink
+                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    to='/gb-business'
+                  >
+                    <img className='w-4 mr-[3px]' src={gbBusiness} alt='*' />
+                    GB-Business
+                  </NavLink>
+                </li>
+                <li className='my-2'>
+                  <NavLink
+                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    to='/gb-franchise'
+                  >
+                    <img className='w-4 mr-[3px]' src={gbFranchise} alt='*' />
+                    GB-Franchise
+                  </NavLink>
+                </li>
+                <li className='my-2'>
+                  <NavLink
+                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    to='/gb-coin'
+                  >
+                    <img className='w-4 mr-[3px]' src={gbCoin} alt='*' />
+                    GB-Coin
+                  </NavLink>
+                </li>
+                <li className='my-2'>
+                  <NavLink
+                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    to='/gb-buyer'
+                  >
+                    <img className='w-4 mr-[3px]' src={gbBuyer} alt='*' />
+                    GB-Buyer
+                  </NavLink>
+                </li>
+                <li className='my-2'>
+                  <NavLink
+                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    to='/alaket'
+                  >
+                    <img className='w-4 mr-[3px]' src={alaket} alt='*' />
+                    Alaket
+                  </NavLink>
+                </li>
+              </ul>
             </li>
           </ul>
           <div className='flex justify-end items-center'>
