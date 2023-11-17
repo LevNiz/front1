@@ -6,7 +6,7 @@ import userImg from './../../assets/icons/user.svg';
 import chat from './../../assets/icons/messages.svg';
 import notification from './../../assets/icons/notification.svg';
 
-const Navbar = ({ hasNotification }) => {
+const Navbar = ({ hasNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -95,11 +95,11 @@ const Navbar = ({ hasNotification }) => {
                   <NavLink to='/gb-chat'>
                     <img className='w-[27px] md:w-6' src={chat} alt='*' />
                   </NavLink>
-                  {/* <span
+                  <span
                     className={`${
-                      hasNotification ? 'block' : 'hidden'
+                      gbChatNotification ? 'block' : 'hidden'
                     } absolute top-0 left-0 bg-red-500 h-2 w-2 rounded-full`}
-                  ></span> */}
+                  ></span>
                 </li>
                 <li className='relative'>
                   <NavLink to='profile/personal-data'>

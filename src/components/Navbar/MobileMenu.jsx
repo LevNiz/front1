@@ -23,7 +23,11 @@ import chat from './../../assets/icons/chat.svg';
 import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
 
-const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
+const MobileMenu = ({
+  isOpen,
+  onClose,
+  hasNotification,
+}) => {
   const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();

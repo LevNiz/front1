@@ -72,6 +72,36 @@ export const fetchChatMessages = async (chatID, senderData, callback) => {
   });
 };
 
+export const gbChatNewMessage = (userID, callBack) => {
+  const q = query(
+    collection(db, 'chat'),
+    where('users', 'array-contains', `${userID}`),
+    orderBy('lastMessageTime', 'desc')
+  );
+
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((docSnap) => {
+      const messagesRef = collection(docSnap.ref, 'messages');
+      const messagesQuery = query(
+        messagesRef,
+        where('read', '==', false),
+        where('receiverUid', '==', `${userID}`)
+      );
+
+      onSnapshot(messagesQuery, (messagesSnapshot) => {
+        const unreadMessages = messagesSnapshot.docs;
+        if (unreadMessages.length) {
+          callBack(true);
+        } else {
+          callBack(false);
+        }
+      });
+    });
+  });
+
+  return unsubscribe;
+};
+
 export const createGBChat = async (chatID, receiver, senderData) => {
   const userDocRef = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);

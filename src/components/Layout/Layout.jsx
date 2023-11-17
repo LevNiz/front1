@@ -4,9 +4,11 @@ import Navbar from '../Navbar/Navbar';
 import { useEffect, useState } from 'react';
 import { SupportChatsNewMessage } from '../../api/chats';
 import { useSelector } from 'react-redux';
+import { gbChatNewMessage } from '../../api/gbchat';
 
 const Layout = () => {
   const [hasNotification, setHasNotification] = useState(0);
+  const [gbChatNotification, stGbChatNotification] = useState(false);
 
   const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
@@ -25,11 +27,24 @@ const Layout = () => {
     return () => {
       fetchMessages();
     };
-  }, []);
+  }, [userID]);
+
+  useEffect(() => {
+    const fetchMessages = gbChatNewMessage(userID, (newDocData) => {
+      stGbChatNotification(newDocData);
+    });
+
+    return () => {
+      fetchMessages();
+    };
+  }, [userID]);
 
   return (
     <>
-      <Navbar hasNotification={hasNotification} />
+      <Navbar
+        gbChatNotification={gbChatNotification}
+        hasNotification={hasNotification}
+      />
       <Outlet context={hasNotification} />
       {firstPathSegment === 'profile' ? (
         ''
