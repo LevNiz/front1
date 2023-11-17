@@ -48,15 +48,6 @@ const GBChatMessages = ({ chats, setChatContent }) => {
 
   useEffect(scrollToBottom, [messages]);
 
-  useEffect(() => {
-    (async () => {
-      const { success, data } = await fetchUser(userID);
-      if (success) {
-        setSenderData(data);
-      }
-    })();
-  }, [userID]);
-
   const handleSendMessage = async (e) => {
     setInputVal('');
     await sendMessage(e, inputVal, senderData, chatData);
@@ -68,6 +59,16 @@ const GBChatMessages = ({ chats, setChatContent }) => {
       await sendGBChatImage(senderData, chatData, file);
     })();
   };
+
+  useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setSenderData(data);
+      }
+    })();
+  }, [userID]);
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -86,145 +87,139 @@ const GBChatMessages = ({ chats, setChatContent }) => {
 
   return (
     <div className='relative w-full'>
-      <>
-        <div className='flex items-center w-full p-2'>
+      <div className='flex items-center w-full p-2'>
+        <img
+          onClick={() => {
+            navigate('/gb-chat');
+            setChatContent(false);
+          }}
+          className='mm:hidden mr-2 cursor-pointer'
+          src={back}
+          alt='*'
+        />
+        <div className='min-w-[48px] border border-gray-400 w-12 h-12 rounded-full overflow-hidden mr-3'>
           <img
-            onClick={() => {
-              navigate('/gb-chat');
-              setChatContent(false);
+            className='object-cover w-full h-full rounded-[50%]'
+            src={chatData?.lastMessageReceiverAvatar}
+            onError={(e) => {
+              e.target.onError = null;
+              e.target.src = noAva;
             }}
-            className='mm:hidden mr-2 cursor-pointer'
-            src={back}
             alt='*'
           />
-          <div className='min-w-[48px] border border-gray-400 w-12 h-12 rounded-full overflow-hidden mr-3'>
-            <img
-              className='object-cover w-full h-full rounded-[50%]'
-              src={chatData?.lastMessageReceiverAvatar}
-              onError={(e) => {
-                e.target.onError = null;
-                e.target.src = noAva;
-              }}
-              alt='*'
-            />
-          </div>
-          <div className='flex flex-col'>
-            <h4 className='font-medium'>
-              {chatData?.lastMessageReceiverName || '-'}
-            </h4>
-          </div>
         </div>
-        <div
-          className='h-[calc(100vh-136px)] mm:h-[calc(100vh-180px)] border md:border-0 md:border-t scrollable border-gray-300 overflow-y-scroll p-2 pb-16'
-          style={{ backgroundImage: `url('${chatBg}')` }}
-        >
-          {isLoading ? (
-            <ContentLoading extraStyle='100%' />
-          ) : messages?.length ? (
-            messages?.map((message) =>
-              message?.data?.senderUid === `${userID}` ? (
-                <div
-                  key={message.id}
-                  className='ml-auto justify-end w-4/5 flex my-1'
-                >
-                  <div className='text-right w-fit flex flex-col'>
-                    <p
-                      className={`bg-green-200 rounded-l-xl rounded-tr-xl ml-auto ${
-                        message?.data?.text ? 'px-3 py-1 mb-1' : ''
-                      } text-[12px] mm:text-sm break-all w-fit flex items-end`}
-                    >
-                      {message?.data?.text}
-                    </p>
-                    {message?.data?.image ? (
-                      <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden mb-1 bg-green-200 p-1'>
-                        <img
-                          className='w-full h-full object-cover cursor-zoom-in rounded-l-xl rounded-tr-xl'
-                          src={message?.data?.image}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = noImg;
-                          }}
-                          alt='*'
-                          onClick={(e) => {
-                            setOpenImg(true);
-                            setClickedImageUrl(e.target.getAttribute('src'));
-                          }}
-                        />
-                      </div>
+        <div className='flex flex-col'>
+          <h4 className='font-medium'>
+            {chatData?.lastMessageReceiverName || '-'}
+          </h4>
+        </div>
+      </div>
+      <div
+        className='h-[calc(100vh-136px)] mm:h-[calc(100vh-180px)] border md:border-0 md:border-t scrollable border-gray-300 overflow-y-scroll p-2 pb-16'
+        style={{ backgroundImage: `url('${chatBg}')` }}
+      >
+        {isLoading ? (
+          <ContentLoading extraStyle='100%' />
+        ) : messages?.length ? (
+          messages?.map((message) =>
+            message?.data?.senderUid === `${userID}` ? (
+              <div
+                key={message.id}
+                className='ml-auto justify-end w-4/5 flex my-1'
+              >
+                <div className='text-right w-fit flex flex-col'>
+                  <p
+                    className={`bg-green-200 rounded-l-xl rounded-tr-xl ml-auto ${
+                      message?.data?.text ? 'px-3 py-1 mb-1' : ''
+                    } text-[12px] mm:text-sm break-all w-fit flex items-end`}
+                  >
+                    {message?.data?.text}
+                  </p>
+                  {message?.data?.image ? (
+                    <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden mb-1 bg-green-200 p-1'>
+                      <img
+                        className='w-full h-full object-cover cursor-zoom-in rounded-l-xl rounded-tr-xl'
+                        src={message?.data?.image}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = noImg;
+                        }}
+                        alt='*'
+                        onClick={(e) => {
+                          setOpenImg(true);
+                          setClickedImageUrl(e.target.getAttribute('src'));
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <span className='mr-3 mb-2 text-[8px] mm:text-[10px] text-gray-500 flex justify-end'>
+                    {message?.data?.time ? (
+                      <FormatDate dateFormat={message?.data?.time} />
                     ) : (
-                      ''
+                      '-- --'
                     )}
-                    <span className='mr-3 mb-2 text-[8px] mm:text-[10px] text-gray-500 flex justify-end'>
-                      {message?.data?.time ? (
-                        <FormatDate dateFormat={message?.data?.time} />
-                      ) : (
-                        '-- --'
-                      )}
-                      {message?.data?.read ? (
-                        <img
-                          className='w-[14px] ml-1'
-                          src={doubleTick}
-                          alt='*'
-                        />
-                      ) : (
-                        <img className='w-[14px] ml-1' src={tick} alt='*' />
-                      )}
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <div key={message.id} className='w-4/5 flex my-1'>
-                  <div className='text-right w-fit flex flex-col'>
-                    <p
-                      className={`bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1 text-left ${
-                        message?.data?.text ? 'px-3 py-1 mb-1' : ''
-                      } text-[12px] mm:text-sm break-all w-fit flex items-end`}
-                    >
-                      {message?.data?.text}
-                    </p>
-                    {message?.data?.image ? (
-                      <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden p-1 bg-slate-500'>
-                        <img
-                          className='w-full h-full object-cover cursor-zoom-in  rounded-r-xl rounded-bl-xl'
-                          src={message?.data?.image}
-                          alt='*'
-                          onClick={(e) => {
-                            setOpenImg(true);
-                            setClickedImageUrl(e.target.getAttribute('src'));
-                          }}
-                        />
-                      </div>
+                    {message?.data?.read ? (
+                      <img className='w-[14px] ml-1' src={doubleTick} alt='*' />
                     ) : (
-                      ''
+                      <img className='w-[14px] ml-1' src={tick} alt='*' />
                     )}
-                    <span className='ml-3 text-left mb-2 text-[8px] mm:text-[10px] text-gray-500'>
-                      {message?.data?.time ? (
-                        <FormatDate dateFormat={message?.data?.time} />
-                      ) : (
-                        '-- --'
-                      )}
-                    </span>
-                  </div>
-                </div>
-              )
-            )
-          ) : (
-            <div className='w-full h-full flex justify-center items-center pb-5 px-4'>
-              <div className='text-center'>
-                <img className='w-3/4 mm:w-1/2 mx-auto' src={chatImg} alt='*' />
-                <h2 className='font-medium text-xl sm:text-2xl'>Чат создан!</h2>
-                <p className='text-gray-500 text-sm mt-1'>
-                  Начните общаться с{' '}
-                  <span className='font-medium text-black'>
-                    {chatData?.lastMessageReceiverName}
                   </span>
-                </p>
+                </div>
               </div>
+            ) : (
+              <div key={message.id} className='w-4/5 flex my-1'>
+                <div className='text-right w-fit flex flex-col'>
+                  <p
+                    className={`bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1 text-left ${
+                      message?.data?.text ? 'px-3 py-1 mb-1' : ''
+                    } text-[12px] mm:text-sm break-all w-fit flex items-end`}
+                  >
+                    {message?.data?.text}
+                  </p>
+                  {message?.data?.image ? (
+                    <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden p-1 bg-slate-500'>
+                      <img
+                        className='w-full h-full object-cover cursor-zoom-in  rounded-r-xl rounded-bl-xl'
+                        src={message?.data?.image}
+                        alt='*'
+                        onClick={(e) => {
+                          setOpenImg(true);
+                          setClickedImageUrl(e.target.getAttribute('src'));
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <span className='ml-3 text-left mb-2 text-[8px] mm:text-[10px] text-gray-500'>
+                    {message?.data?.time ? (
+                      <FormatDate dateFormat={message?.data?.time} />
+                    ) : (
+                      '-- --'
+                    )}
+                  </span>
+                </div>
+              </div>
+            )
+          )
+        ) : (
+          <div className='w-full h-full flex justify-center items-center pb-5 px-4'>
+            <div className='text-center'>
+              <img className='w-3/4 mm:w-1/2 mx-auto' src={chatImg} alt='*' />
+              <h2 className='font-medium text-xl sm:text-2xl'>Чат создан!</h2>
+              <p className='text-gray-500 text-sm mt-1'>
+                Начните общаться с{' '}
+                <span className='font-medium text-black'>
+                  {chatData?.lastMessageReceiverName}
+                </span>
+              </p>
             </div>
-          )}
-          <div ref={messagesEndRef}></div>
-        </div>
-      </>
+          </div>
+        )}
+        <div ref={messagesEndRef}></div>
+      </div>
       <form
         onSubmit={(e) => handleSendMessage(e)}
         className='w-full absolute bottom-0 left-0'
