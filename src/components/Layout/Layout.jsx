@@ -31,6 +31,7 @@ const Layout = () => {
 
   useEffect(() => {
     const fetchMessages = gbChatNewMessage(userID, (newDocData) => {
+      console.log(newDocData);
       stGbChatNotification(newDocData);
     });
 

@@ -90,11 +90,7 @@ export const gbChatNewMessage = (userID, callBack) => {
 
       onSnapshot(messagesQuery, (messagesSnapshot) => {
         const unreadMessages = messagesSnapshot.docs;
-        if (unreadMessages.length) {
-          callBack(true);
-        } else {
-          callBack(false);
-        }
+        callBack(unreadMessages.length);
       });
     });
   });

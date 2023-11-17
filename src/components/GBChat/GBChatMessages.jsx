@@ -68,7 +68,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
     if (id) {
       fetchChats();
     }
-  }, [id, senderData, navigate]);
+  }, [id, senderData]);
 
   const handleSendMessage = async (e) => {
     setInputVal('');
