@@ -6,6 +6,7 @@ import { ContentLoading } from '../../helpers/Loader/Loader';
 import { FormatDate } from '../../helpers/FormatDate/formatDate';
 import {
   fetchChatMessages,
+  lastMessageReadUpdate,
   sendGBChatImage,
   sendMessage,
 } from '../../api/gbchat';
@@ -56,20 +57,6 @@ const GBChatMessages = ({ chats, setChatContent }) => {
     })();
   }, [userID]);
 
-  useEffect(() => {
-    const fetchChats = async () => {
-      setIsLoading(true);
-      await fetchChatMessages(id, senderData, (data) => {
-        setMessages(data);
-        setIsLoading(false);
-      });
-    };
-
-    if (id) {
-      fetchChats();
-    }
-  }, [id, senderData]);
-
   const handleSendMessage = async (e) => {
     setInputVal('');
     await sendMessage(e, inputVal, senderData, chatData);
@@ -81,6 +68,21 @@ const GBChatMessages = ({ chats, setChatContent }) => {
       await sendGBChatImage(senderData, chatData, file);
     })();
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    const unsubscribeMessages = fetchChatMessages(id, senderData, (data) => {
+      setMessages(data);
+      setIsLoading(false);
+    });
+    const lastMessUpdate = async () => {
+      await lastMessageReadUpdate(id, senderData);
+    };
+    lastMessUpdate();
+    return () => {
+      unsubscribeMessages();
+    };
+  }, [id, senderData]);
 
   return (
     <div className='relative w-full'>

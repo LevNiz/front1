@@ -35,41 +35,58 @@ export const fetchGBChats = (userID, callBack) => {
   return unsubscribe;
 };
 
-export const fetchChatMessages = async (chatID, senderData, callback) => {
+export const lastMessageReadUpdate = async (chatID, senderData) => {
   const userDocRef = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);
 
   if (userDocSnapshot?.data() && senderData?.id !== undefined) {
     if (userDocSnapshot?.data()?.lastMessageSender !== `${senderData?.id}`) {
-      updateDoc(userDocRef, { lastMessageRead: true });
+      const updatedUserData = { lastMessageRead: true };
+      updateDoc(userDocRef, updatedUserData);
     }
   }
-  const queryMessages = query(
-    collection(db, 'chat', `${chatID}`, 'messages'),
-    orderBy('time')
-  );
+};
 
-  onSnapshot(queryMessages, (querySnapshot) => {
-    querySnapshot.forEach((chat) => {
-      const docData = chat.data();
-      if (docData.receiverUid == `${senderData?.id}` && !docData.read) {
-        const messageRef = doc(
-          db,
-          'chat',
-          `${chatID}`,
-          'messages',
-          `${chat.id}`
-        );
-        updateDoc(messageRef, { read: true });
-      }
+export const fetchChatMessages = (chatID, senderData, callBack) => {
+  let unsubscribe;
+
+  const fetchMessages = () => {
+    const messagesRef = collection(db, 'chat', `${chatID}`, 'messages');
+    const queryMessages = query(messagesRef, orderBy('time'));
+
+    unsubscribe = onSnapshot(queryMessages, (querySnapshot) => {
+      const docIds = querySnapshot.docs?.map((doc) => ({
+        id: doc.id,
+        data: doc.data() || {},
+      }));
+
+      callBack(docIds);
+
+      querySnapshot.forEach((chat) => {
+        const docData = chat.data();
+        if (docData.receiverUid === `${senderData?.id}` && !docData.read) {
+          const messageRef = doc(
+            db,
+            'chat',
+            `${chatID}`,
+            'messages',
+            `${chat.id}`
+          );
+          updateDoc(messageRef, { read: true });
+        }
+      });
     });
+  };
 
-    const docData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data() || {},
-    }));
-    callback(docData);
-  });
+  if (chatID) {
+    fetchMessages();
+  }
+
+  return () => {
+    if (unsubscribe) {
+      unsubscribe();
+    }
+  };
 };
 
 export const gbChatNewMessage = (userID, callBack) => {
