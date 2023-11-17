@@ -26,8 +26,8 @@ export const registerUser = async (dispatch, data) => {
     const res = await request.post('user/client/', userData);
     const userID = jwt_decode(res?.data.access);
     dispatch(registerSuccess({ user: res?.data, userID: userID?.user_id }));
-    localStorage.setItem('accessToken', res.data.access);
-    localStorage.setItem('refreshToken', res.data.refresh);
+    localStorage.setItem('accessToken', res?.data?.access);
+    localStorage.setItem('refreshToken', res?.data?.refresh);
     return { success: true };
   } catch (error) {
     dispatch(registerFailure(error));
@@ -47,8 +47,8 @@ export const loginUser = async (dispatch, data) => {
     const client = jwt_decode(res?.data.access);
     if (client?.user_type === 'client') {
       dispatch(loginSuccess({ user: res?.data, userID: client?.user_id }));
-      localStorage.setItem('accessToken', res.data.access);
-      localStorage.setItem('refreshToken', res.data.refresh);
+      localStorage.setItem('accessToken', res?.data?.access);
+      localStorage.setItem('refreshToken', res?.data?.refresh);
       return { success: true };
     }
     dispatch(loginFailure());
@@ -66,8 +66,6 @@ export const logOutFetch = async (dispatch) => {
 
 // Update profile:
 export const UpdateProfile = async ({ userID, data, ava }) => {
-  const milliseconds = new Date().getMilliseconds();
-  const formData = new FormData();
   const userData = {
     address: data?.address,
     city: data?.city?.value,
@@ -77,21 +75,26 @@ export const UpdateProfile = async ({ userID, data, ava }) => {
     phone: data?.phone,
   };
 
-  if (ava) {
-    formData.append('image', ava);
-    formData.append('title', milliseconds);
-    try {
-      const res = await axiosInstance.post('core/image/', formData);
-      userData.avatar = res?.data?.image;
-    } catch (imageError) {
-      return { success: false };
-    }
-  }
-
   try {
+    if (ava instanceof File) {
+      const milliseconds = new Date().getMilliseconds();
+      const formData = new FormData();
+      formData.append('image', ava);
+      formData.append('title', milliseconds);
+
+      try {
+        const res = await axiosInstance.post('core/image/', formData);
+        userData.avatar = res?.data?.image;
+      } catch (error) {
+        return { success: false, data: error };
+      }
+    } else {
+      userData.avatar = null;
+    }
+
     await request.patch(`user/client/${userID}/`, userData);
     return { success: true };
-  } catch (patchError) {
-    return { success: false };
+  } catch (error) {
+    return { success: false, data: error };
   }
 };
