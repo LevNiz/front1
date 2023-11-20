@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchAlaketDetail } from '../../api/alaket';
-import { ContentLoading } from '../../helpers/Loader/Loader';
+import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import noImg from '../../assets/images/no-image.svg';
 import noAva from '../../assets/images/no-ava.jpeg';
 import location from '../../assets/icons/location3.svg';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 import { useSelector } from 'react-redux';
+import { createGBChat } from '../../api/gbchat';
+import { fetchUser } from '../../api/client';
 
 const AlaketDetail = () => {
   const { id } = useParams();
   const { userID } = useSelector((state) => state?.user);
+  const navigate = useNavigate();
 
   const [alaket, setAlaket] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [senderData, setSenderData] = useState({});
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -28,6 +33,26 @@ const AlaketDetail = () => {
     })();
     scrollToTop();
   }, [id]);
+
+  useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setSenderData(data);
+      }
+    })();
+  }, [userID]);
+
+  const handleCreateGBChat = async () => {
+    setIsButtonLoading(true);
+    const chatID = `${userID}${alaket?.id}`;
+    const { success } = await createGBChat(chatID, alaket, senderData);
+    if (success) {
+      navigate(`/gb-chat/t/${chatID}`);
+      setIsButtonLoading(false);
+    }
+    setIsButtonLoading(false);
+  };
 
   return (
     <div className='min-h-[80vh] py-20 content'>
@@ -109,14 +134,12 @@ const AlaketDetail = () => {
               </div>
             </div>
             <button
-              onClick={() =>
-                alert('Совсем скоро появится возможность отправлять сообщение!')
-              }
+              onClick={handleCreateGBChat}
               className={`${
                 alaket?.client?.id === userID ? 'hidden' : ''
               } uppercase font-bold hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-xs w-full mt-8`}
             >
-              Написать сообщение
+              {isButtonLoading ? <ButtonLoading /> : 'Написать сообщение'}
             </button>
           </div>
         </div>

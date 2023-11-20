@@ -115,25 +115,30 @@ export const gbChatNewMessage = (userID, callBack) => {
   return unsubscribe;
 };
 
-export const createGBChat = async (chatID, receiver, senderData) => {
+export const createGBChat = async (chatID, receiverData, senderData) => {
   const userDocRef = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);
 
   if (!userDocSnapshot.exists()) {
-    await setDoc(userDocRef, {
-      buyerChat: true,
+    const chatDocData = {
+      buyerChat: receiverData?.client?.user_type === 'buyer' ? true : false,
       lastMessage: 'Чат создан',
       lastMessageRead: false,
-      lastMessageReceiverAvatar: receiver?.avatar || '',
-      lastMessageReceiverName: receiver?.fullname || '',
+      lastMessageReceiverAvatar: receiverData?.client?.avatar || '',
+      lastMessageReceiverName: receiverData?.client?.fullname || '',
       lastMessageSender: `${senderData?.id}` || '',
       lastMessageSenderAvatar: senderData?.avatar || '',
       lastMessageSenderName: senderData?.fullname || '',
       lastMessageTime: serverTimestamp(),
       uid: `${chatID}` || '',
-      users: [`${senderData?.id}`, `${receiver?.id}` || ''],
-    });
+      users: [`${senderData?.id}`, `${receiverData?.client?.id}` || ''],
+    };
+    if (receiverData?.client?.user_type === 'client') {
+      chatDocData.lastMessageReceiver = receiverData?.client?.id;
+    }
+    await setDoc(userDocRef, chatDocData);
   }
+
   return { success: true };
 };
 

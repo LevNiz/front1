@@ -4,7 +4,7 @@ import vectorFranchise from '../../assets/icons/franchiseVector.svg';
 
 const GBFranchiseItem = () => {
   return (
-    <div className='mm:content pt-8 mm:pt-12'>
+    <div className='mm:content pt-8 mm:pt-16'>
       <div className='!bg-[#D660F2] px-4 md:px-6 py-8 sm:py-10 relative'>
         <img src={squire} className='absolute top-0 right-0 z-[1]' alt='*' />
         <h3 className='text-xl mm:text-2xl text-white leading-snug max-w-5xl z-[2] relative'>
