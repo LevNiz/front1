@@ -287,7 +287,10 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
               >
                 <li className='flex items-center'>
                   <NavLink
-                    onClick={() => onClose()}
+                    onClick={() => {
+                      onClose();
+                      alert('В процессе разработки!');
+                    }}
                     to='/gb-shop'
                     className='text-base flex items-center'
                   >
@@ -329,7 +332,10 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                 </li>
                 <li className='flex items-center'>
                   <NavLink
-                    onClick={() => onClose()}
+                    onClick={() => {
+                      onClose();
+                      alert('В процессе разработки!');
+                    }}
                     to='/gb-coin'
                     className='text-base flex items-center'
                   >

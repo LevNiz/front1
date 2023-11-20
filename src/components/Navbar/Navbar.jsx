@@ -88,8 +88,9 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
               <ul className='absolute left-4 hidden top-full p-3 bg-white shadow-md text-black group-hover:block w-52'>
                 <li className='my-2'>
                   <NavLink
+                    onClick={() => alert('В процессе разработки!')}
                     className='hover:opacity-70 duration-150 flex items-center'
-                    to='/gb-shop'
+                    to='#'
                   >
                     <img className='w-4 mr-1.5' src={gbShop} alt='*' />
                     GB-Shop
@@ -115,8 +116,9 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
                 </li>
                 <li className='my-2'>
                   <NavLink
+                    onClick={() => alert('В процессе разработки!')}
                     className='hover:opacity-70 duration-150 flex items-center'
-                    to='/gb-coin'
+                    to='#'
                   >
                     <img className='w-4 mr-1.5' src={gbCoin} alt='*' />
                     GB-Coin
