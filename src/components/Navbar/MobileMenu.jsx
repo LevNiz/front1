@@ -108,13 +108,13 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
               <ul
                 className={`${
                   isProfileMenuOpen ? 'flex' : 'hidden'
-                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3`}
+                } ml-4 bg-slate-100 p-3 rounded-b-xl rounded-tr-xl flex-col space-y-3 mr-2`}
               >
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/personal-data'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -128,7 +128,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-parcels'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -142,7 +142,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-applications'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -156,7 +156,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/buy-request'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -170,7 +170,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/saved-addresses'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -184,7 +184,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/notifications'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -198,7 +198,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-wallet'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -212,7 +212,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/tech-chat'
-                    className='text-sm ss:text-base flex items-center justify-between w-full'
+                    className='text-base flex items-center justify-between w-full'
                   >
                     <div className='flex items-center mr-1'>
                       <img
@@ -283,13 +283,13 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
               <ul
                 className={`${
                   isServices ? 'flex' : 'hidden'
-                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3`}
+                } ml-4 bg-slate-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3 mr-2`}
               >
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/gb-shop'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -303,7 +303,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/gb-business'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -317,7 +317,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/gb-franchise'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -331,7 +331,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/gb-coin'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -345,7 +345,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/gb-buyer'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -359,7 +359,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/alaket'
-                    className='text-sm ss:text-base flex items-center'
+                    className='text-base flex items-center'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'

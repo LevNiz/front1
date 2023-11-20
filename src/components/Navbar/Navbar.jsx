@@ -85,58 +85,58 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
             <li className='relative group cursor-pointer flex items-center'>
               <span>Сервисы</span>
               <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
-              <ul className='absolute left-4 hidden top-full p-3 bg-white shadow-md text-black group-hover:block w-44'>
+              <ul className='absolute left-4 hidden top-full p-3 bg-white shadow-md text-black group-hover:block w-52'>
                 <li className='my-2'>
                   <NavLink
-                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    className='hover:opacity-70 duration-150 flex items-center'
                     to='/gb-shop'
                   >
-                    <img className='w-4 mr-[3px]' src={gbShop} alt='*' />
+                    <img className='w-4 mr-1.5' src={gbShop} alt='*' />
                     GB-Shop
                   </NavLink>
                 </li>
                 <li className='my-2'>
                   <NavLink
-                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    className='hover:opacity-70 duration-150 flex items-center'
                     to='/gb-business'
                   >
-                    <img className='w-4 mr-[3px]' src={gbBusiness} alt='*' />
+                    <img className='w-4 mr-1.5' src={gbBusiness} alt='*' />
                     GB-Business
                   </NavLink>
                 </li>
                 <li className='my-2'>
                   <NavLink
-                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    className='hover:opacity-70 duration-150 flex items-center'
                     to='/gb-franchise'
                   >
-                    <img className='w-4 mr-[3px]' src={gbFranchise} alt='*' />
+                    <img className='w-4 mr-1.5' src={gbFranchise} alt='*' />
                     GB-Franchise
                   </NavLink>
                 </li>
                 <li className='my-2'>
                   <NavLink
-                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    className='hover:opacity-70 duration-150 flex items-center'
                     to='/gb-coin'
                   >
-                    <img className='w-4 mr-[3px]' src={gbCoin} alt='*' />
+                    <img className='w-4 mr-1.5' src={gbCoin} alt='*' />
                     GB-Coin
                   </NavLink>
                 </li>
                 <li className='my-2'>
                   <NavLink
-                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    className='hover:opacity-70 duration-150 flex items-center'
                     to='/gb-buyer'
                   >
-                    <img className='w-4 mr-[3px]' src={gbBuyer} alt='*' />
+                    <img className='w-4 mr-1.5' src={gbBuyer} alt='*' />
                     GB-Buyer
                   </NavLink>
                 </li>
                 <li className='my-2'>
                   <NavLink
-                    className='font-medium hover:opacity-70 duration-150 flex items-center'
+                    className='hover:opacity-70 duration-150 flex items-center'
                     to='/alaket'
                   >
-                    <img className='w-4 mr-[3px]' src={alaket} alt='*' />
+                    <img className='w-4 mr-1.5' src={alaket} alt='*' />
                     Alaket
                   </NavLink>
                 </li>

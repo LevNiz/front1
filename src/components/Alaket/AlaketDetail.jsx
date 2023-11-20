@@ -49,7 +49,7 @@ const AlaketDetail = () => {
           <div className='md:max-w-xl w-full pt-5 flex flex-col justify-between md:min-h-[512px]'>
             <div>
               <div className='flex items-center'>
-                <div className='min-w-[40px] w-10 h-10 rounded-full border border-gray-400 overflow-hidden p-[2px] mr-2'>
+                <div className='min-w-[48px] w-12 h-12 rounded-full border border-slate-500 overflow-hidden p-[2px] mr-2'>
                   <img
                     className='w-full h-full rounded-full object-cover'
                     src={alaket?.client?.avatar}
@@ -60,7 +60,7 @@ const AlaketDetail = () => {
                     alt='*'
                   />
                 </div>
-                <span className='font-medium leading-4'>
+                <span className='text-lg font-medium leading-5'>
                   {alaket?.client?.fullname}
                 </span>
               </div>
