@@ -69,17 +69,17 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
               alt='*'
             />
           </NavLink>
-          <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white navbar'>
-            <li>
+          <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white'>
+            <li className='navbar'>
               <NavLink to='/'>Главная</NavLink>
             </li>
-            <li>
+            <li className='navbar'>
               <NavLink to='/tracking'>Трекинг посылок</NavLink>
             </li>
-            <li>
+            <li className='navbar'>
               <NavLink to='/depots'>Наши склады</NavLink>
             </li>
-            <li>
+            <li className='navbar'>
               <NavLink to='/applications'>Отправка</NavLink>
             </li>
             <li className='relative group cursor-pointer flex items-center'>
