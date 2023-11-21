@@ -32,6 +32,8 @@ const ProfileSidebar = () => {
     navigate('/');
   };
 
+  console.log(hasNotification);
+
   return (
     <>
       <div className='bg-white z-[99999] md:min-w-[240px] md:max-w-[240px] lg:min-w-[300px] lg:max-w-[300px] w-full hidden md:block'>
@@ -117,7 +119,7 @@ const ProfileSidebar = () => {
                   hasNotification > 0 ? 'block' : 'hidden'
                 } bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-md px-1`}
               >
-                {hasNotification}
+                {hasNotification > 99 ? '99+' : hasNotification}
               </span>
             </NavLink>
           </li>

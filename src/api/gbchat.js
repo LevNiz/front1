@@ -108,7 +108,6 @@ export const gbChatNewMessage = (userID, callBack) => {
 
       onSnapshot(messagesQuery, (messagesSnapshot) => {
         const unreadMessages = messagesSnapshot.docs.length;
-        console.log(messagesSnapshot.docs.length);
         totalUnreadMessages = unreadMessages;
 
         callBack(totalUnreadMessages);

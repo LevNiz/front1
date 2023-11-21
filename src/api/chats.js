@@ -9,6 +9,7 @@ import {
   setDoc,
   updateDoc,
   query,
+  where,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import { axiosInstance } from './axios.js';
@@ -20,11 +21,11 @@ export const fetchSupportChats = (userID, callback) => {
     orderBy('time')
   );
 
-  const querySnap = onSnapshot(q, (querySnapshot) => {
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((chat) => {
       const docData = chat.data();
 
-      if (docData.receiverUid == userID && !docData.read) {
+      if (docData.receiverUid === `${userID}`) {
         const messageRef = doc(
           db,
           'support_chat',
@@ -45,18 +46,17 @@ export const fetchSupportChats = (userID, callback) => {
     callback(docData);
   });
 
-  return () => {
-    querySnap();
-  };
+  return unsubscribe;
 };
 
 export const SupportChatsNewMessage = (userID, callback) => {
   const q = query(
     collection(db, 'support_chat', `${userID}`, 'messages'),
-    orderBy('time')
+    where('read', '==', false),
+    where('receiverUid', '==', `${userID}`)
   );
 
-  const querySnap = onSnapshot(q, (querySnapshot) => {
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docData = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       data: doc.data() || {},
@@ -65,7 +65,7 @@ export const SupportChatsNewMessage = (userID, callback) => {
     callback(docData);
   });
 
-  return querySnap
+  return unsubscribe;
 };
 
 export const sendMessage = async (e, inputVal, userData, imgLink) => {
@@ -92,7 +92,7 @@ export const sendMessage = async (e, inputVal, userData, imgLink) => {
     time: serverTimestamp(),
     read: false,
     receiverUid: 'admin',
-    senderUid: userData?.id,
+    senderUid: `${userData?.id}`,
   });
 };
 

@@ -24,28 +24,29 @@ const TechChat = () => {
 
   const messagesEndRef = useRef();
 
+  
+  const scrollToBottom = () => {
+    const scrollable = messagesEndRef.current;
+    const atBottom =
+    scrollable.scrollHeight - scrollable.scrollTop ===
+    scrollable.clientHeight;
+    if (atBottom) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
+    }
+  };
+  
+  useEffect(scrollToBottom, [messages]);
+
   useEffect(() => {
-    const fetchMessages = fetchSupportChats(userID, (newDocData) => {
+    const unsubscribe = fetchSupportChats(userID, (newDocData) => {
       setMessages(newDocData);
       setIsLoading(false);
     });
 
     return () => {
-      fetchMessages();
+      unsubscribe();
     };
   }, []);
-
-  const scrollToBottom = () => {
-    const scrollable = messagesEndRef.current;
-    const atBottom =
-      scrollable.scrollHeight - scrollable.scrollTop ===
-      scrollable.clientHeight;
-    if (atBottom) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
-    }
-  };
-
-  useEffect(scrollToBottom, [messages]);
 
   const handleSendMessage = (e) => {
     sendMessage(e, inputVal, userData);
@@ -91,7 +92,7 @@ const TechChat = () => {
             <ContentLoading extraStyle='100%' />
           ) : messages?.length ? (
             messages?.map((message) =>
-              message?.data?.senderUid === userID ? (
+              message?.data?.senderUid === `${userID}` ? (
                 <div
                   key={message.id}
                   className='ml-auto justify-end w-4/5 flex my-1'
@@ -184,7 +185,7 @@ const TechChat = () => {
           ) : (
             <div className='w-full h-full flex justify-center items-center pb-5 px-4'>
               <div className='text-center'>
-                <img className='w-3/4 mx-auto' src={chatImg} alt='*' />
+                <img className='w-2/4 mx-auto' src={chatImg} alt='*' />
                 <h2 className='font-medium text-xl sm:text-2xl'>
                   Добро пожаловать в чат техподдержки!
                 </h2>
