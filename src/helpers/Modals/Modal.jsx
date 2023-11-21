@@ -93,7 +93,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'successRequest' ? (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[90%] sm:w-full text-center'>
           <div className='flex justify-center py-5'>
             <img src={success} alt='*' />
           </div>
@@ -101,12 +101,12 @@ const Modal = ({
             Ваша заявка успешна отправлена!
           </h3>
           <div className='flex px-8 mb-8'>
-            <NavLink
+            <button
               className='bg-colYellow w-full py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
-              to='/'
+              onClick={onClose}
             >
-              Перейти на главную
-            </NavLink>
+              Закрыть
+            </button>
           </div>
         </div>
       ) : content === 'deleteAddress' ? (
