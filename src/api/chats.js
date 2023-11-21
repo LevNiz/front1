@@ -9,7 +9,6 @@ import {
   setDoc,
   updateDoc,
   query,
-  where,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import { axiosInstance } from './axios.js';
@@ -24,8 +23,7 @@ export const fetchSupportChats = (userID, callback) => {
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((chat) => {
       const docData = chat.data();
-
-      if (docData.receiverUid === `${userID}`) {
+      if (docData.receiverUid == `${userID}`) {
         const messageRef = doc(
           db,
           'support_chat',
@@ -33,11 +31,9 @@ export const fetchSupportChats = (userID, callback) => {
           'messages',
           `${chat.id}`
         );
-
         updateDoc(messageRef, { read: true });
       }
     });
-
     const docData = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       data: doc.data() || {},
@@ -50,11 +46,7 @@ export const fetchSupportChats = (userID, callback) => {
 };
 
 export const SupportChatsNewMessage = (userID, callback) => {
-  const q = query(
-    collection(db, 'support_chat', `${userID}`, 'messages'),
-    where('read', '==', false),
-    where('receiverUid', '==', `${userID}`)
-  );
+  const q = query(collection(db, 'support_chat', `${userID}`, 'messages'));
 
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docData = querySnapshot.docs.map((doc) => ({

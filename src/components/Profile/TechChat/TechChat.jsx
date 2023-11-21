@@ -24,17 +24,16 @@ const TechChat = () => {
 
   const messagesEndRef = useRef();
 
-  
   const scrollToBottom = () => {
     const scrollable = messagesEndRef.current;
     const atBottom =
-    scrollable.scrollHeight - scrollable.scrollTop ===
-    scrollable.clientHeight;
+      scrollable.scrollHeight - scrollable.scrollTop ===
+      scrollable.clientHeight;
     if (atBottom) {
       messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
     }
   };
-  
+
   useEffect(scrollToBottom, [messages]);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const TechChat = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [userID]);
 
   const handleSendMessage = (e) => {
     sendMessage(e, inputVal, userData);

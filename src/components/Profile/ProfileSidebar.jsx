@@ -32,8 +32,6 @@ const ProfileSidebar = () => {
     navigate('/');
   };
 
-  console.log(hasNotification);
-
   return (
     <>
       <div className='bg-white z-[99999] md:min-w-[240px] md:max-w-[240px] lg:min-w-[300px] lg:max-w-[300px] w-full hidden md:block'>

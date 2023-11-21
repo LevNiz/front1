@@ -17,12 +17,16 @@ const Layout = () => {
   const firstPathSegment = pathParts[1];
 
   useEffect(() => {
-    const unsubscribe = SupportChatsNewMessage(userID, (newDocData) => {
-      setHasNotification(newDocData?.length);
+    const fetchMessages = SupportChatsNewMessage(userID, (newDocData) => {
+      const unreadMessages = newDocData.filter(
+        (message) =>
+          !message.data.read && message.data.receiverUid == `${userID}`
+      );
+      setHasNotification(unreadMessages?.length);
     });
 
     return () => {
-      unsubscribe();
+      fetchMessages();
     };
   }, [userID]);
 
