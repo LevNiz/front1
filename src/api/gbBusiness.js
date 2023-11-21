@@ -17,16 +17,13 @@ export const postBusinessRequest = async (data, file) => {
     formData.append('title', milliseconds);
     try {
       const res = await axiosInstance.post('core/image/', formData);
-      console.log(res?.data)
       sendData.file = res?.data?.image;
     } catch (error) {
       return error;
     }
   }
   try {
-    const res = await axiosInstance.post('category/businessRequest/', sendData);
-    console.log(res?.data)
-
+    await axiosInstance.post('category/businessRequest/', sendData);
     return { success: true };
   } catch (error) {
     return { success: false };
