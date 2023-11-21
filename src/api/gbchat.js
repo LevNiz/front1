@@ -3,6 +3,7 @@ import {
   collection,
   doc,
   getDoc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -21,13 +22,27 @@ export const fetchGBChats = (userID, callBack) => {
     orderBy('lastMessageTime', 'desc')
   );
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const changedChats = querySnapshot.docs
-      .filter((doc) => doc.data().users.includes(`${userID}`))
-      .map((doc) => ({
-        chatId: doc.id,
+  const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+    const changedChatsPromises = querySnapshot.docs.map(async (doc) => {
+      const chatId = doc.id;
+
+      const messagesRef = collection(db, 'chat', chatId, 'messages');
+      const messagesQuery = query(
+        messagesRef,
+        where('read', '==', false),
+        where('receiverUid', '==', `${userID}`)
+      );
+
+      const messagesSnapshot = await getDocs(messagesQuery);
+
+      return {
+        chatId,
         data: doc.data(),
-      }));
+        unreadMessagesCount: messagesSnapshot.size,
+      };
+    });
+
+    const changedChats = await Promise.all(changedChatsPromises);
 
     callBack(changedChats);
   });

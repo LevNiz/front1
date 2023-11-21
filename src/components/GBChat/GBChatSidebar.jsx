@@ -9,8 +9,6 @@ import doubleTick from '../../assets/icons/read2.png';
 const GBChatSidebar = ({ chat, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
 
-  console.log(chat);
-
   return (
     <NavLink
       to={`t/${chat?.chatId}`}
@@ -30,18 +28,25 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
       </div>
       <div className='ml-2 w-full'>
         <div className='flex justify-between items-center'>
-          <h4 className='font-medium line-clamp-1 break-all text-sm md:text-base mm:text-xs'>
-            {chat?.data?.lastMessageReceiverName ?? '-'}
-          </h4>
-          <div className='flex justify-end items-center'>
+          <div className='flex items-center'>
+            <h4 className='font-medium line-clamp-1 break-all text-sm md:text-base mm:text-xs'>
+              {chat?.data?.lastMessageReceiverName ?? '-'}
+            </h4>
             <span
               className={`${
                 chat?.data?.buyerChat ? '' : 'hidden'
-              } text-[10px] ml-1 border border-gray-500 px-1.5 rounded-md bg-slate-100`}
+              } text-[10px] ml-2 border border-gray-500 px-1.5 rounded-md bg-slate-100`}
             >
               {chat?.data?.buyerChat ? 'buyer' : ''}
             </span>
           </div>
+          <span
+            className={`${
+              chat?.unreadMessagesCount > 0 ? 'block' : 'hidden'
+            } bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-md px-1 ml-2`}
+          >
+            {chat?.unreadMessagesCount > 99 ? '99+' : chat?.unreadMessagesCount}
+          </span>
         </div>
         <div className='flex justify-between items-center'>
           <div className='flex justify-between items-center w-full'>
