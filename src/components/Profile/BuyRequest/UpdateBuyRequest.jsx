@@ -52,7 +52,7 @@ const UpdateBuyRequest = () => {
 
   return (
     <div className='w-full pt-5 md:p-4'>
-      <h3 className='text-lg ss:text-xl mb-6'>Редактировать</h3>
+      <h3 className='text-lg ss:text-xl mb-6 font-medium'>Редактировать</h3>
       {isLoading ? (
         <ContentLoading extraStyle='480px' />
       ) : (

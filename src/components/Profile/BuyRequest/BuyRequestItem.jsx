@@ -59,7 +59,7 @@ const BuyRequestItem = ({ data = {} }) => {
             </div>
           </div>
           <div className='flex items-center'>
-            <span className='text-sm my-1 pr-1'>Ссылка:</span>
+            <span className='text-sm my-1 pr-1 opacity-50'>Ссылка:</span>
             <NavLink
               to={data?.link || '#'}
               target='_blank'
@@ -67,6 +67,12 @@ const BuyRequestItem = ({ data = {} }) => {
             >
               {data?.link || 'Не указана'}
             </NavLink>
+          </div>
+          <div className='flex'>
+            <span className='text-sm mb-1 pr-1 opacity-50'>Комментарий:</span>
+            <p className='text-sm break-all line-clamp-2 italic'>
+              {data?.comment || 'Не указана'}
+            </p>
           </div>
         </div>
         <div className='flex justify-between items-end'>
