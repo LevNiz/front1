@@ -92,11 +92,12 @@ export const fetchChatMessages = (chatID, senderData, callBack) => {
 export const gbChatNewMessage = (userID, callBack) => {
   const q = query(
     collection(db, 'chat'),
-    where('users', 'array-contains', `${userID}`),
-    orderBy('lastMessageTime', 'desc')
+    where('users', 'array-contains', `${userID}`)
   );
 
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    let totalUnreadMessages = 0;
+
     querySnapshot.forEach((docSnap) => {
       const messagesRef = collection(docSnap.ref, 'messages');
       const messagesQuery = query(
@@ -106,8 +107,11 @@ export const gbChatNewMessage = (userID, callBack) => {
       );
 
       onSnapshot(messagesQuery, (messagesSnapshot) => {
-        const unreadMessages = messagesSnapshot.docs;
-        callBack(unreadMessages.length);
+        const unreadMessages = messagesSnapshot.docs.length;
+        console.log(messagesSnapshot.docs.length);
+        totalUnreadMessages = unreadMessages;
+
+        callBack(totalUnreadMessages);
       });
     });
   });

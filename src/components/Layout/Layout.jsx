@@ -8,7 +8,7 @@ import { gbChatNewMessage } from '../../api/gbchat';
 
 const Layout = () => {
   const [hasNotification, setHasNotification] = useState(0);
-  const [gbChatNotification, stGbChatNotification] = useState(false);
+  const [gbChatNotification, stGbChatNotification] = useState(0);
 
   const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
@@ -30,12 +30,12 @@ const Layout = () => {
   }, [userID]);
 
   useEffect(() => {
-    const fetchMessages = gbChatNewMessage(userID, (newDocData) => {
+    const unsubscribe = gbChatNewMessage(userID, (newDocData) => {
       stGbChatNotification(newDocData);
     });
 
     return () => {
-      fetchMessages();
+      unsubscribe();
     };
   }, [userID]);
 
