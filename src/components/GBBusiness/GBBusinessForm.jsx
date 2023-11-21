@@ -1,21 +1,51 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import imgFile from '../../assets/icons/photo.svg';
 import { NavLink } from 'react-router-dom';
+import { postBusinessRequest } from '../../api/gbBusiness';
+import Modal from '../../helpers/Modals/Modal';
+import { Loading } from '../../helpers/Loader/Loader';
+import imgFile from '../../assets/icons/photo.svg';
+import noImg from '../../assets/images/no-image.svg';
 
 const GBBusinessForm = () => {
+  const [fileValue, setFileValue] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
-    // handleSubmit,
+    handleSubmit,
     formState: { errors },
     watch,
     register,
+    reset,
   } = useForm();
-
   const privacyPolicy = watch('privacyPolicy', '');
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    const { success } = await postBusinessRequest(data, fileValue);
+    if (success) {
+      setModalOpen(true);
+      setModalContent('successRequest');
+      setIsLoading(false);
+      setFileValue(null);
+      reset();
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className='content py-8'>
       <h2 className='text-2xl font-medium mb-8 text-center'>Напишите нам:</h2>
-      <form className='sm:shadow-[0_8px_34px_#00000026] rounded-lg sm:p-10 mb-12 max-w-4xl mx-auto'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='sm:shadow-[0_8px_34px_#00000026] rounded-lg sm:p-10 mb-12 max-w-4xl mx-auto'
+      >
         <div className='grid md:grid-cols-2 gap-6'>
           <div>
             <p className='font-medium mb-2'>Контактное лицо</p>
@@ -55,38 +85,32 @@ const GBBusinessForm = () => {
               placeholder='Номер телефона'
               type='tel'
               {...register('phone', {
-                required: 'Поле обязательно к заполнению!',
+                required: false,
                 pattern: {
                   value: /^[\d()+ -]+$/,
                   message: 'Введите только цифры!',
                 },
               })}
             />
-            {errors?.phone && (
-              <p className='text-red-500 mt-1 text-sm'>
-                {errors?.phone?.message || 'Поле обязательно к заполнению!'}
-              </p>
-            )}
           </div>
           <div>
             <p className='font-medium mb-2'>Описание</p>
             <input
               className='w-full border border-[#FFA629] p-[14px] rounded-[4px] focus:border-[#d49d51] focus:outline-none'
               placeholder='Описание'
-              {...register('comment', {
-                required: 'Поле обязательно к заполнению!',
-              })}
+              {...register('info', { required: false })}
             />
-            {errors?.comment && (
-              <p className='text-red-500 mt-1 text-sm'>
-                {errors?.comment?.message || 'Поле обязательно к заполнению!'}
-              </p>
-            )}
           </div>
         </div>
         <p className='font-medium mb-2 pt-4'>Прикрепите фото</p>
         <label htmlFor='fileVal'>
-          <input className='hidden' id='fileVal' type='file' accept='image/*' />
+          <input
+            className='hidden'
+            id='fileVal'
+            type='file'
+            onChange={(e) => setFileValue(e.target.files[0])}
+            accept='image/*'
+          />
           <div className='border-dashed border-2 border-[#999] p-5 flex justify-center items-center cursor-pointer rounded-md'>
             <div className='py-2'>
               <img className='mx-auto' src={imgFile} alt='*' />
@@ -94,6 +118,13 @@ const GBBusinessForm = () => {
             </div>
           </div>
         </label>
+        <div className='my-3 w-32 h-28 ml-auto overflow-hidden bg-gray-100'>
+          <img
+            className='w-full h-full object-contain'
+            src={fileValue ? URL.createObjectURL(fileValue) : noImg}
+            alt='*'
+          />
+        </div>
         <div className='my-5'>
           <input
             className='hidden'
@@ -151,10 +182,6 @@ const GBBusinessForm = () => {
         </div>
         <div className='flex justify-center'>
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              alert('Эта функция скоро будет доступна!');
-            }}
             type='submit'
             className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-[#07AFE3] text-white duration-150 sm:max-w-[280px] w-full'
           >
@@ -162,6 +189,8 @@ const GBBusinessForm = () => {
           </button>
         </div>
       </form>
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      {isLoading ? <Loading /> : ''}
     </div>
   );
 };
