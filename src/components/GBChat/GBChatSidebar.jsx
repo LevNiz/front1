@@ -30,7 +30,9 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
         <div className='flex justify-between items-center'>
           <div className='flex items-center'>
             <h4 className='font-medium line-clamp-1 break-all text-sm md:text-base mm:text-xs'>
-              {chat?.data?.lastMessageReceiverName ?? '-'}
+              {chat?.data?.lastMessageReceiver === `${userID}`
+                ? chat?.data?.lastMessageSenderName
+                : chat?.data?.lastMessageReceiverName}
             </h4>
             <span
               className={`${

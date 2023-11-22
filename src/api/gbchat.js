@@ -136,7 +136,6 @@ export const gbChatNewMessage = (userID, callBack) => {
 export const createGBChat = async (chatID, receiverData, senderData) => {
   const userDocRef = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);
-
   if (!userDocSnapshot.exists()) {
     const chatDocData = {
       buyerChat: receiverData?.client?.user_type === 'buyer' ? true : false,
@@ -152,7 +151,7 @@ export const createGBChat = async (chatID, receiverData, senderData) => {
       users: [`${senderData?.id}`, `${receiverData?.client?.id}` || ''],
     };
     if (receiverData?.client?.user_type === 'client') {
-      chatDocData.lastMessageReceiver = receiverData?.client?.id;
+      chatDocData.lastMessageReceiver = `${receiverData?.client?.id}`;
     }
     await setDoc(userDocRef, chatDocData);
   }

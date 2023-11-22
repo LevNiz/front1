@@ -45,13 +45,13 @@ const AlaketDetail = () => {
 
   const handleCreateGBChat = async () => {
     setIsButtonLoading(true);
-    const chatID = `${userID}${alaket?.id}`;
+    const chatID = `${userID}${alaket?.client?.id}`;
     const { success } = await createGBChat(chatID, alaket, senderData);
     if (success) {
       navigate(`/gb-chat/t/${chatID}`);
       setIsButtonLoading(false);
     }
-    setIsButtonLoading(false);
+    setIsButtonLoading(true);
   };
 
   return (
@@ -137,7 +137,7 @@ const AlaketDetail = () => {
               onClick={handleCreateGBChat}
               className={`${
                 alaket?.client?.id === userID ? 'hidden' : ''
-              } uppercase font-bold hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-xs w-full mt-8`}
+              } uppercase font-bold hover:opacity-80 px-4 h-14 rounded-lg bg-colYellow duration-150 sm:max-w-xs w-full mt-8`}
             >
               {isButtonLoading ? <ButtonLoading /> : 'Написать сообщение'}
             </button>
