@@ -18,7 +18,11 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
       <div className='w-12 md:w-14 h-12 md:h-14 min-w-[48px] md:min-w-[56px] rounded-full overflow-hidden border border-colYellow'>
         <img
           className='w-full h-full object-cover rounded-full p-[2px]'
-          src={chat?.data?.lastMessageReceiverAvatar}
+          src={
+            chat?.data?.lastMessageReceiver === `${userID}`
+              ? chat?.data?.lastMessageSenderAvatar
+              : chat?.data?.lastMessageReceiverAvatar
+          }
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = noImg;
@@ -32,7 +36,7 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
             <h4 className='font-medium line-clamp-1 break-all text-sm md:text-base mm:text-xs'>
               {chat?.data?.lastMessageReceiver === `${userID}`
                 ? chat?.data?.lastMessageSenderName
-                : chat?.data?.lastMessageReceiverName}
+                : chat?.data?.lastMessageReceiverName || '-'}
             </h4>
             <span
               className={`${

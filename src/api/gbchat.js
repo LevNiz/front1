@@ -133,10 +133,18 @@ export const gbChatNewMessage = (userID, callBack) => {
   return unsubscribe;
 };
 
-export const createGBChat = async (chatID, receiverData, senderData) => {
-  const userDocRef = doc(db, 'chat', `${chatID}`);
+export const createGBChat = async (
+  chatID,
+  receiverData,
+  senderData,
+  chatIDCheck
+) => {
+  const userDocRef = doc(db, 'chat', `${chatIDCheck}`);
+  const userDocRefSet = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);
+  console.log(chatIDCheck);
   if (!userDocSnapshot.exists()) {
+    console.log('into IF');
     const chatDocData = {
       buyerChat: receiverData?.user_type === 'buyer' ? true : false,
       lastMessage: 'Чат создан',
@@ -153,9 +161,9 @@ export const createGBChat = async (chatID, receiverData, senderData) => {
     if (receiverData?.user_type === 'client') {
       chatDocData.lastMessageReceiver = `${receiverData?.id}`;
     }
-    await setDoc(userDocRef, chatDocData);
+    await setDoc(userDocRefSet, chatDocData);
   }
-
+  console.log('out IF');
   return { success: true };
 };
 

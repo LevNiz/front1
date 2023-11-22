@@ -46,7 +46,13 @@ const AlaketDetail = () => {
   const handleCreateGBChat = async () => {
     setIsButtonLoading(true);
     const chatID = `${userID}${alaket?.client?.id}`;
-    const { success } = await createGBChat(chatID, alaket?.client, senderData);
+    const chatIDCheck = `${alaket?.client?.id}${userID}`;
+    const { success } = await createGBChat(
+      chatID,
+      alaket?.client,
+      senderData,
+      chatIDCheck
+    );
     if (success) {
       navigate(`/gb-chat/t/${chatID}`);
       setIsButtonLoading(false);

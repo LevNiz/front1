@@ -69,7 +69,6 @@ const GBChatMessages = ({ chats, setChatContent }) => {
     })();
   }, [userID]);
 
-
   useEffect(() => {
     setIsLoading(true);
     const unsubscribeMessages = fetchChatMessages(id, senderData, (data) => {
@@ -100,7 +99,11 @@ const GBChatMessages = ({ chats, setChatContent }) => {
         <div className='min-w-[48px] border border-gray-400 w-12 h-12 rounded-full overflow-hidden mr-3'>
           <img
             className='object-cover w-full h-full rounded-[50%]'
-            src={chatData?.lastMessageReceiverAvatar}
+            src={
+              chatData.lastMessageReceiver === `${userID}`
+                ? chatData.lastMessageSenderAvatar
+                : chatData.lastMessageReceiverAvatar
+            }
             onError={(e) => {
               e.target.onError = null;
               e.target.src = noAva;
@@ -110,7 +113,9 @@ const GBChatMessages = ({ chats, setChatContent }) => {
         </div>
         <div className='flex flex-col'>
           <h4 className='font-medium'>
-            {chatData?.lastMessageReceiverName || '-'}
+            {chatData.lastMessageReceiver === `${userID}`
+              ? chatData.lastMessageSenderName
+              : chatData.lastMessageReceiverName || '-'}
           </h4>
         </div>
       </div>
@@ -212,7 +217,9 @@ const GBChatMessages = ({ chats, setChatContent }) => {
               <p className='text-gray-500 text-sm mt-1'>
                 Начните общаться с{' '}
                 <span className='font-medium text-black'>
-                  {chatData?.lastMessageReceiverName}
+                  {chatData.lastMessageReceiver === `${userID}`
+                    ? chatData.lastMessageSenderName
+                    : chatData.lastMessageReceiverName || '-'}
                 </span>
               </p>
             </div>
