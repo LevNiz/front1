@@ -4,6 +4,8 @@ import facebook from './../../assets/icons/Facebook.svg';
 import instagram from './../../assets/icons/Instagram.svg';
 import whatsapp from './../../assets/icons/Whatsapp.svg';
 import youtube from './../../assets/icons/YouTube.svg';
+import privacyPolicy from './../../assets/files/PrivacyPolicy.pdf';
+import userAgreement from './../../assets/files/UserAgreement.pdf';
 
 const Footer = () => {
   return (
@@ -71,26 +73,20 @@ const Footer = () => {
             <li className='text-xl font-medium mb-3'>Политика</li>
             <li>
               <NavLink
-                to='#'
+                to={privacyPolicy}
+                target='_blank'
                 className='text-base hover:text-colYellow duration-100'
               >
-                Политика конфиденциальности{' '}
+                Политика конфиденциальности
               </NavLink>
             </li>
             <li>
               <NavLink
-                to='#'
+                to={userAgreement}
+                target='_blank'
                 className='text-base hover:text-colYellow duration-100'
               >
-                Сведения об авторских правах
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to='#'
-                className='text-base hover:text-colYellow duration-100'
-              >
-                Политика согласия
+                Пользовательское соглашение
               </NavLink>
             </li>
           </ul>

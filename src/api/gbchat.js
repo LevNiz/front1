@@ -138,20 +138,20 @@ export const createGBChat = async (chatID, receiverData, senderData) => {
   const userDocSnapshot = await getDoc(userDocRef);
   if (!userDocSnapshot.exists()) {
     const chatDocData = {
-      buyerChat: receiverData?.client?.user_type === 'buyer' ? true : false,
+      buyerChat: receiverData?.user_type === 'buyer' ? true : false,
       lastMessage: 'Чат создан',
       lastMessageRead: false,
-      lastMessageReceiverAvatar: receiverData?.client?.avatar || '',
-      lastMessageReceiverName: receiverData?.client?.fullname || '',
+      lastMessageReceiverAvatar: receiverData?.avatar || '',
+      lastMessageReceiverName: receiverData?.fullname || '',
       lastMessageSender: `${senderData?.id}` || '',
       lastMessageSenderAvatar: senderData?.avatar || '',
       lastMessageSenderName: senderData?.fullname || '',
       lastMessageTime: serverTimestamp(),
       uid: `${chatID}` || '',
-      users: [`${senderData?.id}`, `${receiverData?.client?.id}` || ''],
+      users: [`${senderData?.id}`, `${receiverData?.id}` || ''],
     };
-    if (receiverData?.client?.user_type === 'client') {
-      chatDocData.lastMessageReceiver = `${receiverData?.client?.id}`;
+    if (receiverData?.user_type === 'client') {
+      chatDocData.lastMessageReceiver = `${receiverData?.id}`;
     }
     await setDoc(userDocRef, chatDocData);
   }
