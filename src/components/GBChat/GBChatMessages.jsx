@@ -71,9 +71,13 @@ const GBChatMessages = ({ chats, setChatContent }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const unsubscribeMessages = fetchChatMessages(id, senderData, (data) => {
-      setMessages(data);
-      setIsLoading(false);
+    const unsubscribeMessages = fetchChatMessages(id, senderData, (docData) => {
+      if (docData?.success) {
+        setMessages(docData?.data);
+        setIsLoading(false); 
+      } else {
+        navigate('/gb-chat')
+      }
     });
     const lastMessUpdate = async () => {
       await lastMessageReadUpdate(id, senderData);

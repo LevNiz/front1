@@ -66,31 +66,48 @@ export const fetchChatMessages = (chatID, senderData, callBack) => {
   let unsubscribe;
 
   const fetchMessages = () => {
-    const messagesRef = collection(db, 'chat', `${chatID}`, 'messages');
-    const queryMessages = query(messagesRef, orderBy('time'));
+    const chatRef = doc(db, 'chat', `${chatID}`);
 
-    unsubscribe = onSnapshot(queryMessages, (querySnapshot) => {
-      const docIds = querySnapshot.docs?.map((doc) => ({
-        id: doc.id,
-        data: doc.data() || {},
-      }));
-
-      callBack(docIds);
-
-      querySnapshot.forEach((chat) => {
-        const docData = chat.data();
-        if (docData.receiverUid === `${senderData?.id}` && !docData.read) {
-          const messageRef = doc(
-            db,
-            'chat',
-            `${chatID}`,
-            'messages',
-            `${chat.id}`
-          );
-          updateDoc(messageRef, { read: true });
+    // Check if the chat document exists
+    getDoc(chatRef)
+      .then((chatDoc) => {
+        if (!chatDoc.exists()) {
+          // If the chat document doesn't exist, stop the function
+          callBack({ success: false });
+          return;
         }
+
+        // The chat document exists, proceed with fetching messages
+        const messagesRef = collection(db, 'chat', `${chatID}`, 'messages');
+        const queryMessages = query(messagesRef, orderBy('time'));
+
+        unsubscribe = onSnapshot(queryMessages, (querySnapshot) => {
+          const docIds = querySnapshot.docs?.map((doc) => ({
+            id: doc.id,
+            data: doc.data() || {},
+          }));
+
+          callBack({ success: true, data: docIds });
+
+          querySnapshot.forEach((chat) => {
+            const docData = chat.data();
+            if (docData.receiverUid === `${senderData?.id}` && !docData.read) {
+              const messageRef = doc(
+                db,
+                'chat',
+                `${chatID}`,
+                'messages',
+                `${chat.id}`
+              );
+              updateDoc(messageRef, { read: true });
+            }
+          });
+        });
+      })
+      .catch((error) => {
+        // Handle errors if there is an issue with getting the chat document
+        callBack({ success: false, error: error.message });
       });
-    });
   };
 
   if (chatID) {
@@ -103,6 +120,7 @@ export const fetchChatMessages = (chatID, senderData, callBack) => {
     }
   };
 };
+
 
 export const gbChatNewMessage = (userID, callBack) => {
   const q = query(
