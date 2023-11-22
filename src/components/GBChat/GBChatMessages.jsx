@@ -74,19 +74,18 @@ const GBChatMessages = ({ chats, setChatContent }) => {
     const unsubscribeMessages = fetchChatMessages(id, senderData, (docData) => {
       if (docData?.success) {
         setMessages(docData?.data);
-        setIsLoading(false); 
+        setIsLoading(false);
       } else {
-        navigate('/gb-chat')
+        navigate('/gb-chat');
       }
     });
-    const lastMessUpdate = async () => {
-      await lastMessageReadUpdate(id, senderData);
-    };
-    lastMessUpdate();
+    const unsubscribeLastMessageRead = lastMessageReadUpdate(id, senderData);
+
     return () => {
       unsubscribeMessages();
+      unsubscribeLastMessageRead();
     };
-  }, [id, senderData]);
+  }, [id, senderData, navigate]);
 
   return (
     <div className='relative w-full'>

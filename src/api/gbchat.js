@@ -50,16 +50,20 @@ export const fetchGBChats = (userID, callBack) => {
   return unsubscribe;
 };
 
-export const lastMessageReadUpdate = async (chatID, senderData) => {
+export const lastMessageReadUpdate = (chatID, senderData) => {
   const userDocRef = doc(db, 'chat', `${chatID}`);
-  const userDocSnapshot = await getDoc(userDocRef);
+  const unsubscribe = onSnapshot(userDocRef, (userDocSnapshot) => {
+    if (userDocSnapshot.exists()) {
+      const lastMessageSender = userDocSnapshot.data()?.lastMessageSender;
 
-  if (userDocSnapshot?.data() && senderData?.id !== undefined) {
-    if (userDocSnapshot?.data()?.lastMessageSender !== `${senderData?.id}`) {
-      const updatedUserData = { lastMessageRead: true };
-      updateDoc(userDocRef, updatedUserData);
+      if (lastMessageSender !== `${senderData?.id}`) {
+        const updatedUserData = { lastMessageRead: true };
+        updateDoc(userDocRef, updatedUserData);
+      }
     }
-  }
+  });
+
+  return unsubscribe;
 };
 
 export const fetchChatMessages = (chatID, senderData, callBack) => {
@@ -155,7 +159,7 @@ export const createGBChat = async (
   const userDocRef = doc(db, 'chat', `${chatIDCheck}`);
   const userDocRefSet = doc(db, 'chat', `${chatID}`);
   const userDocSnapshot = await getDoc(userDocRef);
-  console.log(chatIDCheck);
+
   if (!userDocSnapshot.exists()) {
     console.log('into IF');
     const chatDocData = {
