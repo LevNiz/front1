@@ -68,16 +68,13 @@ export const fetchChatMessages = (chatID, senderData, callBack) => {
   const fetchMessages = () => {
     const chatRef = doc(db, 'chat', `${chatID}`);
 
-    // Check if the chat document exists
     getDoc(chatRef)
       .then((chatDoc) => {
         if (!chatDoc.exists()) {
-          // If the chat document doesn't exist, stop the function
           callBack({ success: false });
           return;
         }
 
-        // The chat document exists, proceed with fetching messages
         const messagesRef = collection(db, 'chat', `${chatID}`, 'messages');
         const queryMessages = query(messagesRef, orderBy('time'));
 
@@ -105,7 +102,6 @@ export const fetchChatMessages = (chatID, senderData, callBack) => {
         });
       })
       .catch((error) => {
-        // Handle errors if there is an issue with getting the chat document
         callBack({ success: false, error: error.message });
       });
   };
@@ -120,7 +116,6 @@ export const fetchChatMessages = (chatID, senderData, callBack) => {
     }
   };
 };
-
 
 export const gbChatNewMessage = (userID, callBack) => {
   const q = query(
