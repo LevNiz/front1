@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { gbChatNewMessage } from '../../api/gbchat';
 
 const Layout = () => {
-  const [hasNotification, setHasNotification] = useState(0);
+  const [TechChatNotification, setTechChatNotification] = useState(0);
   const [gbChatNotification, stGbChatNotification] = useState(0);
 
   const { userID } = useSelector((state) => state?.user);
@@ -22,7 +22,7 @@ const Layout = () => {
         (message) =>
           !message.data.read && message.data.receiverUid == `${userID}`
       );
-      setHasNotification(unreadMessages?.length);
+      setTechChatNotification(unreadMessages?.length);
     });
 
     return () => {
@@ -44,9 +44,9 @@ const Layout = () => {
     <>
       <Navbar
         gbChatNotification={gbChatNotification}
-        hasNotification={hasNotification}
+        TechChatNotification={TechChatNotification}
       />
-      <Outlet context={hasNotification} />
+      <Outlet context={TechChatNotification} />
       {firstPathSegment === 'profile' ? (
         ''
       ) : firstPathSegment === 'gb-chat' ? (

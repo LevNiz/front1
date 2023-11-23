@@ -28,7 +28,7 @@ import gbCoin from './../../assets/icons/gb-bitcoin.svg';
 import alaket from './../../assets/icons/alaket.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
-const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
+const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
   const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                   </span>
                   <span
                     className={`${
-                      hasNotification ? 'block' : 'hidden'
+                      TechChatNotification ? 'block' : 'hidden'
                     } ml-2 mt-[2px] bg-red-500 h-2 w-2 rounded-full`}
                   ></span>
                 </div>
@@ -224,10 +224,10 @@ const MobileMenu = ({ isOpen, onClose, hasNotification }) => {
                     </div>
                     <span
                       className={`${
-                        hasNotification > 0 ? 'block' : 'hidden'
+                        TechChatNotification > 0 ? 'block' : 'hidden'
                       } bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-[10px] text-white rounded-md px-1`}
                     >
-                      {hasNotification}
+                      {TechChatNotification}
                     </span>
                   </NavLink>
                 </li>

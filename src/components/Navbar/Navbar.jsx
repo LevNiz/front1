@@ -13,7 +13,7 @@ import gbBuyer from './../../assets/icons/mobile-menu/buyer.svg';
 import alaket from './../../assets/icons/alaket.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
-const Navbar = ({ hasNotification, gbChatNotification }) => {
+const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -173,7 +173,7 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
                   </NavLink>
                   <span
                     className={`${
-                      hasNotification ? 'md:block' : 'hidden'
+                      TechChatNotification ? 'md:block' : 'hidden'
                     } hidden absolute top-0 left-0 bg-red-500 h-2 w-2 rounded-full`}
                   ></span>
                 </li>
@@ -195,7 +195,7 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
               <span className='w-full h-[2.5px] rounded-md bg-colYellow'></span>
               <span
                 className={`${
-                  hasNotification ? 'block' : 'hidden'
+                  TechChatNotification ? 'block' : 'hidden'
                 } absolute -top-[10px] left-0 bg-red-500 h-2 w-2 rounded-full`}
               ></span>
             </div>
@@ -229,7 +229,7 @@ const Navbar = ({ hasNotification, gbChatNotification }) => {
         ''
       )}
       <MobileMenu
-        hasNotification={hasNotification}
+        TechChatNotification={TechChatNotification}
         isOpen={showSidebar}
         onClose={handleCloseMenu}
       />
