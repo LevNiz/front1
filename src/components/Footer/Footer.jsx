@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 import logo from './../../assets/images/header-logo.svg';
 import facebook from './../../assets/icons/Facebook.svg';
 import instagram from './../../assets/icons/Instagram.svg';
-import whatsapp from './../../assets/icons/Whatsapp.svg';
-import youtube from './../../assets/icons/YouTube.svg';
+import tiktok from './../../assets/icons/tiktok.svg';
+import vk from './../../assets/icons/vk.svg';
 import privacyPolicy from './../../assets/files/PrivacyPolicy.pdf';
 import userAgreement from './../../assets/files/UserAgreement.pdf';
 
@@ -95,7 +95,8 @@ const Footer = () => {
           <ul className='flex md:justify-end justify-center items-center mt-5 md:mt-0 space-x-3'>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink
-                to='#'
+                to='https://www.facebook.com/givboxworld'
+                target='_blank'
                 className='flex justify-center items-center w-full h-full'
               >
                 <img src={facebook} alt='*' />
@@ -103,7 +104,8 @@ const Footer = () => {
             </li>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink
-                to='#'
+                to='https://www.instagram.com/givboxworld/'
+                target='_blank'
                 className='flex justify-center items-center w-full h-full'
               >
                 <img src={instagram} alt='*' />
@@ -111,18 +113,20 @@ const Footer = () => {
             </li>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink
-                to='#'
+                to='https://vk.com/givboxworld'
+                target='_blank'
                 className='flex justify-center items-center w-full h-full'
               >
-                <img src={youtube} alt='*' />
+                <img className='w-5' src={vk} alt='*' />
               </NavLink>
             </li>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink
-                to='#'
+                to='https://www.tiktok.com/@givboxworld'
+                target='_blank'
                 className='flex justify-center items-center w-full h-full'
               >
-                <img src={whatsapp} alt='*' />
+                <img className='w-[15px]' src={tiktok} alt='*' />
               </NavLink>
             </li>
           </ul>
