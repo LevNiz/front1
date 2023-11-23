@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { postBusinessRequest } from '../../api/gbBusiness';
 import Modal from '../../helpers/Modals/Modal';
 import { Loading } from '../../helpers/Loader/Loader';
 import imgFile from '../../assets/icons/photo.svg';
 import noImg from '../../assets/images/no-image.svg';
+import { useSelector } from 'react-redux';
 
 const GBBusinessForm = () => {
+  const { user } = useSelector((state) => state?.user);
+
   const [fileValue, setFileValue] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
@@ -20,23 +23,29 @@ const GBBusinessForm = () => {
     register,
     reset,
   } = useForm();
+
   const privacyPolicy = watch('privacyPolicy', '');
+  const navigate = useNavigate();
 
   const closeModal = () => {
     setModalOpen(false);
   };
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
-    const { success } = await postBusinessRequest(data, fileValue);
-    if (success) {
-      setModalOpen(true);
-      setModalContent('successRequest');
+    if (user) {
+      setIsLoading(true);
+      const { success } = await postBusinessRequest(data, fileValue);
+      if (success) {
+        setModalOpen(true);
+        setModalContent('successRequest');
+        setIsLoading(false);
+        setFileValue(null);
+        reset();
+      }
       setIsLoading(false);
-      setFileValue(null);
-      reset();
+    } else {
+      navigate('/auth/sign-in');
     }
-    setIsLoading(false);
   };
 
   return (

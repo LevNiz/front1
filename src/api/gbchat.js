@@ -90,7 +90,6 @@ export const fetchChatMessages = (chatID, senderData, callBack) => {
 
   const fetchMessages = () => {
     const chatRef = doc(db, 'chat', `${chatID}`);
-
     getDoc(chatRef)
       .then((chatDoc) => {
         if (!chatDoc.exists()) {
@@ -180,7 +179,6 @@ export const createGBChat = async (
   const userDocSnapshot = await getDoc(userDocRef);
 
   if (!userDocSnapshot.exists()) {
-    console.log('into IF');
     const chatDocData = {
       buyerChat: receiverData?.user_type === 'buyer' ? true : false,
       lastMessage: 'Чат создан',
@@ -198,9 +196,12 @@ export const createGBChat = async (
       chatDocData.lastMessageReceiver = `${receiverData?.id}`;
     }
     await setDoc(userDocRefSet, chatDocData);
+
+    const createdChatDoc = await getDoc(userDocRefSet);
+
+    return { success: true, data: createdChatDoc.data() };
   }
-  console.log('out IF');
-  return { success: true };
+  return { success: true, data: 'Document already exists' };
 };
 
 export const sendMessage = async (e, inputVal, senderData, chatData) => {

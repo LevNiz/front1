@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { postFranchise } from '../../api/gbFranchise';
 import Modal from '../../helpers/Modals/Modal';
 import { Loading } from '../../helpers/Loader/Loader';
+import { useSelector } from 'react-redux';
 
 const GBFranchiseForm = () => {
+  const { user } = useSelector((state) => state?.user);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +20,9 @@ const GBFranchiseForm = () => {
     register,
     reset,
   } = useForm();
+
   const privacyPolicy = watch('privacyPolicy', '');
+  const navigate = useNavigate();
 
   const closeModal = () => {
     setModalOpen(false);
@@ -26,14 +30,18 @@ const GBFranchiseForm = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    const { success } = await postFranchise(data);
-    if (success) {
-      setModalOpen(true);
-      setModalContent('successRequest');
+    if (user) {
+      const { success } = await postFranchise(data);
+      if (success) {
+        setModalOpen(true);
+        setModalContent('successRequest');
+        setIsLoading(false);
+        reset();
+      }
       setIsLoading(false);
-      reset();
+    } else {
+      navigate('/auth/sign-in');
     }
-    setIsLoading(false);
   };
 
   return (

@@ -78,8 +78,15 @@ export const router = createBrowserRouter(
           <Route index element={<GbBuyer />} />
           <Route path=':id' element={<BGBuyerDetail />} />
         </Route>
+        <Route path='alaket'>
+          <Route index element={<Alaket />} />
+          <Route path=':id' element={<AlaketDetail />} />
+          <Route path='new' element={<AlaketNew />} />
+        </Route>
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/user-agreement' element={<UserAgreement />} />
+        <Route path='gb-business' element={<GBBusiness />} />
+        <Route path='gb-franchise' element={<GBFranchises />} />
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>
             <Route path='personal-data' element={<PersonalData />} />
@@ -108,18 +115,11 @@ export const router = createBrowserRouter(
             <Route path='t/:id' element={<GBChatMessages />} />
             <Route />
           </Route>
-          <Route path='alaket'>
-            <Route index element={<Alaket />} />
-            <Route path=':id' element={<AlaketDetail />} />
-            <Route path='new' element={<AlaketNew />} />
-          </Route>
           <Route path='applications'>
             <Route index element={<Applications />} />
             <Route path='send-application' element={<SendApplication />} />
             <Route path='calculate' element={<CalcDelivery />} />
           </Route>
-          <Route path='gb-business' element={<GBBusiness />} />
-          <Route path='gb-franchise' element={<GBFranchises />} />
         </Route>
         <Route path='*' element={<Home />} />
       </Route>

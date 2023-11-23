@@ -45,7 +45,7 @@ const SignIn = () => {
   return (
     <div className='flex w-full mm:h-screen'>
       <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
-        <div onClick={() => navigate(-1)}>
+        <div onClick={() => navigate('/')}>
           <img
             className='absolute top-10 left-10 cursor-pointer'
             src={back}

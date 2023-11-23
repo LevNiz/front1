@@ -38,14 +38,18 @@ const AlaketNew = () => {
   const alaketType = watch('type');
 
   const onSubmit = async (data) => {
-    data.negotiable = negotiable;
-    setIsLoading(true);
-    const { success } = await postAlaket(data, photo, userID);
-    if (success) {
+    if (userID) {
+      data.negotiable = negotiable;
+      setIsLoading(true);
+      const { success } = await postAlaket(data, photo, userID);
+      if (success) {
+        setIsLoading(false);
+        navigate(-1);
+      }
       setIsLoading(false);
-      navigate(-1);
+    } else {
+      navigate('/auth/sign-in');
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {

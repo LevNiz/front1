@@ -46,7 +46,14 @@ const BGBuyerDetail = () => {
     setIsButtonLoading(true);
     if (userID) {
       const chatID = `${userID}${buyerItem?.id}`;
-      const { success } = await createGBChat(chatID, buyerItem, senderData);
+      const chatIDCheck = `${buyerItem?.id}${userID}`;
+
+      const { success } = await createGBChat(
+        chatID,
+        buyerItem,
+        senderData,
+        chatIDCheck
+      );
       if (success) {
         navigate(`/gb-chat/t/${chatID}`);
         setIsButtonLoading(false);
