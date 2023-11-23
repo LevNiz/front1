@@ -35,10 +35,29 @@ export const fetchGBChats = (userID, callBack) => {
 
       const messagesSnapshot = await getDocs(messagesQuery);
 
+      const messagesUnsubscribe = onSnapshot(
+        messagesQuery,
+        (messagesSnapshot) => {
+          const unreadMessagesCount = messagesSnapshot.docs.length;
+          const updatedChats = changedChats.map((changedChat) => {
+            if (changedChat.chatId === chatId) {
+              return {
+                ...changedChat,
+                unreadMessagesCount,
+              };
+            }
+            return changedChat;
+          });
+
+          callBack(updatedChats);
+        }
+      );
+
       return {
         chatId,
         data: doc.data(),
         unreadMessagesCount: messagesSnapshot.size,
+        messagesUnsubscribe,
       };
     });
 

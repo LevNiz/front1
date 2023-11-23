@@ -25,7 +25,9 @@ const GBChatItem = () => {
       setIsLoading(false);
       setChats(data);
     });
-    return () => unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, [userID]);
 
   return (
