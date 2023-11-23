@@ -45,19 +45,23 @@ const AlaketDetail = () => {
 
   const handleCreateGBChat = async () => {
     setIsButtonLoading(true);
-    const chatID = `${userID}${alaket?.client?.id}`;
-    const chatIDCheck = `${alaket?.client?.id}${userID}`;
-    const { success } = await createGBChat(
-      chatID,
-      alaket?.client,
-      senderData,
-      chatIDCheck
-    );
-    if (success) {
-      navigate(`/gb-chat/t/${chatID}`);
-      setIsButtonLoading(false);
+    if (userID) {
+      const chatID = `${userID}${alaket?.client?.id}`;
+      const chatIDCheck = `${alaket?.client?.id}${userID}`;
+      const { success } = await createGBChat(
+        chatID,
+        alaket?.client,
+        senderData,
+        chatIDCheck
+      );
+      if (success) {
+        navigate(`/gb-chat/t/${chatID}`);
+        setIsButtonLoading(false);
+      }
+      setIsButtonLoading(true);
+    } else {
+      navigate('/auth/sign-in');
     }
-    setIsButtonLoading(true);
   };
 
   return (

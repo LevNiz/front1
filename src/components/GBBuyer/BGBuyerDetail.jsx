@@ -44,13 +44,17 @@ const BGBuyerDetail = () => {
 
   const handleCreateGBChat = async () => {
     setIsButtonLoading(true);
-    const chatID = `${userID}${buyerItem?.id}`;
-    const { success } = await createGBChat(chatID, buyerItem, senderData);
-    if (success) {
-      navigate(`/gb-chat/t/${chatID}`);
+    if (userID) {
+      const chatID = `${userID}${buyerItem?.id}`;
+      const { success } = await createGBChat(chatID, buyerItem, senderData);
+      if (success) {
+        navigate(`/gb-chat/t/${chatID}`);
+        setIsButtonLoading(false);
+      }
       setIsButtonLoading(false);
+    } else {
+      navigate('/auth/sign-in');
     }
-    setIsButtonLoading(false);
   };
 
   return (

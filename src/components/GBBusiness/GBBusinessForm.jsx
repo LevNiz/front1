@@ -168,7 +168,11 @@ const GBBusinessForm = () => {
             </div>
             <p>
               Я согласен (на) с
-              <NavLink className='ml-1 underline' to='/' target='blank'>
+              <NavLink
+                className='ml-1 underline'
+                to='/user-agreement'
+                target='blank'
+              >
                 {' '}
                 условиями пользовательского соглашения
               </NavLink>

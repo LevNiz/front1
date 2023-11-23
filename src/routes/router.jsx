@@ -47,6 +47,8 @@ import {
   Applications,
   GBChat,
   GBFranchises,
+  PrivacyPolicy,
+  UserAgreement,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -76,6 +78,8 @@ export const router = createBrowserRouter(
           <Route index element={<GbBuyer />} />
           <Route path=':id' element={<BGBuyerDetail />} />
         </Route>
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='/user-agreement' element={<UserAgreement />} />
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>
             <Route path='personal-data' element={<PersonalData />} />

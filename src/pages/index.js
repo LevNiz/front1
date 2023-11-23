@@ -9,6 +9,8 @@ import GBBusiness from './GBBusiness/GBBusiness';
 import Applications from './Applications/Applications';
 import GBChat from './GBChat/GBChat';
 import GBFranchises from './GBFranchises/GBFranchises';
+import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
+import UserAgreement from './UserAgreement/UserAgreement';
 
 export {
   Tracking,
@@ -22,4 +24,6 @@ export {
   Applications,
   GBChat,
   GBFranchises,
+  PrivacyPolicy,
+  UserAgreement,
 };

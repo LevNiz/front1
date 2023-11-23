@@ -4,8 +4,6 @@ import facebook from './../../assets/icons/Facebook.svg';
 import instagram from './../../assets/icons/Instagram.svg';
 import tiktok from './../../assets/icons/tiktok.svg';
 import vk from './../../assets/icons/vk.svg';
-import privacyPolicy from './../../assets/files/PrivacyPolicy.pdf';
-import userAgreement from './../../assets/files/UserAgreement.pdf';
 
 const Footer = () => {
   return (
@@ -73,7 +71,7 @@ const Footer = () => {
             <li className='text-xl font-medium mb-3'>Политика</li>
             <li>
               <NavLink
-                to={privacyPolicy}
+                to='/privacy-policy'
                 target='_blank'
                 className='text-base hover:text-colYellow duration-100'
               >
@@ -82,7 +80,7 @@ const Footer = () => {
             </li>
             <li>
               <NavLink
-                to={userAgreement}
+                to='/user-agreement'
                 target='_blank'
                 className='text-base hover:text-colYellow duration-100'
               >
