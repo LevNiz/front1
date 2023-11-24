@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import logo from './../../assets/images/header-logo.svg';
-import facebook from './../../assets/icons/Facebook.svg';
-import instagram from './../../assets/icons/Instagram.svg';
-import tiktok from './../../assets/icons/tiktok.svg';
-import vk from './../../assets/icons/vk.svg';
+import logo from '../../assets/images/header-logo.svg';
+import facebook from '../../assets/icons/Facebook.svg';
+import instagram from '../../assets/icons/Instagram.svg';
+import tiktok from '../../assets/icons/tiktok.svg';
+import vk from '../../assets/icons/vk.svg';
+import telegram from '../../assets/icons/telegram.svg';
 
 const Footer = () => {
   return (
@@ -98,6 +99,15 @@ const Footer = () => {
                 className='flex justify-center items-center w-full h-full'
               >
                 <img src={facebook} alt='*' />
+              </NavLink>
+            </li>
+            <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
+              <NavLink
+                to='https://t.me/givboxworld'
+                target='_blank'
+                className='flex justify-center items-center w-full h-full'
+              >
+                <img className='w-[18px]' src={telegram} alt='*' />
               </NavLink>
             </li>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>

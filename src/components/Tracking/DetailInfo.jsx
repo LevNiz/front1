@@ -56,7 +56,7 @@ const DetailInfo = (props) => {
       }
       setLoading(false);
     })();
-  }, [id]);
+  }, [id, userID, parcelDetail?.client?.id]);
 
   useEffect(() => {
     scrollToTop();
@@ -74,7 +74,7 @@ const DetailInfo = (props) => {
               src={nounBox}
               alt='*'
             />
-            <h2 className='text-xl sm:text-2xl font-medium ml-6 break-all bg-colPurple sm:bg-transparent text-white sm:text-black p-3 rounded-xl sm:p-3 sm:rounded-xl'>
+            <h2 className='text-xl sm:text-2xl font-medium ml-3 break-all bg-colPurple sm:bg-transparent text-white sm:text-black p-3 rounded-xl sm:p-3 sm:rounded-xl'>
               {parcelDetail?.orderNumber}
             </h2>
           </div>
@@ -84,7 +84,7 @@ const DetailInfo = (props) => {
             </div>
             <div className='w-full mm:w-3/6 lg:w-3/5'>
               <div className='grid lg:grid-cols-2 gap-8'>
-                <div className='bg-white w-full p-6 sm:p-10 rounded-[20px] col-span-2 lg:col-span-1 flex flex-col justify-between'>
+                <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2 lg:col-span-1 flex flex-col justify-between'>
                   <div className='flex'>
                     <div className='flex flex-col items-center'>
                       <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
@@ -116,9 +116,14 @@ const DetailInfo = (props) => {
                       </div>
                       <div className='w-[2px] h-full bg-colYellow'></div>
                     </div>
-                    <div className={`${parcelStatus[parcelDetail?.status]?.statusStyle} px-4 py-1 rounded-lg ml-4`}>
+                    <div
+                      className={`${
+                        parcelStatus[parcelDetail?.status]?.statusStyle
+                      } px-4 py-1 rounded-lg ml-4`}
+                    >
                       <h4 className='text-sm'>
-                        {parcelStatus[parcelDetail?.status]?.name || 'Не указан'}
+                        {parcelStatus[parcelDetail?.status]?.name ||
+                          'Не указан'}
                       </h4>
                     </div>
                   </div>
@@ -148,10 +153,19 @@ const DetailInfo = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className='bg-white w-full p-6 sm:p-10 rounded-[20px] col-span-2 lg:col-span-1'>
-                  <h3 className='mb-6 max-w-[420px] mx-auto font-medium'>
-                    Квитанция на счет
-                  </h3>
+                <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2 lg:col-span-1'>
+                  <div className='flex justify-between items-center mb-6'>
+                    <h3 className='font-medium'>Квитанция на счет</h3>
+                    <span
+                      className={`colGreen2 rounded-md px-4 text-sm py-1  ${
+                        paymentStatus[parcelDetail?.paymentStatus]
+                          ?.statusStyle || ''
+                      }`}
+                    >
+                      {paymentStatus[parcelDetail?.paymentStatus]?.name ||
+                        'Не указан'}
+                    </span>
+                  </div>
                   <div className='flex'>
                     <div className='flex flex-col items-center'>
                       <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
@@ -197,19 +211,18 @@ const DetailInfo = (props) => {
                       {parcelDetail?.totalCost} $
                     </span>
                   </div>
-                  <div className='flex justify-end mt-2'>
-                    <span
-                      className={`colGreen2 rounded-[10px] px-6 py-2 font-medium ${
-                        paymentStatus[parcelDetail?.paymentStatus]
-                          ?.statusStyle || ''
-                      }`}
-                    >
-                      {paymentStatus[parcelDetail?.paymentStatus]?.name ||
-                        'Не указан'}
-                    </span>
-                  </div>
+                  <button
+                    onClick={() => alert('В процессе разработки!')}
+                    className={`${
+                      parcelDetail?.paymentStatus === 'paid'
+                        ? 'hidden'
+                        : 'hover:opacity-80'
+                    } mt-2 uppercase font-medium px-4 h-12 text-sm rounded-lg bg-black text-white duration-150 w-full`}
+                  >
+                    Оплатить
+                  </button>
                 </div>
-                <div className='bg-white w-full p-6 sm:p-10 rounded-[20px] col-span-2'>
+                <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2'>
                   <h3 className='mb-2 font-medium'>Комментарии</h3>
                   <p>{parcelDetail?.comment}</p>
                 </div>
@@ -224,7 +237,7 @@ const DetailInfo = (props) => {
                 saved
                   ? 'opacity-50 hover:opacity-50 cursor-not-allowed'
                   : 'hover:opacity-80'
-              } relative p-4 rounded-lg bg-black text-white flex justify-center items-center max-w-[280px] h-12 mt-8 w-full font-bold duration-150`}
+              } relative p-4 rounded-lg bg-black text-white flex justify-center items-center sm:max-w-[280px] h-14 sm:h-12 mt-8 w-full font-bold duration-150`}
             >
               {buttonLoading ? (
                 <ButtonLoading />
