@@ -3,7 +3,6 @@ import axios from 'axios';
 const baseURL = 'https://givbox.ru/givbox/';
 
 // Use only token not required requests:
-
 export const request = axios.create({
   baseURL: baseURL,
   headers: {
@@ -61,7 +60,6 @@ axiosInstance.interceptors.response.use(
         return new Promise((resolve) => {
           subscribers.push((newAccessToken) => {
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-            // Use axiosInstance instead of axios here
             resolve(axiosInstance(originalRequest));
           });
         });
@@ -70,7 +68,6 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // Send the token refresh request
         const refreshToken = localStorage.getItem('refreshToken');
         const refreshResponse = await axiosInstance.post('api/token/refresh/', {
           refresh: refreshToken,
@@ -78,10 +75,8 @@ axiosInstance.interceptors.response.use(
         const newAccessToken = refreshResponse.data.access;
         localStorage.setItem('accessToken', newAccessToken);
 
-        // Call subscribers with the new token
         subscribers.forEach((callback) => callback(newAccessToken));
         subscribers = [];
-        // Use axiosInstance instead of axios here
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         localStorage.removeItem('accessToken');
