@@ -1,17 +1,10 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { slidesData } from '../../constants/slidesData';
-import { useState } from 'react';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const MainSlider = () => {
-  const [size, setSize] = useState(window.innerWidth);
-
-  window.addEventListener('resize', function () {
-    setSize(window.innerWidth);
-  });
-
   return (
     <Swiper
       navigation={true}
@@ -26,19 +19,15 @@ const MainSlider = () => {
         <SwiperSlide
           key={el?.id}
           className={`${
-            el?.id === 1 ? '' : 'bg-cover'
-          } md:min-h-[740px] pb-20 md:pb-0 flex items-center bg-center bg-no-repeat`}
+            el?.id === 1 ? 'text-white' : ''
+          } md:min-h-[740px] pb-20 md:pb-0 flex items-center bg-center bg-no-repeat bg-cover`}
           modules={[Navigation]}
           style={{
-            backgroundImage: size > 768 ? `url('${el?.backgroundImage}')` : '',
-            backgroundColor: `${el?.bgColor}`,
+            backgroundImage: `url('${el?.backgroundImage}')`,
           }}
         >
-          <div className='content'>
+          <div className='content md:pt-0 pt-24'>
             <div className='mb-5 text-center md:text-left'>
-              <div className='md:hidden max-w-[576px] mx-auto w-full overflow-hidden py-8'>
-                <img className='mx-auto' src={el?.mobImage} alt='*' />
-              </div>
               <h1 className='text-4xl md:text-8xl font-bold'>{el?.title}</h1>
               <p className='max-w-[440px] mx-auto md:mx-0 lg:max-w-[496px] w-full text-lg md:text-2xl my-5 mm:my-8'>
                 {el?.description}

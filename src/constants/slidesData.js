@@ -5,7 +5,7 @@ import slideImg4 from './../assets/images/slider/mob-business.png';
 import slideImg5 from './../assets/images/slider/mob-business.png';
 import slideImg6 from './../assets/images/slider/mob-business.png';
 import slideImg7 from './../assets/images/slider/mob-business.png';
-import slideImgDesktop1 from './../assets/images/slider/gb-business.png';
+import slideImgDesktop1 from './../assets/images/slider/gb-business.jpg';
 import slideImgDesktop2 from './../assets/images/slider/gb-shop.png';
 import slideImgDesktop3 from './../assets/images/slider/gb-franchise.png';
 import slideImgDesktop4 from './../assets/images/slider/gb-buyer.png';
@@ -19,7 +19,6 @@ export const slidesData = [
     backgroundImage: `${slideImgDesktop1}`,
     mobImage: `${slideImg5}`,
     title: 'GB-Business',
-    bgColor: '#fff',
     description: 'Cервис для доставок международных ',
   },
   {
@@ -28,7 +27,6 @@ export const slidesData = [
     mobImage: `${slideImg2}`,
     title: 'GB-Shop',
     description: 'Cервис по продаже брендовых товаров',
-    bgColor: '#FBFBFB',
   },
   {
     id: 3,
@@ -36,7 +34,6 @@ export const slidesData = [
     mobImage: `${slideImg3}`,
     title: 'GB-Franchise ',
     description: 'Cервис по предоставлению франшизы',
-    bgColor: '#F1F1F1',
   },
   {
     id: 4,
@@ -45,14 +42,12 @@ export const slidesData = [
     title: 'GB-Buyer',
     description:
       'Cервис по оказанию услуг по выкупу товаров в зарубежных магазинах и маркетплейсах',
-    bgColor: '#fff',
   },
   {
     id: 5,
     backgroundImage: `${slideImgDesktop5}`,
     mobImage: `${slideImg1}`,
     title: 'GB-Coin',
-    bgColor: '#fff',
     description:
       'Cервис для оплаты товаров, услуг, и переводов денег по всему миру',
   },
@@ -61,7 +56,6 @@ export const slidesData = [
     backgroundImage: `${slideImgDesktop6}`,
     mobImage: `${slideImg6}`,
     title: 'GB-Chat',
-    bgColor: '#fff',
     description:
       'Cервис для общения клиентов, продавцов, поставщиков, покупателей и людей желающих найти друг друга для передачи посылок по пути',
   },
@@ -70,7 +64,6 @@ export const slidesData = [
     backgroundImage: `${slideImgDesktop7}`,
     mobImage: `${slideImg7}`,
     title: 'GB-Alaket',
-    bgColor: '#fff',
     description: 'Cервис по поиску для отправок посылок по пути',
   },
 ];
