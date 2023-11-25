@@ -8,7 +8,7 @@ import { ButtonLoading } from '../../../helpers/Loader/Loader';
 import { fetchCountries } from '../../../api/countries';
 import { fetchCities } from '../../../api/cities';
 
-const FilterParcel = ({ isOpen, onClose }) => {
+const FilterModal = ({ isOpen, onClose }) => {
   const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
 
@@ -59,10 +59,10 @@ const FilterParcel = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div>
+    <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='fixed w-full overflow-y-scroll sm:overflow-y-hidden z-[9999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 pb-6 sm:p-6 md:p-10 pt-24 md:pt-10 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
+        className='fixed w-full overflow-y-scroll sm:overflow-y-hidden z-[999999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 pb-6 sm:p-6 md:p-10 md:pt-10 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
       >
         <div className='flex justify-between mb-5'>
           <div className='sm:hidden' onClick={() => onClose()}>
@@ -101,6 +101,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
                       field.onChange(selectedOption);
                       setSelectedCountry(selectedOption.value);
                     }}
+                    menuPortalTarget={document.body}
                     styles={{
                       control: (provided, state) => ({
                         ...provided,
@@ -111,12 +112,20 @@ const FilterParcel = ({ isOpen, onClose }) => {
                           border: state.isFocused ? '1px solid #999' : '',
                         },
                       }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
+                      }),
                     }}
                   />
                 )}
               />
             </div>
-            <div className='relative w-full'>
+            <div className=' w-full'>
               <Controller
                 name='senderCity'
                 control={control}
@@ -130,6 +139,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
                     onChange={(selectedOption) => {
                       field.onChange(selectedOption);
                     }}
+                    menuPortalTarget={document.body}
                     styles={{
                       control: (provided, state) => ({
                         ...provided,
@@ -139,6 +149,14 @@ const FilterParcel = ({ isOpen, onClose }) => {
                         '&:hover': {
                           border: state.isFocused ? '1px solid #999' : '',
                         },
+                      }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
                       }),
                     }}
                   />
@@ -176,6 +194,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
                       field.onChange(selectedOption);
                       setSelectedCountry(selectedOption.value);
                     }}
+                    menuPortalTarget={document.body}
                     styles={{
                       control: (provided, state) => ({
                         ...provided,
@@ -185,6 +204,14 @@ const FilterParcel = ({ isOpen, onClose }) => {
                         '&:hover': {
                           border: state.isFocused ? '1px solid #999' : '',
                         },
+                      }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
                       }),
                     }}
                   />
@@ -205,6 +232,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
                     onChange={(selectedOption) => {
                       field.onChange(selectedOption);
                     }}
+                    menuPortalTarget={document.body}
                     styles={{
                       control: (provided, state) => ({
                         ...provided,
@@ -214,6 +242,14 @@ const FilterParcel = ({ isOpen, onClose }) => {
                         '&:hover': {
                           border: state.isFocused ? '1px solid #999' : '',
                         },
+                      }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
                       }),
                     }}
                   />
@@ -235,8 +271,8 @@ const FilterParcel = ({ isOpen, onClose }) => {
         onClick={onClose}
         className='fixed top-0 left-0 w-full h-full z-[1]'
       ></div>
-    </div>
+    </>
   );
 };
 
-export default FilterParcel;
+export default FilterModal;

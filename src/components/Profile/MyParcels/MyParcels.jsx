@@ -10,7 +10,7 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import ParcelItem from './ParcelItem';
-import FilterParcel from './FilterParcel';
+import FilterModal from './FilterModal';
 import sort from './../../../assets/icons/sort.svg';
 import search from './../../../assets/icons/search.svg';
 
@@ -88,7 +88,7 @@ const MyParcels = () => {
         </button>
       </form>
       <div className='relative'>
-        <FilterParcel isOpen={isFilterModalOpen} onClose={closeFilterModal} />
+        <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />
       </div>
       <div className='scrollable flex relative space-x-3 items-center overflow-x-scroll lg:overflow-x-hidden mt-8 mb-5 pb-3'>
         <div

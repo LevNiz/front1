@@ -134,15 +134,24 @@ const AlaketNew = () => {
                       field.onChange(selectedOption);
                       setSelectedSenderCity(selectedOption);
                     }}
+                    menuPortalTarget={document.body}
                     styles={{
                       control: (provided, state) => ({
                         ...provided,
+                        padding: '8px',
                         boxShadow: state.isFocused ? 0 : 0,
                         border: state.isFocused ? '1px solid #999' : '',
                         '&:hover': {
                           border: state.isFocused ? '1px solid #999' : '',
                         },
-                        padding: '8px',
+                      }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
                       }),
                     }}
                   />
@@ -185,15 +194,24 @@ const AlaketNew = () => {
                       field.onChange(selectedOption);
                       setSelectedReceiverCity(selectedOption);
                     }}
+                    menuPortalTarget={document.body}
                     styles={{
                       control: (provided, state) => ({
                         ...provided,
+                        padding: '8px',
                         boxShadow: state.isFocused ? 0 : 0,
                         border: state.isFocused ? '1px solid #999' : '',
                         '&:hover': {
                           border: state.isFocused ? '1px solid #999' : '',
                         },
-                        padding: '8px',
+                      }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
                       }),
                     }}
                   />

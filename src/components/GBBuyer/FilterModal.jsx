@@ -74,6 +74,7 @@ const FilterModal = ({ isOpen, onClose }) => {
                     setValue('city', '');
                     field.onChange(selectedOption);
                   }}
+                  menuPortalTarget={document.body}
                   styles={{
                     control: (provided, state) => ({
                       ...provided,
@@ -83,6 +84,14 @@ const FilterModal = ({ isOpen, onClose }) => {
                       '&:hover': {
                         border: state.isFocused ? '1px solid #999' : '',
                       },
+                    }),
+                    menuPortal: (provided) => ({
+                      ...provided,
+                      zIndex: 9999999,
+                    }),
+                    menu: (provided) => ({
+                      ...provided,
+                      position: 'absolute',
                     }),
                   }}
                 />
@@ -105,6 +114,7 @@ const FilterModal = ({ isOpen, onClose }) => {
                       </div>
                     ),
                   }))}
+                  menuPortalTarget={document.body}
                   styles={{
                     control: (provided, state) => ({
                       ...provided,
@@ -114,6 +124,14 @@ const FilterModal = ({ isOpen, onClose }) => {
                       '&:hover': {
                         border: state.isFocused ? '1px solid #999' : '',
                       },
+                    }),
+                    menuPortal: (provided) => ({
+                      ...provided,
+                      zIndex: 9999999,
+                    }),
+                    menu: (provided) => ({
+                      ...provided,
+                      position: 'absolute',
                     }),
                   }}
                 />

@@ -245,6 +245,7 @@ const UpdateAddress = () => {
                             field.onChange(selectedOption);
                             setSelectedCountry(selectedOption.value);
                           }}
+                          menuPortalTarget={document.body}
                           styles={{
                             control: (provided, state) => ({
                               ...provided,
@@ -254,6 +255,14 @@ const UpdateAddress = () => {
                               '&:hover': {
                                 border: state.isFocused ? '1px solid #999' : '',
                               },
+                            }),
+                            menuPortal: (provided) => ({
+                              ...provided,
+                              zIndex: 9999999,
+                            }),
+                            menu: (provided) => ({
+                              ...provided,
+                              position: 'absolute',
                             }),
                           }}
                         />
@@ -281,6 +290,7 @@ const UpdateAddress = () => {
                           options={cityOptions}
                           placeholder='Выберите город'
                           isDisabled={!countrySelect}
+                          menuPortalTarget={document.body}
                           styles={{
                             control: (provided, state) => ({
                               ...provided,
@@ -290,6 +300,14 @@ const UpdateAddress = () => {
                               '&:hover': {
                                 border: state.isFocused ? '1px solid #999' : '',
                               },
+                            }),
+                            menuPortal: (provided) => ({
+                              ...provided,
+                              zIndex: 9999999,
+                            }),
+                            menu: (provided) => ({
+                              ...provided,
+                              position: 'absolute',
                             }),
                           }}
                         />
@@ -361,6 +379,7 @@ const UpdateAddress = () => {
                             </div>
                           ),
                         }))}
+                        menuPortalTarget={document.body}
                         styles={{
                           control: (provided, state) => ({
                             ...provided,
@@ -370,6 +389,14 @@ const UpdateAddress = () => {
                             '&:hover': {
                               border: state.isFocused ? '1px solid #999' : '',
                             },
+                          }),
+                          menuPortal: (provided) => ({
+                            ...provided,
+                            zIndex: 9999999,
+                          }),
+                          menu: (provided) => ({
+                            ...provided,
+                            position: 'absolute',
                           }),
                         }}
                       />

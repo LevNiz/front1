@@ -300,6 +300,7 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
                                   field.onChange(selectedOption);
                                   setSelectedCountry(selectedOption.value);
                                 }}
+                                menuPortalTarget={document.body}
                                 styles={{
                                   control: (provided, state) => ({
                                     ...provided,
@@ -313,6 +314,14 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
                                         ? '1px solid #999'
                                         : '',
                                     },
+                                  }),
+                                  menuPortal: (provided) => ({
+                                    ...provided,
+                                    zIndex: 9999999,
+                                  }),
+                                  menu: (provided) => ({
+                                    ...provided,
+                                    position: 'absolute',
                                   }),
                                 }}
                               />
@@ -340,6 +349,7 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
                                 options={cityOptions}
                                 placeholder='Выберите город'
                                 isDisabled={!countrySelect}
+                                menuPortalTarget={document.body}
                                 styles={{
                                   control: (provided, state) => ({
                                     ...provided,
@@ -353,6 +363,14 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
                                         ? '1px solid #999'
                                         : '',
                                     },
+                                  }),
+                                  menuPortal: (provided) => ({
+                                    ...provided,
+                                    zIndex: 9999999,
+                                  }),
+                                  menu: (provided) => ({
+                                    ...provided,
+                                    position: 'absolute',
                                   }),
                                 }}
                               />
@@ -440,6 +458,14 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
                                       ? '1px solid #999'
                                       : '',
                                   },
+                                  menuPortal: (provided) => ({
+                                    ...provided,
+                                    zIndex: 9999999,
+                                  }),
+                                  menu: (provided) => ({
+                                    ...provided,
+                                    position: 'absolute',
+                                  }),
                                 }),
                               }}
                             />

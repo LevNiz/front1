@@ -6,7 +6,7 @@ const ParcelItem = ({ parcel }) => {
   return (
     <NavLink
       to={`/tracking/${parcel?.id}`}
-      className='flex justify-between md:items-center bg-colBgGray2 px-2 my-4 md:p-4 lg:p-8 rounded-lg'
+      className='flex justify-between md:items-center bg-colBgGray2 my-4 p-4 lg:p-8 rounded-lg'
     >
       <div className='md:flex items-center md:space-x-4 w-full'>
         <div className='flex max-w-[250px] w-full'>

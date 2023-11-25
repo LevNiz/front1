@@ -77,17 +77,26 @@ const FilterModal = ({ isOpen, onClose }) => {
                   onChange={(selectedOption) => {
                     field.onChange(selectedOption);
                   }}
-                  styles={{
-                    control: (provided, state) => ({
-                      ...provided,
-                      padding: '8px',
-                      boxShadow: state.isFocused ? 0 : 0,
-                      border: state.isFocused ? '1px solid #999' : '',
-                      '&:hover': {
+                  menuPortalTarget={document.body}
+                    styles={{
+                      control: (provided, state) => ({
+                        ...provided,
+                        padding: '8px',
+                        boxShadow: state.isFocused ? 0 : 0,
                         border: state.isFocused ? '1px solid #999' : '',
-                      },
-                    }),
-                  }}
+                        '&:hover': {
+                          border: state.isFocused ? '1px solid #999' : '',
+                        },
+                      }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
+                      }),
+                    }}
                 />
               )}
             />
@@ -118,17 +127,26 @@ const FilterModal = ({ isOpen, onClose }) => {
                   onChange={(selectedOption) => {
                     field.onChange(selectedOption);
                   }}
-                  styles={{
-                    control: (provided, state) => ({
-                      ...provided,
-                      padding: '8px',
-                      boxShadow: state.isFocused ? 0 : 0,
-                      border: state.isFocused ? '1px solid #999' : '',
-                      '&:hover': {
+                  menuPortalTarget={document.body}
+                    styles={{
+                      control: (provided, state) => ({
+                        ...provided,
+                        padding: '8px',
+                        boxShadow: state.isFocused ? 0 : 0,
                         border: state.isFocused ? '1px solid #999' : '',
-                      },
-                    }),
-                  }}
+                        '&:hover': {
+                          border: state.isFocused ? '1px solid #999' : '',
+                        },
+                      }),
+                      menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 9999999,
+                      }),
+                      menu: (provided) => ({
+                        ...provided,
+                        position: 'absolute',
+                      }),
+                    }}
                 />
               )}
             />

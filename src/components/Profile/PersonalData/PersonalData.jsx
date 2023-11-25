@@ -24,11 +24,6 @@ const PersonalData = () => {
   const [ava, setAva] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [size, setSize] = useState(window.innerWidth);
-
-  window.addEventListener('resize', function () {
-    setSize(window.innerWidth);
-  });
 
   const { cities } = useSelector((state) => state?.cities);
   const { countries } = useSelector((state) => state?.countries);
@@ -261,15 +256,24 @@ const PersonalData = () => {
                           field.onChange(selectedOption);
                           setSelectedCountry(selectedOption.value);
                         }}
+                        menuPortalTarget={document.body}
                         styles={{
                           control: (provided, state) => ({
                             ...provided,
-                            padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                            padding: '8px',
                             boxShadow: state.isFocused ? 0 : 0,
                             border: state.isFocused ? '1px solid #999' : '',
                             '&:hover': {
                               border: state.isFocused ? '1px solid #999' : '',
                             },
+                          }),
+                          menuPortal: (provided) => ({
+                            ...provided,
+                            zIndex: 9999999,
+                          }),
+                          menu: (provided) => ({
+                            ...provided,
+                            position: 'absolute',
                           }),
                         }}
                       />
@@ -303,15 +307,24 @@ const PersonalData = () => {
                         onChange={(selectedOption) => {
                           field.onChange(selectedOption);
                         }}
+                        menuPortalTarget={document.body}
                         styles={{
                           control: (provided, state) => ({
                             ...provided,
-                            padding: size >= 576 ? '8px 8px 8px 34px' : '8px',
+                            padding: '8px',
                             boxShadow: state.isFocused ? 0 : 0,
                             border: state.isFocused ? '1px solid #999' : '',
                             '&:hover': {
                               border: state.isFocused ? '1px solid #999' : '',
                             },
+                          }),
+                          menuPortal: (provided) => ({
+                            ...provided,
+                            zIndex: 9999999,
+                          }),
+                          menu: (provided) => ({
+                            ...provided,
+                            position: 'absolute',
                           }),
                         }}
                       />
