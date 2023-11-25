@@ -54,7 +54,7 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
     async () => {
       await fetchDepots(dispatch);
     };
-  }, []);
+  }, [dispatch]);
 
   if (!isOpen) return null;
 

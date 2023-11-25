@@ -24,7 +24,7 @@ const FilterParcel = ({ isOpen, onClose }) => {
       await fetchCountries(dispatch);
       await fetchCities(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   const senderCountry = watch('senderCountry');
   const receiverCountry = watch('receiverCountry');

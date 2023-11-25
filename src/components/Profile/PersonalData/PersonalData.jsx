@@ -82,7 +82,7 @@ const PersonalData = () => {
       await fetchCountries(dispatch);
       await fetchCities(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   const countrySelect = watch('country');
 

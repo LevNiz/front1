@@ -36,7 +36,7 @@ const Depots = () => {
     (async () => {
       await fetchDepots(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     scrollToTop();

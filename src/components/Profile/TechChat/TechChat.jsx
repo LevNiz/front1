@@ -66,7 +66,7 @@ const TechChat = () => {
         setUserData(data);
       }
     })();
-  }, []);
+  }, [userID]);
 
   return (
     <div className='w-screen'>

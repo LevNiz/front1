@@ -14,7 +14,7 @@ const AlaketItem = () => {
     (async () => {
       await fetchAlaket(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   const lastAlaketDatas = alaket?.slice()?.sort((a, b) => {
     const dateA = new Date(a.dateCreated);

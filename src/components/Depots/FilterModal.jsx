@@ -24,7 +24,7 @@ const FilterModal = ({ isOpen, onClose }) => {
       await fetchCountries(dispatch);
       await fetchCities(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   const clearFilter = async () => {
     setValue('country', '');

@@ -18,7 +18,7 @@ const ActiveApplications = () => {
     (async () => {
       await fetchApplications(userID, dispatch);
     })();
-  }, []);
+  }, [dispatch, userID]);
 
   return (
     <div className='flex flex-col space-y-5 py-8'>

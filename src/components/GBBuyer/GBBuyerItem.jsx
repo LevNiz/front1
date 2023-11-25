@@ -19,7 +19,7 @@ const GBBuyerItem = () => {
       await fetchBuyers(dispatch);
       await fetchWebsites(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

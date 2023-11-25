@@ -56,7 +56,7 @@ const AlaketNew = () => {
     (async () => {
       await fetchCities(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='w-full content py-20'>

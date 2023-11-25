@@ -14,7 +14,7 @@ const CalcDelivery = () => {
       await fetchCities(dispatch);
       await fetchCountries(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='py-24 content min-h-[720px]'>

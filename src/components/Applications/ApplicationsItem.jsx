@@ -18,7 +18,7 @@ const ApplicationsItem = () => {
     (async () => {
       await fetchApplications(userID, dispatch);
     })();
-  }, []);
+  }, [dispatch, userID]);
 
   return (
     <div className='max-w-[991px] w-full flex flex-col space-y-8 mx-auto py-10'>
