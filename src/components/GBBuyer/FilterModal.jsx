@@ -19,9 +19,9 @@ const FilterModal = ({ isOpen, onClose }) => {
     (async () => {
       await fetchCountries(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
-  const clearFilter = async () => {
+  const clearFilter = () => {
     setValue('country', '');
     setValue('websites', '');
   };
@@ -64,7 +64,7 @@ const FilterModal = ({ isOpen, onClose }) => {
                         <img
                           src={country?.icon}
                           alt={country?.nameRu}
-                          className='w-5 h-4 mr-2'
+                          className='w-5 mr-2'
                         />
                         {country?.nameRu}
                       </div>
@@ -100,11 +100,7 @@ const FilterModal = ({ isOpen, onClose }) => {
                     value: country?.id,
                     label: (
                       <div key={country?.id} className='flex items-center'>
-                        <img
-                          src={country?.icon}
-                          alt='*'
-                          className='w-5 h-4 mr-2'
-                        />
+                        <img src={country?.icon} alt='*' className='w-5 mr-2' />
                         {country?.name}
                       </div>
                     ),

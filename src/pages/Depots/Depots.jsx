@@ -56,7 +56,7 @@ const Depots = () => {
               className='px-2 w-full focus:outline-none'
               placeholder='Поиск по названию...'
               {...register('searchDepot', {
-                required: 'Введите название склада!',
+                required: false,
               })}
             />
             <div

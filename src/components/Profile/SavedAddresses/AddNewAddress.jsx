@@ -176,7 +176,7 @@ const AddNewAddress = () => {
                                 <img
                                   src={country?.icon}
                                   alt={country?.nameRu}
-                                  className='w-5 h-4 mr-2'
+                                  className='w-5 mr-2'
                                 />
                                 {country?.nameRu}
                               </div>

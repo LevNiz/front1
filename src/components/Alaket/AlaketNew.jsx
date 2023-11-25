@@ -120,7 +120,7 @@ const AlaketNew = () => {
                           <img
                             src={el?.country?.icon}
                             alt='*'
-                            className='w-5 h-4 mr-2'
+                            className='w-5 mr-2'
                           />
                           {el?.nameRu}
                         </div>
@@ -171,7 +171,7 @@ const AlaketNew = () => {
                           <img
                             src={el?.country?.icon}
                             alt='*'
-                            className='w-5 h-4 mr-2'
+                            className='w-5 mr-2'
                           />
                           {el?.nameRu}
                         </div>

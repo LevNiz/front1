@@ -1,22 +1,18 @@
 import { useEffect } from 'react';
-import { useState } from 'react';
 import back from './../../assets/icons/arrow-left.svg';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
-import { filterDepot } from '../../api/depots';
 import { ButtonLoading } from '../../helpers/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCountries } from '../../api/countries';
 import { fetchCities } from '../../api/cities';
+import { filterAlaket } from '../../api/alaket';
 
 const FilterModal = ({ isOpen, onClose }) => {
   const { loading } = useSelector((state) => state?.depots);
-  const [selectedCountry, setSelectedCountry] = useState('');
-
   const { cities } = useSelector((state) => state?.cities);
-  const { countries } = useSelector((state) => state?.countries);
 
-  const { control, register, setValue, watch, handleSubmit } = useForm();
+  const { control, register, setValue, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,25 +23,14 @@ const FilterModal = ({ isOpen, onClose }) => {
   }, [dispatch]);
 
   const clearFilter = () => {
-    setValue('country', '');
-    setValue('city', '');
-    setValue('maxAmountStart', '');
-    setValue('maxAmountEnd', '');
+    setValue('fromCity', '');
+    setValue('toCity', '');
+    setValue('startDate', '');
+    setValue('endDate', '');
   };
 
-  const countrySelect = watch('country');
-
-  const filteredCities = cities?.filter(
-    (el) => el?.country?.id === selectedCountry
-  );
-
-  const cityOptions = filteredCities?.map((el) => ({
-    value: el?.id,
-    label: el?.nameRu,
-  }));
-
   const onSubmit = async (data) => {
-    await filterDepot(data, dispatch);
+    await filterAlaket(data, dispatch);
     onClose();
   };
 
@@ -67,59 +52,28 @@ const FilterModal = ({ isOpen, onClose }) => {
         </div>
         <div className='grid sm:grid-cols-2 sm:gap-5 md:gap-8 sm:mt-0 xs:mt-8 mt-0'>
           <div className='relative'>
-            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>Страна</p>
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>Из города</p>
             <Controller
-              name='country'
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  placeholder='Выберите страну'
-                  options={countries?.map((country) => ({
-                    value: country?.id,
-                    label: (
-                      <div key={country?.id} className='flex items-center'>
-                        <img
-                          src={country?.icon}
-                          alt={country?.nameRu}
-                          className='w-5 mr-2'
-                        />
-                        {country?.nameRu}
-                      </div>
-                    ),
-                  }))}
-                  onChange={(selectedOption) => {
-                    setValue('city', '');
-                    field.onChange(selectedOption);
-                    setSelectedCountry(selectedOption.value);
-                  }}
-                  styles={{
-                    control: (provided, state) => ({
-                      ...provided,
-                      padding: '8px',
-                      boxShadow: state.isFocused ? 0 : 0,
-                      border: state.isFocused ? '1px solid #999' : '',
-                      '&:hover': {
-                        border: state.isFocused ? '1px solid #999' : '',
-                      },
-                    }),
-                  }}
-                />
-              )}
-            />
-          </div>
-          <div className='relative'>
-            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>Город</p>
-            <Controller
-              name='city'
+              name='fromCity'
               control={control}
               rules={{ required: false }}
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={cityOptions}
+                  options={cities?.map((el) => ({
+                    value: el?.id,
+                    label: (
+                      <div key={el?.id} className='flex items-center'>
+                        <img
+                          src={el?.country?.icon}
+                          alt='*'
+                          className='w-5 mr-2'
+                        />
+                        {el?.nameRu}
+                      </div>
+                    ),
+                  }))}
                   placeholder='Выберите город'
-                  isDisabled={!countrySelect}
                   onChange={(selectedOption) => {
                     field.onChange(selectedOption);
                   }}
@@ -139,27 +93,62 @@ const FilterModal = ({ isOpen, onClose }) => {
             />
           </div>
           <div className='relative'>
-            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>
-              Минимальный вес
-            </p>
-            <input
-              className='appearance-none w-full border border-gray-300 p-3 min-h-[54px] rounded-[4px] focus:outline-none'
-              placeholder='Введите минимальный вес'
-              {...register('maxAmountStart', {
-                required: false,
-              })}
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>В город</p>
+            <Controller
+              name='toCity'
+              control={control}
+              rules={{ required: false }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  options={cities?.map((el) => ({
+                    value: el?.id,
+                    label: (
+                      <div key={el?.id} className='flex items-center'>
+                        <img
+                          src={el?.country?.icon}
+                          alt='*'
+                          className='w-5 mr-2'
+                        />
+                        {el?.nameRu}
+                      </div>
+                    ),
+                  }))}
+                  placeholder='Выберите город'
+                  onChange={(selectedOption) => {
+                    field.onChange(selectedOption);
+                  }}
+                  styles={{
+                    control: (provided, state) => ({
+                      ...provided,
+                      padding: '8px',
+                      boxShadow: state.isFocused ? 0 : 0,
+                      border: state.isFocused ? '1px solid #999' : '',
+                      '&:hover': {
+                        border: state.isFocused ? '1px solid #999' : '',
+                      },
+                    }),
+                  }}
+                />
+              )}
             />
           </div>
           <div className='relative'>
-            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>
-              Максимальный вес
-            </p>
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>С</p>
             <input
-              className='appearance-none w-full border border-gray-300 p-3 min-h-[54px] rounded-[4px] focus:outline-none'
-              placeholder='Введите максимальный вес'
-              {...register('maxAmountEnd', {
-                required: false,
-              })}
+              className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none bg-transparent'
+              placeholder='Выберите дату'
+              type='date'
+              {...register('startDate')}
+            />
+          </div>
+          <div className='relative'>
+            <p className='mt-5 sm:mt-0 text-base font-medium mb-2'>По</p>
+            <input
+              className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none bg-transparent'
+              placeholder='Выберите дату'
+              type='date'
+              {...register('endDate')}
             />
           </div>
         </div>

@@ -58,3 +58,36 @@ export const fetchAlaketDetail = async (id) => {
     return { success: false, data: error };
   }
 };
+
+// Search alaket:
+export const searchAlaket = async (title, dispatch) => {
+  dispatch(fetchAlaketStart());
+  try {
+    const res = await request.get(`core/alaket/?search=${title}`);
+    dispatch(fetchAlaketSuccess(res?.data?.results));
+  } catch (error) {
+    dispatch(fetchAlaketFailure(error));
+  }
+};
+
+// Filter alaket:
+export const filterAlaket = async (data, dispatch) => {
+  const fromCity = data?.fromCity?.value;
+  const toCity = data?.toCity?.value;
+  const startDate = data?.startDate;
+  const endDate = data?.endDate;
+
+  const params = new URLSearchParams({
+    fromCity: fromCity || '',
+    toCity: toCity || '',
+    startDate: startDate || '',
+    endDate: endDate || '',
+  });
+  dispatch(fetchAlaketStart());
+  try {
+    const res = await request.get(`core/alaket/?${params}`);
+    dispatch(fetchAlaketSuccess(res?.data?.results));
+  } catch (error) {
+    dispatch(fetchAlaketFailure(error));
+  }
+};
