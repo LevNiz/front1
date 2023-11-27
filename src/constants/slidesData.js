@@ -1,68 +1,80 @@
-import slideImg1 from './../assets/images/slider/mob-business.png';
-import slideImg2 from './../assets/images/slider/mob-business.png';
-import slideImg3 from './../assets/images/slider/mob-business.png';
-import slideImg4 from './../assets/images/slider/mob-business.png';
-import slideImg5 from './../assets/images/slider/mob-business.png';
-import slideImg6 from './../assets/images/slider/mob-business.png';
-import slideImg7 from './../assets/images/slider/mob-business.png';
-import slideImgDesktop1 from './../assets/images/slider/gb-business.jpg';
-import slideImgDesktop2 from './../assets/images/slider/gb-shop.png';
-import slideImgDesktop3 from './../assets/images/slider/gb-franchise.png';
-import slideImgDesktop4 from './../assets/images/slider/gb-buyer.png';
-import slideImgDesktop5 from './../assets/images/slider/gb-pay.png';
-import slideImgDesktop6 from './../assets/images/slider/gb-chat.png';
-import slideImgDesktop7 from './../assets/images/slider/gb-alaket.png';
+import desktopImageBusiness from './../assets/images/slider/gb-business.jpg';
+import desktopImageShop from './../assets/images/slider/gb-shop.png';
+import desktopImageFranchise from './../assets/images/slider/gb-franchise.png';
+import desktopImageBuyer from './../assets/images/slider/gb-buyer.png';
+import desktopImagePay from './../assets/images/slider/gb-pay.png';
+import desktopImageChat from './../assets/images/slider/gb-chat.png';
+import desktopImageAlaket from './../assets/images/slider/gb-alaket.png';
+
+import tabletGBAlaket from './../assets/images/slider/tablet/gb-alaket.png';
+import tabletGBBuyer from './../assets/images/slider/tablet/gb-buyer.png';
+import tabletGBChat from './../assets/images/slider/tablet/gb-chat.png';
+import tabletGBPay from './../assets/images/slider/tablet/gb-pay.png';
+import tabletGBFranchise from './../assets/images/slider/tablet/gb-franchise.png';
+import tabletGBShop from './../assets/images/slider/tablet/gb-shop.png';
+
+import mobileGBAlaket from './../assets/images/slider/mobile/gb-alaket.png';
+import mobileGBBuyer from './../assets/images/slider/mobile/gb-buyer.png';
+import mobileGBChat from './../assets/images/slider/mobile/gb-chat.png';
+import mobileGBPay from './../assets/images/slider/mobile/gb-pay.png';
+import mobileGBFranchise from './../assets/images/slider/mobile/gb-franchise.png';
+import mobileGBShop from './../assets/images/slider/mobile/gb-shop.png';
 
 export const slidesData = [
   {
     id: 1,
-    backgroundImage: `${slideImgDesktop1}`,
-    mobImage: `${slideImg5}`,
+    backgroundImage: `${desktopImageBusiness}`,
     title: 'GB-Business',
     description: 'Cервис для доставок международных ',
   },
   {
     id: 2,
-    backgroundImage: `${slideImgDesktop2}`,
-    mobImage: `${slideImg2}`,
+    backgroundImage: `${desktopImageShop}`,
+    tabletImage: `${tabletGBShop}`,
+    mobileImage: `${mobileGBShop}`,
     title: 'GB-Shop',
     description: 'Cервис по продаже брендовых товаров',
   },
   {
     id: 3,
-    backgroundImage: `${slideImgDesktop3}`,
-    mobImage: `${slideImg3}`,
+    backgroundImage: `${desktopImageFranchise}`,
+    tabletImage: `${tabletGBFranchise}`,
+    mobileImage: `${mobileGBFranchise}`,
     title: 'GB-Franchise ',
     description: 'Cервис по предоставлению франшизы',
   },
   {
     id: 4,
-    backgroundImage: `${slideImgDesktop4}`,
-    mobImage: `${slideImg4}`,
+    backgroundImage: `${desktopImageBuyer}`,
+    tabletImage: `${tabletGBBuyer}`,
+    mobileImage: `${mobileGBBuyer}`,
     title: 'GB-Buyer',
     description:
       'Cервис по оказанию услуг по выкупу товаров в зарубежных магазинах и маркетплейсах',
   },
   {
     id: 5,
-    backgroundImage: `${slideImgDesktop5}`,
-    mobImage: `${slideImg1}`,
+    backgroundImage: `${desktopImagePay}`,
+    tabletImage: `${tabletGBPay}`,
+    mobileImage: `${mobileGBPay}`,
     title: 'GB-Pay',
     description:
       'Cервис для оплаты товаров, услуг, и переводов денег по всему миру',
   },
   {
     id: 6,
-    backgroundImage: `${slideImgDesktop6}`,
-    mobImage: `${slideImg6}`,
+    backgroundImage: `${desktopImageChat}`,
+    tabletImage: `${tabletGBChat}`,
+    mobileImage: `${mobileGBChat}`,
     title: 'GB-Chat',
     description:
       'Cервис для общения клиентов, продавцов, поставщиков, покупателей и людей желающих найти друг друга для передачи посылок по пути',
   },
   {
     id: 7,
-    backgroundImage: `${slideImgDesktop7}`,
-    mobImage: `${slideImg7}`,
+    backgroundImage: `${desktopImageAlaket}`,
+    tabletImage: `${tabletGBAlaket}`,
+    mobileImage: `${mobileGBAlaket}`,
     title: 'GB-Alaket',
     description: 'Cервис по поиску для отправок посылок по пути',
   },

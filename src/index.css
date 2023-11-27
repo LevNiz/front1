@@ -175,19 +175,48 @@ input[type='number'] {
   color: #fff;
 }
 @media screen and (max-width: 768px) {
+  .slider .swiper-button-next,
+  .slider .swiper-button-prev {
+    bottom: 20px;
+    width: 28px;
+    height: 28px;
+  }
   .slider .swiper-button-next {
-    right: 38%;
-    bottom: 16px;
+    right: 22px;
   }
   .slider .swiper-button-prev {
-    right: auto;
-    left: 38%;
-    bottom: 16px;
+    right: 65px;
+  }
+  .slider .swiper-button-prev::after,
+  .slider .swiper-button-next::after {
+    font-size: 14px;
   }
   .testimonials .slider .swiper-button-next {
     bottom: 0;
   }
   .testimonials .slider .swiper-button-prev {
     bottom: 0;
+  }
+}
+@media screen and (max-width: 576px) {
+  .slider .swiper-button-next {
+    right: 43%;
+    bottom: 20px;
+  }
+  .slider .swiper-button-prev {
+    right: auto;
+    left: 43%;
+    bottom: 20px;
+  }
+}
+@media screen and (max-width: 440px) {
+  .slider .swiper-button-next {
+    right: 40%;
+    bottom: 20px;
+  }
+  .slider .swiper-button-prev {
+    right: auto;
+    left: 40%;
+    bottom: 20px;
   }
 }
