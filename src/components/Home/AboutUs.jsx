@@ -16,22 +16,22 @@ const AboutUs = () => {
       </h1>
       <div className='lg:flex sm:min-h-[520px] mt-12'>
         <div className='w-full lg:w-2/5 min-h-[440px] sm:min-h-[520px] relative'>
-          <div className='w-40 h-56 mm:h-72 bg-colYellow absolute -top-[40px] xl:right-auto right-[85px] mm:right-0 xl:left-[140px] z-[2]'></div>
-          <div className='max-w-[200px] sm:max-w-[275px] sm:min-w-[275px] w-[275px] max-height-[308px] min-height-[308px] absolute top-0 z-[3] right-0 md:right-[40px] overflow-hidden'>
+          <div className='w-40 h-72 bg-colYellow absolute -top-[40px] xl:right-auto right-0 xl:left-[140px] z-[-1] sm:z-[2]'></div>
+          <div className='sm:max-w-[275px] sm:min-w-[275px] height-[308px] sm:absolute top-0 z-[3] pr-10 sm:pr-0 right-[40px] overflow-hidden'>
             <img
-              className='w-full h-full object-cover'
+              className='sm:w-full h-full object-cover ml-auto'
               src={aboutUsImg1}
               alt='*'
             />
           </div>
-          <div className='max-w-[200px] sm:max-w-[275px] sm:min-w-[275px] max-height-[308px] min-height-[308px] absolute bottom-[60px] sm:bottom-0 left-0 sm:left-auto sm:right-[240px] lg:right-auto lg:left-0 z-[1] overflow-hidden'>
+          <div className='sm:max-w-[275px] sm:min-w-[275px] mt-[-100px] sm:mt-0 height-[308px] relative sm:absolute sm:bottom-0 mm:right-[240px] lg:right-auto lg:left-0 z-[-1] sm:z-[1] overflow-hidden'>
             <img
-              className='w-full h-full object-cover'
+              className='sm:w-full h-full object-cover'
               src={aboutUsImg2}
               alt='*'
             />
           </div>
-          <div className='w-[160px] sm:w-[190px] h-[150px] sm:h-[171px] z-[3] bg-black flex justify-center items-center absolute bottom-[44px] sm:bottom-0 right-0 overflow-hidden'>
+          <div className='w-4/5 sm:w-[190px] rounded-xl h-64 mx-auto sm:h-44 mt-8 sm:mt-0 z-[3] bg-black flex justify-center items-center sm:absolute sm:bottom-0 right-0 overflow-hidden'>
             <img className='cursor-pointer' src={play} alt='*' />
           </div>
         </div>
