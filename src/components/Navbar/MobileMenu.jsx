@@ -291,7 +291,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       onClose();
                       alert('В процессе разработки!');
                     }}
-                    to='/gb-shop'
+                    to='/#'
                     className='text-base flex items-center'
                   >
                     <img
@@ -359,6 +359,16 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       alt='*'
                     />
                     <span className='pl-1'>GB-Buyer</span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/gb-chat'
+                    className='text-base flex items-center'
+                  >
+                    <img className='min-w-[18px] w-[18px]' src={chat} alt='*' />
+                    <span className='pl-1'>GB-Chat</span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>

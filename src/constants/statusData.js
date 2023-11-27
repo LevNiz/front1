@@ -24,33 +24,32 @@ export const buyRequestStatus = {
 
 // Parcel status:
 export const parcelStatus = {
-    created: {
-      name: 'Создан',
-      statusStyle: 'bg-colPurple2',
-    },
-    arrived: {
-      name: 'Получен',
-      statusStyle: 'bg-colGreen2',
-    },
-    on_way: {
-      name: 'В пути',
-      statusStyle: 'bg-colBlue',
-    },
-    done: {
-      name: 'Завершён',
-      statusStyle: 'bg-colOrange',
-    },
-  };
+  created: {
+    name: 'Создан',
+    statusStyle: 'bg-colPurple2',
+  },
+  arrived: {
+    name: 'Получен',
+    statusStyle: 'bg-colBlue',
+  },
+  on_way: {
+    name: 'В пути',
+    statusStyle: 'bg-colGreen2',
+  },
+  done: {
+    name: 'Завершён',
+    statusStyle: 'bg-colOrange',
+  },
+};
 
-  // Payment status:
-  export const paymentStatus = {
-    paid: {
-      name: 'Оплачено',
-      statusStyle: 'bg-colGreen2',
-    },
-    unpaid: {
-      name: 'Не оплачено',
-      statusStyle: 'bg-colOrange',
-    },
-  };
-  
+// Payment status:
+export const paymentStatus = {
+  paid: {
+    name: 'Оплачено',
+    statusStyle: 'bg-colGreen2',
+  },
+  unpaid: {
+    name: 'Не оплачено',
+    statusStyle: 'bg-colOrange',
+  },
+};

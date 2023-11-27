@@ -11,6 +11,7 @@ import gbShop from './../../assets/icons/gb-shop.svg';
 import gbCoin from './../../assets/icons/gb-bitcoin.svg';
 import gbBuyer from './../../assets/icons/mobile-menu/buyer.svg';
 import alaket from './../../assets/icons/alaket.svg';
+import gbChat from './../../assets/icons/gb-chat.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
 const Navbar = ({ TechChatNotification, gbChatNotification }) => {
@@ -131,6 +132,15 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   >
                     <img className='w-4 mr-1.5' src={gbBuyer} alt='*' />
                     GB-Buyer
+                  </NavLink>
+                </li>
+                <li className='my-2'>
+                  <NavLink
+                    className='hover:opacity-70 duration-150 flex items-center'
+                    to='/gb-chat'
+                  >
+                    <img className='w-4 mr-1.5' src={gbChat} alt='*' />
+                    GB-Chat
                   </NavLink>
                 </li>
                 <li className='my-2'>

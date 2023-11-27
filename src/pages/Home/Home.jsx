@@ -74,7 +74,7 @@ const Home = () => {
               </div>
               <button
                 type='submit'
-                className='bg-black text-white w-full mt-4 md:mt-0 md:ml-5 h-[42px] font-medium rounded-lg hover:bg-colYellowHover duration-100'
+                className='bg-black text-white w-full mt-4 md:mt-0 md:ml-5 h-[42px] font-medium rounded-lg hover:bg-opacity-70 duration-100'
               >
                 Отследить
               </button>
