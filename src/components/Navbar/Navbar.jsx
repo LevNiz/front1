@@ -121,7 +121,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                     to='#'
                   >
                     <img className='w-4 mr-1.5' src={gbCoin} alt='*' />
-                    GB-Coin
+                    GB-Pay
                   </NavLink>
                 </li>
                 <li className='my-2'>

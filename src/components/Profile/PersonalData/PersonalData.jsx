@@ -151,14 +151,14 @@ const PersonalData = () => {
                 <p className='font-bold mb-2'>ФИО</p>
                 <div className='relative'>
                   <input
-                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px_16px_16px_44px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
                     placeholder='Полное имя'
                     {...register('fullName', {
                       required: 'Поле обязательно к заполнению!',
                     })}
                   />
                   <img
-                    className='absolute top-[15px] left-[10px] hidden mm:block'
+                    className='absolute top-[15px] left-[10px]'
                     src={profile}
                     alt='*'
                   />
@@ -169,7 +169,7 @@ const PersonalData = () => {
                 <div className='relative'>
                   <input
                     type='tel'
-                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-[4px] focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px_16px_16px_44px] mm:p-[14px_14px_14px_44px] rounded-[4px] focus:border-black focus:outline-none'
                     placeholder='Введите ваш телефон'
                     {...register('phone', {
                       required: 'Поле обязательно к заполнению!',
@@ -180,7 +180,7 @@ const PersonalData = () => {
                     })}
                   />
                   <img
-                    className='absolute top-[15px] left-[10px] hidden mm:block'
+                    className='absolute top-[15px] left-[10px]'
                     src={call}
                     alt='*'
                   />
@@ -190,7 +190,7 @@ const PersonalData = () => {
                 <p className='font-bold mb-2'>Электронная почта</p>
                 <div className='relative'>
                   <input
-                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px_16px_16px_44px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
                     type='email'
                     placeholder='Введите ваш email'
                     {...register('email', {
@@ -202,7 +202,7 @@ const PersonalData = () => {
                     })}
                   />
                   <img
-                    className='absolute top-[15px] left-[10px] hidden mm:block'
+                    className='absolute top-[15px] left-[10px]'
                     src={email}
                     alt='*'
                   />
@@ -212,14 +212,14 @@ const PersonalData = () => {
                 <p className='font-bold mb-2'>Место проживания</p>
                 <div className='relative'>
                   <input
-                    className='w-full border border-colGray2 p-[16px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
+                    className='w-full border border-colGray2 p-[16px_16px_16px_44px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
                     placeholder='Адрес проживания'
                     {...register('address', {
                       required: 'Поле обязательно к заполнению!',
                     })}
                   />
                   <img
-                    className='absolute top-[15px] left-[10px] hidden mm:block'
+                    className='absolute top-[15px] left-[10px]'
                     src={location}
                     alt='*'
                   />
@@ -260,7 +260,7 @@ const PersonalData = () => {
                         styles={{
                           control: (provided, state) => ({
                             ...provided,
-                            padding: '8px',
+                            padding: '8px 8px 8px 32px',
                             boxShadow: state.isFocused ? 0 : 0,
                             border: state.isFocused ? '1px solid #999' : '',
                             '&:hover': {
@@ -280,7 +280,7 @@ const PersonalData = () => {
                     )}
                   />
                   <img
-                    className='absolute top-[15px] left-[10px] hidden mm:block'
+                    className='absolute top-[15px] left-[10px]'
                     src={country}
                     alt='*'
                   />
@@ -311,7 +311,7 @@ const PersonalData = () => {
                         styles={{
                           control: (provided, state) => ({
                             ...provided,
-                            padding: '8px',
+                            padding: '8px 8px 8px 32px',
                             boxShadow: state.isFocused ? 0 : 0,
                             border: state.isFocused ? '1px solid #999' : '',
                             '&:hover': {
@@ -331,7 +331,7 @@ const PersonalData = () => {
                     )}
                   />
                   <img
-                    className='absolute top-[15px] left-[10px] hidden mm:block'
+                    className='absolute top-[15px] left-[10px]'
                     src={city}
                     alt='*'
                   />

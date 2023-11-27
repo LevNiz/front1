@@ -1,6 +1,6 @@
 import bgImg from '../../assets/images/services-bg.jpg';
 import gbShop from '../../assets/icons/gb-services/gb-shop.svg';
-import gbCoin from '../../assets/icons/gb-services/gb-coin.svg';
+import gbPay from '../../assets/icons/gb-services/gb-pay.svg';
 import gbBusiness from '../../assets/icons/gb-services/gb-business.svg';
 import gbFranchise from '../../assets/icons/gb-services/gb-franchise.svg';
 import gbBuyer from '../../assets/icons/gb-services/gb-buyer.svg';
@@ -58,12 +58,12 @@ const GBServices = () => {
         <NavLink
           to='#'
           onClick={() => alert('В процессе разработки!')}
-          className='min-h-[160px] ss:min-h-[180px] sm:min-h-[224px] hover:opacity-70 hover:bg-opacity-70 duration-200 flex justify-center items-center bg-coin'
+          className='min-h-[160px] ss:min-h-[180px] sm:min-h-[224px] hover:opacity-70 hover:bg-opacity-70 duration-200 flex justify-center items-center bg-pay'
         >
           <div>
-            <img className='mx-auto w-12 sm:w-auto' src={gbCoin} alt='*' />
+            <img className='mx-auto w-12 sm:w-auto' src={gbPay} alt='*' />
             <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
-              GB-Coin
+              GB-Pay
             </h3>
           </div>
         </NavLink>

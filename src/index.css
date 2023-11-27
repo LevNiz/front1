@@ -109,9 +109,9 @@ input[type='number'] {
       linear-gradient(1deg, #d660f2 0.83%, #f897c7 98.99%)
     );
   }
-  .bg-coin {
+  .bg-pay {
     background: var(
-      --GB-Coin,
+      --GB-Pay,
       linear-gradient(181deg, #7bd6fd -39.35%, #3793fe 99.93%)
     );
   }

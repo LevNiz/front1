@@ -336,7 +336,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       onClose();
                       alert('В процессе разработки!');
                     }}
-                    to='/gb-coin'
+                    to='#'
                     className='text-base flex items-center'
                   >
                     <img
@@ -344,7 +344,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={gbCoin}
                       alt='*'
                     />
-                    <span className='pl-1'>GB-Coin</span>
+                    <span className='pl-1'>GB-Pay</span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>

@@ -9,7 +9,7 @@ import slideImgDesktop1 from './../assets/images/slider/gb-business.jpg';
 import slideImgDesktop2 from './../assets/images/slider/gb-shop.png';
 import slideImgDesktop3 from './../assets/images/slider/gb-franchise.png';
 import slideImgDesktop4 from './../assets/images/slider/gb-buyer.png';
-import slideImgDesktop5 from './../assets/images/slider/gb-coin.png';
+import slideImgDesktop5 from './../assets/images/slider/gb-pay.png';
 import slideImgDesktop6 from './../assets/images/slider/gb-chat.png';
 import slideImgDesktop7 from './../assets/images/slider/gb-alaket.png';
 
@@ -47,7 +47,7 @@ export const slidesData = [
     id: 5,
     backgroundImage: `${slideImgDesktop5}`,
     mobImage: `${slideImg1}`,
-    title: 'GB-Coin',
+    title: 'GB-Pay',
     description:
       'Cервис для оплаты товаров, услуг, и переводов денег по всему миру',
   },
