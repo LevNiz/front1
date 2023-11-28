@@ -157,7 +157,7 @@ const DetailInfo = (props) => {
                   <div className='flex justify-between items-center mb-6'>
                     <h3 className='font-medium'>Квитанция на счет</h3>
                     <span
-                      className={`colGreen2 rounded-md px-4 text-sm py-1  ${
+                      className={`colGreen2 rounded-md px-4 text-xs py-1  ${
                         paymentStatus[parcelDetail?.paymentStatus]
                           ?.statusStyle || ''
                       }`}
@@ -217,7 +217,7 @@ const DetailInfo = (props) => {
                       parcelDetail?.paymentStatus === 'paid'
                         ? 'hidden'
                         : 'hover:opacity-80'
-                    } mt-2 uppercase font-medium px-4 h-12 text-sm rounded-lg bg-black text-white duration-150 w-full`}
+                    } mt-2 font-medium px-4 h-12 text-lg rounded-lg bg-colYellow duration-150 w-full`}
                   >
                     Оплатить
                   </button>
