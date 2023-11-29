@@ -7,8 +7,8 @@ import chat from './../../assets/icons/messages.svg';
 import arrow from './../../assets/icons/arrow-white.svg';
 import notification from './../../assets/icons/notification.svg';
 import gbBusiness from './../../assets/icons/mobile-menu/bussines.svg';
-import gbShop from './../../assets/icons/gb-shop.svg';
-import gbCoin from './../../assets/icons/gb-bitcoin.svg';
+// import gbShop from './../../assets/icons/gb-shop.svg';
+// import gbCoin from './../../assets/icons/gb-bitcoin.svg';
 import gbBuyer from './../../assets/icons/mobile-menu/buyer.svg';
 import alaket from './../../assets/icons/alaket.svg';
 import gbChat from './../../assets/icons/gb-chat.svg';
@@ -87,7 +87,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
               <span>Сервисы</span>
               <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
               <ul className='absolute left-4 hidden top-full p-3 bg-white shadow-md text-black group-hover:block w-52'>
-                <li className='my-2'>
+                {/* <li className='my-2'>
                   <NavLink
                     onClick={() => alert('В процессе разработки!')}
                     className='hover:opacity-70 duration-150 flex items-center'
@@ -96,7 +96,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                     <img className='w-4 mr-1.5' src={gbShop} alt='*' />
                     GB-Shop
                   </NavLink>
-                </li>
+                </li> */}
                 <li className='my-2'>
                   <NavLink
                     className='hover:opacity-70 duration-150 flex items-center'
@@ -115,7 +115,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                     GB-Franchise
                   </NavLink>
                 </li>
-                <li className='my-2'>
+                {/* <li className='my-2'>
                   <NavLink
                     onClick={() => alert('В процессе разработки!')}
                     className='hover:opacity-70 duration-150 flex items-center'
@@ -124,7 +124,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                     <img className='w-4 mr-1.5' src={gbCoin} alt='*' />
                     GB-Pay
                   </NavLink>
-                </li>
+                </li> */}
                 <li className='my-2'>
                   <NavLink
                     className='hover:opacity-70 duration-150 flex items-center'

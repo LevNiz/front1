@@ -23,8 +23,8 @@ import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
 import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
-import gbShop from './../../assets/icons/gb-shop.svg';
-import gbCoin from './../../assets/icons/gb-bitcoin.svg';
+// import gbShop from './../../assets/icons/gb-shop.svg';
+// import gbCoin from './../../assets/icons/gb-bitcoin.svg';
 import alaket from './../../assets/icons/alaket.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
@@ -285,7 +285,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                   isServices ? 'flex' : 'hidden'
                 } ml-4 bg-slate-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3 mr-2`}
               >
-                <li className='flex items-center'>
+                {/* <li className='flex items-center'>
                   <NavLink
                     onClick={() => {
                       onClose();
@@ -301,7 +301,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                     />
                     <span className='pl-1'>GB-Shop</span>
                   </NavLink>
-                </li>
+                </li> */}
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
@@ -330,7 +330,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                     <span className='pl-1'>GB-Franchise</span>
                   </NavLink>
                 </li>
-                <li className='flex items-center'>
+                {/* <li className='flex items-center'>
                   <NavLink
                     onClick={() => {
                       onClose();
@@ -346,7 +346,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                     />
                     <span className='pl-1'>GB-Pay</span>
                   </NavLink>
-                </li>
+                </li> */}
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
