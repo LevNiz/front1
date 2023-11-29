@@ -13,6 +13,7 @@ import websiteReducer from './slices/websiteSlice';
 import buyRequestReducer from './slices/buyRequestSlice';
 import walletHistoryReducer from './slices/walletsSlice';
 import alaketReducer from './slices/alaketSlice';
+import extraServicesReducer from './slices/extraServicesSlice';
 
 const persistConfig = {
   key: 'root',
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   buyRequests: buyRequestReducer,
   walletHistory: walletHistoryReducer,
   alaket: alaketReducer,
+  extraServices: extraServicesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
