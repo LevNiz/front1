@@ -4,6 +4,7 @@ import facebook from '../../assets/icons/Facebook.svg';
 import instagram from '../../assets/icons/Instagram.svg';
 import tiktok from '../../assets/icons/tiktok.svg';
 import vk from '../../assets/icons/vk.svg';
+import cards from '../../assets/images/cards.png';
 import telegram from '../../assets/icons/telegram.svg';
 
 const Footer = () => {
@@ -138,6 +139,9 @@ const Footer = () => {
               </NavLink>
             </li>
           </ul>
+          <div className='max-w-[220px] mx-auto pt-6'>
+            <img src={cards} alt='*' />
+          </div>
         </div>
       </div>
     </footer>
