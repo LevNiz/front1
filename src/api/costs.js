@@ -1,11 +1,17 @@
+import {
+  fetchCostsFailure,
+  fetchCostsStart,
+  fetchCostsSuccess,
+} from '../redux/slices/costsSlice';
 import { request } from './axios';
 
 // Costs:
-export const fetchCosts = async () => {
+export const fetchCosts = async (dispatch) => {
+  dispatch(fetchCostsStart());
   try {
     const res = await request.get('category/costs/');
-    return { success: true, data: res?.data };
+    dispatch(fetchCostsSuccess(res?.data));
   } catch (error) {
-    return { success: false, data: error };
+    dispatch(fetchCostsFailure(error));
   }
 };

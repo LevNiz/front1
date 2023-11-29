@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper/modules';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDepotsDetail } from '../../api/depots';
 import { ContentLoading } from '../../helpers/Loader/Loader';
@@ -23,14 +23,17 @@ const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState();
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState();
-  const [filteredTariffs, setFilteredTariffs] = useState([]);
   const [mainImg, setMainImg] = useState();
   const [openTariff, setOpenTariff] = useState(false);
   const [openExtraTariff, setOpenExtraTariff] = useState(false);
 
+  const { costs } = useSelector((state) => state?.costs)
   const { extraServices } = useSelector((state) => state?.extraServices);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const filteredTariffs = costs?.filter((el) => el?.fromCity?.id === Number(id))
 
   const handleClick = (index) => {
     const main = images[index];
@@ -38,15 +41,12 @@ const DepotDetail = () => {
   };
 
   useEffect(() => {
+    
     scrollToTop();
     (async () => {
-      const { success, data } = await fetchCosts();
-      if (success) {
-        setFilteredTariffs(
-          data?.filter((el) => el?.fromCity?.id === Number(id))
-        );
-      }
+       await fetchCosts(dispatch);
     })();
+
     (async () => {
       setLoading(true);
       const { success, data } = await fetchDepotsDetail(id);
@@ -58,7 +58,7 @@ const DepotDetail = () => {
       }
       setLoading(false);
     })();
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     (async () => {
@@ -267,7 +267,30 @@ const DepotDetail = () => {
                             <span>Премиум: 1 кг / {el?.costPerKgMy} $</span>
                           </div>
                         </div>
-                        <button className='bg-orange-500 text-white rounded-md px-3 py-1 text-sm hover:opacity-80 duration-150 mt-4 lg:mt-0 flex ml-auto'>
+                        <button
+                          onClick={() =>
+                            navigate('/applications/send-application', {
+                              state: {
+                                orderData: {
+                                  senderCity: {
+                                    value: depotItem?.city?.id,
+                                    label: depotItem?.city?.nameRu,
+                                  },
+                                  receiverCity: {
+                                    value: el?.toCity?.id,
+                                    label: el?.toCity?.nameRu,
+                                  },
+                                  parcelSize: {
+                                    value: 'custom',
+                                    label: 'Точные',
+                                  },
+                                  depotTariff: true,
+                                },
+                              },
+                            })
+                          }
+                          className='bg-orange-500 text-white rounded-md px-3 py-1 text-sm hover:opacity-80 duration-150 mt-4 lg:mt-0 flex ml-auto'
+                        >
                           Оформить заказ
                         </button>
                       </div>

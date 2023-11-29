@@ -4,15 +4,17 @@ import { fetchCosts } from '../../../api/costs';
 import CalcDeliveryTariffs from './CalcDeliveryTariffs';
 import { useNavigate } from 'react-router-dom';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CalcDeliveryItem = () => {
-  const [costs, setCosts] = useState('');
   const [parcelCost, setParcelCost] = useState('');
   const [isClickedForm, setIsClickedForm] = useState(false);
   const [orderData, setOrderData] = useState({});
   const [tariff, setTariff] = useState(null);
 
+  const { costs } = useSelector((state) => state?.costs);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleButtonClick = () => {
     setIsClickedForm(false);
@@ -25,10 +27,7 @@ const CalcDeliveryItem = () => {
 
   useEffect(() => {
     (async () => {
-      const { success, data } = await fetchCosts();
-      if (success) {
-        setCosts(data);
-      }
+      await fetchCosts(dispatch);
     })();
   }, []);
 

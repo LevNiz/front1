@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchCosts } from '../../../api/costs';
 import { useForm } from 'react-hook-form';
@@ -17,7 +17,10 @@ import SApplicationComment from './SApplicationComment';
 const SApplicationItem = () => {
   const { state } = useLocation();
   const { userID } = useSelector((state) => state?.user);
+  const { costs } = useSelector((state) => state?.costs);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const {
     handleSubmit,
     register,
@@ -26,9 +29,10 @@ const SApplicationItem = () => {
   } = useForm();
 
   const [parcelCost, setParcelCost] = useState(state?.parcelCost);
-  const [costs, setCosts] = useState('');
   const [params, setParams] = useState(state);
-  const [isDisabled, setIsDisabled] = useState(state === null ? true : false);
+  const [isDisabled, setIsDisabled] = useState(
+    state === null || state?.orderData?.depotTariff ? true : false
+  );
   const [tariff, setTariff] = useState(state?.tariff);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -42,10 +46,7 @@ const SApplicationItem = () => {
 
   useEffect(() => {
     (async () => {
-      const { success, data } = await fetchCosts();
-      if (success) {
-        setCosts(data);
-      }
+       await fetchCosts(dispatch);
     })();
   }, []);
 
