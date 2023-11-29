@@ -174,9 +174,9 @@ export const createGBChat = async (
   senderData,
   chatIDCheck
 ) => {
-  const userDocRef = doc(db, 'chat', `${chatIDCheck}`);
+  const userDocRefCheck = doc(db, 'chat', `${chatID || chatIDCheck}`);
   const userDocRefSet = doc(db, 'chat', `${chatID}`);
-  const userDocSnapshot = await getDoc(userDocRef);
+  const userDocSnapshot = await getDoc(userDocRefCheck);
 
   if (!userDocSnapshot.exists()) {
     const chatDocData = {

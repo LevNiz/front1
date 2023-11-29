@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
 import { useEffect, useState } from 'react';
-import { SupportChatsNewMessage } from '../../api/chats';
+import { SupportChatsNewMessage } from '../../api/techChat';
 import { useSelector } from 'react-redux';
 import { gbChatNewMessage } from '../../api/gbchat';
 

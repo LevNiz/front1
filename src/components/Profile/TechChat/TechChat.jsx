@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { fetchSupportChats, sendImage, sendMessage } from '../../../api/chats';
+import {
+  fetchSupportChats,
+  sendImage,
+  sendMessage,
+} from '../../../api/techChat';
 import { fetchUser } from '../../../api/client';
 import { FormatDate } from '../../../helpers/FormatDate/formatDate';
 import chatBg from '../../../assets/images/chat-bg.jpeg';

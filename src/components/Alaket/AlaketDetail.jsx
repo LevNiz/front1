@@ -46,27 +46,23 @@ const AlaketDetail = () => {
   const handleCreateGBChat = async () => {
     if (userID) {
       setIsButtonLoading(true);
-      if (userID) {
-        const chatID = `${userID}${alaket?.client?.id}`;
-        const chatIDCheck = `${alaket?.client?.id}${userID}`;
-        const { success, data } = await createGBChat(
-          chatID,
-          alaket?.client,
-          senderData,
-          chatIDCheck
+      const chatID = `${userID}${alaket?.client?.id}`;
+      const chatIDCheck = `${alaket?.client?.id}${userID}`;
+      const { success, data } = await createGBChat(
+        chatID,
+        alaket?.client,
+        senderData,
+        chatIDCheck
+      );
+      if (success) {
+        navigate(
+          `/gb-chat/t/${
+            data?.lastMessageSender === `${userID}` ? chatID : chatIDCheck
+          }`
         );
-        if (success) {
-          navigate(
-            `/gb-chat/t/${
-              data?.lastMessageSender === `${userID}` ? chatID : chatIDCheck
-            }`
-          );
-          setIsButtonLoading(false);
-        }
-        setIsButtonLoading(true);
-      } else {
-        navigate('/auth/sign-in');
+        setIsButtonLoading(false);
       }
+      setIsButtonLoading(false);
     } else {
       navigate('/auth/sign-in');
     }
