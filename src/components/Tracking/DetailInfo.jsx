@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import { fetchParcelDetail, fetchSaveParcel } from '../../api/parcels';
 import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
-import { parcelStatus, paymentStatus } from '../../constants/statusData';
+import { parcelStatus } from '../../constants/statusData';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const DetailInfo = (props) => {
@@ -85,14 +85,14 @@ const DetailInfo = (props) => {
             <div className='w-full mm:w-3/6 lg:w-3/5'>
               <div className='grid lg:grid-cols-2 gap-8'>
                 <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2 lg:col-span-1 flex flex-col justify-between'>
-                  <div className='flex'>
+                  <div className='flex relative'>
                     <div className='flex flex-col items-center'>
-                      <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
+                      <div className='w-[33px] min-h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
                         <img src={sender} alt='*' />
                       </div>
-                      <div className='w-[2px] h-full bg-colYellow'></div>
+                      <div className='absolute top-[33px] w-[2px] h-full bg-colYellow'></div>
                     </div>
-                    <div className='ml-4 pb-10'>
+                    <div className='ml-4 pb-7'>
                       <h4 className='text-sm font-medium'>Отправитель</h4>
                       <p className='text-xs mb-2'>
                         {parcelDetail?.senderName ?? 'Не указано'}
@@ -127,9 +127,9 @@ const DetailInfo = (props) => {
                       </h4>
                     </div>
                   </div>
-                  <div className='flex pt-16'>
-                    <div className='flex flex-col items-center relative'>
-                      <div className='w-[2px] h-full bg-colGray2 absolute -top-[100%] z-0'></div>
+                  <div className='flex pt-10 relative'>
+                    <div className='flex flex-col items-center'>
+                      <div className='w-[2px] h-[92px] bg-colGray2 absolute -top-[45%] z-0'></div>
                       <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
                         <img src={receiver} alt='*' />
                       </div>
@@ -156,15 +156,6 @@ const DetailInfo = (props) => {
                 <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2 lg:col-span-1'>
                   <div className='flex justify-between items-center mb-6'>
                     <h3 className='font-medium'>Квитанция на счет</h3>
-                    <span
-                      className={`colGreen2 rounded-md px-4 text-xs py-1  ${
-                        paymentStatus[parcelDetail?.paymentStatus]
-                          ?.statusStyle || ''
-                      }`}
-                    >
-                      {paymentStatus[parcelDetail?.paymentStatus]?.name ||
-                        'Не указан'}
-                    </span>
                   </div>
                   <div className='flex'>
                     <div className='flex flex-col items-center'>
@@ -177,7 +168,7 @@ const DetailInfo = (props) => {
                       <p className='text-xs mb-2'>{parcelDetail?.weight} кг</p>
                     </div>
                   </div>
-                  <div className='flex items-center z-10 mt-5'>
+                  <div className='flex items-center z-10 mt-4'>
                     <div className='flex flex-col items-center'>
                       <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
                         <img src={dollar} alt='*' />
@@ -190,7 +181,7 @@ const DetailInfo = (props) => {
                       </p>
                     </div>
                   </div>
-                  <div className='flex items-center z-10 mt-5'>
+                  <div className='flex items-center z-10 mt-4'>
                     <div className='flex flex-col items-center'>
                       <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
                         <img src={dollar} alt='*' />
@@ -207,20 +198,22 @@ const DetailInfo = (props) => {
                   </div>
                   <div className='flex justify-between items-center my-5'>
                     <h4 className='font-medium'>Итого</h4>
-                    <span className='font-medium'>
+                    <span className='font-bold text-colPurple'>
                       {parcelDetail?.totalCost} $
                     </span>
                   </div>
-                  <button
-                    onClick={() => alert('В процессе разработки!')}
-                    className={`${
-                      parcelDetail?.paymentStatus === 'paid'
-                        ? 'hidden'
-                        : 'hover:opacity-80'
-                    } mt-2 font-medium px-4 h-12 text-lg rounded-lg bg-colYellow duration-150 w-full`}
-                  >
-                    Оплатить
-                  </button>
+                  {parcelDetail?.paymentStatus == 'paid' ? (
+                    <div className='font-medium px-4 h-12 flex justify-center items-center text-lg rounded-lg bg-colGreen w-full'>
+                      Оплачено
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => alert('В процессе разработки!')}
+                      className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg bg-colYellow duration-150 w-full'
+                    >
+                      Оплатить
+                    </button>
+                  )}
                 </div>
                 <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2'>
                   <h3 className='mb-2 font-medium'>Комментарии</h3>

@@ -41,15 +41,3 @@ export const parcelStatus = {
     statusStyle: 'bg-colOrange',
   },
 };
-
-// Payment status:
-export const paymentStatus = {
-  paid: {
-    name: 'Оплачено',
-    statusStyle: 'bg-colGreen2',
-  },
-  unpaid: {
-    name: 'Не оплачено',
-    statusStyle: 'bg-colOrange',
-  },
-};
