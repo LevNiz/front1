@@ -3,6 +3,7 @@ import { logOut } from './userSlice';
 
 const initialState = {
   alaket: null,
+  count: null,
   loading: false,
   error: null,
 };
@@ -24,17 +25,37 @@ export const alaketSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+    fetchAlaketCountStart: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    fetchAlaketCountSuccess: (state, action) => {
+      state.loading = false;
+      state.count = action.payload;
+      state.error = false;
+    },
+    fetchAlaketCountFailure: (state) => {
+      state.loading = false;
+      state.error = true;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(logOut, (state) => {
       state.alaket = null;
+      state.count = null;
       state.loading = false;
       state.error = null;
     });
   },
 });
 
-export const { fetchAlaketStart, fetchAlaketSuccess, fetchAlaketFailure } =
-  alaketSlice.actions;
+export const {
+  fetchAlaketStart,
+  fetchAlaketSuccess,
+  fetchAlaketFailure,
+  fetchAlaketCountStart,
+  fetchAlaketCountSuccess,
+  fetchAlaketCountFailure,
+} = alaketSlice.actions;
 
 export default alaketSlice.reducer;

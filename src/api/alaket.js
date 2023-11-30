@@ -2,17 +2,23 @@ import {
   fetchAlaketStart,
   fetchAlaketSuccess,
   fetchAlaketFailure,
+  fetchAlaketCountStart,
+  fetchAlaketCountSuccess,
+  fetchAlaketCountFailure,
 } from '../redux/slices/alaketSlice';
 import { axiosInstance, request } from './axios';
 
 // Fetch alaket:
-export const fetchAlaket = async (dispatch) => {
+export const fetchAlaket = async (dispatch, page) => {
   dispatch(fetchAlaketStart());
+  dispatch(fetchAlaketCountStart());
   try {
-    const res = await request.get('core/alaket/');
+    const res = await request.get(`core/alaket/?page=${page}`);
     dispatch(fetchAlaketSuccess(res?.data?.results));
+    dispatch(fetchAlaketCountSuccess(res?.data?.count));
   } catch (error) {
     dispatch(fetchAlaketFailure(error));
+    dispatch(fetchAlaketCountFailure(error));
   }
 };
 
