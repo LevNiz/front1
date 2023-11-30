@@ -4,7 +4,11 @@ import facebook from '../../assets/icons/Facebook.svg';
 import instagram from '../../assets/icons/Instagram.svg';
 import tiktok from '../../assets/icons/tiktok.svg';
 import vk from '../../assets/icons/vk.svg';
-import cards from '../../assets/images/cards.png';
+import mir from '../../assets/images/mir.svg';
+import mastercard from '../../assets/images/mastercard.svg';
+import visa from '../../assets/images/visa.svg';
+import amex from '../../assets/images/amex.jpeg';
+import maestro from '../../assets/images/maestro.svg';
 import telegram from '../../assets/icons/telegram.svg';
 
 const Footer = () => {
@@ -139,8 +143,26 @@ const Footer = () => {
               </NavLink>
             </li>
           </ul>
-          <div className='max-w-[220px] mx-auto pt-6'>
-            <img src={cards} alt='*' />
+          <div className='flex justify-center md:justify-end items-center pt-10 md:pt-5 space-x-2'>
+            <div className='w-[50px] h-[30px] bg-[#4b2592] flex justify-center items-center'>
+              <img
+                className='w-[40px] object-contain'
+                src={mastercard}
+                alt='*'
+              />
+            </div>
+            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={visa} alt='*' />
+            </div>
+            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={mir} alt='*' />
+            </div>
+            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={maestro} alt='*' />
+            </div>
+            <div className='w-[50px] h-[30px] bg-[#2b71b3] flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={amex} alt='*' />
+            </div>
           </div>
         </div>
       </div>
