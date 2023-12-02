@@ -10,9 +10,9 @@ import Pagination from '../../helpers/Paginatoin/Pagination';
 const AlaketItem = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const { loading, error, alaket } = useSelector((state) => state?.alaket);
-
-  const count = 175;
+  const { loading, error, alaket, count } = useSelector(
+    (state) => state?.alaket
+  );
 
   useEffect(() => {
     (async () => {
@@ -25,7 +25,7 @@ const AlaketItem = () => {
     const dateB = new Date(b.dateCreated);
     return dateB - dateA;
   });
-  
+
   return (
     <>
       {loading ? (
