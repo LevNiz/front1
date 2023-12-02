@@ -169,16 +169,19 @@ export const gbChatNewMessage = (userID, callBack) => {
 };
 
 export const createGBChat = async (
-  chatID,
+  myChatID,
   receiverData,
   senderData,
-  chatIDCheck
+  clientChatID
 ) => {
-  const userDocRefCheck = doc(db, 'chat', `${chatID || chatIDCheck}`);
-  const userDocRefSet = doc(db, 'chat', `${chatID}`);
-  const userDocSnapshot = await getDoc(userDocRefCheck);
+  const userDocRefMyChatDoc = doc(db, 'chat', `${myChatID}`);
+  const userDocRefClientChatDoc = doc(db, 'chat', `${clientChatID}`);
 
-  if (!userDocSnapshot.exists()) {
+  const userDocSnapshot = await getDoc(userDocRefMyChatDoc);
+  const userDocSnapshotCheck = await getDoc(userDocRefClientChatDoc);
+
+  if (!userDocSnapshot.exists() && !userDocSnapshotCheck.exists()) {
+    console.log('Внутри if');
     const chatDocData = {
       buyerChat: receiverData?.user_type === 'buyer' ? true : false,
       lastMessage: 'Чат создан',
@@ -189,19 +192,20 @@ export const createGBChat = async (
       lastMessageSenderAvatar: senderData?.avatar || '',
       lastMessageSenderName: senderData?.fullname || '',
       lastMessageTime: serverTimestamp(),
-      uid: `${chatID}` || '',
+      uid: `${myChatID}` || '',
       users: [`${senderData?.id}`, `${receiverData?.id}` || ''],
     };
     if (receiverData?.user_type === 'client') {
       chatDocData.lastMessageReceiver = `${receiverData?.id}`;
     }
-    await setDoc(userDocRefSet, chatDocData);
+    await setDoc(userDocRefMyChatDoc, chatDocData);
 
-    const createdChatDoc = await getDoc(userDocRefSet);
+    const createdChatDoc = await getDoc(userDocRefMyChatDoc);
 
     return { success: true, data: createdChatDoc.data() };
   }
-  return { success: true, data: 'Document already exists' };
+  const createdChatDoc = await getDoc(userDocRefMyChatDoc);
+  return { success: true, data: createdChatDoc.data() };
 };
 
 export const sendMessage = async (e, inputVal, senderData, chatData) => {
