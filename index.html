@@ -13,6 +13,15 @@
 
 <body>
   <div id="root"></div>
+  <script>
+    (function (p, a, y, b, o, x) {
+      o = p.createElement(a);
+      x = p.getElementsByTagName(a)[0];
+      o.async = 1;
+      o.src = 'https://cdn.freedompay.money/widget/pbwidget.js?' + 1 * new Date();
+      x.parentNode.insertBefore(o, x);
+    })(document, 'script');
+  </script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

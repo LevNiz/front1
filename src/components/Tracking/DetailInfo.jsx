@@ -62,6 +62,58 @@ const DetailInfo = (props) => {
     scrollToTop();
   }, []);
 
+  // const payforParcel = (amount) => {
+  //   var data = {
+  //     token: '552850',
+  //     payment: {
+  //       order: '1',
+  //       amount: amount,
+  //       currency: 'KZT',
+  //       description: 'Описание заказа',
+  //       expires_at: '2020-12-12 00:00:00',
+  //       param1: 'string',
+  //       param2: 'string',
+  //       param3: 'string',
+  //       test: 0,
+  //       options: {
+  //         callbacks: {
+  //           result_url: 'https://my-domain.com/result',
+  //           check_url: 'https://my-domain.com/check',
+  //         },
+  //         custom_params: {},
+  //         user: {
+  //           email: 'user@test.com',
+  //           phone: '77777777777',
+  //         },
+  //         receipt_positions: [
+  //           {
+  //             count: 2,
+  //             name: 'Коврик для мыши',
+  //             tax_type: 3,
+  //             price: 1000,
+  //           },
+  //           {
+  //             count: 2,
+  //             name: 'Розетка',
+  //             tax_type: 3,
+  //             price: 1000,
+  //           },
+  //         ],
+  //       },
+  //     },
+  //     successCallback: function (payment) {
+  //       console.log(payment);
+  //     },
+  //     errorCallback: function (payment) {
+  //       console.log(payment);
+  //     },
+  //   };
+
+  //   // eslint-disable-next-line no-undef
+  //   var widget = new PayBox(data);
+  //   widget.create();
+  // };
+
   return (
     <div className='bg-colBgGray2 pt-20'>
       {loading ? (
@@ -209,6 +261,7 @@ const DetailInfo = (props) => {
                   ) : (
                     <button
                       onClick={() => alert('В процессе разработки!')}
+                      // onClick={payforParcel(100)}
                       className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg bg-colYellow duration-150 w-full'
                     >
                       Оплатить
