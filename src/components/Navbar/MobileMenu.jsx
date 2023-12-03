@@ -17,12 +17,13 @@ import box from './../../assets/icons/mobile-menu/box.svg';
 import profileUser from './../../assets/icons/mobile-menu/profile-user.svg';
 import profileBox from './../../assets/icons/mobile-menu/profile-box.svg';
 import profileNotif from './../../assets/icons/mobile-menu/profile-notification.svg';
-import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
+// import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
 import sendBox from './../../assets/icons/mobile-menu/send-box.svg';
 import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
 import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
+import searchIcon from './../../assets/icons/search-item.svg';
 // import gbShop from './../../assets/icons/gb-shop.svg';
 // import gbCoin from './../../assets/icons/gb-bitcoin.svg';
 import alaket from './../../assets/icons/alaket.svg';
@@ -121,7 +122,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={profileUser}
                       alt='*'
                     />
-                    <span className='pl-1'>Личные данные</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Личные данные
+                    </span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
@@ -135,7 +138,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={profileBox}
                       alt='*'
                     />
-                    <span className='pl-1'>Мои посылки</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Мои посылки
+                    </span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
@@ -149,7 +154,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={ordersIcon}
                       alt='*'
                     />
-                    <span className='pl-1'>Мои заявки</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Мои заявки
+                    </span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
@@ -163,7 +170,25 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={applicationIcon}
                       alt='*'
                     />
-                    <span className='pl-1'>Заявки на покупку</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Заявки на покупку
+                    </span>
+                  </NavLink>
+                </li>
+                <li className='flex items-center'>
+                  <NavLink
+                    onClick={() => onClose()}
+                    to='/profile/search-request'
+                    className='text-base flex items-center'
+                  >
+                    <img
+                      className='min-w-[18px] w-[18px]'
+                      src={searchIcon}
+                      alt='*'
+                    />
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Заявки на поиск товара
+                    </span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
@@ -177,7 +202,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={location}
                       alt='*'
                     />
-                    <span className='pl-1'>Сохраненные адреса</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Сохраненные адреса
+                    </span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
@@ -191,10 +218,12 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={profileNotif}
                       alt='*'
                     />
-                    <span className='pl-1'>Уведомления</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Уведомления
+                    </span>
                   </NavLink>
                 </li>
-                <li className='flex items-center'>
+                {/* <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-wallet'
@@ -205,9 +234,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={profileWallet}
                       alt='*'
                     />
-                    <span className='pl-1'>Мой кошелёк</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>Мой кошелёк</span>
                   </NavLink>
-                </li>
+                </li> */}
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
@@ -220,7 +249,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                         src={chat}
                         alt='*'
                       />
-                      <span className='pl-1'>Чат с поддержкой</span>
+                      <span className='pl-1 sm:text-[15px] leading-5'>
+                        Чат с поддержкой
+                      </span>
                     </div>
                     <span
                       className={`${

@@ -12,6 +12,7 @@ import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
 import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
+import searchIcon from './../../assets/icons/search-item.svg';
 
 const ProfileSidebar = () => {
   const dispatch = useDispatch();
@@ -79,6 +80,15 @@ const ProfileSidebar = () => {
             >
               <img className='pr-3' src={applicationIcon} alt='*' />
               <span className='text-lg'>Заявка на покупку</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='search-request'
+              className='flex items-center p-2 rounded-lg'
+            >
+              <img className='pr-3' src={searchIcon} alt='*' />
+              <span className='text-lg leading-5'>Заявка на поиск товара</span>
             </NavLink>
           </li>
           <li>

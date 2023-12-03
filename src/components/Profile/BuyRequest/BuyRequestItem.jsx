@@ -77,7 +77,7 @@ const BuyRequestItem = ({ data = {} }) => {
         </div>
         <div className='flex justify-between items-end'>
           <div
-            className={`w-max px-3 py-1 text-center cursor-pointer text-[10px] rounded-lg ${
+            className={`w-max px-3 py-1 text-center text-[10px] rounded-lg ${
               buyRequestStatus[data?.status].statusStyle
             }`}
           >

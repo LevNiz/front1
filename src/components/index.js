@@ -49,6 +49,7 @@ import GBFranchiseForm from './GBFranchise/GBFranchiseForm';
 import AlaketItem from './Alaket/AlaketItem';
 import AlaketNew from './Alaket/AlaketNew';
 import AlaketDetail from './Alaket/AlaketDetail';
+import ItemSearchRequest from './Profile/ItemSearchRequest/ItemSearchRequest';
 
 export {
   Layout,
@@ -102,4 +103,5 @@ export {
   AlaketItem,
   AlaketNew,
   AlaketDetail,
+  ItemSearchRequest,
 };
