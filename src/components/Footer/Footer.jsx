@@ -13,13 +13,13 @@ import telegram from '../../assets/icons/telegram.svg';
 
 const Footer = () => {
   return (
-    <footer className='bg-black py-10 lg:py-0 lg:min-h-[252px] flex justify-between items-center pb-12 md:pb-10'>
+    <footer className='bg-black py-10 lg:min-h-[252px] flex justify-between items-center pb-12 md:pb-10'>
       <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between w-full container'>
         <NavLink className='pr-5' to='/'>
           <img src={logo} alt='*' />
         </NavLink>
         <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
-          <ul className='space-y-2'>
+          {/* <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Главная</li>
             <li>
               <NavLink
@@ -53,43 +53,38 @@ const Footer = () => {
                 GB-Бизнес
               </NavLink>
             </li>
-          </ul>
+          </ul> */}
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Контакты</li>
-            <li>
-              <NavLink
-                to='tel:+996 123 456 678'
-                className='text-base hover:text-colYellow duration-100'
-              >
-                Тел: +996 123 456 678
-              </NavLink>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='tel:8(800)201-07-88'>8(800)201-07-88</NavLink>
             </li>
-            <li>
-              <NavLink
-                to='#'
-                className='text-base hover:text-colYellow duration-100'
-              >
-                Эл. почта: givbox@gmail.com
-              </NavLink>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='#'>support@givbox.ru</NavLink>
+            </li>
+          </ul>
+          <ul className='space-y-3 max-w-[280px]'>
+            <li className='text-xl font-medium mb-3'>Адреса ПВЗ</li>
+            <li className='opacity-80'>
+              121087, Россия, Москва, Багратионовский переулок 5, этаж 3, офис
+              34.
+            </li>
+            <li className='opacity-80'>
+              443110, Россия, Самара, Ново садовая , д. 30.
+            </li>
+            <li className='opacity-80'>
+              724831, Кыргызстан, Бишкек, ул. Шопоково, д. 33.
             </li>
           </ul>
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Политика</li>
-            <li>
-              <NavLink
-                to='/privacy-policy'
-                target='_blank'
-                className='text-base hover:text-colYellow duration-100'
-              >
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='/privacy-policy' target='_blank'>
                 Политика конфиденциальности
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to='/user-agreement'
-                target='_blank'
-                className='text-base hover:text-colYellow duration-100'
-              >
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='/user-agreement' target='_blank'>
                 Пользовательское соглашение
               </NavLink>
             </li>
