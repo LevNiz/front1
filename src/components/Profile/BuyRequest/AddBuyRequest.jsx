@@ -17,6 +17,7 @@ const AddBuyRequest = () => {
     formState: { errors },
     register,
   } = useForm({
+    mode: 'onChange',
     defaultValues: async () => {
       setIsLoading(true);
       const { success, data } = await fetchUser(userID);

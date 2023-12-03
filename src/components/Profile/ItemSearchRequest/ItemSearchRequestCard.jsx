@@ -1,6 +1,7 @@
 // import { NavLink } from 'react-router-dom';
 import edit from '../../../assets/icons/update.svg';
 import trash from '../../../assets/icons/trash.svg';
+import noImg from '../../../assets/images/no-image.jpeg';
 
 const ItemSearchRequestCard = ({ el }) => {
   return (
@@ -39,6 +40,10 @@ const ItemSearchRequestCard = ({ el }) => {
               <img
                 className='w-full h-full object-cover'
                 src={el?.photo}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = noImg;
+                }}
                 alt='*'
               />
             </div>

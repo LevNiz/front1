@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
+import { useNavigate } from 'react-router-dom';
 
 const ItemSearchRequest = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -13,6 +14,7 @@ const ItemSearchRequest = () => {
   );
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -25,7 +27,7 @@ const ItemSearchRequest = () => {
       <div className='flex justify-between items-center mb-5'>
         <h3 className='ss:text-xl sm:font-medium'>Заявки на поиск товара</h3>
         <button
-          //   onClick={() => navigate('new')}
+            onClick={() => navigate('new')}
           className='bg-colYellow py-2 ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'
         >
           Новый запрос

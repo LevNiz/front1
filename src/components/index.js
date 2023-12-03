@@ -50,6 +50,7 @@ import AlaketItem from './Alaket/AlaketItem';
 import AlaketNew from './Alaket/AlaketNew';
 import AlaketDetail from './Alaket/AlaketDetail';
 import ItemSearchRequest from './Profile/ItemSearchRequest/ItemSearchRequest';
+import ItemSearchRequestNew from './Profile/ItemSearchRequest/ItemSearchRequestNew';
 
 export {
   Layout,
@@ -104,4 +105,5 @@ export {
   AlaketNew,
   AlaketDetail,
   ItemSearchRequest,
+  ItemSearchRequestNew,
 };
