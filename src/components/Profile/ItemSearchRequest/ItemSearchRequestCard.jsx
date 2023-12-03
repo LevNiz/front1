@@ -1,4 +1,3 @@
-// import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -9,11 +8,13 @@ import Modal from '../../../helpers/Modals/Modal';
 import edit from '../../../assets/icons/update.svg';
 import trash from '../../../assets/icons/trash.svg';
 import noImg from '../../../assets/images/no-image.jpeg';
+import { useNavigate } from 'react-router-dom';
 
 const ItemSearchRequestCard = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
@@ -47,7 +48,7 @@ const ItemSearchRequestCard = ({ el }) => {
             </span>
             <div className='flex space-x-1'>
               <img
-                // onClick={() => navigate(`update/${data?.id}`)}
+                onClick={() => navigate(`update/${el?.id}`)}
                 className='cursor-pointer min-w-[28px]'
                 src={edit}
                 alt='*'
@@ -77,7 +78,7 @@ const ItemSearchRequestCard = ({ el }) => {
               />
             </div>
             <h4 className='font-medium text-lg ml-3 line-clamp-1 break-all'>
-              {el?.client?.fullname}
+              {el?.name}
             </h4>
           </div>
           <p className='text-sm break-all line-clamp-2'>

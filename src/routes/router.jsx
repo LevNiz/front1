@@ -36,6 +36,7 @@ import {
   AlaketNew,
   ItemSearchRequest,
   ItemSearchRequestNew,
+  ItemSearchRequestUpdate,
 } from '../components';
 import {
   Auth,
@@ -115,6 +116,7 @@ export const router = createBrowserRouter(
             <Route path='search-request'>
               <Route index element={<ItemSearchRequest />} />
               <Route path='new' element={<ItemSearchRequestNew />} />
+              <Route path='update/:id' element={<ItemSearchRequestUpdate />} />
             </Route>
           </Route>
           <Route path='gb-chat' element={<GBChat />}>

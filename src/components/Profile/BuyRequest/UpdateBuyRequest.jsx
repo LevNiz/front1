@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-  FetchBuyRequests,
   FetchBuyRequestsDetail,
   updateBuyRequest,
 } from '../../../api/buyRequests';
 import { useForm } from 'react-hook-form';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { useDispatch, useSelector } from 'react-redux';
 
 const UpdateBuyRequest = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { userID } = useSelector((el) => el?.user);
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -35,17 +35,12 @@ const UpdateBuyRequest = () => {
     },
   });
 
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const onSubmit = async (data) => {
     setIsLoading(true);
     const { success } = await updateBuyRequest(data, id);
     if (success) {
       setIsLoading(false);
       navigate(-1);
-      await FetchBuyRequests(dispatch, userID);
     }
     setIsLoading(false);
   };
