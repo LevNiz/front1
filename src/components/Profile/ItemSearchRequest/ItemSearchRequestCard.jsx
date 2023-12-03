@@ -1,9 +1,38 @@
 // import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  deleteSearchRequest,
+  fetchSearchRequest,
+} from '../../../api/searchRequest.js';
+import Modal from '../../../helpers/Modals/Modal';
 import edit from '../../../assets/icons/update.svg';
 import trash from '../../../assets/icons/trash.svg';
 import noImg from '../../../assets/images/no-image.jpeg';
 
 const ItemSearchRequestCard = ({ el }) => {
+  const { userID } = useSelector((state) => state?.user);
+
+  const dispatch = useDispatch();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('');
+  const [itemId, setItemId] = useState(null);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const onDeleteSearchRequest = async () => {
+    setModalOpen(true);
+    const { success } = await deleteSearchRequest(dispatch, itemId);
+    if (success) {
+      setModalOpen(false);
+      await fetchSearchRequest(dispatch, userID);
+    }
+    setModalOpen(false);
+  };
+
   return (
     <>
       <div className='bg-colBgGray2 p-2 sm:p-4 rounded-md'>
@@ -24,11 +53,11 @@ const ItemSearchRequestCard = ({ el }) => {
                 alt='*'
               />
               <img
-                // onClick={() => {
-                //   setModalOpen(true);
-                //   setModalContent('deleteBuyRequest');
-                //   setBuyRequestID(data?.id);
-                // }}
+                onClick={() => {
+                  setModalOpen(true);
+                  setModalContent('deleteSearchRequest');
+                  setItemId(el?.id);
+                }}
                 className='cursor-pointer min-w-[30px]'
                 src={trash}
                 alt='*'
@@ -56,6 +85,12 @@ const ItemSearchRequestCard = ({ el }) => {
           </p>
         </div>
       </div>
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        content={modalContent}
+        onDeleteSearchRequest={onDeleteSearchRequest}
+      />
     </>
   );
 };

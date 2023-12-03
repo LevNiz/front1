@@ -40,11 +40,22 @@ export const postSearchRequest = async (data, userID, file) => {
     } catch (error) {
       return error;
     }
-    try {
-      await axiosInstance.post(`core/item_search_request/`, sendData);
-      return { success: true };
-    } catch (error) {
-      return { success: false };
-    }
+  }
+  try {
+    await axiosInstance.post(`core/item_search_request/`, sendData);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
+// delete search request:
+export const deleteSearchRequest = async (dispatch, id) => {
+  dispatch(fetchSearchRequestStart());
+  try {
+    await axiosInstance.delete(`core/item_search_request/${id}`);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
   }
 };

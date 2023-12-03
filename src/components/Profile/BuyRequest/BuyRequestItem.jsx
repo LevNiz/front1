@@ -19,7 +19,7 @@ const BuyRequestItem = ({ data = {} }) => {
 
   const onDeleteBuyRequest = async () => {
     setModalOpen(true);
-    const { success } = await deleteBuyRequest(buyRequestID);
+    const { success } = await deleteBuyRequest(dispatch, buyRequestID);
     if (success) {
       setModalOpen(false);
       await FetchBuyRequests(dispatch, userID);
