@@ -17,7 +17,7 @@ const DetailInfo = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [parcelDetail, setParcelDetail] = useState();
+  const [parcelDetail, setParcelDetail] = useState({});
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -64,12 +64,12 @@ const DetailInfo = (props) => {
 
   const payForParcel = () => {
     var data = {
-      token: 'tUuoIawwykxV6vjn8eMyZKC8LqXE34p1',
+      token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
       payment: {
         order: '1',
-        amount: 100,
+        amount: 1.1,
         currency: 'KG',
-        description: 'Описание заказа',
+        description: `${parcelDetail?.comment}`,
         expires_at: '2020-12-12 00:00:00',
         param1: 'string',
         param2: 'string',
@@ -82,8 +82,8 @@ const DetailInfo = (props) => {
           },
           custom_params: {},
           user: {
-            email: 'user@test.com',
-            phone: '77777777777',
+            email: `${parcelDetail?.client?.login}`,
+            phone: `${parcelDetail?.client?.phone}`,
           },
           receipt_positions: [
             {
@@ -102,10 +102,10 @@ const DetailInfo = (props) => {
         },
       },
       successCallback: function (payment) {
-        alert('Оплата прошла успешна!', payment);
+        alert(payment);
       },
       errorCallback: function (payment) {
-        alert('Оплата не прошла!', payment);
+        alert(payment);
       },
     };
 
