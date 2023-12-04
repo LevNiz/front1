@@ -53,7 +53,7 @@ const ItemSearchRequestNew = () => {
         <ContentLoading extraStyle='480px' />
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='grid ld:grid-cols-2 gap-5'>
+          <div className='grid ld:grid-cols-2 ld:gap-5'>
             <div>
               <div>
                 <p className='font-medium mb-2'>ФИО</p>
@@ -98,14 +98,8 @@ const ItemSearchRequestNew = () => {
                   {...register('description')}
                 />
               </div>
-              <button
-                type='submit'
-                className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 w-full'
-              >
-                Cохранить
-              </button>
             </div>
-            <div>
+            <div className='mt-2 ld:mt-0'>
               <p className='font-medium mb-2'>Фото товара</p>
               <label htmlFor='fileVal'>
                 <input
@@ -135,6 +129,12 @@ const ItemSearchRequestNew = () => {
               )}
             </div>
           </div>
+          <button
+            type='submit'
+            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-sm ml-auto w-full flex justify-center'
+          >
+            Cохранить
+          </button>
         </form>
       )}
     </div>
