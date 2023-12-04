@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { logOutFetch } from './user';
+import { useDispatch } from 'react-redux';
 
 const baseURL = 'https://givbox.ru/givbox/';
 
@@ -79,8 +81,11 @@ axiosInstance.interceptors.response.use(
         subscribers = [];
         return axiosInstance(originalRequest);
       } catch (refreshError) {
+        const dispatch = useDispatch();
+
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
+        await logOutFetch(dispatch);
         window.location.href = '/auth/sign-in';
       } finally {
         isRefreshing = false;
