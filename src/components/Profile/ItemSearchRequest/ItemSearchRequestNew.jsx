@@ -50,15 +50,10 @@ const ItemSearchRequestNew = () => {
   });
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
-      const photoURLs = await uploadPhotos(blocks);
-      const { success } = await postSearchRequest(
-        data,
-        userID,
-        photoURLs,
-        blocks
-      );
+      const wantedItems = await uploadPhotos(blocks);
+      const { success } = await postSearchRequest(data, userID, wantedItems);
       if (success) {
         setIsLoading(false);
         navigate(-1);
@@ -68,6 +63,7 @@ const ItemSearchRequestNew = () => {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className='w-full pt-8 md:p-4'>

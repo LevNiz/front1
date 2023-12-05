@@ -31,18 +31,16 @@ export const FetchSearchRequestsDetail = async (id) => {
 
 // send post search request:
 export const uploadPhotos = async (blocks) => {
-  const photoURLs = [];
+  const wantedItems = [];
 
   for (const block of blocks) {
-    if (block.photo) {
-      const photoURL = await uploadPhoto(block.photo);
-      photoURLs.push(photoURL);
-    } else {
-      photoURLs.push(null);
+    if (block?.photo) {
+      const photoURL = await uploadPhoto(block?.photo);
+      wantedItems.push({ description: block?.description, photo: photoURL });
     }
   }
 
-  return photoURLs;
+  return wantedItems;
 };
 
 const uploadPhoto = async (photo) => {
@@ -58,20 +56,19 @@ const uploadPhoto = async (photo) => {
   }
 };
 
-export const postSearchRequest = async (data, userID, photoURLs, blocks) => {
+export const postSearchRequest = async (data, userID, wantedItems) => {
   const sendData = {
     client: userID,
     name: data.name,
     phone: data.phone,
-    wantedItems: photoURLs?.map((photoURL, index) => ({
-      description: blocks[index]?.description,
-      photo: photoURL,
-    })),
+    wantedItems: wantedItems,
     active: true,
   };
-  try {
-    await axiosInstance.post('core/item_search_request/', sendData);
 
+  try {
+    const res = await axiosInstance.post('core/item_search_request/', sendData);
+    console.log(res?.data);
+    console.log('sendData', sendData);
     return { success: true };
   } catch (error) {
     return { success: false };
