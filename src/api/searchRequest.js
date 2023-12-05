@@ -19,6 +19,16 @@ export const fetchSearchRequest = async (dispatch, userID) => {
   }
 };
 
+// fetch search request item detail:
+export const fetchSearchRequestDetail = async (id) => {
+  try {
+    const res = await request.get(`core/item_search_request/${id}/`);
+    return { success: true, data: res?.data };
+  } catch (error) {
+    return { success: false, data: error };
+  }
+};
+
 // fetch search request detail:
 export const FetchSearchRequestsDetail = async (id) => {
   try {
@@ -68,22 +78,26 @@ export const postSearchRequest = async (data, userID, wantedItems) => {
     wantedItems: wantedItems,
     active: true,
   };
-
   try {
-    await axiosInstance.post('core/item_search_request/', sendData);
-    return { success: true };
+    if (wantedItems?.length > 0) {
+      await axiosInstance.post('core/item_search_request/', sendData);
+      return { success: true };
+    }
   } catch (error) {
     return { success: false };
   }
 };
 
 // delete search request:
-export const deleteSearchRequest = async (dispatch, id) => {
-  dispatch(fetchSearchRequestStart());
+export const deleteSearchRequest = async (id, setIsLoading, setModalOpen) => {
+  setIsLoading(true);
+  setModalOpen(false);
   try {
     await axiosInstance.delete(`core/item_search_request/${id}`);
+    setIsLoading(false);
     return { success: true };
   } catch (error) {
+    setIsLoading(false);
     return { success: false };
   }
 };

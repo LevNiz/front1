@@ -111,11 +111,11 @@ const ItemSearchRequestNew = () => {
               )}
             </div>
           </div>
-          <h3 className='pt-4 pb-2 font-medium text-lg'>Товары</h3>
+          <h3 className='pt-4 font-medium text-lg'>Товары</h3>
           {blocks.map((block, index) => (
             <div
               key={index}
-              className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md my-4'
+              className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md mt-5 mb-2'
             >
               <div>
                 <p className='font-medium mb-2'>Фото товара</p>
@@ -163,6 +163,13 @@ const ItemSearchRequestNew = () => {
               </div>
             </div>
           ))}
+          {!blocks[0]?.photo || !blocks[0]?.description ? (
+            <p className='text-red-500 mt-1 text-sm'>
+              Поле обязательно к заполнению!
+            </p>
+          ) : (
+            ''
+          )}
           <div
             onClick={handleAddBlock}
             className='bg-green-500 text-white font-medium rounded-md px-5 py-[2px] mt-3 flex ml-auto text-xl hover:opacity-80 duration-150 w-max cursor-pointer'
