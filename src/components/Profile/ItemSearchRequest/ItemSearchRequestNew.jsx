@@ -115,9 +115,9 @@ const ItemSearchRequestNew = () => {
           {blocks.map((block, index) => (
             <div
               key={index}
-              className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md'
+              className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md my-4'
             >
-              <div className='mt-3 ld:mt-0'>
+              <div>
                 <p className='font-medium mb-2'>Фото товара</p>
                 <div className='flex items-center'>
                   <label className='w-4/5' htmlFor={`photo-${index}`}>
@@ -130,14 +130,14 @@ const ItemSearchRequestNew = () => {
                       }
                       accept='image/jpeg, image/jpg, image/png, image/webp'
                     />
-                    <div className='border-dashed border-2 h-[78px] border-colGray2 flex flex-col justify-center items-center cursor-pointer rounded-md'>
+                    <div className='border-dashed border-2 h-16 sm:h-[78px] border-colGray2 flex flex-col justify-center items-center cursor-pointer rounded-md'>
                       <p className='opacity-70'>Загрузить фото</p>
                       <span className='text-[10px] opacity-40'>
                         (jpeg, jpg, png, webp)
                       </span>
                     </div>
                   </label>
-                  <div className='ml-3 overflow-hidden w-1/5 h-[78px] bg-gray-100 rounded-md'>
+                  <div className='ml-3 overflow-hidden w-1/5 h-16 sm:h-[78px] bg-gray-100 rounded-md'>
                     <img
                       className='w-full h-full object-contain'
                       onError={(e) => {

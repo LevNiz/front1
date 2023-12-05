@@ -8,7 +8,7 @@ import Modal from '../../../helpers/Modals/Modal';
 import edit from '../../../assets/icons/update.svg';
 import trash from '../../../assets/icons/trash.svg';
 import noImg from '../../../assets/images/no-image.jpeg';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const ItemSearchRequestCard = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
@@ -19,17 +19,9 @@ const ItemSearchRequestCard = ({ el }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
   const [itemId, setItemId] = useState(null);
-  const [imgModal, setImgModal] = useState(null);
 
   const closeModal = () => {
     setModalOpen(false);
-  };
-
-  const handelClickCard = (e) => {
-    const hasClass = e.target.classList.contains('delete-btn');
-    if (!hasClass) {
-      setImgModal(el?.photo);
-    }
   };
 
   const onDeleteSearchRequest = async () => {
@@ -44,11 +36,11 @@ const ItemSearchRequestCard = ({ el }) => {
 
   return (
     <>
-      <div
-        onClick={(e) => handelClickCard(e)}
-        className='bg-colBgGray2 p-2 sm:p-4 rounded-md cursor-pointer'
+      <NavLink
+        to={`${el?.id}`}
+        className='bg-colBgGray2 p-3 sm:p-4 rounded-md cursor-pointer'
       >
-        <div className='w-full mb-3'>
+        <div className='w-full'>
           <div className='flex justify-between items-center'>
             <span
               className={`${
@@ -77,10 +69,10 @@ const ItemSearchRequestCard = ({ el }) => {
             </div>
           </div>
           <div className='flex items-center py-3'>
-            <div className='min-w-[48px] mm:min-w-[64px] w-12 h-12 mm:w-16 mm:h-16 rounded-full overflow-hidden'>
+            <div className='min-w-[24px] mm:min-w-[24px] w-6 h-6 rounded-full overflow-hidden border border-gray-400'>
               <img
                 className='w-full h-full object-cover'
-                src={el?.photo}
+                src={el?.client?.avatar}
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = noImg;
@@ -88,38 +80,30 @@ const ItemSearchRequestCard = ({ el }) => {
                 alt='*'
               />
             </div>
-            <h4 className='font-medium mm:text-lg ml-3 line-clamp-1 break-all'>
+            <h4 className='font-medium text-sm ml-3 line-clamp-1 break-all'>
               {el?.name}
             </h4>
           </div>
-          <p className='text-sm break-all line-clamp-2'>
-            {el?.description || 'Не указана'}
-          </p>
+          <p className='text-sm font-medium'>Товары</p>
+          <div className='flex mt-2'>
+            <div className='min-w-[80px] w-20 ss:min-w-[96px] ss:w-24 h-16 ss:h-20 overflow-hidden rounded-md bg-white'>
+              <img
+                className='w-full h-full object-contain'
+                src={el?.wantedItems[0]?.photo}
+                alt='*'
+              />
+            </div>
+            <div className='ml-3'>
+              <span className='text-xs font-medium opacity-70'>
+                Доп. информация:
+              </span>
+              <p className='line-clamp-2 break-all text-sm'>
+                {el?.wantedItems[0]?.description}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div
-        className={`${
-          imgModal ? 'visible opacity-100' : 'invisible opacity-0'
-        } fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-[999999] duration-150`}
-      >
-        <span
-          onClick={() => setImgModal(null)}
-          className='absolute top-5 right-5 w-10 h-10 mm:w-16 mm:h-16 flex justify-center items-center rounded-full z-10 text-3xl mm:text-5xl cursor-pointer bg-white'
-        >
-          &times;
-        </span>
-        <div className='w-[90%] h-[90vh] mx-auto overflow-hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center'>
-          <img
-            className='mx-auto'
-            src={imgModal}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = noImg;
-            }}
-            alt='*'
-          />
-        </div>
-      </div>
+      </NavLink>
       <Modal
         isOpen={modalOpen}
         onClose={closeModal}
