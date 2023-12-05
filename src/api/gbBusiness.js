@@ -16,7 +16,11 @@ export const postBusinessRequest = async (data, file) => {
     formData.append('image', file);
     formData.append('title', milliseconds);
     try {
-      const res = await axiosInstance.post('core/image/', formData);
+      const res = await axiosInstance.post('core/image/', formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      });
       sendData.file = res?.data?.image;
     } catch (error) {
       return error;

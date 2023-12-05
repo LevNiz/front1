@@ -41,7 +41,11 @@ export const postAlaket = async (data, photo, userID) => {
     formData.append('image', photo);
     formData.append('title', milliseconds);
     try {
-      const res = await axiosInstance.post('core/image/', formData);
+      const res = await axiosInstance.post('core/image/', formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      });
       sendData.photo = res?.data?.image;
     } catch (error) {
       return error;

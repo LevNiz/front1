@@ -98,7 +98,11 @@ export const sendImage = async (file, userData) => {
   formData.append('title', milliseconds);
 
   try {
-    const res = await axiosInstance.post('core/image/', formData);
+    const res = await axiosInstance.post('core/image/', formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+    });
     const imgLink = res?.data?.image;
     if (imgLink) {
       const userDocRef = doc(db, 'support_chat', `${userData?.id}`);

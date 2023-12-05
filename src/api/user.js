@@ -83,7 +83,11 @@ export const UpdateProfile = async ({ userID, data, ava }) => {
       formData.append('title', milliseconds);
 
       try {
-        const res = await axiosInstance.post('core/image/', formData);
+        const res = await axiosInstance.post('core/image/', formData, {
+          headers: {
+            'Content-type': 'multipart/form-data',
+          },
+        });
         userData.avatar = res?.data?.image;
       } catch (error) {
         return { success: false, data: error };

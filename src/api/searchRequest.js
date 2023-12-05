@@ -49,7 +49,11 @@ const uploadPhoto = async (photo) => {
   formData.append('image', photo);
   formData.append('title', milliseconds);
   try {
-    const res = await axiosInstance.post('core/image/', formData);
+    const res = await axiosInstance.post('core/image/', formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+    });
     return res?.data?.image;
   } catch (error) {
     return error;
@@ -66,9 +70,7 @@ export const postSearchRequest = async (data, userID, wantedItems) => {
   };
 
   try {
-    const res = await axiosInstance.post('core/item_search_request/', sendData);
-    console.log(res?.data);
-    console.log('sendData', sendData);
+    await axiosInstance.post('core/item_search_request/', sendData);
     return { success: true };
   } catch (error) {
     return { success: false };
@@ -101,7 +103,11 @@ export const updateSearchRequest = async (data, id, file) => {
     formData.append('image', file);
     formData.append('title', milliseconds);
     try {
-      const res = await axiosInstance.post('core/image/', formData);
+      const res = await axiosInstance.post('core/image/', formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      });
       sendData.photo = res?.data?.image;
     } catch (error) {
       return error;

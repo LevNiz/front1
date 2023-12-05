@@ -181,7 +181,6 @@ export const createGBChat = async (
   const userDocSnapshotCheck = await getDoc(userDocRefClientChatDoc);
 
   if (!userDocSnapshot.exists() && !userDocSnapshotCheck.exists()) {
-    console.log('Внутри if');
     const chatDocData = {
       buyerChat: receiverData?.user_type === 'buyer' ? true : false,
       lastMessage: 'Чат создан',
@@ -251,7 +250,11 @@ export const sendGBChatImage = async (senderData, chatData, file) => {
   formData.append('title', milliseconds);
 
   try {
-    const res = await axiosInstance.post('core/image/', formData);
+    const res = await axiosInstance.post('core/image/', formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+    });
     const imgLink = res?.data?.image;
     if (imgLink) {
       const userDocRef = doc(db, 'chat', `${chatData?.uid}`);
