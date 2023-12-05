@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchUser } from '../../../api/client';
-import { postSearchRequest } from '../../../api/searchRequest';
+import { postSearchRequest, uploadPhotos } from '../../../api/searchRequest';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import noImg from '../../../assets/images/no-image.svg';
 
@@ -12,7 +12,23 @@ const ItemSearchRequestNew = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [fileValue, setFileValue] = useState(null);
+  const [blocks, setBlocks] = useState([{ photo: null, description: '' }]);
+
+  const handleFileChange = (index, file) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[index].photo = file;
+    setBlocks(updatedBlocks);
+  };
+
+  const handleDescriptionChange = (index, value) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[index].description = value;
+    setBlocks(updatedBlocks);
+  };
+
+  const handleAddBlock = () => {
+    setBlocks([...blocks, { photo: null, description: '' }]);
+  };
 
   const {
     handleSubmit,
@@ -34,14 +50,23 @@ const ItemSearchRequestNew = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     setIsLoading(true);
-    const { success } = await postSearchRequest(data, userID, fileValue);
-    if (success) {
+    try {
+      const photoURLs = await uploadPhotos(blocks);
+      const { success } = await postSearchRequest(
+        data,
+        userID,
+        photoURLs,
+        blocks
+      );
+      if (success) {
+        setIsLoading(false);
+        navigate(-1);
+      }
       setIsLoading(false);
-      navigate(-1);
+    } catch (error) {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -92,48 +117,59 @@ const ItemSearchRequestNew = () => {
             </div>
           </div>
           <h3 className='pt-4 pb-2 font-medium text-lg'>Товары</h3>
-          <div className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md'>
-            <div className='mt-3 ld:mt-0'>
-              <p className='font-medium mb-2'>Фото товара</p>
-              <div className='flex items-center'>
-                <label className='w-4/5' htmlFor='photo'>
-                  <input
-                    className='hidden'
-                    id='photo'
-                    type='file'
-                    onChange={(e) => setFileValue(e.target.files[0])}
-                    accept='image/*'
-                  />
-                  <div className='border-dashed border-2 h-[78px] border-colGray2 flex justify-center items-center cursor-pointer rounded-md'>
-                    <p className='opacity-50'>Загрузить фото</p>
+          {blocks.map((block, index) => (
+            <div
+              key={index}
+              className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md'
+            >
+              <div className='mt-3 ld:mt-0'>
+                <p className='font-medium mb-2'>Фото товара</p>
+                <div className='flex items-center'>
+                  <label className='w-4/5' htmlFor={`photo-${index}`}>
+                    <input
+                      className='hidden'
+                      id={`photo-${index}`}
+                      type='file'
+                      onChange={(e) =>
+                        handleFileChange(index, e.target.files[0])
+                      }
+                      accept='image/jpeg, image/jpg, image/png, image/webp'
+                    />
+                    <div className='border-dashed border-2 h-[78px] border-colGray2 flex flex-col justify-center items-center cursor-pointer rounded-md'>
+                      <p className='opacity-70'>Загрузить фото</p>
+                      <span className='text-[10px] opacity-40'>
+                        (jpeg, jpg, png, webp)
+                      </span>
+                    </div>
+                  </label>
+                  <div className='ml-3 overflow-hidden w-1/5 h-[78px] bg-gray-100 rounded-md'>
+                    <img
+                      className='w-full h-full object-contain'
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = noImg;
+                      }}
+                      src={block.photo ? URL.createObjectURL(block.photo) : ''}
+                      alt='*'
+                    />
                   </div>
-                </label>
-                <div className='ml-3 overflow-hidden w-1/5 h-[78px] bg-gray-100 rounded-md'>
-                  <img
-                    className='w-full h-full object-contain'
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = noImg;
-                    }}
-                    src={fileValue ? URL.createObjectURL(fileValue) : ''}
-                    alt='*'
-                  />
                 </div>
               </div>
+              <div className='mt-3 ld:mt-0'>
+                <p className='font-medium mb-2'>Доп. информация</p>
+                <textarea
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
+                  placeholder='Дополнительная информация'
+                  value={block.description}
+                  onChange={(e) =>
+                    handleDescriptionChange(index, e.target.value)
+                  }
+                />
+              </div>
             </div>
-            <div className='mt-3 ld:mt-0'>
-              <p className='font-medium mb-2'>Доп. информация</p>
-              <textarea
-                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
-                placeholder='Дополнительная информация'
-                {...register('description', {
-                  required: true,
-                })}
-              />
-            </div>
-          </div>
+          ))}
           <div
-            // onClick={() => append({})}
+            onClick={handleAddBlock}
             className='bg-green-500 text-white font-medium rounded-md px-5 py-[2px] mt-3 flex ml-auto text-xl hover:opacity-80 duration-150 w-max cursor-pointer'
           >
             +
