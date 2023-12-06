@@ -27,7 +27,7 @@ const ItemSearchRequestNew = () => {
   };
 
   const handleAddBlock = () => {
-    setBlocks([...blocks, { photo: null, description: '' }]);
+    setBlocks([...blocks, { photo: '', description: '' }]);
   };
 
   const {
@@ -112,7 +112,7 @@ const ItemSearchRequestNew = () => {
             </div>
           </div>
           <h3 className='pt-4 font-medium text-lg'>Товары</h3>
-          {blocks.map((block, index) => (
+          {blocks?.map((block, index) => (
             <div
               key={index}
               className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md mt-5 mb-2'
@@ -144,7 +144,9 @@ const ItemSearchRequestNew = () => {
                         e.target.onerror = null;
                         e.target.src = noImg;
                       }}
-                      src={block.photo ? URL.createObjectURL(block.photo) : ''}
+                      src={
+                        block?.photo ? URL.createObjectURL(block?.photo) : ''
+                      }
                       alt='*'
                     />
                   </div>
@@ -155,7 +157,7 @@ const ItemSearchRequestNew = () => {
                 <textarea
                   className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
                   placeholder='Дополнительная информация'
-                  value={block.description}
+                  value={block?.description}
                   onChange={(e) =>
                     handleDescriptionChange(index, e.target.value)
                   }

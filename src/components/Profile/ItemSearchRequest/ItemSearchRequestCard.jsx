@@ -1,4 +1,5 @@
 import noImg from '../../../assets/images/no-image.jpeg';
+import noAva from '../../../assets/images/no-ava.jpeg';
 import { NavLink } from 'react-router-dom';
 
 const ItemSearchRequestCard = ({ el }) => {
@@ -19,7 +20,7 @@ const ItemSearchRequestCard = ({ el }) => {
                     src={el?.client?.avatar}
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = noImg;
+                      e.target.src = noAva;
                     }}
                     alt='*'
                   />
@@ -43,6 +44,10 @@ const ItemSearchRequestCard = ({ el }) => {
               <img
                 className='w-full h-full object-contain'
                 src={el?.wantedItems[0]?.photo}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = noImg;
+                }}
                 alt='*'
               />
             </div>

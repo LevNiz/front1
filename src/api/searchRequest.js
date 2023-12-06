@@ -44,12 +44,16 @@ export const uploadPhotos = async (blocks) => {
   const wantedItems = [];
 
   for (const block of blocks) {
-    if (block?.photo) {
+    if (block?.photo instanceof File) {
       const photoURL = await uploadPhoto(block?.photo);
       wantedItems.push({ description: block?.description, photo: photoURL });
+    } else {
+      wantedItems.push({
+        description: block?.description,
+        photo: block?.photo,
+      });
     }
   }
-
   return wantedItems;
 };
 
@@ -98,39 +102,6 @@ export const deleteSearchRequest = async (id, setIsLoading, setModalOpen) => {
     return { success: true };
   } catch (error) {
     setIsLoading(false);
-    return { success: false };
-  }
-};
-
-// update search request:
-export const updateSearchRequest = async (data, id, file) => {
-  const milliseconds = new Date().getMilliseconds();
-  const formData = new FormData();
-
-  const sendData = {
-    name: data.name,
-    phone: data.phone,
-    description: data.description,
-    active: true,
-  };
-  if (file) {
-    formData.append('image', file);
-    formData.append('title', milliseconds);
-    try {
-      const res = await axiosInstance.post('core/image/', formData, {
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
-      });
-      sendData.photo = res?.data?.image;
-    } catch (error) {
-      return error;
-    }
-  }
-  try {
-    await axiosInstance.patch(`core/item_search_request/${id}/`, sendData);
-    return { success: true };
-  } catch (error) {
     return { success: false };
   }
 };

@@ -36,7 +36,6 @@ import {
   AlaketNew,
   ItemSearchRequest,
   ItemSearchRequestNew,
-  ItemSearchRequestUpdate,
   ItemSearchRequestDetail,
 } from '../components';
 import {
@@ -119,7 +118,6 @@ export const router = createBrowserRouter(
             <Route path='search-request'>
               <Route index element={<ItemSearchRequest />} />
               <Route path='new' element={<ItemSearchRequestNew />} />
-              <Route path='update/:id' element={<ItemSearchRequestUpdate />} />
               <Route path=':id' element={<ItemSearchRequestDetail />} />
             </Route>
           </Route>

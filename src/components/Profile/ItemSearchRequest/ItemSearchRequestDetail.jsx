@@ -5,9 +5,8 @@ import {
   fetchSearchRequestDetail,
 } from '../../../api/searchRequest';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import noImg from '../../../assets/images/no-image.jpeg';
-import edit from '../../../assets/icons/update.svg';
-import trash from '../../../assets/icons/trash.svg';
+import noImg from '../../../assets/images/no-image.svg';
+import noAva from '../../../assets/images/no-ava.jpeg';
 import Modal from '../../../helpers/Modals/Modal';
 
 const ItemSearchRequestDetail = () => {
@@ -53,26 +52,17 @@ const ItemSearchRequestDetail = () => {
     <div className='w-full py-8 md:p-4'>
       <div className='flex justify-between items-center mb-3'>
         <h1 className='ss:text-xl font-medium'>Заявка на поиcк товара</h1>
-        <div className='flex space-x-2'>
-          <img
-            // onClick={() =>
-            //   navigate(`/profile/search-request/update/${itemData?.id}`)
-            // }
-            onClick={() => alert('В процессе разработки!')}
-            className='cursor-pointer min-w-[28px]'
-            src={edit}
-            alt='*'
-          />
-          <img
+        <div className='ml-3'>
+          <div
             onClick={() => {
               setModalOpen(true);
               setModalContent('deleteSearchRequest');
               setItemId(itemData?.id);
             }}
-            className='cursor-pointer min-w-[30px] delete-btn'
-            src={trash}
-            alt='*'
-          />
+            className='cursor-pointer text-red-500 font-medium'
+          >
+            Удалить
+          </div>
         </div>
       </div>
       {isLoading ? (
@@ -86,7 +76,7 @@ const ItemSearchRequestDetail = () => {
                 src={itemData?.client?.avatar}
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = noImg;
+                  e.target.src = noAva;
                 }}
                 alt='*'
               />
@@ -111,6 +101,10 @@ const ItemSearchRequestDetail = () => {
                   <img
                     className='mx-auto w-full h-full object-contain'
                     src={el?.photo}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = noImg;
+                    }}
                     alt='*'
                   />
                 </div>
