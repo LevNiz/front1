@@ -95,7 +95,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div>
+        <div className='md:pl-5'>
           <ul className='flex md:justify-end justify-center items-center mt-5 md:mt-0 space-x-3'>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink
