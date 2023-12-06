@@ -13,7 +13,10 @@ import telegram from '../../assets/icons/telegram.svg';
 
 const Footer = () => {
   return (
-    <footer className='bg-black py-10 lg:min-h-[252px] flex justify-between items-center pb-12 md:pb-10'>
+    <footer
+      id='footer'
+      className='bg-black py-10 lg:min-h-[252px] flex justify-between items-center pb-12 md:pb-10'
+    >
       <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between w-full container'>
         <NavLink className='pr-5' to='/'>
           <img src={logo} alt='*' />

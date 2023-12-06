@@ -13,6 +13,14 @@ const MainSlider = () => {
     setActiveSlide(swiper.realIndex);
   };
 
+  const handleScrollToFooter = () => {
+    const footerElement = document.getElementById('footer');
+
+    if (footerElement) {
+      footerElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   window.addEventListener('resize', function () {
     setSize(window.innerWidth);
   });
@@ -80,6 +88,7 @@ const MainSlider = () => {
                 y: 0,
                 transition: { delay: 0.8, duration: 0.8 },
               }}
+              onClick={handleScrollToFooter}
               className='text-[18px] bg-colPurple text-white rounded-lg px-6 py-2 mt-8 sm:mt-2 flex justify-center mx-auto mm:mx-0 md:block'
             >
               Связаться с нами
