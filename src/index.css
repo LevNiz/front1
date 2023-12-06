@@ -140,6 +140,12 @@ input[type='number'] {
     );
   }
 }
+.gb-franchise {
+  background: var(
+    --GB-Frinachise,
+    linear-gradient(1deg, #d660f2 0.83%, #f897c7 98.99%)
+  );
+}
 /* End */
 @media screen and (max-width: 576px) {
   .ReactFlagsSelect-module_selectBtn__19wW7 {

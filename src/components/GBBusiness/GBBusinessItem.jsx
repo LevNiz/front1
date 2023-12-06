@@ -1,20 +1,15 @@
-import squire from '../../assets/images/squire.png';
 import iconamoon from '../../assets/icons/iconamoon.svg';
 
 const GBBusinessItem = () => {
   return (
     <div className='mm:content pt-10 mm:pt-16'>
-      <div className='!bg-[#07AFE3] px-4 md:px-6 py-8 sm:py-10 relative'>
-        <img src={squire} className='absolute top-0 right-0 z-[1]' alt='*' />
-        <h3 className='text-xl mm:text-2xl text-white leading-snug max-w-5xl z-[2] relative'>
-          Уважаемые импортеры и экспортеры, наша команда поможет вам в решении
-          задач по импорту/экспорту товаров из любых стран и континентов.{' '}
-        </h3>
-      </div>
+      <h3 className='text-xl mm:text-2xl text-center italic py-10 text-[#020105]'>
+        Уважаемые импортеры и экспортеры, наша команда поможет вам в решении
+        задач по импорту/экспорту товаров из любых стран и континентов.{' '}
+      </h3>
       <div className='content py-8'>
         <h2 className='text-xl md:text-2xl font-medium mt-3 mb-5'>
-          Начните зарабатывать на международной доставке и продаже брендовых
-          товаров.
+          К Вашим услугам доставка любыми видами транспорта:
         </h2>
         <div className='flex flex-col space-y-4'>
           <div className='flex items-start'>
@@ -86,7 +81,7 @@ const GBBusinessItem = () => {
             </p>
           </div>
         </div>
-        <div className='w-full mt-8 text-lg sm:text-xl bg-[#FFA629] text-center mx-auto rounded-lg px-6 py-5 text-white'>
+        <div className='w-full mt-16 text-lg sm:text-xl text-center mx-auto rounded-lg py-5'>
           Для консультации по вашим грузам просим связываться с нашими
           менеджерами любым удобным для Вас способом, мы оперативно отметим и
           сделаем все необходимые расчеты.

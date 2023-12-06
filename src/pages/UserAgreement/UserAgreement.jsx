@@ -1,4 +1,11 @@
+import { useEffect } from 'react';
+import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+
 const UserAgreement = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <div className='pt-28 pb-8 content'>
       <div>

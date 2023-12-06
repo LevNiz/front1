@@ -116,7 +116,7 @@ const GBFranchiseForm = () => {
               htmlFor='checkbox'
               className='text-sm flex cursor-pointer mm:items-center'
             >
-              <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
+              <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-[#d660f2] border border-white rounded'>
                 {privacyPolicy ? (
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -146,11 +146,7 @@ const GBFranchiseForm = () => {
               </div>
               <p>
                 Я согласен (на) с
-                <NavLink
-                  className='ml-1 underline'
-                  to='/user-agreement'
-                  target='blank'
-                >
+                <NavLink className='ml-1 underline' to='/user-agreement'>
                   {' '}
                   условиями пользовательского соглашения
                 </NavLink>
@@ -166,7 +162,7 @@ const GBFranchiseForm = () => {
         <div className='flex justify-center'>
           <button
             type='submit'
-            className='mt-10 font-medium hover:opacity-80 p-3 rounded-lg bg-[#D660F2] text-white duration-150 sm:max-w-[280px] w-full'
+            className='mt-10 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 sm:max-w-[280px] w-full'
           >
             Отправить
           </button>

@@ -5,7 +5,6 @@ import { postBusinessRequest } from '../../api/gbBusiness';
 import Modal from '../../helpers/Modals/Modal';
 import { Loading } from '../../helpers/Loader/Loader';
 import imgFile from '../../assets/icons/photo.svg';
-import noImg from '../../assets/images/no-image.svg';
 import { useSelector } from 'react-redux';
 
 const GBBusinessForm = () => {
@@ -59,7 +58,7 @@ const GBBusinessForm = () => {
           <div>
             <p className='font-medium mb-2'>Контактное лицо</p>
             <input
-              className='w-full border border-[#FFA629] p-[16px] mm:p-[14px] rounded-[4px] focus:border-[#d49d51] focus:outline-none'
+              className='w-full border border-gray-300 p-[16px] mm:p-[14px] rounded-[4px] focus:border-gray-500 focus:outline-none'
               placeholder='Контактное лицо'
               {...register('name', {
                 required: 'Поле обязательно к заполнению!',
@@ -74,7 +73,7 @@ const GBBusinessForm = () => {
           <div>
             <p className='font-medium mb-2'>E-mail</p>
             <input
-              className='w-full border border-[#FFA629] p-[14px] rounded-[4px] focus:border-[#d49d51] focus:outline-none'
+              className='w-full border border-gray-300 p-[14px] rounded-[4px] focus:border-gray-500 focus:outline-none'
               placeholder='E-mail'
               type='email'
               {...register('email', {
@@ -90,7 +89,7 @@ const GBBusinessForm = () => {
           <div>
             <p className='font-medium mb-2'>Телефона</p>
             <input
-              className='w-full border border-[#FFA629] p-[16px] mm:p-[14px] rounded-[4px] focus:border-[#d49d51] focus:outline-none'
+              className='w-full border border-gray-300 p-[16px] mm:p-[14px] rounded-[4px] focus:border-gray-500 focus:outline-none'
               placeholder='Номер телефона'
               type='tel'
               {...register('phone', {
@@ -105,7 +104,7 @@ const GBBusinessForm = () => {
           <div>
             <p className='font-medium mb-2'>Описание</p>
             <input
-              className='w-full border border-[#FFA629] p-[14px] rounded-[4px] focus:border-[#d49d51] focus:outline-none'
+              className='w-full border border-gray-300 p-[14px] rounded-[4px] focus:border-gray-500 focus:outline-none'
               placeholder='Описание'
               {...register('info', { required: false })}
             />
@@ -127,13 +126,16 @@ const GBBusinessForm = () => {
             </div>
           </div>
         </label>
-        <div className='my-3 w-32 h-28 ml-auto overflow-hidden bg-gray-100'>
-          <img
-            className='w-full h-full object-contain'
-            src={fileValue ? URL.createObjectURL(fileValue) : noImg}
-            alt='*'
-          />
-        </div>
+        {fileValue && (
+          <div className='my-3 w-32 h-28 ml-auto overflow-hidden bg-gray-100'>
+            <img
+              className='w-full h-full object-contain'
+              src={URL.createObjectURL(fileValue)}
+              alt='*'
+            />
+          </div>
+        )}
+
         <div className='my-5'>
           <input
             className='hidden'
@@ -147,7 +149,7 @@ const GBBusinessForm = () => {
             htmlFor='checkbox'
             className='text-sm flex cursor-pointer mm:items-center'
           >
-            <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-yellow-300 border border-white rounded'>
+            <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-[#07AFE3] border border-white rounded'>
               {privacyPolicy ? (
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -180,7 +182,6 @@ const GBBusinessForm = () => {
               <NavLink
                 className='ml-1 underline'
                 to='/user-agreement'
-                target='blank'
               >
                 {' '}
                 условиями пользовательского соглашения
@@ -196,7 +197,7 @@ const GBBusinessForm = () => {
         <div className='flex justify-center'>
           <button
             type='submit'
-            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-[#07AFE3] text-white duration-150 sm:max-w-[280px] w-full'
+            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 sm:max-w-[280px] w-full'
           >
             Отправить
           </button>
