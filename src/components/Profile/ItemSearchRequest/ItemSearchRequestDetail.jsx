@@ -51,8 +51,8 @@ const ItemSearchRequestDetail = () => {
 
   return (
     <div className='w-full py-8 md:p-4'>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-xl font-medium mb-2'>Заявка на поиcк товара</h1>
+      <div className='flex justify-between items-center mb-3'>
+        <h1 className='ss:text-xl font-medium'>Заявка на поиcк товара</h1>
         <div className='flex space-x-2'>
           <img
             // onClick={() =>
@@ -92,7 +92,7 @@ const ItemSearchRequestDetail = () => {
               />
             </div>
             <div className='ml-3'>
-              <h4 className='font-medium text-lg leading-5'>
+              <h4 className='font-medium text-lg leading-5 pt-1'>
                 {itemData?.name || 'Не указана'}
               </h4>
               <span className='text-sm opacity-50'>

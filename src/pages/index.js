@@ -11,6 +11,7 @@ import GBChat from './GBChat/GBChat';
 import GBFranchises from './GBFranchises/GBFranchises';
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
 import UserAgreement from './UserAgreement/UserAgreement';
+import RefundPolicy from './RefundPolicy/RefundPolicy';
 
 export {
   Tracking,
@@ -26,4 +27,5 @@ export {
   GBFranchises,
   PrivacyPolicy,
   UserAgreement,
+  RefundPolicy,
 };
