@@ -11,29 +11,27 @@ const ItemSearchRequestCard = ({ el }) => {
       >
         <div className='w-full'>
           {' '}
-          <div className='flex items-center pb-3'>
-            <div className='flex justify-between items-center w-full'>
-              <div className='flex items-center'>
-                <div className='min-w-[40px] w-10 h-10 rounded-full overflow-hidden border border-gray-400'>
-                  <img
-                    className='w-full h-full object-cover'
-                    src={el?.client?.avatar}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = noAva;
-                    }}
-                    alt='*'
-                  />
-                </div>
-                <h4 className='font-medium text-sm ml-3 line-clamp-1 break-all'>
-                  {el?.name}
-                </h4>
+          <div className='flex justify-between pb-3'>
+            <div className='flex items-center'>
+              <div className='min-w-[40px] w-10 h-10 rounded-full overflow-hidden border border-gray-400'>
+                <img
+                  className='w-full h-full object-cover'
+                  src={el?.client?.avatar}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = noAva;
+                  }}
+                  alt='*'
+                />
               </div>
+              <h4 className='font-medium text-sm ml-3 line-clamp-1 break-all'>
+                {el?.name}
+              </h4>
             </div>
             <span
               className={`${
-                el?.active ? 'bg-colGreen' : 'bg-red-300'
-              } mr-2 rounded-md text-xs px-3 py-1`}
+                el?.active ? 'text-green-500' : 'text-red-500'
+              } mr-2 rounded-md text-xs font-medium`}
             >
               {el?.active ? 'Активный' : 'Неактивный'}
             </span>
