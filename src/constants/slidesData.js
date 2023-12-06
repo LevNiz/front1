@@ -25,7 +25,7 @@ export const slidesData = [
     id: 1,
     backgroundImage: `${desktopImageBusiness}`,
     title: 'GB-Business',
-    description: 'Cервис для доставок международных ',
+    description: 'Cервис для доставок международных коммерческих грузов',
   },
   {
     id: 2,
