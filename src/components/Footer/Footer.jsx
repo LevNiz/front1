@@ -22,41 +22,6 @@ const Footer = () => {
           <img src={logo} alt='*' />
         </NavLink>
         <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
-          {/* <ul className='space-y-2'>
-            <li className='text-xl font-medium mb-3'>Главная</li>
-            <li>
-              <NavLink
-                to='tracking'
-                className='text-base hover:text-colYellow duration-100'
-              >
-                Трекинг посылок
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to='depots'
-                className='text-base hover:text-colYellow duration-100'
-              >
-                Наши склады
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to='gb-buyer'
-                className='text-base hover:text-colYellow duration-100'
-              >
-                GB-Байер
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to='gb-business'
-                className='text-base hover:text-colYellow duration-100'
-              >
-                GB-Бизнес
-              </NavLink>
-            </li>
-          </ul> */}
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Контакты</li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
@@ -69,11 +34,11 @@ const Footer = () => {
           <ul className='space-y-3 max-w-[280px]'>
             <li className='text-xl font-medium mb-3'>Адреса ПВЗ</li>
             <li className='opacity-80'>
-              121087, Россия, Москва, Багратионовский переулок 5, этаж 3, офис
+              121087, Россия, Москва, Багратионовский проезд, д. 5, этаж 3, офис
               34.
             </li>
             <li className='opacity-80'>
-              443110, Россия, Самара, Ново садовая , д. 30.
+              443110, Россия, Самара, Ново- Садовая улица, д. 30.
             </li>
             <li className='opacity-80'>
               724831, Кыргызстан, Бишкек, ул. Шопоково, д. 33.
