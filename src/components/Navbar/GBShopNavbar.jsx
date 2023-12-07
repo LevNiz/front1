@@ -14,7 +14,7 @@ import alaket from './../../assets/icons/alaket.svg';
 import gbChat from './../../assets/icons/gb-chat.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
-const Navbar = ({ TechChatNotification, gbChatNotification }) => {
+const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -247,4 +247,4 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   );
 };
 
-export default Navbar;
+export default GBShopNavbar;

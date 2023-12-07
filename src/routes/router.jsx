@@ -53,6 +53,7 @@ import {
   PrivacyPolicy,
   UserAgreement,
   RefundPolicy,
+  GBShopMain,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -92,6 +93,9 @@ export const router = createBrowserRouter(
         <Route path='refund-policy' element={<RefundPolicy />} />
         <Route path='gb-business' element={<GBBusiness />} />
         <Route path='gb-franchise' element={<GBFranchises />} />
+        <Route path='gb-shop'>
+          <Route index element={<GBShopMain />} />
+        </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>
             <Route path='personal-data' element={<PersonalData />} />

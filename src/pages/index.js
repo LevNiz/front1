@@ -12,6 +12,7 @@ import GBFranchises from './GBFranchises/GBFranchises';
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
 import UserAgreement from './UserAgreement/UserAgreement';
 import RefundPolicy from './RefundPolicy/RefundPolicy';
+import GBShopMain from './GBShop/GBShopMain/GBShopMain';
 
 export {
   Tracking,
@@ -28,4 +29,5 @@ export {
   PrivacyPolicy,
   UserAgreement,
   RefundPolicy,
+  GBShopMain,
 };

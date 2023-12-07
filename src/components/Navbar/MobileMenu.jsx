@@ -25,7 +25,7 @@ import applicationIcon from './../../assets/icons/box-tick.svg';
 import ordersIcon from './../../assets/icons/orders.svg';
 import searchIcon from './../../assets/icons/search-item.svg';
 // import gbShop from './../../assets/icons/gb-shop.svg';
-// import gbCoin from './../../assets/icons/gb-bitcoin.svg';
+// import gbCoin from './../../assets/icons/gb-pay.svg';
 import alaket from './../../assets/icons/alaket.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
 
