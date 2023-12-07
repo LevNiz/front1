@@ -1,18 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
-import logo from './../../assets/images/header-logo.svg';
-import userImg from './../../assets/icons/user.svg';
-import chat from './../../assets/icons/messages.svg';
-import arrow from './../../assets/icons/arrow-white.svg';
-import notification from './../../assets/icons/notification.svg';
-import gbBusiness from './../../assets/icons/mobile-menu/bussines.svg';
-// import gbShop from './../../assets/icons/gb-shop.svg';
-// import gbPay from './../../assets/icons/gb-pay.svg';
-import gbBuyer from './../../assets/icons/mobile-menu/buyer.svg';
-import alaket from './../../assets/icons/alaket.svg';
-import gbChat from './../../assets/icons/gb-chat.svg';
-import gbFranchise from './../../assets/icons/gb-franchise.svg';
+import logo from './../../assets/gb-shop/icons/gb-shop-logo.svg';
+import userIcon from './../../assets/gb-shop/icons/user.svg';
+import favourite from './../../assets/gb-shop/icons/favourite.svg';
+import basket from './../../assets/gb-shop/icons/basket.svg';
 
 const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -60,116 +52,32 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
       <header
         className={`${
           scrolling ? '-translate-y-full' : 'translate-y-0'
-        } bg-black py-4 lg:py-2 fixed top-0 w-full transition-transform duration-300 ease-in-out z-[999999]`}
+        } py-4 fixed top-0 w-full transition-transform duration-300 ease-in-out z-[999999] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]`}
       >
         <div className='container flex justify-between items-center'>
-          <NavLink to='/'>
-            <img
-              className='w-[120px] mm:w-[140px] lg:w-auto'
-              src={logo}
-              alt='*'
-            />
-          </NavLink>
-          <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white'>
-            <li className='navbar'>
-              <NavLink to='/'>Главная</NavLink>
-            </li>
-            <li className='navbar'>
-              <NavLink to='/tracking'>Трекинг посылок</NavLink>
-            </li>
-            <li className='navbar'>
-              <NavLink to='/depots'>Наши склады</NavLink>
-            </li>
-            <li className='navbar'>
-              <NavLink to='/applications'>Отправка</NavLink>
-            </li>
-            <li className='relative group cursor-pointer flex items-center'>
-              <span>Сервисы</span>
-              <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
-              <ul className='absolute left-4 hidden top-full p-3 bg-white shadow-md text-black group-hover:block w-52'>
-                {/* <li className='my-2'>
-                  <NavLink
-                    onClick={() => alert('В процессе разработки!')}
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='#'
-                  >
-                    <img className='w-4 mr-1.5' src={gbShop} alt='*' />
-                    GB-Shop
-                  </NavLink>
-                </li> */}
-                <li className='my-2'>
-                  <NavLink
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='/gb-business'
-                  >
-                    <img className='w-4 mr-1.5' src={gbBusiness} alt='*' />
-                    GB-Business
-                  </NavLink>
-                </li>
-                <li className='my-2'>
-                  <NavLink
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='/gb-franchise'
-                  >
-                    <img className='w-4 mr-1.5' src={gbFranchise} alt='*' />
-                    GB-Franchise
-                  </NavLink>
-                </li>
-                {/* <li className='my-2'>
-                  <NavLink
-                    onClick={() => alert('В процессе разработки!')}
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='#'
-                  >
-                    <img className='w-4 mr-1.5' src={gbPay} alt='*' />
-                    GB-Pay
-                  </NavLink>
-                </li> */}
-                <li className='my-2'>
-                  <NavLink
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='/gb-buyer'
-                  >
-                    <img className='w-4 mr-1.5' src={gbBuyer} alt='*' />
-                    GB-Buyer
-                  </NavLink>
-                </li>
-                <li className='my-2'>
-                  <NavLink
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='/gb-chat'
-                  >
-                    <img className='w-4 mr-1.5' src={gbChat} alt='*' />
-                    GB-Chat
-                  </NavLink>
-                </li>
-                <li className='my-2'>
-                  <NavLink
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='/alaket'
-                  >
-                    <img className='w-4 mr-1.5' src={alaket} alt='*' />
-                    Alaket
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <div className='flex items-center'>
+            <NavLink to='/'>
+              <img
+                className='w-[120px] mm:w-[140px] lg:w-auto'
+                src={logo}
+                alt='*'
+              />
+            </NavLink>
+            <button className='flex justify-center items-center rounded-md bg-colYellow ml-7 px-4 py-2 space-x-3'>
+              <div className='flex flex-col space-y-1 w-6 cursor-pointer'>
+                <span className='w-full h-[2px] rounded-md bg-black'></span>
+                <span className='w-full h-[2px] rounded-md bg-black'></span>
+                <span className='w-full h-[2px] rounded-md bg-black'></span>
+              </div>
+              <p>Каталог</p>
+            </button>
+          </div>
           <div className='flex justify-end items-center'>
             {user ? (
               <ul className='flex items-center justify-end space-x-4'>
-                <li className='hidden sm:block'>
-                  <NavLink to='profile/notifications'>
-                    <img
-                      className='w-[27px] md:w-6'
-                      src={notification}
-                      alt='*'
-                    />
-                  </NavLink>
-                </li>
                 <li className='relative'>
-                  <NavLink to='/gb-chat'>
-                    <img className='w-[27px] md:w-6' src={chat} alt='*' />
+                  <NavLink to='#'>
+                    <img className='w-[27px] md:w-6' src={favourite} alt='*' />
                   </NavLink>
                   <span
                     className={`${
@@ -177,9 +85,14 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
                     } absolute top-0 left-0 bg-red-500 h-2 w-2 rounded-full`}
                   ></span>
                 </li>
+                <li className='hidden sm:block'>
+                  <NavLink to='#'>
+                    <img className='w-[27px] md:w-6' src={basket} alt='*' />
+                  </NavLink>
+                </li>
                 <li className='relative'>
                   <NavLink to='profile/personal-data'>
-                    <img className='w-[27px] md:w-6' src={userImg} alt='*' />
+                    <img className='w-[27px] md:w-6' src={userIcon} alt='*' />
                   </NavLink>
                   <span
                     className={`${

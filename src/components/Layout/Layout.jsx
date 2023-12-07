@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { SupportChatsNewMessage } from '../../api/techChat';
 import { useSelector } from 'react-redux';
 import { gbChatNewMessage } from '../../api/gbchat';
+import GBShopNavbar from '../Navbar/GBShopNavbar';
 
 const Layout = () => {
   const [TechChatNotification, setTechChatNotification] = useState(0);
@@ -40,7 +41,13 @@ const Layout = () => {
     };
   }, [userID]);
 
-  return (
+  return firstPathSegment === 'gb-shop' ? (
+    <>
+      <GBShopNavbar />
+      <Outlet />
+      <Footer />
+    </>
+  ) : (
     <>
       <Navbar
         gbChatNotification={gbChatNotification}

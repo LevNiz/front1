@@ -1,6 +1,6 @@
 const GBShopMain = () => {
   return (
-    <div className='pt-20 content'>
+    <div className='pt-28 content h-80'>
       <h1>GB Shop</h1>
     </div>
   );
