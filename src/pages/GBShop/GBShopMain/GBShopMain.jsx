@@ -1,7 +1,9 @@
+import { MainBlock } from '../../../components';
+
 const GBShopMain = () => {
   return (
-    <div className='pt-28 content h-80'>
-      <h1>GB Shop</h1>
+    <div className='pt-28 pb-10 content'>
+      <MainBlock />
     </div>
   );
 };

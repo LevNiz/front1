@@ -52,6 +52,7 @@ import AlaketDetail from './Alaket/AlaketDetail';
 import ItemSearchRequest from './Profile/ItemSearchRequest/ItemSearchRequest';
 import ItemSearchRequestNew from './Profile/ItemSearchRequest/ItemSearchRequestNew';
 import ItemSearchRequestDetail from './Profile/ItemSearchRequest/ItemSearchRequestDetail';
+import MainBlock from './GBShop/GBShopMain/MainBlock';
 
 export {
   Layout,
@@ -108,4 +109,5 @@ export {
   ItemSearchRequest,
   ItemSearchRequestNew,
   ItemSearchRequestDetail,
+  MainBlock,
 };

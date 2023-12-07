@@ -6,6 +6,7 @@ import { SupportChatsNewMessage } from '../../api/techChat';
 import { useSelector } from 'react-redux';
 import { gbChatNewMessage } from '../../api/gbchat';
 import GBShopNavbar from '../Navbar/GBShopNavbar';
+import GBShopFooter from '../Footer/GBShopFooter';
 
 const Layout = () => {
   const [TechChatNotification, setTechChatNotification] = useState(0);
@@ -14,8 +15,7 @@ const Layout = () => {
   const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
 
-  const pathParts = pathname.split('/');
-  const firstPathSegment = pathParts[1];
+  const firstPathSegment = pathname.split('/')[1];
 
   useEffect(() => {
     const fetchMessages = SupportChatsNewMessage(userID, (newDocData) => {
@@ -45,7 +45,7 @@ const Layout = () => {
     <>
       <GBShopNavbar />
       <Outlet />
-      <Footer />
+      <GBShopFooter />
     </>
   ) : (
     <>

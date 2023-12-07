@@ -1,47 +1,35 @@
 import { NavLink } from 'react-router-dom';
-import logo from '../../assets/images/header-logo.svg';
+import logo from '../../assets/gb-shop/icons/gb-shop-logo.svg';
 import facebook from '../../assets/icons/Facebook.svg';
 import instagram from '../../assets/icons/Instagram.svg';
 import tiktok from '../../assets/icons/tiktok.svg';
 import vk from '../../assets/icons/vk.svg';
-import mir from '../../assets/images/mir.svg';
-import mastercard from '../../assets/images/mastercard.svg';
-import visa from '../../assets/images/visa.svg';
-import amex from '../../assets/images/amex.jpeg';
-import maestro from '../../assets/images/maestro.svg';
 import telegram from '../../assets/icons/telegram.svg';
 
-const Footer = () => {
+const GBShopFooter = () => {
   return (
-    <footer
-      id='footer'
-      className='bg-black py-10 lg:min-h-[252px] pb-12 md:pb-10'
-    >
-      <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between w-full container'>
+    <footer id='footer' className='py-10 pb-12 md:pb-10 bg-[#FBFBFB]'>
+      <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between ld:items-center w-full container'>
         <NavLink className='pr-5' to='/'>
-          <img src={logo} alt='*' />
+          <img className='w-28' src={logo} alt='*' />
         </NavLink>
-        <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
+        <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 md:space-x-12'>
+          <ul className='space-y-2'>
+            <li className='text-xl font-medium mb-3'>Главная</li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='/tracking'>Трекинг посылок</NavLink>
+            </li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='/depots'>Наши склады</NavLink>
+            </li>
+          </ul>
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Контакты</li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='tel:8(800)201-07-88'>8(800)201-07-88</NavLink>
+              Тел: +996 123 456 678
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='#'>support@givbox.ru</NavLink>
-            </li>
-          </ul>
-          <ul className='space-y-3 max-w-[280px]'>
-            <li className='text-xl font-medium mb-3'>Адреса ПВЗ</li>
-            <li className='opacity-80'>
-              121087, Россия, Москва, Багратионовский проезд, д. 5, этаж 3, офис
-              34.
-            </li>
-            <li className='opacity-80'>
-              443110, Россия, Самара, Ново- Садовая улица, д. 30.
-            </li>
-            <li className='opacity-80'>
-              724831, Кыргызстан, Бишкек, ул. Шопоково, д. 33.
+              Эл. почта: givbox@givbox.ru
             </li>
           </ul>
           <ul className='space-y-2'>
@@ -111,31 +99,13 @@ const Footer = () => {
               </NavLink>
             </li>
           </ul>
-          <div className='flex justify-center md:justify-end items-center pt-10 md:pt-5 space-x-2'>
-            <div className='w-[50px] h-[30px] bg-[#4b2592] flex justify-center items-center'>
-              <img
-                className='w-[40px] object-contain'
-                src={mastercard}
-                alt='*'
-              />
-            </div>
-            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
-              <img className='w-[40px] object-contain' src={visa} alt='*' />
-            </div>
-            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
-              <img className='w-[40px] object-contain' src={mir} alt='*' />
-            </div>
-            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
-              <img className='w-[40px] object-contain' src={maestro} alt='*' />
-            </div>
-            <div className='w-[50px] h-[30px] bg-[#2b71b3] flex justify-center items-center'>
-              <img className='w-[40px] object-contain' src={amex} alt='*' />
-            </div>
-          </div>
         </div>
       </div>
+      <p className='container text-right text-[#C3C3C3] text-sm font-medium'>
+        © {new Date().getFullYear()}
+      </p>
     </footer>
   );
 };
 
-export default Footer;
+export default GBShopFooter;

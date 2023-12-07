@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../../api/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import lock from '../../assets/icons/new-password.svg';
 import email from '../../assets/icons/new-email.svg';
@@ -15,6 +15,7 @@ import Modal from '../../helpers/Modals/Modal';
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { userID } = useSelector((state) => state?.user);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -45,7 +46,7 @@ const SignIn = () => {
   return (
     <div className='flex w-full mm:h-screen'>
       <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
-        <div onClick={() => navigate('/')}>
+        <div onClick={() => (userID ? navigate(-1) : navigate('/'))}>
           <img
             className='absolute top-10 left-10 cursor-pointer'
             src={back}
