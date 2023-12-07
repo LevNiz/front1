@@ -6,7 +6,7 @@ import sale from '../../../assets/gb-shop/images/main/sale.svg';
 
 const MainBlock = () => {
   return (
-    <div className='grid grid-cols-3 gap-7 py-5'>
+    <div className='grid grid-cols-3 gap-7 pt-5 pb-10'>
       <div className='overflow-hidden rounded-md'>
         <img className='mx-auto' src={mainBigImg1} alt='*' />
       </div>
