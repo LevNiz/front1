@@ -18,7 +18,12 @@ const Catalog = () => {
       </div>
       <div className='grid grid-cols-7 gap-7 pt-3'>
         {firstSevenCatalogs?.map((el) => (
-          <NavLink className='group' to='#' key={el?.id}>
+          <NavLink
+            to='categories'
+            state={{ from: el?.name }}
+            className='group'
+            key={el?.id}
+          >
             <div className='min-h-[140px] p-2 flex justify-center items-center shadow-md group-hover:shadow-xl duration-150 bg-[#FBFBFB] rounded-xl'>
               <img className='mx-auto' src={el?.image} alt='*' />
             </div>

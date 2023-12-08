@@ -55,6 +55,7 @@ import {
   RefundPolicy,
   GBShopMain,
   Catalogues,
+  Categories,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -97,6 +98,9 @@ export const router = createBrowserRouter(
         <Route path='gb-shop'>
           <Route index element={<GBShopMain />} />
           <Route path='catalogues' element={<Catalogues />} />
+          <Route path='categories'>
+            <Route index element={<Categories />} />
+          </Route>
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>

@@ -14,6 +14,7 @@ import UserAgreement from './UserAgreement/UserAgreement';
 import RefundPolicy from './RefundPolicy/RefundPolicy';
 import GBShopMain from './GBShop/GBShopMain/GBShopMain';
 import Catalogues from './GBShop/Catalogues/Catalogues';
+import Categories from './GBShop/Categories/Categories';
 
 export {
   Tracking,
@@ -32,4 +33,5 @@ export {
   RefundPolicy,
   GBShopMain,
   Catalogues,
+  Categories,
 };

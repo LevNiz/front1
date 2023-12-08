@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Brands,
   Catalog,
@@ -7,8 +8,13 @@ import {
   Garments,
   Shoes,
 } from '../../../components';
+import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 
 const GBShopMain = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <div className='pt-28 pb-10 content'>
       <MainBlock />

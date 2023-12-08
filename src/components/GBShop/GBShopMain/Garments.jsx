@@ -52,7 +52,7 @@ const Garments = () => {
                 <div className='p-3'>
                   <NavLink
                     to='#'
-                    className='font-bold text-sm line-clamp-1 break-all hover:underline pb-2'
+                    className='font-bold text-sm line-clamp-1 break-all hover:underline pb-2 w-max'
                   >
                     {el?.name}
                   </NavLink>
