@@ -55,6 +55,7 @@ import ItemSearchRequestDetail from './Profile/ItemSearchRequest/ItemSearchReque
 import MainBlock from './GBShop/GBShopMain/MainBlock';
 import Catalog from './GBShop/GBShopMain/Catalog';
 import Brands from './GBShop/GBShopMain/Brands';
+import Electronics from './GBShop/GBShopMain/Electronics';
 
 export {
   Layout,
@@ -114,4 +115,5 @@ export {
   MainBlock,
   Catalog,
   Brands,
+  Electronics,
 };

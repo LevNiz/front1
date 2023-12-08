@@ -187,6 +187,22 @@ input[type='number'] {
 .testimonials .swiper-button-prev::after {
   color: #fff;
 }
+.gb-shop .swiper-button-next,
+.gb-shop .swiper-button-prev {
+  background-color: #fff !important;
+  bottom: 20px;
+  box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.16);
+}
+.gb-shop .swiper-button-next {
+  left: 52%;
+}
+.gb-shop .swiper-button-prev {
+  left: 48%;
+}
+.gb-shop .swiper-button-next::after,
+.gb-shop .swiper-button-prev::after {
+  color: #000;
+}
 @media screen and (max-width: 768px) {
   .slider .swiper-button-next,
   .slider .swiper-button-prev {
