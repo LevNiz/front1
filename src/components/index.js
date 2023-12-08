@@ -57,7 +57,7 @@ import Catalog from './GBShop/GBShopMain/Catalog';
 import Brands from './GBShop/GBShopMain/Brands';
 import Electronics from './GBShop/GBShopMain/Electronics';
 import Appliances from './GBShop/GBShopMain/Appliances';
-import Garments from './GBShop/GBShopMain/Garments';
+import Clothes from './GBShop/GBShopMain/Clothes';
 import Shoes from './GBShop/GBShopMain/Shoes';
 import CategoryCard from './GBShop/Categories/CategoryCard';
 
@@ -121,7 +121,7 @@ export {
   Brands,
   Electronics,
   Appliances,
-  Garments,
+  Clothes,
   Shoes,
   CategoryCard,
 };

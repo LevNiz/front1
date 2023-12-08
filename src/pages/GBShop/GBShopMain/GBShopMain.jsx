@@ -5,7 +5,7 @@ import {
   Electronics,
   Appliances,
   MainBlock,
-  Garments,
+  Clothes,
   Shoes,
 } from '../../../components';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
@@ -22,7 +22,7 @@ const GBShopMain = () => {
       <Brands />
       <Electronics />
       <Appliances />
-      <Garments />
+      <Clothes />
       <Shoes />
     </div>
   );

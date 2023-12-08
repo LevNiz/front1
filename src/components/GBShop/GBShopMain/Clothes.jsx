@@ -9,7 +9,7 @@ import favourite from '../../../assets/gb-shop/icons/favourite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
 import { garments } from '../../../constants/gb-shop/garments.js';
 
-const Garments = () => {
+const Clothes = () => {
   return (
     <div className='pt-10 gb-shop slider'>
       <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 my-7'>
@@ -82,4 +82,4 @@ const Garments = () => {
   );
 };
 
-export default Garments;
+export default Clothes;
