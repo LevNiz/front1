@@ -16,6 +16,7 @@ import alaketReducer from './slices/alaketSlice';
 import extraServicesReducer from './slices/extraServicesSlice';
 import costsReducer from './slices/costsSlice';
 import searchRequestReducer from './slices/searchRequestSlice';
+import gbShopItemsReducer from './slices/gbShopItemsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   extraServices: extraServicesReducer,
   costs: costsReducer,
   searchRequests: searchRequestReducer,
+  homeItems: gbShopItemsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

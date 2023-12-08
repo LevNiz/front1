@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
 import { CategoryCard } from '../../../components';
-import { electronics } from '../../../constants/gb-shop/electronics';
 import { useEffect } from 'react';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 
@@ -10,6 +9,8 @@ const Categories = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
+
+const electronics = []
 
   return (
     <div className='py-24 min-h-[991px]'>

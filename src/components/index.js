@@ -55,10 +55,7 @@ import ItemSearchRequestDetail from './Profile/ItemSearchRequest/ItemSearchReque
 import MainBlock from './GBShop/GBShopMain/MainBlock';
 import Catalog from './GBShop/GBShopMain/Catalog';
 import Brands from './GBShop/GBShopMain/Brands';
-import Electronics from './GBShop/GBShopMain/Electronics';
-import Appliances from './GBShop/GBShopMain/Appliances';
-import Clothes from './GBShop/GBShopMain/Clothes';
-import Shoes from './GBShop/GBShopMain/Shoes';
+import CategorySlider from './GBShop/GBShopMain/CategorySlider';
 import CategoryCard from './GBShop/Categories/CategoryCard';
 
 export {
@@ -119,9 +116,6 @@ export {
   MainBlock,
   Catalog,
   Brands,
-  Electronics,
-  Appliances,
-  Clothes,
-  Shoes,
   CategoryCard,
+  CategorySlider,
 };
