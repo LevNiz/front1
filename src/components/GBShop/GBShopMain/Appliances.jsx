@@ -3,18 +3,18 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { NavLink } from 'react-router-dom';
-import { electronics } from '../../../constants/gb-shop/electronics.js';
+import { appliances } from '../../../constants/gb-shop/appliances.js';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import shopingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favourite from '../../../assets/gb-shop/icons/favourite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
 
-const Electronics = () => {
+const Appliances = () => {
   return (
     <div className='pt-10 gb-shop slider'>
       <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 my-7'>
         <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
-          Электроника
+          Бытовая техника
         </h3>
         <NavLink className='flex items-center justify-end' to='catalog'>
           <span className='font-medium text-xl mr-2 text-[#FEDE2B]'>Все</span>
@@ -29,7 +29,7 @@ const Electronics = () => {
           className='min-h-[400px]'
           spaceBetween={20}
         >
-          {electronics?.map((el) => (
+          {appliances?.map((el) => (
             <SwiperSlide modules={[Navigation]} key={el?.id}>
               <div className='overflow-hidden rounded-xl shadow-lg relative'>
                 <NavLink to='#'>
@@ -46,10 +46,10 @@ const Electronics = () => {
                   src={el?.countryFlag}
                   alt='*'
                 />
-                <div className='absolute top-4 right-4 w-8 h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'>
+                <div className='absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'>
                   <img src={share} alt='*' />
                 </div>
-                <div className='p-3'>
+                <div className='p-3 mb-'>
                   <NavLink
                     to='#'
                     className='font-bold text-sm line-clamp-1 break-all hover:underline pb-2'
@@ -82,4 +82,4 @@ const Electronics = () => {
   );
 };
 
-export default Electronics;
+export default Appliances;

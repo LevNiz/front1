@@ -3,19 +3,17 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { NavLink } from 'react-router-dom';
-import { electronics } from '../../../constants/gb-shop/electronics.js';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import shopingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favourite from '../../../assets/gb-shop/icons/favourite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
+import { shoes } from '../../../constants/gb-shop/shoes.js';
 
-const Electronics = () => {
+const Shoes = () => {
   return (
-    <div className='pt-10 gb-shop slider'>
+    <div className='py-10 gb-shop slider'>
       <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 my-7'>
-        <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
-          Электроника
-        </h3>
+        <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>Обувь</h3>
         <NavLink className='flex items-center justify-end' to='catalog'>
           <span className='font-medium text-xl mr-2 text-[#FEDE2B]'>Все</span>
           <img src={rightArrow} alt='*' />
@@ -29,7 +27,7 @@ const Electronics = () => {
           className='min-h-[400px]'
           spaceBetween={20}
         >
-          {electronics?.map((el) => (
+          {shoes?.map((el) => (
             <SwiperSlide modules={[Navigation]} key={el?.id}>
               <div className='overflow-hidden rounded-xl shadow-lg relative'>
                 <NavLink to='#'>
@@ -82,4 +80,4 @@ const Electronics = () => {
   );
 };
 
-export default Electronics;
+export default Shoes;

@@ -1,4 +1,12 @@
-import { Brands, Catalog, Electronics, MainBlock } from '../../../components';
+import {
+  Brands,
+  Catalog,
+  Electronics,
+  Appliances,
+  MainBlock,
+  Garments,
+  Shoes,
+} from '../../../components';
 
 const GBShopMain = () => {
   return (
@@ -7,6 +15,9 @@ const GBShopMain = () => {
       <Catalog />
       <Brands />
       <Electronics />
+      <Appliances />
+      <Garments />
+      <Shoes />
     </div>
   );
 };

@@ -56,6 +56,9 @@ import MainBlock from './GBShop/GBShopMain/MainBlock';
 import Catalog from './GBShop/GBShopMain/Catalog';
 import Brands from './GBShop/GBShopMain/Brands';
 import Electronics from './GBShop/GBShopMain/Electronics';
+import Appliances from './GBShop/GBShopMain/Appliances';
+import Garments from './GBShop/GBShopMain/Garments';
+import Shoes from './GBShop/GBShopMain/Shoes';
 
 export {
   Layout,
@@ -116,4 +119,7 @@ export {
   Catalog,
   Brands,
   Electronics,
+  Appliances,
+  Garments,
+  Shoes,
 };
