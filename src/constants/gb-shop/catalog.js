@@ -42,4 +42,39 @@ export const catalogs = [
     name: 'Электроника',
     image: electronics,
   },
+  {
+    id: 8,
+    name: 'Одежда',
+    image: garment,
+  },
+  {
+    id: 9,
+    name: 'Обувь',
+    image: shoes,
+  },
+  {
+    id: 10,
+    name: 'Парфюмерия',
+    image: perfumery,
+  },
+  {
+    id: 11,
+    name: 'Бытовая техника',
+    image: kitchen,
+  },
+  {
+    id: 12,
+    name: 'Спорт и отдых',
+    image: sport,
+  },
+  {
+    id: 13,
+    name: 'Быстрая доставка',
+    image: delivery,
+  },
+  {
+    id: 14,
+    name: 'Электроника',
+    image: electronics,
+  },
 ];
