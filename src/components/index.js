@@ -54,6 +54,7 @@ import ItemSearchRequestNew from './Profile/ItemSearchRequest/ItemSearchRequestN
 import ItemSearchRequestDetail from './Profile/ItemSearchRequest/ItemSearchRequestDetail';
 import MainBlock from './GBShop/GBShopMain/MainBlock';
 import Catalog from './GBShop/GBShopMain/Catalog';
+import Brands from './GBShop/GBShopMain/Brands';
 
 export {
   Layout,
@@ -112,4 +113,5 @@ export {
   ItemSearchRequestDetail,
   MainBlock,
   Catalog,
+  Brands,
 };
