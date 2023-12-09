@@ -82,12 +82,15 @@ const Parcel = () => {
             </div>
           </form>
         </div>
-        <div className='max-w-[380px] h-[130px] hidden rounded-[10px] lg:flex justify-center items-center w-full bg-colPurple mt-0 py-4 px-6 lg:ml-10 text-center'>
+        <NavLink
+          to='/applications/send-application'
+          className='max-w-[380px] h-[130px] hidden rounded-[10px] lg:flex justify-center items-center w-full bg-colPurple mt-0 py-4 px-6 lg:ml-10 text-center'
+        >
           <img src={rulesImg} alt='*' />
           <p className='text-xl font-medium text-white ml-3'>
             Инструкция к оформлению нового заказа
           </p>
-        </div>
+        </NavLink>
       </div>
       <h2 className='text-center font-medium text-2xl mt-10'>
         Мои текущие посылки

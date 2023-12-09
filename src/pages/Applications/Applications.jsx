@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { ApplicationsItem } from '../../components';
 import calculator from './../../assets/icons/calculator.svg';
+import truck from './../../assets/icons/truck-icon.svg';
 import noun from './../../assets/icons/white-noun.svg';
 
 const Applications = () => {
@@ -33,7 +34,7 @@ const Applications = () => {
         >
           <div className='flex justify-between items-start mb-3'>
             <div className='w-10 h-10 flex justify-center items-center rounded-full bg-black bg-opacity-10'>
-              <img className='w-7' src={calculator} alt='*' />
+              <img className='w-7' src={truck} alt='*' />
             </div>
             <div className='w-8 h-8 flex justify-center items-center rounded-full bg-white bg-opacity-10'>
               <img className='w-6' src={noun} alt='*' />
