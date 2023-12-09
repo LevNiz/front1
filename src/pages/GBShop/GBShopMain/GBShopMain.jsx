@@ -12,7 +12,9 @@ import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 
 const GBShopMain = () => {
-  const { homeItems } = useSelector((state) => state?.homeItems);
+  const { homeItems, loading, error } = useSelector(
+    (state) => state?.homeItems
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const GBShopMain = () => {
               <img src={rightArrow} alt='*' />
             </NavLink>
           </div>
-          <CategorySlider items={el?.items} />
+          <CategorySlider items={el?.items} loading={loading} error={error} />
         </div>
       ))}
     </div>

@@ -6,13 +6,21 @@ import { NavLink } from 'react-router-dom';
 import shopingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favourite from '../../../assets/gb-shop/icons/favourite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
-import noProduct from '../../../assets/gb-shop/images/no-product.svg';
 import noImg from '../../../assets/images/no-image.jpeg';
+import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
+import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 
-const CategorySlider = ({ items }) => {
+const CategorySlider = ({ items, loading, error }) => {
   return (
     <>
-      {items?.length ? (
+      {loading ? (
+        <ContentLoading extraStyle={320} />
+      ) : error ? (
+        <div className='flex justify-center my-8 bg-gray-50 p-3'>
+          <ErrorServer />
+        </div>
+      ) : items?.length ? (
         <div className='pt-5 gb-shop slider'>
           <Swiper
             modules={[Navigation]}
@@ -25,7 +33,7 @@ const CategorySlider = ({ items }) => {
               <SwiperSlide modules={[Navigation]} key={el?.id}>
                 <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
                   <NavLink to='#'>
-                    <div className='h-[210px] overflow-hidden relative'>
+                    <div className='h-[210px] overflow-hidden relative bg-gray-50'>
                       <img
                         className='w-full h-full object-cover'
                         src={el?.image}
@@ -88,13 +96,11 @@ const CategorySlider = ({ items }) => {
           </Swiper>
         </div>
       ) : (
-        <div className='flex justify-center my-8 bg-gray-50 p-5'>
-          <div>
-            <img className='w-32 mx-auto' src={noProduct} alt='*' />
-            <p className='pt-4 max-w-[190px] text-center font-ubuntu'>
-              В этой категории пока нет товаров
-            </p>
-          </div>
+        <div className='flex justify-center my-8 bg-gray-50 p-3'>
+          <GBSHopEmpty
+            title='Ничего не нашли!'
+            desc='В этой категории пока нет товаров.'
+          />
         </div>
       )}
     </>

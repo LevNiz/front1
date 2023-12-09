@@ -44,7 +44,7 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
       <header
         className={`${
           scrolling ? '-translate-y-full' : 'translate-y-0'
-        } py-4 fixed bg-white top-0 w-full transition-transform duration-300 ease-in-out z-[999999] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]`}
+        } py-2 fixed bg-white top-0 w-full transition-transform duration-300 ease-in-out z-[999999] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]`}
       >
         <div className='container flex justify-between items-center'>
           <div className='flex items-center'>
@@ -55,13 +55,13 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
                 alt='*'
               />
             </NavLink>
-            <button className='flex justify-center items-center rounded-md bg-colYellow ml-7 px-4 py-2 space-x-3 hover:opacity-80 duration-150'>
+            <button className='flex justify-center items-center rounded-md bg-colYellow ml-7 px-3 py-2 space-x-3 hover:opacity-80 duration-150'>
               <div className='flex flex-col space-y-1 w-6 cursor-pointer'>
                 <span className='w-full h-[2px] rounded-md bg-black'></span>
                 <span className='w-full h-[2px] rounded-md bg-black'></span>
                 <span className='w-full h-[2px] rounded-md bg-black'></span>
               </div>
-              <p>Каталог</p>
+              <p className='text-sm font-ubuntu'>Каталог</p>
             </button>
           </div>
           <div className='flex justify-end items-center'>
