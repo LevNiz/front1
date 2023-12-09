@@ -3,12 +3,12 @@ import vectorFranchise from '../../assets/icons/franchiseVector.svg';
 
 const GBFranchiseItem = () => {
   return (
-    <div className='content pt-8 mm:pt-16'>
-      <h3 className='text-xl mm:text-2xl py-10 text-center italic'>
+    <div className='content pt-5'>
+      <h3 className='text-xl mm:text-2xl py-5 text-center italic'>
         Сервис GB-Franchise - это уникальная возможность зарабатывать и
         развиваться с международной компанией GivBox
       </h3>
-      <div className='py-8'>
+      <div className='py-5'>
         <h2 className='text-2xl sm:text-3xl font-medium medium mt-3 mb-5'>
           Начните зарабатывать на международной доставке и продаже брендовых
           товаров.
@@ -95,7 +95,7 @@ const GBFranchiseItem = () => {
             Мы предлагаем вам готовую идею, а идея - это самый дорогой товар в
             мире!
           </h1>
-          <h4 className='max-w-[280px] w-full min-h-[60px] mx-auto mt-8 rounded-md text-white font-medium text-3xl flex justify-center items-center gb-franchise'>
+          <h4 className='max-w-[280px] w-full min-h-[60px] mx-auto mt-8 rounded-md font-medium text-2xl flex justify-center items-center bg-colYellow'>
             Хочу франшизу
           </h4>
         </div>

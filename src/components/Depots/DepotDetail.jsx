@@ -10,11 +10,12 @@ import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { fetchCosts } from '../../api/costs';
 import { fetchExtraServices } from '../../api/extraServices';
 import 'swiper/css';
-import location from './../../assets/icons/location.svg';
-import clock from './../../assets/icons/clock.svg';
-import call from './../../assets/icons/call.svg';
-import boxIcon from './../../assets/icons/package.svg';
-import arrow from './../../assets/icons/arrow-white.svg';
+import location from './../../assets/icons/new-location.svg';
+import clock from './../../assets/icons/timeSvg.svg';
+import call from './../../assets/icons/new-call.svg';
+import boxIcon from './../../assets/icons/mobile-menu/profile-box.svg';
+import arrow from './../../assets/icons/down.svg';
+import arrowWhite from './../../assets/icons/arrow-white.svg';
 import noImg from './../../assets/images/no-image.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
 import extraServiceIcon from './../../assets/icons/extra-service.svg';
@@ -27,13 +28,15 @@ const DepotDetail = () => {
   const [openTariff, setOpenTariff] = useState(false);
   const [openExtraTariff, setOpenExtraTariff] = useState(false);
 
-  const { costs } = useSelector((state) => state?.costs)
+  const { costs } = useSelector((state) => state?.costs);
   const { extraServices } = useSelector((state) => state?.extraServices);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const filteredTariffs = costs?.filter((el) => el?.fromCity?.id === Number(id))
+  const filteredTariffs = costs?.filter(
+    (el) => el?.fromCity?.id === Number(id)
+  );
 
   const handleClick = (index) => {
     const main = images[index];
@@ -41,10 +44,9 @@ const DepotDetail = () => {
   };
 
   useEffect(() => {
-    
     scrollToTop();
     (async () => {
-       await fetchCosts(dispatch);
+      await fetchCosts(dispatch);
     })();
 
     (async () => {
@@ -227,14 +229,14 @@ const DepotDetail = () => {
             <div className='w-full lg:w-1/2'>
               <div
                 onClick={() => setOpenTariff(!openTariff)}
-                className='flex justify-between items-center tariffs-bg py-4 px-5 rounded-md cursor-pointer'
+                className='flex justify-between items-center bg-black py-4 px-5 rounded-md cursor-pointer'
               >
                 <h3 className='ss:text-xl font-medium text-white'>Тарифы</h3>
                 <img
                   className={`${
                     openTariff ? 'rotate-[180deg]' : ''
-                  } border sm:border-2 border-white rounded-md`}
-                  src={arrow}
+                  } rounded-md w-5`}
+                  src={arrowWhite}
                   alt='*'
                 />
               </div>
@@ -304,15 +306,15 @@ const DepotDetail = () => {
             <div className='w-full lg:w-1/2 mt-5 md:mt-0'>
               <div
                 onClick={() => setOpenExtraTariff(!openExtraTariff)}
-                className='flex justify-between items-center bg-[#6FCF97] py-4 px-5 rounded-md cursor-pointer'
+                className='flex justify-between items-center bg-colYellow py-4 px-5 rounded-md cursor-pointer'
               >
-                <h3 className='ss:text-xl font-medium text-white'>
-                  Дополнительные тарифы
+                <h3 className='ss:text-xl font-medium'>
+                  Дополнительные услуги
                 </h3>
                 <img
                   className={`${
                     openExtraTariff ? 'rotate-[180deg]' : ''
-                  } border sm:border-2 border-white rounded-md`}
+                  } rounded-md w-4`}
                   src={arrow}
                   alt='*'
                 />

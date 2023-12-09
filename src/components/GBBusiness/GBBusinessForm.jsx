@@ -48,7 +48,7 @@ const GBBusinessForm = () => {
   };
 
   return (
-    <div className='content py-8'>
+    <div className='py-8'>
       <h2 className='text-2xl font-medium mb-8 text-center'>Напишите нам:</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -179,10 +179,7 @@ const GBBusinessForm = () => {
             </div>
             <p>
               Я согласен (на) с
-              <NavLink
-                className='ml-1 underline'
-                to='/user-agreement'
-              >
+              <NavLink className='ml-1 underline' to='/user-agreement'>
                 {' '}
                 условиями пользовательского соглашения
               </NavLink>

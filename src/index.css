@@ -125,9 +125,6 @@ input[type='number'] {
     linear-gradient(181deg, #ffb061 -12.43%, #ff6125 99.91%)
   );
 }
-.tariffs-bg {
-  background: linear-gradient(271deg, #cba4ff 3.63%, #9747ff 96.1%);
-}
 
 @media screen and (max-width: 991px) {
   .bg-business {

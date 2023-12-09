@@ -2,12 +2,12 @@ import iconamoon from '../../assets/icons/iconamoon.svg';
 
 const GBBusinessItem = () => {
   return (
-    <div className='mm:content pt-10 mm:pt-16'>
-      <h3 className='text-xl mm:text-2xl text-center italic py-10 text-[#020105]'>
+    <div className='content pt-5'>
+      <h3 className='text-xl mm:text-2xl text-center italic py-5 text-[#020105]'>
         Уважаемые импортеры и экспортеры, наша команда поможет вам в решении
         задач по импорту/экспорту товаров из любых стран и континентов.{' '}
       </h3>
-      <div className='content py-8'>
+      <div className='content py-5'>
         <h2 className='text-xl md:text-2xl font-medium mt-3 mb-5'>
           К Вашим услугам доставка любыми видами транспорта:
         </h2>

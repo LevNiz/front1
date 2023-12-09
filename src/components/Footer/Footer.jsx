@@ -19,7 +19,7 @@ const Footer = () => {
     >
       <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between w-full container'>
         <NavLink className='pr-5' to='/'>
-          <img src={logo} alt='*' />
+          <img className='w-40' src={logo} alt='*' />
         </NavLink>
         <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
           <ul className='space-y-2'>

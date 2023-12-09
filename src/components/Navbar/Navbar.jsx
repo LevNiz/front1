@@ -60,31 +60,35 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
       <header
         className={`${
           scrolling ? '-translate-y-full' : 'translate-y-0'
-        } bg-black py-4 lg:py-2 fixed top-0 w-full transition-transform duration-300 ease-in-out z-[999999]`}
+        } bg-black h-[58px] flex items-center fixed top-0 w-full transition-transform duration-300 ease-in-out z-[999999]`}
       >
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>
-            <img
-              className='w-[120px] mm:w-[140px] lg:w-auto'
-              src={logo}
-              alt='*'
-            />
+            <img className='w-[112px] sm:w-[130px]' src={logo} alt='*' />
           </NavLink>
           <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white'>
             <li className='navbar'>
-              <NavLink to='/'>Главная</NavLink>
+              <NavLink to='/' className='text-sm lg:text-base'>
+                Главная
+              </NavLink>
             </li>
             <li className='navbar'>
-              <NavLink to='/tracking'>Трекинг посылок</NavLink>
+              <NavLink to='/tracking' className='text-sm lg:text-base'>
+                Трекинг посылок
+              </NavLink>
             </li>
             <li className='navbar'>
-              <NavLink to='/depots'>Наши склады</NavLink>
+              <NavLink to='/depots' className='text-sm lg:text-base'>
+                Наши склады
+              </NavLink>
             </li>
             <li className='navbar'>
-              <NavLink to='/applications'>Отправка</NavLink>
+              <NavLink to='/applications' className='text-sm lg:text-base'>
+                Отправка
+              </NavLink>
             </li>
             <li className='relative group cursor-pointer flex items-center'>
-              <span>Сервисы</span>
+              <span className='text-sm lg:text-base'>Сервисы</span>
               <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
               <ul className='absolute left-4 hidden top-full p-3 bg-white shadow-md text-black group-hover:block w-52'>
                 {/* <li className='my-2'>

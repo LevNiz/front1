@@ -45,7 +45,7 @@ const GBFranchiseForm = () => {
   };
 
   return (
-    <div className='content py-8'>
+    <div className='py-8'>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='sm:shadow-[0_8px_34px_#00000026] rounded-lg sm:p-10 mb-12 max-w-[820px] mx-auto'
@@ -54,7 +54,7 @@ const GBFranchiseForm = () => {
           <div>
             <p className='font-medium mb-2'>Контактное лицо</p>
             <input
-              className='w-full border border-[#D660F2] p-[16px] mm:p-[14px] rounded-[4px] focus:border-[#9a44b0] focus:outline-none'
+              className='w-full border border-gray-300 p-[16px] mm:p-[14px] rounded-[4px] focus:border-gray-500 focus:outline-none'
               placeholder='Контактное лицо'
               {...register('name', {
                 required: 'Поле обязательно к заполнению!',
@@ -69,7 +69,7 @@ const GBFranchiseForm = () => {
           <div className='my-5'>
             <p className='font-medium mb-2'>E-mail</p>
             <input
-              className='w-full border border-[#D660F2] p-[14px] rounded-[4px] focus:border-[#9a44b0] focus:outline-none'
+              className='w-full border border-gray-300 p-[14px] rounded-[4px] focus:border-gray-500 focus:outline-none'
               placeholder='E-mail'
               type='email'
               {...register('email', {
@@ -85,7 +85,7 @@ const GBFranchiseForm = () => {
           <div>
             <p className='font-medium mb-2'>Телефона</p>
             <input
-              className='w-full border border-[#D660F2] p-[16px] mm:p-[14px] rounded-[4px] focus:border-[#9a44b0] focus:outline-none'
+              className='w-full border border-gray-300 p-[16px] mm:p-[14px] rounded-[4px] focus:border-gray-500 focus:outline-none'
               placeholder='Номер телефона'
               type='tel'
               {...register('phone', {

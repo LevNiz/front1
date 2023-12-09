@@ -6,7 +6,7 @@ import Modal from '../../helpers/Modals/Modal';
 
 import logout from './../../assets/icons/logout.svg';
 import logo from './../../assets/icons/logo-mob.svg';
-import arrow from './../../assets/icons/arrow.svg';
+import arrow from './../../assets/icons/down.svg';
 import home from './../../assets/icons/mobile-menu/home.svg';
 import depot from './../../assets/icons/mobile-menu/depot.svg';
 import userIcon from './../../assets/icons/mobile-menu/user.svg';
@@ -101,7 +101,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                 <img
                   className={`${
                     isProfileMenuOpen ? 'rotate-180' : ''
-                  } duration-200`}
+                  } duration-200 w-4`}
                   src={arrow}
                   alt='*'
                 />
@@ -306,7 +306,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                   </span>
                 </div>
                 <img
-                  className={`${isServices ? 'rotate-180' : ''} duration-200`}
+                  className={`${
+                    isServices ? 'rotate-180' : ''
+                  } duration-200 w-4`}
                   src={arrow}
                   alt='*'
                 />
