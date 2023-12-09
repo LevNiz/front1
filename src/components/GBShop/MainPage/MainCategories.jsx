@@ -2,16 +2,16 @@ import { NavLink } from 'react-router-dom';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import { catalogs } from '../../../constants/gb-shop/catalog';
 
-const Catalog = () => {
+const MainCategories = () => {
   const firstSevenCatalogs = catalogs.slice(0, 7);
 
   return (
     <>
       <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 my-7'>
         <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
-          Каталог
+          Категории
         </h3>
-        <NavLink className='flex items-center justify-end' to='catalogues'>
+        <NavLink to='categories' className='flex items-center justify-end'>
           <span className='font-medium text-xl mr-2 text-[#FEDE2B]'>Все</span>
           <img src={rightArrow} alt='*' />
         </NavLink>
@@ -19,7 +19,7 @@ const Catalog = () => {
       <div className='grid grid-cols-7 gap-7 pt-3'>
         {firstSevenCatalogs?.map((el) => (
           <NavLink
-            to='categories'
+            to='items'
             state={{ from: el?.name }}
             className='group'
             key={el?.id}
@@ -35,4 +35,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default MainCategories;

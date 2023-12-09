@@ -12,9 +12,9 @@ import GBFranchises from './GBFranchises/GBFranchises';
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
 import UserAgreement from './UserAgreement/UserAgreement';
 import RefundPolicy from './RefundPolicy/RefundPolicy';
-import GBShopMain from './GBShop/GBShopMain/GBShopMain';
-import Catalogues from './GBShop/Catalogues/Catalogues';
+import MainPage from './GBShop/MainPage/MainPage';
 import Categories from './GBShop/Categories/Categories';
+import Items from './GBShop/Items/Items';
 
 export {
   Tracking,
@@ -31,7 +31,7 @@ export {
   PrivacyPolicy,
   UserAgreement,
   RefundPolicy,
-  GBShopMain,
-  Catalogues,
+  MainPage,
   Categories,
+  Items,
 };

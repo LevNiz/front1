@@ -53,8 +53,8 @@ import {
   PrivacyPolicy,
   UserAgreement,
   RefundPolicy,
-  GBShopMain,
-  Catalogues,
+  MainPage,
+  Items,
   Categories,
 } from '../pages';
 
@@ -96,10 +96,10 @@ export const router = createBrowserRouter(
         <Route path='gb-business' element={<GBBusiness />} />
         <Route path='gb-franchise' element={<GBFranchises />} />
         <Route path='gb-shop'>
-          <Route index element={<GBShopMain />} />
-          <Route path='catalogues' element={<Catalogues />} />
-          <Route path='categories'>
-            <Route index element={<Categories />} />
+          <Route index element={<MainPage />} />
+          <Route path='categories' element={<Categories />} />
+          <Route path='items'>
+            <Route index element={<Items />} />
           </Route>
         </Route>
         <Route element={<PrivateRoute />}>

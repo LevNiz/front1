@@ -52,11 +52,11 @@ import AlaketDetail from './Alaket/AlaketDetail';
 import ItemSearchRequest from './Profile/ItemSearchRequest/ItemSearchRequest';
 import ItemSearchRequestNew from './Profile/ItemSearchRequest/ItemSearchRequestNew';
 import ItemSearchRequestDetail from './Profile/ItemSearchRequest/ItemSearchRequestDetail';
-import MainBlock from './GBShop/GBShopMain/MainBlock';
-import Catalog from './GBShop/GBShopMain/Catalog';
-import Brands from './GBShop/GBShopMain/Brands';
-import CategorySlider from './GBShop/GBShopMain/CategorySlider';
-import CategoryCard from './GBShop/Categories/CategoryCard';
+import MainBlock from './GBShop/MainPage/MainBlock';
+import MainCategories from './GBShop/MainPage/MainCategories';
+import Brands from './GBShop/MainPage/Brands';
+import CategorySlider from './GBShop/MainPage/CategorySlider';
+import ItemsCard from './GBShop/Items/ItemsCard';
 
 export {
   Layout,
@@ -114,8 +114,8 @@ export {
   ItemSearchRequestNew,
   ItemSearchRequestDetail,
   MainBlock,
-  Catalog,
+  MainCategories,
   Brands,
-  CategoryCard,
+  ItemsCard,
   CategorySlider,
 };

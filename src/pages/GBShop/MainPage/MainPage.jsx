@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 import { fetchHomeItems } from '../../../api/gb-shop/homeItems';
 import {
   Brands,
-  Catalog,
+  MainCategories,
   MainBlock,
   CategorySlider,
 } from '../../../components';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 
-const GBShopMain = () => {
+const MainPage = () => {
   const { homeItems, loading, error } = useSelector(
     (state) => state?.homeItems
   );
@@ -30,7 +30,7 @@ const GBShopMain = () => {
   return (
     <div className='pt-28 pb-10 content'>
       <MainBlock />
-      <Catalog />
+      <MainCategories />
       <Brands />
       {homeItems?.map((el) => (
         <div key={el?.id}>
@@ -38,7 +38,7 @@ const GBShopMain = () => {
             <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
               {el?.category?.nameRus}
             </h3>
-            <NavLink className='flex items-center justify-end' to='catalog'>
+            <NavLink className='flex items-center justify-end' to='items'>
               <span className='font-medium text-xl mr-2 text-[#FEDE2B]'>
                 Все
               </span>
@@ -52,4 +52,4 @@ const GBShopMain = () => {
   );
 };
 
-export default GBShopMain;
+export default MainPage;
