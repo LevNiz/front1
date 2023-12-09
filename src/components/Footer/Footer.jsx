@@ -10,6 +10,8 @@ import visa from '../../assets/images/visa.svg';
 import amex from '../../assets/images/amex.jpeg';
 import maestro from '../../assets/images/maestro.svg';
 import telegram from '../../assets/icons/telegram.svg';
+import call from '../../assets/icons/call-white.svg';
+import mail from '../../assets/icons/gmail-white.svg';
 
 const Footer = () => {
   return (
@@ -24,24 +26,32 @@ const Footer = () => {
         <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Контакты</li>
-            <li className='opacity-80 hover:opacity-100 duration-100'>
+            <li className='opacity-80 hover:opacity-100 duration-100 flex items-center'>
+              <img className='mr-2 w-5' src={call} alt='*' />
               <NavLink to='tel:8(800)201-07-88'>8(800)201-07-88</NavLink>
             </li>
-            <li className='opacity-80 hover:opacity-100 duration-100'>
+            <li className='opacity-80 hover:opacity-100 duration-100 flex items-center'>
+              <img className='mr-2 w-5' src={mail} alt='*' />
               <NavLink to='#'>support@givbox.ru</NavLink>
             </li>
           </ul>
           <ul className='space-y-3 max-w-[280px]'>
             <li className='text-xl font-medium mb-3'>Адреса ПВЗ</li>
-            <li className='opacity-80'>
-              121087, Россия, Москва, Багратионовский проезд, д. 5, этаж 3, офис
-              34.
+            <li>
+              <p>Россия, Москва</p>
+              <p className='opacity-80 text-sm'>
+                121087, Багратионовский проезд, д. 5, этаж 3, офис 34.
+              </p>
             </li>
-            <li className='opacity-80'>
-              443110, Россия, Самара, Ново- Садовая улица, д. 30.
+            <li>
+              <p>Россия, Самара</p>
+              <p className='opacity-80 text-sm'>
+                443110, Ново- Садовая улица, д. 30.
+              </p>
             </li>
-            <li className='opacity-80'>
-              724831, Кыргызстан, Бишкек, ул. Шопоково, д. 33.
+            <li>
+              <p>Кыргызстан, Бишкек</p>
+              <p className='opacity-80 text-sm'>724831, ул. Шопоково, д. 33.</p>
             </li>
           </ul>
           <ul className='space-y-2'>
@@ -111,7 +121,7 @@ const Footer = () => {
               </NavLink>
             </li>
           </ul>
-          <div className='flex justify-center md:justify-end items-center pt-10 md:pt-5 space-x-2'>
+          <div className='flex justify-center md:justify-end items-center pt-10 md:pt-8 space-x-2'>
             <div className='w-[50px] h-[30px] bg-[#4b2592] flex justify-center items-center'>
               <img
                 className='w-[40px] object-contain'
