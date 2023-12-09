@@ -109,7 +109,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
               <ul
                 className={`${
                   isProfileMenuOpen ? 'flex' : 'hidden'
-                } ml-4 bg-slate-100 p-3 rounded-b-xl rounded-tr-xl flex-col space-y-3 mr-2`}
+                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl flex-col space-y-3 mr-2`}
               >
                 <li className='flex items-center'>
                   <NavLink
@@ -316,7 +316,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
               <ul
                 className={`${
                   isServices ? 'flex' : 'hidden'
-                } ml-4 bg-slate-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3 mr-2`}
+                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-3 mr-2`}
               >
                 {/* <li className='flex items-center'>
                   <NavLink

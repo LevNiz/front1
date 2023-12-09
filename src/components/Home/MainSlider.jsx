@@ -43,7 +43,7 @@ const MainSlider = () => {
           key={el?.id}
           className={`${
             el?.id === 1 ? 'text-white' : ''
-          } min-h-[430px] md:min-h-[740px] pb-20 md:pb-0 flex items-center bg-[80%] mm:bg-center md:bg-[70%] xl:bg-center bg-no-repeat bg-cover`}
+          } min-h-[440px] md:min-h-[768px] pb-20 md:pb-0 flex items-center bg-[80%] mm:bg-center md:bg-[70%] xl:bg-center bg-no-repeat bg-cover`}
           style={{
             backgroundImage:
               size > 768

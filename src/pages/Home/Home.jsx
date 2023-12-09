@@ -14,12 +14,18 @@ import {
 } from '../../components';
 import { Loading } from '../../helpers/Loader/Loader';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import { useDispatch } from 'react-redux';
+import { fetchCountries } from '../../api/countries';
+import { fetchCities } from '../../api/cities';
+import { fetchDepots } from '../../api/depots';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const closeModal = () => {
     setModalOpen(false);
@@ -43,6 +49,14 @@ const Home = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      await fetchCountries(dispatch);
+      await fetchCities(dispatch);
+      await fetchDepots(dispatch);
+    })();
+  }, [dispatch]);
 
   useEffect(() => {
     scrollToTop();
