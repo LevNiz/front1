@@ -6,7 +6,7 @@ export const DepotMap = ({ center }) => {
   return (
     <LoadScript googleMapsApiKey={googleMapsApiKey}>
       <GoogleMap
-        mapContainerStyle={{ height: '320px' }}
+        mapContainerStyle={{ height: '320px', borderRadius: '8px' }}
         zoom={10}
         center={center}
       >

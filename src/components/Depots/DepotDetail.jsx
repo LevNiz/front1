@@ -81,7 +81,7 @@ const DepotDetail = () => {
             <div className='w-full md:w-3/6 xl:w-2/5 mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0'>
               <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
                 <img
-                  src={mainImg}
+                  src={mainImg ? mainImg : noImg}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = noImg;
@@ -123,20 +123,25 @@ const DepotDetail = () => {
               </Swiper>
             </div>
             <div className='md:w-3/6 xl:w-3/5'>
-              <div className='max-w-[630px] w-full mx-auto mm:px-5 pb-5 flex mm:block flex-col'>
-                <div className='order-1 mt-10 mm:mt-0'>
-                  <DepotMap
-                    center={{ lat: depotItem?.lat, lng: depotItem?.lon }}
-                  />
-                  <p className='text-center mt-4 mb-8 flex justify-center items-center px-4 mm:px-0'>
-                    <span className='mr-1 opacity-60'>Тип склада:</span>
-                    <span className='font-medium'>
-                      {depotItem?.types === 'both'
-                        ? 'Отправка / Приём'
-                        : depotItem?.types === 'in'
-                        ? 'Приём'
-                        : 'Отправка'}
-                    </span>
+              <div className='max-w-[630px] w-full mx-auto mm:px-5 pb-5'>
+                <div className='mt-10 mm:mt-0 md:block flex flex-col'>
+                  <div className='order-1 pt-5 md:pt-0'>
+                    <DepotMap
+                      center={{ lat: depotItem?.lat, lng: depotItem?.lon }}
+                    />
+                    <p className='text-center my-3 flex justify-center items-center px-4 mm:px-0'>
+                      <span className='mr-1 opacity-60'>Тип склада:</span>
+                      <span className='font-medium'>
+                        {depotItem?.types === 'both'
+                          ? 'Отправка / Приём'
+                          : depotItem?.types === 'in'
+                          ? 'Приём'
+                          : 'Отправка'}
+                      </span>
+                    </p>
+                  </div>
+                  <p className='font-medium px-4 mm:px-0'>
+                    {depotItem?.infoRu}
                   </p>
                 </div>
                 <div className='rounded-2xl grid lg:grid-cols-2 gap-5 mt-8 px-4 mm:px-0'>
