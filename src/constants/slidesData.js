@@ -3,7 +3,7 @@ import desktopImageShop from './../assets/images/slider/gb-shop.png';
 import desktopImageFranchise from './../assets/images/slider/gb-franchise.png';
 import desktopImageBuyer from './../assets/images/slider/gb-buyer.png';
 import desktopImagePay from './../assets/images/slider/gb-pay.png';
-import desktopImageChat from './../assets/images/slider/gb-chat.png';
+import desktopImageChat from './../assets/images/slider/gb-chat.webp';
 import desktopImageAlaket from './../assets/images/slider/gb-alaket.png';
 
 import tabletGBAlaket from './../assets/images/slider/tablet/gb-alaket.png';
@@ -15,7 +15,7 @@ import tabletGBShop from './../assets/images/slider/tablet/gb-shop.png';
 
 import mobileGBAlaket from './../assets/images/slider/mobile/gb-alaket.png';
 import mobileGBBuyer from './../assets/images/slider/mobile/gb-buyer.png';
-import mobileGBChat from './../assets/images/slider/mobile/gb-chat.png';
+import mobileGBChat from './../assets/images/slider/gb-chat.webp';
 import mobileGBPay from './../assets/images/slider/mobile/gb-pay.png';
 import mobileGBFranchise from './../assets/images/slider/mobile/gb-franchise.png';
 import mobileGBShop from './../assets/images/slider/mobile/gb-shop.png';
