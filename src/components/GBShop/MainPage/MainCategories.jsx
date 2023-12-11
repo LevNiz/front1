@@ -42,7 +42,7 @@ const MainCategories = () => {
           {firstSevenCatalogs?.map((el) => (
             <NavLink
               to='items'
-              state={{ from: el?.name, category: el?.id }}
+              state={{ from: el?.nameRus, category: el?.id }}
               className='group'
               key={el?.id}
             >

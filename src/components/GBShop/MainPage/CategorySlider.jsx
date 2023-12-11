@@ -37,6 +37,10 @@ const CategorySlider = ({ items, loading, error }) => {
                       <img
                         className='w-full h-full object-cover'
                         src={el?.image}
+                        onError={(e) => {
+                          e.target.onError = null;
+                          e.target.src = noImg;
+                        }}
                         alt='*'
                       />
                       <div className='absolute bottom-2 right-2 font-medium text-sm bg-colYellow py-[2px] px-2 rounded-sm z-10'>
@@ -50,6 +54,10 @@ const CategorySlider = ({ items, loading, error }) => {
                     <img
                       className='absolute top-3 left-3 min-w-[32px] w-8 h-8 object-cover rounded-full'
                       src={el?.country?.icon}
+                      onError={(e) => {
+                        e.target.onError = null;
+                        e.target.src = noImg;
+                      }}
                       alt='*'
                     />
                   )}

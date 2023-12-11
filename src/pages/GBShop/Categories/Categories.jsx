@@ -43,7 +43,7 @@ const Categories = () => {
             <Link
               to='/gb-shop/items'
               key={el?.id}
-              state={{ from: el?.name, category: el?.id }}
+              state={{ from: el?.nameRus, category: el?.id }}
               className='group'
             >
               <div className='h-36 flex justify-center items-center shadow-md group-hover:shadow-xl duration-150 bg-[#FBFBFB] rounded-xl'>
