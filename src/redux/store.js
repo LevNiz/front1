@@ -17,6 +17,8 @@ import extraServicesReducer from './slices/extraServicesSlice';
 import costsReducer from './slices/costsSlice';
 import searchRequestReducer from './slices/searchRequestSlice';
 import gbShopItemsReducer from './slices/gbShopItemsSlice';
+import categoriesReducer from './slices/categoriesSlice';
+import itemsReducer from './slices/itemsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -41,6 +43,8 @@ const rootReducer = combineReducers({
   costs: costsReducer,
   searchRequests: searchRequestReducer,
   homeItems: gbShopItemsReducer,
+  categories: categoriesReducer,
+  items: itemsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

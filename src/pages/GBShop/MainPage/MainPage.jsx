@@ -38,7 +38,14 @@ const MainPage = () => {
             <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
               {el?.category?.nameRus}
             </h3>
-            <NavLink className='flex items-center justify-end' to='items'>
+            <NavLink
+              className='flex items-center justify-end'
+              to='items'
+              state={{
+                from: el?.category?.nameRus,
+                category: el?.category?.id,
+              }}
+            >
               <span className='font-medium text-xl mr-2 text-[#FEDE2B]'>
                 Все
               </span>
