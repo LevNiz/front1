@@ -57,6 +57,7 @@ import MainCategories from './GBShop/MainPage/MainCategories';
 import Brands from './GBShop/MainPage/Brands';
 import CategorySlider from './GBShop/MainPage/CategorySlider';
 import ItemsCard from './GBShop/Items/ItemsCard';
+import ItemsDetail from './GBShop/Items/ItemsDetail';
 
 export {
   Layout,
@@ -118,4 +119,5 @@ export {
   Brands,
   ItemsCard,
   CategorySlider,
+  ItemsDetail,
 };

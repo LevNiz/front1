@@ -28,9 +28,9 @@ const Items = () => {
   }, []);
 
   return (
-    <div className='py-24 min-h-[991px] w-full'>
+    <div className='py-24 min-h-[991px]'>
       <div className='content'>
-        <div className='bg-[#FBFBFB] py-2 px-5 my-7'>
+        <div className='bg-[#FBFBFB] py-2 p-5 my-4'>
           <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
             {state?.from}
           </h3>

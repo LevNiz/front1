@@ -37,6 +37,7 @@ import {
   ItemSearchRequest,
   ItemSearchRequestNew,
   ItemSearchRequestDetail,
+  ItemsDetail,
 } from '../components';
 import {
   Auth,
@@ -100,6 +101,7 @@ export const router = createBrowserRouter(
           <Route path='categories' element={<Categories />} />
           <Route path='items'>
             <Route index element={<Items />} />
+            <Route path=':id' element={<ItemsDetail />} />
           </Route>
         </Route>
         <Route element={<PrivateRoute />}>

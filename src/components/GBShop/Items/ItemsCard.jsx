@@ -7,7 +7,10 @@ import noImg from '../../../assets/images/no-image.svg';
 const CategoryCard = ({ el }) => {
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
-      <NavLink to='#'>
+      <NavLink
+        to={`${el?.id}`}
+        state={{ from: el?.category?.nameRus, category: el?.category?.id }}
+      >
         <div className='h-[210px] overflow-hidden relative bg-gray-50'>
           <img
             className='w-full h-full object-cover'
@@ -42,6 +45,7 @@ const CategoryCard = ({ el }) => {
       <div className='p-2'>
         <NavLink
           to='#'
+          state={{ from: el?.category?.nameRus, category: el?.category?.id }}
           className='font-bold text-sm line-clamp-1 break-all hover:underline pb-2 w-max'
         >
           {el?.name}

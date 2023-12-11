@@ -12,6 +12,7 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 
 const CategorySlider = ({ items, loading, error }) => {
+  
   return (
     <>
       {loading ? (
@@ -32,7 +33,13 @@ const CategorySlider = ({ items, loading, error }) => {
             {items?.map((el) => (
               <SwiperSlide modules={[Navigation]} key={el?.id}>
                 <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
-                  <NavLink to='#'>
+                  <NavLink
+                    to={`items/${el?.id}`}
+                    state={{
+                      from: el?.category?.nameRus,
+                      category: el?.category?.id,
+                    }}
+                  >
                     <div className='h-[210px] overflow-hidden relative bg-gray-50'>
                       <img
                         className='w-full h-full object-cover'
@@ -66,7 +73,11 @@ const CategorySlider = ({ items, loading, error }) => {
                   </div>
                   <div className='p-2'>
                     <NavLink
-                      to='#'
+                      to={`items/${el?.id}`}
+                      state={{
+                        from: el?.category?.nameRus,
+                        category: el?.category?.id,
+                      }}
                       className='font-bold text-sm line-clamp-1 break-all hover:underline pb-2 w-max'
                     >
                       {el?.name}

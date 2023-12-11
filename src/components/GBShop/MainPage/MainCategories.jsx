@@ -14,7 +14,7 @@ const MainCategories = () => {
   );
   const dispatch = useDispatch();
 
-  const firstSevenCatalogs = categories.slice(0, 7);
+  const firstSevenCategories = categories.slice(0, 7);
 
   useEffect(() => {
     (async () => {
@@ -37,9 +37,9 @@ const MainCategories = () => {
         <ContentLoading extraStyle={164} />
       ) : error ? (
         <ErrorServer />
-      ) : firstSevenCatalogs?.length ? (
+      ) : firstSevenCategories?.length ? (
         <div className='grid grid-cols-7 gap-7 pt-3'>
-          {firstSevenCatalogs?.map((el) => (
+          {firstSevenCategories?.map((el) => (
             <NavLink
               to='items'
               state={{ from: el?.nameRus, category: el?.id }}
