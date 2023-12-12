@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MobileMenu from './MobileMenu';
 import logo from './../../assets/images/header-logo.svg';
 import userImg from './../../assets/icons/user.svg';
 import chat from './../../assets/icons/messages.svg';
 import arrow from './../../assets/icons/arrow-white.svg';
+import arrowRight from './../../assets/icons/right-icon.svg';
 import notification from './../../assets/icons/notification.svg';
 
 // import gbShop from '../../assets/icons/gb-services/gb-shop.svg';
@@ -15,6 +16,9 @@ import gbFranchise from '../../assets/icons/gb-services/gb-franchise.svg';
 import gbBuyer from '../../assets/icons/gb-services/gb-buyer.svg';
 import alaket from '../../assets/icons/gb-services/gb-alaket.svg';
 import gbChat from '../../assets/icons/gb-services/gb-chat.svg';
+import { fetchCountries } from '../../api/countries';
+import { fetchCities } from '../../api/cities';
+import { fetchDepots } from '../../api/depots';
 
 const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -23,6 +27,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const { depots } = useSelector((state) => state?.depots);
+  const dispatch = useDispatch();
 
   const { pathname } = useLocation();
   const modalRef = useRef();
@@ -37,6 +42,14 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const handleCloseMenu = () => {
     setShowSidebar(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      await fetchCountries(dispatch);
+      await fetchCities(dispatch);
+      await fetchDepots(dispatch);
+    })();
+  }, [dispatch]);
 
   useEffect(() => {
     setScrolling(false);
@@ -81,35 +94,38 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                 Трекинг посылок
               </NavLink>
             </li>
-            <li className='relative group flex items-center'>
-              <span className='text-sm lg:text-base cursor-pointer'>
+            <li className='relative flex items-center'>
+              <NavLink
+                to='/depots'
+                className='text-sm lg:text-base cursor-pointer'
+              >
                 Наши склады
-              </span>
-              <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
-              <div className='absolute -left-5 hidden w-60 top-full group-hover:block pt-2'>
-                <div className='py-2 bg-white text-black flex flex-col max-h-[300px] overflow-y-scroll shadow-lg scrollable'>
-                  <NavLink
-                    className='ml-3 my-[2px] w-max text-blue-600 underline mb-2 text-sm font-medium'
-                    to='/depots'
-                  >
-                    Показать все
-                  </NavLink>
-                  {depots?.map((el) => (
-                    <NavLink
-                      to={`/depots/${el?.id}`}
-                      key={el?.id}
-                      className='px-3 py-[2px] hover:bg-gray-100 flex items-center'
-                    >
-                      <img
-                        className='w-5 mr-2'
-                        src={el?.country?.icon}
-                        alt=''
-                      />
-                      <span className='line-clamp-1 break-all'>
-                        {el?.country?.nameRu}, {el?.city?.nameRu}
-                      </span>
-                    </NavLink>
-                  ))}
+              </NavLink>
+              <div className='group'>
+                <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
+                <div className='absolute -left-3/4 block w-72 top-[90%] group-hover:block pt-3'>
+                  <div className='py-2 rounded-sm bg-white text-black flex flex-col max-h-[300px] overflow-y-scroll shadow-lg scrollable'>
+                    {depots?.map((el) => (
+                      <div
+                        key={el?.id}
+                        className='px-3 py-2 cursor-pointer hover:bg-colYellow duration-150 flex justify-between items-center'
+                      >
+                        <div className='flex items-center'>
+                          <div className='w-7 h-7 min-w-[28px] mr-2 rounded-full overflow-hidden'>
+                            <img
+                              className='w-full h-full object-cover'
+                              src={el?.country?.icon}
+                              alt=''
+                            />
+                          </div>
+                          <span className='line-clamp-1 break-all font-medium'>
+                            {el?.country?.nameRu}, {el?.city?.nameRu}
+                          </span>
+                        </div>
+                        <img src={arrowRight} alt='*' />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </li>
@@ -126,7 +142,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   {/* <li>
                     <NavLink
                       onClick={() => alert('В процессе разработки!')}
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='#'
                     >
                       <img className='w-4 mr-1.5' src={gbShop} alt='*' />
@@ -135,7 +151,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li> */}
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-business'
                     >
                       <img className='w-4 mr-1.5' src={gbBusiness} alt='*' />
@@ -144,7 +160,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-franchise'
                     >
                       <img className='w-4 mr-1.5' src={gbFranchise} alt='*' />
@@ -154,7 +170,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   {/* <li>
                     <NavLink
                       onClick={() => alert('В процессе разработки!')}
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='#'
                     >
                       <img className='w-4 mr-1.5' src={gbPay} alt='*' />
@@ -163,7 +179,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li> */}
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-buyer'
                     >
                       <img className='w-4 mr-1.5' src={gbBuyer} alt='*' />
@@ -172,7 +188,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-chat'
                     >
                       <img className='w-4 mr-1.5' src={gbChat} alt='*' />
@@ -181,7 +197,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/alaket'
                     >
                       <img className='w-4 mr-1.5' src={alaket} alt='*' />
