@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchApplications } from '../../../api/applications';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { NavLink } from 'react-router-dom';
 import parcelCar from '../../../assets/images/parcel-car.svg';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
@@ -21,7 +20,7 @@ const ActiveApplications = () => {
   }, [dispatch, userID]);
 
   return (
-    <div className='flex flex-col space-y-5 py-8'>
+    <div className='flex flex-col h-full space-y-5 py-8'>
       {loading ? (
         <ContentLoading extraStyle='320px' />
       ) : error ? (
@@ -29,10 +28,8 @@ const ActiveApplications = () => {
       ) : applications?.length ? (
         <>
           {applications?.map((el) => (
-            <NavLink
+            <div
               key={el?.id}
-              // to=''
-              onClick={() => alert('Детальная страница уже совсем скоро!')}
               className='w-full bg-colBgGray2 rounded-[18px] p-3 ss:p-5'
             >
               <div className='flex justify-between items-center'>
@@ -94,7 +91,7 @@ const ActiveApplications = () => {
                   <div className='sm:min-h-[23px] min-h-[15px] ss:min-h-[18px] min-w-[15px] ss:min-w-[18px] sm:min-w-[23px] p-2 rounded-full bg-black'></div>
                 </div>
               </div>
-            </NavLink>
+            </div>
           ))}
         </>
       ) : (

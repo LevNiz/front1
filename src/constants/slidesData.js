@@ -15,7 +15,7 @@ import tabletGBShop from './../assets/images/slider/tablet/gb-shop.png';
 
 import mobileGBAlaket from './../assets/images/slider/mobile/gb-alaket.png';
 import mobileGBBuyer from './../assets/images/slider/mobile/gb-buyer.png';
-import mobileGBChat from './../assets/images/slider/gb-chat.webp';
+import mobileGBChat from './../assets/images/slider/mobile/gb-chat.png';
 import mobileGBPay from './../assets/images/slider/mobile/gb-pay.png';
 import mobileGBFranchise from './../assets/images/slider/mobile/gb-franchise.png';
 import mobileGBShop from './../assets/images/slider/mobile/gb-shop.png';
