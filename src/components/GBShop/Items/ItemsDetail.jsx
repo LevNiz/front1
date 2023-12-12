@@ -64,7 +64,7 @@ const ItemsDetail = () => {
               </div>
             </div>
             <div className='flex items-center'>
-              <h2 className='text-2xl font-medium'>$ {item?.cost}</h2>
+              <h2 className='text-2xl font-medium'>$ {item?.costSale}</h2>
               <h3 className='text-[#666] line-through ml-2 mr-5'>
                 $ {item?.cost}
               </h3>

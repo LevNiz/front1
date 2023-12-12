@@ -7,13 +7,14 @@ import userImg from './../../assets/icons/user.svg';
 import chat from './../../assets/icons/messages.svg';
 import arrow from './../../assets/icons/arrow-white.svg';
 import notification from './../../assets/icons/notification.svg';
-import gbBusiness from './../../assets/icons/mobile-menu/bussines.svg';
-// import gbShop from './../../assets/icons/gb-shop.svg';
-// import gbPay from './../../assets/icons/gb-pay.svg';
-import gbBuyer from './../../assets/icons/mobile-menu/buyer.svg';
-import alaket from './../../assets/icons/alaket.svg';
-import gbChat from './../../assets/icons/gb-chat.svg';
-import gbFranchise from './../../assets/icons/gb-franchise.svg';
+
+// import gbShop from '../../assets/icons/gb-services/gb-shop.svg';
+// import gbPay from '../../assets/icons/gb-services/gb-pay.svg';
+import gbBusiness from '../../assets/icons/gb-services/gb-business.svg';
+import gbFranchise from '../../assets/icons/gb-services/gb-franchise.svg';
+import gbBuyer from '../../assets/icons/gb-services/gb-buyer.svg';
+import alaket from '../../assets/icons/gb-services/gb-alaket.svg';
+import gbChat from '../../assets/icons/gb-services/gb-chat.svg';
 
 const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -121,66 +122,66 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
               <span className='text-sm lg:text-base'>Сервисы</span>
               <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
               <div className='absolute left-4 hidden top-full group-hover:block w-52 pt-2'>
-                <ul className='p-3 bg-white shadow-md text-black'>
-                  {/* <li className='my-2'>
-                  <NavLink
-                    onClick={() => alert('В процессе разработки!')}
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='#'
-                  >
-                    <img className='w-4 mr-1.5' src={gbShop} alt='*' />
-                    GB-Shop
-                  </NavLink>
-                </li> */}
-                  <li className='my-2'>
+                <ul className='py-2 bg-white rounded-sm shadow-md text-black'>
+                  {/* <li>
                     <NavLink
-                      className='hover:opacity-70 duration-150 flex items-center'
+                      onClick={() => alert('В процессе разработки!')}
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      to='#'
+                    >
+                      <img className='w-4 mr-1.5' src={gbShop} alt='*' />
+                      GB-Shop
+                    </NavLink>
+                  </li> */}
+                  <li>
+                    <NavLink
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
                       to='/gb-business'
                     >
                       <img className='w-4 mr-1.5' src={gbBusiness} alt='*' />
                       GB-Business
                     </NavLink>
                   </li>
-                  <li className='my-2'>
+                  <li>
                     <NavLink
-                      className='hover:opacity-70 duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
                       to='/gb-franchise'
                     >
                       <img className='w-4 mr-1.5' src={gbFranchise} alt='*' />
                       GB-Franchise
                     </NavLink>
                   </li>
-                  {/* <li className='my-2'>
-                  <NavLink
-                    onClick={() => alert('В процессе разработки!')}
-                    className='hover:opacity-70 duration-150 flex items-center'
-                    to='#'
-                  >
-                    <img className='w-4 mr-1.5' src={gbPay} alt='*' />
-                    GB-Pay
-                  </NavLink>
-                </li> */}
-                  <li className='my-2'>
+                  {/* <li>
                     <NavLink
-                      className='hover:opacity-70 duration-150 flex items-center'
+                      onClick={() => alert('В процессе разработки!')}
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
+                      to='#'
+                    >
+                      <img className='w-4 mr-1.5' src={gbPay} alt='*' />
+                      GB-Pay
+                    </NavLink>
+                  </li> */}
+                  <li>
+                    <NavLink
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
                       to='/gb-buyer'
                     >
                       <img className='w-4 mr-1.5' src={gbBuyer} alt='*' />
                       GB-Buyer
                     </NavLink>
                   </li>
-                  <li className='my-2'>
+                  <li>
                     <NavLink
-                      className='hover:opacity-70 duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
                       to='/gb-chat'
                     >
                       <img className='w-4 mr-1.5' src={gbChat} alt='*' />
                       GB-Chat
                     </NavLink>
                   </li>
-                  <li className='my-2'>
+                  <li>
                     <NavLink
-                      className='hover:opacity-70 duration-150 flex items-center'
+                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 flex items-center'
                       to='/alaket'
                     >
                       <img className='w-4 mr-1.5' src={alaket} alt='*' />
