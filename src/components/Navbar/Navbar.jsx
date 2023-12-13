@@ -77,7 +77,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
       <header
         className={`${
           scrolling ? '-translate-y-full' : 'translate-y-0'
-        } bg-black h-[58px] flex items-center fixed top-0 w-full transition-transform duration-300 ease-in-out z-[999999]`}
+        } bg-black h-[58px] flex items-center fixed top-0 w-full transition-transform duration-300 ease-in-out z-[9999999]`}
       >
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>
@@ -143,7 +143,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   {/* <li>
                     <NavLink
                       onClick={() => alert('В процессе разработки!')}
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='#'
                     >
                       <img className='w-4 mr-1.5' src={gbShop} alt='*' />
@@ -152,7 +152,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li> */}
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-business'
                     >
                       <img className='w-4 mr-1.5' src={gbBusiness} alt='*' />
@@ -161,7 +161,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-franchise'
                     >
                       <img className='w-4 mr-1.5' src={gbFranchise} alt='*' />
@@ -171,7 +171,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   {/* <li>
                     <NavLink
                       onClick={() => alert('В процессе разработки!')}
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='#'
                     >
                       <img className='w-4 mr-1.5' src={gbPay} alt='*' />
@@ -180,7 +180,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li> */}
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-buyer'
                     >
                       <img className='w-4 mr-1.5' src={gbBuyer} alt='*' />
@@ -189,7 +189,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/gb-chat'
                     >
                       <img className='w-4 mr-1.5' src={gbChat} alt='*' />
@@ -198,7 +198,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow hover:text-white px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
                       to='/alaket'
                     >
                       <img className='w-4 mr-1.5' src={alaket} alt='*' />

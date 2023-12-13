@@ -14,7 +14,7 @@ const MainCategories = () => {
   );
   const dispatch = useDispatch();
 
-  const firstSevenCategories = categories.slice(0, 7);
+  const firstSevenCategories = categories?.slice(0, 7);
 
   useEffect(() => {
     (async () => {
