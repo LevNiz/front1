@@ -103,10 +103,11 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
               </NavLink>
               <div className='group'>
                 <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
-                <div className='absolute -left-3/4 block w-72 top-[90%] group-hover:block pt-3'>
+                <div className='absolute -left-3/4 hidden w-72 top-[90%] group-hover:block pt-3'>
                   <div className='py-2 rounded-sm bg-white text-black flex flex-col max-h-[300px] overflow-y-scroll shadow-lg scrollable'>
                     {depots?.map((el) => (
-                      <div
+                      <NavLink
+                        to={`/depots/${el?.id}`}
                         key={el?.id}
                         className='px-3 py-2 cursor-pointer hover:bg-colYellow duration-150 flex justify-between items-center'
                       >
@@ -119,11 +120,11 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                             />
                           </div>
                           <span className='line-clamp-1 break-all font-medium'>
-                            {el?.country?.nameRu}, {el?.city?.nameRu}
+                            {el?.country?.nameRu + ', ' + el?.city?.nameRu}
                           </span>
                         </div>
                         <img src={arrowRight} alt='*' />
-                      </div>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
