@@ -5,6 +5,7 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import noImg from '../../../assets/images/no-image.svg';
 import { fetchItemsDetail } from '../../../api/gb-shop/items';
 import favourite from '../../../assets/gb-shop/icons/favourite.svg';
+import ItemsSlider from './ItemsSlider';
 
 const ItemsDetail = () => {
   const [item, setItem] = useState({});
@@ -38,7 +39,9 @@ const ItemsDetail = () => {
       ) : (
         <div className='flex pt-5 space-x-8'>
           <div className='w-1/2'>
-            <img src={item?.image} alt='*' />
+            <div className='border border-gray-200 rounded-md overflow-hidden p-3'>
+              <ItemsSlider images={item?.image} />
+            </div>
           </div>
           <div className='w-1/2'>
             <div className='flex items-center pt-5'>
@@ -73,7 +76,7 @@ const ItemsDetail = () => {
               </span>
             </div>
             <p className='py-7'>{item?.description}</p>
-            <p className='text-sm mb-2'>Количество</p>
+            <p className='mb-2 font-medium'>Количество:</p>
             <div className='flex pb-5'>
               <div className='border rounded-tl-sm rounded-bl-sm border-black w-14 h-10 flex justify-center items-center font-medium cursor-pointer'>
                 -
