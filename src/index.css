@@ -200,6 +200,13 @@ input[type='number'] {
 .gb-shop .swiper-button-prev::after {
   color: #000;
 }
+.gb-shop-card-slider-thumb .swiper-slide-thumb-active {
+  opacity: 1;
+}
+.gb-shop-card-main-slider .swiper-button-prev:after,
+.swiper-button-next:after {
+  color: #000;
+}
 @media screen and (max-width: 768px) {
   .slider .swiper-button-next,
   .slider .swiper-button-prev {

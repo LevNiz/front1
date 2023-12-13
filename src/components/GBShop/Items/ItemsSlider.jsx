@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Thumbs } from 'swiper/modules';
+
 import noImg from '../../../assets/images/no-image.svg';
 
 const ItemsSlider = () => {
@@ -28,50 +31,75 @@ const ItemsSlider = () => {
       image:
         'https://thumbs.dreamstime.com/b/cold-snowy-winter-road-16246084.jpg',
     },
+    {
+      id: 6,
+      image:
+        'https://images.unsplash.com/photo-1587483283491-40b2af304d7f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fDUwMHxlbnwwfHwwfHx8MA%3D%3D',
+    },
+    {
+      id: 7,
+      image:
+        'https://thumbs.dreamstime.com/b/cold-snowy-winter-road-16246084.jpg',
+    },
   ];
-  const [mainImg, setMainImg] = useState(images[0]?.image);
-
-  const handleClick = (index) => {
-    const main = images[index];
-    setMainImg(main?.image);
-  };
+  const [activeThumb, setActiveThumb] = useState('');
 
   return (
-    <div className='w-full mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0 flex'>
-      <div className='flex flex-col justify-center space-y-5'>
-        {images !== null
-          ? images?.map((el, index) => (
-              <div
-                key={index}
-                className='!min-w-[80px] !w-[20%] h-[80px] bg-[#FBFBFB] rounded-lg overflow-hidden cursor-pointer'
-                onClick={() => {
-                  handleClick(index);
-                }}
-              >
-                <img
-                  src={el?.image}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = noImg;
-                  }}
-                  alt='*'
-                  className='w-full h-full object-cover'
-                />
-              </div>
-            ))
-          : ''}
-      </div>
-      <div className='md:max-w-[480px] w-full h-[470px] overflow-hidden rounded-lg mx-auto bg-[#FBFBFB]'>
-        <img
-          src={mainImg ? mainImg : noImg}
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = noImg;
-          }}
-          alt='*'
-          className='w-full h-full object-contain rounded-lg'
-        />
-      </div>
+    <div className='w-full mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0'>
+      <Swiper
+        loop={true}
+        spaceBetween={10}
+        navigation={true}
+        modules={[Navigation, Thumbs]}
+        grabCursor={true}
+        thumbs={{
+          swiper: activeThumb && !activeThumb.destroyed ? activeThumb : null,
+        }}
+        className='gb-shop-card-main-slider'
+      >
+        {images?.map((el, index) => (
+          <SwiperSlide
+            key={index}
+            className='h-[470px] rounded-lg mx-auto bg-[#FBFBFB]'
+          >
+            <img
+              src={el?.image}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = noImg;
+              }}
+              alt='*'
+              className='w-full h-full object-contain'
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Swiper
+        onSwiper={setActiveThumb}
+        spaceBetween={14}
+        modules={[Thumbs]}
+        slidesPerView={4}
+        className='mt-5 gb-shop-card-slider-thumb'
+      >
+        {images?.map((el, index) => (
+          <SwiperSlide
+            key={index}
+            className={`${
+              images?.length > 3 ? '' : '!mx-auto'
+            } h-[90px] rounded-lg bg-gray-100 overflow-hidden opacity-50`}
+          >
+            <img
+              src={el?.image}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = noImg;
+              }}
+              alt='*'
+              className='w-full h-full object-cover'
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
