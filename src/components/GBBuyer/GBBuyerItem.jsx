@@ -33,10 +33,10 @@ const GBBuyerItem = () => {
             <NavLink
               to={`${el?.id}`}
               key={el?.id}
-              className='shadow-md relative flex mm:block rounded-xl overflow-hidden'
+              className='shadow-[0_4px_16px_#e9e9e9] hover:shadow-[0_4px_16px_#d9d9d9] duration-200 flex rounded-xl overflow-hidden p-2'
             >
-              <div className='bg-gray-100 p-2 sm:py-6 min-w-[90px] ss:min-w-[110px] sm:w-[25%] mm:w-auto flex items-center'>
-                <div className='w-16 ss:w-20 sm:w-24 min-w-[64px] ss:min-w-[80px] sm:min-w-[96px] h-16 ss:h-20 sm:h-24 rounded-full overflow-hidden mx-auto border-2 border-colYellow p-[2px]'>
+              <div className='sm:py-4 min-w-[90px] ss:min-w-[110px] sm:w-[25%] mm:w-auto flex items-center'>
+                <div className='w-20 ss:w-24 min-w-[80px] ss:min-w-[96px] h-20 ss:h-24 rounded-full overflow-hidden mx-auto p-[2px]'>
                   <img
                     className='w-full h-full object-cover rounded-full'
                     src={el?.avatar}
@@ -47,23 +47,23 @@ const GBBuyerItem = () => {
                   />
                 </div>
               </div>
-              <div className='p-3 sm:py-5 sm:px-4 mm:text-center w-[75%] mm:w-auto'>
-                <div className='flex mm:justify-center items-center'>
-                  <h3 className='font-medium sm:text-xl mr-1'>
+              <div className='p-3 sm:p-2 w-[75%]'>
+                <div className='flex justify-between items-center'>
+                  <h3 className='font-medium sm:text-lg mr-1 line-clamp-1 break-all'>
                     {el?.fullname || 'Не указана'}
                   </h3>
                   <img className='w-8' src={instaTick} alt='*' />
                 </div>
-                <div className='flex mm:justify-center my-2 mm:my-0 items-center space-x-1 mm:absolute top-2 lg:top-3 right-3'>
-                  <img className='w-4' src={star} alt='*' />
-                  <img className='w-4' src={star} alt='*' />
-                  <img className='w-4' src={star} alt='*' />
-                  <img className='w-4' src={star} alt='*' />
-                  <img className='w-4' src={star} alt='*' />
-                </div>
                 <div className='opacity-80 text-sm mt-[2px] line-clamp-1 break-all'>
                   {el?.countries &&
                     el?.countries?.map((country) => country?.nameRu).join(', ')}
+                </div>
+                <div className='flex my-2 items-center space-x-1'>
+                  <img className='w-4' src={star} alt='*' />
+                  <img className='w-4' src={star} alt='*' />
+                  <img className='w-4' src={star} alt='*' />
+                  <img className='w-4' src={star} alt='*' />
+                  <img className='w-4' src={star} alt='*' />
                 </div>
                 <div className='opacity-60 text-xs mt-[2px] line-clamp-1 break-all'>
                   {el?.websites &&
