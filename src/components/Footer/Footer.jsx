@@ -4,12 +4,12 @@ import facebook from '../../assets/icons/Facebook.svg';
 import instagram from '../../assets/icons/Instagram.svg';
 import tiktok from '../../assets/icons/tiktok.svg';
 import vk from '../../assets/icons/vk.svg';
+import telegram from '../../assets/icons/telegram.svg';
 import mir from '../../assets/images/mir.svg';
 import mastercard from '../../assets/images/mastercard.svg';
 import visa from '../../assets/images/visa.svg';
 import amex from '../../assets/images/amex.jpeg';
 import maestro from '../../assets/images/maestro.svg';
-import telegram from '../../assets/icons/telegram.svg';
 import call from '../../assets/icons/call-white.svg';
 import mail from '../../assets/icons/gmail-white.svg';
 
@@ -100,7 +100,7 @@ const Footer = () => {
                 target='_blank'
                 className='flex justify-center items-center w-full h-full'
               >
-                <img src={instagram} alt='*' />
+                <img className='w-[18px]' src={instagram} alt='*' />
               </NavLink>
             </li>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
