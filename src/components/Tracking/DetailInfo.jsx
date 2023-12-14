@@ -121,12 +121,8 @@ const DetailInfo = (props) => {
       ) : (
         <div className='pt-12 pb-20 content'>
           <div className='flex justify-center items-center mb-12'>
-            <img
-              className='sm:block hidden w-10 sm:w-auto'
-              src={nounBox}
-              alt='*'
-            />
-            <h2 className='text-xl sm:text-2xl font-medium ml-3 break-all bg-colPurple sm:bg-transparent text-white sm:text-black p-3 rounded-xl sm:p-3 sm:rounded-xl'>
+            <img className='sm:block hidden sm:w-12' src={nounBox} alt='*' />
+            <h2 className='text-xl sm:text-2xl font-medium break-all bg-colPurple sm:bg-transparent text-white sm:text-black p-3 rounded-md'>
               {parcelDetail?.orderNumber}
             </h2>
           </div>
@@ -255,13 +251,13 @@ const DetailInfo = (props) => {
                     </span>
                   </div>
                   {parcelDetail?.paymentStatus == 'paid' ? (
-                    <div className='font-medium px-4 h-12 flex justify-center items-center text-lg rounded-lg bg-colGreen w-full'>
+                    <div className='font-medium px-4 h-12 flex justify-center items-center text-lg rounded-lg bg-black opacity-50 cursor-not-allowed text-white w-full'>
                       Оплачено
                     </div>
                   ) : (
                     <button
                       onClick={payForParcel}
-                      className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg bg-colYellow duration-150 w-full'
+                      className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 w-full'
                     >
                       Оплатить
                     </button>

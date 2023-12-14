@@ -210,7 +210,7 @@ const SApplicationItem = () => {
                     isButtonDisabled
                       ? 'opacity-50 hover:opacity-50 cursor-not-allowed'
                       : 'hover:opacity-80'
-                  } uppercase font-medium p-5 text-lg rounded-lg bg-[#6747e5] text-white duration-150 w-full`}
+                  } uppercase font-medium p-5 text-lg rounded-lg bg-black text-white duration-150 w-full`}
                 >
                   Оформить заявку
                 </button>

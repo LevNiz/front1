@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Mousewheel } from 'swiper/modules';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDepotsDetail } from '../../api/depots';
@@ -9,7 +7,6 @@ import { DepotMap } from './DepotMap';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { fetchCosts } from '../../api/costs';
 import { fetchExtraServices } from '../../api/extraServices';
-import 'swiper/css';
 import location from './../../assets/icons/new-location.svg';
 import clock from './../../assets/icons/timeSvg.svg';
 import call from './../../assets/icons/new-call.svg';
@@ -18,7 +15,6 @@ import arrow from './../../assets/icons/down.svg';
 import arrowWhite from './../../assets/icons/arrow-white.svg';
 import noImg from './../../assets/images/no-image.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
-import extraServiceIcon from './../../assets/icons/extra-service.svg';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState();
@@ -90,18 +86,10 @@ const DepotDetail = () => {
                   className='w-full h-full object-cover'
                 />
               </div>
-              <Swiper
-                direction={'horizontal'}
-                slidesPerView={4}
-                mousewheel={true}
-                modules={[Mousewheel]}
-                noSwiping={true}
-                wrapperClass='swiper-wrapper justify-center sm:space-x-4 space-x-3 lg:space-x-8'
-                className='flex justify-around mt-5'
-              >
+              <div className='flex justify-center space-x-3 mt-5'>
                 {depotItem?.images !== null
                   ? images?.map((el, index) => (
-                      <SwiperSlide
+                      <div
                         key={index}
                         className='sm:max-w-[80px] !w-[22%] h-[50px] bg-colBgGray xs:h-[60px] sm:w-full sm:h-[75px] rounded-lg overflow-hidden cursor-pointer'
                         onClick={() => {
@@ -117,10 +105,10 @@ const DepotDetail = () => {
                           alt='*'
                           className='w-full h-full object-cover'
                         />
-                      </SwiperSlide>
+                      </div>
                     ))
                   : ''}
-              </Swiper>
+              </div>
             </div>
             <div className='md:w-3/6 xl:w-3/5'>
               <div className='max-w-[630px] w-full mx-auto mm:px-5 pb-5'>
@@ -337,8 +325,8 @@ const DepotDetail = () => {
                   <div key={el?.id} className='flex justify-between'>
                     <div className='flex'>
                       <img
-                        className='h-6 mr-2 mt-1'
-                        src={extraServiceIcon}
+                        className='min-w-[24px] w-6 h-6 mr-2 mt-1'
+                        src={el?.icon}
                         alt='*'
                       />
                       <div>

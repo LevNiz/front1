@@ -7,6 +7,7 @@ import GBChatMessages from './GBChatMessages';
 import { fetchGBChats } from '../../api/gbchat';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 import chatImg from '../../assets/images/chat.png';
+import emptyChat from '../../assets/images/empty-chat.svg';
 
 const GBChatItem = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -31,7 +32,7 @@ const GBChatItem = () => {
   }, [userID]);
 
   return (
-    <div className={`flex ${chats?.length ? '' : 'justify-center'} w-full`}>
+    <div className='justify-center flex w-full'>
       {isLoading ? (
         <ContentLoading extraStyle='480px' />
       ) : chats?.length ? (
@@ -83,6 +84,7 @@ const GBChatItem = () => {
         <ErrorEmpty
           title='Чат пока пуст.'
           desc='Здесь будут сообщения с клиентами и байерами.'
+          image={emptyChat}
         />
       )}
     </div>

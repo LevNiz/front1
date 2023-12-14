@@ -115,7 +115,11 @@ const Parcel = () => {
                 </span>
                 <div className='flex justify-between items-center mt-1'>
                   <div className='flex items-center ss:max-w-[auto] max-w-[80%] w-full'>
-                    <img className='lg:block hidden' src={nounBox} alt='*' />
+                    <img
+                      className='lg:block hidden w-12'
+                      src={nounBox}
+                      alt='*'
+                    />
                     <h4 className='text-base sm:text-2xl font-medium lg:ml-4 whitespace-nowrap text-ellipsis overflow-hidden'>
                       {el?.orderNumber ? `№ ${el?.orderNumber}` : 'Не указано'}
                     </h4>

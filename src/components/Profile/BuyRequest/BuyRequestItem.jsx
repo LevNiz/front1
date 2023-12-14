@@ -42,7 +42,7 @@ const BuyRequestItem = ({ data = {} }) => {
             <div className='flex space-x-1'>
               <img
                 onClick={() => navigate(`update/${data?.id}`)}
-                className='cursor-pointer min-w-[28px]'
+                className='cursor-pointer w-6 min-w-[24px]'
                 src={edit}
                 alt='*'
               />
@@ -52,7 +52,7 @@ const BuyRequestItem = ({ data = {} }) => {
                   setModalContent('deleteBuyRequest');
                   setBuyRequestID(data?.id);
                 }}
-                className='cursor-pointer min-w-[30px]'
+                className='cursor-pointer w-[26px] min-w-[26px]'
                 src={trash}
                 alt='*'
               />
