@@ -54,7 +54,7 @@ const Services = () => {
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service6} alt='*' />
             <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
-              Предоставим GB франшизу и вы сразу сможете заработать сразу
+              Предоставим GB франшизу и вы сразу сможете заработать
             </p>
           </div>
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
