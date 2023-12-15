@@ -262,7 +262,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
             <input
               className='hidden'
               name='image'
-              accept='image/*'
+              accept='image/jpeg, image/png, image/webp'
               onChange={(e) => handleSendImage(e)}
               type='file'
               id='file'

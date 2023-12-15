@@ -30,8 +30,9 @@ const UpdateBuyRequest = () => {
           link: data?.link,
           comment: data?.comment,
         };
+      } else {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     },
   });
 
@@ -41,8 +42,9 @@ const UpdateBuyRequest = () => {
     if (success) {
       setIsLoading(false);
       navigate(-1);
+    } else {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

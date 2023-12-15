@@ -16,6 +16,8 @@ import { db } from '../firebase/firebase';
 import { axiosInstance } from './axios';
 
 export const fetchGBChats = (userID, callBack) => {
+  let changedChats;
+
   const q = query(
     collection(db, 'chat'),
     where('users', 'array-contains', `${userID}`),
@@ -39,7 +41,7 @@ export const fetchGBChats = (userID, callBack) => {
         messagesQuery,
         (messagesSnapshot) => {
           const unreadMessagesCount = messagesSnapshot.docs.length;
-          const updatedChats = changedChats.map((changedChat) => {
+          changedChats = changedChats?.map((changedChat) => {
             if (changedChat.chatId === chatId) {
               return {
                 ...changedChat,
@@ -49,7 +51,7 @@ export const fetchGBChats = (userID, callBack) => {
             return changedChat;
           });
 
-          callBack(updatedChats);
+          callBack(changedChats);
         }
       );
 
@@ -61,7 +63,7 @@ export const fetchGBChats = (userID, callBack) => {
       };
     });
 
-    const changedChats = await Promise.all(changedChatsPromises);
+    changedChats = await Promise.all(changedChatsPromises);
 
     callBack(changedChats);
   });
@@ -179,7 +181,6 @@ export const createGBChat = async (
 
   const userDocSnapshot = await getDoc(userDocRefMyChatDoc);
   const userDocSnapshotCheck = await getDoc(userDocRefClientChatDoc);
-
   if (!userDocSnapshot.exists() && !userDocSnapshotCheck.exists()) {
     const chatDocData = {
       buyerChat: receiverData?.user_type === 'buyer' ? true : false,

@@ -52,14 +52,18 @@ const BGBuyerDetail = () => {
       const chatID = `${userID}${buyerItem?.id}`;
       const chatIDCheck = `${buyerItem?.id}${userID}`;
 
-      const { success } = await createGBChat(
+      const { success, data } = await createGBChat(
         chatID,
         buyerItem,
         senderData,
         chatIDCheck
       );
       if (success) {
-        navigate(`/gb-chat/t/${chatID}`);
+        navigate(
+          `/gb-chat/t/${
+            data?.lastMessageSender === `${userID}` ? chatID : chatIDCheck
+          }`
+        );
         setIsButtonLoading(false);
       }
       setIsButtonLoading(false);

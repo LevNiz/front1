@@ -49,7 +49,7 @@ export const postBuyRequest = async (data, userID) => {
 
 // Delete Address:
 export const deleteBuyRequest = async (dispatch, id) => {
-  dispatch(fetchBuyRequestStart())
+  dispatch(fetchBuyRequestStart());
   try {
     await axiosInstance.delete(`core/buyer_request/${id}`);
     return { success: true };
