@@ -20,11 +20,11 @@ const BuyRequest = () => {
     (async () => {
       await FetchBuyRequests(dispatch, userID);
     })();
-  }, []);
+  }, [dispatch, userID]);
 
   return (
     <div className='w-full pt-5 md:p-4'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center pb-5'>
         <h3 className='ss:text-xl sm:font-medium'>Заявки на покупку</h3>
         <button
           onClick={() => navigate('new')}
@@ -38,7 +38,7 @@ const BuyRequest = () => {
       ) : error ? (
         <ErrorServer />
       ) : buyRequests?.length ? (
-        <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3'>
+        <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5 xl:pr-20'>
           {buyRequests?.map((buyRequest) => (
             <BuyRequestItem key={buyRequest?.id} data={buyRequest} />
           ))}

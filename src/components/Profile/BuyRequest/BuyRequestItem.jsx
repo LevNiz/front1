@@ -33,7 +33,7 @@ const BuyRequestItem = ({ data = {} }) => {
 
   return (
     <>
-      <div className='bg-colBgGray2 p-2 sm:p-4 rounded-md'>
+      <div className='shadow-[0_4px_16px_#e9e9e9] p-2 sm:p-5 rounded-xl'>
         <div className='w-full mb-3'>
           <div className='flex justify-between items-center'>
             <h4 className='font-medium break-all line-clamp-1 pr-2'>
@@ -59,7 +59,7 @@ const BuyRequestItem = ({ data = {} }) => {
             </div>
           </div>
           <div className='flex items-center'>
-            <span className='text-sm my-1 pr-1 opacity-50'>Ссылка:</span>
+            <span className='text-sm my-1 pr-1'>Ссылка:</span>
             <NavLink
               to={data?.link || '#'}
               target='_blank'
@@ -69,8 +69,8 @@ const BuyRequestItem = ({ data = {} }) => {
             </NavLink>
           </div>
           <div className='flex'>
-            <span className='text-sm mb-1 pr-1 opacity-50'>Комментарий:</span>
-            <p className='text-sm break-all line-clamp-2 italic'>
+            <span className='text-sm mb-1 pr-1'>Комментарий:</span>
+            <p className='text-sm break-all line-clamp-1 italic'>
               {data?.comment || 'Не указана'}
             </p>
           </div>

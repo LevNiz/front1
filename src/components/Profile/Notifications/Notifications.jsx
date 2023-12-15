@@ -1,8 +1,9 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { notifications } from '../../../constants/notificationsData';
-import noNotifications from '../../../assets/images/no-notification.png';
+import noNotification from '../../../assets/images/no-notification.svg';
 import { useState } from 'react';
 import Modal from '../../../helpers/Modals/Modal';
+import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 
 const Notifications = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -14,7 +15,7 @@ const Notifications = () => {
 
   return (
     <>
-      {notifications?.length ? (
+      {!notifications?.length ? (
         <div className='content pl-0 md:pl-4 pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
           <div className='pt-5'>
             <div className='flex justify-between items-center pb-5'>
@@ -68,24 +69,12 @@ const Notifications = () => {
           </div>
         </div>
       ) : (
-        <div className='flex justify-center items-center w-full min-h-[400px]'>
-          <div>
-            <img
-              className='mx-auto sm:w-auto w-[120px]'
-              src={noNotifications}
-              alt='*'
-            />
-            <h4 className='text-xl sm:text-2xl font-medium py-6 sm:py-12'>
-              У вас еще нет уведомлений
-            </h4>
-            <NavLink
-              to='/'
-              className='max-w-[255px] mx-auto w-full flex justify-center items-center bg-black h-[48px] font-medium text-white rounded-[10px] hover:opacity-80 duration-150'
-              type='submit'
-            >
-              Перейти на главную
-            </NavLink>
-          </div>
+        <div className='flex justify-center w-full'>
+          <ErrorEmpty
+            title='У вас еще нет уведомлений.'
+            desc='Здесь будут уведомления.'
+            image={noNotification}
+          />
         </div>
       )}
       <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />

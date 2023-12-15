@@ -7,7 +7,7 @@ const ItemSearchRequestCard = ({ el }) => {
     <>
       <NavLink
         to={`${el?.id}`}
-        className='bg-colBgGray2 p-3 sm:p-4 rounded-md cursor-pointer'
+        className='shadow-[0_4px_16px_#e9e9e9] p-3 sm:p-4 rounded-md cursor-pointer'
       >
         <div className='w-full'>
           {' '}
@@ -38,7 +38,7 @@ const ItemSearchRequestCard = ({ el }) => {
           </div>
           <p className='text-sm font-medium'>Товары</p>
           <div className='flex mt-2'>
-            <div className='min-w-[80px] w-20 ss:min-w-[96px] ss:w-24 h-16 ss:h-20 overflow-hidden rounded-md bg-white'>
+            <div className='min-w-[80px] w-20 ss:min-w-[96px] ss:w-24 h-16 ss:h-20 overflow-hidden rounded-md bg-gray-100'>
               <img
                 className='w-full h-full object-contain'
                 src={el?.wantedItems[0]?.photo}
