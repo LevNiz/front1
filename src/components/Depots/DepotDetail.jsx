@@ -418,7 +418,7 @@ const DepotDetail = () => {
               </div>
               <div className='pt-8'>
                 <p className='text-colYellow font-medium'>
-                  Исходящте - 10 дней бесплатно
+                  Исходящие - 10 дней бесплатно
                 </p>
                 <p className='text-sm font-medium py-4'>
                   Далее 130 р. в день, максимальный срок хранения - 30 дней.
