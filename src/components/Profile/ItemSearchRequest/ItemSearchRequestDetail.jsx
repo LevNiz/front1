@@ -70,7 +70,7 @@ const ItemSearchRequestDetail = () => {
       ) : (
         <>
           <div className='flex items-center py-5'>
-            <div className='min-w-[64px] w-16 h-16 rounded-full overflow-hidden border-2 border-colYellow'>
+            <div className='min-w-[64px] w-16 h-16 rounded-full overflow-hidden bg-gray-100'>
               <img
                 className='w-full h-full object-cover p-[2px] rounded-full'
                 src={itemData?.client?.avatar}
@@ -90,27 +90,30 @@ const ItemSearchRequestDetail = () => {
               </span>
             </div>
           </div>
-          <h4 className='text-lg font-medium mb-5'>Товары</h4>
-          <div className='grid mm:grid-cols-2 gap-8 mm:gap-5'>
-            {itemData?.wantedItems?.map((el) => (
-              <div
-                className='shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)]'
-                key={el?.id}
-              >
-                <div className='h-[220px] ss:h-[260px] md:h-[240px] lg:h-[300px] overflow-hidden rounded-tr-md rounded-tl-md bg-gray-100 flex justify-center items-center'>
-                  <img
-                    className='mx-auto w-full h-full object-contain'
-                    src={el?.photo}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = noImg;
-                    }}
-                    alt='*'
-                  />
+          <div className='mm:shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] mm:p-5 rounded-lg'>
+            <h4 className='font-medium mb-5'>Товары</h4>
+            <div className='grid mm:grid-cols-2 gap-8 mm:gap-5'>
+              {itemData?.wantedItems?.map((el) => (
+                <div className='grid mm:grid-cols-2 gap-3' key={el?.id}>
+                  <div className='h-52 mm:h-32 md:h-28 lg:h-36 xl:h-40 overflow-hidden rounded-md bg-gray-100 flex justify-center items-center'>
+                    <img
+                      className='mx-auto w-full h-full object-contain'
+                      src={el?.photo}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = noImg;
+                      }}
+                      alt='*'
+                    />
+                  </div>
+                  <div>
+                    <p className='line-clamp-6 break-all'>
+                      {el?.description || 'Не указана'}
+                    </p>
+                  </div>
                 </div>
-                <p className='p-3 italic'>{el?.description || 'Не указана'}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </>
       )}

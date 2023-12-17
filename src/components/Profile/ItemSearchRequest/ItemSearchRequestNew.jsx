@@ -165,22 +165,28 @@ const ItemSearchRequestNew = () => {
               </div>
             </div>
           ))}
-          {!blocks[0]?.photo || !blocks[0]?.description ? (
+          {!(blocks[0]?.photo && blocks[0]?.description) && (
             <p className='text-red-500 mt-1 text-sm'>
               Поле обязательно к заполнению!
             </p>
-          ) : (
-            ''
           )}
-          <div
-            onClick={handleAddBlock}
-            className='bg-green-500 text-white font-medium rounded-md px-5 py-[2px] mt-3 flex ml-auto text-xl hover:opacity-80 duration-150 w-max cursor-pointer'
-          >
-            +
-          </div>
+          {blocks[0]?.photo && blocks[0]?.description && (
+            <div
+              onClick={handleAddBlock}
+              className='bg-green-500 text-white font-medium rounded-md px-5 py-[2px] mt-3 flex ml-auto text-xl hover:opacity-80 duration-150 w-max cursor-pointer'
+            >
+              +
+            </div>
+          )}
+
           <button
             type='submit'
-            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-xs ml-auto w-full flex justify-center'
+            disabled={!blocks[0]?.photo || !blocks[0]?.description}
+            className={`${
+              !blocks[0]?.photo || !blocks[0]?.description
+                ? 'opacity-50 cursor-not-allowed'
+                : 'hover:opacity-80'
+            } mt-8 font-medium p-3 rounded-lg bg-black text-white duration-150 max-w-xs ml-auto w-full flex justify-center`}
           >
             Cохранить
           </button>

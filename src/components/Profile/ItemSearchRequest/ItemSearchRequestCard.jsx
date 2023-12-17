@@ -37,26 +37,23 @@ const ItemSearchRequestCard = ({ el }) => {
             </span>
           </div>
           <p className='text-sm font-medium'>Товары</p>
-          <div className='flex mt-2'>
-            <div className='min-w-[80px] w-20 ss:min-w-[96px] ss:w-24 h-16 ss:h-20 overflow-hidden rounded-md bg-gray-100'>
-              <img
-                className='w-full h-full object-contain'
-                src={el?.wantedItems[0]?.photo}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = noImg;
-                }}
-                alt='*'
-              />
-            </div>
-            <div className='ml-3'>
-              <span className='text-xs font-medium opacity-70'>
-                Доп. информация:
-              </span>
-              <p className='line-clamp-2 break-all text-sm'>
-                {el?.wantedItems[0]?.description}
-              </p>
-            </div>
+          <div className='grid grid-cols-4 gap-4 mt-2'>
+            {el?.wantedItems?.slice(0, 4)?.map((elem) => (
+              <div
+                key={elem?.id}
+                className='min-w-[80px] w-20 ss:min-w-[96px] ss:w-24 h-16 ss:h-20 overflow-hidden rounded-md bg-gray-100'
+              >
+                <img
+                  className='w-full h-full object-cover'
+                  src={elem?.photo}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = noImg;
+                  }}
+                  alt='*'
+                />
+              </div>
+            ))}
           </div>
         </div>
       </NavLink>
