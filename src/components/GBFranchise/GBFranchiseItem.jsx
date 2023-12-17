@@ -3,7 +3,7 @@ import vectorFranchise from '../../assets/icons/franchiseVector.svg';
 
 const GBFranchiseItem = () => {
   return (
-    <div className='content pt-5'>
+    <div className='pt-5'>
       <h3 className='text-xl mm:text-2xl py-5 text-center italic'>
         Сервис GB-Franchise - это уникальная возможность зарабатывать и
         развиваться с международной компанией GivBox
