@@ -15,12 +15,16 @@ import arrow from './../../assets/icons/down.svg';
 import arrowWhite from './../../assets/icons/arrow-white.svg';
 import noImg from './../../assets/images/no-image.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
+import attention from './../../assets/icons/attention3.svg';
+import infoIcon1 from './../../assets/icons/depot-info1.svg';
+import infoIcon2 from './../../assets/icons/depot-info2.svg';
+import box from './../../assets/icons/noun-box.svg';
 
 const DepotDetail = () => {
-  const [depotItem, setDepotItem] = useState();
+  const [depotItem, setDepotItem] = useState({});
   const [loading, setLoading] = useState(true);
-  const [images, setImages] = useState();
-  const [mainImg, setMainImg] = useState();
+  const [images, setImages] = useState([]);
+  const [mainImg, setMainImg] = useState(null);
   const [openTariff, setOpenTariff] = useState(false);
   const [openExtraTariff, setOpenExtraTariff] = useState(false);
 
@@ -70,7 +74,7 @@ const DepotDetail = () => {
         <ContentLoading extraStyle='85vh' />
       ) : (
         <>
-          <h1 className='text-2xl sm:text-4xl font-semibold text-center sm:mt-4 mb-6 sm:mb-14'>
+          <h1 className='text-2xl sm:text-4xl font-medium text-center sm:mt-4 mb-6 sm:mb-14'>
             {depotItem?.nameRu}
           </h1>
           <div className='md:flex pb-12 min-h-[576px]'>
@@ -341,6 +345,172 @@ const DepotDetail = () => {
                     </span>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+          <div className='flex items-center pt-16 px-3'>
+            <img src={attention} alt='*' />
+            <span className='ml-2 text-xl'>Внимание</span>
+          </div>
+          <div className='lg:flex lg:space-x-5 pt-5'>
+            <div className='lg:w-3/5 rounded-2xl bg-[#FBFBFB] p-5'>
+              <div className='flex items-center pb-3'>
+                <img src={infoIcon1} alt='*' />
+                <span className='font-medium text-xl pl-2 pt-1'>
+                  Негабаритный груз
+                </span>
+              </div>
+              <p>
+                <strong>Негабаритный груз</strong> - это посылки, где длина
+                одной из сторон превышает 150 см. Такие посылки авиакомпания
+                принимает, как правило, с дополнительной доплатой на всем пути
+                следования груза.
+                <br />
+                <br />
+                Если одна из сторое вашей посылки после упаковки будет более 150
+                см., расчет стоимости доставки будет производиться{' '}
+                <strong>с доплатой 60% от вашего тарифа</strong>.
+              </p>
+              <div className='flex items-center pt-8 pb-3'>
+                <img src={infoIcon2} alt='*' />
+                <span className='font-medium text-xl pl-2 pt-1'>
+                  Хранение посылок
+                </span>
+              </div>
+              <div className='border-b-2 border-gray-300 pb-5'>
+                <p className='text-colYellow font-medium'>
+                  Входящие - 45 дней бесплатно
+                </p>
+                <p className='text-sm font-medium py-4'>
+                  Далее 130 р. в день, максимальный срок хранения - 75 дней.
+                </p>
+                <div className='relative w-full h-7'>
+                  <span className='absolute top-0 font-medium left-0'>
+                    0 дн.
+                  </span>
+                  <span className='absolute top-0 font-medium left-[65%]'>
+                    45 дн.
+                  </span>
+                  <span className='absolute top-0 font-medium right-0'>
+                    75 дн.
+                  </span>
+                </div>
+                <div className='relative h-1 w-full bg-colYellow mt-5'>
+                  <span className='absolute w-2/6 h-1 bg-black top-0 right-0'></span>
+                  <span className='absolute -top-2 left-0 h-5 w-5 bg-colYellow rounded-full'></span>
+                  <span className='absolute -top-2 left-[65%] h-5 w-5 bg-black rounded-full'></span>
+                  <span className='absolute -top-2 right-0 h-5 w-5 bg-black rounded-full'></span>
+                </div>
+                <div className='relative w-full h-7 mt-6'>
+                  <span className='absolute top-0 font-medium left-[30%]'>
+                    0 дн.
+                  </span>
+                  <span className='absolute top-0 font-medium right-5'>
+                    130 дн.
+                  </span>
+                </div>
+                <p className='py-3'>
+                  Хранение входящих посылок на складе 45 дней бесплатно, на
+                  следующий день и далее 130 р в день за одну посылку.
+                  Максимальный срок хранения груза - 75 дней. Далее посылка
+                  утилизируется.
+                </p>
+              </div>
+              <div className='pt-8'>
+                <p className='text-colYellow font-medium'>
+                  Исходящте - 10 дней бесплатно
+                </p>
+                <p className='text-sm font-medium py-4'>
+                  Далее 130 р. в день, максимальный срок хранения - 30 дней.
+                </p>
+                <div className='relative w-full h-7'>
+                  <span className='absolute top-0 font-medium left-0'>
+                    0 дн.
+                  </span>
+                  <span className='absolute top-0 font-medium left-[65%]'>
+                    10 дн.
+                  </span>
+                  <span className='absolute top-0 font-medium right-0'>
+                    30 дн.
+                  </span>
+                </div>
+                <div className='relative h-1 w-full bg-colYellow mt-5'>
+                  <span className='absolute w-2/6 h-1 bg-black top-0 right-0'></span>
+                  <span className='absolute -top-2 left-0 h-5 w-5 bg-colYellow rounded-full'></span>
+                  <span className='absolute -top-2 left-[65%] h-5 w-5 bg-black rounded-full'></span>
+                  <span className='absolute -top-2 right-0 h-5 w-5 bg-black rounded-full'></span>
+                </div>
+                <div className='relative w-full h-7 mt-6'>
+                  <span className='absolute top-0 font-medium left-[30%]'>
+                    0 дн.
+                  </span>
+                  <span className='absolute top-0 font-medium right-5'>
+                    130 дн.
+                  </span>
+                </div>
+                <p className='py-3'>
+                  Срок исходящей посылки по статусом “ожидает оплаты”: 10 дней
+                  бесплатно, на следующий день и далее 130 р. в день за одну
+                  посылку. Максимальный срок хранения груза - 30 дней. Далее
+                  посылка утилизируется.
+                </p>
+              </div>
+            </div>
+            <div className='lg:w-2/5 h-max rounded-2xl bg-[#FBFBFB] p-5'>
+              <div className='flex items-center pb-3'>
+                <img className='w-7' src={box} alt='*' />
+                <span className='font-medium text-xl pl-2'>Объемный вес</span>
+              </div>
+              <p className='py-4'>
+                Мы знаем как важны правила расчета объемного веса, поэтому
+                постараемся максимально подробно рассказать в каких случаях мы
+                его считаем
+              </p>
+              <ul className='pl-2 space-y-2'>
+                <li className='font-medium flex text-sm'>
+                  <span className='mr-1'>1.</span>
+                  <span>
+                    Физический вес превышает объемный вес = расчет по
+                    физическому весу.
+                  </span>
+                </li>
+                <li className='font-medium flex text-sm'>
+                  <span className='mr-1'>2.</span>
+                  <span>
+                    Объемный вес превышает физический не более, чем на 170% =
+                    расчет по физическому весу.
+                  </span>
+                </li>
+                <li className='font-medium flex text-sm'>
+                  <span className='mr-1'>3.</span>
+                  <span>
+                    Объемный вес превышает физический более, чем на 170% =
+                    расчет по объемному весу.
+                  </span>
+                </li>
+              </ul>
+              <p className='font-medium py-5'>
+                Объемный вес будет считаться со скидкой 50% от вашего тарифа.
+              </p>
+              <div className='p-5 bg-[#F6F6F6] rounded-lg'>
+                <p className='font-medium pb-3'>Примеры</p>
+                <ul className='space-y-3'>
+                  <li>
+                    Физический вес посылки <strong>3кг.</strong>, объемный вес
+                    <strong>4кг.</strong>, = расчет стоимости как за 3 кг
+                  </li>
+                  <li>
+                    Физический вес посылки <strong>3кг.</strong>, объемный вес
+                    <strong>1кг.</strong> = расчет стоимости как за{' '}
+                    <strong>3кг.</strong>
+                  </li>
+                  <li>
+                    Физический вес посылки <strong>3кг.</strong>, объемный вес
+                    <strong>10кг.</strong> = расчет стоимости{' '}
+                    <strong>3кг</strong> по физическому весу, объемный вес{' '}
+                    <strong>10кг - 3 кг = 7кг.*50%</strong> от вашего тарифа.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
