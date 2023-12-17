@@ -151,7 +151,7 @@ const AlaketDetail = () => {
               onClick={handleCreateGBChat}
               className={`${
                 alaket?.client?.id === userID ? 'hidden' : ''
-              } uppercase font-bold hover:opacity-80 px-4 h-14 rounded-lg bg-colYellow duration-150 sm:max-w-xs w-full mt-8`}
+              } uppercase font-bold hover:opacity-80 px-4 h-14 rounded-lg bg-black text-white duration-150 sm:max-w-xs w-full mt-8`}
             >
               {isButtonLoading ? <ButtonLoading /> : 'Написать сообщение'}
             </button>

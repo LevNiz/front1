@@ -72,8 +72,8 @@ const AlaketNew = () => {
               htmlFor='alaketem'
               className={`${
                 alaketType === 'alaketem'
-                  ? 'border-gray-300 bg-colYellow'
-                  : 'border-gray-300'
+                  ? 'border-colYellow bg-colYellow'
+                  : 'border-colYellow'
               } border w-full rounded-tl-md rounded-bl-md mm:max-w-[180px] py-2 text-center border-r-0 cursor-pointer`}
             >
               <input
@@ -89,8 +89,8 @@ const AlaketNew = () => {
               htmlFor='berem'
               className={`${
                 alaketType === 'berem'
-                  ? 'border-gray-300 bg-colYellow'
-                  : 'border-gray-300'
+                  ? 'border-colYellow bg-colYellow'
+                  : 'border-colYellow'
               } border mm:max-w-[180px] w-full rounded-tr-md rounded-br-md py-2 text-center cursor-pointer`}
             >
               <input
