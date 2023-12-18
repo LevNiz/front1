@@ -44,7 +44,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className='flex w-full mm:h-screen'>
+    <div className='flex w-full mm:h-screen pt-10 mm:pt-0'>
       <div className='hidden mm:w-2/5 lg:w-2/6 bg-black mm:flex justify-center items-center'>
         <div onClick={() => (userID ? navigate(-1) : navigate('/'))}>
           <img

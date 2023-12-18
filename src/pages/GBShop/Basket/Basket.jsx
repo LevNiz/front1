@@ -1,19 +1,25 @@
+import { useSelector } from 'react-redux';
 import { BasketInfo } from '../../../components';
+import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 
 const Basket = () => {
-  return (
+  const { user } = useSelector((state) => state?.user);
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
+  return user ? (
     <div className='py-24 min-h-[991px] content'>
       <h3 className='font-bold font-ubuntu px-5 py-3 text-[#030303] text-3xl bg-[#FBFBFB]'>
         Корзина
       </h3>
-      <div className='flex justify-between items-center pt-10'>
-        <span className='font-medium text-lg w-[28%]'>Товар</span>
-        <span className='font-medium text-lg w-[22%]'>Цена</span>
-        <span className='font-medium text-lg w-[28%]'>Количество</span>
-        <span className='font-medium text-lg w-[15%]'>Итого</span>
-      </div>
       <BasketInfo />
     </div>
+  ) : (
+    <Navigate to='/auth/sign-in' />
   );
 };
 

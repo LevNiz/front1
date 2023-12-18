@@ -15,6 +15,6 @@ export const fetchBasketData = async (userID) => {
       return [];
     }
   } catch (error) {
-    console.error(error);
+    return 'error';
   }
 };
