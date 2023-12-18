@@ -26,7 +26,9 @@ const CategorySlider = ({ items, loading, error }) => {
             modules={[Navigation]}
             slidesPerView={5}
             navigation={items?.length > 5 ? true : false}
-            className={`${items?.length > 5 ? 'min-h-[400px]' : '360px'} p-4`}
+            className={`${
+              items?.length > 5 ? 'min-h-[400px]' : '360px'
+            } px-4 pb-7 pt-4`}
             spaceBetween={20}
           >
             {items?.map((el) => (

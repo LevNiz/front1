@@ -32,8 +32,8 @@ const MainPage = () => {
       <MainBlock />
       <MainCategories />
       <Brands />
-      {homeItems?.map((el) => (
-        <div key={el?.id}>
+      {homeItems?.map((el, index) => (
+        <div key={index}>
           <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 mt-12'>
             <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
               {el?.category?.nameRus}
