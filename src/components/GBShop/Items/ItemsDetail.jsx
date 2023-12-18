@@ -90,7 +90,7 @@ const ItemsDetail = () => {
                 <div className='border rounded-tl-sm rounded-bl-sm border-gray-200 w-14 h-10 flex justify-center items-center font-medium cursor-pointer'>
                   -
                 </div>
-                <div className='border border-y-gray-200 border-x-0 min-w-[60px] px-1 flex justify-center items-center'>
+                <div className='border border-y-gray-200 font-medium border-x-0 min-w-[60px] px-1 flex justify-center items-center'>
                   1
                 </div>
                 <div className='border rounded-tr-sm rounded-br-sm border-gray-200 w-14 h-10 flex justify-center items-center font-medium cursor-pointer'>

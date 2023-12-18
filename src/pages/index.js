@@ -15,6 +15,7 @@ import RefundPolicy from './RefundPolicy/RefundPolicy';
 import MainPage from './GBShop/MainPage/MainPage';
 import Categories from './GBShop/Categories/Categories';
 import Items from './GBShop/Items/Items';
+import Basket from './GBShop/Basket/Basket';
 
 export {
   Tracking,
@@ -34,4 +35,5 @@ export {
   MainPage,
   Categories,
   Items,
+  Basket,
 };

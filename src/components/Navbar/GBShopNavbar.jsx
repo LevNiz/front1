@@ -78,7 +78,7 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
                   ></span>
                 </li>
                 <li className='hidden sm:block'>
-                  <NavLink to='#'>
+                  <NavLink to='/gb-shop/basket'>
                     <img className='w-[27px] md:w-6' src={basket} alt='*' />
                   </NavLink>
                 </li>

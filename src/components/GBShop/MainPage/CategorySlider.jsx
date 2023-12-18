@@ -12,7 +12,6 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 
 const CategorySlider = ({ items, loading, error }) => {
-  
   return (
     <>
       {loading ? (
@@ -34,7 +33,7 @@ const CategorySlider = ({ items, loading, error }) => {
               <SwiperSlide modules={[Navigation]} key={el?.id}>
                 <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
                   <NavLink
-                    to={`items/${el?.id}`}
+                    to={`/gb-shop/items/${el?.id}`}
                     state={{
                       from: el?.category?.nameRus,
                       category: el?.category?.id,
