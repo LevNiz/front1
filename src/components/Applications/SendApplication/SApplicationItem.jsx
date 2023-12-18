@@ -190,8 +190,8 @@ const SApplicationItem = () => {
             </div>
             <SApplicationComment register={register} errors={errors} />
             <div className='md:flex justify-between items-center mt-12'>
-              <div className='flex justify-end md:justify-start sm:max-w-[287px] w-full md:ml-0 ml-auto items-center bg-[#c9fbc0] p-5'>
-                <span className='text-xl font-medium'>Общая стоимость:</span>
+              <div className='flex justify-end md:justify-start sm:max-w-[320px] w-full md:ml-0 ml-auto items-center bg-colYellow p-5'>
+                <span className='text-lg'>Общая стоимость:</span>
                 <span className='text-xl font-medium mx-1 '>
                   {tariff === 2
                     ? (parseFloat(parcelCost) + 4).toFixed(2)
