@@ -75,7 +75,7 @@ const GBShopFooter = () => {
               <NavLink
                 to='https://www.instagram.com/givboxworld/'
                 target='_blank'
-                className='flex justify-center items-center w-full h-full'
+                className='flex justify-center items-center w-[18px] h-full'
               >
                 <img src={instagram} alt='*' />
               </NavLink>
