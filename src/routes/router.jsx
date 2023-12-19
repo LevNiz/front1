@@ -58,6 +58,7 @@ import {
   Items,
   Categories,
   Basket,
+  Order,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -104,9 +105,8 @@ export const router = createBrowserRouter(
             <Route index element={<Items />} />
             <Route path=':id' element={<ItemsDetail />} />
           </Route>
-          <Route path='basket'>
-            <Route index element={<Basket />} />
-          </Route>
+          <Route path='basket' element={<Basket />} />
+          <Route path='order' element={<Order />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>

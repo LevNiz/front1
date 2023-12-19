@@ -16,6 +16,7 @@ import MainPage from './GBShop/MainPage/MainPage';
 import Categories from './GBShop/Categories/Categories';
 import Items from './GBShop/Items/Items';
 import Basket from './GBShop/Basket/Basket';
+import Order from './GBShop/Order/Order';
 
 export {
   Tracking,
@@ -36,4 +37,5 @@ export {
   Categories,
   Items,
   Basket,
+  Order,
 };

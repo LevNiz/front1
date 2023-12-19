@@ -5,11 +5,13 @@ import GBShopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { fetchBasketData } from '../../../api/gb-shop/basket';
 import { useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 const BasketInfo = () => {
   const [basket, setBasket] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
   const { userID } = useSelector((state) => state?.user);
   const { register, watch } = useForm();
   const checkboxInput = watch('checkboxInput');
@@ -95,9 +97,8 @@ const BasketInfo = () => {
               <button
                 type='submit'
                 disabled={!checkboxInput}
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert('В процессе разработки!');
+                onClick={() => {
+                  navigate('/gb-shop/order', { state: basket });
                 }}
                 className={`${
                   checkboxInput

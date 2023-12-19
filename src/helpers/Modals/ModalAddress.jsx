@@ -64,7 +64,7 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
         onClick={onClose}
         className='absolute inset-0 bg-gray-800 opacity-50'
       ></div>
-      <div className='bg-white p-4 md:p-8 md:rounded-md h-screen md:h-[90vh] shadow-md z-10 md:max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
+      <div className='bg-white p-4 md:p-8 md:rounded-md h-screen md:h-[86vh] shadow-md z-10 md:max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
         {addressForm ? (
           <>
             <div className='flex justify-between items-center pt-5 md:pt-0 mb-10'>
