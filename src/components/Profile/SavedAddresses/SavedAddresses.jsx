@@ -40,7 +40,7 @@ const SavedAddresses = () => {
       await fetchAddresses(userID, dispatch);
       await fetchDepots(dispatch);
     })();
-  }, []);
+  }, [dispatch, userID]);
 
   return (
     <div className='w-screen md:p-4 pt-6'>
@@ -48,9 +48,7 @@ const SavedAddresses = () => {
         <h1 className='text-xl mr-2 sm:mr-0'>Сохраненные адреса</h1>
         <button
           onClick={() => navigate('new')}
-          className={`${
-            addresses?.length ? 'block' : 'hidden'
-          } bg-black text-white py-2 ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm`}
+          className='bg-black text-white py-2 ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'
         >
           Добавить новый
         </button>

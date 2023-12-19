@@ -29,7 +29,7 @@ const CalcDeliveryItem = () => {
     (async () => {
       await fetchCosts(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   const onSubmitCalc = (data) => {
     const cityParcelCost = costs?.find(

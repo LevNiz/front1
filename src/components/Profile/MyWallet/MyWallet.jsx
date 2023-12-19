@@ -15,7 +15,7 @@ const MyWallet = () => {
     (async () => {
       await fetchWalletHistory(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='pt-6 md:p-4 w-full'>

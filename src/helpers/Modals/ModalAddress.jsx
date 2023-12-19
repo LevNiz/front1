@@ -59,15 +59,15 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
   if (!isOpen) return null;
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-[999999]'>
+    <div className='fixed inset-0 flex items-center justify-center z-[9999999]'>
       <div
         onClick={onClose}
         className='absolute inset-0 bg-gray-800 opacity-50'
       ></div>
-      <div className='bg-white p-4 md:p-8 md:rounded-md h-screen md:h-[86vh] shadow-md z-10 md:max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
+      <div className='bg-white p-4 md:p-8 md:rounded-md h-full md:h-[86vh] shadow-md z-10 md:max-w-[90%] w-full text-center relative overflow-hidden overflow-y-scroll'>
         {addressForm ? (
           <>
-            <div className='flex justify-between items-center pt-5 md:pt-0 mb-10'>
+            <div className='flex justify-between items-center pt-0 mb-10'>
               <h3 className='hidden md:block text-2xl font-medium'>
                 Выберите адрес
               </h3>
@@ -79,7 +79,7 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
               </button>
               <div
                 onClick={onClose}
-                className='md:hidden text-4xl cursor-pointer absolute top-9 md:top-4 right-7'
+                className='md:hidden text-4xl cursor-pointer absolute top-4 right-7'
               >
                 &times;
               </div>
@@ -169,7 +169,7 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
         ) : (
           <>
             <img
-              className='w-6 cursor-pointer sm:absolute top-5 mt-5 md:mt-0 sm:top-6 left-auto sm:left-8'
+              className='w-6 cursor-pointer sm:absolute top-5 mt-2 md:mt-0 sm:top-6 left-auto sm:left-8'
               src={back}
               alt='*'
               onClick={() => setAddressForm(true)}
@@ -283,7 +283,7 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
                                   value: country?.id,
                                   label: (
                                     <div
-                                      key={country?.country}
+                                      key={country?.id}
                                       className='flex items-center'
                                     >
                                       <img

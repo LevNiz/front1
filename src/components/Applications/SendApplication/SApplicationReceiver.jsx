@@ -75,7 +75,7 @@ const SApplicationReceiver = ({ onReceiver }) => {
               setModalOpen(true);
               handleAddresses();
             }}
-            className='bg-black max-w-xs w-full p-3 text-white rounded-md hover:opacity-70 duration-150'
+            className='bg-black sm:max-w-xs w-full p-3 h-[50px] text-white rounded-md hover:opacity-70 duration-150'
           >
             {choseAddress?.length ? 'Выбрать другой адрес' : '+ Выбрать адрес'}
           </button>

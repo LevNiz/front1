@@ -74,19 +74,27 @@ axiosInstance.interceptors.response.use(
         const refreshResponse = await axiosInstance.post('api/token/refresh/', {
           refresh: refreshToken,
         });
+
         const newAccessToken = refreshResponse.data.access;
+
+        // Обновление токена в localStorage
         localStorage.setItem('accessToken', newAccessToken);
 
+        // Повторение запросов, которые были ожидающими обновление токена
         subscribers.forEach((callback) => callback(newAccessToken));
         subscribers = [];
+
+        // Повторный запрос с обновленным токеном
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         const dispatch = useDispatch();
 
+        // Если обновление токена не удалось, очистите localStorage и перенаправьте пользователя на страницу логина
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         await logOutFetch(dispatch);
         window.location.href = '/auth/sign-in';
+        return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
       }

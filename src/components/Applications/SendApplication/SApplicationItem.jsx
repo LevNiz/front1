@@ -46,9 +46,9 @@ const SApplicationItem = () => {
 
   useEffect(() => {
     (async () => {
-       await fetchCosts(dispatch);
+      await fetchCosts(dispatch);
     })();
-  }, []);
+  }, [dispatch]);
 
   const closeModal = () => {
     setModalOpen(false);

@@ -18,7 +18,7 @@ const ArchiveApplications = () => {
     (async () => {
       await fetchArchiveApplications(userID, dispatch);
     })();
-  }, []);
+  }, [userID, dispatch]);
 
   return (
     <div className='flex flex-col space-y-5 py-8'>

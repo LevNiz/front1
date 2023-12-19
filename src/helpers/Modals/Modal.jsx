@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import sosImg from './../../assets/images/sos.svg';
 import inCorrectImg from './../../assets/images/404.svg';
+import notFound from '../../assets/images/empty.svg';
 import success from './../../assets/images/success.jpg';
 
 const Modal = ({
@@ -182,7 +183,7 @@ const Modal = ({
       ) : (
         <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
           <div className='flex justify-center py-5'>
-            <img src={inCorrectImg} alt='*' />
+            <img src={notFound} alt='*' />
           </div>
           <h3 className='text-lg font-semibold'>Неверный логин или пароль</h3>
           <p className='text-base mt-8 mb-4'>Забыли пароль?</p>
