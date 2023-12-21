@@ -35,7 +35,7 @@ const DepotDetail = () => {
   const navigate = useNavigate();
 
   const filteredTariffs = costs?.filter(
-    (el) => el?.fromCity?.id === Number(id)
+    (el) => el?.fromCity?.id === depotItem?.city?.id
   );
 
   const handleClick = (index) => {
@@ -212,11 +212,11 @@ const DepotDetail = () => {
               </div>
             </div>
           </div>
-          <div className='text-center pb-10 text-xl font-medium content'>
+          <div className='text-center pb-10 text-xl content'>
             <h4>У вас коммерческий груз?</h4>
-            <h4 className='text-[#da47ff]'>Не проблема!</h4>
+            <h4 className='font-bold'>Не проблема!</h4>
             <h4>
-              Отпрравьте заявку прямо сейчас в разделе{' '}
+              Отправьте заявку прямо сейчас в разделе{' '}
               <NavLink to='/gb-business' className='text-blue-500 underline'>
                 GB-Business
               </NavLink>
@@ -240,7 +240,7 @@ const DepotDetail = () => {
               <div
                 className={`${
                   openTariff ? 'flex' : 'hidden'
-                } p-3 mm:p-5 bg-gray-100 flex-col space-y-4`}
+                } p-3 mm:p-5 bg-gray-50 flex-col space-y-4`}
               >
                 {filteredTariffs?.length ? (
                   filteredTariffs?.map((el) => (
@@ -288,7 +288,7 @@ const DepotDetail = () => {
                               },
                             })
                           }
-                          className='bg-orange-500 text-white rounded-md px-3 py-1 text-sm hover:opacity-80 duration-150 mt-4 lg:mt-0 flex ml-auto'
+                          className='bg-black text-white rounded-md px-3 py-1 text-sm hover:opacity-80 duration-150 mt-4 lg:mt-0 flex ml-auto'
                         >
                           Оформить заказ
                         </button>
@@ -319,7 +319,7 @@ const DepotDetail = () => {
               <div
                 className={`${
                   openExtraTariff ? 'flex' : 'hidden'
-                } p-3 mm:p-5 bg-gray-100 flex-col space-y-4`}
+                } p-3 mm:p-5 bg-gray-50 flex-col space-y-4`}
               >
                 <p className='opacity-70'>
                   Вы можете закзать следующие SMART услуги до того, как ваша
