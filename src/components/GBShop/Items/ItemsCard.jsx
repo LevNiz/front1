@@ -29,7 +29,6 @@ const ItemsCard = ({ el }) => {
     } else {
       await addToFavorites(userID, el);
     }
-
     setIsFavorite(!isFavorite);
   };
 

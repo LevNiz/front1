@@ -5,15 +5,22 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import ItemsSlider from './ItemsSlider';
 import CategorySlider from '../MainPage/CategorySlider';
 import noImg from '../../../assets/images/no-image.svg';
-import { fetchItemsDetail } from '../../../api/gb-shop/items';
-import favourite from '../../../assets/gb-shop/icons/favorite.svg';
+import {
+  addToFavorites,
+  fetchFavoriteItems,
+  fetchItemsDetail,
+  removeFromFavorites,
+} from '../../../api/gb-shop/items';
+import favorite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import { useSelector } from 'react-redux';
 
 const ItemsDetail = () => {
   const [item, setItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
+  const { userID } = useSelector((state) => state?.user);
   const { items, loading, error } = useSelector((state) => state?.items);
   const { categories } = useSelector((state) => state?.categories);
 
@@ -27,6 +34,22 @@ const ItemsDetail = () => {
   const itemCategoryTitle = categories?.filter(
     (el) => el?.id === state?.category
   );
+
+  const handleToggleFavorite = async () => {
+    if (isFavorite) {
+      await removeFromFavorites(userID, item?.id);
+    } else {
+      await addToFavorites(userID, item);
+    }
+    setIsFavorite(!isFavorite);
+  };
+
+  useEffect(() => {
+    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
+      setIsFavorite(favData?.some((el) => el?.id === item?.id));
+    });
+    return () => unsubscribe();
+  }, [userID, item?.id]);
 
   useEffect(() => {
     scrollToTop();
@@ -55,7 +78,7 @@ const ItemsDetail = () => {
           <div className='flex pt-5 space-x-8'>
             <div className='w-1/2'>
               <div className='border border-gray-100 rounded-md overflow-hidden p-3'>
-                <ItemsSlider images={item?.image} />
+                <ItemsSlider slideImg={item?.image} />
               </div>
             </div>
             <div className='w-1/2'>
@@ -77,8 +100,13 @@ const ItemsDetail = () => {
               </div>
               <div className='flex justify-between items-center my-3'>
                 <h1 className='font-ubuntu text-3xl'>{item?.name}</h1>
-                <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-[#ebebeb] rounded-full cursor-pointer'>
-                  <img className='w-5' src={favourite} alt='*' />
+                <div
+                  onClick={handleToggleFavorite}
+                  className={`${
+                    isFavorite ? 'bg-colYellow' : 'bg-gray-100'
+                  } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
+                >
+                  <img className='w-5' src={favorite} alt='*' />
                 </div>
               </div>
               <div className='flex items-center'>

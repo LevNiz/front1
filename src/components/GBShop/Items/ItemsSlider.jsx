@@ -43,7 +43,7 @@ const ItemsSlider = () => {
     },
   ];
   const [activeThumb, setActiveThumb] = useState('');
-
+  
   return (
     <div className='w-full mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0'>
       <Swiper
