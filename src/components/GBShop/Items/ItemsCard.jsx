@@ -3,9 +3,37 @@ import shoppingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favIcon from '../../../assets/gb-shop/icons/favorite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
 import noImg from '../../../assets/images/no-image.jpeg';
+import { useEffect, useState } from 'react';
+import {
+  addToFavorites,
+  fetchFavoriteItems,
+  removeFromFavorites,
+} from '../../../api/gb-shop/items';
+import { useSelector } from 'react-redux';
 
-const CategoryCard = ({ el, favorite }) => {
+const ItemsCard = ({ el, favorite }) => {
+  const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const checkFavoriteStatus = async () => {
+      const favoriteItems = await fetchFavoriteItems(userID);
+      setIsFavorite(favoriteItems?.some((item) => item.id === el?.id));
+    };
+
+    checkFavoriteStatus();
+  }, [userID, el?.id]);
+
+  const handleToggleFavorite = async () => {
+    if (isFavorite) {
+      await removeFromFavorites(userID, el?.id);
+    } else {
+      await addToFavorites(userID, el);
+    }
+
+    setIsFavorite((prevState) => !prevState);
+  };
 
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
@@ -75,6 +103,7 @@ const CategoryCard = ({ el, favorite }) => {
           </div>
           <div className='flex justify-end items-center space-x-2'>
             <div
+              onClick={handleToggleFavorite}
               className={`${
                 favorite ? 'bg-colYellow' : 'bg-gray-100'
               } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
@@ -91,4 +120,4 @@ const CategoryCard = ({ el, favorite }) => {
   );
 };
 
-export default CategoryCard;
+export default ItemsCard;
