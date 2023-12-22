@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
 import logo from './../../assets/gb-shop/icons/gb-shop-logo.svg';
 import userIcon from './../../assets/gb-shop/icons/user.svg';
-import favourite from './../../assets/gb-shop/icons/favourite.svg';
+import favorite from './../../assets/gb-shop/icons/favorite.svg';
 import basket from './../../assets/gb-shop/icons/basket.svg';
 
 const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
@@ -68,8 +68,8 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
             {user ? (
               <ul className='flex items-center justify-end space-x-4'>
                 <li className='relative'>
-                  <NavLink to='#'>
-                    <img className='w-[27px] md:w-6' src={favourite} alt='*' />
+                  <NavLink to='/gb-shop/favorites'>
+                    <img className='w-[27px] md:w-6' src={favorite} alt='*' />
                   </NavLink>
                   <span
                     className={`${

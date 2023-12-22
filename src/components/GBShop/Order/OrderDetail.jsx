@@ -145,7 +145,7 @@ const OrderDetail = () => {
                   <div className='pl-3 pt-2'>
                     <div className='flex justify-between items-start'>
                       <h5 className='font-medium'>{el?.item?.name}</h5>
-                      <img src={trash} alt='*' />
+                      <img className='cursor-pointer' src={trash} alt='*' />
                     </div>
                     <div className='flex items-center pt-1'>
                       <div className='min-w-[24px] w-6 h-6 rounded-full overflow-hidden border border-gray-300 bg-white'>

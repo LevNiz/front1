@@ -6,7 +6,7 @@ import ItemsSlider from './ItemsSlider';
 import CategorySlider from '../MainPage/CategorySlider';
 import noImg from '../../../assets/images/no-image.svg';
 import { fetchItemsDetail } from '../../../api/gb-shop/items';
-import favourite from '../../../assets/gb-shop/icons/favourite.svg';
+import favourite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import { useSelector } from 'react-redux';
 
@@ -15,11 +15,17 @@ const ItemsDetail = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { items, loading, error } = useSelector((state) => state?.items);
+  const { categories } = useSelector((state) => state?.categories);
+
   const { state } = useLocation();
   const { id } = useParams();
 
   const similarItems = items?.filter(
     (el) => el?.category?.id === item?.category?.id
+  );
+
+  const itemCategoryTitle = categories?.filter(
+    (el) => el?.id === state?.category
   );
 
   useEffect(() => {
@@ -39,7 +45,7 @@ const ItemsDetail = () => {
     <div className='py-24 min-h-[991px] content'>
       <div className='bg-[#FBFBFB] py-2 px-5 my-4'>
         <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
-          {state?.from}
+          {itemCategoryTitle[0]?.nameRus}
         </h3>
       </div>
       {isLoading ? (
@@ -150,7 +156,11 @@ const ItemsDetail = () => {
               <img src={rightArrow} alt='*' />
             </NavLink>
           </div>
-          <CategorySlider items={similarItems} loading={loading} error={error} />
+          <CategorySlider
+            items={similarItems}
+            loading={loading}
+            error={error}
+          />
         </>
       )}
     </div>

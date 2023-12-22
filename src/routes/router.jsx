@@ -59,6 +59,7 @@ import {
   Categories,
   Basket,
   Order,
+  Favorites,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -106,6 +107,7 @@ export const router = createBrowserRouter(
             <Route path=':id' element={<ItemsDetail />} />
           </Route>
           <Route path='basket' element={<Basket />} />
+          <Route path='favorites' element={<Favorites />} />
           <Route path='order' element={<Order />} />
         </Route>
         <Route element={<PrivateRoute />}>

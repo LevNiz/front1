@@ -1,15 +1,21 @@
-import { NavLink } from 'react-router-dom';
-import shopingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
-import favourite from '../../../assets/gb-shop/icons/favourite.svg';
+import { NavLink, useLocation } from 'react-router-dom';
+import shoppingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
+import favIcon from '../../../assets/gb-shop/icons/favorite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
-import noImg from '../../../assets/images/no-image.svg';
+import noImg from '../../../assets/images/no-image.jpeg';
 
-const CategoryCard = ({ el }) => {
+const CategoryCard = ({ el, favorite }) => {
+  const { pathname } = useLocation();
+
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
       <NavLink
-        to={`${el?.id}`}
-        state={{ from: el?.category?.nameRus, category: el?.category?.id }}
+        to={`/gb-shop/items/${el?.id}`}
+        state={
+          pathname === '/gb-shop/favorites'
+            ? { category: el?.category }
+            : { category: el?.category?.id }
+        }
       >
         <div className='h-[210px] overflow-hidden relative bg-gray-50'>
           <img
@@ -52,7 +58,7 @@ const CategoryCard = ({ el }) => {
         </NavLink>
         <div className='flex justify-between items-center'>
           <div className='flex items-center pt-1'>
-            <div className='min-w-[20px] w-5 h-5 rounded-full border border-gray-400'>
+            <div className='min-w-[20px] w-5 h-5 rounded-full border border-gray-300'>
               <img
                 className='w-full h-full object-cover rounded-full'
                 src={el?.supplier?.avatar}
@@ -68,11 +74,15 @@ const CategoryCard = ({ el }) => {
             </p>
           </div>
           <div className='flex justify-end items-center space-x-2'>
-            <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-[#e3e3e3] rounded-full cursor-pointer'>
-              <img className='w-5' src={favourite} alt='*' />
+            <div
+              className={`${
+                favorite ? 'bg-colYellow' : 'bg-gray-100'
+              } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
+            >
+              <img className='w-5' src={favIcon} alt='*' />
             </div>
-            <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-[#e3e3e3] rounded-full cursor-pointer'>
-              <img className='w-5' src={shopingCart} alt='*' />
+            <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-gray-100 rounded-full cursor-pointer'>
+              <img className='w-5' src={shoppingCart} alt='*' />
             </div>
           </div>
         </div>

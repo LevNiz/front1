@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { NavLink } from 'react-router-dom';
 import shopingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
-import favourite from '../../../assets/gb-shop/icons/favourite.svg';
+import favourite from '../../../assets/gb-shop/icons/favorite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
 import noImg from '../../../assets/images/no-image.jpeg';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
@@ -37,7 +37,6 @@ const CategorySlider = ({ items, loading, error }) => {
                   <NavLink
                     to={`/gb-shop/items/${el?.id}`}
                     state={{
-                      from: el?.category?.nameRus,
                       category: el?.category?.id,
                     }}
                   >

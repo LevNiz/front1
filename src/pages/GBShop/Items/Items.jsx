@@ -9,12 +9,18 @@ import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 
 const Items = () => {
-  const { state } = useLocation();
   const { loading, error, items } = useSelector((state) => state?.items);
+  const { categories } = useSelector((state) => state?.categories);
+
+  const { state } = useLocation();
   const dispatch = useDispatch();
 
   const filteredItems = items?.filter(
     (el) => el?.category?.id === state?.category
+  );
+
+  const itemCategoryTitle = categories?.filter(
+    (el) => el?.id === state?.category
   );
 
   useEffect(() => {
@@ -32,7 +38,7 @@ const Items = () => {
       <div className='content'>
         <div className='bg-[#FBFBFB] py-2 p-5 my-4'>
           <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
-            {state?.from}
+            {itemCategoryTitle[0]?.nameRus}
           </h3>
         </div>
       </div>
