@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import shoppingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favIcon from '../../../assets/gb-shop/icons/favorite.svg';
@@ -9,7 +10,6 @@ import {
   fetchFavoriteItems,
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
-import { useSelector } from 'react-redux';
 
 const ItemsCard = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
@@ -18,7 +18,7 @@ const ItemsCard = ({ el }) => {
 
   useEffect(() => {
     const unsubscribe = fetchFavoriteItems(userID, (favData) => {
-      setIsFavorite(favData?.some((item) => item.id === el?.id));
+      setIsFavorite(favData?.some((item) => item?.id === el?.id));
     });
     return () => unsubscribe();
   }, [userID, el?.id]);

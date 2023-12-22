@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -10,8 +12,24 @@ import noImg from '../../../assets/images/no-image.jpeg';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
+import {
+  addToFavorites,
+  fetchFavoriteItems,
+  removeFromFavorites,
+} from '../../../api/gb-shop/items';
 
 const CategorySlider = ({ items, loading, error }) => {
+  const { userID } = useSelector((state) => state?.user);
+  const [favItem, setFavItem] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
+      setFavItem(favData);
+    });
+
+    return () => unsubscribe();
+  }, [userID, items]);
+
   return (
     <>
       {loading ? (
@@ -100,10 +118,23 @@ const CategorySlider = ({ items, loading, error }) => {
                         </p>
                       </div>
                       <div className='flex justify-end items-center space-x-2'>
-                        <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-[#e3e3e3] rounded-full cursor-pointer'>
+                        <div
+                          onClick={async () => {
+                            if (favItem?.some((item) => item?.id === el?.id)) {
+                              await removeFromFavorites(userID, el?.id);
+                            } else {
+                              await addToFavorites(userID, el);
+                            }
+                          }}
+                          className={`${
+                            favItem?.some((item) => item?.id === el?.id)
+                              ? 'bg-colYellow'
+                              : 'bg-gray-100'
+                          } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
+                        >
                           <img className='w-5' src={favourite} alt='*' />
                         </div>
-                        <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-[#e3e3e3] rounded-full cursor-pointer'>
+                        <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-gray-100 rounded-full cursor-pointer'>
                           <img className='w-5' src={shopingCart} alt='*' />
                         </div>
                       </div>
