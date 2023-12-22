@@ -2,8 +2,8 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   getDocs,
+  onSnapshot,
   setDoc,
 } from 'firebase/firestore';
 import {
@@ -36,21 +36,20 @@ export const fetchItemsDetail = async (id) => {
 };
 
 // Fetch Favorite items:
-export const fetchFavoriteItems = async (userID) => {
+export const fetchFavoriteItems = (userID, updateCallback) => {
   try {
     const userDocRef = doc(db, 'users', `${userID}`);
-    const userDocSnapshot = await getDoc(userDocRef);
+    const favCollectionRef = collection(userDocRef, 'favs');
 
-    if (userDocSnapshot.exists()) {
-      const favCollectionRef = collection(userDocRef, 'favs');
-      const favSnapshot = await getDocs(favCollectionRef);
-      const favData = favSnapshot.docs.map((doc) => doc.data());
-      return favData;
-    } else {
-      return [];
-    }
+    const unsubscribe = onSnapshot(favCollectionRef, (snapshot) => {
+      const favData = snapshot.docs.map((doc) => doc.data());
+      updateCallback(favData);
+    });
+
+    return unsubscribe;
   } catch (error) {
-    return 'error';
+    console.error('Error fetching and subscribing to favorite items', error);
+    return () => {};
   }
 };
 

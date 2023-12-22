@@ -11,18 +11,16 @@ import {
 } from '../../../api/gb-shop/items';
 import { useSelector } from 'react-redux';
 
-const ItemsCard = ({ el, favorite }) => {
+const ItemsCard = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    const checkFavoriteStatus = async () => {
-      const favoriteItems = await fetchFavoriteItems(userID);
-      setIsFavorite(favoriteItems?.some((item) => item.id === el?.id));
-    };
-
-    checkFavoriteStatus();
+    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
+      setIsFavorite(favData?.some((item) => item.id === el?.id));
+    });
+    return () => unsubscribe();
   }, [userID, el?.id]);
 
   const handleToggleFavorite = async () => {
@@ -32,7 +30,7 @@ const ItemsCard = ({ el, favorite }) => {
       await addToFavorites(userID, el);
     }
 
-    setIsFavorite((prevState) => !prevState);
+    setIsFavorite(!isFavorite);
   };
 
   return (
@@ -105,7 +103,7 @@ const ItemsCard = ({ el, favorite }) => {
             <div
               onClick={handleToggleFavorite}
               className={`${
-                favorite ? 'bg-colYellow' : 'bg-gray-100'
+                isFavorite ? 'bg-colYellow' : 'bg-gray-100'
               } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
             >
               <img className='w-5' src={favIcon} alt='*' />

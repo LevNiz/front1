@@ -13,11 +13,11 @@ const FavoritesItem = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    (async () => {
-      const favData = await fetchFavoriteItems(userID);
+    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
       setFavItems(favData);
       setIsLoading(false);
-    })();
+    });
+    return () => unsubscribe();
   }, [userID]);
 
   return (
