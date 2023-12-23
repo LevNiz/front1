@@ -6,9 +6,8 @@ import logo from './../../assets/images/header-logo.svg';
 import userImg from './../../assets/icons/user.svg';
 import chat from './../../assets/icons/messages.svg';
 import arrow from './../../assets/icons/arrow-white.svg';
-import arrowRight from './../../assets/icons/right-icon.svg';
 import notification from './../../assets/icons/notification.svg';
-
+import arrowRight from './../../assets/icons/right-icon.svg';
 // import gbShop from '../../assets/icons/gb-services/gb-shop.svg';
 // import gbPay from '../../assets/icons/gb-services/gb-pay.svg';
 import gbBusiness from '../../assets/icons/gb-services/gb-business.svg';
@@ -18,6 +17,12 @@ import alaket from '../../assets/icons/gb-services/gb-alaket.svg';
 import gbChat from '../../assets/icons/gb-services/gb-chat.svg';
 import { fetchCountries } from '../../api/countries';
 import { fetchDepots } from '../../api/depots';
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from '@material-tailwind/react';
 
 const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -89,7 +94,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
       >
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>
-            <img className='w-[112px] sm:w-[130px]' src={logo} alt='*' />
+            <img className='w-28 sm:w-32' src={logo} alt='*' />
           </NavLink>
           <ul className='hidden md:flex space-x-3 lg:space-x-5 items-center text-white'>
             <li className='navbar'>
@@ -109,34 +114,64 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
               >
                 Наши склады
               </NavLink>
-              <div className='group'>
-                <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
-                <div className='absolute -left-3/4 w-64 top-[90%] group-hover:block pt-3'>
-                  <div className='py-2 rounded-sm bg-white text-black flex flex-col max-h-[300px] overflow-y-scroll shadow-lg scrollable'>
-                    {filteredCountries?.map((el) => (
-                      <div
-                        key={el?.id}
-                        onClick={() => setDepotID(el?.id)}
-                        className='px-3 py-2 relative cursor-pointer hover:bg-colYellow duration-150 flex justify-between items-center'
-                      >
-                        <div className='flex items-center'>
-                          <div className='w-6 h-6 min-w-[24px] mr-2 rounded-full overflow-hidden'>
-                            <img
-                              className='w-full h-full object-cover'
-                              src={el?.icon}
-                              alt=''
-                            />
+              <Menu>
+                <MenuHandler className='w-max flex items-center p-0'>
+                  <MenuItem className='text-sm lg:text-base p-0'>
+                    <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
+                  </MenuItem>
+                </MenuHandler>
+                <MenuList className='!p-1 rounded-sm w-56 !mt-4 !pr-2 bg-white text-black flex flex-col max-h-[300px] overflow-y-scroll shadow-lg scrollable'>
+                  {filteredCountries?.map((el) => (
+                    <Menu
+                      placement='right-start'
+                      allowHover
+                      offset={15}
+                      key={el?.id}
+                    >
+                      <MenuHandler className='flex items-center justify-between'>
+                        <MenuItem>
+                          <div
+                            key={el?.id}
+                            onMouseEnter={() => setDepotID(el?.id)}
+                            onMouseDown={() => setDepotID(el?.id)}
+                            className='py-1 !px-0 relative cursor-pointer outline-none w-full flex justify-between items-center'
+                          >
+                            <div className='flex items-center'>
+                              <div className='w-6 h-6 min-w-[24px] mr-2 rounded-full overflow-hidden'>
+                                <img
+                                  className='w-full h-full object-cover'
+                                  src={el?.icon}
+                                  alt=''
+                                />
+                              </div>
+                              <span className='line-clamp-1 break-all font-medium'>
+                                {el?.nameRu}
+                              </span>
+                            </div>
+                            <img src={arrowRight} alt='*' />
                           </div>
-                          <span className='line-clamp-1 break-all font-medium'>
-                            {el?.nameRu}
-                          </span>
-                        </div>
-                        <img src={arrowRight} alt='*' />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                        </MenuItem>
+                      </MenuHandler>
+                      <MenuList className='p-1'>
+                        {filteredDepotCities?.map((el) => (
+                          <MenuItem
+                            className={`${
+                              el?.active
+                                ? ''
+                                : 'pointer-events-none cursor-not-allowed opacity-40'
+                            } py-1`}
+                            key={el?.id}
+                          >
+                            <NavLink to={`/depots/${el?.id}`}>
+                              г. {el?.city?.nameRu}
+                            </NavLink>
+                          </MenuItem>
+                        ))}
+                      </MenuList>
+                    </Menu>
+                  ))}
+                </MenuList>
+              </Menu>
             </li>
             <li className='navbar'>
               <NavLink to='/applications' className='text-sm lg:text-base'>

@@ -25,7 +25,7 @@ const BuyRequest = () => {
   return (
     <div className='w-full pt-5 md:p-4'>
       <div className='flex justify-between items-center pb-5'>
-        <h3 className='ss:text-xl sm:font-medium'>Заявки на покупку</h3>
+        <h3 className='ss:text-xl sm:font-medium'>Заявки на покупку товара</h3>
         <button
           onClick={() => navigate('new')}
           className='bg-black text-white py-2 ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'

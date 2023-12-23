@@ -65,7 +65,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
       <div
         className={`
         fixed top-0 ${isOpen ? 'left-0' : 'left-[-100%]'}
-        w-[82%] ss:w-[75%] h-full transition-all duration-200 bg-white z-[9999999] block md:hidden`}
+        w-[82%] ss:w-[80%] h-full transition-all duration-200 bg-white z-[9999999] block md:hidden`}
       >
         <div className='my-5 pb-5 border-b border-gray-400 mx-3'>
           <img className='mx-auto w-32' src={logo} alt='*' />
@@ -139,7 +139,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       alt='*'
                     />
                     <span className='pl-1 sm:text-[15px] leading-5'>
-                      Мои посылки
+                      Мои отправки
                     </span>
                   </NavLink>
                 </li>
@@ -163,7 +163,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/buy-request'
-                    className='text-base flex items-center'
+                    className='text-base flex items-start'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'
@@ -171,7 +171,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       alt='*'
                     />
                     <span className='pl-1 sm:text-[15px] leading-5'>
-                      Заявки на покупку
+                      Заявки на покупку товара
                     </span>
                   </NavLink>
                 </li>
@@ -179,7 +179,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/search-request'
-                    className='text-base flex items-center'
+                    className='text-base flex items-start'
                   >
                     <img
                       className='min-w-[18px] w-[18px]'

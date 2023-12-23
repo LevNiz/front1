@@ -36,7 +36,7 @@ const ProfileSidebar = () => {
   return (
     <>
       <div className='bg-white z-[99999] md:min-w-[240px] md:max-w-[240px] lg:min-w-[300px] lg:max-w-[300px] w-full hidden md:block'>
-        <ul className='border-r border-colGray2 pb-24 pt-6 sidebar pr-5 lg:pr-10 hidden md:flex flex-col space-y-3'>
+        <ul className='border-r border-colGray2 pt-6 sidebar pr-4 hidden md:flex flex-col space-y-3'>
           <li>
             <NavLink
               to='personal-data'
@@ -52,7 +52,7 @@ const ProfileSidebar = () => {
               className='flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={parcel} alt='*' />
-              <span className='text-lg'>Мои посылки</span>
+              <span className='text-lg'>Мои отправки</span>
             </NavLink>
           </li>
           <li>
@@ -79,7 +79,9 @@ const ProfileSidebar = () => {
               className='flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={applicationIcon} alt='*' />
-              <span className='text-lg'>Заявка на покупку</span>
+              <span className='text-lg leading-6'>
+                Заявка на покупку товара
+              </span>
             </NavLink>
           </li>
           <li>

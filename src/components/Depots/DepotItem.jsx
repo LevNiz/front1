@@ -2,14 +2,24 @@ import { NavLink } from 'react-router-dom';
 import time from './../../assets/icons/time.svg';
 import local from './../../assets/icons/location-outline.svg';
 import noImg from './../../assets/images/no-image.svg';
+import locked from './../../assets/images/locked.svg';
 
 const DepotItem = ({ el }) => {
   return (
     <>
       <NavLink
         to={`${el?.id}`}
-        className='shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] relative hover:shadow-[0px_10px_20px_10px_rgba(204,_204,_204,_0.40)] duration-150 overflow-hidden rounded-lg sm:rounded-2xl my-2 ss:my-0'
+        className={`${
+          el?.active ? '' : 'pointer-events-none'
+        } shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] relative hover:shadow-[0px_10px_20px_10px_rgba(204,_204,_204,_0.40)] duration-150 overflow-hidden rounded-lg sm:rounded-2xl my-2 ss:my-0`}
       >
+        <div
+          className={`${
+            el?.active ? 'hidden' : 'flex'
+          } absolute top-0 left-0 w-full h-full bg-[#A7A9B7] bg-opacity-70 z-10 flex justify-center items-center`}
+        >
+          <img className='w-1/3' src={locked} alt='*' />
+        </div>
         <div className='h-[220px] ss:h-[160px] sm:h-[220px] lg:h-[280px] overflow-hidden bg-colBgGray'>
           <img
             className='w-full h-full object-cover'
