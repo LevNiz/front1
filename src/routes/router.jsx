@@ -38,6 +38,7 @@ import {
   ItemSearchRequestNew,
   ItemSearchRequestDetail,
   ItemsDetail,
+  BecomeBuyer,
 } from '../components';
 import {
   Auth,
@@ -88,6 +89,7 @@ export const router = createBrowserRouter(
         <Route path='gb-buyer'>
           <Route index element={<GbBuyer />} />
           <Route path=':id' element={<BGBuyerDetail />} />
+          <Route path='become-buyer' element={<BecomeBuyer />} />
         </Route>
         <Route path='alaket'>
           <Route index element={<Alaket />} />

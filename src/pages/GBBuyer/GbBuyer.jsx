@@ -5,16 +5,14 @@ import { GBBuyerItem } from '../../components';
 import { searchBuyer } from '../../api/buyer';
 import FilterModal from '../../components/GBBuyer/FilterModal';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import sort from '../../assets/icons/sort.svg';
+import { NavLink } from 'react-router-dom';
 
 const GbBuyer = () => {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const openFilterModal = (e) => {
     e.preventDefault();
@@ -42,29 +40,31 @@ const GbBuyer = () => {
               className='px-2 w-full focus:outline-none'
               placeholder='Поиск по имени...'
               {...register('buyer', {
-                required: 'Введите имя байера!',
+                required: false,
               })}
             />
             <div
               onClick={(e) => openFilterModal(e)}
-              className='cursor-pointer flex justify-center items-center w-[116px] h-10 bg-colYellow rounded-lg hover:bg-colYellowHover duration-100'
+              className='flex justify-center items-center mr-1 cursor-pointer'
             >
-              Фильтр
+              <img className='w-9' src={sort} alt='*' />
             </div>
+            <button
+              onClick={handleSubmit(onSubmit)}
+              className='md:max-w-[160px] mt-4 md:mt-0 ml-2 w-full bg-black h-10 font-medium text-white rounded-lg hover:opacity-80 duration-150'
+              type='submit'
+            >
+              Поиск
+            </button>
           </div>
-          <button
-            onClick={handleSubmit(onSubmit)}
-            className='md:max-w-[255px] mt-4 md:mt-0 md:ml-5 w-full bg-black h-[50px] font-semibold text-white rounded-[10px] hover:opacity-80 duration-150'
+          <NavLink
+            to='become-buyer'
+            className='md:max-w-[200px] flex justify-center items-center mt-4 md:mt-0 ml-5 w-full bg-colYellow h-12 font-medium rounded-lg hover:opacity-80 duration-150'
             type='submit'
           >
-            Поиск
-          </button>
+            Стать buyer ом
+          </NavLink>
         </form>
-        {errors?.buyer && (
-          <p className='text-red-500 text-sm'>
-            {errors?.buyer.message || 'Error!'}
-          </p>
-        )}
       </div>
       <div className='relative'>
         <FilterModal isOpen={isFilterModalOpen} onClose={closeFilterModal} />

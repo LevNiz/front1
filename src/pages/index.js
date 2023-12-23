@@ -4,7 +4,7 @@ import Home from './Home/Home';
 import Auth from './Auth/Auth';
 import Profile from './Profile/Profile';
 import Alaket from './Alaket/Alaket';
-import GbBuyer from './GB-Buyer/GbBuyer';
+import GbBuyer from './GBBuyer/GbBuyer';
 import GBBusiness from './GBBusiness/GBBusiness';
 import Applications from './Applications/Applications';
 import GBChat from './GBChat/GBChat';
