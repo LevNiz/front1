@@ -17,7 +17,6 @@ import gbBuyer from '../../assets/icons/gb-services/gb-buyer.svg';
 import alaket from '../../assets/icons/gb-services/gb-alaket.svg';
 import gbChat from '../../assets/icons/gb-services/gb-chat.svg';
 import { fetchCountries } from '../../api/countries';
-import { fetchCities } from '../../api/cities';
 import { fetchDepots } from '../../api/depots';
 
 const Navbar = ({ TechChatNotification, gbChatNotification }) => {
@@ -25,13 +24,23 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [depotsID, setDepotID] = useState(null);
 
   const { depots } = useSelector((state) => state?.depots);
+  const { countries } = useSelector((state) => state?.countries);
   const dispatch = useDispatch();
 
   const { pathname } = useLocation();
   const modalRef = useRef();
   const user = localStorage.getItem('accessToken');
+
+  const filteredCountries = countries?.filter((el) =>
+    depots?.some((depot) => el?.id === depot?.country?.id)
+  );
+
+  const filteredDepotCities = depots?.filter(
+    (el) => el?.country?.id === depotsID
+  );
 
   const handleOutSideModal = (e) => {
     if (!modalRef.current.contains(e.target)) {
@@ -46,7 +55,6 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   useEffect(() => {
     (async () => {
       await fetchCountries(dispatch);
-      await fetchCities(dispatch);
       await fetchDepots(dispatch);
     })();
   }, [dispatch]);
@@ -103,28 +111,28 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
               </NavLink>
               <div className='group'>
                 <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
-                <div className='absolute -left-3/4 hidden w-72 top-[90%] group-hover:block pt-3'>
+                <div className='absolute -left-3/4 w-64 top-[90%] group-hover:block pt-3'>
                   <div className='py-2 rounded-sm bg-white text-black flex flex-col max-h-[300px] overflow-y-scroll shadow-lg scrollable'>
-                    {depots?.map((el) => (
-                      <NavLink
-                        to={`/depots/${el?.id}`}
+                    {filteredCountries?.map((el) => (
+                      <div
                         key={el?.id}
-                        className='px-3 py-2 cursor-pointer hover:bg-colYellow duration-150 flex justify-between items-center'
+                        onClick={() => setDepotID(el?.id)}
+                        className='px-3 py-2 relative cursor-pointer hover:bg-colYellow duration-150 flex justify-between items-center'
                       >
                         <div className='flex items-center'>
-                          <div className='w-7 h-7 min-w-[28px] mr-2 rounded-full overflow-hidden'>
+                          <div className='w-6 h-6 min-w-[24px] mr-2 rounded-full overflow-hidden'>
                             <img
                               className='w-full h-full object-cover'
-                              src={el?.country?.icon}
+                              src={el?.icon}
                               alt=''
                             />
                           </div>
                           <span className='line-clamp-1 break-all font-medium'>
-                            {el?.country?.nameRu + ', ' + el?.city?.nameRu}
+                            {el?.nameRu}
                           </span>
                         </div>
                         <img src={arrowRight} alt='*' />
-                      </NavLink>
+                      </div>
                     ))}
                   </div>
                 </div>
