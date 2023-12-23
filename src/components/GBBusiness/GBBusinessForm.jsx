@@ -23,7 +23,7 @@ const GBBusinessForm = () => {
     reset,
   } = useForm();
 
-  const privacyPolicy = watch('privacyPolicy', '');
+  const privacyPolicy = watch('privacyPolicy');
   const navigate = useNavigate();
 
   const closeModal = () => {
@@ -117,7 +117,7 @@ const GBBusinessForm = () => {
             id='fileVal'
             type='file'
             onChange={(e) => setFileValue(e.target.files[0])}
-            accept='image/*'
+            accept='image/jpeg, image/jpg, image/png, image/webp'
           />
           <div className='border-dashed border-2 border-[#999] p-5 flex justify-center items-center cursor-pointer rounded-md'>
             <div className='py-2'>
@@ -135,7 +135,6 @@ const GBBusinessForm = () => {
             />
           </div>
         )}
-
         <div className='my-5'>
           <input
             className='hidden'
@@ -179,8 +178,11 @@ const GBBusinessForm = () => {
             </div>
             <p>
               Я согласен (на) с
-              <NavLink className='ml-1 underline' to='/user-agreement'>
-                {' '}
+              <NavLink
+                className='ml-1 underline'
+                to='/user-agreement'
+                tablet='_blank'
+              >
                 условиями пользовательского соглашения
               </NavLink>
             </p>

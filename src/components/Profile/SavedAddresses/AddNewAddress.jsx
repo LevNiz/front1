@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { fetchAddresses, postAddress } from '../../../api/addresses';
+import { fetchCountries } from '../../../api/countries';
 
 const AddNewAddress = () => {
   const { cities } = useSelector((state) => state?.cities);
@@ -44,6 +45,12 @@ const AddNewAddress = () => {
       await fetchAddresses(userID, dispatch);
     }
   };
+
+  useEffect(() => {
+    async () => {
+      await fetchCountries(dispatch);
+    };
+  }, [dispatch]);
 
   return (
     <div className='md:p-4 pt-6 w-full'>

@@ -21,7 +21,7 @@ const GBFranchiseForm = () => {
     reset,
   } = useForm();
 
-  const privacyPolicy = watch('privacyPolicy', '');
+  const privacyPolicy = watch('privacyPolicy');
   const navigate = useNavigate();
 
   const closeModal = () => {
@@ -146,8 +146,11 @@ const GBFranchiseForm = () => {
               </div>
               <p>
                 Я согласен (на) с
-                <NavLink className='ml-1 underline' to='/user-agreement'>
-                  {' '}
+                <NavLink
+                  className='ml-1 underline'
+                  to='/user-agreement'
+                  tablet='_blank'
+                >
                   условиями пользовательского соглашения
                 </NavLink>
               </p>

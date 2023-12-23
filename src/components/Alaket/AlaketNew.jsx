@@ -335,7 +335,7 @@ const AlaketNew = () => {
                   className='hidden'
                   id='fileVal'
                   type='file'
-                  accept='image/*'
+                  accept='image/jpeg, image/jpg, image/png, image/webp'
                   onChange={(e) => setPhoto(e.target.files[0])}
                 />
                 <div className='border-dashed border-2 border-[#999] p-5 flex justify-center items-center cursor-pointer rounded-md'>

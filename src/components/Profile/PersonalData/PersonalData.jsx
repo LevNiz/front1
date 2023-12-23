@@ -125,7 +125,7 @@ const PersonalData = () => {
               <input
                 className='hidden'
                 onChange={(e) => setAva(e.target.files[0])}
-                accept='image/*'
+                accept='image/jpeg, image/jpg, image/png, image/webp'
                 type='file'
                 id='ava'
               />
