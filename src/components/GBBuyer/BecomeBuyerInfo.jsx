@@ -7,8 +7,8 @@ import money from '../../assets/icons/dollarAlaket.svg';
 const BecomeBuyerInfo = () => {
   return (
     <>
-      <div className='flex pt-5'>
-        <div className='w-2/5'>
+      <div className='md:flex pt-5'>
+        <div className='md:w-2/5'>
           <div className='h-72 rounded-lg overflow-hidden'>
             <ReactPlayer
               controls
@@ -19,7 +19,7 @@ const BecomeBuyerInfo = () => {
             />
           </div>
         </div>
-        <div className='w-3/5 pl-8'>
+        <div className='w-full md:w-3/5 md:pl-8 pt-5 md:pt-0'>
           <h3 className='text-lg max-w-[470px]'>
             Присоединяйтесь к GivBox и станьте байером для удобных и надежных
             доставок!
@@ -41,28 +41,28 @@ const BecomeBuyerInfo = () => {
       <h2 className='text-2xl font-semibold pt-12 pb-5 mm:px-3'>
         Что вы получаете, став байером GivBox?
       </h2>
-      <div className='shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] p-7'>
+      <div className='shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] p-4 mm:p-7'>
         <ul className='space-y-3'>
-          <li className='flex items-center'>
-            <img className='w-5' src={time} alt='*' />
+          <li className='flex mm:items-center'>
+            <img className='w-5 h-5 mt-1 mm:mt-0' src={time} alt='*' />
             <span className='pl-2'>
               Моментальный доступ к удобным и надежным доставкам.
             </span>
           </li>
-          <li className='flex items-center'>
-            <img className='w-5' src={map} alt='*' />
+          <li className='flex mm:items-center'>
+            <img className='w-5 h-5 mt-1 mm:mt-0' src={map} alt='*' />
             <span className='pl-2'>
               Возможность поддержать местные и экологичные варианты доставки.
             </span>
           </li>
-          <li className='flex items-center'>
-            <img className='w-5' src={money} alt='*' />
+          <li className='flex mm:items-center'>
+            <img className='w-5 h-5 mt-1 mm:mt-0' src={money} alt='*' />
             <span className='pl-2'>
               Участие в программе лояльности с бонусами и скидками.
             </span>
           </li>
-          <li className='flex items-center'>
-            <img className='w-5' src={box} alt='*' />
+          <li className='flex mm:items-center'>
+            <img className='w-5 h-5 mt-1 mm:mt-0' src={box} alt='*' />
             <span className='pl-2'>
               Удовлетворение от знания, что вы вносите вклад в облегчение жизни
               многих людей.

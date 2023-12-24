@@ -55,7 +55,7 @@ const BecomeBuyer = () => {
 
   return (
     <div className='content py-20 min-h-[768px]'>
-      <h1 className='text-xl py-3 mm:text-3xl font-bold'>Стать Buyer ом</h1>
+      <h1 className='text-2xl py-3 mm:text-3xl font-bold'>Стать Buyer ом</h1>
       <BecomeBuyerInfo />
       <form className='py-8' onSubmit={handleSubmit(onSubmit)}>
         <BecomeBuyerForm
@@ -77,7 +77,7 @@ const BecomeBuyer = () => {
         />
         <label
           htmlFor='checkbox'
-          className='text-sm flex cursor-pointer mm:items-center mt-3'
+          className='text-sm flex cursor-pointer mm:items-center mt-8 ld:mt-3'
         >
           <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-colYellow border border-white rounded'>
             {privacyPolicy ? (

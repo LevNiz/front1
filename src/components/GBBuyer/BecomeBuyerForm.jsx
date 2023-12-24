@@ -37,8 +37,8 @@ const BecomeBuyerForm = ({
   return (
     <>
       <h1 className='text-xl font-medium mb-5'>Форма заявки</h1>
-      <div className='flex'>
-        <div className='w-2/5 space-y-3'>
+      <div className='ld:flex'>
+        <div className='w-full ld:w-1/2 lg:w-2/5 space-y-3'>
           <div>
             <p className='font-medium mb-2'>ФИО</p>
             <input
@@ -259,9 +259,9 @@ const BecomeBuyerForm = ({
             />
           </div>
         </div>
-        <div className='w-3/5 pl-8'>
-          <div className='grid grid-cols-2 gap-4'>
-            <div>
+        <div className='w-full ld:w-1/2 lg:w-3/5 ld:pl-5 lg:pl-8'>
+          <div className='grid lg:grid-cols-2 gap-4'>
+            <div className='pt-1 ld:pt-0'>
               <p className='font-medium mb-2'>Копия паспорта</p>
               <div className='h-56 border border-gray-300 rounded-lg overflow-hidden'>
                 <img
