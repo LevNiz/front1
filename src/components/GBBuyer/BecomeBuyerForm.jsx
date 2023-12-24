@@ -176,6 +176,7 @@ const BecomeBuyerForm = ({
                 render={({ field }) => (
                   <Select
                     {...field}
+                    isMulti
                     placeholder='Выберите страны'
                     options={countryOptions}
                     menuPortalTarget={document.body}

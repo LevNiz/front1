@@ -67,7 +67,7 @@ export const postStayBuyer = async (data, userID, passport, passportSelfie) => {
     commission: data.commission,
     redemption_speed: data.redemption_speed,
     country: data?.country?.value,
-    shop_countries: [],
+    shop_countries: data?.shop_countries?.map((el) => el?.value) || [],
     paymentType: data.paymentType,
     search_product: '',
     rating: 0.0,
