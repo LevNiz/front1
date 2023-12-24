@@ -2,20 +2,55 @@ import { useForm } from 'react-hook-form';
 import BecomeBuyerForm from './BecomeBuyerForm';
 import BecomeBuyerInfo from './BecomeBuyerInfo';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { postStayBuyer } from '../../api/buyer';
+import { useSelector } from 'react-redux';
+import Modal from '../../helpers/Modals/Modal';
+import { Loading } from '../../helpers/Loader/Loader';
 
 const BecomeBuyer = () => {
+  const [passportSelfie, setPassportSelfie] = useState(false);
+  const [passport, setPassport] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const { userID } = useSelector((state) => state?.user);
+
   const {
     control,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
     register,
+    reset,
   } = useForm({ mode: 'onChange' });
 
   const privacyPolicy = watch('privacyPolicy');
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    const { success } = await postStayBuyer(
+      data,
+      userID,
+      passport,
+      passportSelfie
+    );
+    if (success) {
+      setIsLoading(false);
+      setModalOpen(true);
+      setModalContent('successRequest');
+      setPassportSelfie(null);
+      setPassport(null);
+      reset();
+    } else {
+      setIsLoading(false);
+      setModalOpen(true);
+      setModalContent('errorRequest');
+    }
   };
 
   return (
@@ -27,6 +62,10 @@ const BecomeBuyer = () => {
           control={control}
           errors={errors}
           register={register}
+          setPassportSelfie={setPassportSelfie}
+          passportSelfie={passportSelfie}
+          setPassport={setPassport}
+          passport={passport}
         />
         <input
           className='hidden'
@@ -86,11 +125,18 @@ const BecomeBuyer = () => {
         )}
         <button
           type='submit'
-          className='mt-8 font-medium hover:opacity-80 p-4 rounded-md bg-black text-white duration-150 sm:max-w-[499px] w-full'
+          disabled={(!isDirty && !isValid) || !passportSelfie || !passport}
+          className={`${
+            isDirty && isValid && passportSelfie && passport
+              ? 'hover:opacity-80'
+              : 'cursor-not-allowed opacity-50'
+          } mt-8 font-medium p-4 rounded-md bg-black text-white duration-150 sm:max-w-[499px] w-full`}
         >
           Отправить
         </button>
       </form>
+      {isLoading ? <Loading /> : ''}
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
     </div>
   );
 };

@@ -111,6 +111,24 @@ const Modal = ({
             </button>
           </div>
         </div>
+      ) : content === 'errorRequest' ? (
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[90%] sm:w-full text-center'>
+          <div className='flex justify-center py-5'>
+            <img src={inCorrectImg} alt='*' />
+          </div>
+          <h3 className='text-xl font-medium'>Произошла ошибка!</h3>
+          <p className='text-sm mt-1 mb-4 opacity-60'>
+            Повторите попытку еще раз.
+          </p>
+          <div className='flex px-8 mb-8'>
+            <button
+              className='bg-colYellow w-full py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
+              onClick={onClose}
+            >
+              Закрыть
+            </button>
+          </div>
+        </div>
       ) : content === 'deleteAddress' ? (
         <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
           <div className='flex justify-center py-5'>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
@@ -6,10 +6,15 @@ import { fetchCountries } from '../../api/countries';
 import selfie from '../../assets/images/selfie.jpeg';
 import passportImg from '../../assets/images/passport.webp';
 
-const BecomeBuyerForm = ({ control, register, errors }) => {
-  const [passportSelfie, setPassportSelfie] = useState(null);
-  const [passport, setPassport] = useState(null);
-
+const BecomeBuyerForm = ({
+  control,
+  register,
+  errors,
+  setPassportSelfie,
+  passportSelfie,
+  setPassport,
+  passport,
+}) => {
   const { countries } = useSelector((state) => state?.countries);
   const dispatch = useDispatch();
 
@@ -248,7 +253,7 @@ const BecomeBuyerForm = ({ control, register, errors }) => {
             <textarea
               className='w-full border resize-none border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
               placeholder='Доп. информация'
-              {...register('nameAddress', {
+              {...register('comment', {
                 required: false,
               })}
             />

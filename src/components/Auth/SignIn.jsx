@@ -18,7 +18,7 @@ const SignIn = () => {
   const { userID } = useSelector((state) => state?.user);
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState();
+  const [modalContent, setModalContent] = useState('');
   const [visiblePass, setVisiblePass] = useState(false);
 
   const {
