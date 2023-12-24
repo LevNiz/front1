@@ -3,6 +3,7 @@ import sosImg from './../../assets/images/sos.svg';
 import inCorrectImg from './../../assets/images/404.svg';
 import notFound from '../../assets/images/empty.svg';
 import success from './../../assets/images/success.jpg';
+import errorImg from './../../assets/images/error.svg';
 
 const Modal = ({
   isOpen,
@@ -112,9 +113,9 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'errorRequest' ? (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[90%] sm:w-full text-center'>
-          <div className='flex justify-center py-5'>
-            <img src={inCorrectImg} alt='*' />
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[420px] w-[90%] sm:w-full text-center'>
+          <div className='flex justify-center pt-5'>
+            <img src={errorImg} alt='*' />
           </div>
           <h3 className='text-xl font-medium'>Произошла ошибка!</h3>
           <p className='text-sm mt-1 mb-4 opacity-60'>

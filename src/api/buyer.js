@@ -96,22 +96,23 @@ export const postStayBuyer = async (data, userID, passport, passportSelfie) => {
       });
   };
 
-  try {
-    const [passportImage, passportSelfieImage] = await Promise.all([
-      passport && uploadImage(passport),
-      passportSelfie && uploadImage(passportSelfie),
-    ]);
+  const uploadImagesSequentially = async () => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      if (passport) {
+        sendData.passport_front = await uploadImage(passport);
+      }
+      if (passportSelfie) {
+        sendData.passport_back = await uploadImage(passportSelfie);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
 
-    if (passportImage) {
-      sendData.passport_front = passportImage;
-    }
-    if (passportSelfieImage) {
-      sendData.passport_back = passportSelfieImage;
-    }
-    await axiosInstance.post(
-      'https://givbox.ru/givbox/user/becomeBuyer/',
-      sendData
-    );
+  try {
+    await uploadImagesSequentially();
+    await axiosInstance.post('user/becomeBuyer/', sendData);
     return { success: true };
   } catch (error) {
     return { success: false };
