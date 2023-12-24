@@ -47,11 +47,11 @@ const GbBuyer = () => {
               onClick={(e) => openFilterModal(e)}
               className='flex justify-center items-center mr-1 cursor-pointer'
             >
-              <img className='w-9' src={sort} alt='*' />
+              <img className='w-14 md:w-9' src={sort} alt='*' />
             </div>
             <button
               onClick={handleSubmit(onSubmit)}
-              className='md:max-w-[160px] mt-4 md:mt-0 ml-2 w-full bg-black h-10 font-medium text-white rounded-lg hover:opacity-80 duration-150'
+              className='max-w-[90px] ss:max-w-[120px] md:max-w-[160px] ml-2 w-full bg-black h-10 font-medium text-white rounded-lg hover:opacity-80 duration-150'
               type='submit'
             >
               Поиск
@@ -59,7 +59,7 @@ const GbBuyer = () => {
           </div>
           <NavLink
             to='become-buyer'
-            className='md:max-w-[200px] flex justify-center items-center mt-4 md:mt-0 ml-5 w-full bg-colYellow h-12 font-medium rounded-lg hover:opacity-80 duration-150'
+            className='md:max-w-[200px] flex justify-center items-center mt-4 md:mt-0 md:ml-5 w-full bg-colYellow h-12 font-medium rounded-lg hover:opacity-80 duration-150'
             type='submit'
           >
             Стать buyer ом
