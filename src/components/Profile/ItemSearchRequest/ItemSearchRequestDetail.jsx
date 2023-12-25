@@ -53,16 +53,16 @@ const ItemSearchRequestDetail = () => {
       <div className='flex justify-between items-center mb-3'>
         <h1 className='ss:text-xl font-medium'>Заявка на поиcк товара</h1>
         <div className='ml-3'>
-          <div
+          <button
             onClick={() => {
               setModalOpen(true);
               setModalContent('deleteSearchRequest');
               setItemId(itemData?.id);
             }}
-            className='cursor-pointer text-red-500 font-medium'
+            className='bg-black text-white py-2 px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'
           >
             Удалить
-          </div>
+          </button>
         </div>
       </div>
       {isLoading ? (
@@ -72,7 +72,7 @@ const ItemSearchRequestDetail = () => {
           <div className='flex items-center py-5'>
             <div className='min-w-[64px] w-16 h-16 rounded-full overflow-hidden bg-gray-100'>
               <img
-                className='w-full h-full object-cover p-[2px] rounded-full'
+                className='w-full h-full object-cover p-[1px] rounded-full'
                 src={itemData?.client?.avatar}
                 onError={(e) => {
                   e.target.onerror = null;
@@ -85,9 +85,6 @@ const ItemSearchRequestDetail = () => {
               <h4 className='font-medium text-lg leading-5 pt-1'>
                 {itemData?.name || 'Не указана'}
               </h4>
-              <span className='text-sm opacity-50'>
-                {itemData?.phone || 'Не указана'}
-              </span>
             </div>
           </div>
           <div className='mm:shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] mm:p-5 rounded-lg'>
