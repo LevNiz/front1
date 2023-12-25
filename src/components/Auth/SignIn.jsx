@@ -54,7 +54,7 @@ const SignIn = () => {
           />
         </div>
         <NavLink to='/'>
-          <img src={logo} alt='*' />
+          <img className='w-32' src={logo} alt='*' />
         </NavLink>
       </div>
       <div className='w-full mm:w-3/5 lg:w-4/6 flex flex-col justify-center items-center py-12  px-4 overflow-y-scroll'>

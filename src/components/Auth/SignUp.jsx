@@ -58,7 +58,7 @@ const SignUp = () => {
           />
         </div>
         <NavLink to='/'>
-          <img src={logo} alt='*' />
+          <img className='w-32' src={logo} alt='*' />
         </NavLink>
       </div>
       <div className='justify-start mm:py-20 h-full w-full mm:w-3/5 lg:w-4/6 flex flex-col items-center py-12  px-4 overflow-y-scroll'>

@@ -8,7 +8,6 @@ import { fetchSearchParcel } from '../../api/parcels';
 import nounBox from './../../assets/icons/noun-box.svg';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import parcelIcon from './../../assets/images/parcel-icon.png';
-import rulesImg from './../../assets/images/rules.svg';
 
 const UnAuthParcel = () => {
   const [findParcel, setFindParcel] = useState([]);
@@ -33,13 +32,13 @@ const UnAuthParcel = () => {
   return (
     <>
       <div className='lg:flex items-center lg:my-6'>
-        <div className='lg:max-w-[885px] w-full min-h-[190px] shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_0px] rounded-md mx-auto px-4 py-4 sm:px-12 sm:py-6 bg-colYellow'>
+        <div className='w-full min-h-[190px] shadow-[rgba(204,_204,_204,_0.40)_0px_10px_20px_0px] rounded-md mx-auto px-4 py-4 mm:px-12 mm:py-6 bg-colYellow'>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h3 className='text-base sm:text-xl font-medium mb-8'>
+            <h3 className='text-base sm:text-xl font-medium mb-5 mm:mb-8'>
               Введите ваш номер, чтобы найти вашу посылку
             </h3>
-            <div className='sm:flex'>
-              <div className='sm:max-w-[405px] w-full'>
+            <div className='mm:flex'>
+              <div className='w-full'>
                 <input
                   className='w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
                   placeholder='Ваш номер'
@@ -55,18 +54,12 @@ const UnAuthParcel = () => {
               </div>
               <button
                 type='submit'
-                className='bg-black text-white w-full mt-4 sm:mt-0 sm:ml-5 h-[42px] font-medium rounded-lg hover:opacity-80 duration-100'
+                className='bg-black text-white mm:max-w-sm w-full mt-4 mm:mt-0 mm:ml-5 h-[42px] font-medium rounded-lg hover:opacity-80 duration-100'
               >
                 Отследить
               </button>
             </div>
           </form>
-        </div>
-        <div className='max-w-[380px] h-[130px] hidden rounded-[10px] lg:flex justify-center items-center w-full bg-colPurple mt-0 py-4 px-6 lg:ml-10 text-center'>
-          <img src={rulesImg} alt='*' />
-          <p className='text-xl font-medium text-white ml-3'>
-            Инструкция к оформлению нового заказа
-          </p>
         </div>
       </div>
       {isLoading ? (
