@@ -60,7 +60,7 @@ const Parcel = () => {
             <div className='mm:flex'>
               <div className='w-full'>
                 <input
-                  className='w-full px-4 h-[42px] rounded-[10px] shadow-md text-base focus:outline-none'
+                  className='w-full px-4 h-[44px] mm:h-12 rounded-[10px] shadow-md text-base focus:outline-none'
                   placeholder='Ваш номер'
                   {...register('orderNumber', {
                     required: 'Поле обязательно к заполнению!',
@@ -74,7 +74,7 @@ const Parcel = () => {
               </div>
               <button
                 type='submit'
-                className='bg-black text-white mm:max-w-sm w-full mt-4 mm:mt-0 mm:ml-5 h-[42px] font-medium rounded-lg hover:opacity-80 duration-100'
+                className='bg-black text-white mm:max-w-sm w-full mt-4 mm:mt-0 mm:ml-5 h-[44px] mm:h-12 font-medium rounded-lg hover:opacity-80 duration-100'
               >
                 Отследить
               </button>

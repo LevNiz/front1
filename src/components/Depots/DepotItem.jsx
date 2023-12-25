@@ -32,7 +32,7 @@ const DepotItem = ({ el }) => {
           />
         </div>
         <div className='p-3 lg:p-4 relative'>
-          <div className='absolute -top-3 md:-top-6 right-2 md:right-5 w-6 md:w-12 h-6 md:h-12 rounded-full overflow-hidden'>
+          <div className='absolute -top-4 md:-top-7 right-2 md:right-5 w-6 md:w-12 h-6 md:h-12 rounded-full overflow-hidden'>
             <img
               className='w-full h-full object-cover'
               src={el?.country?.icon}
@@ -43,27 +43,27 @@ const DepotItem = ({ el }) => {
               alt='*'
             />
           </div>
-          <h3 className='sm:text-lg lg:text-xl font-medium text-black line-clamp-1 break-all'>
+          <h3 className='text-sm sm:text-lg lg:text-xl font-medium text-black line-clamp-1 break-all'>
             {el?.nameRu || 'Не указан'}
           </h3>
-          <div className='flex items-center mt-2 mm:mt-3 mb-1 mm:mb-2'>
+          <div className='flex items-center mt-2 mm:mt-3 mb-1'>
             <img
-              className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]'
+              className='w-[14px] min-w-[14px] mm:w-4 mm:min-w-[16px] md:w-5 md:min-w-[20px]'
               src={time}
               alt='*'
             />
-            <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>
+            <p className='text-xs mm:text-base text-colGray ml-2 line-clamp-1 break-all'>
               {el?.workingHours[0]?.mondayStart} -{' '}
               {el?.workingHours[0]?.mondayEnd}
             </p>
           </div>
           <div className='flex items-center'>
             <img
-              className='w-4 min-w-[16px] mm:w-5 mm:min-w-[20px] md:w-6 md:min-w-[24px]'
+              className='w-[14px] min-w-[14px] mm:w-4 mm:min-w-[16px] md:w-5 md:min-w-[20px]'
               src={local}
               alt='*'
             />
-            <p className='text-sm mm:text-lg text-colGray ml-2 md:ml-3 line-clamp-1 break-all'>
+            <p className='text-xs mm:text-base text-colGray ml-2 line-clamp-1 break-all'>
               {el?.address ? el?.address : 'Не указан'}
             </p>
           </div>

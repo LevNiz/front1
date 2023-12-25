@@ -55,7 +55,7 @@ const FilterModal = ({ isOpen, onClose }) => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='fixed w-full h-screen sm:h-auto sm:absolute top-0 left-0 xl:left-[7%] bg-white p-4 sm:p-6 md:p-10 pt-6 z-[999999] max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
+        className='fixed w-full h-screen sm:h-auto sm:absolute top-0 left-0 xl:left-[7%] bg-white p-4 sm:p-6 md:p-10 pt-6 z-[9999999] max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
       >
         <div className='flex justify-between sm:justify-end'>
           <div className='block sm:hidden' onClick={() => onClose()}>
