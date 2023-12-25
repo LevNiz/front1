@@ -8,13 +8,6 @@ import chat from './../../assets/icons/messages.svg';
 import arrow from './../../assets/icons/arrow-white.svg';
 import notification from './../../assets/icons/notification.svg';
 import arrowRight from './../../assets/icons/right-icon.svg';
-// import gbShop from '../../assets/icons/gb-services/gb-shop.svg';
-// import gbPay from '../../assets/icons/gb-services/gb-pay.svg';
-import gbBusiness from '../../assets/icons/gb-services/gb-business.svg';
-import gbFranchise from '../../assets/icons/gb-services/gb-franchise.svg';
-import gbBuyer from '../../assets/icons/gb-services/gb-buyer.svg';
-import alaket from '../../assets/icons/gb-services/gb-alaket.svg';
-import gbChat from '../../assets/icons/gb-services/gb-chat.svg';
 import { fetchCountries } from '../../api/countries';
 import { fetchDepots } from '../../api/depots';
 import {
@@ -120,7 +113,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                     <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
                   </MenuItem>
                 </MenuHandler>
-                <MenuList className='!p-1 rounded-sm w-56 !mt-4 !pr-2 bg-white text-black flex flex-col max-h-[300px] overflow-y-scroll shadow-lg scrollable'>
+                <MenuList className='!p-0 rounded-sm w-60 h-60 !mt-4 bg-white text-black flex flex-col overflow-y-scroll shadow-lg scrollable'>
                   {filteredCountries?.map((el) => (
                     <Menu
                       placement='right-start'
@@ -128,13 +121,13 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                       offset={15}
                       key={el?.id}
                     >
-                      <MenuHandler className='flex items-center justify-between'>
+                      <MenuHandler className='flex items-center justify-between py-2 hover:bg-colYellow duration-200 rounded-none border-b border-[#C3C3C3]'>
                         <MenuItem>
                           <div
                             key={el?.id}
                             onMouseEnter={() => setDepotID(el?.id)}
                             onMouseDown={() => setDepotID(el?.id)}
-                            className='py-1 !px-0 relative cursor-pointer outline-none w-full flex justify-between items-center'
+                            className='relative cursor-pointer outline-none w-full flex justify-between items-center'
                           >
                             <div className='flex items-center'>
                               <div className='w-6 h-6 min-w-[24px] mr-2 rounded-full overflow-hidden'>
@@ -144,25 +137,29 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                                   alt=''
                                 />
                               </div>
-                              <span className='line-clamp-1 break-all font-medium'>
+                              <span className='line-clamp-1 break-all font-medium text-[15px]'>
                                 {el?.nameRu}
                               </span>
                             </div>
-                            <img src={arrowRight} alt='*' />
+                            <img
+                              className='h-[15px]'
+                              src={arrowRight}
+                              alt='*'
+                            />
                           </div>
                         </MenuItem>
                       </MenuHandler>
-                      <MenuList className='p-1'>
+                      <MenuList className='p-0'>
                         {filteredDepotCities?.map((el) => (
                           <MenuItem
                             className={`${
                               el?.active
                                 ? ''
                                 : 'pointer-events-none cursor-not-allowed opacity-40'
-                            } py-1`}
+                            } py-[10px] hover:bg-colYellow duration-200`}
                             key={el?.id}
                           >
-                            <NavLink to={`/depots/${el?.id}`}>
+                            <NavLink className='px-2' to={`/depots/${el?.id}`}>
                               г. {el?.city?.nameRu}
                             </NavLink>
                           </MenuItem>
@@ -181,70 +178,63 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
             <li className='relative group cursor-pointer flex items-center'>
               <span className='text-sm lg:text-base'>Сервисы</span>
               <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
-              <div className='absolute left-4 hidden top-full group-hover:block w-52 pt-2'>
-                <ul className='py-2 bg-white rounded-sm shadow-md text-black'>
+              <div className='absolute pt-4 left-0 top-full opacity-0 invisible group-hover:visible group-hover:opacity-100 duration-300 w-56'>
+                <ul className='bg-white rounded-sm shadow-md text-black'>
                   {/* <li>
                     <NavLink
                       onClick={() => alert('В процессе разработки!')}
-                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='#'
                     >
-                      <img className='w-4 mr-1.5' src={gbShop} alt='*' />
                       GB-Shop
                     </NavLink>
                   </li> */}
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='/gb-business'
                     >
-                      <img className='w-4 mr-1.5' src={gbBusiness} alt='*' />
                       GB-Business
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='/gb-franchise'
                     >
-                      <img className='w-4 mr-1.5' src={gbFranchise} alt='*' />
                       GB-Franchise
                     </NavLink>
                   </li>
                   {/* <li>
                     <NavLink
                       onClick={() => alert('В процессе разработки!')}
-                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='#'
                     >
-                      <img className='w-4 mr-1.5' src={gbPay} alt='*' />
                       GB-Pay
                     </NavLink>
                   </li> */}
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='/gb-buyer'
                     >
-                      <img className='w-4 mr-1.5' src={gbBuyer} alt='*' />
                       GB-Buyer
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='/gb-chat'
                     >
-                      <img className='w-4 mr-1.5' src={gbChat} alt='*' />
                       GB-Chat
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      className='hover:bg-colYellow px-3 py-[5px] duration-150 font-medium flex items-center'
+                      className='hover:bg-colYellow px-4 py-2 duration-150 text-[15px] font-medium flex items-center'
                       to='/alaket'
                     >
-                      <img className='w-4 mr-1.5' src={alaket} alt='*' />
                       Alaket
                     </NavLink>
                   </li>
