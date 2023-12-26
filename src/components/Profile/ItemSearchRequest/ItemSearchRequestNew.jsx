@@ -178,7 +178,6 @@ const ItemSearchRequestNew = () => {
               +
             </div>
           )}
-
           <button
             type='submit'
             disabled={!blocks[0]?.photo || !blocks[0]?.description}

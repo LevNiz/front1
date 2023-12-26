@@ -37,7 +37,6 @@ import BGBuyerDetail from './GBBuyer/BGBuyerDetail';
 import SendApplication from './Applications/SendApplication/SendApplication';
 import BuyRequest from './Profile/BuyRequest/BuyRequest';
 import AddBuyRequest from './Profile/BuyRequest/AddBuyRequest';
-import UpdateBuyRequest from './Profile/BuyRequest/UpdateBuyRequest';
 import GBBusinessForm from './GBBusiness/GBBusinessForm';
 import GBBusinessItem from './GBBusiness/GBBusinessItem';
 import TopUpWallet from './Profile/MyWallet/TopUpWallet';
@@ -62,6 +61,7 @@ import BasketInfo from './GBShop/Basket/BasketInfo';
 import OrderDetail from './GBShop/Order/OrderDetail';
 import FavoritesItem from './GBShop/Favorites/FavoritesItem';
 import BecomeBuyer from './GBBuyer/BecomeBuyer';
+import BuyRequestDetail from './Profile/BuyRequest/BuyRequestDetail';
 
 export {
   Layout,
@@ -104,7 +104,6 @@ export {
   GBChatItem,
   BuyRequest,
   AddBuyRequest,
-  UpdateBuyRequest,
   GBBusinessForm,
   GBBusinessItem,
   TopUpWallet,
@@ -128,4 +127,5 @@ export {
   OrderDetail,
   FavoritesItem,
   BecomeBuyer,
+  BuyRequestDetail,
 };

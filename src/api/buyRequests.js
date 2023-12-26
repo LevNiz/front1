@@ -30,15 +30,14 @@ export const FetchBuyRequestsDetail = async (id) => {
 };
 
 // Post Buyer requests:
-export const postBuyRequest = async (data, userID) => {
+export const postBuyRequest = async (data, userID, blocks) => {
   try {
     const sendData = {
       name: data.name,
       phone: data.phone,
-      link: data.link,
       client: Number(userID),
-      comment: data.comment,
       status: 'created',
+      cart_request: blocks,
     };
     await axiosInstance.post('core/buyer_request/', sendData);
     return { success: true };
@@ -52,22 +51,6 @@ export const deleteBuyRequest = async (dispatch, id) => {
   dispatch(fetchBuyRequestStart());
   try {
     await axiosInstance.delete(`core/buyer_request/${id}`);
-    return { success: true };
-  } catch (error) {
-    return { success: false };
-  }
-};
-
-// Update buyRequest:
-export const updateBuyRequest = async (data, id) => {
-  const sendData = {
-    name: data.name,
-    phone: data.phone,
-    link: data.link,
-    comment: data.comment,
-  };
-  try {
-    await axiosInstance.patch(`core/buyer_request/${id}/`, sendData);
     return { success: true };
   } catch (error) {
     return { success: false };

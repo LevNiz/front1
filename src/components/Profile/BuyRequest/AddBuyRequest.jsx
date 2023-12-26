@@ -11,6 +11,23 @@ const AddBuyRequest = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [blocks, setBlocks] = useState([{ link: '', comment: '' }]);
+
+  const handleLinkValue = (index, value) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[index].link = value;
+    setBlocks(updatedBlocks);
+  };
+
+  const handleCommentValue = (index, value) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[index].comment = value;
+    setBlocks(updatedBlocks);
+  };
+
+  const handleAddBlock = () => {
+    setBlocks([...blocks, { link: '', comment: '' }]);
+  };
 
   const {
     handleSubmit,
@@ -33,7 +50,7 @@ const AddBuyRequest = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    const { success } = await postBuyRequest(data, userID);
+    const { success } = await postBuyRequest(data, userID, blocks);
     if (success) {
       setIsLoading(false);
       navigate(-1);
@@ -51,7 +68,7 @@ const AddBuyRequest = () => {
         <ContentLoading extraStyle='480px' />
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='max-w-md'>
+          <div className='grid mm:grid-cols-2 gap-5'>
             <div>
               <p className='font-medium mb-2'>ФИО</p>
               <input
@@ -67,10 +84,10 @@ const AddBuyRequest = () => {
                 </p>
               )}
             </div>
-            <div className='mt-4'>
+            <div>
               <p className='font-medium mb-2'>Номер телефона</p>
               <input
-                className='w-full border border-colGray2 p-[16px] mm:p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                 placeholder='Номер телефона'
                 type='tel'
                 {...register('phone', {
@@ -87,36 +104,56 @@ const AddBuyRequest = () => {
                 </p>
               )}
             </div>
-            <div className='mt-4'>
-              <p className='font-medium mb-2'>Ссылка</p>
-              <input
-                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
-                placeholder='Ссылка'
-                {...register('link', {
-                  required: 'Поле обязательно к заполнению!',
-                })}
-              />
-              {errors?.link && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.link?.message || 'Поле обязательно к заполнению!'}
-                </p>
-              )}
-            </div>
-            <div className='mt-4'>
-              <p className='font-medium mb-2'>Комментарий</p>
-              <textarea
-                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
-                placeholder='Комментарий'
-                {...register('comment')}
-              />
-            </div>
-            <button
-              type='submit'
-              className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 w-full'
-            >
-              Cохранить
-            </button>
           </div>
+          <p className='font-medium mb-2 mt-4'>Товары</p>
+          {blocks?.map((el, index) => (
+            <div
+              key={index}
+              className='grid mm:grid-cols-2 gap-5 mt-3 p-3 border border-gray-300 rounded-md'
+            >
+              <div>
+                <p className='font-medium mb-2'>Ссылка</p>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='Ссылка'
+                  {...register(`link${index}`, {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                  value={el?.link}
+                  onChange={(e) => handleLinkValue(index, e.target.value)}
+                />
+                {errors?.link && (
+                  <p className='text-red-500 mt-1 text-sm'>
+                    {errors?.link?.message || 'Поле обязательно к заполнению!'}
+                  </p>
+                )}
+              </div>
+              <div>
+                <p className='font-medium mb-2'>Комментарий</p>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='Комментарий'
+                  {...register(`comment${index}`)}
+                  onChange={(e) => handleCommentValue(index, e.target.value)}
+                  value={el?.comment}
+                />
+              </div>
+            </div>
+          ))}
+          {blocks[0]?.link && (
+            <div
+              onClick={handleAddBlock}
+              className='bg-green-500 text-white font-medium rounded-md px-5 py-[2px] mt-3 flex ml-auto text-xl hover:opacity-80 duration-150 w-max cursor-pointer'
+            >
+              +
+            </div>
+          )}
+          <button
+            type='submit'
+            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-xs w-full'
+          >
+            Cохранить
+          </button>
         </form>
       )}
     </div>
