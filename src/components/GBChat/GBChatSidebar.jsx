@@ -13,7 +13,7 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
     <NavLink
       to={`t/${chat?.chatId}`}
       onClick={() => setChatContent(true)}
-      className='flex items-center rounded-md p-2'
+      className='flex items-center p-2 border-b border-[##D9D8D8] rounded-md'
     >
       <div className='w-12 md:w-14 h-12 md:h-14 min-w-[48px] md:min-w-[56px] rounded-full overflow-hidden border border-colYellow'>
         <img
@@ -49,7 +49,7 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
           <span
             className={`${
               chat?.unreadMessagesCount > 0 ? 'block' : 'hidden'
-            } bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-md px-1 ml-2`}
+            } bg-colYellow h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-md px-1 ml-2`}
           >
             {chat?.unreadMessagesCount > 99 ? '99+' : chat?.unreadMessagesCount}
           </span>

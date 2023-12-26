@@ -12,14 +12,14 @@ import {
 } from '../../api/gbchat';
 import { fetchUser } from '../../api/client';
 
-import chatBg from '../../assets/images/chat-bg.jpeg';
-import chatImg from '../../assets/images/chat.png';
+import chatImg from '../../assets/images/empty-chat.svg';
 import noImg from '../../assets/images/no-image.svg';
 import noAva from '../../assets/images/no-ava.jpeg';
 import back from '../../assets/icons/arrow-left.svg';
 import tick from '../../assets/icons/read.png';
 import doubleTick from '../../assets/icons/read2.png';
 import clipFile from '../../assets/icons/clip-file.svg';
+import sendIcon from '../../assets/images/send.svg';
 
 const GBChatMessages = ({ chats, setChatContent }) => {
   const { userID } = useSelector((state) => state?.user);
@@ -89,7 +89,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
 
   return (
     <div className='relative w-full'>
-      <div className='flex items-center w-full p-2'>
+      <div className='flex items-center w-full p-2 bg-[#ECECEC] ld:border-r-[3px] border-[#bdbdbd]'>
         <img
           onClick={() => {
             navigate('/gb-chat');
@@ -122,10 +122,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
           </h4>
         </div>
       </div>
-      <div
-        className='h-[calc(100vh-136px)] mm:h-[calc(100vh-180px)] border md:border-0 md:border-t scrollable border-gray-300 overflow-y-scroll p-2 pb-16'
-        style={{ backgroundImage: `url('${chatBg}')` }}
-      >
+      <div className='h-[calc(100vh-122px)] scrollable overflow-y-scroll p-2 pb-16'>
         {isLoading ? (
           <ContentLoading extraStyle='100%' />
         ) : messages?.length ? (
@@ -215,8 +212,10 @@ const GBChatMessages = ({ chats, setChatContent }) => {
         ) : (
           <div className='w-full h-full flex justify-center items-center pb-5 px-4'>
             <div className='text-center'>
-              <img className='w-3/4 mm:w-1/2 mx-auto' src={chatImg} alt='*' />
-              <h2 className='font-medium text-xl sm:text-2xl'>Чат создан!</h2>
+              <img className='max-w-[280px] mx-auto' src={chatImg} alt='*' />
+              <h2 className='font-medium text-xl sm:text-2xl pt-5'>
+                Чат создан!
+              </h2>
               <p className='text-gray-500 text-sm mt-1'>
                 Начните общаться с{' '}
                 <span className='font-medium text-black'>
@@ -232,7 +231,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
       </div>
       <form
         onSubmit={(e) => handleSendMessage(e)}
-        className='w-full absolute bottom-0 left-0'
+        className='w-full absolute bottom-0 left-0 bg-[#ECECEC] py-[2px] ld:border-r-[3px] border-[#bdbdbd]'
       >
         <div className='flex items-center relative m-2 mr-3'>
           <textarea
@@ -251,7 +250,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
             }}
             value={inputVal}
             rows='1'
-            className='pl-8 pr-10 py-3 w-full rounded-md sm:rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
+            className='pl-4 pr-10 py-3 w-full ml-8 mr-12 rounded-md sm:rounded-xl focus:outline-none resize-none text-base text-gray-900 bg-white border border-gray-300'
             placeholder='Введите сообщение'
           ></textarea>
           <label
@@ -270,17 +269,9 @@ const GBChatMessages = ({ chats, setChatContent }) => {
           </label>
           <button
             type='submit'
-            className='absolute top-[50%] -translate-y-[50%] right-0 inline-flex justify-center p-2 text-tpPurple2 cursor-pointer opacity-60'
+            className='absolute top-[50%] -translate-y-[50%] -right-[8px] inline-flex justify-center p-2 text-tpPurple2 cursor-pointer'
           >
-            <svg
-              aria-hidden='true'
-              className='w-8 h-8 rotate-90'
-              fill='currentColor'
-              viewBox='0 0 20 20'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path d='M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z'></path>
-            </svg>
+            <img className='w-10' src={sendIcon} alt='*' />
           </button>
         </div>
       </form>

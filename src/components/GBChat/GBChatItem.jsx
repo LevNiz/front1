@@ -6,7 +6,7 @@ import GBChatSidebar from './GBChatSidebar';
 import GBChatMessages from './GBChatMessages';
 import { fetchGBChats } from '../../api/gbchat';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
-import chatImg from '../../assets/images/chat.png';
+import chatImg from '../../assets/images/empty-chat.svg';
 import emptyChat from '../../assets/images/empty-chat.svg';
 
 const GBChatItem = () => {
@@ -34,7 +34,7 @@ const GBChatItem = () => {
   return (
     <div className='justify-center flex w-full'>
       {isLoading ? (
-        <ContentLoading extraStyle='480px' />
+        <ContentLoading extraStyle='580px' />
       ) : chats?.length ? (
         <>
           <div
@@ -42,10 +42,10 @@ const GBChatItem = () => {
               chatContent ? 'hidden' : 'block'
             } mm:block w-full mm:w-2/5 lg:w-2/6`}
           >
-            <h4 className='text-xl font-medium bg-slate-100 p-3 ld:border-r-[3px] border-[#bdbdbd]'>
-              GB-Chat
-            </h4>
-            <div className='chatSidebar flex flex-col space-y-3 scrollable pt-4 mm:h-[calc(100vh-180px)] overflow-y-scroll mm:pr-2 md:pr-3'>
+            <div className='mm:pt-5 ld:border-r-[3px] border-[#bdbdbd]'>
+              <h4 className='text-xl font-medium bg-[#F7F7F7] p-3'>GB-Chat</h4>
+            </div>
+            <div className='chatSidebar flex flex-col scrollable pt-4 mm:h-[calc(100vh-130px)] overflow-y-scroll mm:pr-2 md:pr-3'>
               {chats?.map((chat) => (
                 <GBChatSidebar
                   key={chat?.chatId}
@@ -58,7 +58,7 @@ const GBChatItem = () => {
           <div
             className={`${
               chatContent ? 'block' : 'hidden'
-            } w-full mm:w-3/5 lg:w-4/6`}
+            } w-full mm:w-3/5 lg:w-4/6 bg-[#F7F7F7]`}
           >
             <GBChatMessages chats={chats} setChatContent={setChatContent} />
           </div>
@@ -66,12 +66,12 @@ const GBChatItem = () => {
             className={`${
               chatContent
                 ? 'hidden'
-                : 'hidden mm:flex justify-center items-center w-4/6'
+                : 'hidden mm:flex justify-center items-center w-4/6 bg-[#F7F7F7]'
             } `}
           >
             <div>
-              <img className='w-[65%] mx-auto' src={chatImg} alt='*' />
-              <h1 className='font-medium text-xl md:text-2xl pt-3 text-center'>
+              <img className='max-w-xs mx-auto' src={chatImg} alt='*' />
+              <h1 className='font-medium text-xl md:text-2xl pt-5 text-center'>
                 Добро пожаловать в GB-Chat!
               </h1>
               <p className='opacity-50 text-center pt-1 mb-10'>
