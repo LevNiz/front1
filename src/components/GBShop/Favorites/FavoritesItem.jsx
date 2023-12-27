@@ -1,29 +1,18 @@
-import { useEffect, useState } from 'react';
 import { ItemsCard } from '../..';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
-import { fetchFavoriteItems } from '../../../api/gb-shop/items';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 
 const FavoritesItem = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [favItems, setFavItems] = useState([]);
-
-  const { userID } = useSelector((state) => state?.user);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
-      setFavItems(favData);
-      setIsLoading(false);
-    });
-    return () => unsubscribe();
-  }, [userID]);
+  const { favItems, loading, error } = useSelector((state) => state?.favItems);
 
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <ContentLoading extraStyle={380} />
+      ) : error ? (
+        <ErrorServer />
       ) : favItems?.length ? (
         <div className='grid grid-cols-5 gap-7 container pt-4'>
           {favItems?.map((el) => (

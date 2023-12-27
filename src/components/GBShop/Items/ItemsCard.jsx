@@ -4,32 +4,23 @@ import shoppingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favIcon from '../../../assets/gb-shop/icons/favorite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
 import noImg from '../../../assets/images/no-image.jpeg';
-import { useEffect, useState } from 'react';
 import {
   addToFavorites,
-  fetchFavoriteItems,
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
 
 const ItemsCard = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
-  const { pathname } = useLocation();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { favItems } = useSelector((state) => state?.favItems);
 
-  useEffect(() => {
-    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
-      setIsFavorite(favData?.some((item) => item?.id === el?.id));
-    });
-    return () => unsubscribe();
-  }, [userID, el?.id]);
+  const { pathname } = useLocation();
 
   const handleToggleFavorite = async () => {
-    if (isFavorite) {
+    if (favItems?.some((item) => item?.id === el?.id)) {
       await removeFromFavorites(userID, el?.id);
     } else {
       await addToFavorites(userID, el);
     }
-    setIsFavorite(!isFavorite);
   };
 
   return (
@@ -77,7 +68,7 @@ const ItemsCard = ({ el }) => {
         <NavLink
           to='#'
           state={{ from: el?.category?.nameRus, category: el?.category?.id }}
-          className='font-bold text-sm line-clamp-1 break-all hover:underline pb-2 w-max'
+          className='font-bold text-sm line-clamp-1 break-all hover:underline mb-2'
         >
           {el?.name}
         </NavLink>
@@ -102,7 +93,9 @@ const ItemsCard = ({ el }) => {
             <div
               onClick={handleToggleFavorite}
               className={`${
-                isFavorite ? 'bg-colYellow' : 'bg-gray-100'
+                favItems?.some((item) => item?.id === el?.id)
+                  ? 'bg-colYellow'
+                  : 'bg-gray-100'
               } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
             >
               <img className='w-5' src={favIcon} alt='*' />

@@ -7,6 +7,7 @@ import favorite from './../../assets/gb-shop/icons/favorite.svg';
 import basket from './../../assets/gb-shop/icons/basket.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBasketData } from '../../api/gb-shop/basket';
+import { fetchFavoriteItems } from '../../api/gb-shop/items';
 
 const GBShopNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -14,6 +15,7 @@ const GBShopNavbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const { cartItems } = useSelector((state) => state?.cartItems);
+  const { favItems } = useSelector((state) => state?.favItems);
   const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -49,6 +51,11 @@ const GBShopNavbar = () => {
     return () => unsubscribe();
   }, [userID, dispatch]);
 
+  useEffect(() => {
+    const unsubscribe = fetchFavoriteItems(userID, dispatch);
+    return () => unsubscribe();
+  }, [userID, dispatch]);
+
   return (
     <div className='relative'>
       <header
@@ -78,6 +85,9 @@ const GBShopNavbar = () => {
             {user ? (
               <ul className='flex items-center justify-end space-x-4'>
                 <li className='relative'>
+                  <span className='absolute -top-3 -right-3 bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-full px-1'>
+                    {favItems?.length > 99 ? '99+' : favItems?.length}
+                  </span>
                   <NavLink to='/gb-shop/favorites'>
                     <img className='w-[27px] md:w-6' src={favorite} alt='*' />
                   </NavLink>

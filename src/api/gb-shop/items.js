@@ -11,6 +11,11 @@ import {
   fetchItemsStart,
   fetchItemsSuccess,
 } from '../../redux/slices/itemsSlice';
+import {
+  fetchFavItemsStart,
+  fetchFavItemsSuccess,
+  fetchFavItemsFailure,
+} from '../../redux/slices/favItemsSlice';
 import { request } from '../axios';
 import { db } from '../../firebase/firebase';
 
@@ -36,21 +41,24 @@ export const fetchItemsDetail = async (id) => {
 };
 
 // Fetch Favorite items:
-export const fetchFavoriteItems = (userID, updateCallback) => {
-  try {
-    const userDocRef = doc(db, 'users', `${userID}`);
-    const favCollectionRef = collection(userDocRef, 'favs');
+export const fetchFavoriteItems = (userID, dispatch) => {
+  dispatch(fetchFavItemsStart());
 
-    const unsubscribe = onSnapshot(favCollectionRef, (snapshot) => {
+  const userDocRef = doc(db, 'users', `${userID}`);
+  const favCollectionRef = collection(userDocRef, 'favs');
+
+  const unsubscribe = onSnapshot(
+    favCollectionRef,
+    (snapshot) => {
       const favData = snapshot.docs.map((doc) => doc.data());
-      updateCallback(favData);
-    });
+      dispatch(fetchFavItemsSuccess(favData));
+    },
+    (error) => {
+      dispatch(fetchFavItemsFailure(error));
+    }
+  );
 
-    return unsubscribe;
-  } catch (error) {
-    console.error('Error fetching and subscribing to favorite items', error);
-    return () => {};
-  }
+  return unsubscribe;
 };
 
 // Add item to Favorites using setDoc:

@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -14,21 +13,12 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import {
   addToFavorites,
-  fetchFavoriteItems,
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
 
 const CategorySlider = ({ items, loading, error }) => {
   const { userID } = useSelector((state) => state?.user);
-  const [favItem, setFavItem] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
-      setFavItem(favData);
-    });
-
-    return () => unsubscribe();
-  }, [userID, items]);
+  const { favItems } = useSelector((state) => state?.favItems);
 
   return (
     <>
@@ -96,7 +86,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         from: el?.category?.nameRus,
                         category: el?.category?.id,
                       }}
-                      className='font-bold text-sm line-clamp-1 break-all hover:underline pb-2 w-max'
+                      className='font-bold text-sm line-clamp-1 break-all hover:underline mb-2'
                     >
                       {el?.name}
                     </NavLink>
@@ -120,14 +110,14 @@ const CategorySlider = ({ items, loading, error }) => {
                       <div className='flex justify-end items-center space-x-2'>
                         <div
                           onClick={async () => {
-                            if (favItem?.some((item) => item?.id === el?.id)) {
+                            if (favItems?.some((item) => item?.id === el?.id)) {
                               await removeFromFavorites(userID, el?.id);
                             } else {
                               await addToFavorites(userID, el);
                             }
                           }}
                           className={`${
-                            favItem?.some((item) => item?.id === el?.id)
+                            favItems?.some((item) => item?.id === el?.id)
                               ? 'bg-colYellow'
                               : 'bg-gray-100'
                           } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}

@@ -7,28 +7,26 @@ import CategorySlider from '../MainPage/CategorySlider';
 import noImg from '../../../assets/images/no-image.svg';
 import {
   addToFavorites,
-  fetchFavoriteItems,
   fetchItemsDetail,
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
 import favorite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, fetchBasketData } from '../../../api/gb-shop/basket';
+import { useSelector } from 'react-redux';
+import { addToCart } from '../../../api/gb-shop/basket';
 
 const ItemsDetail = () => {
   const { userID } = useSelector((state) => state?.user);
   const { items, loading, error } = useSelector((state) => state?.items);
   const { categories } = useSelector((state) => state?.categories);
   const { cartItems } = useSelector((state) => state?.cartItems);
+  const { favItems } = useSelector((state) => state?.favItems);
   const { state } = useLocation();
   const { id } = useParams();
-  const dispatch = useDispatch();
 
   const [item, setItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [btnIsLoading, setBtnIsLoading] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const itemCart = cartItems?.filter((el) => el?.item?.id === Number(id));
 
@@ -41,12 +39,11 @@ const ItemsDetail = () => {
   );
 
   const handleToggleFavorite = async () => {
-    if (isFavorite) {
+    if (favItems?.some((el) => el?.id === item?.id)) {
       await removeFromFavorites(userID, item?.id);
     } else {
       await addToFavorites(userID, item);
     }
-    setIsFavorite(!isFavorite);
   };
 
   const handleAddToCart = async () => {
@@ -57,18 +54,6 @@ const ItemsDetail = () => {
     }
     setBtnIsLoading(false);
   };
-
-  useEffect(() => {
-    const unsubscribe = fetchFavoriteItems(userID, (favData) => {
-      setIsFavorite(favData?.some((el) => el?.id === item?.id));
-    });
-    return () => unsubscribe();
-  }, [userID, item?.id]);
-
-  useEffect(() => {
-    const unsubscribe = fetchBasketData(userID, dispatch);
-    return () => unsubscribe();
-  }, [userID, dispatch]);
 
   useEffect(() => {
     scrollToTop();
@@ -122,7 +107,9 @@ const ItemsDetail = () => {
                 <div
                   onClick={handleToggleFavorite}
                   className={`${
-                    isFavorite ? 'bg-colYellow' : 'bg-gray-100'
+                    favItems?.some((el) => el?.id === item?.id)
+                      ? 'bg-colYellow'
+                      : 'bg-gray-100'
                   } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
                 >
                   <img className='w-5' src={favorite} alt='*' />
@@ -142,7 +129,7 @@ const ItemsDetail = () => {
                 {itemCart?.length ? (
                   <NavLink
                     to='/gb-shop/basket'
-                    className='h-12 bg-colYellow max-w-xs w-full rounded-md flex justify-center items-center'
+                    className='h-12 bg-colYellow max-w-xs w-full font-medium rounded-md flex justify-center items-center'
                   >
                     Перейти в корзину
                   </NavLink>

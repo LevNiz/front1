@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ModalGBShop from '../../../helpers/Modals/ModalGBShop';
 import noImg from '../../../assets/images/no-image.svg';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { fetchBasketData } from '../../../api/gb-shop/basket';
 
 const OrderDetail = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const { cartItems, loading } = useSelector((state) => state?.cartItems);
   const { addresses } = useSelector((state) => state?.addresses);
-  const { userID } = useSelector((state) => state?.user);
 
   const {
     control,
@@ -20,7 +18,6 @@ const OrderDetail = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const dispatch = useDispatch();
 
   const closeModal = () => {
     setOpenModal(false);
@@ -37,12 +34,6 @@ const OrderDetail = () => {
           ', ' +
           el?.nameAddress,
   }));
-
-  useEffect(() => {
-    (async () => {
-      await fetchBasketData(userID, dispatch);
-    })();
-  }, [userID, dispatch]);
 
   const onSubmit = (data) => {
     console.log(data);

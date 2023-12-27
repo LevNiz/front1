@@ -1,28 +1,18 @@
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
 import BasketItem from './BasketItem';
 import GBShopEmpty from '../../../helpers/Errors/GBSHopEmpty';
-import { fetchBasketData } from '../../../api/gb-shop/basket';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 
 const BasketInfo = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userID } = useSelector((state) => state?.user);
   const { cartItems, loading, error } = useSelector(
     (state) => state?.cartItems
   );
   const { register, watch } = useForm();
   const checkboxInput = watch('checkboxInput');
-
-  useEffect(() => {
-    (async () => {
-      await fetchBasketData(userID, dispatch);
-    })();
-  }, [userID, dispatch]);
 
   return (
     <>
