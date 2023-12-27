@@ -8,10 +8,12 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
+import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
 
 const ItemsCard = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
   const { favItems } = useSelector((state) => state?.favItems);
+  const { cartItems } = useSelector((state) => state?.cartItems);
 
   const { pathname } = useLocation();
 
@@ -100,7 +102,20 @@ const ItemsCard = ({ el }) => {
             >
               <img className='w-5' src={favIcon} alt='*' />
             </div>
-            <div className='flex justify-center items-center w-8 h-8 min-w-[32px] bg-gray-100 rounded-full cursor-pointer'>
+            <div
+              onClick={async () => {
+                if (cartItems?.some((item) => item?.item?.id === el?.id)) {
+                  await removeFromCart(userID, el?.id);
+                } else {
+                  await addToCart(userID, el);
+                }
+              }}
+              className={`${
+                cartItems?.some((item) => item?.item?.id === el?.id)
+                  ? 'bg-colYellow'
+                  : 'bg-gray-100'
+              } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
+            >
               <img className='w-5' src={shoppingCart} alt='*' />
             </div>
           </div>
