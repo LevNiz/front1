@@ -5,13 +5,18 @@ import logo from './../../assets/gb-shop/icons/gb-shop-logo.svg';
 import userIcon from './../../assets/gb-shop/icons/user.svg';
 import favorite from './../../assets/gb-shop/icons/favorite.svg';
 import basket from './../../assets/gb-shop/icons/basket.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBasketData } from '../../api/gb-shop/basket';
 
-const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
+const GBShopNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
+  const { cartItems } = useSelector((state) => state?.cartItems);
+  const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const user = localStorage.getItem('accessToken');
 
   const handleCloseMenu = () => {
@@ -38,6 +43,11 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [prevScrollPos]);
+
+  useEffect(() => {
+    const unsubscribe = fetchBasketData(userID, dispatch);
+    return () => unsubscribe();
+  }, [userID, dispatch]);
 
   return (
     <div className='relative'>
@@ -71,13 +81,11 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
                   <NavLink to='/gb-shop/favorites'>
                     <img className='w-[27px] md:w-6' src={favorite} alt='*' />
                   </NavLink>
-                  <span
-                    className={`${
-                      gbChatNotification > 0 ? 'block' : 'hidden'
-                    } absolute top-0 left-0 bg-red-500 h-2 w-2 rounded-full`}
-                  ></span>
                 </li>
-                <li className='hidden sm:block'>
+                <li className='hidden sm:block relative'>
+                  <span className='absolute -top-3 -right-3 bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-full px-1'>
+                    {cartItems?.length > 99 ? '99+' : cartItems?.length}
+                  </span>
                   <NavLink to='/gb-shop/basket'>
                     <img className='w-[27px] md:w-6' src={basket} alt='*' />
                   </NavLink>
@@ -86,11 +94,6 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
                   <NavLink to='profile/personal-data'>
                     <img className='w-[27px] md:w-6' src={userIcon} alt='*' />
                   </NavLink>
-                  <span
-                    className={`${
-                      TechChatNotification ? 'md:block' : 'hidden'
-                    } hidden absolute top-0 left-0 bg-red-500 h-2 w-2 rounded-full`}
-                  ></span>
                 </li>
               </ul>
             ) : (
@@ -108,20 +111,11 @@ const GBShopNavbar = ({ TechChatNotification, gbChatNotification }) => {
               <span className='w-full h-[2.5px] rounded-md bg-colYellow'></span>
               <span className='w-full h-[2.5px] rounded-md bg-colYellow'></span>
               <span className='w-full h-[2.5px] rounded-md bg-colYellow'></span>
-              <span
-                className={`${
-                  TechChatNotification ? 'block' : 'hidden'
-                } absolute -top-[10px] left-0 bg-red-500 h-2 w-2 rounded-full`}
-              ></span>
             </div>
           </div>
         </div>
       </header>
-      <MobileMenu
-        TechChatNotification={TechChatNotification}
-        isOpen={showSidebar}
-        onClose={handleCloseMenu}
-      />
+      <MobileMenu isOpen={showSidebar} onClose={handleCloseMenu} />
     </div>
   );
 };

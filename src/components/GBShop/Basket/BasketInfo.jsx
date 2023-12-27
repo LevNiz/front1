@@ -1,37 +1,38 @@
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import BasketItem from './BasketItem';
 import GBShopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { fetchBasketData } from '../../../api/gb-shop/basket';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
+import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 
 const BasketInfo = () => {
-  const [basket, setBasket] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userID } = useSelector((state) => state?.user);
+  const { cartItems, loading, error } = useSelector(
+    (state) => state?.cartItems
+  );
   const { register, watch } = useForm();
   const checkboxInput = watch('checkboxInput');
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
-      const basketData = await fetchBasketData(userID);
-      setBasket(basketData);
-      setIsLoading(false);
+      await fetchBasketData(userID, dispatch);
     })();
-  }, [userID]);
+  }, [userID, dispatch]);
 
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <div className='flex justify-center items-center min-h-[480px]'>
           <ContentLoading />
         </div>
-      ) : basket?.length ? (
+      ) : error ? (
+        <ErrorServer />
+      ) : cartItems?.length ? (
         <>
           <div className='flex justify-between items-center pt-10'>
             <span className='font-medium text-lg w-[28%]'>Товар</span>
@@ -40,7 +41,7 @@ const BasketInfo = () => {
             <span className='font-medium text-lg w-[15%]'>Итого</span>
           </div>
           <div>
-            {basket?.map((el, index) => (
+            {cartItems?.map((el, index) => (
               <BasketItem key={index} el={el} />
             ))}
 
@@ -98,7 +99,7 @@ const BasketInfo = () => {
                 type='submit'
                 disabled={!checkboxInput}
                 onClick={() => {
-                  navigate('/gb-shop/order', { state: basket });
+                  navigate('/gb-shop/order', { state: cartItems });
                 }}
                 className={`${
                   checkboxInput

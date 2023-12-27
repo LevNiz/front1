@@ -1,5 +1,6 @@
-const BasketItem = ({ el }) => {
+import { NavLink } from 'react-router-dom';
 
+const BasketItem = ({ el }) => {
   return (
     <div className='border-b border-gray-300 border-t py-5 my-5'>
       <div className='flex items-start justify-between space-x-5'>
@@ -12,7 +13,12 @@ const BasketItem = ({ el }) => {
             />
           </div>
           <div className='w-3/5 pl-3 flex flex-col justify-between'>
-            <p className='font-medium pt-3'>{el?.item?.name || 'Не указано'}</p>
+            <NavLink
+              to={`/gb-shop/items/${el?.item?.id}`}
+              className='font-medium pt-3'
+            >
+              {el?.item?.name || 'Не указано'}
+            </NavLink>
             <span className='text-[#8A8A8A] border-b border-gray-400 w-max cursor-pointer mb-3'>
               Удалить
             </span>

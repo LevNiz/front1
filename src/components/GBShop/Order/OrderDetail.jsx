@@ -1,23 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ModalGBShop from '../../../helpers/Modals/ModalGBShop';
 import noImg from '../../../assets/images/no-image.svg';
-import trash from '../../../assets/icons/trash.svg';
+import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { fetchBasketData } from '../../../api/gb-shop/basket';
 
 const OrderDetail = () => {
   const [openModal, setOpenModal] = useState(false);
 
+  const { cartItems, loading } = useSelector((state) => state?.cartItems);
   const { addresses } = useSelector((state) => state?.addresses);
-  const { state } = useLocation();
+  const { userID } = useSelector((state) => state?.user);
+
   const {
     control,
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const dispatch = useDispatch();
 
   const closeModal = () => {
     setOpenModal(false);
@@ -35,158 +38,189 @@ const OrderDetail = () => {
           el?.nameAddress,
   }));
 
+  useEffect(() => {
+    (async () => {
+      await fetchBasketData(userID, dispatch);
+    })();
+  }, [userID, dispatch]);
+
   const onSubmit = (data) => {
     console.log(data);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className='pt-16'>
-        <div className='flex space-x-10'>
-          <div className='w-2/5'>
-            <div className='relative'>
-              <h3 className='font-medium mb-3 text-[#484848]'>
-                Адрес доставки
-              </h3>
-              <p
-                className={`${
-                  addresses?.length ? 'hidden' : ''
-                } opacity-50 -mt-2 mb-2 text-sm`}
-              >
-                Вы еще не добавили адрес для доставки. Добавьте новый адрес.
-              </p>
-              {addresses?.length ? (
-                <>
-                  <Controller
-                    name='address'
-                    control={control}
-                    rules={{
-                      required: 'Поле обязательно к заполнению!',
-                    }}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        options={addressOptions}
-                        placeholder='Выберите адрес доставки'
-                        menuPortalTarget={document.body}
-                        styles={{
-                          control: (provided, state) => ({
-                            ...provided,
-                            padding: '8px',
-                            boxShadow: state.isFocused ? 0 : 0,
-                            border: state.isFocused ? '1px solid #999' : '',
-                            '&:hover': {
+      {loading ? (
+        <ContentLoading extraStyle={480} />
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)} className='pt-16'>
+          <div className='flex space-x-10'>
+            <div className='w-2/5'>
+              <div className='relative'>
+                <h3 className='font-medium mb-3 text-[#484848]'>
+                  Адрес доставки
+                </h3>
+                <p
+                  className={`${
+                    addresses?.length ? 'hidden' : ''
+                  } opacity-50 -mt-2 mb-2 text-sm`}
+                >
+                  Вы еще не добавили адрес для доставки. Добавьте новый адрес.
+                </p>
+                {addresses?.length ? (
+                  <>
+                    <Controller
+                      name='address'
+                      control={control}
+                      rules={{
+                        required: 'Поле обязательно к заполнению!',
+                      }}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          options={addressOptions}
+                          placeholder='Выберите адрес доставки'
+                          menuPortalTarget={document.body}
+                          styles={{
+                            control: (provided, state) => ({
+                              ...provided,
+                              padding: '8px',
+                              boxShadow: state.isFocused ? 0 : 0,
                               border: state.isFocused ? '1px solid #999' : '',
-                            },
-                          }),
-                          menuPortal: (provided) => ({
-                            ...provided,
-                            zIndex: 9999999,
-                          }),
-                          menu: (provided) => ({
-                            ...provided,
-                            position: 'absolute',
-                          }),
-                        }}
-                      />
+                              '&:hover': {
+                                border: state.isFocused ? '1px solid #999' : '',
+                              },
+                            }),
+                            menuPortal: (provided) => ({
+                              ...provided,
+                              zIndex: 9999999,
+                            }),
+                            menu: (provided) => ({
+                              ...provided,
+                              position: 'absolute',
+                            }),
+                          }}
+                        />
+                      )}
+                    />
+                    {errors?.address && (
+                      <p className='text-red-500 mt-1 text-sm'>
+                        {errors?.address.message || 'Error!'}
+                      </p>
                     )}
-                  />
-                  {errors?.address && (
-                    <p className='text-red-500 mt-1 text-sm'>
-                      {errors?.address.message || 'Error!'}
+                    <p
+                      onClick={() => {
+                        setOpenModal(true);
+                      }}
+                      className={`${
+                        addresses?.length ? '' : 'hidden'
+                      } text-xs font-medium opacity-60 cursor-pointer underline text-right mt-2`}
+                    >
+                      Добавить новый
                     </p>
-                  )}
-                  <p
+                  </>
+                ) : (
+                  <div
                     onClick={() => {
                       setOpenModal(true);
                     }}
                     className={`${
-                      addresses?.length ? '' : 'hidden'
-                    } text-xs font-medium opacity-60 cursor-pointer underline text-right mt-2`}
+                      addresses?.length ? 'hidden' : ''
+                    } font-medium hover:opacity-80 px-4 h-12 rounded-md bg-black text-white duration-150 sm:max-w-xs w-full mt-5 cursor-pointer flex justify-center items-center`}
                   >
-                    Добавить новый
-                  </p>
-                </>
-              ) : (
-                <div
-                  onClick={() => {
-                    setOpenModal(true);
-                  }}
-                  className={`${
-                    addresses?.length ? 'hidden' : ''
-                  } font-medium hover:opacity-80 px-4 h-12 rounded-md bg-black text-white duration-150 sm:max-w-xs w-full mt-5 cursor-pointer flex justify-center items-center`}
-                >
-                  Добавить новый адрес
-                </div>
-              )}
-            </div>
-            <div className='pt-5'>
-              <h3 className='font-medium mb-3 text-[#484848]'>Комментарий</h3>
-              <textarea
-                className='w-full border border-colGray2 p-4 rounded-md focus:border-black focus:outline-none resize-none'
-                placeholder='Комментарий'
-                {...register('comment', {
-                  required: false,
-                })}
-              />
-            </div>
-          </div>
-          <div className='w-3/5 p-5 rounded-md bg-[#F5F5F5] space-y-5'>
-            {state?.map((el, index) => (
-              <div key={index} className='flex'>
-                <div className='w-32 h-32 min-w-[128px] rounded-md overflow-hidden bg-white'>
-                  <img
-                    className='w-full h-full object-contain'
-                    src={el?.item?.image}
-                    alt='*'
-                  />
-                </div>
-                <div className='flex flex-col justify-between w-full'>
-                  <div className='pl-3 pt-2'>
-                    <div className='flex justify-between items-start'>
-                      <h5 className='font-medium'>{el?.item?.name}</h5>
-                      <img className='cursor-pointer' src={trash} alt='*' />
-                    </div>
-                    <div className='flex items-center pt-1'>
-                      <div className='min-w-[24px] w-6 h-6 rounded-full overflow-hidden border border-gray-300 bg-white'>
-                        <img
-                          className='w-full h-full object-contain rounded-full p-[2px]'
-                          src={el?.item?.supplier?.avatar}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = noImg;
-                          }}
-                          alt='*'
-                        />
-                      </div>
-                      <p className='text-sm text-[#A7A9B7] ml-1'>
-                        {el?.item?.supplier?.fullname}
-                      </p>
-                    </div>
+                    Добавить новый адрес
                   </div>
-                  <p className='font-medium ml-3 pb-3 text-right'>
-                    $ {el?.item?.cost}
-                  </p>
+                )}
+              </div>
+              <div className='pt-5'>
+                <h3 className='font-medium mb-3 text-[#484848]'>Комментарий</h3>
+                <textarea
+                  className='w-full border border-colGray2 p-4 rounded-md focus:border-black focus:outline-none resize-none'
+                  placeholder='Комментарий'
+                  {...register('comment', {
+                    required: false,
+                  })}
+                />
+              </div>
+            </div>
+            <div className='w-3/5 p-5 rounded-md bg-[#F5F5F5] space-y-5'>
+              {cartItems?.map((el, index) => (
+                <div key={index} className='flex'>
+                  <div className='w-32 h-32 min-w-[128px] rounded-md overflow-hidden bg-white'>
+                    <img
+                      className='w-full h-full object-contain'
+                      src={el?.item?.image}
+                      alt='*'
+                    />
+                  </div>
+                  <div className='flex flex-col justify-between w-full'>
+                    <div className='pl-3 pt-2'>
+                      <h5 className='font-medium'>{el?.item?.name}</h5>
+                      <div className='flex items-center py-2'>
+                        <span className='text-sm text-[#888993]'>
+                          Количество:
+                        </span>
+                        <p className='ml-1 text-sm font-medium'>
+                          {el?.quantity}
+                        </p>
+                      </div>
+                      <div className='flex items-center'>
+                        <div className='min-w-[24px] w-6 h-6 rounded-full overflow-hidden border border-gray-300 bg-white'>
+                          <img
+                            className='w-full h-full object-contain rounded-full p-[2px]'
+                            src={el?.item?.supplier?.avatar}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = noImg;
+                            }}
+                            alt='*'
+                          />
+                        </div>
+                        <p className='text-sm text-[#A7A9B7] ml-1'>
+                          {el?.item?.supplier?.fullname}
+                        </p>
+                      </div>
+                    </div>
+                    <p className='font-medium ml-3 pb-3 text-right'>
+                      $ {el?.item?.cost}
+                    </p>
+                  </div>
+                </div>
+              ))}
+              <div className='space-y-2 pt-4'>
+                <div className='flex justify-between items-center'>
+                  <span className='text-[#484848]'>Товары</span>
+                  <span className='text-[#484848]'>
+                    {cartItems?.length} товара
+                  </span>
+                </div>
+                <div className='flex justify-between items-center'>
+                  <span className='text-[#484848]'>Доставка</span>
+                  <span className='text-[#484848]'>Включено в стоимость</span>
+                </div>
+                <div className='flex justify-between items-center'>
+                  <span className='text-[#484848]'>Итого к оплате</span>
+                  <span className='text-black font-bold'>1200 $</span>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-        <div className='flex justify-end pt-10'>
-          <button
-            type='button'
-            onClick={handleSubmit(onSubmit)}
-            disabled={!addresses?.length}
-            className={`${
-              addresses?.length
-                ? 'hover:opacity-80'
-                : 'opacity-60 cursor-not-allowed'
-            } font-medium px-4 h-14 rounded-md bg-black text-white duration-150 sm:max-w-xs w-full`}
-          >
-            Подтвердить
-          </button>
-        </div>
-      </form>
+          <div className='flex justify-end pt-10'>
+            <button
+              type='button'
+              onClick={handleSubmit(onSubmit)}
+              disabled={!addresses?.length}
+              className={`${
+                addresses?.length
+                  ? 'hover:opacity-80'
+                  : 'opacity-60 cursor-not-allowed'
+              } font-medium px-4 h-14 rounded-md bg-black text-white duration-150 sm:max-w-xs w-full`}
+            >
+              Подтвердить
+            </button>
+          </div>
+        </form>
+      )}
       <ModalGBShop isOpen={openModal} onClose={closeModal} />
     </>
   );

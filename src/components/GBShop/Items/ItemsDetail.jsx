@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
-import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
 import ItemsSlider from './ItemsSlider';
 import CategorySlider from '../MainPage/CategorySlider';
 import noImg from '../../../assets/images/no-image.svg';
@@ -13,19 +13,24 @@ import {
 } from '../../../api/gb-shop/items';
 import favorite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, fetchBasketData } from '../../../api/gb-shop/basket';
 
 const ItemsDetail = () => {
-  const [item, setItem] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
-
   const { userID } = useSelector((state) => state?.user);
   const { items, loading, error } = useSelector((state) => state?.items);
   const { categories } = useSelector((state) => state?.categories);
-
+  const { cartItems } = useSelector((state) => state?.cartItems);
   const { state } = useLocation();
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const [item, setItem] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [btnIsLoading, setBtnIsLoading] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const itemCart = cartItems?.filter((el) => el?.item?.id === Number(id));
 
   const similarItems = items?.filter(
     (el) => el?.category?.id === item?.category?.id
@@ -44,12 +49,26 @@ const ItemsDetail = () => {
     setIsFavorite(!isFavorite);
   };
 
+  const handleAddToCart = async () => {
+    setBtnIsLoading(true);
+    const { success } = await addToCart(userID, item);
+    if (success) {
+      setBtnIsLoading(false);
+    }
+    setBtnIsLoading(false);
+  };
+
   useEffect(() => {
     const unsubscribe = fetchFavoriteItems(userID, (favData) => {
       setIsFavorite(favData?.some((el) => el?.id === item?.id));
     });
     return () => unsubscribe();
   }, [userID, item?.id]);
+
+  useEffect(() => {
+    const unsubscribe = fetchBasketData(userID, dispatch);
+    return () => unsubscribe();
+  }, [userID, dispatch]);
 
   useEffect(() => {
     scrollToTop();
@@ -119,20 +138,22 @@ const ItemsDetail = () => {
                 </span>
               </div>
               <p className='py-7'>{item?.description}</p>
-              <p className='mb-2 font-medium'>Количество:</p>
               <div className='flex pb-5'>
-                <div className='border rounded-tl-sm rounded-bl-sm border-gray-200 w-14 h-10 flex justify-center items-center font-medium cursor-pointer'>
-                  -
-                </div>
-                <div className='border border-y-gray-200 font-medium border-x-0 min-w-[60px] px-1 flex justify-center items-center'>
-                  1
-                </div>
-                <div className='border rounded-tr-sm rounded-br-sm border-gray-200 w-14 h-10 flex justify-center items-center font-medium cursor-pointer'>
-                  +
-                </div>
-                <button className='h-10 ml-4 bg-black text-white max-w-xs w-full rounded-sm'>
-                  В корзину
-                </button>
+                {itemCart?.length ? (
+                  <NavLink
+                    to='/gb-shop/basket'
+                    className='h-12 bg-colYellow max-w-xs w-full rounded-md flex justify-center items-center'
+                  >
+                    Перейти в корзину
+                  </NavLink>
+                ) : (
+                  <button
+                    onClick={handleAddToCart}
+                    className='h-12 bg-black text-white max-w-xs w-full rounded-md'
+                  >
+                    {btnIsLoading ? <ButtonLoading /> : 'В корзину'}
+                  </button>
+                )}
               </div>
             </div>
           </div>

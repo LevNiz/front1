@@ -19,6 +19,7 @@ import searchRequestReducer from './slices/searchRequestSlice';
 import gbShopItemsReducer from './slices/gbShopItemsSlice';
 import categoriesReducer from './slices/categoriesSlice';
 import itemsReducer from './slices/itemsSlice';
+import cartItemsSlice from './slices/cartItemsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -45,6 +46,7 @@ const rootReducer = combineReducers({
   homeItems: gbShopItemsReducer,
   categories: categoriesReducer,
   items: itemsReducer,
+  cartItems: cartItemsSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
