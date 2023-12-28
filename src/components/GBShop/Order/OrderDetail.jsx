@@ -48,9 +48,9 @@ const OrderDetail = () => {
       {loading ? (
         <ContentLoading extraStyle={480} />
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className='pt-16'>
-          <div className='flex space-x-10'>
-            <div className='w-2/5'>
+        <form onSubmit={handleSubmit(onSubmit)} className='pt-5 md:pt-16'>
+          <div className='md:flex md:space-x-5 lg:space-x-10'>
+            <div className='md:w-2/5 pb-5 md:pb-0'>
               <div className='relative'>
                 <h3 className='font-medium mb-3 text-[#484848]'>
                   Адрес доставки
@@ -138,10 +138,10 @@ const OrderDetail = () => {
                 />
               </div>
             </div>
-            <div className='w-3/5 p-5 rounded-md bg-[#F5F5F5] space-y-5'>
+            <div className='md:w-3/5 md:p-5 rounded-md md:bg-[#F5F5F5] space-y-5'>
               {cartItems?.map((el, index) => (
                 <div key={index} className='flex'>
-                  <div className='w-32 h-32 min-w-[128px] rounded-md overflow-hidden bg-white'>
+                  <div className='sm:w-32 sm:h-32 sm:min-w-[128px] w-28 h-28 min-w-[112px] rounded-md overflow-hidden bg-white'>
                     <img
                       className='w-full h-full object-contain'
                       src={el?.item?.image}
@@ -150,7 +150,9 @@ const OrderDetail = () => {
                   </div>
                   <div className='flex flex-col justify-between w-full'>
                     <div className='pl-3 pt-2'>
-                      <h5 className='font-medium'>{el?.item?.name}</h5>
+                      <h5 className='font-medium line-clamp-2 break-all'>
+                        {el?.item?.name}
+                      </h5>
                       <div className='flex items-center py-2'>
                         <span className='text-sm text-[#888993]'>
                           Количество:
@@ -171,12 +173,12 @@ const OrderDetail = () => {
                             alt='*'
                           />
                         </div>
-                        <p className='text-sm text-[#A7A9B7] ml-1'>
+                        <p className='text-sm text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
                           {el?.item?.supplier?.fullname}
                         </p>
                       </div>
                     </div>
-                    <p className='font-medium ml-3 pb-3 text-right'>
+                    <p className='font-medium ml-3 text-right'>
                       $ {el?.item?.cost}
                     </p>
                   </div>

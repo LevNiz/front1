@@ -40,7 +40,7 @@ const MainCategories = () => {
       ) : error ? (
         <ErrorServer />
       ) : firstSevenCategories?.length ? (
-        <div className='flex lg:grid grid-cols-7 gap-3 md:gap-5 lg:gap-7 pt-3 overflow-x-scroll scrollable pb-4'>
+        <div className='flex lg:grid grid-cols-7 gap-3 md:gap-5 lg:gap-7 pt-3 overflow-x-scroll xl:overflow-hidden scrollable pb-4'>
           {firstSevenCategories?.map((el) => (
             <NavLink
               to='items'
@@ -59,7 +59,7 @@ const MainCategories = () => {
                   alt='*'
                 />
               </div>
-              <p className='text-center text-xs md:text-base xl:text-xl break-all line-clamp-1 lg:line-clamp-2 font-medium pt-3'>
+              <p className='text-center text-xs md:text-base xl:text-xl break-all lg:break-normal line-clamp-1 lg:line-clamp-2 font-medium pt-3'>
                 {el?.nameRus}
               </p>
             </NavLink>

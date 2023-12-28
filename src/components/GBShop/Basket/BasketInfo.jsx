@@ -37,10 +37,12 @@ const BasketInfo = () => {
         <ErrorServer />
       ) : cartItems?.length ? (
         <>
-          <div className='flex justify-between items-center pt-10'>
+          <div className='hidden ld:flex justify-between items-center pt-10'>
             <span className='font-medium text-lg w-[35%]'>Товар</span>
             <span className='font-medium text-lg w-[15%]'>Цена</span>
-            <span className='font-medium text-lg w-[28%]'>Количество</span>
+            <span className='font-medium text-lg w-[20%] lg:w-[28%]'>
+              Количество
+            </span>
             <span className='font-medium text-lg w-[15%]'>Итого</span>
           </div>
           <div>
@@ -92,10 +94,8 @@ const BasketInfo = () => {
                     </svg>
                   )}
                 </div>
-                <p>
-                  <span className='ml-1 text-[#5a5959]'>
-                    Согласен(на) получить уведомления об акциях
-                  </span>
+                <p className='ml-1 text-[#5a5959]'>
+                  Согласен(на) получить уведомления об акциях
                 </p>
               </label>
               <button

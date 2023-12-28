@@ -21,9 +21,11 @@ const Order = () => {
 
   return userID ? (
     <div className='content py-20'>
-      <h3 className='font-bold font-ubuntu px-5 py-3 text-[#030303] text-3xl bg-[#FBFBFB] mt-5'>
-        Оформить заказ
-      </h3>
+      <div className='bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-4'>
+        <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
+          Оформить заказ
+        </h3>
+      </div>
       <OrderDetail />
     </div>
   ) : (
