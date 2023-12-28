@@ -5,14 +5,27 @@ import { useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
+import { useEffect, useState } from 'react';
 
 const BasketInfo = () => {
+  const [totalCost, setTotalCost] = useState(0);
   const navigate = useNavigate();
   const { cartItems, loading, error } = useSelector(
     (state) => state?.cartItems
   );
   const { register, watch } = useForm();
   const checkboxInput = watch('checkboxInput');
+
+  useEffect(() => {
+    const calculateTotalQuantity = () => {
+      const total = cartItems?.reduce((acc, item) => {
+        return acc + item?.item?.cost * item.quantity;
+      }, 0);
+      setTotalCost(total);
+    };
+
+    calculateTotalQuantity();
+  }, [cartItems]);
 
   return (
     <>
@@ -25,8 +38,8 @@ const BasketInfo = () => {
       ) : cartItems?.length ? (
         <>
           <div className='flex justify-between items-center pt-10'>
-            <span className='font-medium text-lg w-[28%]'>Товар</span>
-            <span className='font-medium text-lg w-[22%]'>Цена</span>
+            <span className='font-medium text-lg w-[35%]'>Товар</span>
+            <span className='font-medium text-lg w-[15%]'>Цена</span>
             <span className='font-medium text-lg w-[28%]'>Количество</span>
             <span className='font-medium text-lg w-[15%]'>Итого</span>
           </div>
@@ -38,7 +51,7 @@ const BasketInfo = () => {
             <form className='max-w-[420px] pt-10 ml-auto'>
               <div className='flex items-center justify-between pb-5'>
                 <span className='font-medium'>Итого</span>
-                <span className='text-xl font-bold'>$ 1200.00</span>
+                <span className='text-xl font-bold'>$ {totalCost}</span>
               </div>
               <input
                 className='hidden'

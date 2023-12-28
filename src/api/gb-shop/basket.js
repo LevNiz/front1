@@ -6,6 +6,7 @@ import {
   onSnapshot,
   getDocs,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import {
   fetchCartItemsFailure,
@@ -81,4 +82,24 @@ export const removeFromCart = async (userID, itemID) => {
   } catch (error) {
     console.error('Error removing from favorites', error);
   }
+};
+
+// Increment quantity
+export const handleIncreaseQuantity = async (userID, itemId, count) => {
+  const userDocRef = doc(db, 'users', `${userID}`);
+  const cartItemRef = doc(userDocRef, 'cart', `${itemId}`);
+
+  await updateDoc(cartItemRef, {
+    quantity: count,
+  });
+};
+
+// Decrement quantity
+export const handleDecreaseQuantity = async (userID, itemId, count) => {
+  const userDocRef = doc(db, 'users', `${userID}`);
+  const cartItemRef = doc(userDocRef, 'cart', `${itemId}`);
+
+  await updateDoc(cartItemRef, {
+    quantity: count,
+  });
 };
