@@ -102,7 +102,7 @@ const BasketInfo = () => {
                 type='submit'
                 disabled={!checkboxInput}
                 onClick={() => {
-                  navigate('/gb-shop/order', { state: cartItems });
+                  navigate('/gb-shop/order', { state: totalCost });
                 }}
                 className={`${
                   checkboxInput

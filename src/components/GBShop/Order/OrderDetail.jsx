@@ -5,12 +5,16 @@ import { useSelector } from 'react-redux';
 import ModalGBShop from '../../../helpers/Modals/ModalGBShop';
 import noImg from '../../../assets/images/no-image.svg';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { payForParcel } from '../../../api/gb-shop/order';
+import { useLocation } from 'react-router-dom';
 
 const OrderDetail = () => {
   const [openModal, setOpenModal] = useState(false);
-
   const { cartItems, loading } = useSelector((state) => state?.cartItems);
   const { addresses } = useSelector((state) => state?.addresses);
+  const { userID } = useSelector((state) => state?.user);
+
+  const { state } = useLocation();
 
   const {
     control,
@@ -36,7 +40,7 @@ const OrderDetail = () => {
   }));
 
   const onSubmit = (data) => {
-    console.log(data);
+    payForParcel(data, cartItems, userID, state);
   };
 
   return (
