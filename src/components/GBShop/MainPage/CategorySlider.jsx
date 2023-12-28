@@ -21,6 +21,7 @@ const CategorySlider = ({ items, loading, error }) => {
   const { userID } = useSelector((state) => state?.user);
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
+  const { userData } = useSelector((state) => state?.user);
 
   return (
     <div>
@@ -99,7 +100,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         from: el?.category?.nameRus,
                         category: el?.category?.id,
                       }}
-                      className='font-medium mm:font-bold text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
+                      className='font-medium w-max mm:font-bold text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
                     >
                       {el?.name}
                     </NavLink>
@@ -126,7 +127,11 @@ const CategorySlider = ({ items, loading, error }) => {
                             if (favItems?.some((item) => item?.id === el?.id)) {
                               await removeFromFavorites(userID, el?.id);
                             } else {
-                              await addToFavorites(userID, el);
+                              await addToFavorites(
+                                userID,
+                                el,
+                                userData?.fullname
+                              );
                             }
                           }}
                           className={`${
@@ -146,7 +151,7 @@ const CategorySlider = ({ items, loading, error }) => {
                             ) {
                               await removeFromCart(userID, el?.id);
                             } else {
-                              await addToCart(userID, el);
+                              await addToCart(userID, el, userData?.fullname);
                             }
                           }}
                           className={`${

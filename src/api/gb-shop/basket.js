@@ -36,7 +36,7 @@ export const fetchBasketData = (userID, dispatch) => {
 };
 
 // Add item from Cart:
-export const addToCart = async (userID, item) => {
+export const addToCart = async (userID, item, name) => {
   const itemData = {
     category: item?.category || [],
     cost: item?.cost || '',
@@ -54,13 +54,18 @@ export const addToCart = async (userID, item) => {
     item: itemData,
     quantity: 1,
   };
+  const token = localStorage.getItem('accessToken');
   try {
     const userDocRef = doc(db, 'users', `${userID}`);
+    await setDoc(userDocRef, {
+      name: name,
+      token: token,
+    });
     const cartCollectionRef = collection(userDocRef, 'cart');
-
     await setDoc(doc(cartCollectionRef, `${item?.id}`), sendData);
     return { success: true };
   } catch (error) {
+    alert(`Ошибка: ${error}`);
     return { success: false };
   }
 };
@@ -80,7 +85,7 @@ export const removeFromCart = async (userID, itemID) => {
       await deleteDoc(docToDelete.ref);
     }
   } catch (error) {
-    console.error('Error removing from favorites', error);
+    alert(`Ошибка: ${error}`);
   }
 };
 

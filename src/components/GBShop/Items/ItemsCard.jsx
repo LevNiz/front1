@@ -14,6 +14,7 @@ const ItemsCard = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
+  const { userData } = useSelector((state) => state?.user);
 
   const { pathname } = useLocation();
 
@@ -21,7 +22,15 @@ const ItemsCard = ({ el }) => {
     if (favItems?.some((item) => item?.id === el?.id)) {
       await removeFromFavorites(userID, el?.id);
     } else {
-      await addToFavorites(userID, el);
+      await addToFavorites(userID, el, userData?.fullname);
+    }
+  };
+
+  const handleToggleCart = async () => {
+    if (cartItems?.some((item) => item?.item?.id === el?.id)) {
+      await removeFromCart(userID, el?.id);
+    } else {
+      await addToCart(userID, el, userData?.fullname);
     }
   };
 
@@ -102,13 +111,7 @@ const ItemsCard = ({ el }) => {
               <img className='w-5' src={favIcon} alt='*' />
             </div>
             <div
-              onClick={async () => {
-                if (cartItems?.some((item) => item?.item?.id === el?.id)) {
-                  await removeFromCart(userID, el?.id);
-                } else {
-                  await addToCart(userID, el);
-                }
-              }}
+              onClick={handleToggleCart}
               className={`${
                 cartItems?.some((item) => item?.item?.id === el?.id)
                   ? 'bg-colYellow'

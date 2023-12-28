@@ -13,7 +13,7 @@ import jwt_decode from 'jwt-decode';
 // Register:
 export const registerUser = async (dispatch, data) => {
   dispatch(registerStart());
-  const userData = {
+  const sendData = {
     login: data.email,
     phone: data.phone,
     fullname: data.fullName,
@@ -23,9 +23,15 @@ export const registerUser = async (dispatch, data) => {
     wallet: [],
   };
   try {
-    const res = await request.post('user/client/', userData);
-    const userID = jwt_decode(res?.data.access);
-    dispatch(registerSuccess({ user: res?.data, userID: userID?.user_id }));
+    const res = await request.post('user/client/', sendData);
+    const client = jwt_decode(res?.data.access);
+    dispatch(
+      registerSuccess({
+        user: res?.data,
+        userID: client?.user_id,
+        userData: client,
+      })
+    );
     localStorage.setItem('accessToken', res?.data?.access);
     localStorage.setItem('refreshToken', res?.data?.refresh);
     return { success: true };
@@ -37,16 +43,22 @@ export const registerUser = async (dispatch, data) => {
 
 // Login:
 export const loginUser = async (dispatch, data) => {
-  const userData = {
+  const sendData = {
     login: data.email,
     password: data.password,
   };
   try {
     dispatch(loginStart());
-    const res = await request.post('api/user/login/', userData);
+    const res = await request.post('api/user/login/', sendData);
     const client = jwt_decode(res?.data.access);
     if (client?.user_type === 'client') {
-      dispatch(loginSuccess({ user: res?.data, userID: client?.user_id }));
+      dispatch(
+        loginSuccess({
+          user: res?.data,
+          userID: client?.user_id,
+          userData: client,
+        })
+      );
       localStorage.setItem('accessToken', res?.data?.access);
       localStorage.setItem('refreshToken', res?.data?.refresh);
       return { success: true };

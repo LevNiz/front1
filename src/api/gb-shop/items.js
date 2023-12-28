@@ -62,7 +62,7 @@ export const fetchFavoriteItems = (userID, dispatch) => {
 };
 
 // Add item to Favorites using setDoc:
-export const addToFavorites = async (userID, el) => {
+export const addToFavorites = async (userID, el, name) => {
   const sendData = {
     category: el?.category?.id || '',
     cost: el?.cost || '',
@@ -76,13 +76,18 @@ export const addToFavorites = async (userID, el) => {
     supplier: el?.supplier || [],
     uid: `${el?.id}` || '',
   };
+  const token = localStorage.getItem('accessToken');
   try {
     const userDocRef = doc(db, 'users', `${userID}`);
+    await setDoc(userDocRef, {
+      name: name,
+      token: token,
+    });
     const favCollectionRef = collection(userDocRef, 'favs');
 
     await setDoc(doc(favCollectionRef, `${el?.id}`), sendData);
   } catch (error) {
-    console.error('Error adding to favorites', error);
+    alert(`Ошибка: ${error}`);
   }
 };
 
@@ -101,6 +106,6 @@ export const removeFromFavorites = async (userID, itemID) => {
       await deleteDoc(docToDelete.ref);
     }
   } catch (error) {
-    console.error('Error removing from favorites', error);
+    alert(`Ошибка: ${error}`);
   }
 };

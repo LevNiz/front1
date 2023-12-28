@@ -21,6 +21,7 @@ const ItemsDetail = () => {
   const { categories } = useSelector((state) => state?.categories);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { favItems } = useSelector((state) => state?.favItems);
+  const { userData } = useSelector((state) => state?.user);
   const { state } = useLocation();
   const { id } = useParams();
 
@@ -42,13 +43,13 @@ const ItemsDetail = () => {
     if (favItems?.some((el) => el?.id === item?.id)) {
       await removeFromFavorites(userID, item?.id);
     } else {
-      await addToFavorites(userID, item);
+      await addToFavorites(userID, item, userData?.fullname);
     }
   };
 
   const handleAddToCart = async () => {
     setBtnIsLoading(true);
-    const { success } = await addToCart(userID, item);
+    const { success } = await addToCart(userID, item, userData?.fullname);
     if (success) {
       setBtnIsLoading(false);
     }
