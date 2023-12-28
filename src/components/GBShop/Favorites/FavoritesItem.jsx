@@ -14,7 +14,7 @@ const FavoritesItem = () => {
       ) : error ? (
         <ErrorServer />
       ) : favItems?.length ? (
-        <div className='grid grid-cols-5 gap-7 container pt-4'>
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pt-4 mm:content'>
           {favItems?.map((el) => (
             <ItemsCard key={el?.id} el={el} favorite={true} />
           ))}

@@ -7,7 +7,7 @@ import brand5 from '../../../assets/gb-shop/brands/brand5.svg';
 const Brands = () => {
   return (
     <div className='py-10 content'>
-      <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 mt-7 mb-12'>
+      <div className='flex justify-between items-center bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 mt-7 mb-12'>
         <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
           Бренды
         </h3>

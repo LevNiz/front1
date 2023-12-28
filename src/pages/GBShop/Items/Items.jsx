@@ -34,10 +34,10 @@ const Items = () => {
   }, []);
 
   return (
-    <div className='py-24 min-h-[991px]'>
+    <div className='py-16 mm:py-24 min-h-[991px]'>
       <div className='content'>
-        <div className='bg-[#FBFBFB] py-2 p-5 my-4'>
-          <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
+        <div className='bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-4'>
+          <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
             {itemCategoryTitle[0]?.nameRus}
           </h3>
         </div>
@@ -45,7 +45,7 @@ const Items = () => {
       {loading ? (
         <ContentLoading extraStyle={380} />
       ) : filteredItems?.length ? (
-        <div className='grid grid-cols-5 gap-7 container pt-4'>
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pt-4'>
           {filteredItems?.map((el) => (
             <ItemsCard key={el?.id} el={el} />
           ))}

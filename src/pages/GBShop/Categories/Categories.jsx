@@ -25,9 +25,9 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className='py-24 content min-h-[991px]'>
-      <div className='bg-[#FBFBFB] py-2 px-5 my-7'>
-        <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
+    <div className='py-16 mm:py-24 content min-h-[991px]'>
+      <div className='bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-7'>
+        <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
           Категории
         </h3>
       </div>
@@ -38,7 +38,7 @@ const Categories = () => {
           <ErrorServer />
         </div>
       ) : categories?.length ? (
-        <div className='grid grid-cols-7 gap-7 pt-3'>
+        <div className='grid grid-cols-2 ss:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4 md:gap-7 pt-3'>
           {categories?.map((el) => (
             <Link
               to='/gb-shop/items'
@@ -46,7 +46,7 @@ const Categories = () => {
               state={{ from: el?.nameRus, category: el?.id }}
               className='group'
             >
-              <div className='h-36 flex justify-center items-center shadow-md group-hover:shadow-xl duration-150 bg-[#FBFBFB] rounded-xl'>
+              <div className='h-28 sm:h-32 mm:h-36 flex justify-center items-center shadow-md overflow-hidden group-hover:shadow-xl duration-150 bg-[#FBFBFB] rounded-xl'>
                 <img
                   className='mx-auto'
                   src={el?.icon ? el?.icon : noImg}
@@ -57,7 +57,7 @@ const Categories = () => {
                   alt='*'
                 />
               </div>
-              <p className='text-center text-xl font-medium pt-3'>
+              <p className='text-center text-sm sm:text-base xl:text-xl font-medium pt-3'>
                 {el?.nameRus}
               </p>
             </Link>

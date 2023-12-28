@@ -45,7 +45,7 @@ const ItemsSlider = ({ slideImg }) => {
   // const [activeThumb, setActiveThumb] = useState('');
 
   return (
-    <div className='w-full mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0'>
+    <>
       <Swiper
         loop={true}
         spaceBetween={10}
@@ -60,7 +60,7 @@ const ItemsSlider = ({ slideImg }) => {
         {/* {images?.map((el, index) => ( */}
         <SwiperSlide
           // key={index}
-          className='h-[470px] rounded-lg mx-auto bg-[#FBFBFB]'
+          className='sm:h-[340px] lg:h-[470px] rounded-lg mx-auto bg-[#FBFBFB]'
         >
           <img
             src={slideImg}
@@ -100,7 +100,7 @@ const ItemsSlider = ({ slideImg }) => {
           </SwiperSlide>
         ))}
       </Swiper> */}
-    </div>
+    </>
   );
 };
 

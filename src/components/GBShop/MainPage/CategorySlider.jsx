@@ -76,7 +76,6 @@ const CategorySlider = ({ items, loading, error }) => {
                         {el?.cost} $
                       </div>
                       <div className='absolute bottom-0 left-0 w-full h-12 bg-[linear-gradient(180deg,_rgba(0,_0,_0,_0.0)_0%,_rgba(0,_0,_0,_0.50)_200%)]'></div>
-                      _{' '}
                     </div>
                   </NavLink>
                   {el?.country && (
@@ -100,7 +99,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         from: el?.category?.nameRus,
                         category: el?.category?.id,
                       }}
-                      className='font-medium mm:font-bold text-sm line-clamp-1 break-all hover:underline sm:mb-2'
+                      className='font-medium mm:font-bold text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
                     >
                       {el?.name}
                     </NavLink>
