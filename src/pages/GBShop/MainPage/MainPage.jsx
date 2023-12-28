@@ -28,14 +28,14 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className='pt-28 pb-10 content'>
+    <div className='pt-28 pb-10'>
       <MainBlock />
       <MainCategories />
       <Brands />
       {homeItems?.map((el, index) => (
-        <div key={index}>
-          <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 mt-12'>
-            <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
+        <div className='content' key={index}>
+          <div className='flex justify-between items-center bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-7'>
+            <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
               {el?.category?.nameRus}
             </h3>
             <NavLink
@@ -46,10 +46,10 @@ const MainPage = () => {
                 category: el?.category?.id,
               }}
             >
-              <span className='font-medium text-xl mr-2 text-[#FEDE2B]'>
+              <span className='font-medium text-base md:text-xl mr-1 md:mr-2 text-[#FEDE2B]'>
                 Все
               </span>
-              <img src={rightArrow} alt='*' />
+              <img className='w-4 md:w-6' src={rightArrow} alt='*' />
             </NavLink>
           </div>
           <CategorySlider items={el?.items} loading={loading} error={error} />

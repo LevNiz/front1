@@ -8,21 +8,19 @@ import telegram from '../../assets/icons/telegram.svg';
 
 const GBShopFooter = () => {
   return (
-    <footer id='footer' className='py-10 pb-12 md:pb-10 bg-[#FBFBFB]'>
-      <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between ld:items-center w-full container'>
-        <NavLink className='pr-5' to='/'>
-          <img className='w-28' src={logo} alt='*' />
+    <footer
+      id='footer'
+      className='py-10 pb-12 md:pb-10 bg-[#FBFBFB] text-center mm:text-left'
+    >
+      <div className='flex-col space-y-10 lg:space-y-0 lg:flex-row flex justify-between ld:items-center w-full container'>
+        <NavLink className='lg:pr-5' to='/'>
+          <img
+            className='w-[64px] lg:w-[106px] mx-auto lg:mx-0'
+            src={logo}
+            alt='*'
+          />
         </NavLink>
-        <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 md:space-x-12'>
-          <ul className='space-y-2'>
-            <li className='text-xl font-medium mb-3'>Главная</li>
-            <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/tracking'>Трекинг посылок</NavLink>
-            </li>
-            <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/depots'>Наши склады</NavLink>
-            </li>
-          </ul>
+        <div className='flex w-full md:w-auto justify-center lg:justify-start mm:flex-row flex-col space-y-7 mm:space-y-0 mm:space-x-12 xl:pr-32'>
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Контакты</li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
@@ -101,7 +99,7 @@ const GBShopFooter = () => {
           </ul>
         </div>
       </div>
-      <p className='container text-right text-[#C3C3C3] text-sm font-medium'>
+      <p className='container text-center lg:text-right pt-5 text-[#C3C3C3] text-sm font-medium'>
         © {new Date().getFullYear()}
       </p>
     </footer>

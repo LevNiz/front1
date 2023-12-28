@@ -23,14 +23,16 @@ const MainCategories = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <div className='flex justify-between items-center bg-[#FBFBFB] py-2 px-5 my-7'>
-        <h3 className='font-bold font-ubuntu text-[#030303] text-3xl'>
+    <div className='content'>
+      <div className='flex justify-between items-center bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-7'>
+        <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
           Категории
         </h3>
         <NavLink to='categories' className='flex items-center justify-end'>
-          <span className='font-medium text-xl mr-2 text-[#FEDE2B]'>Все</span>
-          <img src={rightArrow} alt='*' />
+          <span className='font-medium text-base md:text-xl mr-1 md:mr-2 text-[#FEDE2B]'>
+            Все
+          </span>
+          <img className='w-4 md:w-6' src={rightArrow} alt='*' />
         </NavLink>
       </div>
       {loading ? (
@@ -38,15 +40,15 @@ const MainCategories = () => {
       ) : error ? (
         <ErrorServer />
       ) : firstSevenCategories?.length ? (
-        <div className='grid grid-cols-7 gap-7 pt-3'>
+        <div className='flex lg:grid grid-cols-7 gap-3 md:gap-5 lg:gap-7 pt-3 overflow-x-scroll scrollable pb-4'>
           {firstSevenCategories?.map((el) => (
             <NavLink
               to='items'
               state={{ from: el?.nameRus, category: el?.id }}
-              className='group'
+              className='group min-w-[92px] md:min-w-[128px]'
               key={el?.id}
             >
-              <div className='h-36 flex justify-center items-center shadow-md group-hover:shadow-xl duration-150 bg-[#FBFBFB] rounded-xl'>
+              <div className='h-[92px] md:h-32 xl:h-36 flex justify-center items-center shadow-md group-hover:shadow-xl duration-150 bg-[#FBFBFB] rounded-xl'>
                 <img
                   onError={(e) => {
                     e.target.onerror = null;
@@ -57,7 +59,7 @@ const MainCategories = () => {
                   alt='*'
                 />
               </div>
-              <p className='text-center text-xl font-medium pt-3'>
+              <p className='text-center text-xs md:text-base xl:text-xl break-all line-clamp-1 lg:line-clamp-2 font-medium pt-3'>
                 {el?.nameRus}
               </p>
             </NavLink>
@@ -66,7 +68,7 @@ const MainCategories = () => {
       ) : (
         <GBSHopEmpty />
       )}
-    </>
+    </div>
   );
 };
 

@@ -23,7 +23,7 @@ const CategorySlider = ({ items, loading, error }) => {
   const { cartItems } = useSelector((state) => state?.cartItems);
 
   return (
-    <>
+    <div>
       {loading ? (
         <ContentLoading extraStyle={320} />
       ) : error ? (
@@ -31,15 +31,27 @@ const CategorySlider = ({ items, loading, error }) => {
           <ErrorServer />
         </div>
       ) : items?.length ? (
-        <div className='pt-5 gb-shop slider'>
+        <div className='pt-5 gb-shop'>
           <Swiper
             modules={[Navigation]}
             slidesPerView={5}
-            navigation={items?.length > 5 ? true : false}
-            className={`${
-              items?.length > 5 ? 'min-h-[400px]' : '360px'
-            } px-4 pb-7 pt-4`}
+            navigation={true}
+            className='px-4 pb-20 sm:pb-24 pt-4'
             spaceBetween={20}
+            breakpoints={{
+              260: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              992: {
+                slidesPerView: 4,
+              },
+              1200: {
+                slidesPerView: 5,
+              },
+            }}
           >
             {items?.map((el) => (
               <SwiperSlide modules={[Navigation]} key={el?.id}>
@@ -50,7 +62,7 @@ const CategorySlider = ({ items, loading, error }) => {
                       category: el?.category?.id,
                     }}
                   >
-                    <div className='h-[210px] overflow-hidden relative bg-gray-50'>
+                    <div className='h-[120px] xs:h-[140px] sx:h-[180px] sm:h-[210px] overflow-hidden relative bg-gray-50'>
                       <img
                         className='w-full h-full object-cover'
                         src={el?.image}
@@ -60,7 +72,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         }}
                         alt='*'
                       />
-                      <div className='absolute bottom-2 right-2 font-medium text-sm bg-colYellow py-[2px] px-2 rounded-sm z-10'>
+                      <div className='absolute bottom-2 right-2 sm:font-medium text-xs sm:text-sm bg-colYellow py-[2px] px-2 rounded-sm z-10'>
                         {el?.cost} $
                       </div>
                       <div className='absolute bottom-0 left-0 w-full h-12 bg-[linear-gradient(180deg,_rgba(0,_0,_0,_0.0)_0%,_rgba(0,_0,_0,_0.50)_200%)]'></div>
@@ -69,7 +81,7 @@ const CategorySlider = ({ items, loading, error }) => {
                   </NavLink>
                   {el?.country && (
                     <img
-                      className='absolute top-3 left-3 min-w-[32px] w-8 h-8 object-cover rounded-full'
+                      className='absolute top-3 left-3 min-w-[28px] mm:min-w-[32px] w-7 mm:w-8 h-7 mm:h-8 object-cover rounded-full'
                       src={el?.country?.icon}
                       onError={(e) => {
                         e.target.onError = null;
@@ -78,7 +90,7 @@ const CategorySlider = ({ items, loading, error }) => {
                       alt='*'
                     />
                   )}
-                  <div className='absolute top-4 right-4 w-8 h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'>
+                  <div className='absolute top-2 mm:top-4 right-2 mm:right-4 w-7 mm:w-8 h-7 mm:h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'>
                     <img src={share} alt='*' />
                   </div>
                   <div className='p-2'>
@@ -88,11 +100,11 @@ const CategorySlider = ({ items, loading, error }) => {
                         from: el?.category?.nameRus,
                         category: el?.category?.id,
                       }}
-                      className='font-bold text-sm line-clamp-1 break-all hover:underline mb-2'
+                      className='font-medium mm:font-bold text-sm line-clamp-1 break-all hover:underline sm:mb-2'
                     >
                       {el?.name}
                     </NavLink>
-                    <div className='flex justify-between items-center'>
+                    <div className='sm:flex justify-between items-center'>
                       <div className='flex items-center pt-1'>
                         <div className='min-w-[20px] w-5 h-5 rounded-full border border-gray-400'>
                           <img
@@ -122,9 +134,9 @@ const CategorySlider = ({ items, loading, error }) => {
                             favItems?.some((item) => item?.id === el?.id)
                               ? 'bg-colYellow'
                               : 'bg-gray-100'
-                          } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
+                          } flex justify-center items-center w-7 sm:w-8 h-7 sm:h-8 min-w-[28px] sm:min-w-[32px] rounded-full cursor-pointer`}
                         >
-                          <img className='w-5' src={favourite} alt='*' />
+                          <img className='w-4 sm:w-5' src={favourite} alt='*' />
                         </div>
                         <div
                           onClick={async () => {
@@ -142,9 +154,13 @@ const CategorySlider = ({ items, loading, error }) => {
                             cartItems?.some((item) => item?.item?.id === el?.id)
                               ? 'bg-colYellow'
                               : 'bg-gray-100'
-                          } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
+                          } flex justify-center items-center w-7 sm:w-8 h-7 sm:h-8 min-w-[28px] rounded-full cursor-pointer`}
                         >
-                          <img className='w-5' src={shopingCart} alt='*' />
+                          <img
+                            className='w-4 sm:w-5'
+                            src={shopingCart}
+                            alt='*'
+                          />
                         </div>
                       </div>
                     </div>
@@ -162,7 +178,7 @@ const CategorySlider = ({ items, loading, error }) => {
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

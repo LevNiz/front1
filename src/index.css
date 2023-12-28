@@ -18,7 +18,7 @@
 
 .sidebar li a.active,
 .chatSidebar a.active {
-  background: #ECECEC;
+  background: #ececec;
 }
 .sidebar.active {
   background: #f2f2f2;
@@ -154,7 +154,9 @@ input[type='number'] {
 }
 
 .slider .swiper-button-next,
-.slider .swiper-button-prev {
+.slider .swiper-button-prev,
+.gb-shop .swiper-button-next,
+.gb-shop .swiper-button-prev {
   top: auto !important;
   bottom: 60px;
   right: 40px;
@@ -167,11 +169,14 @@ input[type='number'] {
   align-items: center;
 }
 .slider .swiper-button-prev::after,
-.slider .swiper-button-next::after {
+.slider .swiper-button-next::after,
+.gb-shop .swiper-button-prev::after,
+.gb-shop .swiper-button-next::after {
   color: #fff;
   font-size: 18px;
 }
-.slider .swiper-button-prev {
+.slider .swiper-button-prev,
+.gb-shop .swiper-button-prev {
   right: 90px;
   left: auto;
 }
@@ -191,10 +196,10 @@ input[type='number'] {
   box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.16);
 }
 .gb-shop .swiper-button-next {
-  left: 52%;
+  right: 47% !important;
 }
 .gb-shop .swiper-button-prev {
-  left: 48%;
+  right: 53% !important;
 }
 .gb-shop .swiper-button-next::after,
 .gb-shop .swiper-button-prev::after {
@@ -209,7 +214,9 @@ input[type='number'] {
 }
 @media screen and (max-width: 768px) {
   .slider .swiper-button-next,
-  .slider .swiper-button-prev {
+  .slider .swiper-button-prev,
+  .gb-shop .swiper-button-next,
+  .gb-shop .swiper-button-prev {
     width: 28px;
     height: 28px;
   }
@@ -219,8 +226,16 @@ input[type='number'] {
   .slider .swiper-button-prev {
     right: 65px;
   }
+  .gb-shop .swiper-button-next {
+    right: 45% !important;
+  }
+  .gb-shop .swiper-button-prev {
+    right: 55% !important;
+  }
   .slider .swiper-button-prev::after,
-  .slider .swiper-button-next::after {
+  .slider .swiper-button-next::after,
+  .gb-shop .swiper-button-prev::after,
+  .gb-shop .swiper-button-next::after {
     font-size: 14px;
   }
   .testimonials .slider .swiper-button-next {
@@ -239,6 +254,12 @@ input[type='number'] {
     right: auto;
     left: 43%;
     bottom: 20px;
+  }
+  .gb-shop .swiper-button-next {
+    right: 43% !important;
+  }
+  .gb-shop .swiper-button-prev {
+    right: 57% !important;
   }
 }
 @media screen and (max-width: 440px) {
