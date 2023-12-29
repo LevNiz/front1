@@ -7,10 +7,12 @@ import basket from './../../assets/gb-shop/icons/basket.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBasketData } from '../../api/gb-shop/basket';
 import { fetchFavoriteItems } from '../../api/gb-shop/items';
+import GBShopCatalog from './GBShopCatalog';
 
 const GBShopNavbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { favItems } = useSelector((state) => state?.favItems);
@@ -18,6 +20,10 @@ const GBShopNavbar = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const user = localStorage.getItem('accessToken');
+
+  const handleCloseMenu = () => {
+    setShowSidebar(false);
+  };
 
   useEffect(() => {
     setScrolling(false);
@@ -62,7 +68,10 @@ const GBShopNavbar = () => {
             <NavLink to='/gb-shop'>
               <img className='w-[64px] lg:w-auto' src={logo} alt='*' />
             </NavLink>
-            <button className='hidden md:flex justify-center items-center rounded-md bg-colYellow ml-7 px-3 py-2 space-x-3 hover:opacity-80 duration-150'>
+            <button
+              onClick={() => setShowSidebar(true)}
+              className='hidden sm:flex justify-center focus:outline-none items-center rounded-md bg-colYellow ml-3 sm:ml-7 px-3 py-2 space-x-3 hover:opacity-80 duration-150'
+            >
               <div className='flex flex-col space-y-1 w-6 cursor-pointer'>
                 <span className='w-full h-[2px] rounded-md bg-black'></span>
                 <span className='w-full h-[2px] rounded-md bg-black'></span>
@@ -90,6 +99,16 @@ const GBShopNavbar = () => {
                     <img className='md:w-6' src={basket} alt='*' />
                   </NavLink>
                 </li>
+                <li className='pl-1 sm:hidden'>
+                  <div
+                    onClick={() => setShowSidebar(true)}
+                    className='flex flex-col space-y-[6px] w-6 cursor-pointer'
+                  >
+                    <span className='w-full h-[2px] rounded-md bg-black'></span>
+                    <span className='w-full h-[2px] rounded-md bg-black'></span>
+                    <span className='w-full h-[2px] rounded-md bg-black'></span>
+                  </div>
+                </li>
                 <li className='relative'>
                   <NavLink to='profile/personal-data'>
                     <img className='md:w-6' src={userIcon} alt='*' />
@@ -107,6 +126,7 @@ const GBShopNavbar = () => {
           </div>
         </div>
       </header>
+      <GBShopCatalog isOpen={showSidebar} onClose={handleCloseMenu} />
     </div>
   );
 };
