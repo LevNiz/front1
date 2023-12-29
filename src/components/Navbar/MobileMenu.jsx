@@ -321,6 +321,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                 <li className='flex items-center'>
                   <NavLink
                     to='/gb-shop'
+                    target='_blank'
                     className='text-base flex items-center'
                   >
                     <img

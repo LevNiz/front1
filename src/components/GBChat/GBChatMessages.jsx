@@ -127,7 +127,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
           <ContentLoading extraStyle='100%' />
         ) : messages?.length ? (
           messages?.map((message) =>
-            message?.data?.senderUid === `${userID}` ? (
+            message?.data?.senderUid == `${userID}` ? (
               <div
                 key={message.id}
                 className='ml-auto justify-end w-4/5 flex my-1'

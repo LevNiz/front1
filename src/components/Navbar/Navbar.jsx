@@ -184,6 +184,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                     <NavLink
                       className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='/gb-shop'
+                      target='_blank'
                     >
                       GB-Shop
                     </NavLink>

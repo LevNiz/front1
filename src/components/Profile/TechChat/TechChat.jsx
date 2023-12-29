@@ -88,12 +88,12 @@ const TechChat = () => {
             <ContentLoading extraStyle='100%' />
           ) : messages?.length ? (
             messages?.map((message) =>
-              message?.data?.senderUid === `${userID}` ? (
+              message?.data?.senderUid == `${userID}` ? (
                 <div
-                  key={message.id}
+                  key={message?.id}
                   className='ml-auto justify-end w-4/5 flex my-1'
                 >
-                  <div className='text-right w-fit flex flex-col'>
+                  <div className='w-fit flex flex-col'>
                     <p
                       className={`bg-green-200 rounded-l-xl rounded-tr-xl ml-auto ${
                         message?.data?.text ? 'px-3 py-1 mb-1' : ''
@@ -101,7 +101,7 @@ const TechChat = () => {
                     >
                       {message?.data?.text}
                     </p>
-                    {message?.data?.image ? (
+                    {message?.data?.image && (
                       <div className='w-28 h-28 rounded-l-xl rounded-tr-xl overflow-hidden mb-1 bg-green-200 p-1'>
                         <img
                           className='w-full h-full object-cover cursor-zoom-in rounded-l-xl rounded-tr-xl'
@@ -117,8 +117,6 @@ const TechChat = () => {
                           }}
                         />
                       </div>
-                    ) : (
-                      ''
                     )}
                     <span className='mr-3 mb-2 text-[8px] mm:text-[10px] text-gray-500 flex justify-end'>
                       {message?.data?.time ? (
@@ -139,16 +137,16 @@ const TechChat = () => {
                   </div>
                 </div>
               ) : (
-                <div key={message.id} className='w-4/5 flex my-1'>
+                <div key={message?.id} className='w-4/5 flex my-1'>
                   <div className='text-right w-fit flex flex-col'>
                     <p
-                      className={`bg-slate-500 text-white rounded-r-xl rounded-bl-xl mt-1 text-left ${
-                        message?.data?.text ? 'px-3 py-1 mb-1' : ''
-                      } text-[12px] mm:text-sm break-all w-fit flex items-end`}
+                      className={` ${
+                        message?.data?.text ? 'flex' : 'hidden'
+                      } text-[12px] mm:text-sm break-all w-fit items-end bg-slate-500 text-white rounded-r-xl rounded-bl-xl px-3 py-1 my-1 text-left`}
                     >
                       {message?.data?.text}
                     </p>
-                    {message?.data?.image ? (
+                    {message?.data?.image && (
                       <div className='w-28 h-28 rounded-r-xl rounded-bl-xl overflow-hidden p-1 bg-slate-500'>
                         <img
                           className='w-full h-full object-cover cursor-zoom-in  rounded-r-xl rounded-bl-xl'
@@ -164,8 +162,6 @@ const TechChat = () => {
                           }}
                         />
                       </div>
-                    ) : (
-                      ''
                     )}
                     <span className='ml-3 text-left mb-2 text-[8px] mm:text-[10px] text-gray-500'>
                       {message?.data?.time ? (
