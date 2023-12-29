@@ -180,15 +180,14 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
               <img className='w-4 ml-1 mt-[2px]' src={arrow} alt='*' />
               <div className='absolute pt-4 left-0 top-full opacity-0 invisible group-hover:visible group-hover:opacity-100 duration-300 w-56'>
                 <ul className='bg-white rounded-sm shadow-md text-black'>
-                  {/* <li>
+                  <li>
                     <NavLink
-                      onClick={() => alert('В процессе разработки!')}
                       className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
-                      to='#'
+                      to='/gb-shop'
                     >
                       GB-Shop
                     </NavLink>
-                  </li> */}
+                  </li>
                   <li>
                     <NavLink
                       className='hover:bg-colYellow px-4 py-[10px] border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'

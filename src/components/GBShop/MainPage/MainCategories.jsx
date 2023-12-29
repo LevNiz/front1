@@ -66,7 +66,10 @@ const MainCategories = () => {
           ))}
         </div>
       ) : (
-        <GBSHopEmpty />
+        <GBSHopEmpty
+          title='Пока нет категорий.'
+          desc='Здесь будут категории товаров.'
+        />
       )}
     </div>
   );

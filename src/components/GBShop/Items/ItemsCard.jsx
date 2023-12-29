@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import shoppingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favIcon from '../../../assets/gb-shop/icons/favorite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
@@ -17,20 +17,30 @@ const ItemsCard = ({ el }) => {
   const { userData } = useSelector((state) => state?.user);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const token = localStorage.getItem('accessToken');
 
   const handleToggleFavorite = async () => {
-    if (favItems?.some((item) => item?.id === el?.id)) {
-      await removeFromFavorites(userID, el?.id);
+    if (token) {
+      if (favItems?.some((item) => item?.id === el?.id)) {
+        await removeFromFavorites(userID, el?.id);
+      } else {
+        await addToFavorites(userID, el, userData?.fullname);
+      }
     } else {
-      await addToFavorites(userID, el, userData?.fullname);
+      navigate('/auth/sign-in');
     }
   };
 
   const handleToggleCart = async () => {
-    if (cartItems?.some((item) => item?.item?.id === el?.id)) {
-      await removeFromCart(userID, el?.id);
+    if (token) {
+      if (cartItems?.some((item) => item?.item?.id === el?.id)) {
+        await removeFromCart(userID, el?.id);
+      } else {
+        await addToCart(userID, el, userData?.fullname);
+      }
     } else {
-      await addToCart(userID, el, userData?.fullname);
+      navigate('/auth/sign-in');
     }
   };
 

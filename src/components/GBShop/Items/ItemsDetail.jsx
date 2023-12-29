@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
 import ItemsSlider from './ItemsSlider';
@@ -24,6 +24,8 @@ const ItemsDetail = () => {
   const { userData } = useSelector((state) => state?.user);
   const { state } = useLocation();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const token = localStorage.getItem('accessToken');
 
   const [item, setItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -34,26 +36,33 @@ const ItemsDetail = () => {
   const similarItems = items?.filter(
     (el) => el?.category?.id === item?.category?.id
   );
-
   const itemCategoryTitle = categories?.filter(
     (el) => el?.id === state?.category
   );
 
   const handleToggleFavorite = async () => {
-    if (favItems?.some((el) => el?.id === item?.id)) {
-      await removeFromFavorites(userID, item?.id);
+    if (token) {
+      if (favItems?.some((el) => el?.id === item?.id)) {
+        await removeFromFavorites(userID, item?.id);
+      } else {
+        await addToFavorites(userID, item, userData?.fullname);
+      }
     } else {
-      await addToFavorites(userID, item, userData?.fullname);
+      navigate('/auth/sign-in');
     }
   };
 
   const handleAddToCart = async () => {
-    setBtnIsLoading(true);
-    const { success } = await addToCart(userID, item, userData?.fullname);
-    if (success) {
+    if (token) {
+      setBtnIsLoading(true);
+      const { success } = await addToCart(userID, item, userData?.fullname);
+      if (success) {
+        setBtnIsLoading(false);
+      }
       setBtnIsLoading(false);
+    } else {
+      navigate('/auth/sign-in');
     }
-    setBtnIsLoading(false);
   };
 
   useEffect(() => {
@@ -91,10 +100,10 @@ const ItemsDetail = () => {
               </div>
               <div className='md:w-1/2'>
                 <div className='flex items-center pt-5'>
-                  <div className='min-w-[20px] w-5 h-5 rounded-full border border-gray-400'>
+                  <div className='min-w-[20px] w-5 h-5 rounded-full'>
                     <img
                       className='w-full h-full object-cover rounded-full'
-                      src={item?.supplier?.avatar}
+                      src={item?.supplier?.avatar || noImg}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = noImg;
@@ -103,7 +112,7 @@ const ItemsDetail = () => {
                     />
                   </div>
                   <p className='text-xs text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
-                    {item?.supplier?.fullname}
+                    {item?.supplier?.fullname || 'Не указана'}
                   </p>
                 </div>
                 <div className='flex justify-between my-3'>

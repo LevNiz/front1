@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import shopingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favourite from '../../../assets/gb-shop/icons/favorite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
@@ -22,6 +22,9 @@ const CategorySlider = ({ items, loading, error }) => {
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { userData } = useSelector((state) => state?.user);
+
+  const navigate = useNavigate();
+  const token = localStorage.getItem('accessToken');
 
   return (
     <div>
@@ -109,7 +112,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         <div className='min-w-[20px] w-5 h-5 rounded-full border border-gray-400'>
                           <img
                             className='w-full h-full object-cover rounded-full'
-                            src={el?.supplier?.avatar}
+                            src={el?.supplier?.avatar || noImg}
                             onError={(e) => {
                               e.target.onerror = null;
                               e.target.src = noImg;
@@ -118,20 +121,26 @@ const CategorySlider = ({ items, loading, error }) => {
                           />
                         </div>
                         <p className='text-xs text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
-                          {el?.supplier?.fullname}
+                          {el?.supplier?.fullname || 'Не указана'}
                         </p>
                       </div>
                       <div className='flex justify-end items-center space-x-2'>
                         <div
                           onClick={async () => {
-                            if (favItems?.some((item) => item?.id === el?.id)) {
-                              await removeFromFavorites(userID, el?.id);
+                            if (token) {
+                              if (
+                                favItems?.some((item) => item?.id === el?.id)
+                              ) {
+                                await removeFromFavorites(userID, el?.id);
+                              } else {
+                                await addToFavorites(
+                                  userID,
+                                  el,
+                                  userData?.fullname
+                                );
+                              }
                             } else {
-                              await addToFavorites(
-                                userID,
-                                el,
-                                userData?.fullname
-                              );
+                              navigate('/auth/sign-in');
                             }
                           }}
                           className={`${
@@ -144,14 +153,18 @@ const CategorySlider = ({ items, loading, error }) => {
                         </div>
                         <div
                           onClick={async () => {
-                            if (
-                              cartItems?.some(
-                                (item) => item?.item?.id === el?.id
-                              )
-                            ) {
-                              await removeFromCart(userID, el?.id);
+                            if (token) {
+                              if (
+                                cartItems?.some(
+                                  (item) => item?.item?.id === el?.id
+                                )
+                              ) {
+                                await removeFromCart(userID, el?.id);
+                              } else {
+                                await addToCart(userID, el, userData?.fullname);
+                              }
                             } else {
-                              await addToCart(userID, el, userData?.fullname);
+                              navigate('/auth/sign-in');
                             }
                           }}
                           className={`${
