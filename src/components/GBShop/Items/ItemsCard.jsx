@@ -97,7 +97,7 @@ const ItemsCard = ({ el }) => {
             <div className='min-w-[20px] w-5 h-5 rounded-full border border-gray-300'>
               <img
                 className='w-full h-full object-cover rounded-full'
-                src={el?.supplier?.avatar}
+                src={el?.supplier?.avatar || noImg}
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = noImg;
@@ -106,7 +106,7 @@ const ItemsCard = ({ el }) => {
               />
             </div>
             <p className='text-xs text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
-              {el?.supplier?.fullname}
+              {el?.supplier?.fullname || 'Не указана'}
             </p>
           </div>
           <div className='flex justify-end items-center space-x-2'>

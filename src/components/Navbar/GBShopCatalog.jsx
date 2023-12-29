@@ -35,7 +35,12 @@ const GBShopCatalog = ({ isOpen, onClose }) => {
             <>
               {categories?.map((el) => (
                 <li key={el?.id}>
-                  <NavLink className='flex items-center'>
+                  <NavLink
+                    to={`/gb-shop/items`}
+                    onClick={() => onClose()}
+                    state={{ from: el?.nameRus, category: el?.id }}
+                    className='flex items-center'
+                  >
                     <img
                       className='w-6 h-6 object-cover'
                       src={el?.icon}

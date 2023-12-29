@@ -118,8 +118,8 @@ const BasketInfo = () => {
       ) : (
         <div className='flex justify-center items-center min-h-[480px]'>
           <GBShopEmpty
-            title='Вы пока не делали покупки'
-            desc='Перейдите в раздел GB-Shop для покупки'
+            title='Ваша корзина пуста.'
+            desc='Выберите товары в разделе GB-Shop.'
           />
         </div>
       )}
