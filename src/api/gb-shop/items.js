@@ -76,18 +76,23 @@ export const addToFavorites = async (userID, el, name) => {
     supplier: el?.supplier || [],
     uid: `${el?.id}` || '',
   };
-  const token = localStorage.getItem('accessToken');
-  try {
-    const userDocRef = doc(db, 'users', `${userID}`);
-    await setDoc(userDocRef, {
-      name: name,
-      token: token,
-    });
-    const favCollectionRef = collection(userDocRef, 'favs');
 
-    await setDoc(doc(favCollectionRef, `${el?.id}`), sendData);
+  const token = localStorage.getItem('accessToken');
+  const userDocRef = doc(db, 'users', `${userID}`);
+  const favsCollectionRef = collection(userDocRef, 'favs');
+
+  const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+    if (!docSnapshot.exists()) {
+      setDoc(userDocRef, { name: name || '', token: token || '' });
+    }
+  });
+
+  try {
+    await setDoc(doc(favsCollectionRef, `${el?.id}`), sendData);
   } catch (error) {
     alert(`Ошибка: ${error}`);
+  } finally {
+    unsubscribe();
   }
 };
 

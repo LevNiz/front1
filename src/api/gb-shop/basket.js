@@ -55,18 +55,23 @@ export const addToCart = async (userID, item, name) => {
     quantity: 1,
   };
   const token = localStorage.getItem('accessToken');
+  const userDocRef = doc(db, 'users', `${userID}`);
+  const cartCollectionRef = collection(userDocRef, 'cart');
+
+  const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+    if (!docSnapshot.exists()) {
+      setDoc(userDocRef, { name: name || '', token: token || '' });
+    }
+  });
+
   try {
-    const userDocRef = doc(db, 'users', `${userID}`);
-    await setDoc(userDocRef, {
-      name: name,
-      token: token,
-    });
-    const cartCollectionRef = collection(userDocRef, 'cart');
     await setDoc(doc(cartCollectionRef, `${item?.id}`), sendData);
     return { success: true };
   } catch (error) {
     alert(`Ошибка: ${error}`);
     return { success: false };
+  } finally {
+    unsubscribe();
   }
 };
 
