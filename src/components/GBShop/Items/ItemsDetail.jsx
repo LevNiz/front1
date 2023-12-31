@@ -4,16 +4,18 @@ import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
 import ItemsSlider from './ItemsSlider';
 import CategorySlider from '../MainPage/CategorySlider';
-import noImg from '../../../assets/images/no-image.svg';
 import {
   addToFavorites,
+  fetchItems,
   fetchItemsDetail,
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../../api/gb-shop/basket';
 import favorite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
-import { useSelector } from 'react-redux';
-import { addToCart } from '../../../api/gb-shop/basket';
+import noImg from '../../../assets/images/no-image.svg';
+import share from '../../../assets/gb-shop/icons/share.svg';
 
 const ItemsDetail = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -25,6 +27,7 @@ const ItemsDetail = () => {
   const { state } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = localStorage.getItem('accessToken');
 
   const [item, setItem] = useState({});
@@ -78,6 +81,12 @@ const ItemsDetail = () => {
     })();
   }, [id]);
 
+  useEffect(() => {
+    (async () => {
+      await fetchItems(dispatch);
+    })();
+  }, [dispatch]);
+
   return (
     <div className='py-16 md:py-24 min-h-[991px]'>
       <div className='content'>
@@ -95,7 +104,7 @@ const ItemsDetail = () => {
             <div className='md:flex mm:pt-5 md:space-x-5 lg:space-x-8'>
               <div className='md:w-1/2'>
                 <div className='sm:h-[340px] lg:h-[470px] border border-gray-100 rounded-md overflow-hidden p-3'>
-                  <ItemsSlider slideImg={item?.image} />
+                  <ItemsSlider item={item} />
                 </div>
               </div>
               <div className='md:w-1/2'>
@@ -111,25 +120,30 @@ const ItemsDetail = () => {
                       alt='*'
                     />
                   </div>
-                  <p className='text-xs text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
-                    {item?.supplier?.fullname || 'Не указана'}
-                  </p>
-                </div>
-                <div className='flex justify-between my-3'>
-                  <h1 className='font-medium font-ubuntu text-xl mm:text-3xl'>
-                    {item?.name}
-                  </h1>
-                  <div
-                    onClick={handleToggleFavorite}
-                    className={`${
-                      favItems?.some((el) => el?.id === item?.id)
-                        ? 'bg-colYellow'
-                        : 'bg-gray-100'
-                    } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
-                  >
-                    <img className='w-5' src={favorite} alt='*' />
+                  <div className='flex justify-between items-center w-full'>
+                    <p className='text-xs text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
+                      {item?.supplier?.fullname || 'Не указана'}
+                    </p>
+                    <div className='flex'>
+                      <div
+                        onClick={handleToggleFavorite}
+                        className={`${
+                          favItems?.some((el) => el?.id === item?.id)
+                            ? 'bg-colYellow'
+                            : 'bg-gray-100'
+                        } flex justify-center items-center w-8 h-8 min-w-[32px] rounded-full cursor-pointer`}
+                      >
+                        <img className='w-5' src={favorite} alt='*' />
+                      </div>
+                      <div className='w-8 h-8 cursor-pointer rounded-full bg-gray-100 ml-2 flex justify-center items-center'>
+                        <img src={share} alt='*' />
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <h1 className='font-medium font-ubuntu text-xl mm:text-3xl my-3'>
+                  {item?.name}
+                </h1>
                 <div className='flex items-center'>
                   <h2 className='text-2xl font-medium'>$ {item?.costSale}</h2>
                   <h3 className='text-[#666] line-through ml-2 mr-5'>

@@ -3,8 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper/modules';
 
 import noImg from '../../../assets/images/no-image.svg';
+import { NavLink } from 'react-router-dom';
 
-const ItemsSlider = ({ slideImg }) => {
+const ItemsSlider = ({ item }) => {
   // const images = [
   //   {
   //     id: 1,
@@ -60,10 +61,20 @@ const ItemsSlider = ({ slideImg }) => {
         {/* {images?.map((el, index) => ( */}
         <SwiperSlide
           // key={index}
-          className='sm:h-[340px] lg:h-[470px] rounded-lg mx-auto bg-[#FBFBFB]'
+          className='relative sm:h-[340px] lg:h-[470px] rounded-lg mx-auto bg-[#FBFBFB]'
         >
+          <NavLink
+            to='#'
+            className='absolute top-3 right-3 w-10 h-10 rounded-full overflow-hidden'
+          >
+            <img
+              className='w-full h-full object-cover'
+              src={item?.country?.icon}
+              alt='*'
+            />
+          </NavLink>
           <img
-            src={slideImg}
+            src={item?.image}
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = noImg;
