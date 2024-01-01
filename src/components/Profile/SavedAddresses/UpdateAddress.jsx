@@ -418,14 +418,9 @@ const UpdateAddress = () => {
                 className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                 placeholder='Комментарий'
                 {...register('nameAddress', {
-                  required: 'Поле обязательно к заполнению!',
+                  required: false,
                 })}
               />
-              {errors?.nameAddress && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.nameAddress.message || 'Error!'}
-                </p>
-              )}
             </div>
           </div>
           <button

@@ -78,6 +78,7 @@ export const logOutFetch = async (dispatch) => {
 
 // Update profile:
 export const UpdateProfile = async ({ userID, data, ava }) => {
+
   const userData = {
     address: data?.address,
     city: data?.city?.value,
@@ -109,6 +110,7 @@ export const UpdateProfile = async ({ userID, data, ava }) => {
     }
 
     await axiosInstance.patch(`user/client/${userID}/`, userData);
+
     return { success: true };
   } catch (error) {
     return { success: false, data: error };

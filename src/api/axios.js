@@ -12,7 +12,8 @@ export const request = axios.create({
   },
 });
 
-// Use only token required requests:
+// *************************************** Use only token required requests *****************************
+
 export const axiosInstance = axios.create({
   baseURL: baseURL,
   headers: {
@@ -20,91 +21,65 @@ export const axiosInstance = axios.create({
   },
 });
 
-// Флаг, чтобы избежать бесконечных циклов
-let isRefreshing = false;
-
-// Создаем массив запросов, ожидающих обновления токена
-let subscribers = [];
-
-// Добавим интерцептор для отправки токена с каждым запросом
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+axiosInstance.interceptors.request.use((config) => {
+  const accessToken = localStorage.getItem('accessToken');
+  const authorizationToken = accessToken ? `Bearer ${accessToken}` : '';
+  config.headers.Authorization = authorizationToken;
+  return config;
+});
 
 axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (res) => res,
   async (error) => {
-    const { config, response } = error;
-    const originalRequest = config;
-
-    // Проверяем статус ошибки и наличие refreshToken
+    if (error.config.url === 'https://givbox.ru/givbox/api/user/login/') {
+      return error;
+    }
+    const originalRequest = error.config;
     if (
-      response &&
-      response.status === 401 &&
-      originalRequest &&
-      !originalRequest._retry
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
     ) {
-      originalRequest._retry = true;
-
-      // Если мы уже отправляем запрос на обновление токена, то подписываемся на обновление
-      if (isRefreshing) {
-        return new Promise((resolve) => {
-          subscribers.push((newAccessToken) => {
-            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-            resolve(axiosInstance(originalRequest));
-          });
-        });
-      }
-
-      isRefreshing = true;
+      error.config._isRetry = true;
 
       try {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const refreshResponse = await axiosInstance.post('api/token/refresh/', {
-          refresh: refreshToken,
+        const response = await axios.post(`${baseURL}api/token/refresh/`, {
+          refresh: localStorage.getItem('refresh'),
         });
-
-        const newAccessToken = refreshResponse.data.access;
-
-        // Обновление токена в localStorage
-        localStorage.setItem('accessToken', newAccessToken);
-
-        // Повторение запросов, которые были ожидающими обновление токена
-        subscribers.forEach((callback) => callback(newAccessToken));
-        subscribers = [];
-
-        // Повторный запрос с обновленным токеном
-        return axiosInstance(originalRequest);
-      } catch (refreshError) {
+        localStorage.setItem('access', JSON.stringify(response.data.access));
+        return axiosInstance.request(originalRequest);
+      } catch (error) {
         const dispatch = useDispatch();
-
-        // Если обновление токена не удалось, очистите localStorage и перенаправьте пользователя на страницу логина
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         await logOutFetch(dispatch);
         window.location.href = '/auth/sign-in';
-        return Promise.reject(refreshError);
-      } finally {
-        isRefreshing = false;
       }
     }
-
-    return Promise.reject(error);
+    throw error;
   }
 );
 
-// Добавим интерцептор для обработки ответов
+// // Флаг, чтобы избежать бесконечных циклов
+// let isRefreshing = false;
+
+// // Создаем массив запросов, ожидающих обновления токена
+// let subscribers = [];
+
+// // Добавим интерцептор для отправки токена с каждым запросом
+// axiosInstance.interceptors.request.use(
+//   (config) => {
+//     const accessToken = localStorage.getItem('accessToken');
+//     if (accessToken) {
+//       config.headers.Authorization = `Bearer ${accessToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
 // axiosInstance.interceptors.response.use(
 //   (response) => {
 //     return response;
@@ -127,7 +102,7 @@ axiosInstance.interceptors.response.use(
 //         return new Promise((resolve) => {
 //           subscribers.push((newAccessToken) => {
 //             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-//             resolve(axios(originalRequest));
+//             resolve(axiosInstance(originalRequest));
 //           });
 //         });
 //       }
@@ -135,22 +110,31 @@ axiosInstance.interceptors.response.use(
 //       isRefreshing = true;
 
 //       try {
-//         // Отправляем запрос на обновление токена
 //         const refreshToken = localStorage.getItem('refreshToken');
-//         const refreshResponse = await axios.post('api/token/refresh/', {
+//         const refreshResponse = await axiosInstance.post('api/token/refresh/', {
 //           refresh: refreshToken,
 //         });
+
 //         const newAccessToken = refreshResponse.data.access;
+
+//         // Обновление токена в localStorage
 //         localStorage.setItem('accessToken', newAccessToken);
 
-//         // Вызываем подписчиков с новым токеном
+//         // Повторение запросов, которые были ожидающими обновление токена
 //         subscribers.forEach((callback) => callback(newAccessToken));
 //         subscribers = [];
-//         return axios(originalRequest);
+
+//         // Повторный запрос с обновленным токеном
+//         return axiosInstance(originalRequest);
 //       } catch (refreshError) {
+//         const dispatch = useDispatch();
+
+//         // Если обновление токена не удалось, очистите localStorage и перенаправьте пользователя на страницу логина
 //         localStorage.removeItem('accessToken');
 //         localStorage.removeItem('refreshToken');
+//         await logOutFetch(dispatch);
 //         window.location.href = '/auth/sign-in';
+//         return Promise.reject(refreshError);
 //       } finally {
 //         isRefreshing = false;
 //       }
