@@ -114,7 +114,9 @@ const PersonalData = () => {
               <div className='md:max-w-[110px] md:min-w-[110px] max-w-[160px] min-w-[160px] border-2 p-[2px] border-colYellow h-[160px] md:h-[110px] overflow-hidden rounded-full'>
                 <img
                   className='w-full h-full object-cover rounded-full'
-                  src={ava ? URL.createObjectURL(ava) : userData?.avatar}
+                  src={
+                    ava ? URL.createObjectURL(ava) : userData?.avatar || noImg
+                  }
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = noImg;

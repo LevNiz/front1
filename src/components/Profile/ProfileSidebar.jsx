@@ -26,8 +26,8 @@ const ProfileSidebar = () => {
     setModalOpen(false);
   };
 
-  const logOutUser = async () => {
-    await logOutFetch(dispatch);
+  const logOutUser = () => {
+    logOutFetch(dispatch);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     navigate('/');

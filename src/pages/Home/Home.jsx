@@ -14,6 +14,10 @@ import {
 } from '../../components';
 import { Loading } from '../../helpers/Loader/Loader';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import axios from 'axios';
+import { axiosInstance, baseURL } from '../../api/axios';
+import { logOutFetch } from '../../api/user';
+import { useDispatch } from 'react-redux';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -21,6 +25,7 @@ const Home = () => {
   const [modalContent, setModalContent] = useState();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const closeModal = () => {
     setModalOpen(false);
@@ -48,6 +53,35 @@ const Home = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
+
+  axiosInstance.interceptors.response.use(
+    (res) => res,
+    async (error) => {
+      if (error.config.url === 'https://givbox.ru/givbox/api/user/login/') {
+        return error;
+      }
+      const originalRequest = error.config;
+      if (
+        error.response.status === 401 &&
+        error.config &&
+        !error.config._isRetry
+      ) {
+        error.config._isRetry = true;
+        try {
+          const response = await axios.post(`${baseURL}api/token/refresh/`, {
+            refresh: localStorage.getItem('refreshToken'),
+          });
+          localStorage.setItem('accessToken', response.data.access);
+          return axiosInstance.request(originalRequest);
+        } catch (error) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          logOutFetch(dispatch);
+        }
+      }
+      throw error;
+    }
+  );
 
   return (
     <>

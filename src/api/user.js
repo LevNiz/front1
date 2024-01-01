@@ -72,13 +72,12 @@ export const loginUser = async (dispatch, data) => {
 };
 
 // LogOut:
-export const logOutFetch = async (dispatch) => {
+export const logOutFetch = (dispatch) => {
   dispatch(logOut());
 };
 
 // Update profile:
 export const UpdateProfile = async ({ userID, data, ava }) => {
-
   const userData = {
     address: data?.address,
     city: data?.city?.value,

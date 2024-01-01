@@ -10,6 +10,7 @@ import {
 } from '../../../components';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
+import { fetchStores } from '../../../api/gb-shop/stores';
 
 const MainPage = () => {
   const { homeItems, loading, error } = useSelector(
@@ -20,6 +21,7 @@ const MainPage = () => {
   useEffect(() => {
     (async () => {
       await fetchHomeItems(dispatch);
+      await fetchStores(dispatch);
     })();
   }, [dispatch]);
 
