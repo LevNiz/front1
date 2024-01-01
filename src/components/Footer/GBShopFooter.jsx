@@ -5,6 +5,11 @@ import instagram from '../../assets/icons/Instagram.svg';
 import tiktok from '../../assets/icons/tiktok.svg';
 import vk from '../../assets/icons/vk.svg';
 import telegram from '../../assets/icons/telegram.svg';
+import mir from '../../assets/images/mir.svg';
+import mastercard from '../../assets/images/mastercard.svg';
+import visa from '../../assets/images/visa.svg';
+import amex from '../../assets/images/amex.jpeg';
+import maestro from '../../assets/images/maestro.svg';
 
 const GBShopFooter = () => {
   return (
@@ -97,6 +102,27 @@ const GBShopFooter = () => {
               </NavLink>
             </li>
           </ul>
+          <div className='flex justify-center md:justify-end items-center pt-10 md:pt-8 space-x-2'>
+            <div className='w-[50px] h-[30px] bg-[#4b2592] flex justify-center items-center'>
+              <img
+                className='w-[40px] object-contain'
+                src={mastercard}
+                alt='*'
+              />
+            </div>
+            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={visa} alt='*' />
+            </div>
+            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={mir} alt='*' />
+            </div>
+            <div className='w-[50px] h-[30px] bg-white flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={maestro} alt='*' />
+            </div>
+            <div className='w-[50px] h-[30px] bg-[#2b71b3] flex justify-center items-center'>
+              <img className='w-[40px] object-contain' src={amex} alt='*' />
+            </div>
+          </div>
         </div>
       </div>
       <p className='container text-center lg:text-right pt-5 text-[#C3C3C3] text-sm font-medium'>

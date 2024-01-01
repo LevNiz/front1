@@ -176,31 +176,21 @@ const ItemsDetail = () => {
             <div className='pt-10'>
               <h4 className='font-bold text-xl py-2'>Оплата</h4>
               <p>
-                Et amet, eu, urna ut tortor, ut at amet nec felis tincidunt sed
-                ultrices magna dignissim nulla tortor, pellentesque tincidunt
-                commodo duis et nec, et elementum euismod in id arcu ut lacus
-                elementum velit
-                <br />
-                <br />
-                Et amet, eu, urna ut tortor, ut at amet nec felis tincidunt sed
-                ultrices magna dignissim nulla tortor, pellentesque tincidunt
-                commodo duis et nec, et elementum euismod in id arcu ut lacus
-                elementum velit
+                Заказ можно оплатить удобным для вас банковской картой. Также
+                можете использовать ваши бонусы
               </p>
             </div>
             <div className='py-10'>
               <h4 className='font-bold text-xl py-2'>Доставка</h4>
               <p>
-                Et amet, eu, urna ut tortor, ut at amet nec felis tincidunt sed
-                ultrices magna dignissim nulla tortor, pellentesque tincidunt
-                commodo duis et nec, et elementum euismod in id arcu ut lacus
-                elementum velit
+                Доставка товаров осуществляется курьером или на пунк выдачи
+                заказов. Удобный способ доставки можно выбрать при оформлении
+                заказа.
+                <br />
+                Для получения потребуется паспорт.
                 <br />
                 <br />
-                Et amet, eu, urna ut tortor, ut at amet nec felis tincidunt sed
-                ultrices magna dignissim nulla tortor, pellentesque tincidunt
-                commodo duis et nec, et elementum euismod in id arcu ut lacus
-                elementum velit
+                Доставка и таможенное оформление уже включены в стоимость
               </p>
             </div>
           </div>

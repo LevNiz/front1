@@ -66,7 +66,12 @@ const ItemSearchRequestNew = () => {
 
   return (
     <div className='w-full pt-8 md:p-4'>
-      <h3 className='text-lg ss:text-xl'>Заполните форму для заявки.</h3>
+      <p className='max-w-3xl pb-3'>
+        Уважаемые клиенты бесплатный поиск товаров предоставляется только
+        клиентам с премиум подпиской, без премиум подписки поиск товара стоит
+        50$. Спасибо за сотрудничество!
+      </p>
+      <h3 className='text-base ss:text-lg'>Заполните форму для заявки.</h3>
       <p className='text-sm opacity-70 mb-6'>
         Наши менеджеры скоро свяжутся с вами.
       </p>

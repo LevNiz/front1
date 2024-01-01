@@ -63,18 +63,24 @@ const ItemsSlider = ({ item }) => {
           // key={index}
           className='relative sm:h-[340px] lg:h-[470px] rounded-lg mx-auto bg-[#FBFBFB]'
         >
-          <NavLink
-            to='#'
-            className='absolute top-3 right-3 w-10 h-10 rounded-full overflow-hidden'
-          >
-            <img
-              className='w-full h-full object-cover'
-              src={item?.country?.icon}
-              alt='*'
-            />
-          </NavLink>
+          {item?.country?.icon && (
+            <NavLink
+              to='#'
+              className='absolute top-3 right-3 w-10 h-10 rounded-full overflow-hidden'
+            >
+              <img
+                className='w-full h-full object-cover'
+                src={item?.country?.icon}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = noImg;
+                }}
+                alt='*'
+              />
+            </NavLink>
+          )}
           <img
-            src={item?.image}
+            src={item?.image ? item?.image : noImg}
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = noImg;
