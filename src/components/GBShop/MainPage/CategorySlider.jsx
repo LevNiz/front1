@@ -18,13 +18,12 @@ import {
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
 
 const CategorySlider = ({ items, loading, error }) => {
-  const { userID } = useSelector((state) => state?.user);
+  const { userID, user } = useSelector((state) => state?.user);
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { userData } = useSelector((state) => state?.user);
 
   const navigate = useNavigate();
-  const token = localStorage.getItem('accessToken');
 
   return (
     <div>
@@ -127,7 +126,7 @@ const CategorySlider = ({ items, loading, error }) => {
                       <div className='flex justify-end items-center space-x-2'>
                         <div
                           onClick={async () => {
-                            if (token) {
+                            if (user) {
                               if (
                                 favItems?.some((item) => item?.id === el?.id)
                               ) {
@@ -136,7 +135,8 @@ const CategorySlider = ({ items, loading, error }) => {
                                 await addToFavorites(
                                   userID,
                                   el,
-                                  userData?.fullname
+                                  userData?.fullname,
+                                  user?.access
                                 );
                               }
                             } else {
@@ -153,7 +153,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         </div>
                         <div
                           onClick={async () => {
-                            if (token) {
+                            if (user) {
                               if (
                                 cartItems?.some(
                                   (item) => item?.item?.id === el?.id
@@ -161,7 +161,12 @@ const CategorySlider = ({ items, loading, error }) => {
                               ) {
                                 await removeFromCart(userID, el?.id);
                               } else {
-                                await addToCart(userID, el, userData?.fullname);
+                                await addToCart(
+                                  userID,
+                                  el,
+                                  userData?.fullname,
+                                  user?.access
+                                );
                               }
                             } else {
                               navigate('/auth/sign-in');

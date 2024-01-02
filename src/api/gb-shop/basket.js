@@ -36,7 +36,7 @@ export const fetchBasketData = (userID, dispatch) => {
 };
 
 // Add item from Cart:
-export const addToCart = async (userID, item, name) => {
+export const addToCart = async (userID, item, name, access) => {
   const itemData = {
     category: item?.category || [],
     cost: item?.cost || '',
@@ -54,13 +54,12 @@ export const addToCart = async (userID, item, name) => {
     item: itemData,
     quantity: 1,
   };
-  const token = localStorage.getItem('accessToken');
   const userDocRef = doc(db, 'users', `${userID}`);
   const cartCollectionRef = collection(userDocRef, 'cart');
 
   const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
     if (!docSnapshot.exists()) {
-      setDoc(userDocRef, { name: name || '', token: token || '' });
+      setDoc(userDocRef, { name: name || '', token: access || '' });
     }
   });
 

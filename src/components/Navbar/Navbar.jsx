@@ -26,11 +26,11 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
 
   const { depots } = useSelector((state) => state?.depots);
   const { countries } = useSelector((state) => state?.countries);
+  const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
 
   const { pathname } = useLocation();
   const modalRef = useRef();
-  const user = localStorage.getItem('accessToken');
 
   const filteredCountries = countries?.filter((el) =>
     depots?.some((depot) => el?.id === depot?.country?.id)

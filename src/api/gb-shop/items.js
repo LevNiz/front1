@@ -62,7 +62,7 @@ export const fetchFavoriteItems = (userID, dispatch) => {
 };
 
 // Add item to Favorites using setDoc:
-export const addToFavorites = async (userID, el, name) => {
+export const addToFavorites = async (userID, el, name, access) => {
   const sendData = {
     category: el?.category?.id || '',
     cost: el?.cost || '',
@@ -77,13 +77,12 @@ export const addToFavorites = async (userID, el, name) => {
     uid: `${el?.id}` || '',
   };
 
-  const token = localStorage.getItem('accessToken');
   const userDocRef = doc(db, 'users', `${userID}`);
   const favsCollectionRef = collection(userDocRef, 'favs');
 
   const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
     if (!docSnapshot.exists()) {
-      setDoc(userDocRef, { name: name || '', token: token || '' });
+      setDoc(userDocRef, { name: name || '', token: access || '' });
     }
   });
 

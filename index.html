@@ -13,7 +13,10 @@
 
   <title>GivBox</title>
   <script>
-    if (window.location.pathname === '/gb-shop') {
+    let path = window.location.pathname;
+    let firstSegment = path.split('/')[1];
+
+    if (firstSegment === 'gb-shop') {
       document.title = 'GB Shop';
     }
   </script>

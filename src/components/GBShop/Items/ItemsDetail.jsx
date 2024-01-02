@@ -18,7 +18,7 @@ import noImg from '../../../assets/images/no-image.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
 
 const ItemsDetail = () => {
-  const { userID } = useSelector((state) => state?.user);
+  const { userID, user } = useSelector((state) => state?.user);
   const { items, loading, error } = useSelector((state) => state?.items);
   const { categories } = useSelector((state) => state?.categories);
   const { cartItems } = useSelector((state) => state?.cartItems);
@@ -28,7 +28,6 @@ const ItemsDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = localStorage.getItem('accessToken');
 
   const [item, setItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -44,11 +43,11 @@ const ItemsDetail = () => {
   );
 
   const handleToggleFavorite = async () => {
-    if (token) {
+    if (user) {
       if (favItems?.some((el) => el?.id === item?.id)) {
         await removeFromFavorites(userID, item?.id);
       } else {
-        await addToFavorites(userID, item, userData?.fullname);
+        await addToFavorites(userID, item, userData?.fullname, user?.access);
       }
     } else {
       navigate('/auth/sign-in');
@@ -56,9 +55,14 @@ const ItemsDetail = () => {
   };
 
   const handleAddToCart = async () => {
-    if (token) {
+    if (user) {
       setBtnIsLoading(true);
-      const { success } = await addToCart(userID, item, userData?.fullname);
+      const { success } = await addToCart(
+        userID,
+        item,
+        userData?.fullname,
+        user?.access
+      );
       if (success) {
         setBtnIsLoading(false);
       }

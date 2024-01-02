@@ -11,21 +11,20 @@ import {
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
 
 const ItemsCard = ({ el }) => {
-  const { userID } = useSelector((state) => state?.user);
+  const { userID, user } = useSelector((state) => state?.user);
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { userData } = useSelector((state) => state?.user);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const token = localStorage.getItem('accessToken');
 
   const handleToggleFavorite = async () => {
-    if (token) {
+    if (user) {
       if (favItems?.some((item) => item?.id === el?.id)) {
         await removeFromFavorites(userID, el?.id);
       } else {
-        await addToFavorites(userID, el, userData?.fullname);
+        await addToFavorites(userID, el, userData?.fullname, user?.access);
       }
     } else {
       navigate('/auth/sign-in');
@@ -33,11 +32,11 @@ const ItemsCard = ({ el }) => {
   };
 
   const handleToggleCart = async () => {
-    if (token) {
+    if (user) {
       if (cartItems?.some((item) => item?.item?.id === el?.id)) {
         await removeFromCart(userID, el?.id);
       } else {
-        await addToCart(userID, el, userData?.fullname);
+        await addToCart(userID, el, userData?.fullname, user?.access);
       }
     } else {
       navigate('/auth/sign-in');

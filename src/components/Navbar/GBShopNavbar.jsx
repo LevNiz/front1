@@ -16,10 +16,9 @@ const GBShopNavbar = () => {
 
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { favItems } = useSelector((state) => state?.favItems);
-  const { userID } = useSelector((state) => state?.user);
+  const { userID, user } = useSelector((state) => state?.user);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const user = localStorage.getItem('accessToken');
 
   const handleCloseMenu = () => {
     setShowSidebar(false);
