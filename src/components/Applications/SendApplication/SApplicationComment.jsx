@@ -1,4 +1,4 @@
-const SApplicationComment = ({ register, errors }) => {
+const SApplicationComment = ({ register }) => {
   return (
     <div className='md:pl-5 lg:pl-10'>
       <div className='max-w-[768px]'>
@@ -9,14 +9,9 @@ const SApplicationComment = ({ register, errors }) => {
           className='w-full border border-colGray2 p-4 rounded-lg focus:border-black focus:outline-none resize-none'
           placeholder='Комментарий'
           {...register('comment', {
-            required: 'Поле обязательно к заполнению!',
+            required: false,
           })}
         />
-        {errors?.comment && (
-          <p className='text-red-500 mt-1 text-sm'>
-            {errors?.comment.message || 'Error!'}
-          </p>
-        )}
       </div>
     </div>
   );

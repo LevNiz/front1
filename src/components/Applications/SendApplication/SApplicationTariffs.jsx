@@ -24,7 +24,7 @@ const SApplicationTariffs = ({
       <p className='mb-3 font-medium'>
         Выберите тариф <span className='text-red-500'>*</span>
       </p>
-      <div className='lg:max-w-[680px] grid md:grid-cols-2 gap-10 mt-5'>
+      <div className='lg:max-w-[680px] grid ld:grid-cols-2 gap-6 md:gap-10 mt-5'>
         {tariffsData.map((el) => (
           <div
             key={el.id}
@@ -45,7 +45,7 @@ const SApplicationTariffs = ({
                 {el?.status}
               </span>
             </div>
-            <div className='py-2 text-3xl font-bold'>
+            <div className='py-2 text-2xl mm:text-3xl font-bold'>
               {parcelCost
                 ? el?.status === 'Быстро'
                   ? `${(parseFloat(parcelCost) + addedCost)?.toFixed(2)} $`

@@ -378,7 +378,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
             !selectedTariff
               ? 'bg-[#D9D8D8] cursor-not-allowed'
               : 'hover:opacity-80 text-white bg-black'
-          } font-medium p-3 flex justify-center items-center rounded-lg duration-150 sm:max-w-[280px] w-full mt-5`}
+          } font-medium p-3 ss:p-4 mm:p-3 flex justify-center items-center text-lg rounded-lg duration-150 mm:max-w-[280px] w-full mt-3 sm:mt-5`}
         >
           Рассчитать
         </button>

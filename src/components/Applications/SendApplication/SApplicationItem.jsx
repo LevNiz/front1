@@ -40,9 +40,7 @@ const SApplicationItem = () => {
   const [receiver, setReceiver] = useState('');
 
   const dateArrival = watch('dateArrival');
-  const comment = watch('comment');
-
-  const isButtonDisabled = !(dateArrival && comment && receiver);
+  const isButtonDisabled = !(dateArrival && receiver);
 
   useEffect(() => {
     (async () => {
