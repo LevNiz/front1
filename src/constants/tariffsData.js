@@ -1,5 +1,11 @@
-import truck from './../assets/icons/truck.svg';
-import building from './../assets/icons/buildings.svg';
+import standart from './../assets/icons/standart.svg';
+import standartActive from './../assets/icons/standartActive.svg';
+import premium from './../assets/icons/premium.svg';
+import premiumActive from './../assets/icons/premiumActive.svg';
+import arrow from './../assets/icons/arrow-down.svg';
+import location from './../assets/icons/location3.svg';
+import hoveredLocation from './../assets/icons/location-white.svg';
+import arrowWhite from './../assets/icons/arrow-down-white.svg';
 
 export const tariffsData = [
   {
@@ -7,14 +13,24 @@ export const tariffsData = [
     name: 'Стандартный',
     status: 'Выгодно',
     deliveryPoint: 'Пункт выдачи GB',
-    img: building,
+    statusImg: standart,
+    statusWhiteImg: standartActive,
+    arrowImg: arrow,
+    arrowWhiteImg: arrowWhite,
+    locationImg: location,
+    locationWhiteImg: hoveredLocation,
   },
   {
     id: 2,
-    name: 'Стандартный',
+    name: 'Премиум',
     status: 'Быстро',
     deliveryPoint: 'Местный курьер',
-    img: truck,
+    statusImg: premium,
+    statusWhiteImg: premiumActive,
+    arrowImg: arrow,
+    arrowWhiteImg: arrowWhite,
+    locationImg: location,
+    locationWhiteImg: hoveredLocation,
   },
 ];
 

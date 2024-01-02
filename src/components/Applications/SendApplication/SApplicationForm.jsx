@@ -369,16 +369,20 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
         onHandleTariff={onHandleTariff}
         onChoseTariff={onChoseTariff}
       />
-      <button
-        onClick={handleSubmit(onSubmit)}
-        type='submit'
-        disabled={!selectedTariff}
-        className={`${
-          !selectedTariff ? 'opacity-60 cursor-not-allowed' : 'hover:opacity-80'
-        } font-medium p-3 flex justify-center items-center ml-auto rounded-lg bg-black text-white duration-150 sm:max-w-[280px] w-full mt-5`}
-      >
-        Рассчитать
-      </button>
+      <div className='md:ml-5 lg:ml-10 py-5'>
+        <button
+          onClick={handleSubmit(onSubmit)}
+          type='submit'
+          disabled={!selectedTariff}
+          className={`${
+            !selectedTariff
+              ? 'bg-[#D9D8D8] cursor-not-allowed'
+              : 'hover:opacity-80 text-white bg-black'
+          } font-medium p-3 flex justify-center items-center rounded-lg duration-150 sm:max-w-[280px] w-full mt-5`}
+        >
+          Рассчитать
+        </button>
+      </div>
     </>
   );
 };

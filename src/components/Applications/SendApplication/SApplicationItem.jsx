@@ -80,7 +80,7 @@ const SApplicationItem = () => {
         cost?.toCity?.id === data?.receiverCity?.value
     );
     if (cityParcelCost) {
-      const costPerKg = cityParcelCost.costPerKg;
+      const costPerKg = cityParcelCost?.costPerKg;
       let parCost;
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
@@ -190,11 +190,13 @@ const SApplicationItem = () => {
             </div>
             <SApplicationComment register={register} errors={errors} />
             <div className='md:flex justify-between items-center mt-12'>
-              <div className='flex justify-end md:justify-start sm:max-w-[320px] w-full md:ml-0 ml-auto items-center bg-colYellow p-5'>
+              <div className='flex justify-end md:justify-start sm:max-w-[320px] font-medium w-full md:ml-0 ml-auto items-center p-5'>
                 <span className='text-lg'>Общая стоимость:</span>
-                <span className='text-xl font-medium mx-1 '>
+                <span className='text-xl mx-1 '>
                   {tariff === 2
-                    ? (parseFloat(parcelCost) + 4).toFixed(2)
+                    ? parcelCost
+                      ? (parseFloat(parcelCost) + 4).toFixed(2)
+                      : '00.00'
                     : parcelCost
                     ? parcelCost
                     : '00.00'}

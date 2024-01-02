@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import rightArrow from './../../../assets/images/right-arrow.png';
-import vector from './../../../assets/icons/vector.svg';
 import { tariffsData } from '../../../constants/tariffsData';
 import { addedCost } from '../../../constants/tariffsData';
 
@@ -35,23 +33,9 @@ const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
             </div>
             <div className='flex items-center py-5'>
               <span className='text-sm'>Пункт приёма GB</span>
-              <img
-                src={rightArrow}
-                className='w-5 h-5 rotate-90 mx-2'
-                alt='*'
-              />
               <span className='text-sm'>{el?.deliveryPoint}</span>
             </div>
             <p className='font-medium'>От 12 рабочих дней</p>
-            <div className='flex justify-end items-center my-3'>
-              <div className='w-6 h-6 rounded-full bg-purple-200 border border-white -mr-3 flex justify-center items-center'>
-                <img className='w-4' src={el?.img} alt='*' />
-              </div>
-              <div className='w-6 h-6 rounded-full bg-purple-200 border border-white flex justify-center items-center mr-2'>
-                <img className='w-4' src={el?.img} alt='*' />
-              </div>
-              <img src={vector} alt='*' />
-            </div>
             <div className='bg-[#6747e5] text-white p-2 rounded-md text-center text-lg font-bold'>
               {el?.status === 'Быстро'
                 ? (parseFloat(parcelCost) + addedCost).toFixed(2)
