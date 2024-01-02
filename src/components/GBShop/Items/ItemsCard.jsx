@@ -43,6 +43,17 @@ const ItemsCard = ({ el }) => {
     }
   };
 
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    alert('Ссылка на товар скопирована!');
+  };
+
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
       <NavLink
@@ -80,7 +91,12 @@ const ItemsCard = ({ el }) => {
           alt='*'
         />
       )}
-      <div className='absolute top-2 mm:top-4 right-2 mm:right-4 w-7 mm:w-8 h-7 mm:h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'>
+      <div
+        onClick={() =>
+          copyToClipboard(`https://givbox.ru/gb-shop/items/${el?.id}`)
+        }
+        className='absolute top-2 mm:top-4 right-2 mm:right-4 w-7 mm:w-8 h-7 mm:h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'
+      >
         <img src={share} alt='*' />
       </div>
       <div className='p-2'>

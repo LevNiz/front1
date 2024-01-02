@@ -24,6 +24,16 @@ const CategorySlider = ({ items, loading, error }) => {
   const { userData } = useSelector((state) => state?.user);
 
   const navigate = useNavigate();
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    alert('Ссылка на товар скопирована!');
+  };
 
   return (
     <div>
@@ -92,7 +102,14 @@ const CategorySlider = ({ items, loading, error }) => {
                       alt='*'
                     />
                   )}
-                  <div className='absolute top-2 mm:top-4 right-2 mm:right-4 w-7 mm:w-8 h-7 mm:h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'>
+                  <div
+                    onClick={() =>
+                      copyToClipboard(
+                        `https://givbox.ru/gb-shop/items/${el?.id}`
+                      )
+                    }
+                    className='absolute top-2 mm:top-4 right-2 mm:right-4 w-7 mm:w-8 h-7 mm:h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'
+                  >
                     <img src={share} alt='*' />
                   </div>
                   <div className='p-2'>

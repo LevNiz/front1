@@ -72,6 +72,17 @@ const ItemsDetail = () => {
     }
   };
 
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    alert('Ссылка на товар скопирована!');
+  };
+
   useEffect(() => {
     scrollToTop();
     (async () => {
@@ -139,7 +150,14 @@ const ItemsDetail = () => {
                       >
                         <img className='w-5' src={favorite} alt='*' />
                       </div>
-                      <div className='w-8 h-8 cursor-pointer rounded-full bg-gray-100 ml-2 flex justify-center items-center'>
+                      <div
+                        onClick={() =>
+                          copyToClipboard(
+                            `https://givbox.ru/gb-shop/items/${item?.id}`
+                          )
+                        }
+                        className='w-8 h-8 cursor-pointer rounded-full bg-gray-100 ml-2 flex justify-center items-center'
+                      >
                         <img src={share} alt='*' />
                       </div>
                     </div>
