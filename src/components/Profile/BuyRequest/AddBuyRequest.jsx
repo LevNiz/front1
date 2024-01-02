@@ -29,6 +29,11 @@ const AddBuyRequest = () => {
     setBlocks([...blocks, { link: '', comment: '' }]);
   };
 
+  const handleDeleteBlock = (index) => {
+    const updatedBlocks = blocks?.filter((_, i) => i !== index);
+    setBlocks(updatedBlocks);
+  };
+
   const {
     handleSubmit,
     formState: { errors },
@@ -119,8 +124,16 @@ const AddBuyRequest = () => {
           {blocks?.map((el, index) => (
             <div
               key={index}
-              className='grid mm:grid-cols-2 gap-5 mt-3 p-3 border border-gray-300 rounded-md'
+              className='grid mm:grid-cols-2 relative gap-5 mt-3 p-3 border border-gray-300 rounded-md'
             >
+              {index !== 0 && (
+                <span
+                  className='absolute top-3 right-3 text-2xl font-medium text-red-500 flex justify-end items-center h-3 cursor-pointer'
+                  onClick={() => handleDeleteBlock(index)}
+                >
+                  &times;
+                </span>
+              )}
               <div>
                 <p className='font-medium mb-2'>Ссылка</p>
                 <input
@@ -132,9 +145,10 @@ const AddBuyRequest = () => {
                   value={el?.link}
                   onChange={(e) => handleLinkValue(index, e.target.value)}
                 />
-                {errors?.link && (
+                {errors?.[`link${index}`] && (
                   <p className='text-red-500 mt-1 text-sm'>
-                    {errors?.link?.message || 'Поле обязательно к заполнению!'}
+                    {errors?.[`link${index}`]?.message ||
+                      `Поле "Ссылка" обязательно к заполнению!`}
                   </p>
                 )}
               </div>

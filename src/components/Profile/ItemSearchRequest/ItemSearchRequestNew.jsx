@@ -14,7 +14,8 @@ const ItemSearchRequestNew = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [blocks, setBlocks] = useState([{ photo: null, description: '' }]);
 
-  const handleFileChange = (index, file) => {
+  const handleFileChange = (index, e) => {
+    const file = e.target.files[0];
     const updatedBlocks = [...blocks];
     updatedBlocks[index].photo = file;
     setBlocks(updatedBlocks);
@@ -28,6 +29,11 @@ const ItemSearchRequestNew = () => {
 
   const handleAddBlock = () => {
     setBlocks([...blocks, { photo: '', description: '' }]);
+  };
+
+  const handleDeleteBlock = (index) => {
+    const updatedBlocks = blocks?.filter((_, i) => i !== index);
+    setBlocks(updatedBlocks);
   };
 
   const {
@@ -120,8 +126,16 @@ const ItemSearchRequestNew = () => {
           {blocks?.map((block, index) => (
             <div
               key={index}
-              className='grid ld:grid-cols-2 ld:gap-5 border border-gray-400 p-3 rounded-md mt-5 mb-2'
+              className='grid ld:grid-cols-2 ld:gap-5 border relative border-gray-400 p-3 rounded-md mt-5 mb-2'
             >
+              {index !== 0 && (
+                <span
+                  className='absolute top-3 right-3 text-2xl font-medium text-red-500 flex justify-end items-center h-3 cursor-pointer'
+                  onClick={() => handleDeleteBlock(index)}
+                >
+                  &times;
+                </span>
+              )}
               <div>
                 <p className='font-medium mb-2'>Фото товара</p>
                 <div className='flex items-center'>
@@ -130,9 +144,7 @@ const ItemSearchRequestNew = () => {
                       className='hidden'
                       id={`photo-${index}`}
                       type='file'
-                      onChange={(e) =>
-                        handleFileChange(index, e.target.files[0])
-                      }
+                      onChange={(e) => handleFileChange(index, e)}
                       accept='image/jpeg, image/jpg, image/png, image/webp'
                     />
                     <div className='border-dashed border-2 h-16 sm:h-[78px] border-colGray2 flex flex-col justify-center items-center cursor-pointer rounded-md'>
@@ -156,6 +168,11 @@ const ItemSearchRequestNew = () => {
                     />
                   </div>
                 </div>
+                {!blocks[index]?.photo && (
+                  <p className='text-red-500 mt-1 text-sm'>
+                    Загрузите фото товара
+                  </p>
+                )}
               </div>
               <div className='mt-3 ld:mt-0'>
                 <p className='font-medium mb-2'>Доп. информация</p>
@@ -170,12 +187,7 @@ const ItemSearchRequestNew = () => {
               </div>
             </div>
           ))}
-          {!(blocks[0]?.photo && blocks[0]?.description) && (
-            <p className='text-red-500 mt-1 text-sm'>
-              Поле обязательно к заполнению!
-            </p>
-          )}
-          {blocks[0]?.photo && blocks[0]?.description && (
+          {blocks[0]?.photo && (
             <div
               onClick={handleAddBlock}
               className='bg-green-500 text-white font-medium rounded-md px-5 py-[2px] mt-3 flex ml-auto text-xl hover:opacity-80 duration-150 w-max cursor-pointer'
@@ -185,9 +197,9 @@ const ItemSearchRequestNew = () => {
           )}
           <button
             type='submit'
-            disabled={!blocks[0]?.photo || !blocks[0]?.description}
+            disabled={!blocks?.every((block) => block?.photo)}
             className={`${
-              !blocks[0]?.photo || !blocks[0]?.description
+              !blocks?.every((block) => block?.photo)
                 ? 'opacity-50 cursor-not-allowed'
                 : 'hover:opacity-80'
             } mt-8 font-medium p-3 rounded-lg bg-black text-white duration-150 max-w-xs ml-auto w-full flex justify-center`}
