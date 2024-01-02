@@ -3,9 +3,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper/modules';
 
 import noImg from '../../../assets/images/no-image.svg';
-import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ItemsSlider = ({ item }) => {
+  const { depots } = useSelector((state) => state?.depots);
   // const images = [
   //   {
   //     id: 1,
@@ -45,6 +46,15 @@ const ItemsSlider = ({ item }) => {
   // ];
   // const [activeThumb, setActiveThumb] = useState('');
 
+  const handleOpenDepot = (cityID) => {
+    const depotID = depots?.filter((depot) => depot?.city?.id == cityID);
+    if (depotID?.length) {
+      window.open(`/depots/${depotID[0]?.id}`, '_blank');
+    } else {
+      alert('В этом городе пока нет склада!');
+    }
+  };
+
   return (
     <>
       <Swiper
@@ -64,9 +74,9 @@ const ItemsSlider = ({ item }) => {
           className='relative sm:h-[340px] lg:h-[470px] rounded-lg mx-auto bg-[#FBFBFB]'
         >
           {item?.country?.icon && (
-            <NavLink
-              to='#'
-              className='absolute top-3 right-3 w-10 h-10 rounded-full overflow-hidden'
+            <div
+              onClick={() => handleOpenDepot(item?.city?.id)}
+              className='absolute top-3 right-3 cursor-pointer w-10 h-10 rounded-full overflow-hidden'
             >
               <img
                 className='w-full h-full object-cover'
@@ -77,7 +87,7 @@ const ItemsSlider = ({ item }) => {
                 }}
                 alt='*'
               />
-            </NavLink>
+            </div>
           )}
           <img
             src={item?.image ? item?.image : noImg}

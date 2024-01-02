@@ -22,8 +22,19 @@ const CategorySlider = ({ items, loading, error }) => {
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { userData } = useSelector((state) => state?.user);
+  const { depots } = useSelector((state) => state?.depots);
 
   const navigate = useNavigate();
+
+  const handleOpenDepot = (cityID) => {
+    const depotID = depots?.filter((depot) => depot?.city?.id == cityID);
+    if (depotID?.length) {
+      window.open(`/depots/${depotID[0]?.id}`, '_blank');
+    } else {
+      alert('В этом городе пока нет склада!');
+    }
+  };
+
   const copyToClipboard = (text) => {
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -93,12 +104,13 @@ const CategorySlider = ({ items, loading, error }) => {
                   </NavLink>
                   {el?.country && (
                     <img
-                      className='absolute top-3 left-3 min-w-[28px] mm:min-w-[32px] w-7 mm:w-8 h-7 mm:h-8 object-cover rounded-full'
+                      className='absolute top-3 cursor-pointer left-3 min-w-[28px] mm:min-w-[32px] w-7 mm:w-8 h-7 mm:h-8 object-cover rounded-full'
                       src={el?.country?.icon}
                       onError={(e) => {
                         e.target.onError = null;
                         e.target.src = noImg;
                       }}
+                      onClick={() => handleOpenDepot(el?.city?.id)}
                       alt='*'
                     />
                   )}

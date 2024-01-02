@@ -15,6 +15,7 @@ const ItemsCard = ({ el }) => {
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { userData } = useSelector((state) => state?.user);
+  const { depots } = useSelector((state) => state?.depots);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -54,6 +55,15 @@ const ItemsCard = ({ el }) => {
     alert('Ссылка на товар скопирована!');
   };
 
+  const handleOpenDepot = (cityID) => {
+    const depotID = depots?.filter((depot) => depot?.city?.id == cityID);
+    if (depotID?.length) {
+      window.open(`/depots/${depotID[0]?.id}`, '_blank');
+    } else {
+      alert('В этом городе пока нет склада!');
+    }
+  };
+
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
       <NavLink
@@ -82,8 +92,9 @@ const ItemsCard = ({ el }) => {
       </NavLink>
       {el?.country && (
         <img
-          className='absolute top-3 left-3 min-w-[28px] mm:min-w-[32px] w-7 mm:w-8 h-7 mm:h-8 object-cover rounded-full'
+          className='absolute top-3 left-3 cursor-pointer min-w-[28px] mm:min-w-[32px] w-7 mm:w-8 h-7 mm:h-8 object-cover rounded-full'
           src={el?.country?.icon}
+          onClick={() => handleOpenDepot(el?.city?.id)}
           onError={(e) => {
             e.target.onError = null;
             e.target.src = noImg;

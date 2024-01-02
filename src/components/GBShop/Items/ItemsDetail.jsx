@@ -24,6 +24,7 @@ const ItemsDetail = () => {
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { favItems } = useSelector((state) => state?.favItems);
   const { userData } = useSelector((state) => state?.user);
+
   const { state } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
