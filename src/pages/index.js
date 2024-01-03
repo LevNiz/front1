@@ -18,6 +18,7 @@ import Items from './GBShop/Items/Items';
 import Basket from './GBShop/Basket/Basket';
 import Order from './GBShop/Order/Order';
 import Favorites from './GBShop/Favorites/Favorites';
+import Brands from './GBShop/Brands/Brands';
 
 export {
   Tracking,
@@ -40,4 +41,5 @@ export {
   Basket,
   Order,
   Favorites,
+  Brands,
 };

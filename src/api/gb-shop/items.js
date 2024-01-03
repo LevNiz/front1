@@ -113,3 +113,12 @@ export const removeFromFavorites = async (userID, itemID) => {
     alert(`Ошибка: ${error}`);
   }
 };
+// Filter by supplier:
+export const fetchBrandsItem = async (id) => {
+  try {
+    const res = await request.get(`core/item/?supplier=${id}`);
+    return { success: true, data: res?.data?.results };
+  } catch (error) {
+    return { success: false, data: 'error' };
+  }
+};

@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
+import { NavLink } from 'react-router-dom';
 
 const Brands = () => {
   const { stores, loading, error } = useSelector((state) => state?.stores);
@@ -20,7 +21,9 @@ const Brands = () => {
       ) : stores?.length ? (
         <div className='grid grid-cols-2 ld:grid-cols-3 xl:grid-cols-5 gap-5 shadow-[0_0_28px_#edebeb] rounded-lg p-5'>
           {stores?.map((el) => (
-            <div
+            <NavLink
+              to='brands'
+              state={{ brandID: el?.id, brandName: el?.fullname }}
               className='w-32 mm:w-40 h-[70px] sm:h-[90px] xl:h-[200px] mx-auto'
               key={el?.id}
             >
@@ -29,7 +32,7 @@ const Brands = () => {
                 src={el?.avatar}
                 alt='*'
               />
-            </div>
+            </NavLink>
           ))}
         </div>
       ) : (

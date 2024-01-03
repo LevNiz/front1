@@ -5,7 +5,7 @@ import {
   fetchStoreFailure,
 } from '../../redux/slices/storeSlice';
 
-export const fetchStores = async (dispatch) => {
+export const fetchBrands = async (dispatch) => {
   dispatch(fetchStoreStart());
   try {
     const res = await request.get('user/store/');

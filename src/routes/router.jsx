@@ -61,6 +61,7 @@ import {
   Basket,
   Order,
   Favorites,
+  Brands,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -111,6 +112,7 @@ export const router = createBrowserRouter(
           <Route path='basket' element={<Basket />} />
           <Route path='favorites' element={<Favorites />} />
           <Route path='order' element={<Order />} />
+          <Route path='brands' element={<Brands />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>

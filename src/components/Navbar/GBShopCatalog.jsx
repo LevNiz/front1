@@ -42,7 +42,7 @@ const GBShopCatalog = ({ isOpen, onClose }) => {
                     className='flex items-center'
                   >
                     <img
-                      className='w-10 h-8 object-cover'
+                      className='min-w-[40px] w-10 h-8 object-cover'
                       src={el?.icon}
                       alt='*'
                     />
