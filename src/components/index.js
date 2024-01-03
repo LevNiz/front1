@@ -62,6 +62,7 @@ import OrderDetail from './GBShop/Order/OrderDetail';
 import FavoritesItem from './GBShop/Favorites/FavoritesItem';
 import BecomeBuyer from './GBBuyer/BecomeBuyer';
 import BuyRequestDetail from './Profile/BuyRequest/BuyRequestDetail';
+import BuyRequestUpdate from './Profile/BuyRequest/BuyRequestUpdate';
 
 export {
   Layout,
@@ -128,4 +129,5 @@ export {
   FavoritesItem,
   BecomeBuyer,
   BuyRequestDetail,
+  BuyRequestUpdate,
 };

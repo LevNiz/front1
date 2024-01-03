@@ -39,6 +39,7 @@ import {
   ItemsDetail,
   BecomeBuyer,
   BuyRequestDetail,
+  BuyRequestUpdate,
 } from '../components';
 import {
   Auth,
@@ -136,6 +137,7 @@ export const router = createBrowserRouter(
               <Route index element={<BuyRequest />} />
               <Route path='new' element={<AddBuyRequest />} />
               <Route path=':id' element={<BuyRequestDetail />} />
+              <Route path='update/:id' element={<BuyRequestUpdate />} />
             </Route>
             <Route path='search-request'>
               <Route index element={<ItemSearchRequest />} />

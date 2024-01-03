@@ -46,6 +46,21 @@ export const postBuyRequest = async (data, userID, blocks) => {
   }
 };
 
+// PatchBuyer requests:
+export const updateBuyRequest = async (data, blocks, id) => {
+  try {
+    const sendData = {
+      name: data.name,
+      phone: data.phone,
+      cart_request: blocks,
+    };
+    await axiosInstance.patch(`core/buyer_request/${id}/`, sendData);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
 // Delete Address:
 export const deleteBuyRequest = async (dispatch, id) => {
   dispatch(fetchBuyRequestStart());

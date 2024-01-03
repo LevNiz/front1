@@ -5,9 +5,11 @@ import {
   deleteBuyRequest,
 } from '../../../api/buyRequests';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import noImg from '../../../assets/images/no-ava.jpeg';
 import Modal from '../../../helpers/Modals/Modal';
 import { useDispatch } from 'react-redux';
+import noImg from '../../../assets/images/no-ava.jpeg';
+import trash from '../../../assets/icons/trash.svg';
+import update from '../../../assets/icons/update.svg';
 
 const BuyRequestDetail = () => {
   const [item, setItem] = useState({});
@@ -49,15 +51,28 @@ const BuyRequestDetail = () => {
         <h3 className='ss:text-xl sm:font-medium pr-3'>
           Заявки на покупку товара
         </h3>
-        <button
-          onClick={() => {
-            setModalOpen(true);
-            setModalContent('deleteBuyRequest');
-          }}
-          className='bg-black text-white py-2 min-w-[98px] ss:py-[10px] px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'
-        >
-          Удалить
-        </button>
+        <div className='flex'>
+          <NavLink to={`/profile/buy-request/update/${id}`}>
+            <img
+              className='cursor-pointer'
+              onClick={() => {
+                setModalOpen(true);
+                setModalContent('deleteBuyRequest');
+              }}
+              src={update}
+              alt='*'
+            />
+          </NavLink>
+          <img
+            className='cursor-pointer ml-3'
+            onClick={() => {
+              setModalOpen(true);
+              setModalContent('deleteBuyRequest');
+            }}
+            src={trash}
+            alt='*'
+          />
+        </div>
       </div>
       {isLoading ? (
         <ContentLoading extraStyle={480} />
