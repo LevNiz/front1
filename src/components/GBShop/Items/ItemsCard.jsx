@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import shoppingCart from '../../../assets/gb-shop/icons/shopping-cart.svg';
 import favIcon from '../../../assets/gb-shop/icons/favorite.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
@@ -17,7 +17,6 @@ const ItemsCard = ({ el }) => {
   const { userData } = useSelector((state) => state?.user);
   const { depots } = useSelector((state) => state?.depots);
 
-  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const handleToggleFavorite = async () => {
@@ -66,14 +65,7 @@ const ItemsCard = ({ el }) => {
 
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
-      <NavLink
-        to={`/gb-shop/items/${el?.id}`}
-        state={
-          pathname === '/gb-shop/favorites'
-            ? { category: el?.category }
-            : { category: el?.category?.id }
-        }
-      >
+      <NavLink to={`/gb-shop/items/${el?.id}`}>
         <div className='h-[120px] xs:h-[140px] sx:h-[180px] sm:h-[210px] overflow-hidden relative bg-gray-50'>
           <img
             className='w-full h-full object-cover'
@@ -113,7 +105,6 @@ const ItemsCard = ({ el }) => {
       <div className='p-2'>
         <NavLink
           to='#'
-          state={{ from: el?.category?.nameRus, category: el?.category?.id }}
           className='font-medium mm:font-bold text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
         >
           {el?.name}

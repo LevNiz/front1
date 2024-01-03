@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
 import ItemsSlider from './ItemsSlider';
@@ -20,12 +20,10 @@ import share from '../../../assets/gb-shop/icons/share.svg';
 const ItemsDetail = () => {
   const { userID, user } = useSelector((state) => state?.user);
   const { items, loading, error } = useSelector((state) => state?.items);
-  const { categories } = useSelector((state) => state?.categories);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { favItems } = useSelector((state) => state?.favItems);
   const { userData } = useSelector((state) => state?.user);
 
-  const { state } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,9 +36,6 @@ const ItemsDetail = () => {
 
   const similarItems = items?.filter(
     (el) => el?.category?.id === item?.category?.id
-  );
-  const itemCategoryTitle = categories?.filter(
-    (el) => el?.id === state?.category
   );
 
   const handleToggleFavorite = async () => {
@@ -108,7 +103,7 @@ const ItemsDetail = () => {
       <div className='content'>
         <div className='bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-4'>
           <h3 className='font-bold font-ubuntu text-[#030303] text-2xl lg:text-3xl'>
-            {itemCategoryTitle[0]?.nameRus}
+            {item?.category?.nameRus}
           </h3>
         </div>
       </div>
