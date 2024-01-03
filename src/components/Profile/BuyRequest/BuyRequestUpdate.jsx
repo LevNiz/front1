@@ -12,33 +12,13 @@ const BuyRequestUpdate = () => {
   const { id } = useParams();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [blocks, setBlocks] = useState([{ link: '', comment: '' }]);
-
-  const handleLinkValue = (index, value) => {
-    const updatedBlocks = [...blocks];
-    updatedBlocks[index].link = value;
-    setBlocks(updatedBlocks);
-  };
-
-  const handleCommentValue = (index, value) => {
-    const updatedBlocks = [...blocks];
-    updatedBlocks[index].comment = value;
-    setBlocks(updatedBlocks);
-  };
-
-  const handleAddBlock = () => {
-    setBlocks([...blocks, { link: '', comment: '' }]);
-  };
-
-  const handleDeleteBlock = (index) => {
-    const updatedBlocks = blocks?.filter((_, i) => i !== index);
-    setBlocks(updatedBlocks);
-  };
+  const [blocks, setBlocks] = useState([]);
 
   const {
     handleSubmit,
     formState: { errors },
     register,
+    setValue,
   } = useForm({
     mode: 'onChange',
     defaultValues: async () => {
@@ -54,6 +34,29 @@ const BuyRequestUpdate = () => {
       }
     },
   });
+
+  const handleLinkValue = (index, value) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[index].link = value;
+    setBlocks(updatedBlocks);
+  };
+
+  const handleCommentValue = (index, value) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[index].comment = value;
+    setBlocks(updatedBlocks);
+  };
+
+  const handleAddBlock = () => {
+    setBlocks([...blocks, { link: '', comment: '' }]);
+    setValue(`link${blocks.length}`, '');
+    setValue(`comment${blocks.length}`, '');
+  };
+
+  const handleDeleteBlock = (index) => {
+    const updatedBlocks = blocks?.filter((_, i) => i !== index);
+    setBlocks(updatedBlocks);
+  };
 
   const onSubmit = async (data) => {
     setIsLoading(true);
