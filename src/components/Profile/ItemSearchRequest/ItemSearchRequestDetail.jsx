@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import {
   deleteSearchRequest,
   fetchSearchRequestDetail,
 } from '../../../api/searchRequest';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
+import Modal from '../../../helpers/Modals/Modal';
 import noImg from '../../../assets/images/no-image.svg';
 import noAva from '../../../assets/images/no-ava.jpeg';
-import Modal from '../../../helpers/Modals/Modal';
+import trash from '../../../assets/icons/trash.svg';
+import update from '../../../assets/icons/update.svg';
 
 const ItemSearchRequestDetail = () => {
   const [itemData, setItemData] = useState({});
@@ -53,16 +55,21 @@ const ItemSearchRequestDetail = () => {
       <div className='flex justify-between items-center mb-3'>
         <h1 className='ss:text-xl font-medium'>Заявка на поиcк товара</h1>
         <div className='ml-3'>
-          <button
-            onClick={() => {
-              setModalOpen(true);
-              setModalContent('deleteSearchRequest');
-              setItemId(itemData?.id);
-            }}
-            className='bg-black text-white py-2 px-3 sm:px-5 font-medium rounded-md hover:opacity-70 duration-100 text-xs sm:text-sm'
-          >
-            Удалить
-          </button>
+          <div className='flex'>
+            <NavLink to={`/profile/search-request/update/${id}`}>
+              <img className='cursor-pointer' src={update} alt='*' />
+            </NavLink>
+            <img
+              className='cursor-pointer ml-3'
+              onClick={() => {
+                setModalOpen(true);
+                setModalContent('deleteSearchRequest');
+                setItemId(itemData?.id);
+              }}
+              src={trash}
+              alt='*'
+            />
+          </div>
         </div>
       </div>
       {isLoading ? (

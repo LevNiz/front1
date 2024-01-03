@@ -92,6 +92,22 @@ export const postSearchRequest = async (data, userID, wantedItems) => {
   }
 };
 
+export const updateSearchRequest = async (data, wantedItems, id) => {
+  const sendData = {
+    name: data.name,
+    phone: data.phone,
+    wantedItems: wantedItems,
+  };
+  try {
+    if (wantedItems?.length > 0) {
+      await axiosInstance.patch(`core/item_search_request/${id}/`, sendData);
+      return { success: true };
+    }
+  } catch (error) {
+    return { success: false };
+  }
+};
+
 // delete search request:
 export const deleteSearchRequest = async (id, setIsLoading, setModalOpen) => {
   setIsLoading(true);

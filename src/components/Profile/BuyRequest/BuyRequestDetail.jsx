@@ -53,15 +53,7 @@ const BuyRequestDetail = () => {
         </h3>
         <div className='flex'>
           <NavLink to={`/profile/buy-request/update/${id}`}>
-            <img
-              className='cursor-pointer'
-              onClick={() => {
-                setModalOpen(true);
-                setModalContent('deleteBuyRequest');
-              }}
-              src={update}
-              alt='*'
-            />
+            <img className='cursor-pointer' src={update} alt='*' />
           </NavLink>
           <img
             className='cursor-pointer ml-3'
