@@ -147,27 +147,17 @@ export const gbChatNewMessage = (userID, callBack) => {
     where('users', 'array-contains', `${userID}`)
   );
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    let totalUnreadMessages = 0;
-
-    querySnapshot.forEach((docSnap) => {
-      const messagesRef = collection(docSnap.ref, 'messages');
-      const messagesQuery = query(
-        messagesRef,
-        where('read', '==', false),
-        where('receiverUid', '==', `${userID}`)
-      );
-
-      onSnapshot(messagesQuery, (messagesSnapshot) => {
-        const unreadMessages = messagesSnapshot.docs.length;
-        totalUnreadMessages = unreadMessages;
-
-        callBack(totalUnreadMessages);
-      });
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      const doc = change.doc.data();
+      const isLastMessageRead = doc.lastMessageRead;
+      callBack(isLastMessageRead);
     });
   });
 
-  return unsubscribe;
+  return () => {
+    unsubscribe();
+  };
 };
 
 export const createGBChat = async (

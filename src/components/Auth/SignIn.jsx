@@ -84,6 +84,13 @@ const SignIn = () => {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: 'Введите корректный адрес электронной почты',
                   },
+                  validate: (value) => {
+                    const lowercaseValue = value.toLowerCase();
+                    if (value !== lowercaseValue) {
+                      return 'Используйте только строчные буквы';
+                    }
+                    return true;
+                  },
                 })}
               />
               <img

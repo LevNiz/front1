@@ -260,7 +260,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </NavLink>
                   <span
                     className={`${
-                      gbChatNotification > 0 ? 'block' : 'hidden'
+                      gbChatNotification ? 'hidden' : ''
                     } absolute top-0 left-0 bg-red-500 h-2 w-2 rounded-full`}
                   ></span>
                 </li>
