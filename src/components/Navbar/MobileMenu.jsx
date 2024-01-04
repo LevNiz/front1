@@ -155,7 +155,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       alt='*'
                     />
                     <span className='pl-1 sm:text-[15px] leading-5'>
-                      Мои заявки
+                    Заявки на отправку
                     </span>
                   </NavLink>
                 </li>

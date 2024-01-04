@@ -30,9 +30,9 @@ export const postApplications = async (data, userID) => {
     dateSending: data.dateArrival,
     phone: data.receiverPhone,
     comment: data.comment,
-    height: Number(data.height) || null,
-    width: Number(data.width) || null,
-    length: Number(data.length) || null,
+    height: Number(data.height) || 0,
+    width: Number(data.width) || 0,
+    length: Number(data.length) || 0,
     cost: Number(data.cost),
     weight:
       data.parcelSize.value === 'custom'
@@ -51,11 +51,11 @@ export const postApplications = async (data, userID) => {
 export const fetchApplications = async (userID, dispatch) => {
   dispatch(fetchApplicationStart());
   try {
-    const res = await request.get('core/request/');
-    const myApplications = res?.data?.results?.filter(
-      (el) => el?.client?.id === userID
+    const res = await request.get(`core/request/?client=${userID}`);
+    const activeApplications = res?.data?.results?.filter(
+      (el) => el?.archive === false
     );
-    dispatch(fetchApplicationSuccess(myApplications));
+    dispatch(fetchApplicationSuccess(activeApplications));
   } catch (error) {
     dispatch(fetchApplicationFailure(error));
   }
@@ -65,12 +65,9 @@ export const fetchApplications = async (userID, dispatch) => {
 export const fetchArchiveApplications = async (userID, dispatch) => {
   dispatch(fetchArchiveApplicationStart());
   try {
-    const res = await request.get('core/request/');
-    const myApplications = res?.data?.results?.filter(
-      (el) => el?.client?.id === userID
-    );
-    const archiveApplications = myApplications?.filter(
-      (el) => el?.senderName === true
+    const res = await request.get(`core/request/?client=${userID}`);
+    const archiveApplications = res?.data?.results?.filter(
+      (el) => el?.archive === true
     );
     dispatch(fetchArchiveApplicationSuccess(archiveApplications));
   } catch (error) {

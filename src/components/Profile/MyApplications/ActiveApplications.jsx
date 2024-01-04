@@ -8,7 +8,7 @@ import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 
 const ActiveApplications = () => {
   const { userID } = useSelector((state) => state?.user);
-  const { loading, error, applications } = useSelector(
+  const { loading, error, activeApplications } = useSelector(
     (state) => state?.applications
   );
   const dispatch = useDispatch();
@@ -25,9 +25,9 @@ const ActiveApplications = () => {
         <ContentLoading extraStyle='320px' />
       ) : error ? (
         <ErrorServer />
-      ) : applications?.length ? (
+      ) : activeApplications?.length ? (
         <>
-          {applications?.map((el) => (
+          {activeApplications?.map((el) => (
             <div
               key={el?.id}
               className='w-full bg-colBgGray2 rounded-[18px] p-3 ss:p-5'

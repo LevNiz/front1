@@ -10,7 +10,7 @@ import GBShopFooter from '../Footer/GBShopFooter';
 
 const Layout = () => {
   const [TechChatNotification, setTechChatNotification] = useState(0);
-  const [gbChatNotification, stGbChatNotification] = useState(0);
+  const [gbChatNotification, stGbChatNotification] = useState(true);
 
   const { userID } = useSelector((state) => state?.user);
   const { pathname } = useLocation();

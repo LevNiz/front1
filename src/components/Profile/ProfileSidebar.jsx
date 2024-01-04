@@ -61,7 +61,7 @@ const ProfileSidebar = () => {
               className='flex items-center p-2 rounded-lg'
             >
               <img className='pr-3' src={ordersIcon} alt='*' />
-              <span className='text-lg'>Мои заявки</span>
+              <span className='text-lg'>Заявки на отправку</span>
             </NavLink>
           </li>
           {/* <li>

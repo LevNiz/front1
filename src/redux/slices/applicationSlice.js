@@ -42,7 +42,7 @@ export const applicationSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(logOut, (state) => {
       state.applications = null;
-      state.archiveApplications = null,
+      state.archiveApplications = null;
       state.loading = false;
       state.error = null;
     });
