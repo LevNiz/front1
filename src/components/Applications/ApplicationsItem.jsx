@@ -6,6 +6,7 @@ import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import noRequest from './../../assets/images/no-request.svg';
+import { NavLink } from 'react-router-dom';
 
 const ApplicationsItem = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -29,7 +30,8 @@ const ApplicationsItem = () => {
       ) : applications?.length ? (
         <>
           {applications?.map((el) => (
-            <div
+            <NavLink
+              to={`${el?.id}`}
               key={el?.id}
               className='w-full bg-colBgGray2 rounded-[18px] p-4 md:p-6'
             >
@@ -92,7 +94,7 @@ const ApplicationsItem = () => {
                   <div className='sm:min-h-[23px] min-h-[18px] min-w-[18px] sm:min-w-[23px] p-2 rounded-full bg-black'></div>
                 </div>
               </div>
-            </div>
+            </NavLink>
           ))}
         </>
       ) : (

@@ -61,6 +61,15 @@ export const fetchApplications = async (userID, dispatch) => {
   }
 };
 
+export const fetchApplicationsDetail = async (id) => {
+  try {
+    const res = await request.get(`core/request/${id}/`);
+    return { success: true, data: res?.data };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
 // Get applications:
 export const fetchArchiveApplications = async (userID, dispatch) => {
   dispatch(fetchArchiveApplicationStart());

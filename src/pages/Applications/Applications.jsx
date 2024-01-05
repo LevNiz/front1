@@ -14,7 +14,7 @@ const Applications = () => {
 
   return (
     <div className='py-24 content'>
-      <div className='flex justify-center space-x-4 sm:space-x-8 pt-8 min-h-[148px]'>
+      <div className='flex justify-center space-x-4 sm:space-x-8 mm:pt-8 min-h-[92px] mm:min-h-[148px]'>
         <NavLink
           className='p-3 sm:p-5 rounded-2xl w-full bg-black text-white'
           to='calculate'
