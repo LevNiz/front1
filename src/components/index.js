@@ -65,6 +65,7 @@ import BuyRequestDetail from './Profile/BuyRequest/BuyRequestDetail';
 import BuyRequestUpdate from './Profile/BuyRequest/BuyRequestUpdate';
 import ItemSearchRequestUpdate from './Profile/ItemSearchRequest/ItemSearchRequestUpdate';
 import ApplicationsDetail from './Applications/ApplicationsDetail';
+import ApplicationsUpdate from './Applications/ApplicationsUpdate';
 
 export {
   Layout,
@@ -134,4 +135,5 @@ export {
   BuyRequestUpdate,
   ItemSearchRequestUpdate,
   ApplicationsDetail,
+  ApplicationsUpdate,
 };

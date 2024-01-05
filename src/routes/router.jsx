@@ -42,6 +42,7 @@ import {
   BuyRequestUpdate,
   ItemSearchRequestUpdate,
   ApplicationsDetail,
+  ApplicationsUpdate,
 } from '../components';
 import {
   Auth,
@@ -155,6 +156,7 @@ export const router = createBrowserRouter(
           <Route path='applications'>
             <Route index element={<Applications />} />
             <Route path=':id' element={<ApplicationsDetail />} />
+            <Route path='update/:id' element={<ApplicationsUpdate />} />
             <Route path='send-application' element={<SendApplication />} />
             <Route path='calculate' element={<CalcDelivery />} />
           </Route>

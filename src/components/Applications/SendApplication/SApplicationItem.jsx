@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { fetchCosts } from '../../../api/costs';
 import { useForm } from 'react-hook-form';
 import editIcon from '../../../assets/icons/edit.svg';
@@ -18,7 +18,6 @@ const SApplicationItem = () => {
   const { state } = useLocation();
   const { userID } = useSelector((state) => state?.user);
   const { costs } = useSelector((state) => state?.costs);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
@@ -102,7 +101,6 @@ const SApplicationItem = () => {
       setIsLoading(false);
       setModalOpen(true);
       setModalContent('successRequest');
-      navigate('/applications');
     } else {
       setIsLoading(false);
     }
@@ -177,7 +175,10 @@ const SApplicationItem = () => {
                 </div>
               </div>
             </div>
-            <SApplicationReceiver onReceiver={handleReceiverData} />
+            <SApplicationReceiver
+              receiverID={receiver?.receiverID}
+              onReceiver={handleReceiverData}
+            />
             <div className='flex items-center pb-5 pt-8'>
               <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
                 4
@@ -186,7 +187,7 @@ const SApplicationItem = () => {
                 Отправка
               </h3>
             </div>
-            <SApplicationComment register={register} errors={errors} />
+            <SApplicationComment register={register} />
             <div className='md:flex justify-between items-center mt-12'>
               <div className='flex justify-end md:justify-start sm:max-w-[320px] font-medium w-full md:ml-0 ml-auto items-center p-5'>
                 <span className='text-lg'>Общая стоимость:</span>

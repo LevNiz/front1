@@ -8,7 +8,7 @@ import back from './../../assets/icons/arrow-left.svg';
 import { fetchAddresses, postAddress } from '../../api/addresses';
 import { fetchDepots } from '../../api/depots';
 
-const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
+const ModalAddress = ({ isOpen, onClose, onReceiver }) => {
   const { cities } = useSelector((state) => state?.cities);
   const { countries } = useSelector((state) => state?.countries);
   const { depots } = useSelector((state) => state?.depots);
@@ -140,9 +140,9 @@ const ModalAddress = ({ isOpen, onClose, onSelectAddress, onReceiver }) => {
                     </div>
                     <button
                       onClick={() => {
-                        onSelectAddress(el?.id);
                         onClose();
                         onReceiver({
+                          receiverID: el?.id,
                           receiverName: el?.receiverName,
                           receiverPhone: el?.phone,
                         });

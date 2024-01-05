@@ -3,26 +3,21 @@ import { fetchAddresses } from '../../../api/addresses';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalAddress from '../../../helpers/Modals/ModalAddress';
 
-const SApplicationReceiver = ({ onReceiver }) => {
+const SApplicationReceiver = ({ receiverID, onReceiver }) => {
   const { userID } = useSelector((state) => state?.user);
   const { addresses } = useSelector((state) => state?.addresses);
   const dispatch = useDispatch();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [addressID, setAddressID] = useState(null);
 
   const closeModal = () => {
     setModalOpen(false);
   };
 
-  const choseAddress = addresses?.filter((el) => el?.id === addressID) || [];
+  const choseAddress = addresses?.filter((el) => el?.id === receiverID) || [];
 
   const handleAddresses = async () => {
     await fetchAddresses(userID, dispatch);
-  };
-
-  const handleChooseAddress = (address) => {
-    setAddressID(address);
   };
 
   return (
@@ -84,7 +79,6 @@ const SApplicationReceiver = ({ onReceiver }) => {
       <ModalAddress
         isOpen={modalOpen}
         onClose={closeModal}
-        onSelectAddress={handleChooseAddress}
         onReceiver={onReceiver}
       />
     </>

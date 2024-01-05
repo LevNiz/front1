@@ -39,8 +39,10 @@ export const postApplications = async (data, userID) => {
         ? Number(data.scopeWeight)
         : data.parcelSize.weight,
   };
+  console.log(sendData);
   try {
     await axiosInstance.post('core/request/', sendData);
+    console.log('Success')
     return { success: true };
   } catch (error) {
     return { success: false };
