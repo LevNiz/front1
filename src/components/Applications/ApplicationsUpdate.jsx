@@ -10,7 +10,7 @@ import {
   postApplications,
 } from '../../api/applications';
 import { fetchParcelCategories } from '../../api/parcels';
-import { addedCost, tariffsData } from '../../constants/tariffsData';
+import { tariffsData } from '../../constants/tariffsData';
 
 import attention from '../../assets/icons/attention.svg';
 import attention2 from '../../assets/icons/attention.svg';
@@ -45,7 +45,8 @@ const ApplicationsUpdate = () => {
     setModalOpen(false);
   };
 
-  const choseAddress = addresses?.filter((el) => el?.id === receiver?.receiverID) || [];
+  const choseAddress =
+    addresses?.filter((el) => el?.id === receiver?.receiverID) || [];
 
   const handleAddresses = async () => {
     await fetchAddresses(userID, dispatch);
@@ -683,7 +684,7 @@ const ApplicationsUpdate = () => {
                         <p className='text-xs opacity-50'>Тип адреса</p>
                         <h4 className='text-sm border-b-gray-300 border-b pb-1'>
                           {el?.type === 'custom'
-                            ? 'custom'
+                            ? 'Кастомный'
                             : el?.type === 'depot'
                             ? 'Пункт выдачи GivBox'
                             : '' || 'Не указана'}
@@ -778,7 +779,6 @@ const ApplicationsUpdate = () => {
       <ModalAddress
         isOpen={modalOpen}
         onClose={closeModal}
-        onSelectAddress={handleChooseAddress}
         onReceiver={handleChooseAddress}
       />
     </>

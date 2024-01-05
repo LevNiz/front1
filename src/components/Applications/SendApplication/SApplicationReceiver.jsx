@@ -42,7 +42,7 @@ const SApplicationReceiver = ({ receiverID, onReceiver }) => {
                 <p className='text-xs opacity-50'>Тип адреса</p>
                 <h4 className='text-sm border-b-gray-300 border-b pb-1'>
                   {el?.type === 'custom'
-                    ? 'custom'
+                    ? 'Кастомный'
                     : el?.type === 'depot'
                     ? 'Пункт выдачи GivBox'
                     : '' || 'Не указана'}
