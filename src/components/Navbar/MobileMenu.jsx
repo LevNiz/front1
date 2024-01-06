@@ -5,7 +5,7 @@ import { logOutFetch } from '../../api/user';
 import Modal from '../../helpers/Modals/Modal';
 
 import logout from './../../assets/icons/logout.svg';
-import logo from './../../assets/icons/logo-mob.svg';
+import logo from './../../assets/images/header-logo.svg';
 import arrow from './../../assets/icons/down.svg';
 import home from './../../assets/icons/mobile-menu/home.svg';
 import depot from './../../assets/icons/mobile-menu/depot.svg';
@@ -67,7 +67,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
         fixed top-0 ${isOpen ? 'left-0' : 'left-[-100%]'}
         w-[82%] ss:w-[80%] h-full transition-all duration-200 bg-white z-[9999999] block md:hidden`}
       >
-        <div className='my-5 pb-5 border-b border-gray-400 mx-3'>
+        <div className='py-5 bg-black mb-5 border-b border-gray-400 px-3'>
           <img className='mx-auto w-32' src={logo} alt='*' />
         </div>
         <ul className='py-6 px-2 sidebar overflow-hidden overflow-y-scroll flex flex-col justify-between h-[calc(100%_-_102px)]'>
@@ -155,7 +155,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       alt='*'
                     />
                     <span className='pl-1 sm:text-[15px] leading-5'>
-                    Заявки на отправку
+                      Заявки на отправку
                     </span>
                   </NavLink>
                 </li>

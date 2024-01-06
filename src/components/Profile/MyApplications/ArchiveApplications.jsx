@@ -31,8 +31,7 @@ const ArchiveApplications = () => {
           {archiveApplications?.map((el) => (
             <NavLink
               key={el?.id}
-              // to=''
-              onClick={() => alert('Детальная страница уже совсем скоро!')}
+              to={`/applications/${el?.id}`}
               className='w-full bg-colBgGray2 rounded-[18px] p-3 ss:p-5'
             >
               <div className='flex justify-between items-center'>

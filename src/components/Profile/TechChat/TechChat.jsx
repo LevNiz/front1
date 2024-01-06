@@ -76,8 +76,8 @@ const TechChat = () => {
     <div className='w-screen'>
       <div className='relative'>
         <div className='flex items-center w-full pt-0 mm:pt-2 p-2'>
-          <div className='min-w-[48px] w-12 h-12 rounded-full overflow-hidden mr-3 flex justify-center items-center bg-colYellow'>
-            <img className='object-cover w-8' src={logo} alt='*' />
+          <div className='min-w-[40px] w-10 h-10 rounded-full overflow-hidden mr-3 flex justify-center items-center bg-black'>
+            <img className='object-cover w-5' src={logo} alt='*' />
           </div>
           <div className='flex flex-col'>
             <h4 className='font-medium'>GivBox Admin</h4>
