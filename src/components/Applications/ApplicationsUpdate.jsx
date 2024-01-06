@@ -26,7 +26,7 @@ const ApplicationsUpdate = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [parcelData, setParcelData] = useState([]);
-  const [parcelSize, setParcelSize] = useState(order?.orderData?.parcelSize);
+  const [parcelSize, setParcelSize] = useState();
   const [scopeWeight, setScopeWeight] = useState(null);
   const [selectedTariff, setSelectedTariff] = useState(order?.tariff);
   const [activeTariff, setActiveTariff] = useState(null);
@@ -72,6 +72,24 @@ const ApplicationsUpdate = () => {
       const { success, data } = await fetchApplicationsDetail(id);
       if (success) {
         setOrder(data);
+        setParcelSize({
+          value: data?.packageData
+            ? data?.packageData?.id
+            : data?.height > 0 &&
+              data?.width > 0 &&
+              data?.length > 0 &&
+              data?.packageData === null
+            ? 'custom'
+            : 'measurement',
+          label: data?.packageData
+            ? data?.packageData?.nameRu
+            : data?.height > 0 &&
+              data?.width > 0 &&
+              data?.length > 0 &&
+              data?.packageData === null
+            ? 'Точные'
+            : 'Измерить на складе',
+        });
         setIsLoading(false);
         return {
           senderCity: {
@@ -82,10 +100,6 @@ const ApplicationsUpdate = () => {
           receiverCity: {
             value: data?.toCity?.id || '',
             label: `${data?.toCity?.nameRu}, ${data?.toCountry?.nameRu}` || {},
-          },
-          parcelSize: {
-            value: data?.packageData ? data?.packageData?.id : 'custom',
-            label: data?.packageData ? data?.packageData?.nameRu : 'Точные',
           },
           length: data?.length,
           width: data?.width,
@@ -286,6 +300,7 @@ const ApplicationsUpdate = () => {
                       name='parcelSize'
                       control={control}
                       rules={{ required: 'Поле обязательно к заполнению!' }}
+                      defaultValue={parcelSize}
                       render={({ field }) => (
                         <Select
                           {...field}
@@ -455,19 +470,19 @@ const ApplicationsUpdate = () => {
                         ''
                       )}
                     </div>
-                  ) : parcelSizeSelect?.weight ? (
-                    <div>
-                      <p className='font-medium leading-4'>Вес, кг</p>
-                      <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
-                        До {parcelSizeSelect?.weight} кг
-                      </div>
-                    </div>
                   ) : (
-                    <div></div>
+                    parcelSizeSelect?.weight && (
+                      <div>
+                        <p className='font-medium leading-4'>Вес, кг</p>
+                        <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
+                          До {parcelSizeSelect?.weight} кг
+                        </div>
+                      </div>
+                    )
                   )}
                 </div>
 
-                <p className='mb-3 font-medium'>
+                <p className='mb-3 mt-5 font-medium'>
                   Выберите тариф <span className='text-red-500'>*</span>
                 </p>
                 <div className='lg:max-w-[680px] grid ld:grid-cols-2 gap-6 md:gap-10 mt-5'>
@@ -503,9 +518,7 @@ const ApplicationsUpdate = () => {
                       </div>
                       <div className='py-2 text-2xl mm:text-3xl font-bold'>
                         {/* {parcelCost
-                ? el?.status === 'Быстро'
-                  ? `${(parseFloat(parcelCost) + addedCost)?.toFixed(2)} $`
-                  : `${parseFloat(parcelCost).toFixed(2)} $`
+                ? `${parseFloat(parcelCost).toFixed(2)} $`
                 : '00.00 $'} */}
                         00.00 $
                       </div>

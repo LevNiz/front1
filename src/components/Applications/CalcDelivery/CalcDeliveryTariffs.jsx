@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { tariffsData } from '../../../constants/tariffsData';
-import { addedCost } from '../../../constants/tariffsData';
 import receptionPoint from '../../../assets/icons/receptionPoint.svg';
 
 const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
@@ -40,9 +39,7 @@ const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
             </div>
             <div className='py-2 text-2xl mm:text-3xl font-bold'>
               {parcelCost
-                ? el?.status === 'Быстро'
-                  ? `${(parseFloat(parcelCost) + addedCost)?.toFixed(2)} $`
-                  : `${parseFloat(parcelCost).toFixed(2)} $`
+                ? `${parseFloat(parcelCost).toFixed(2)} $`
                 : '00.00 $'}
             </div>
             <div className='py-5'>
@@ -77,12 +74,6 @@ const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
             >
               Выбрать
             </div>
-            {/* <div className='bg-[#6747e5] text-white p-2 rounded-md text-center text-lg font-bold'>
-              {el?.status === 'Быстро'
-                ? (parseFloat(parcelCost) + addedCost).toFixed(2)
-                : parcelCost}
-              $
-            </div> */}
           </div>
         ))}
       </div>

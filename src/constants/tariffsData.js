@@ -11,6 +11,7 @@ export const tariffsData = [
   {
     id: 1,
     name: 'Стандартный',
+    type: 'standart',
     status: 'Выгодно',
     deliveryPoint: 'Пункт выдачи GB',
     statusImg: standart,
@@ -23,6 +24,7 @@ export const tariffsData = [
   {
     id: 2,
     name: 'Премиум',
+    type: 'premium',
     status: 'Быстро',
     deliveryPoint: 'Местный курьер',
     statusImg: premium,
@@ -33,5 +35,3 @@ export const tariffsData = [
     locationWhiteImg: hoveredLocation,
   },
 ];
-
-export const addedCost = 4;

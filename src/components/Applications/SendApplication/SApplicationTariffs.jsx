@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { tariffsData } from '../../../constants/tariffsData';
-import { addedCost } from '../../../constants/tariffsData';
 import receptionPoint from '../../../assets/icons/receptionPoint.svg';
 
 const SApplicationTariffs = ({
@@ -47,9 +46,7 @@ const SApplicationTariffs = ({
             </div>
             <div className='py-2 text-2xl mm:text-3xl font-bold'>
               {parcelCost
-                ? el?.status === 'Быстро'
-                  ? `${(parseFloat(parcelCost) + addedCost)?.toFixed(2)} $`
-                  : `${parseFloat(parcelCost).toFixed(2)} $`
+                ? `${parseFloat(parcelCost).toFixed(2)} $`
                 : '00.00 $'}
             </div>
             <div className='py-5'>

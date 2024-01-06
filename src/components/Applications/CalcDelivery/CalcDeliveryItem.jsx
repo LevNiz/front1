@@ -39,13 +39,20 @@ const CalcDeliveryItem = () => {
     );
     if (cityParcelCost) {
       const costPerKg = cityParcelCost.costPerKg;
+      const costPerKgMy = cityParcelCost?.costPerKgMy;
       let cost;
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
         const parcelWeight = (width * length * height) / 5000;
-        cost = Math.max(parcelWeight, data.weight) * costPerKg;
+        cost =
+          Math.max(parcelWeight, data.weight) *
+          (tariff === 1 ? costPerKg : costPerKgMy);
+      } else if (data.parcelSize.value === 'measurement') {
+        cost = 0;
       } else {
-        cost = Number(data.parcelSize.weight) * Number(costPerKg);
+        cost =
+          Number(data.parcelSize.weight) *
+          (tariff === 1 ? costPerKg : costPerKgMy);
       }
       setParcelCost(cost.toFixed(2));
       setIsClickedForm(true);

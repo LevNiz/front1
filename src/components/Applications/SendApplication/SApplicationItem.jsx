@@ -69,7 +69,7 @@ const SApplicationItem = () => {
           ? parcelWeight
           : Number(data.weight)
         : Number(data.parcelSize.weight);
-    setParams({ ...orderData, scopeWeight });
+    setParams({ ...orderData, scopeWeight, tariff });
     setIsDisabled(false);
     const cityParcelCost = costs?.find(
       (cost) =>
@@ -78,13 +78,19 @@ const SApplicationItem = () => {
     );
     if (cityParcelCost) {
       const costPerKg = cityParcelCost?.costPerKg;
+      const costPerKgMy = cityParcelCost?.costPerKgMy;
       let parCost;
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
         const parcelWeight = (width * length * height) / 5000;
-        parCost = Math.max(parcelWeight, data.weight) * costPerKg;
+        parCost =
+          Math.max(parcelWeight, data.weight) *
+          (tariff === 1 ? costPerKg : costPerKgMy);
+      } else if (data.parcelSize.value === 'measurement') {
+        parCost = 0;
       } else {
-        parCost = data.parcelSize.weight * costPerKg;
+        parCost =
+          data.parcelSize.weight * (tariff === 1 ? costPerKg : costPerKgMy);
       }
       setParcelCost(parCost?.toFixed(2));
     } else {
@@ -95,7 +101,7 @@ const SApplicationItem = () => {
   const onSubmitForm = async (data) => {
     setIsLoading(true);
     const requestData = { ...params, ...data, ...receiver };
-    requestData.cost = tariff === 2 ? Number(parcelCost) + 4 : parcelCost;
+    requestData.cost = parcelCost;
     const { success } = await postApplications(requestData, userID);
     if (success) {
       setIsLoading(false);
@@ -191,16 +197,7 @@ const SApplicationItem = () => {
             <div className='md:flex justify-between items-center mt-12'>
               <div className='flex justify-end md:justify-start sm:max-w-[320px] font-medium w-full md:ml-0 ml-auto items-center p-5'>
                 <span className='text-lg'>Общая стоимость:</span>
-                <span className='text-xl mx-1 '>
-                  {tariff === 2
-                    ? parcelCost
-                      ? (parseFloat(parcelCost) + 4).toFixed(2)
-                      : '00.00'
-                    : parcelCost
-                    ? parcelCost
-                    : '00.00'}
-                  $
-                </span>
+                <span className='text-xl mx-1 '>$ {parcelCost}</span>
               </div>
               <div className='flex justify-end items-center mt-8 md:mt-0 sm:max-w-[320px] w-full ml-auto'>
                 <button

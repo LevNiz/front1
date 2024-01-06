@@ -200,6 +200,10 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                       value: 'custom',
                       label: 'Точные',
                     },
+                    {
+                      value: 'measurement',
+                      label: 'Измерить на складе',
+                    },
                     ...(parcelData || []).map((el) => ({
                       value: el?.id,
                       label: `${el?.nameRu} (${el?.length}x${el?.width}x${el?.height} см)`,
@@ -241,7 +245,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
               </p>
             )}
           </div>
-          {parcelSize?.label === 'Точные' ? (
+          {parcelSize?.label === 'Точные' && (
             <>
               <div>
                 <div className='flex items-center'>
@@ -317,8 +321,6 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                 </div>
               </div>
             </>
-          ) : (
-            ''
           )}
         </div>
         <div className='md:flex justify-between items-end mt-5'>

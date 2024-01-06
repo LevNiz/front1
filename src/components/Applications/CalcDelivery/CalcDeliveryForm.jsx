@@ -179,6 +179,10 @@ const CalcDeliveryForm = ({ onSubmit }) => {
                     value: 'custom',
                     label: 'Точные',
                   },
+                  {
+                    value: 'measurement',
+                    label: 'Измерить на складе',
+                  },
                   ...(parcelData || []).map((el) => ({
                     value: el?.id,
                     label: `${el?.nameRu} (${el?.length}x${el?.width}x${el?.height} см)`,
