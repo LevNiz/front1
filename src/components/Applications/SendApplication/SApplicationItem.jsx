@@ -36,7 +36,7 @@ const SApplicationItem = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
-  const [receiver, setReceiver] = useState('');
+  const [receiver, setReceiver] = useState(null);
   const [services, setServices] = useState([]);
 
   const dateArrival = watch('dateArrival');
@@ -117,7 +117,7 @@ const SApplicationItem = () => {
     const requestData = {
       ...params,
       ...data,
-      ...receiver,
+      receiver: receiver,
       cost: parcelCost,
       extraServices: serviceIds,
     };
@@ -203,7 +203,7 @@ const SApplicationItem = () => {
               </div>
             </div>
             <SApplicationReceiver
-              receiverID={receiver?.receiverID}
+              receiver={receiver}
               onReceiver={handleReceiverData}
             />
             <div className='flex items-center pb-5 pt-8'>

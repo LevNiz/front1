@@ -334,7 +334,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                     высота в см / 5000
                   </p>
                   <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
-                    {scopeWeight}
+                    {scopeWeight.toFixed(2)}
                   </div>
                   <div className='flex items-start p-3 rounded-lg bg-orange-200 max-w-[362px] w-full'>
                     <img className='mt-[2px]' src={attention} alt='*' />

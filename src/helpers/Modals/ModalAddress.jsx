@@ -141,11 +141,7 @@ const ModalAddress = ({ isOpen, onClose, onReceiver }) => {
                     <button
                       onClick={() => {
                         onClose();
-                        onReceiver({
-                          receiverID: el?.id,
-                          receiverName: el?.receiverName,
-                          receiverPhone: el?.phone,
-                        });
+                        onReceiver(el);
                       }}
                       className='bg-colYellow hover:opacity-70 duration-200 w-full p-2 rounded-md mt-5 text-sm font-medium'
                     >

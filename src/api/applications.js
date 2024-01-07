@@ -16,8 +16,8 @@ export const postApplications = async (data, userID) => {
   const sendData = {
     senderName: data.serviceName,
     senderPhone: '-',
-    receiverName: data.receiverName,
-    receiverPhone: data.receiverPhone,
+    receiverName: data.receiver.receiverName,
+    receiverPhone: data.receiver.phone,
     serviceName: data.serviceName,
     client: userID,
     fromCity: data.senderCity.value,
@@ -31,11 +31,11 @@ export const postApplications = async (data, userID) => {
         : null,
     packageType: null,
     dateSending: data.dateArrival,
-    phone: data.receiverPhone,
-    extraServices: data.extraServices,
+    phone: data.receiver.phone,
+    extraServices: data.extraServices || [],
     premium: data.tariff === 2 ? true : false,
     comment: data.comment,
-    address: data.receiverID,
+    address: data.receiver.id,
     height: Number(data.height) || 0,
     width: Number(data.width) || 0,
     length: Number(data.length) || 0,
@@ -43,10 +43,56 @@ export const postApplications = async (data, userID) => {
     weight:
       data.parcelSize.value === 'custom'
         ? Number(data.scopeWeight)
+        : data.parcelSize.value === 'measurement'
+        ? Number(0)
         : data.parcelSize.weight,
   };
   try {
     await axiosInstance.post('core/request/', sendData);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
+export const updateApplications = async (data, userID, id) => {
+  const sendData = {
+    senderName: data.serviceName,
+    senderPhone: '-',
+    receiverName: data.receiver.receiverName,
+    receiverPhone: data.receiver.phone,
+    serviceName: data.serviceName,
+    client: userID,
+    fromCity: data.senderCity.value,
+    toCity: data.receiverCity.value,
+    fromCountry: data.senderCity.fromCountry,
+    toCountry: data.receiverCity.toCountry,
+    packageData:
+      data.parcelSize.value !== 'custom' &&
+      data.parcelSize.value !== 'measurement'
+        ? data.parcelSize.value
+        : null,
+    packageType: null,
+    dateSending: data.dateArrival,
+    phone: data.receiver.phone,
+    extraServices: data.extraServices || [],
+    premium: data.selectedTariff === 2 ? true : false,
+    comment: data.comment,
+    address: data.receiver.id,
+    height: Number(data.height) || 0,
+    width: Number(data.width) || 0,
+    length: Number(data.length) || 0,
+    cost: Number(data.cost),
+    weight:
+      data.parcelSize.value === 'custom'
+        ? Number(data.scopeWeight)
+        : data.parcelSize.value === 'measurement'
+        ? Number(0)
+        : data.parcelSize.weight,
+  };
+  console.log(data);
+  try {
+    await axiosInstance.patch(`core/request/${id}/`, sendData);
     return { success: true };
   } catch (error) {
     return { success: false };

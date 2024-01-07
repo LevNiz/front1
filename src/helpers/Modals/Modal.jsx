@@ -156,6 +156,24 @@ const Modal = ({
             </NavLink>
           </div>
         </div>
+      ) : content === 'successUpdateRequest' ? (
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[90%] sm:w-full text-center'>
+          <div className='flex justify-center py-5'>
+            <img src={success} alt='*' />
+          </div>
+          <h3 className='text-xl font-medium mb-8'>
+            Ваша заявка успешна изменена!
+          </h3>
+          <div className='flex px-8 mb-8'>
+            <NavLink
+              to='/applications'
+              className='bg-colYellow w-full py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
+              onClick={onClose}
+            >
+              Закрыть
+            </NavLink>
+          </div>
+        </div>
       ) : content === 'errorRequest' ? (
         <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[420px] w-[90%] sm:w-full text-center'>
           <div className='flex justify-center pt-5'>

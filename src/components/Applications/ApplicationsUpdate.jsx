@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLoading } from '../../helpers/Loader/Loader';
+import { ContentLoading, Loading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import {
   fetchApplicationsDetail,
-  postApplications,
+  updateApplications,
 } from '../../api/applications';
 import { fetchParcelCategories } from '../../api/parcels';
 import { tariffsData } from '../../constants/tariffsData';
@@ -20,19 +20,22 @@ import receptionPoint from '../../assets/icons/receptionPoint.svg';
 import editIcon from '../../assets/icons/edit.svg';
 import { fetchAddresses } from '../../api/addresses';
 import ModalAddress from '../../helpers/Modals/ModalAddress';
+import Modal from '../../helpers/Modals/Modal';
 
 const ApplicationsUpdate = () => {
   const [order, setOrder] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [params, setParams] = useState({});
   const [parcelData, setParcelData] = useState([]);
   const [isParcelSize, setIsParcelSize] = useState();
   const [scopeWeight, setScopeWeight] = useState(null);
   const [selectedTariff, setSelectedTariff] = useState(order?.premium ? 2 : 1);
+  const [modalOpenAddress, setModalOpenAddress] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [receiver, setReceiver] = useState(null);
+  const [modalContent, setModalContent] = useState('');
+  const [receiver, setReceiver] = useState(order?.address);
   const [selectedSenderCity, setSelectedSenderCity] = useState();
   const [selectedReceiverCity, setSelectedReceiverCity] = useState();
   const [parcelCost, setParcelCost] = useState(null);
@@ -40,9 +43,12 @@ const ApplicationsUpdate = () => {
   const { costs } = useSelector((state) => state?.costs);
   const { cities } = useSelector((state) => state?.cities);
   const { userID } = useSelector((state) => state?.user);
-  const { addresses } = useSelector((state) => state?.addresses);
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  const closeModalAddress = () => {
+    setModalOpenAddress(false);
+  };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -68,6 +74,7 @@ const ApplicationsUpdate = () => {
       const { success, data } = await fetchApplicationsDetail(id);
       if (success) {
         setOrder(data);
+        setReceiver(data?.address);
         setIsParcelSize({
           value: data?.packageData
             ? data?.packageData?.id
@@ -78,23 +85,26 @@ const ApplicationsUpdate = () => {
             ? 'custom'
             : 'measurement',
           label: data?.packageData
-            ? data?.packageData?.nameRu
+            ? `${data?.packageData?.nameRu} (${data?.packageData?.length}x${data?.packageData?.width}x${data?.packageData?.height} см)`
             : data?.height > 0 &&
               data?.width > 0 &&
               data?.length > 0 &&
               data?.packageData === null
             ? 'Точные'
             : 'Измерить на складе',
+          weight: data?.packageData ? data?.packageData?.weight : null,
         });
         setIsLoading(false);
         return {
           senderCity: {
             value: data?.fromCity?.id || '',
+            fromCountry: data?.fromCity?.country,
             label:
               `${data?.fromCity?.nameRu}, ${data?.fromCountry?.nameRu}` || {},
           },
           receiverCity: {
             value: data?.toCity?.id || '',
+            toCountry: data?.toCity?.country,
             label: `${data?.toCity?.nameRu}, ${data?.toCountry?.nameRu}` || {},
           },
           length: data?.length > 0 ? data?.length : '',
@@ -116,9 +126,6 @@ const ApplicationsUpdate = () => {
   const width = watch('width');
   const height = watch('height');
   const weight = watch('weight');
-
-  const choseAddress =
-    addresses?.filter((el) => el?.id === receiver?.receiverID) || [];
 
   const today = new Date();
   const year = today.getFullYear();
@@ -188,17 +195,22 @@ const ApplicationsUpdate = () => {
   };
 
   const onSubmitForm = async (data) => {
-    setIsLoading(true);
-    // const requestData = { ...params, ...data, ...receiver };
-    // requestData.cost = tariff === 2 ? Number(parcelCost) + 4 : parcelCost;
-    const { success } = await postApplications(data, userID);
+    setLoading(true);
+    const requestData = {
+      ...params,
+      ...data,
+      receiver: receiver,
+      cost: parcelCost,
+    };
+    const { success } = await updateApplications(requestData, userID, id);
     if (success) {
-      setIsLoading(false);
-      //   setModalOpen(true);
-      //   setModalContent('successRequest');
-      //   navigate('/applications');
+      setLoading(false);
+      setModalOpen(true);
+      setModalContent('successUpdateRequest');
     } else {
-      setIsLoading(false);
+      setLoading(false);
+      setModalOpen(true);
+      setModalContent('errorRequest');
     }
   };
 
@@ -227,9 +239,7 @@ const ApplicationsUpdate = () => {
               </span>
             </div>
             <div
-              className={`${
-                !isDisabled ? 'pointer-events-none opacity-40' : ''
-              }`}
+              className={`${!isDisabled && 'pointer-events-none opacity-40'}`}
             >
               <div className='md:ml-5 lg:ml-10'>
                 <form>
@@ -253,8 +263,12 @@ const ApplicationsUpdate = () => {
                             }))}
                             placeholder='Выберите город'
                             onChange={(selectedOption) => {
-                              field.onChange(selectedOption);
-                              setSelectedSenderCity(selectedOption);
+                              const modifiedOption = {
+                                ...selectedOption,
+                                fromCountry: selectedOption?.fromCountry,
+                              };
+                              field.onChange(modifiedOption);
+                              setSelectedSenderCity(modifiedOption);
                             }}
                             menuPortalTarget={document.body}
                             styles={{
@@ -494,7 +508,7 @@ const ApplicationsUpdate = () => {
                   <div className='md:flex justify-between items-end mt-5'>
                     {isParcelSize?.label === 'Точные' ? (
                       <div>
-                        {scopeWeight !== null ? (
+                        {scopeWeight !== null && (
                           <>
                             <p className='font-medium leading-4'>
                               Объёмный вес, кг
@@ -504,7 +518,7 @@ const ApplicationsUpdate = () => {
                               ширина * высота в см / 5000
                             </p>
                             <div className='border border-colGray2 p-[14px] rounded-[4px] w-max min-w-[110px] mb-3 mt-2'>
-                              {scopeWeight}
+                              {scopeWeight.toFixed(2)}
                             </div>
                             <div className='flex items-start p-3 rounded-lg bg-orange-200 max-w-[362px] w-full'>
                               <img
@@ -525,8 +539,6 @@ const ApplicationsUpdate = () => {
                               </div>
                             </div>
                           </>
-                        ) : (
-                          ''
                         )}
                       </div>
                     ) : (
@@ -646,9 +658,7 @@ const ApplicationsUpdate = () => {
               </div>
             </div>
             <div
-              className={`${
-                isDisabled ? 'pointer-events-none opacity-40' : ''
-              }`}
+              className={`${isDisabled && 'pointer-events-none opacity-40'}`}
             >
               <div className='flex items-center pb-5 pt-8'>
                 <span className='bg-black text-colYellow rounded-full min-w-[32px] h-8 flex justify-center items-center font-medium text-lg'>
@@ -735,30 +745,27 @@ const ApplicationsUpdate = () => {
                 </div>
               </div>
               <div className='md:pl-5 lg:pl-10'>
-                {choseAddress?.map((el) => (
-                  <div
-                    key={el?.id}
-                    className='text-left h-max max-w-[340px] mb-5'
-                  >
+                {receiver && (
+                  <div className='text-left h-max max-w-[340px] mb-5'>
                     <div className='flex flex-col space-y-2'>
                       <div>
                         <p className='text-xs opacity-50'>Имя получателя</p>
                         <h4 className='text-sm border-b-gray-300 border-b pb-1'>
-                          {el?.receiverName || 'Не указана'}
+                          {receiver?.receiverName || 'Не указана'}
                         </h4>
                       </div>
                       <div>
                         <p className='text-xs opacity-50'>Номер телефона</p>
                         <h4 className='text-sm border-b-gray-300 border-b pb-1'>
-                          {el?.phone || 'Не указана'}
+                          {receiver?.phone || 'Не указана'}
                         </h4>
                       </div>
                       <div>
                         <p className='text-xs opacity-50'>Тип адреса</p>
                         <h4 className='text-sm border-b-gray-300 border-b pb-1'>
-                          {el?.type === 'custom'
+                          {receiver?.type === 'custom'
                             ? 'Кастомный'
-                            : el?.type === 'depot'
+                            : receiver?.type === 'depot'
                             ? 'Пункт выдачи GivBox'
                             : '' || 'Не указана'}
                         </h4>
@@ -766,31 +773,29 @@ const ApplicationsUpdate = () => {
                       <div>
                         <p className='text-xs opacity-50'>Город, страна</p>
                         <h4 className='text-sm border-b-gray-300 border-b pb-1'>
-                          {el?.city?.nameRu + ', ' + el?.country?.nameRu ||
-                            'Не указана'}
+                          {receiver?.city?.nameRu +
+                            ', ' +
+                            receiver?.country?.nameRu || 'Не указана'}
                         </h4>
                       </div>
                       <div>
                         <p className='text-xs opacity-50'>Адрес</p>
                         <h4 className='text-sm border-b-gray-300 border-b pb-1'>
-                          {el?.address || 'Не указана'}
+                          {receiver?.address || 'Не указана'}
                         </h4>
                       </div>
                     </div>
                   </div>
-                ))}
+                )}
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    setModalOpen(true);
+                    setModalOpenAddress(true);
                     handleAddresses();
                   }}
-                  // onClick={(e) => e.preventDefault()}
                   className='bg-black sm:max-w-xs w-full p-3 h-[50px] text-white rounded-md hover:opacity-70 duration-150'
                 >
-                  {choseAddress?.length
-                    ? 'Выбрать другой адрес'
-                    : '+ Выбрать адрес'}
+                  {receiver ? 'Выбрать другой адрес' : '+ Выбрать адрес'}
                 </button>
               </div>
               <div className='flex items-center pb-5 pt-8'>
@@ -825,14 +830,13 @@ const ApplicationsUpdate = () => {
                 <div className='flex justify-end items-center mt-8 md:mt-0 sm:max-w-[320px] w-full ml-auto'>
                   <button
                     type='submit'
-                    //   disabled={isButtonDisabled}
+                    disabled={!receiver}
                     onClick={handleSubmit(onSubmitForm)}
-                    //   className={`${
-                    //     isButtonDisabled
-                    //       ? 'opacity-50 hover:opacity-50 cursor-not-allowed'
-                    //       : 'hover:opacity-80'
-                    //   } uppercase font-medium p-5 text-lg rounded-lg bg-black text-white duration-150 w-full`}
-                    className='hover:opacity-80 uppercase font-medium p-5 text-lg rounded-lg bg-black text-white duration-150 w-full'
+                    className={`${
+                      !receiver
+                        ? 'opacity-50 hover:opacity-50 cursor-not-allowed'
+                        : 'hover:opacity-80'
+                    } uppercase font-medium p-5 text-lg rounded-lg bg-black text-white duration-150 w-full`}
                   >
                     Оформить заявку
                   </button>
@@ -843,10 +847,12 @@ const ApplicationsUpdate = () => {
         )}
       </div>
       <ModalAddress
-        isOpen={modalOpen}
-        onClose={closeModal}
+        isOpen={modalOpenAddress}
+        onClose={closeModalAddress}
         onReceiver={handleChooseAddress}
       />
+      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      {loading ? <Loading /> : ''}
     </>
   );
 };
