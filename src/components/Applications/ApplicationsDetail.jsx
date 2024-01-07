@@ -4,9 +4,12 @@ import { fetchApplicationsDetail } from '../../api/applications';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import { useSelector } from 'react-redux';
 
 const ApplicationsDetail = () => {
+  const { extraServices } = useSelector((state) => state?.extraServices);
   const [order, setOrder] = useState({});
+  const [services, setServices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
@@ -16,6 +19,11 @@ const ApplicationsDetail = () => {
       const { success, data } = await fetchApplicationsDetail(id);
       if (success) {
         setOrder(data);
+        setServices(
+          extraServices?.filter((service) =>
+            data?.extraServices?.includes(service?.id)
+          )
+        );
         setIsLoading(false);
       } else {
         setOrder('error');
@@ -23,7 +31,7 @@ const ApplicationsDetail = () => {
       }
     })();
     scrollToTop();
-  }, [id]);
+  }, [id, extraServices]);
 
   return (
     <div className='content py-20 min-h-[720px]'>
@@ -53,6 +61,30 @@ const ApplicationsDetail = () => {
                 <p>
                   {order?.fromCountry?.nameRu}, {order?.fromCity?.nameRu}
                 </p>
+                <div className='mt-4'>
+                  <p className='text-lg font-bold'>Информация о посылке:</p>
+                  <p>Вес: {order?.weight} кг</p>
+                  <p>
+                    Размеры: {order?.height}x{order?.width}x{order?.length} см
+                  </p>
+                </div>
+                <div className='mt-4'>
+                  <p className='text-lg font-bold'>Информация о доставке:</p>
+                  <p>Дата отправки: {order?.dateSending}</p>
+                  <p>Тип услуги: {order?.serviceName}</p>
+                  <p>Номер трака: {order?.trackNumbers}</p>
+                </div>
+                <div className='mt-4'>
+                  <p className='text-lg font-bold'>Комментарий клиента:</p>
+                  <p>{order?.comment}</p>
+                </div>
+                <div className='mt-4'>
+                  <p className='text-lg font-bold'>Информация о клиенте:</p>
+                  <p>{order?.client?.fullname}</p>
+                  <p>Email: {order?.client?.login}</p>
+                  <p>Телефон: {order?.client?.phone}</p>
+                  <p>Адрес: {order?.client?.address}</p>
+                </div>
               </div>
               <div>
                 <p className='text-lg font-bold'>Получатель:</p>
@@ -61,31 +93,29 @@ const ApplicationsDetail = () => {
                 <p>
                   {order?.toCountry?.nameRu}, {order?.toCity?.nameRu}
                 </p>
+                <p className='text-lg font-bold pt-3'>Дополнительные услуги:</p>
+                {services &&
+                  services?.map((el) => (
+                    <div key={el?.id} className='py-2 max-w-xl'>
+                      <div className='flex justify-between shadow-[0_0_10px_#e5e3e3] py-2 px-3 rounded-lg'>
+                        <div className='flex'>
+                          <div className='w-6 min-w-[24px] h-6 mr-2'>
+                            <img src={el?.icon} alt='*' />
+                          </div>
+                          <div>
+                            <h5 className='font-medium'>{el?.nameRu}</h5>
+                            <p className='text-sm opacity-60'>
+                              {el?.infoRu || 'Описание'}
+                            </p>
+                          </div>
+                        </div>
+                        <span className='font-bold text-colPurple'>
+                          {el?.cost} $
+                        </span>
+                      </div>
+                    </div>
+                  ))}
               </div>
-            </div>
-            <div className='mt-4'>
-              <p className='text-lg font-bold'>Информация о посылке:</p>
-              <p>Вес: {order?.weight} кг</p>
-              <p>
-                Размеры: {order?.height}x{order?.width}x{order?.length} см
-              </p>
-            </div>
-            <div className='mt-4'>
-              <p className='text-lg font-bold'>Информация о доставке:</p>
-              <p>Дата отправки: {order?.dateSending}</p>
-              <p>Тип услуги: {order?.serviceName}</p>
-              <p>Номер трака: {order?.trackNumbers}</p>
-            </div>
-            <div className='mt-4'>
-              <p className='text-lg font-bold'>Комментарий клиента:</p>
-              <p>{order?.comment}</p>
-            </div>
-            <div className='mt-4'>
-              <p className='text-lg font-bold'>Информация о клиенте:</p>
-              <p>{order?.client?.fullname}</p>
-              <p>Email: {order?.client?.login}</p>
-              <p>Телефон: {order?.client?.phone}</p>
-              <p>Адрес: {order?.client?.address}</p>
             </div>
             <div className='mt-4'>
               <p className='text-2xl font-bold pt-3 text-right'>

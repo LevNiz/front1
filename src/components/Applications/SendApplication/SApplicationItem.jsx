@@ -37,6 +37,7 @@ const SApplicationItem = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
   const [receiver, setReceiver] = useState('');
+  const [services, setServices] = useState([]);
 
   const dateArrival = watch('dateArrival');
   const isButtonDisabled = !(dateArrival && receiver);
@@ -57,6 +58,17 @@ const SApplicationItem = () => {
 
   const handleReceiverData = (data) => {
     setReceiver(data);
+  };
+
+  const handleServicesData = (data) => {
+    setServices([...services, data]);
+  };
+
+  const handleServicesDelete = (serviceId) => {
+    const updatedServices = services.filter(
+      (service) => service.id !== serviceId
+    );
+    setServices(updatedServices);
   };
 
   const onSubmitCalc = (data) => {
@@ -94,20 +106,29 @@ const SApplicationItem = () => {
       }
       setParcelCost(parCost?.toFixed(2));
     } else {
-      alert('Цена доставки не указана! (из города / в город)');
+      setIsDisabled(true);
+      alert('Цена доставки не указана! Выберите другой город.');
     }
   };
 
   const onSubmitForm = async (data) => {
     setIsLoading(true);
-    const requestData = { ...params, ...data, ...receiver };
-    requestData.cost = parcelCost;
+    const serviceIds = services.map((service) => service.id);
+    const requestData = {
+      ...params,
+      ...data,
+      ...receiver,
+      cost: parcelCost,
+      extraServices: serviceIds,
+    };
     const { success } = await postApplications(requestData, userID);
     if (success) {
       setIsLoading(false);
       setModalOpen(true);
       setModalContent('successRequest');
     } else {
+      setModalOpen(true);
+      setModalContent('errorRequest');
       setIsLoading(false);
     }
   };
@@ -193,7 +214,12 @@ const SApplicationItem = () => {
                 Отправка
               </h3>
             </div>
-            <SApplicationComment register={register} />
+            <SApplicationComment
+              register={register}
+              services={services}
+              handleServicesData={handleServicesData}
+              handleServicesDelete={handleServicesDelete}
+            />
             <div className='md:flex justify-between items-center mt-12'>
               <div className='flex justify-end md:justify-start sm:max-w-[320px] font-medium w-full md:ml-0 ml-auto items-center p-5'>
                 <span className='text-lg'>Общая стоимость:</span>

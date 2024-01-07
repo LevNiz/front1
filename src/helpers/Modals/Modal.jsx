@@ -4,6 +4,7 @@ import inCorrectImg from './../../assets/images/404.svg';
 import notFound from '../../assets/images/empty.svg';
 import success from './../../assets/images/success.jpg';
 import errorImg from './../../assets/images/error.svg';
+import { useSelector } from 'react-redux';
 
 const Modal = ({
   isOpen,
@@ -13,7 +14,11 @@ const Modal = ({
   onDelAddress,
   onDelBuyRequest,
   onDeleteSearchRequest,
+  handleServicesData,
+  services,
 }) => {
+  const { extraServices } = useSelector((state) => state?.extraServices);
+
   if (!isOpen) return null;
 
   return (
@@ -93,6 +98,44 @@ const Modal = ({
               Список пуст
             </h4>
             <p className='text-gray-500'>По вашему запросу ничего не нашли.</p>
+          </div>
+        </div>
+      ) : content === 'extraServices' ? (
+        <div className='bg-white py-5 mm:py-6 px-2 mm:px-6 rounded-xl shadow-md z-10 max-w-3xl w-[95%]'>
+          <div className='pr-5 pl-3 h-[480px] overflow-y-scroll scrollable'>
+            <h1 className='text-xl pt-3 font-medium text-center'>
+              Дополнительные услуги
+            </h1>
+            <p className='py-1 text-xs mm:text-base mb-5 text-center'>
+              Вы можете заказать следующие SMART услуги до того, как ваша
+              посылка поступить в наш скалад.
+            </p>
+            <div className='space-y-5'>
+              {extraServices?.map((el) => (
+                <div
+                  key={el?.id}
+                  onClick={() => {
+                    if (!services.includes(el)) {
+                      handleServicesData(el);
+                    }
+                  }}
+                  className='flex justify-between shadow-[0_0_10px_#e5e3e3] py-2 px-3 rounded-lg cursor-pointer'
+                >
+                  <div className='flex'>
+                    <div className='w-6 min-w-[24px] h-6 mr-2'>
+                      <img src={el?.icon} alt='*' />
+                    </div>
+                    <div>
+                      <h5 className='font-medium'>{el?.nameRu}</h5>
+                      <p className='text-sm opacity-60'>
+                        {el?.infoRu || 'Описание'}
+                      </p>
+                    </div>
+                  </div>
+                  <span className='font-bold text-colPurple'>{el?.cost} $</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ) : content === 'successRequest' ? (

@@ -13,7 +13,6 @@ export const postApplications = async (data, userID) => {
   if (data.orderData) {
     data = { ...data.orderData, ...data };
   }
-  console.log(data);
   const sendData = {
     senderName: data.serviceName,
     senderPhone: '-',
@@ -26,14 +25,17 @@ export const postApplications = async (data, userID) => {
     fromCountry: data.senderCity.fromCountry,
     toCountry: data.receiverCity.toCountry,
     packageData:
-      data.parcelSize.value !== ('custom' && 'measurement')
+      data.parcelSize.value !== 'custom' &&
+      data.parcelSize.value !== 'measurement'
         ? data.parcelSize.value
         : null,
     packageType: null,
     dateSending: data.dateArrival,
     phone: data.receiverPhone,
+    extraServices: data.extraServices,
     premium: data.tariff === 2 ? true : false,
     comment: data.comment,
+    address: data.receiverID,
     height: Number(data.height) || 0,
     width: Number(data.width) || 0,
     length: Number(data.length) || 0,
@@ -43,10 +45,8 @@ export const postApplications = async (data, userID) => {
         ? Number(data.scopeWeight)
         : data.parcelSize.weight,
   };
-  console.log(sendData);
   try {
-    // await axiosInstance.post('core/request/', sendData);
-    console.log('Success');
+    await axiosInstance.post('core/request/', sendData);
     return { success: true };
   } catch (error) {
     return { success: false };
