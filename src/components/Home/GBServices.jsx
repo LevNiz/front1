@@ -32,12 +32,12 @@ const GBServices = () => {
               GB-Shop
             </h3>
             <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
-              Магазин бредовых товаров со всего мира
+              Магазин брендовых товаров со всего мира
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
             <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
-              Магазин бредовых товаров со всего мира
+              Магазин брендовых товаров со всего мира
             </p>
           </div>
         </NavLink>
@@ -149,12 +149,12 @@ const GBServices = () => {
               GB-Chat
             </h3>
             <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
-              Удобный Месседжер для общения внутри экосистемы GivBox
+              Удобный месседжер для общения внутри экосистемы GivBox
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
             <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
-              Удобный Месседжер для общения внутри экосистемы GivBox
+              Удобный месседжер для общения внутри экосистемы GivBox
             </p>
           </div>
         </NavLink>
