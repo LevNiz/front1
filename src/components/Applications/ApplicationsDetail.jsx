@@ -32,11 +32,14 @@ const ApplicationsDetail = () => {
         setIsLoading(false);
       }
     })();
+    scrollToTop();
+  }, [id, extraServices]);
+
+  useEffect(() => {
     (async () => {
       await fetchExtraServices(dispatch);
     })();
-    scrollToTop();
-  }, [id, extraServices]);
+  }, [dispatch]);
 
   return (
     <div className='content py-20 min-h-[720px]'>
