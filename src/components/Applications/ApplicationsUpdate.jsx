@@ -31,7 +31,7 @@ const ApplicationsUpdate = () => {
   const [parcelData, setParcelData] = useState([]);
   const [isParcelSize, setIsParcelSize] = useState();
   const [scopeWeight, setScopeWeight] = useState(null);
-  const [selectedTariff, setSelectedTariff] = useState(order?.premium ? 2 : 1);
+  const [selectedTariff, setSelectedTariff] = useState(null);
   const [modalOpenAddress, setModalOpenAddress] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
@@ -39,10 +39,12 @@ const ApplicationsUpdate = () => {
   const [selectedSenderCity, setSelectedSenderCity] = useState();
   const [selectedReceiverCity, setSelectedReceiverCity] = useState();
   const [parcelCost, setParcelCost] = useState(null);
+  const [services, setServices] = useState([]);
 
   const { costs } = useSelector((state) => state?.costs);
   const { cities } = useSelector((state) => state?.cities);
   const { userID } = useSelector((state) => state?.user);
+  const { extraServices } = useSelector((state) => state?.extraServices);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -62,6 +64,17 @@ const ApplicationsUpdate = () => {
     setReceiver(address);
   };
 
+  const handleServicesData = (data) => {
+    setServices([...services, data]);
+  };
+
+  const handleServicesDelete = (serviceId) => {
+    const updatedServices = services.filter(
+      (service) => service.id !== serviceId
+    );
+    setServices(updatedServices);
+  };
+
   const {
     handleSubmit,
     control,
@@ -75,6 +88,10 @@ const ApplicationsUpdate = () => {
       if (success) {
         setOrder(data);
         setReceiver(data?.address);
+        setSelectedTariff(data?.premium ? 2 : 1);
+        setServices(
+          extraServices?.filter((el) => data?.extraServices.includes(el?.id))
+        );
         setIsParcelSize({
           value: data?.packageData
             ? data?.packageData?.id
@@ -196,11 +213,13 @@ const ApplicationsUpdate = () => {
 
   const onSubmitForm = async (data) => {
     setLoading(true);
+    const serviceIds = services.map((service) => service.id);
     const requestData = {
       ...params,
       ...data,
       receiver: receiver,
       cost: parcelCost,
+      extraServices: serviceIds,
     };
     const { success } = await updateApplications(requestData, userID, id);
     if (success) {
@@ -807,7 +826,48 @@ const ApplicationsUpdate = () => {
                 </h3>
               </div>
               <div className='md:pl-5 lg:pl-10'>
-                <div className='max-w-[768px]'>
+                <p className='font-medium mb-3'>Дополнительные услуги</p>
+                <button
+                  onClick={() => {
+                    setModalOpen(true);
+                    setModalContent('extraServices');
+                  }}
+                  className='bg-black sm:max-w-xs w-full p-3 h-[50px] text-white rounded-md hover:opacity-70 duration-150 mb-5'
+                >
+                  + Выбрать услуги
+                </button>
+                {services &&
+                  services?.map((el) => (
+                    <div key={el?.id} className='py-2 max-w-xl mm:ml-5'>
+                      <div className='flex justify-between shadow-[0_0_10px_#e5e3e3] py-2 px-3 rounded-lg'>
+                        <div className='flex'>
+                          <div className='w-5 mm:w-6 min-w-[20px] mm:min-w-[24px] h-5 mm:h-6 mr-2'>
+                            <img src={el?.icon} alt='*' />
+                          </div>
+                          <div>
+                            <h5 className='text-sm mm:text-base font-medium'>
+                              {el?.nameRu}
+                            </h5>
+                            <p className='text-xs mm:text-sm opacity-60'>
+                              {el?.infoRu || 'Описание'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className='flex justify-end items-start'>
+                          <span className='font-bold text-colPurple min-w-[44px] text-right'>
+                            {el?.cost} $
+                          </span>
+                          <span
+                            onClick={() => handleServicesDelete(el?.id)}
+                            className='ml-3 text-xl text-red-500 cursor-pointer'
+                          >
+                            &times;
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                <div className='max-w-[768px] pt-5'>
                   <p className='font-medium mb-2'>
                     Дополнительная информация или комментарий
                   </p>
@@ -820,7 +880,7 @@ const ApplicationsUpdate = () => {
                   />
                 </div>
               </div>
-              <div className='md:flex justify-between items-center mt-12'>
+              <div className='md:flex justify-between items-center mt-5 mm:mt-12'>
                 <div className='flex justify-end md:justify-start sm:max-w-[320px] font-medium w-full md:ml-0 ml-auto items-center p-5'>
                   <span className='text-lg'>Общая стоимость:</span>
                   <span className='text-xl mx-1 '>
@@ -851,7 +911,13 @@ const ApplicationsUpdate = () => {
         onClose={closeModalAddress}
         onReceiver={handleChooseAddress}
       />
-      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        content={modalContent}
+        handleServicesData={handleServicesData}
+        services={services}
+      />
       {loading ? <Loading /> : ''}
     </>
   );

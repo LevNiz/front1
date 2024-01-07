@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import sosImg from './../../assets/images/sos.svg';
 import inCorrectImg from './../../assets/images/404.svg';
 import notFound from '../../assets/images/empty.svg';
@@ -18,6 +18,7 @@ const Modal = ({
   services,
 }) => {
   const { extraServices } = useSelector((state) => state?.extraServices);
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
@@ -118,6 +119,7 @@ const Modal = ({
                     if (!services.includes(el)) {
                       handleServicesData(el);
                     }
+                    onClose();
                   }}
                   className='flex justify-between shadow-[0_0_10px_#e5e3e3] py-2 px-3 rounded-lg cursor-pointer'
                 >
@@ -165,13 +167,15 @@ const Modal = ({
             Ваша заявка успешна изменена!
           </h3>
           <div className='flex px-8 mb-8'>
-            <NavLink
-              to='/applications'
-              className='bg-colYellow w-full py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
-              onClick={onClose}
+            <span
+              className='bg-colYellow w-full cursor-pointer py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
+              onClick={() => {
+                onClose();
+                navigate(-1);
+              }}
             >
               Закрыть
-            </NavLink>
+            </span>
           </div>
         </div>
       ) : content === 'errorRequest' ? (

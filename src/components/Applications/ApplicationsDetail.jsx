@@ -67,6 +67,7 @@ const ApplicationsDetail = () => {
                   <p>
                     Размеры: {order?.height}x{order?.width}x{order?.length} см
                   </p>
+                  <p>Тариф: {order?.premium ? 'Премиум' : 'Стандартный'}</p>
                 </div>
                 <div className='mt-4'>
                   <p className='text-lg font-bold'>Информация о доставке:</p>
@@ -99,18 +100,20 @@ const ApplicationsDetail = () => {
                     <div key={el?.id} className='py-2 max-w-xl'>
                       <div className='flex justify-between shadow-[0_0_10px_#e5e3e3] py-2 px-3 rounded-lg'>
                         <div className='flex'>
-                          <div className='w-6 min-w-[24px] h-6 mr-2'>
+                          <div className='w-5 mm:w-6 min-w-[20px] mm:min-w-[24px] h-5 mm:h-6 mr-2'>
                             <img src={el?.icon} alt='*' />
                           </div>
                           <div>
-                            <h5 className='font-medium'>{el?.nameRu}</h5>
-                            <p className='text-sm opacity-60'>
+                            <h5 className='text-sm mm:text-base font-medium'>
+                              {el?.nameRu}
+                            </h5>
+                            <p className='text-xs mm:text-sm opacity-60'>
                               {el?.infoRu || 'Описание'}
                             </p>
                           </div>
                         </div>
-                        <span className='font-bold text-colPurple'>
-                          {el?.cost} $
+                        <span className='font-bold text-colPurple min-w-[44px] text-right'>
+                          {el?.cost + ` $`}
                         </span>
                       </div>
                     </div>

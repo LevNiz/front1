@@ -36,9 +36,9 @@ export const postApplications = async (data, userID) => {
     premium: data.tariff === 2 ? true : false,
     comment: data.comment,
     address: data.receiver.id,
-    height: Number(data.height) || 0,
-    width: Number(data.width) || 0,
-    length: Number(data.length) || 0,
+    height: data.parcelSize.value === 'custom' ? Number(data.height) : 0,
+    width: data.parcelSize.value === 'custom' ? Number(data.width) : 0,
+    length: data.parcelSize.value === 'custom' ? Number(data.length) : 0,
     cost: Number(data.cost),
     weight:
       data.parcelSize.value === 'custom'
@@ -79,9 +79,9 @@ export const updateApplications = async (data, userID, id) => {
     premium: data.selectedTariff === 2 ? true : false,
     comment: data.comment,
     address: data.receiver.id,
-    height: Number(data.height) || 0,
-    width: Number(data.width) || 0,
-    length: Number(data.length) || 0,
+    height: data.parcelSize.value === 'custom' ? Number(data.height) : 0,
+    width: data.parcelSize.value === 'custom' ? Number(data.width) : 0,
+    length: data.parcelSize.value === 'custom' ? Number(data.length) : 0,
     cost: Number(data.cost),
     weight:
       data.parcelSize.value === 'custom'
@@ -90,7 +90,6 @@ export const updateApplications = async (data, userID, id) => {
         ? Number(0)
         : data.parcelSize.weight,
   };
-  console.log(data);
   try {
     await axiosInstance.patch(`core/request/${id}/`, sendData);
     return { success: true };
