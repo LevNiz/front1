@@ -21,6 +21,7 @@ import editIcon from '../../assets/icons/edit.svg';
 import { fetchAddresses } from '../../api/addresses';
 import ModalAddress from '../../helpers/Modals/ModalAddress';
 import Modal from '../../helpers/Modals/Modal';
+import { fetchCosts } from '../../api/costs';
 
 const ApplicationsUpdate = () => {
   const [order, setOrder] = useState({});
@@ -170,6 +171,12 @@ const ApplicationsUpdate = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      await fetchCosts(dispatch);
+    })();
+  }, [dispatch]);
 
   const onSubmitCalc = (data) => {
     const orderData = {};
