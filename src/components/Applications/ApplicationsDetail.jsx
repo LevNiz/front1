@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchApplicationsDetail } from '../../api/applications';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
-import { useSelector } from 'react-redux';
+import { fetchExtraServices } from '../../api/extraServices';
 
 const ApplicationsDetail = () => {
   const { extraServices } = useSelector((state) => state?.extraServices);
@@ -12,6 +13,7 @@ const ApplicationsDetail = () => {
   const [services, setServices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -29,6 +31,9 @@ const ApplicationsDetail = () => {
         setOrder('error');
         setIsLoading(false);
       }
+    })();
+    (async () => {
+      await fetchExtraServices(dispatch);
     })();
     scrollToTop();
   }, [id, extraServices]);
