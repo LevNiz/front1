@@ -235,7 +235,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                       className='hover:bg-colYellow px-4 py-2 duration-150 text-[15px] font-medium flex items-center'
                       to='/alaket'
                     >
-                      Alaket
+                      GB-Alaket
                     </NavLink>
                   </li>
                 </ul>

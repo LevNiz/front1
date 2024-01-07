@@ -412,7 +412,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={alaket}
                       alt='*'
                     />
-                    <span className='pl-1'>Alaket</span>
+                    <span className='pl-1'>GB-Alaket</span>
                   </NavLink>
                 </li>
               </ul>
