@@ -103,10 +103,10 @@ export const fetchApplications = async (userID, dispatch) => {
   dispatch(fetchApplicationStart());
   try {
     const res = await request.get(`core/request/?client=${userID}`);
-    const activeApplications = res?.data?.results?.filter(
+    const applications = res?.data?.results?.filter(
       (el) => el?.archive === false
     );
-    dispatch(fetchApplicationSuccess(activeApplications));
+    dispatch(fetchApplicationSuccess(applications));
   } catch (error) {
     dispatch(fetchApplicationFailure(error));
   }

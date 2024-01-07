@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 const ActiveApplications = () => {
   const { userID } = useSelector((state) => state?.user);
-  const { loading, error, activeApplications } = useSelector(
+  const { loading, error, applications } = useSelector(
     (state) => state?.applications
   );
   const dispatch = useDispatch();
@@ -26,9 +26,9 @@ const ActiveApplications = () => {
         <ContentLoading extraStyle='320px' />
       ) : error ? (
         <ErrorServer />
-      ) : activeApplications?.length ? (
+      ) : applications?.length ? (
         <>
-          {activeApplications?.map((el) => (
+          {applications?.map((el) => (
             <NavLink
               to={`/applications/${el?.id}`}
               key={el?.id}

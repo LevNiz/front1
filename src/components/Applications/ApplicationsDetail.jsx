@@ -95,7 +95,7 @@ const ApplicationsDetail = () => {
                   {order?.toCountry?.nameRu}, {order?.toCity?.nameRu}
                 </p>
                 <p className='text-lg font-bold pt-3'>Дополнительные услуги:</p>
-                {services &&
+                {services?.length &&
                   services?.map((el) => (
                     <div key={el?.id} className='py-2 max-w-xl'>
                       <div className='flex justify-between shadow-[0_0_10px_#e5e3e3] py-2 px-3 rounded-lg'>
