@@ -11,6 +11,11 @@ import {
 } from '../../api/applications';
 import { fetchParcelCategories } from '../../api/parcels';
 import { tariffsData } from '../../constants/tariffsData';
+import { fetchAddresses } from '../../api/addresses';
+import ModalAddress from '../../helpers/Modals/ModalAddress';
+import Modal from '../../helpers/Modals/Modal';
+import { fetchCosts } from '../../api/costs';
+import { fetchCities } from '../../api/cities';
 
 import attention from '../../assets/icons/attention.svg';
 import attention2 from '../../assets/icons/attention.svg';
@@ -18,10 +23,6 @@ import info from '../../assets/icons/attention2.svg';
 import boxSize from '../../assets/images/box-size.jpeg';
 import receptionPoint from '../../assets/icons/receptionPoint.svg';
 import editIcon from '../../assets/icons/edit.svg';
-import { fetchAddresses } from '../../api/addresses';
-import ModalAddress from '../../helpers/Modals/ModalAddress';
-import Modal from '../../helpers/Modals/Modal';
-import { fetchCosts } from '../../api/costs';
 
 const ApplicationsUpdate = () => {
   const [order, setOrder] = useState({});
@@ -175,6 +176,7 @@ const ApplicationsUpdate = () => {
   useEffect(() => {
     (async () => {
       await fetchCosts(dispatch);
+      await fetchCities(dispatch);
     })();
   }, [dispatch]);
 

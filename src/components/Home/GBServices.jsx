@@ -154,7 +154,7 @@ const GBServices = () => {
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
             <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
-              Удобный месседжер для общения внутри экосистемы GivBox
+              Удобный мессенджер для общения внутри экосистемы GivBox
             </p>
           </div>
         </NavLink>
