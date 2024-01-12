@@ -25,7 +25,8 @@ export const slidesData = [
     id: 1,
     backgroundImage: `${desktopImageBusiness}`,
     title: 'GB-Business',
-    description: 'Cервис для доставок международных коммерческих грузов',
+    description:
+      'Доставка в любую точку мира без лишних хлопот. Быстро, надежно и выгодно. Управляйте своими коммерческими грузами на глобальном уровне',
   },
   {
     id: 2,
@@ -33,7 +34,8 @@ export const slidesData = [
     tabletImage: `${tabletGBShop}`,
     mobileImage: `${mobileGBShop}`,
     title: 'GB-Shop',
-    description: 'Cервис по продаже брендовых товаров',
+    description:
+      'Самый короткий путь к стилю и качеству. С нами брендовые товары еще проще и доступнее',
   },
   {
     id: 3,
@@ -59,7 +61,7 @@ export const slidesData = [
     mobileImage: `${mobileGBPay}`,
     title: 'GB-Pay',
     description:
-      'Cервис для оплаты товаров, услуг, и переводов денег по всему миру',
+      'Удобная платежная система от GivBox. Оплачивайте услуги компании моментально и самое главное безопасно',
   },
   {
     id: 6,
@@ -68,7 +70,7 @@ export const slidesData = [
     mobileImage: `${mobileGBChat}`,
     title: 'GB-Chat',
     description:
-      'Cервис для общения клиентов, продавцов, поставщиков, покупателей и людей желающих найти друг друга для передачи посылок по пути',
+      'Не оставит вас одного с кучей важных вопросов. Простой и практичный чат созданный для всех наших клиентов и в частности именно Вас',
   },
   {
     id: 7,
@@ -76,6 +78,7 @@ export const slidesData = [
     tabletImage: `${tabletGBAlaket}`,
     mobileImage: `${mobileGBAlaket}`,
     title: 'GB-Alaket',
-    description: 'Cервис по поиску для отправок посылок по пути',
+    description:
+      'Моментально найдет человека для передачи ваших посылок, или же предложит вам взять на себя эту увлекательную и оплачиваемую миссию',
   },
 ];

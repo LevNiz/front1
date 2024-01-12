@@ -43,7 +43,7 @@ const MainSlider = () => {
           key={el?.id}
           className={`${
             el?.id === 1 ? 'text-white' : ''
-          } min-h-[440px] md:min-h-[768px] pb-20 md:pb-0 flex items-center bg-[80%] mm:bg-center md:bg-[70%] xl:bg-center bg-no-repeat bg-cover`}
+          } min-h-[480px] md:min-h-[768px] pb-20 md:pb-0 flex items-center bg-[80%] mm:bg-center md:bg-[70%] xl:bg-center bg-no-repeat bg-cover`}
           style={{
             backgroundImage:
               size > 768
@@ -76,7 +76,7 @@ const MainSlider = () => {
               <h1 className='text-4xl ss:text-5xl md:text-6xl xl:text-8xl font-bold'>
                 {el?.title}
               </h1>
-              <p className='mx-auto mm:mx-0 max-w-[300px] md:max-w-[380px] lg:max-w-[496px] w-full text-base md:text-2xl my-5 md:my-8'>
+              <p className='md:max-w-[420px] lg:max-w-[560px] w-full text-lg md:text-xl my-5 md:my-8'>
                 {el?.description}
               </p>
             </motion.div>
