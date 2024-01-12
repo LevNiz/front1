@@ -43,7 +43,8 @@ export const slidesData = [
     tabletImage: `${tabletGBFranchise}`,
     mobileImage: `${mobileGBFranchise}`,
     title: 'GB-Franchise ',
-    description: 'Cервис по предоставлению франшизы',
+    description:
+      'Мгновенный успех в открытии складов ожидает ваш первый шаг. Получите узнаваемое имя и готовый бизнес план в мгновении.',
   },
   {
     id: 4,
@@ -52,7 +53,7 @@ export const slidesData = [
     mobileImage: `${mobileGBBuyer}`,
     title: 'GB-Buyer',
     description:
-      'Cервис по оказанию услуг по выкупу товаров в зарубежных магазинах и маркетплейсах',
+      'Ваш путь к успешному продвижению и заказу байерских услуг! Мы гарантируем комфортные, а самое главное безопасные условия для поиска идеальных клиентов и исполнителей.',
   },
   {
     id: 5,

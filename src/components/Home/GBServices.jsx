@@ -28,16 +28,16 @@ const GBServices = () => {
         >
           <div>
             <img className='mx-auto w-10 sm:w-auto' src={gbShop} alt='*' />
-            <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
+            <h3 className='font-medium sm:font-bold text-lg mm:text-2xl lg:text-3xl text-center mt-2'>
               GB-Shop
             </h3>
-            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
+            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-[10px] sm:text-sm'>
               Самый короткий путь к стилю и качеству. С нами брендовые товары
               еще проще и доступнее
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
-            <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
+            <p className='text-center p-3 text-[#FBFBFB]'>
               Самый короткий путь к стилю и качеству. С нами брендовые товары
               еще проще и доступнее
             </p>
@@ -49,17 +49,17 @@ const GBServices = () => {
         >
           <div>
             <img className='mx-auto w-10 sm:w-auto' src={gbBusiness} alt='*' />
-            <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
+            <h3 className='font-medium sm:font-bold text-lg mm:text-2xl lg:text-3xl text-center mt-2'>
               GB-Business
             </h3>
-            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
+            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-[10px] sm:text-sm'>
               Доставка в любую точку мира без лишних хлопот. Быстро, надежно и
               выгодно. Управляйте своими коммерческими грузами на глобальном
               уровне
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
-            <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
+            <p className='text-center p-3 text-[#FBFBFB]'>
               Доставка в любую точку мира без лишних хлопот. Быстро, надежно и
               выгодно. Управляйте своими коммерческими грузами на глобальном
               уровне
@@ -72,16 +72,18 @@ const GBServices = () => {
         >
           <div>
             <img className='mx-auto w-10 sm:w-auto' src={gbFranchise} alt='*' />
-            <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
+            <h3 className='font-medium sm:font-bold text-lg mm:text-2xl lg:text-3xl text-center mt-2'>
               GB-Franchise
             </h3>
-            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
-              Сервис по предоставлению франшизы в Вашем городе
+            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-[10px] sm:text-sm'>
+              Мгновенный успех в открытии складов ожидает ваш первый шаг.
+              Получите узнаваемое имя и готовый бизнес план в мгновении.
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
-            <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
-              Сервис по предоставлению франшизы в Вашем городе
+            <p className='text-center p-3 text-[#FBFBFB]'>
+              Мгновенный успех в открытии складов ожидает ваш первый шаг.
+              Получите узнаваемое имя и готовый бизнес план в мгновении.
             </p>
           </div>
         </NavLink>
@@ -92,16 +94,16 @@ const GBServices = () => {
         >
           <div>
             <img className='mx-auto w-10 sm:w-auto' src={gbPay} alt='*' />
-            <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
+            <h3 className='font-medium sm:font-bold text-lg mm:text-2xl lg:text-3xl text-center mt-2'>
               GB-Pay
             </h3>
-            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
+            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-[10px] sm:text-sm'>
               Удобная платежная система от GivBox. Оплачивайте услуги компании
               моментально и самое главное безопасно
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
-            <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
+            <p className='text-center p-3 text-[#FBFBFB]'>
               Удобная платежная система от GivBox. Оплачивайте услуги компании
               моментально и самое главное безопасно
             </p>
@@ -113,16 +115,20 @@ const GBServices = () => {
         >
           <div>
             <img className='mx-auto w-10 sm:w-auto' src={gbBuyer} alt='*' />
-            <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
+            <h3 className='font-medium sm:font-bold text-lg mm:text-2xl lg:text-3xl text-center mt-2'>
               GB-Buyer
             </h3>
-            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
-              Сервис для оказания услуг выкупа по всему миру
+            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-[10px] sm:text-sm'>
+              Ваш путь к успешному продвижению и заказу байерских услуг! Мы
+              гарантируем комфортные, а самое главное безопасные условия для
+              поиска идеальных клиентов и исполнителей.
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
-            <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
-              Сервис для оказания услуг выкупа по всему миру
+            <p className='text-center p-3 text-[#FBFBFB]'>
+              Ваш путь к успешному продвижению и заказу байерских услуг! Мы
+              гарантируем комфортные, а самое главное безопасные условия для
+              поиска идеальных клиентов и исполнителей.
             </p>
           </div>
         </NavLink>
@@ -132,17 +138,17 @@ const GBServices = () => {
         >
           <div>
             <img className='mx-auto w-10 sm:w-auto' src={alaket} alt='*' />
-            <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
+            <h3 className='font-medium sm:font-bold text-lg mm:text-2xl lg:text-3xl text-center mt-2'>
               GB-Alaket
             </h3>
-            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
+            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-[10px] sm:text-sm'>
               Моментально найдет человека для передачи ваших посылок, или же
               предложит вам взять на себя эту увлекательную и оплачиваемую
               миссию
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
-            <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
+            <p className='text-center p-3 text-[#FBFBFB]'>
               Моментально найдет человека для передачи ваших посылок, или же
               предложит вам взять на себя эту увлекательную и оплачиваемую
               миссию
@@ -155,17 +161,17 @@ const GBServices = () => {
         >
           <div>
             <img className='mx-auto w-10 sm:w-auto' src={gbChat} alt='*' />
-            <h3 className='font-medium sm:font-bold text-xl sm:text-2xl lg:text-3xl text-center mt-2'>
+            <h3 className='font-medium sm:font-bold text-lg mm:text-2xl lg:text-3xl text-center mt-2'>
               GB-Chat
             </h3>
-            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-xs sm:text-sm'>
+            <p className='lg:hidden text-center p-2 text-[#FBFBFB] opacity-80 text-[10px] sm:text-sm'>
               Не оставит вас одного с кучей важных вопросов. Простой и
               практичный чат созданный для всех наших клиентов и в частности
               именно Вас
             </p>
           </div>
           <div className='hidden lg:flex group-hover:opacity-[1] opacity-0 duration-200 absolute top-0 left-0 w-full h-full justify-center items-center bg-[linear-gradient(180deg,_rgba(2,_1,_5,_0.58)_0%,_#020105_100%)]'>
-            <p className='text-center p-2 text-[#FBFBFB] mm:text-lg'>
+            <p className='text-center p-3 text-[#FBFBFB]'>
               Не оставит вас одного с кучей важных вопросов. Простой и
               практичный чат созданный для всех наших клиентов и в частности
               именно Вас

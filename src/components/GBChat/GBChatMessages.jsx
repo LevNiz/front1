@@ -282,7 +282,7 @@ const GBChatMessages = ({ chats, setChatContent }) => {
       >
         <span
           onClick={() => setOpenImg(false)}
-          className='absolute top-0 right-0 flex items-center h-[70px] mm:h-[90px] p-5 mm:p-10 cursor-pointer text-white text-5xl z-10 bg-[rgba(0,0,0,.7)]'
+          className='absolute top-0 right-0 flex items-center h-[70px] mm:h-[90px] p-5 mm:p-10 cursor-pointer text-white text-5xl z-10 '
         >
           &times;
         </span>
