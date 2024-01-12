@@ -104,8 +104,6 @@ export const UpdateProfile = async ({ userID, data, ava }) => {
       } catch (error) {
         return { success: false, data: error };
       }
-    } else {
-      userData.avatar = null;
     }
 
     await axiosInstance.patch(`user/client/${userID}/`, userData);
