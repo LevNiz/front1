@@ -17,8 +17,10 @@ const BasketItem = ({ el }) => {
   };
 
   const handelDecrement = async (itemID) => {
-    setCount((prevCount) => prevCount - 1);
-    await handleDecreaseQuantity(userID, itemID, count - 1);
+    if (count > 1) {
+      setCount((prevCount) => prevCount - 1);
+      await handleDecreaseQuantity(userID, itemID, count - 1);
+    }
   };
 
   return (

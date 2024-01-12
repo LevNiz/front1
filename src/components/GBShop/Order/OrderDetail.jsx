@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 
 const OrderDetail = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [totalCost, setTotalCost] = useState(null);
   const { cartItems, loading } = useSelector((state) => state?.cartItems);
   const { addresses } = useSelector((state) => state?.addresses);
   const { userID } = useSelector((state) => state?.user);
@@ -38,6 +39,17 @@ const OrderDetail = () => {
           ', ' +
           el?.nameAddress,
   }));
+
+  useEffect(() => {
+    const calculateTotalQuantity = () => {
+      const total = cartItems?.reduce((acc, item) => {
+        return acc + item?.item?.cost * item.quantity;
+      }, 0);
+      setTotalCost(total);
+    };
+
+    calculateTotalQuantity();
+  }, [cartItems]);
 
   const onSubmit = (data) => {
     payForParcel(data, cartItems, userID, state);
@@ -197,7 +209,7 @@ const OrderDetail = () => {
                 </div>
                 <div className='flex justify-between items-center'>
                   <span className='text-[#484848]'>Итого к оплате</span>
-                  <span className='text-black font-bold'>1200 $</span>
+                  <span className='text-black font-bold'>{totalCost} $</span>
                 </div>
               </div>
             </div>
