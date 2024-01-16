@@ -11,6 +11,8 @@ const BasketItem = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
   const [count, setCount] = useState(el?.quantity);
 
+  const currency = 89.33;
+
   const handelIncrement = async (itemID) => {
     setCount((prevCount) => prevCount + 1);
     await handleIncreaseQuantity(userID, itemID, count + 1);
@@ -44,6 +46,7 @@ const BasketItem = ({ el }) => {
               </NavLink>
               <span className='text-sm pt-1 opacity-70 font-medium'>
                 $ {el?.item?.cost}
+                <p className='text-xs'>({el?.item?.cost * currency} с)</p>
               </span>
               <div className='flex ld:hidden py-2'>
                 <div
@@ -74,7 +77,10 @@ const BasketItem = ({ el }) => {
           </div>
         </div>
         <div className='hidden ld:block w-[15%]'>
-          <span className='font-medium'>$ {el?.item?.cost}</span>
+          <span className='font-medium'>
+            $ {el?.item?.cost}{' '}
+            <p className='text-xs'>({el?.item?.cost * currency} с)</p>
+          </span>
         </div>
         <div className='hidden ld:block w-[20%] lg:w-[28%]'>
           <div className='flex pb-5'>
@@ -97,6 +103,7 @@ const BasketItem = ({ el }) => {
         </div>
         <div className='hidden ld:block w-[15%] font-medium'>
           $ {el?.item?.cost * count}
+          <p className='text-xs'>({el?.item?.cost * count * currency} с)</p>
         </div>
       </div>
     </div>

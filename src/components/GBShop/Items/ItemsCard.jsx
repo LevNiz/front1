@@ -18,6 +18,7 @@ const ItemsCard = ({ el }) => {
   const { depots } = useSelector((state) => state?.depots);
 
   const navigate = useNavigate();
+  const currency = 89.33;
 
   const handleToggleFavorite = async () => {
     if (user) {
@@ -76,8 +77,9 @@ const ItemsCard = ({ el }) => {
             }}
             alt='*'
           />
-          <div className='absolute bottom-2 right-2 sm:font-medium text-xs sm:text-sm bg-colYellow py-[2px] px-2 rounded-sm z-10'>
-            {el?.cost} $
+          <div className='absolute bottom-2 right-2 text-center bg-colYellow py-[2px] px-2 rounded-sm z-10'>
+            <p className='font-medium'>$ {el?.cost}</p>
+            <p className='text-xs'>({el?.cost * currency} с)</p>
           </div>
           <div className='absolute bottom-0 left-0 w-full h-12 bg-[linear-gradient(180deg,_rgba(0,_0,_0,_0.0)_0%,_rgba(0,_0,_0,_0.50)_200%)]'></div>
         </div>

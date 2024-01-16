@@ -25,6 +25,7 @@ const CategorySlider = ({ items, loading, error }) => {
   const { depots } = useSelector((state) => state?.depots);
 
   const navigate = useNavigate();
+  const currency = 89.33;
 
   const handleOpenDepot = (cityID) => {
     const depotID = depots?.filter((depot) => depot?.city?.id == cityID);
@@ -80,12 +81,7 @@ const CategorySlider = ({ items, loading, error }) => {
             {items?.map((el) => (
               <SwiperSlide modules={[Navigation]} key={el?.id}>
                 <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
-                  <NavLink
-                    to={`/gb-shop/items/${el?.id}`}
-                    // state={{
-                    //   category: el?.category?.id,
-                    // }}
-                  >
+                  <NavLink to={`/gb-shop/items/${el?.id}`}>
                     <div className='h-[120px] xs:h-[140px] sx:h-[180px] sm:h-[210px] overflow-hidden relative bg-gray-50'>
                       <img
                         className='w-full h-full object-cover'
@@ -96,8 +92,9 @@ const CategorySlider = ({ items, loading, error }) => {
                         }}
                         alt='*'
                       />
-                      <div className='absolute bottom-2 right-2 sm:font-medium text-xs sm:text-sm bg-colYellow py-[2px] px-2 rounded-sm z-10'>
-                        {el?.cost} $
+                      <div className='absolute bottom-2 right-2 text-center bg-colYellow py-[2px] px-2 rounded-sm z-10'>
+                        <p className='font-medium'>$ {el?.cost}</p>
+                        <p className='text-xs'>({el?.cost * currency} с)</p>
                       </div>
                       <div className='absolute bottom-0 left-0 w-full h-12 bg-[linear-gradient(180deg,_rgba(0,_0,_0,_0.0)_0%,_rgba(0,_0,_0,_0.50)_200%)]'></div>
                     </div>

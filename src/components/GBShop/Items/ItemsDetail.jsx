@@ -33,6 +33,7 @@ const ItemsDetail = () => {
   const [btnIsLoading, setBtnIsLoading] = useState(false);
 
   const itemCart = cartItems?.filter((el) => el?.item?.id === Number(id));
+  const currency = 89.33;
 
   const similarItems = items?.filter(
     (el) => el?.category?.id === item?.category?.id
@@ -163,13 +164,25 @@ const ItemsDetail = () => {
                   {item?.name}
                 </h1>
                 <div className='flex items-center'>
-                  <h2 className='text-2xl font-medium'>$ {item?.costSale}</h2>
-                  <h3 className='text-[#666] line-through ml-2 mr-5'>
-                    $ {item?.cost}
-                  </h3>
+                  <h2 className='text-2xl font-medium'>
+                    $ {item?.costSale > 0 ? item?.costSale : item?.cost}
+                  </h2>
+                  {item?.costSale > 0 && (
+                    <h3 className='text-[#666] line-through ml-2 mr-1'>
+                      $ {item?.cost}
+                    </h3>
+                  )}
+                  <span className='ml-1 mr-3'>
+                    (
+                    {item?.costSale > 0
+                      ? item?.costSale
+                      : item?.cost * currency}{' '}
+                    с)
+                  </span>
                   <span className='bg-[#DA3F3F] px-2 py-[3px] text-white rounded-3xl text-xs'>
                     Эконом 30%
                   </span>
+                  <span></span>
                 </div>
                 <p className='py-7'>{item?.description}</p>
                 <div className='flex pb-5'>

@@ -14,6 +14,7 @@ const BasketInfo = () => {
     (state) => state?.cartItems
   );
   const { register } = useForm();
+  const currency = 89.33;
 
   useEffect(() => {
     const calculateTotalQuantity = () => {
@@ -50,9 +51,14 @@ const BasketInfo = () => {
             ))}
 
             <form className='max-w-sm pt-10 ml-auto'>
-              <div className='flex items-center justify-between pb-5'>
+              <div className='flex justify-between pb-5'>
                 <span className='font-medium'>Итого</span>
-                <span className='text-xl font-bold'>$ {totalCost}</span>
+                <span className='text-xl font-bold'>
+                  $ {totalCost}{' '}
+                  <p className='text-sm font-medium'>
+                    ({totalCost * currency} с)
+                  </p>
+                </span>
               </div>
               <input
                 className='hidden'

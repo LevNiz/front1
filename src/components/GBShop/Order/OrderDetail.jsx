@@ -16,6 +16,7 @@ const OrderDetail = () => {
   const { userID } = useSelector((state) => state?.user);
 
   const { state } = useLocation();
+  const currency = 89.33;
 
   const {
     control,
@@ -192,6 +193,9 @@ const OrderDetail = () => {
                     </div>
                     <p className='font-medium ml-3 text-right'>
                       $ {el?.item?.cost}
+                      <span className='text-xs ml-1'>
+                        ({el?.item?.cost * currency} c)
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -209,7 +213,12 @@ const OrderDetail = () => {
                 </div>
                 <div className='flex justify-between items-center'>
                   <span className='text-[#484848]'>Итого к оплате</span>
-                  <span className='text-black font-bold'>{totalCost} $</span>
+                  <span className='text-black font-bold'>
+                    {totalCost} ${' '}
+                    <span className='text-sm font-medium'>
+                      ({totalCost * currency} c)
+                    </span>
+                  </span>
                 </div>
               </div>
             </div>
