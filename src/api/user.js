@@ -131,7 +131,6 @@ export const postSendCode = async (code) => {
   };
   try {
     const res = await request.post('user/password/reset/', sendData);
-    console.log(res.data);
     return { success: true, data: res?.data };
   } catch (error) {
     return { success: false };
