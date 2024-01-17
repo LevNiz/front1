@@ -108,7 +108,6 @@ const BGBuyerDetail = () => {
                 <img className='w-4' src={star} alt='*' />
                 <img className='w-4' src={star} alt='*' />
               </div>
-              <p className='mt-3 ld:my-7'>{`"${buyerItem?.info}"`}</p>
             </div>
             <div className='w-full mt-8'>
               <button
@@ -122,13 +121,7 @@ const BGBuyerDetail = () => {
           <div className='lg:flex ld:w-1/2 md:w-3/5 lg:w-3/4 pt-10 ld:pt-0'>
             <div className='lg:w-3/5 ld:pl-5 lg:px-8 lg:border-r-4 border-colYellow'>
               <h3 className='text-xl font-medium'>О себе</h3>
-              <p className='pt-2'>
-                Lorem ipsum dolor sit amet consectetur. Nibh nibh quis ut vel.
-                Egestas nullam amet nullam mi pellentesque pharetra elementum.
-                Mauris diam cras fermentum pharetra habitant quis fames
-                facilisis. Quisque non lectus faucibus non massa varius
-                vulputate orci.
-              </p>
+              <p className='pt-2'>{buyerItem?.info}</p>
               <h3 className='text-xl font-medium mt-5'>
                 Страны в которых совершаю покупки
               </h3>
@@ -138,13 +131,13 @@ const BGBuyerDetail = () => {
                     ?.map((country) => country?.nameRu)
                     .join(', ')}
               </p>
-              <h3 className='text-xl font-medium mt-5'>
+              {/* <h3 className='text-xl font-medium mt-5'>
                 Подбор и поиск товаров
               </h3>
               <p className='pt-2'>
                 Lorem ipsum dolor sit amet consectetur. Nibh nibh quis ut{' '}
-              </p>
-              <h3 className='text-xl font-medium mt-5'>
+              </p> */}
+              {/* <h3 className='text-xl font-medium mt-5'>
                 Отзывы других пользователей{' '}
               </h3>
               <p className='pt-2'>
@@ -153,7 +146,7 @@ const BGBuyerDetail = () => {
                 <span className='text-colYellow font-medium cursor-pointer'>
                   Читать дальше
                 </span>
-              </p>
+              </p> */}
             </div>
             <div className='lg:w-2/5 pt-5 ld:pt-0 ld:pl-8'>
               <h3 className='text-xl font-medium'>Стаж работы</h3>
