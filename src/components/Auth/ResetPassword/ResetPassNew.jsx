@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -8,17 +8,21 @@ import pass from '../../../assets/icons/new-password.svg';
 import pass2 from '../../../assets/icons/new-confirm-password.svg';
 import logo from '../../../assets/icons/logo2.svg';
 import back from '../../../assets/icons/back.svg';
+import { postResetPassword } from '../../../api/user';
+import { Loading } from '../../../helpers/Loader/Loader';
 
 const ResetPassNew = () => {
   const [visiblePass, setVisiblePass] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
 
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const {
     register,
     watch,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     mode: 'onChange',
@@ -31,6 +35,18 @@ const ResetPassNew = () => {
   const hasNumber = /^(?=.*\d)/.test(password);
   const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
   const hasSamePassword = password !== '' && password === confirmPass;
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    const { success } = await postResetPassword(data, state);
+    if (success) {
+      navigate('/auth/reset-password/success');
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      alert('Что-то пошло не так! Повторите еще раз!');
+    }
+  };
 
   return (
     <div className='flex w-full mm:h-screen'>
@@ -47,7 +63,10 @@ const ResetPassNew = () => {
         </NavLink>
       </div>
       <div className='py-20 h-full w-full mm:w-3/5 lg:w-4/6 flex justify-center items-center  px-4 overflow-y-scroll'>
-        <form className='mm:max-w-[400px] w-full pb-5'>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='mm:max-w-[400px] w-full pb-5'
+        >
           <div className='mm:hidden' onClick={() => navigate(-1)}>
             <img src={leftArrow} className='absolute top-4 left-4' alt='*' />
           </div>
@@ -183,14 +202,12 @@ const ResetPassNew = () => {
               </p>
             </div>
           </div>
-          <NavLink
-            to='/auth/reset-password/success'
-            className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'
-          >
+          <button className='p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold hover:opacity-80 duration-150'>
             Подтвердить
-          </NavLink>
+          </button>
         </form>
       </div>
+      {isLoading ? <Loading /> : ''}
     </div>
   );
 };

@@ -113,3 +113,49 @@ export const UpdateProfile = async ({ userID, data, ava }) => {
     return { success: false, data: error };
   }
 };
+// Reset password:
+export const fetchResetPasswordEmail = async (data) => {
+  const sendData = {
+    email: data.email,
+  };
+  try {
+    await request.post('user/password/reset-request/', sendData);
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+export const postSendCode = async (code) => {
+  const sendData = {
+    code: code,
+  };
+  try {
+    const res = await request.post('user/password/reset/', sendData);
+    console.log(res.data);
+    return { success: true, data: res?.data };
+  } catch (error) {
+    return { success: false };
+  }
+};
+export const postResetPassword = async (data, state) => {
+  const sendData = {
+    new_password: data.password,
+    user_id: state.data,
+  };
+
+  try {
+    const headers = {
+      Authorization: `Bearer ${state.token}`,
+    };
+
+    await request.patch(
+      'user/change_password/without_old_password/',
+      sendData,
+      { headers }
+    );
+
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
