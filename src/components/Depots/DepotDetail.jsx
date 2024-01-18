@@ -158,7 +158,7 @@ const DepotDetail = () => {
                       <img src={location} alt='*' />
                     </span>
                     <p className='text-base sm:text-xl font-medium ml-3'>
-                      {`${depotItem?.address}, ${depotItem?.city?.nameRu}, ${depotItem?.country?.nameRu}`}
+                      {depotItem?.address}
                     </p>
                   </div>
                   <div className='flex items-start'>
