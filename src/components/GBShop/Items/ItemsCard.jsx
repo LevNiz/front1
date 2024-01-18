@@ -9,7 +9,7 @@ import {
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
-import { toastModal } from '../../../helpers/Modals/ToastModal';
+import { toastModal } from '../../../helpers/Modals/toastModal';
 
 const ItemsCard = ({ el }) => {
   const { userID, user } = useSelector((state) => state?.user);

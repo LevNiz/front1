@@ -16,7 +16,7 @@ import favorite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import noImg from '../../../assets/images/no-image.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
-import { toastModal } from '../../../helpers/Modals/ToastModal';
+import { toastModal } from '../../../helpers/Modals/toastModal';
 
 const ItemsDetail = () => {
   const { userID, user } = useSelector((state) => state?.user);

@@ -16,7 +16,7 @@ import {
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
-import { toastModal } from '../../../helpers/Modals/ToastModal';
+import { toastModal } from '../../../helpers/Modals/toastModal';
 
 const CategorySlider = ({ items, loading, error }) => {
   const { userID, user } = useSelector((state) => state?.user);

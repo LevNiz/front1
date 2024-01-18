@@ -21,7 +21,7 @@ import infoIcon2 from '../../assets/icons/depot-info2.svg';
 import box from '../../assets/icons/noun-box.svg';
 import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
-import { toastModal } from '../../helpers/Modals/ToastModal';
+import { toastModal } from '../../helpers/Modals/toastModal';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
