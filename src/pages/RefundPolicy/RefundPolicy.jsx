@@ -81,7 +81,7 @@ const RefundPolicy = () => {
           применимого законодательства имеют преимущественную силу.
         </span>
       </p>
-      <ul className='pt-5 max-w-[400px] ml-auto'>
+      <ul className='pt-5'>
         <li className='text-lg font-medium'>Реквизиты Компании:</li>
         <li>ОсОО «Бинур»</li>
         <li>ИНН 00104201910219</li>
