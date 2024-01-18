@@ -165,8 +165,14 @@ const DepotDetail = () => {
                             value={inputName}
                             className='outline-none w-full pr-2'
                             placeholder='Ваше имя латиницей'
-                            onChange={(e) => setInputName(e.target.value)}
-                            pattern='[A-Za-z]'
+                            onChange={(e) => {
+                              const inputValue = e.target.value;
+                              const regex = /^[a-zA-Z]*$/;
+
+                              if (regex.test(inputValue) || inputValue === '') {
+                                setInputName(inputValue);
+                              }
+                            }}
                           />
                           <img
                             className='cursor-pointer'
@@ -192,18 +198,18 @@ const DepotDetail = () => {
                             className='outline-none w-full pr-2'
                             placeholder='Ваша фамилия латиницей'
                             pattern='[a-zA-Z]*'
-                            onChange={(e) => setInputSurname(e.target.value)}
+                            onChange={(e) => {
+                              const inputValue = e.target.value;
+                              const regex = /^[a-zA-Z]*$/;
+
+                              if (regex.test(inputValue) || inputValue === '') {
+                                setInputSurname(inputValue);
+                              }
+                            }}
                           />
                           <img
                             className='cursor-pointer'
-                            onClick={() => {
-                              const textToCopy = `GB${inputSurname}`;
-                              navigator.clipboard
-                                .writeText(textToCopy)
-                                .then(() => {
-                                  toastModal('Текст скопирован ✅');
-                                });
-                            }}
+                            onClick={() => copyToClipboard(inputSurname)}
                             src={copy}
                             alt='*'
                           />
