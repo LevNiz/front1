@@ -7,18 +7,20 @@ import { DepotMap } from './DepotMap';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { fetchCosts } from '../../api/costs';
 import { fetchExtraServices } from '../../api/extraServices';
-import location from './../../assets/icons/new-location.svg';
-import clock from './../../assets/icons/timeSvg.svg';
-import call from './../../assets/icons/new-call.svg';
-import boxIcon from './../../assets/icons/mobile-menu/profile-box.svg';
-import arrow from './../../assets/icons/down.svg';
-import arrowWhite from './../../assets/icons/arrow-white.svg';
-import noImg from './../../assets/images/no-image.svg';
-import parcel from './../../assets/icons/my-parcel.svg';
-import attention from './../../assets/icons/attention3.svg';
-import infoIcon1 from './../../assets/icons/depot-info1.svg';
-import infoIcon2 from './../../assets/icons/depot-info2.svg';
-import box from './../../assets/icons/noun-box.svg';
+import location from '../../assets/icons/new-location.svg';
+import clock from '../../assets/icons/timeSvg.svg';
+import call from '../../assets/icons/new-call.svg';
+import userIcon from '../../assets/icons/new-profile.svg';
+import arrow from '../../assets/icons/down.svg';
+import arrowWhite from '../../assets/icons/arrow-white.svg';
+import noImg from '../../assets/images/no-image.svg';
+import parcel from '../../assets/icons/my-parcel.svg';
+import attention from '../../assets/icons/attention3.svg';
+import infoIcon1 from '../../assets/icons/depot-info1.svg';
+import infoIcon2 from '../../assets/icons/depot-info2.svg';
+import box from '../../assets/icons/noun-box.svg';
+import copy from '../../assets/icons/copy.svg';
+import instruction from '../../assets/icons/instruction.svg';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
@@ -41,6 +43,17 @@ const DepotDetail = () => {
   const handleClick = (index) => {
     const main = images[index];
     setMainImg(main);
+  };
+
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    alert('Текст скопирован!');
   };
 
   useEffect(() => {
@@ -77,9 +90,9 @@ const DepotDetail = () => {
           <h1 className='text-2xl sm:text-4xl font-medium text-center sm:mt-4 mb-6 sm:mb-14'>
             {depotItem?.nameRu}
           </h1>
-          <div className='md:flex pb-12 min-h-[576px]'>
-            <div className='w-full md:w-3/6 xl:w-2/5 mb-5 mm:mb-12 md:mb-0 px-4 mm:px-0'>
-              <div className='md:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
+          <div className='dd:flex pb-12 min-h-[576px]'>
+            <div className='w-full dd:w-3/6 xl:w-2/5 mb-5 mm:mb-12 dd:mb-0 px-4 mm:px-0'>
+              <div className='dd:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
                 <img
                   src={mainImg ? mainImg : noImg}
                   onError={(e) => {
@@ -114,8 +127,8 @@ const DepotDetail = () => {
                   : ''}
               </div>
             </div>
-            <div className='md:w-3/6 xl:w-3/5'>
-              <div className='max-w-[630px] w-full mx-auto mm:px-5 pb-5'>
+            <div className='dd:w-3/6 xl:w-3/5'>
+              <div className='dd:max-w-[630px] w-full mx-auto mm:px-5 pb-5'>
                 <div className='mt-10 mm:mt-0 md:block flex flex-col'>
                   <div className='order-1 pt-5 md:pt-0'>
                     <DepotMap
@@ -136,77 +149,196 @@ const DepotDetail = () => {
                     {depotItem?.infoRu}
                   </p>
                 </div>
-                <div className='rounded-2xl grid lg:grid-cols-2 gap-5 mt-8 px-4 mm:px-0'>
-                  <div className='flex items-start'>
-                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-0'>
-                      <img src={call} alt='*' />
+                <div className='rounded-xl bg-gray-100 mt-6 px-2 py-3 sm:p-4 space-y-3 mx-4 mm:mx-0'>
+                  <div className='flex justify-between'>
+                    <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center bg-white p-1'>
+                      <img src={userIcon} alt='*' />
                     </span>
-                    <p className='text-base sm:text-xl font-medium ml-3'>
-                      {depotItem?.contacts?.phone}
-                    </p>
+                    <div className='w-full space-y-2'>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>Имя</p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                          <p>{depotItem?.nameStr || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() => copyToClipboard(depotItem?.nameStr)}
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>Фамилия</p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                          <p>{depotItem?.surnameStr || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() =>
+                              copyToClipboard(depotItem?.surnameStr)
+                            }
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                      <div className='flex items-start pt-1'>
+                        <img className='w-6 h-6' src={instruction} alt='*' />
+                        <span className='text-xs font-light italic pl-2'>
+                          {depotItem?.instructionsRu || 'Не указано'}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className='flex items-start'>
-                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-1'>
-                      <img src={boxIcon} alt='*' />
-                    </span>
-                    <p className='text-base sm:text-xl font-medium ml-3'>
-                      {depotItem?.maxAmount} кг
-                    </p>
-                  </div>
-                  <div className='flex items-start'>
-                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-1'>
+                  <div className='flex justify-between items-start'>
+                    <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center bg-white p-1'>
                       <img src={location} alt='*' />
                     </span>
-                    <p className='text-base sm:text-xl font-medium ml-3'>
-                      {depotItem?.address}
-                    </p>
+                    <div className='w-full space-y-2'>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>Адрес</p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start break-all'>
+                          <p>{depotItem?.address || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() => copyToClipboard(depotItem?.address)}
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>Zip код</p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                          <p>{depotItem?.link_zip || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() => copyToClipboard(depotItem?.link_zip)}
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>Город</p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                          <p>{depotItem?.cityStr || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() => copyToClipboard(depotItem?.cityStr)}
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>Штат / Регион</p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                          <p>{depotItem?.stateStr || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() => copyToClipboard(depotItem?.stateStr)}
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>Страна</p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                          <p>{depotItem?.country?.nameRu || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() =>
+                              copyToClipboard(depotItem?.country?.nameRu)
+                            }
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className='flex items-start'>
-                    <span className='w-6 min-w-[24px] rounded-xl flex items-center justify-center mt-1'>
+                  <div className='flex justify-between items-end'>
+                    <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
+                      <img src={call} alt='*' />
+                    </span>
+                    <div className='ml-3 w-full'>
+                      <p className='text-sm pb-1'>Номер телефона</p>
+                      <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                        <p>{depotItem?.contacts?.phone}</p>
+                        <img
+                          className='cursor-pointer'
+                          onClick={() =>
+                            copyToClipboard(depotItem?.contacts?.phone)
+                          }
+                          src={copy}
+                          alt='*'
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className='flex items-start pt-2'>
+                    <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
                       <img src={clock} alt='*' />
                     </span>
-                    <div className='text-base sm:text-xl font-medium ml-3'>
+                    <div className='ml-3 w-full'>
                       {depotItem?.workingHours?.map((el, index) => (
-                        <div key={index}>
-                          <div className='flex'>
-                            <span className='mr-2'>Пн: </span>
-                            <span>
-                              {el?.mondayStart} - {el?.mondayEnd}
-                            </span>
+                        <div
+                          className='grid grid-cols-2 gap-4 bg-white rounded-md py-2 pl-3 pr-2 text-sm sm:text-base'
+                          key={index}
+                        >
+                          <div>
+                            <div className='flex'>
+                              <span className='mr-2'>Пн: </span>
+                              <span>
+                                {el?.mondayStart} - {el?.mondayEnd}
+                              </span>
+                            </div>
+                            <div className='flex'>
+                              <span className='mr-2'>Вт: </span>
+                              <span>
+                                {el?.tuesdayStart} - {el?.tuesdayEnd}
+                              </span>
+                            </div>
+                            <div className='flex'>
+                              <span className='mr-2'>Ср: </span>
+                              <span>
+                                {el?.wednesdayStart} - {el?.wednesdayEnd}
+                              </span>
+                            </div>
                           </div>
-                          <div className='flex'>
-                            <span className='mr-2'>Вт: </span>
-                            <span>
-                              {el?.tuesdayStart} - {el?.tuesdayEnd}
-                            </span>
-                          </div>
-                          <div className='flex'>
-                            <span className='mr-2'>Ср: </span>
-                            <span>
-                              {el?.wednesdayStart} - {el?.wednesdayEnd}
-                            </span>
-                          </div>
-                          <div className='flex'>
-                            <span className='mr-2'>Чт: </span>
-                            <span>
-                              {el?.thursdayStart} - {el?.thursdayEnd}
-                            </span>
-                          </div>
-                          <div className='flex'>
-                            <span className='mr-2'>Пт: </span>
-                            <span>
-                              {el?.fridayStart} - {el?.fridayEnd}
-                            </span>
-                          </div>
-                          <div className='flex'>
-                            <span className='mr-2'>Сб: </span>
-                            <span>
-                              {el?.satStart} - {el?.satEnd}
-                            </span>
+                          <div>
+                            <div className='flex'>
+                              <span className='mr-2'>Чт: </span>
+                              <span>
+                                {el?.thursdayStart} - {el?.thursdayEnd}
+                              </span>
+                            </div>
+                            <div className='flex'>
+                              <span className='mr-2'>Пт: </span>
+                              <span>
+                                {el?.fridayStart} - {el?.fridayEnd}
+                              </span>
+                            </div>
+                            <div className='flex'>
+                              <span className='mr-2'>Сб: </span>
+                              <span>
+                                {el?.satStart} - {el?.satEnd}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
+                  </div>
+                  <div className='flex items-start py-3'>
+                    <img className='w-6 h-6' src={instruction} alt='*' />
+                    <span className='text-xs font-light italic pl-2'>
+                      Уважаемые клиенты просьба заполнять адрес строго в
+                      соответствии с нашими инструкциями , при неправильно
+                      заполненном адресе за поиск ваших отправлений будет
+                      взыматься дополнительная плата!
+                    </span>
                   </div>
                 </div>
               </div>

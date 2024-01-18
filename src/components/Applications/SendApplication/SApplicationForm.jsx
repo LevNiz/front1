@@ -273,7 +273,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                 </p>
                 <div className='flex justify-between items-center'>
                   <input
-                    className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-non'
+                    className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
                     placeholder='Длина'
                     type='number'
                     step='0.000001'
