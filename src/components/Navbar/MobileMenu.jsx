@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logOutFetch } from '../../api/user';
@@ -28,9 +28,12 @@ import gbShop from './../../assets/icons/gb-shop.svg';
 // import gbCoin from './../../assets/icons/gb-pay.svg';
 import alaket from './../../assets/icons/alaket.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
+import { fetchCountries } from '../../api/countries';
+import { fetchDepots } from '../../api/depots';
 
 const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
   const { user } = useSelector((state) => state?.user);
+  const { depots } = useSelector((state) => state?.depots);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,6 +41,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
   const [modalContent, setModalContent] = useState();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isServices, setIsServices] = useState(false);
+  const [isDepots, setIsDepots] = useState(false);
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen);
@@ -45,6 +49,10 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
 
   const toggleServices = () => {
     setIsServices(!isServices);
+  };
+
+  const toggleDepots = () => {
+    setIsDepots(!isDepots);
   };
 
   const closeModal = () => {
@@ -59,6 +67,13 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
     onClose();
     navigate('/');
   };
+
+  useEffect(() => {
+    (async () => {
+      await fetchCountries(dispatch);
+      await fetchDepots(dispatch);
+    })();
+  }, [dispatch]);
 
   return (
     <>
@@ -274,15 +289,59 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                 <span className='pl-2'>Трекинг посылок</span>
               </NavLink>
             </li>
-            <li className='my-3 flex items-center'>
-              <NavLink
-                to='/depots'
-                onClick={() => onClose()}
-                className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-full'
+            <li className='my-3'>
+              <div className='flex justify-between items-center'>
+                <div
+                  onClick={() => {
+                    onClose();
+                    navigate('/depots');
+                  }}
+                  className='ss:text-lg sm:text-xl font-medium p-2 rounded-lg flex w-max'
+                >
+                  <img src={depot} alt='*' />
+                  <span className='pl-2'>Наши склады</span>
+                </div>
+                <div onClick={toggleDepots} className='p-2'>
+                  <img
+                    className={`${
+                      isDepots ? 'rotate-180' : ''
+                    } duration-200 w-4`}
+                    src={arrow}
+                    alt='*'
+                  />
+                </div>
+              </div>
+              <ul
+                className={`${
+                  isDepots ? 'flex' : 'hidden'
+                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-2 mr-2`}
               >
-                <img src={depot} alt='*' />
-                <span className='pl-2'>Наши склады</span>
-              </NavLink>
+                {depots?.map((el) => (
+                  <li
+                    key={el?.id}
+                    onClick={() => onClose()}
+                    className='flex items-center'
+                  >
+                    <NavLink
+                      to={`/depots/${el?.id}`}
+                      className={`${
+                        el?.active
+                          ? ''
+                          : 'pointer-events-none cursor-not-allowed opacity-40'
+                      } text-base flex items-center`}
+                    >
+                      <img
+                        className='min-w-[20px] w-5 h-5 object-contain'
+                        src={el?.country?.icon}
+                        alt='*'
+                      />
+                      <span className='pl-1.5 line-clamp-1 break-all'>
+                        {`${el?.city?.nameRu}, ${el?.country?.nameRu}`}
+                      </span>
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
             </li>
             <li className='my-3 flex items-center'>
               <NavLink

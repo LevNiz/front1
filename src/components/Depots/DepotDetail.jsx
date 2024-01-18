@@ -278,10 +278,11 @@ const DepotDetail = () => {
                     </div>
                   </div>
                   <div className='flex items-start pt-2'>
-                    <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
+                    <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center mt-1 bg-white p-1'>
                       <img src={clock} alt='*' />
                     </span>
                     <div className='ml-3 w-full'>
+                      <p className='text-sm pb-1'>График работы</p>
                       {depotItem?.workingHours?.map((el, index) => (
                         <div
                           className='grid grid-cols-2 gap-4 bg-white rounded-md py-2 pl-3 pr-2 text-sm sm:text-base'
