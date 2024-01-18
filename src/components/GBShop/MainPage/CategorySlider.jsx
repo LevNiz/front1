@@ -16,6 +16,7 @@ import {
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
+import { toastModal } from '../../../helpers/Modals/ToastModal';
 
 const CategorySlider = ({ items, loading, error }) => {
   const { userID, user } = useSelector((state) => state?.user);
@@ -44,7 +45,7 @@ const CategorySlider = ({ items, loading, error }) => {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    alert('Ссылка на товар скопирована!');
+    toastModal('Ссылка на товар скопирована!');
   };
 
   return (

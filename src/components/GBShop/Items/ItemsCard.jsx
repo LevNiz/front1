@@ -9,6 +9,7 @@ import {
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
+import { toastModal } from '../../../helpers/Modals/ToastModal';
 
 const ItemsCard = ({ el }) => {
   const { userID, user } = useSelector((state) => state?.user);
@@ -52,7 +53,7 @@ const ItemsCard = ({ el }) => {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    alert('Ссылка на товар скопирована!');
+    toastModal('Ссылка на товар скопирована!');
   };
 
   const handleOpenDepot = (cityID) => {

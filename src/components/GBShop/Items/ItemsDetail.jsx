@@ -16,6 +16,7 @@ import favorite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import noImg from '../../../assets/images/no-image.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
+import { toastModal } from '../../../helpers/Modals/ToastModal';
 
 const ItemsDetail = () => {
   const { userID, user } = useSelector((state) => state?.user);
@@ -77,7 +78,7 @@ const ItemsDetail = () => {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    alert('Ссылка на товар скопирована!');
+    toastModal('Ссылка на товар скопирована!');
   };
 
   useEffect(() => {

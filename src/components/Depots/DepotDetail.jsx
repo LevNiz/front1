@@ -21,6 +21,7 @@ import infoIcon2 from '../../assets/icons/depot-info2.svg';
 import box from '../../assets/icons/noun-box.svg';
 import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
+import { toastModal } from '../../helpers/Modals/ToastModal';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
@@ -29,6 +30,8 @@ const DepotDetail = () => {
   const [mainImg, setMainImg] = useState(null);
   const [openTariff, setOpenTariff] = useState(false);
   const [openExtraTariff, setOpenExtraTariff] = useState(false);
+  const [inputName, setInputName] = useState('');
+  const [inputSurname, setInputSurname] = useState('');
 
   const { costs } = useSelector((state) => state?.costs);
   const { extraServices } = useSelector((state) => state?.extraServices);
@@ -52,8 +55,7 @@ const DepotDetail = () => {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-
-    alert('Текст скопирован!');
+    toastModal('Текст скопирован ✅');
   };
 
   useEffect(() => {
@@ -158,10 +160,24 @@ const DepotDetail = () => {
                       <div className='ml-3'>
                         <p className='text-sm pb-1'>Имя</p>
                         <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <p>{depotItem?.nameStr || 'Не указано'}</p>
+                          <input
+                            type='text'
+                            value={inputName}
+                            className='outline-none w-full pr-2'
+                            placeholder='Ваше имя латиницей'
+                            onChange={(e) => setInputName(e.target.value)}
+                            pattern='[A-Za-z]'
+                          />
                           <img
                             className='cursor-pointer'
-                            onClick={() => copyToClipboard(depotItem?.nameStr)}
+                            onClick={() => {
+                              const textToCopy = `GB${inputName}`;
+                              navigator.clipboard
+                                .writeText(textToCopy)
+                                .then(() => {
+                                  toastModal('Текст скопирован ✅');
+                                });
+                            }}
                             src={copy}
                             alt='*'
                           />
@@ -170,12 +186,38 @@ const DepotDetail = () => {
                       <div className='ml-3'>
                         <p className='text-sm pb-1'>Фамилия</p>
                         <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <p>{depotItem?.surnameStr || 'Не указано'}</p>
+                          <input
+                            type='text'
+                            value={inputSurname}
+                            className='outline-none w-full pr-2'
+                            placeholder='Ваша фамилия латиницей'
+                            pattern='[a-zA-Z]*'
+                            onChange={(e) => setInputSurname(e.target.value)}
+                          />
                           <img
                             className='cursor-pointer'
-                            onClick={() =>
-                              copyToClipboard(depotItem?.surnameStr)
-                            }
+                            onClick={() => {
+                              const textToCopy = `GB${inputSurname}`;
+                              navigator.clipboard
+                                .writeText(textToCopy)
+                                .then(() => {
+                                  toastModal('Текст скопирован ✅');
+                                });
+                            }}
+                            src={copy}
+                            alt='*'
+                          />
+                        </div>
+                      </div>
+                      <div className='ml-3'>
+                        <p className='text-sm pb-1'>
+                          Логистический код (указывается перед именем)
+                        </p>
+                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                          <p>{depotItem?.nameStr || 'Не указано'}</p>
+                          <img
+                            className='cursor-pointer'
+                            onClick={() => copyToClipboard(depotItem?.nameStr)}
                             src={copy}
                             alt='*'
                           />
@@ -197,7 +239,9 @@ const DepotDetail = () => {
                       <div className='ml-3'>
                         <p className='text-sm pb-1'>Адрес</p>
                         <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start break-all'>
-                          <p>{depotItem?.address || 'Не указано'}</p>
+                          <p className='pr-1'>
+                            {depotItem?.address || 'Не указано'}
+                          </p>
                           <img
                             className='cursor-pointer'
                             onClick={() => copyToClipboard(depotItem?.address)}
