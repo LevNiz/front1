@@ -22,6 +22,7 @@ import box from '../../assets/icons/noun-box.svg';
 import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
 import { toastModal } from '../../helpers/Modals/toastModal';
+import ReactPlayer from 'react-player';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
@@ -89,12 +90,22 @@ const DepotDetail = () => {
         <ContentLoading extraStyle='85vh' />
       ) : (
         <>
-          <h1 className='text-2xl sm:text-4xl font-medium text-center sm:mt-4 mb-6 sm:mb-14'>
+          <h1 className='text-2xl sm:text-4xl font-medium text-center'>
             {depotItem?.nameRu}
           </h1>
-          <div className='dd:flex pb-12 min-h-[576px]'>
-            <div className='w-full dd:w-3/6 xl:w-2/5 mb-5 mm:mb-12 dd:mb-0 px-4 mm:px-0'>
-              <div className='dd:max-w-[472px] h-[320px] sm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
+          <p className='text-center mt-2 flex justify-center items-center px-4 mm:px-0 sm:mt-4 mb-6 sm:mb-10'>
+            <span className='mr-1 opacity-60'>Тип склада:</span>
+            <span className='font-medium'>
+              {depotItem?.types === 'both'
+                ? 'Отправка / Приём'
+                : depotItem?.types === 'in'
+                ? 'Приём'
+                : 'Отправка'}
+            </span>
+          </p>
+          <div className='dd:flex dd:space-x-5 pb-5'>
+            <div className='w-full dd:w-3/6 mb-6 dd:mb-0 px-4 mm:px-0'>
+              <div className='w-full h-60 ss:h-72 sm:h-[320px] mm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
                 <img
                   src={mainImg ? mainImg : noImg}
                   onError={(e) => {
@@ -105,302 +116,309 @@ const DepotDetail = () => {
                   className='w-full h-full object-cover'
                 />
               </div>
-              <div className='flex justify-center space-x-3 mt-5'>
-                {depotItem?.images !== null
-                  ? images?.map((el, index) => (
-                      <div
-                        key={index}
-                        className='sm:max-w-[80px] !w-[22%] h-[50px] bg-colBgGray xs:h-[60px] sm:w-full sm:h-[75px] rounded-lg overflow-hidden cursor-pointer'
-                        onClick={() => {
-                          handleClick(index);
-                        }}
-                      >
-                        <img
-                          src={el}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = noImg;
+              {depotItem?.images?.length > 1 && (
+                <div className='flex justify-center space-x-3 mt-5'>
+                  {depotItem?.images !== null
+                    ? images?.map((el, index) => (
+                        <div
+                          key={index}
+                          className='sm:max-w-[80px] !w-[22%] h-[50px] bg-colBgGray xs:h-[60px] sm:w-full sm:h-[75px] rounded-lg overflow-hidden cursor-pointer'
+                          onClick={() => {
+                            handleClick(index);
                           }}
-                          alt='*'
-                          className='w-full h-full object-cover'
-                        />
-                      </div>
-                    ))
-                  : ''}
-              </div>
+                        >
+                          <img
+                            src={el}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = noImg;
+                            }}
+                            alt='*'
+                            className='w-full h-full object-cover'
+                          />
+                        </div>
+                      ))
+                    : ''}
+                </div>
+              )}
+              <p className='dd:hidden pt-5'>{depotItem?.infoRu}</p>
             </div>
-            <div className='dd:w-3/6 xl:w-3/5'>
-              <div className='dd:max-w-[630px] w-full mx-auto mm:px-5 pb-5'>
-                <div className='mt-10 mm:mt-0 md:block flex flex-col'>
-                  <div className='order-1 pt-5 md:pt-0'>
+            <div className='w-full dd:w-3/6'>
+              <div className='w-full mx-auto'>
+                <div className='md:block flex flex-col'>
+                  <div className='order-1'>
                     <DepotMap
                       center={{ lat: depotItem?.lat, lng: depotItem?.lon }}
                     />
-                    <p className='text-center my-3 flex justify-center items-center px-4 mm:px-0'>
-                      <span className='mr-1 opacity-60'>Тип склада:</span>
-                      <span className='font-medium'>
-                        {depotItem?.types === 'both'
-                          ? 'Отправка / Приём'
-                          : depotItem?.types === 'in'
-                          ? 'Приём'
-                          : 'Отправка'}
-                      </span>
-                    </p>
-                  </div>
-                  <p className='font-medium px-4 mm:px-0'>
-                    {depotItem?.infoRu}
-                  </p>
-                </div>
-                <div className='rounded-xl bg-gray-100 mt-6 px-2 py-3 sm:p-4 space-y-3 mx-4 mm:mx-0'>
-                  <div className='flex justify-between'>
-                    <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center bg-white p-1'>
-                      <img src={userIcon} alt='*' />
-                    </span>
-                    <div className='w-full space-y-2'>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>Имя</p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <input
-                            type='text'
-                            value={inputName}
-                            className='outline-none w-full pr-2'
-                            placeholder='Ваше имя латиницей'
-                            onChange={(e) => {
-                              const inputValue = e.target.value;
-                              const regex = /^[a-zA-Z]*$/;
-
-                              if (regex.test(inputValue) || inputValue === '') {
-                                setInputName(inputValue);
-                              }
-                            }}
-                          />
-                          <img
-                            className='cursor-pointer'
-                            onClick={() => {
-                              const textToCopy = `GB${inputName}`;
-                              navigator.clipboard
-                                .writeText(textToCopy)
-                                .then(() => {
-                                  toastModal('Текст скопирован ✅');
-                                });
-                            }}
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>Фамилия</p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <input
-                            type='text'
-                            value={inputSurname}
-                            className='outline-none w-full pr-2'
-                            placeholder='Ваша фамилия латиницей'
-                            pattern='[a-zA-Z]*'
-                            onChange={(e) => {
-                              const inputValue = e.target.value;
-                              const regex = /^[a-zA-Z]*$/;
-
-                              if (regex.test(inputValue) || inputValue === '') {
-                                setInputSurname(inputValue);
-                              }
-                            }}
-                          />
-                          <img
-                            className='cursor-pointer'
-                            onClick={() => copyToClipboard(inputSurname)}
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>
-                          Логистический код (указывается перед именем)
-                        </p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <p>{depotItem?.nameStr || 'Не указано'}</p>
-                          <img
-                            className='cursor-pointer'
-                            onClick={() => copyToClipboard(depotItem?.nameStr)}
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                      <div className='flex items-start pt-1'>
-                        <img className='w-6 h-6' src={instruction} alt='*' />
-                        <span className='text-xs font-light italic pl-2'>
-                          {depotItem?.instructionsRu || 'Не указано'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='flex justify-between items-start'>
-                    <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center bg-white p-1'>
-                      <img src={location} alt='*' />
-                    </span>
-                    <div className='w-full space-y-2'>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>Адрес</p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start break-all'>
-                          <p className='pr-1'>
-                            {depotItem?.address || 'Не указано'}
-                          </p>
-                          <img
-                            className='cursor-pointer'
-                            onClick={() => copyToClipboard(depotItem?.address)}
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>Zip код</p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <p>{depotItem?.link_zip || 'Не указано'}</p>
-                          <img
-                            className='cursor-pointer'
-                            onClick={() => copyToClipboard(depotItem?.link_zip)}
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>Город</p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <p>{depotItem?.cityStr || 'Не указано'}</p>
-                          <img
-                            className='cursor-pointer'
-                            onClick={() => copyToClipboard(depotItem?.cityStr)}
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>Штат / Регион</p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <p>{depotItem?.stateStr || 'Не указано'}</p>
-                          <img
-                            className='cursor-pointer'
-                            onClick={() => copyToClipboard(depotItem?.stateStr)}
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                      <div className='ml-3'>
-                        <p className='text-sm pb-1'>Страна</p>
-                        <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                          <p>{depotItem?.country?.nameRu || 'Не указано'}</p>
-                          <img
-                            className='cursor-pointer'
-                            onClick={() =>
-                              copyToClipboard(depotItem?.country?.nameRu)
-                            }
-                            src={copy}
-                            alt='*'
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='flex justify-between items-end'>
-                    <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
-                      <img src={call} alt='*' />
-                    </span>
-                    <div className='ml-3 w-full'>
-                      <p className='text-sm pb-1'>Номер телефона</p>
-                      <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                        <p>{depotItem?.contacts?.phone}</p>
-                        <img
-                          className='cursor-pointer'
-                          onClick={() =>
-                            copyToClipboard(depotItem?.contacts?.phone)
-                          }
-                          src={copy}
-                          alt='*'
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='flex items-start pt-2'>
-                    <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center mt-1 bg-white p-1'>
-                      <img src={clock} alt='*' />
-                    </span>
-                    <div className='ml-3 w-full'>
-                      <p className='text-sm pb-1'>График работы</p>
-                      {depotItem?.workingHours?.map((el, index) => (
-                        <div
-                          className='grid grid-cols-2 gap-4 bg-white rounded-md py-2 pl-3 pr-2 text-sm sm:text-base'
-                          key={index}
-                        >
-                          <div>
-                            <div className='flex'>
-                              <span className='mr-2'>Пн: </span>
-                              <span>
-                                {el?.mondayStart} - {el?.mondayEnd}
-                              </span>
-                            </div>
-                            <div className='flex'>
-                              <span className='mr-2'>Вт: </span>
-                              <span>
-                                {el?.tuesdayStart} - {el?.tuesdayEnd}
-                              </span>
-                            </div>
-                            <div className='flex'>
-                              <span className='mr-2'>Ср: </span>
-                              <span>
-                                {el?.wednesdayStart} - {el?.wednesdayEnd}
-                              </span>
-                            </div>
-                          </div>
-                          <div>
-                            <div className='flex'>
-                              <span className='mr-2'>Чт: </span>
-                              <span>
-                                {el?.thursdayStart} - {el?.thursdayEnd}
-                              </span>
-                            </div>
-                            <div className='flex'>
-                              <span className='mr-2'>Пт: </span>
-                              <span>
-                                {el?.fridayStart} - {el?.fridayEnd}
-                              </span>
-                            </div>
-                            <div className='flex'>
-                              <span className='mr-2'>Сб: </span>
-                              <span>
-                                {el?.satStart} - {el?.satEnd}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className='flex items-start py-3'>
-                    <img className='w-6 h-6' src={instruction} alt='*' />
-                    <span className='text-xs font-light italic pl-2'>
-                      Уважаемые клиенты просьба заполнять адрес строго в
-                      соответствии с нашими инструкциями , при неправильно
-                      заполненном адресе за поиск ваших отправлений будет
-                      взыматься дополнительная плата!
-                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className='text-center pb-10 text-xl content'>
+          <p className='px-4 mm:px-0 hidden dd:block max-w-6xl'>
+            {depotItem?.infoRu}
+          </p>
+          <div className='md:flex justify-center mt-8 md:space-x-5 px-4 mm:px-0'>
+            {depotItem?.video && (
+              <div className='w-full dd:w-1/2 lg:w-2/5 h-56 mm:h-72 rounded-lg overflow-hidden mb-5 md:mb-0'>
+                <ReactPlayer
+                  controls
+                  className='react-player'
+                  url={depotItem?.video}
+                  width='100%'
+                  height='100%'
+                />
+              </div>
+            )}
+            <div className='w-full dd:w-1/2 lg:w-3/5 rounded-xl bg-gray-100 px-2 py-3 sm:p-4 space-y-3'>
+              <div className='flex justify-between'>
+                <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center bg-white p-1'>
+                  <img src={userIcon} alt='*' />
+                </span>
+                <div className='w-full space-y-2'>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>Имя</p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                      <input
+                        type='text'
+                        value={inputName}
+                        className='outline-none w-full pr-2'
+                        placeholder='Ваше имя латиницей'
+                        onChange={(e) => {
+                          const inputValue = e.target.value;
+                          const regex = /^[a-zA-Z]*$/;
+
+                          if (regex.test(inputValue) || inputValue === '') {
+                            setInputName(inputValue);
+                          }
+                        }}
+                      />
+                      <img
+                        className='cursor-pointer'
+                        onClick={() => {
+                          const textToCopy = `GB${inputName}`;
+                          navigator.clipboard.writeText(textToCopy).then(() => {
+                            toastModal('Текст скопирован ✅');
+                          });
+                        }}
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>Фамилия</p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                      <input
+                        type='text'
+                        value={inputSurname}
+                        className='outline-none w-full pr-2'
+                        placeholder='Ваша фамилия латиницей'
+                        pattern='[a-zA-Z]*'
+                        onChange={(e) => {
+                          const inputValue = e.target.value;
+                          const regex = /^[a-zA-Z]*$/;
+
+                          if (regex.test(inputValue) || inputValue === '') {
+                            setInputSurname(inputValue);
+                          }
+                        }}
+                      />
+                      <img
+                        className='cursor-pointer'
+                        onClick={() => copyToClipboard(inputSurname)}
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>
+                      Логистический код (указывается перед именем)
+                    </p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                      <p>{depotItem?.nameStr || 'Не указано'}</p>
+                      <img
+                        className='cursor-pointer'
+                        onClick={() => copyToClipboard(depotItem?.nameStr)}
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  <div className='flex items-start pt-1'>
+                    <img className='w-6 h-6' src={instruction} alt='*' />
+                    <span className='text-xs font-light italic pl-2'>
+                      {depotItem?.instructionsRu || 'Не указано'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className='flex justify-between items-start'>
+                <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center bg-white p-1'>
+                  <img src={location} alt='*' />
+                </span>
+                <div className='w-full space-y-2'>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>Адрес</p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start break-all'>
+                      <p className='pr-1'>
+                        {depotItem?.address || 'Не указано'}
+                      </p>
+                      <img
+                        className='cursor-pointer'
+                        onClick={() => copyToClipboard(depotItem?.address)}
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>Zip код</p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                      <p>{depotItem?.link_zip || 'Не указано'}</p>
+                      <img
+                        className='cursor-pointer'
+                        onClick={() => copyToClipboard(depotItem?.link_zip)}
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>Город</p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                      <p>{depotItem?.cityStr || 'Не указано'}</p>
+                      <img
+                        className='cursor-pointer'
+                        onClick={() => copyToClipboard(depotItem?.cityStr)}
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>Штат / Регион</p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                      <p>{depotItem?.stateStr || 'Не указано'}</p>
+                      <img
+                        className='cursor-pointer'
+                        onClick={() => copyToClipboard(depotItem?.stateStr)}
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  <div className='ml-3'>
+                    <p className='text-sm pb-1'>Страна</p>
+                    <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                      <p>{depotItem?.country?.nameRu || 'Не указано'}</p>
+                      <img
+                        className='cursor-pointer'
+                        onClick={() =>
+                          copyToClipboard(depotItem?.country?.nameRu)
+                        }
+                        src={copy}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='flex justify-between items-end'>
+                <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
+                  <img src={call} alt='*' />
+                </span>
+                <div className='ml-3 w-full'>
+                  <p className='text-sm pb-1'>Номер телефона</p>
+                  <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                    <p>{depotItem?.contacts?.phone}</p>
+                    <img
+                      className='cursor-pointer'
+                      onClick={() =>
+                        copyToClipboard(depotItem?.contacts?.phone)
+                      }
+                      src={copy}
+                      alt='*'
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className='flex items-start pt-2'>
+                <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center mt-1 bg-white p-1'>
+                  <img src={clock} alt='*' />
+                </span>
+                <div className='ml-3 w-full'>
+                  <p className='text-sm pb-1'>График работы</p>
+                  {depotItem?.workingHours?.map((el, index) => (
+                    <div
+                      className='grid grid-cols-2 gap-4 bg-white rounded-md py-2 pl-3 pr-2 text-sm sm:text-base'
+                      key={index}
+                    >
+                      <div>
+                        <div className='flex'>
+                          <span className='mr-2'>Пн: </span>
+                          <span>
+                            {el?.mondayStart} - {el?.mondayEnd}
+                          </span>
+                        </div>
+                        <div className='flex'>
+                          <span className='mr-2'>Вт: </span>
+                          <span>
+                            {el?.tuesdayStart} - {el?.tuesdayEnd}
+                          </span>
+                        </div>
+                        <div className='flex'>
+                          <span className='mr-2'>Ср: </span>
+                          <span>
+                            {el?.wednesdayStart} - {el?.wednesdayEnd}
+                          </span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className='flex'>
+                          <span className='mr-2'>Чт: </span>
+                          <span>
+                            {el?.thursdayStart} - {el?.thursdayEnd}
+                          </span>
+                        </div>
+                        <div className='flex'>
+                          <span className='mr-2'>Пт: </span>
+                          <span>
+                            {el?.fridayStart} - {el?.fridayEnd}
+                          </span>
+                        </div>
+                        <div className='flex'>
+                          <span className='mr-2'>Сб: </span>
+                          <span>
+                            {el?.satStart} - {el?.satEnd}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className='flex items-start py-3'>
+                <img className='w-6 h-6' src={instruction} alt='*' />
+                <span className='text-xs font-light italic pl-2'>
+                  Уважаемые клиенты просьба заполнять адрес строго в
+                  соответствии с нашими инструкциями , при неправильно
+                  заполненном адресе за поиск ваших отправлений будет взыматься
+                  дополнительная плата!
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className='text-center py-10 text-xl content'>
             <h4>У вас коммерческий груз?</h4>
             <h4 className='font-bold'>Не проблема!</h4>
             <h4>
               Отправьте заявку прямо сейчас в разделе{' '}
-              <NavLink to='/gb-business' className='text-blue-500 underline'>
+              <NavLink
+                to='/gb-business'
+                className='text-blue-500 font-medium underline'
+              >
                 GB-Business
               </NavLink>
             </h4>
@@ -504,30 +522,45 @@ const DepotDetail = () => {
                   openExtraTariff ? 'flex' : 'hidden'
                 } p-3 mm:p-5 bg-gray-50 flex-col space-y-4`}
               >
-                <p className='opacity-70'>
-                  Вы можете закзать следующие SMART услуги до того, как ваша
-                  посылка постуи пить в наш склад.
-                </p>
-                {extraServices?.map((el) => (
-                  <div key={el?.id} className='flex justify-between'>
-                    <div className='flex'>
-                      <img
-                        className='min-w-[24px] w-6 h-6 mr-2 mt-1'
-                        src={el?.icon}
-                        alt='*'
-                      />
-                      <div>
-                        <h4 className='font-medium'>{el?.nameRu}</h4>
-                        <p className='text-sm opacity-70'>
-                          {el?.infoRu || 'Описание'}
-                        </p>
+                {extraServices?.length ? (
+                  <>
+                    <p className='text-xl text-[#020105] text-center'>
+                      А ещё вы можете заказать наши{' '}
+                      <span className='font-medium'>SMART</span> услуги
+                    </p>
+                    {extraServices?.map((el) => (
+                      <div
+                        key={el?.id}
+                        className='flex justify-between border-b border-[#A7A9B7] pb-2'
+                      >
+                        <div className='flex'>
+                          <img
+                            className='min-w-[28px] w-7 h-7 mr-2'
+                            src={el?.icon}
+                            alt='*'
+                          />
+                          <div className='px-2'>
+                            <h4 className='text-[13px]'>{el?.nameRu}</h4>
+                            {el?.infoRu && (
+                              <p className='text-[10px] pt-1 italic'>
+                                {el?.infoRu}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <div className='text-xl font-bold flex'>
+                          <span>~</span>
+                          <span className='px-0.5'>{el?.cost}</span>
+                          <span>$</span>
+                        </div>
                       </div>
-                    </div>
-                    <span className='text-colPurple font-bold'>
-                      {el?.cost} $
-                    </span>
-                  </div>
-                ))}
+                    ))}
+                  </>
+                ) : (
+                  <p className='font-medium text-center'>
+                    Нет дополнительных услуг.
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -535,8 +568,8 @@ const DepotDetail = () => {
             <img src={attention} alt='*' />
             <span className='ml-2 text-xl'>Внимание</span>
           </div>
-          <div className='lg:flex lg:space-x-5 pt-5'>
-            <div className='lg:w-3/5 rounded-2xl bg-[#FBFBFB] p-5'>
+          <div className='lg:flex lg:space-x-5 pt-5 mx-4'>
+            <div className='lg:w-3/5 rounded-2xl bg-[#FBFBFB] p-3 mm:p-5'>
               <div className='flex items-center pb-3'>
                 <img src={infoIcon1} alt='*' />
                 <span className='font-medium text-xl pl-2 pt-1'>
@@ -639,7 +672,7 @@ const DepotDetail = () => {
                 </p>
               </div>
             </div>
-            <div className='lg:w-2/5 h-max rounded-2xl bg-[#FBFBFB] p-5'>
+            <div className='lg:w-2/5 h-max rounded-2xl bg-[#FBFBFB] p-3 mm:p-5'>
               <div className='flex items-center pb-3'>
                 <img className='w-7' src={box} alt='*' />
                 <span className='font-medium text-xl pl-2'>Объемный вес</span>
