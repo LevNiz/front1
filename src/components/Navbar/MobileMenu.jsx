@@ -336,7 +336,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                         alt='*'
                       />
                       <span className='pl-1.5 line-clamp-1 break-all'>
-                        {`${el?.city?.nameRu}, ${el?.country?.nameRu}`}
+                        {el?.nameRu}
                       </span>
                     </NavLink>
                   </li>
