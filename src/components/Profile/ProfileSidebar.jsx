@@ -127,7 +127,7 @@ const ProfileSidebar = () => {
               <span
                 className={`${
                   hasNotification > 0 ? 'block' : 'hidden'
-                } bg-red-500 h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-md px-1`}
+                } bg-colYellow h-5 min-w-[20px] flex justify-center items-center text-xs rounded-md px-1`}
               >
                 {hasNotification > 99 ? '99+' : hasNotification}
               </span>

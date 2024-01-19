@@ -49,7 +49,7 @@ const GBChatSidebar = ({ chat, setChatContent }) => {
           <span
             className={`${
               chat?.unreadMessagesCount > 0 ? 'block' : 'hidden'
-            } bg-colYellow h-5 min-w-[20px] flex justify-center items-center text-xs text-white rounded-md px-1 ml-2`}
+            } bg-colYellow h-5 min-w-[20px] flex justify-center items-center text-xs rounded-md px-1 ml-2`}
           >
             {chat?.unreadMessagesCount > 99 ? '99+' : chat?.unreadMessagesCount}
           </span>

@@ -148,11 +148,21 @@ export const gbChatNewMessage = (userID, callBack) => {
   );
 
   const unsubscribe = onSnapshot(q, (snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      const doc = change.doc.data();
-      const isLastMessageRead = doc.lastMessageRead;
-      callBack(isLastMessageRead);
+    let hasUnreadMessages = false;
+
+    snapshot.forEach((doc) => {
+      const isLastMessageRead = doc.data().lastMessageRead;
+      const lastMessageSender = doc.data().lastMessageSender;
+
+      if (isLastMessageRead === false && lastMessageSender !== `${userID}`) {
+        hasUnreadMessages = true;
+        callBack(isLastMessageRead);
+      }
     });
+
+    if (!hasUnreadMessages) {
+      callBack(true);
+    }
   });
 
   return () => {
