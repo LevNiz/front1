@@ -34,15 +34,19 @@ const SApplicationComment = ({
                 <div className='w-6 min-w-[24px] h-6 mr-2'>
                   <img src={el?.icon} alt='*' />
                 </div>
-                <div>
-                  <h5 className='font-medium'>{el?.nameRu}</h5>
-                  <p className='text-sm opacity-60'>
-                    {el?.infoRu || 'Описание'}
-                  </p>
+                <div className='px-1'>
+                  <h5 className='text-sm'>{el?.nameRu}</h5>
+                  {el?.infoRu && (
+                    <p className='text-xs pt-1 italic'>{el?.infoRu}</p>
+                  )}
                 </div>
               </div>
               <div className='flex justify-end items-start'>
-                <span className='font-bold text-colPurple'>{el?.cost} $</span>
+                <div className='text-lg font-bold flex'>
+                  <span>~</span>
+                  <span className='px-0.5'>{el?.cost}</span>
+                  <span>$</span>
+                </div>
                 <span
                   onClick={() => handleServicesDelete(el?.id)}
                   className='ml-3 text-xl text-red-500 cursor-pointer'

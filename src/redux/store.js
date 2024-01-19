@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import userReducer from './slices/userSlice';
 import depotReducer from './slices/depotSlice';
 import parcelReducer from './slices/parcelSlice';
 import countryReducer from './slices/countrySlice';

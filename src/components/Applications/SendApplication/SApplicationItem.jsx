@@ -106,7 +106,7 @@ const SApplicationItem = () => {
       }
       setParcelCost(parCost?.toFixed(2));
     } else {
-      setIsDisabled(true);
+      // setIsDisabled(true);
       alert('Цена доставки не указана! Выберите другой город.');
     }
   };

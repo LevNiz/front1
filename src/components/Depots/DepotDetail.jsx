@@ -475,10 +475,12 @@ const DepotDetail = () => {
                                   senderCity: {
                                     value: depotItem?.city?.id,
                                     label: depotItem?.city?.nameRu,
+                                    fromCountry: depotItem?.country?.id,
                                   },
                                   receiverCity: {
                                     value: el?.toCity?.id,
                                     label: el?.toCity?.nameRu,
+                                    toCountry: el?.toCity?.country?.id,
                                   },
                                   parcelSize: {
                                     value: 'custom',
@@ -724,7 +726,8 @@ const DepotDetail = () => {
                     Физический вес посылки <strong>3 кг.</strong>, объемный вес
                     <strong>10 кг.</strong> = расчет стоимости{' '}
                     <strong>3 кг</strong> по физическому весу, объемный вес{' '}
-                    <strong> 10 кг - 3 кг = 7 кг. * 50%</strong> от вашего тарифа.
+                    <strong> 10 кг - 3 кг = 7 кг. * 50%</strong> от вашего
+                    тарифа.
                   </li>
                 </ul>
               </div>
