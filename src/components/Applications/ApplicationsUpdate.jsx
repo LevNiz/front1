@@ -216,6 +216,7 @@ const ApplicationsUpdate = () => {
       }
       setParcelCost(parCost?.toFixed(2));
     } else {
+      setParcelCost('00.00');
       alert('Цена доставки не указана! (из города / в город)');
     }
   };

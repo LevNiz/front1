@@ -40,6 +40,7 @@ const CalcDeliveryItem = () => {
     if (cityParcelCost) {
       const costPerKg = cityParcelCost.costPerKg;
       const costPerKgMy = cityParcelCost?.costPerKgMy;
+
       let cost;
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
@@ -59,6 +60,8 @@ const CalcDeliveryItem = () => {
       setOrderData(data);
     } else {
       alert('Цена доставки не указана! (из города / в город)');
+      setParcelCost(0);
+      setIsClickedForm(true);
     }
   };
 
