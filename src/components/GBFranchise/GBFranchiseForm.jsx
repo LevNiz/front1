@@ -1,56 +1,23 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import { postFranchise } from '../../api/gbFranchise';
-import Modal from '../../helpers/Modals/Modal';
-import { Loading } from '../../helpers/Loader/Loader';
-import { useSelector } from 'react-redux';
-
-const GBFranchiseForm = () => {
-  const { user } = useSelector((state) => state?.user);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
+const GBFranchiseForm = ({ onSubmit }) => {
   const {
     handleSubmit,
     formState: { errors },
     watch,
     register,
-    reset,
   } = useForm();
 
   const privacyPolicy = watch('privacyPolicy');
-  const navigate = useNavigate();
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  const onSubmit = async (data) => {
-    setIsLoading(true);
-    if (user) {
-      const { success } = await postFranchise(data);
-      if (success) {
-        setModalOpen(true);
-        setModalContent('successRequest');
-        setIsLoading(false);
-        reset();
-      }
-      setIsLoading(false);
-    } else {
-      navigate('/auth/sign-in');
-    }
-  };
 
   return (
-    <div className='py-8'>
+    <div className='sm:content'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='sm:shadow-[0_8px_34px_#00000026] rounded-lg sm:p-10 mb-12 max-w-[820px] mx-auto'
+        className='sm:shadow-[0_8px_34px_#00000026] rounded-lg py-6 px-4 sm:px-12 sm:py-8 max-w-[820px] mx-auto bg-white'
       >
-        <div className='max-w-2xl w-full mx-auto pt-4'>
+        <div className='max-w-2xl w-full mx-auto'>
           <div>
             <p className='font-medium mb-2'>Контактное лицо</p>
             <input
@@ -116,7 +83,7 @@ const GBFranchiseForm = () => {
               htmlFor='checkbox'
               className='text-sm flex cursor-pointer mm:items-center'
             >
-              <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-[#d660f2] border border-white rounded'>
+              <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-black border border-white rounded'>
                 {privacyPolicy ? (
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -171,8 +138,6 @@ const GBFranchiseForm = () => {
           </button>
         </div>
       </form>
-      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
-      {isLoading ? <Loading /> : ''}
     </div>
   );
 };

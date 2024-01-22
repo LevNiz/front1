@@ -30,6 +30,7 @@ export default {
       md: '768px',
       dd: '870px',
       lg: '991px',
+      gg: '1080px',
       xl: '1200px',
       xl2: '1360px',
     },

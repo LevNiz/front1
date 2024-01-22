@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
-import { GBFranchiseForm, GBFranchiseItem } from '../../components';
+import { GBFranchiseItem } from '../../components';
 
 const GBFranchises = () => {
   useEffect(() => {
@@ -8,9 +8,8 @@ const GBFranchises = () => {
   }, []);
 
   return (
-    <div className='pt-16 content'>
+    <div className='pt-14'>
       <GBFranchiseItem />
-      <GBFranchiseForm />
     </div>
   );
 };

@@ -12,6 +12,6 @@ export const postFranchise = async (data) => {
     await axiosInstance.post('category/franchise/', sendData);
     return { success: true };
   } catch (error) {
-    return { success: false, data: error };
+    return { success: false, errData: error?.response?.data };
   }
 };

@@ -175,13 +175,12 @@ const Modal = ({
             Ваша заявка успешна отправлена!
           </h3>
           <div className='flex px-8 mb-8'>
-            <NavLink
-              to='/applications'
+            <button
               className='bg-colYellow w-full py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
-              onClick={onClose}
+              onClick={() => navigate(-1)}
             >
               Закрыть
-            </NavLink>
+            </button>
           </div>
         </div>
       ) : content === 'successUpdateRequest' ? (
