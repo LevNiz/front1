@@ -76,6 +76,11 @@ const Footer = () => {
                 Правила возврата денежных средств
               </NavLink>
             </li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='/prohibited-products' target='_blank'>
+                Запрещенные товары
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className='md:pl-5'>

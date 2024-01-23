@@ -66,6 +66,7 @@ import {
   Order,
   Favorites,
   Brands,
+  ProhibitedProducts,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -104,6 +105,7 @@ export const router = createBrowserRouter(
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/user-agreement' element={<UserAgreement />} />
         <Route path='refund-policy' element={<RefundPolicy />} />
+        <Route path='prohibited-products' element={<ProhibitedProducts />} />
         <Route path='gb-business' element={<GBBusiness />} />
         <Route path='gb-franchise' element={<GBFranchises />} />
         <Route path='gb-shop'>
