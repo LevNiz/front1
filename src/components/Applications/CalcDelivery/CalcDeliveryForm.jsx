@@ -8,7 +8,15 @@ import info from '../../../assets/icons/attention2.svg';
 import boxSize from '../../../assets/images/box-size.jpeg';
 
 const CalcDeliveryForm = ({ onSubmit }) => {
-  const { cities } = useSelector((state) => state?.cities);
+  const { depots } = useSelector((state) => state?.depots);
+  const cities = [
+    ...new Set(
+      depots.map((el) => ({
+        city: el?.city,
+        country: el?.country,
+      }))
+    ),
+  ];
 
   const [parcelData, setParcelData] = useState([]);
   const [parcelSize, setParcelSize] = useState('');
@@ -26,17 +34,18 @@ const CalcDeliveryForm = ({ onSubmit }) => {
   };
 
   const senderCityOptions = cities?.map((el) => ({
-    value: el.id,
-    label: `${el.nameRu}, ${el.country.nameRu}`,
+    value: el?.city?.id,
+    label: `${el?.city?.nameRu}, ${el.country?.nameRu}`,
     fromCountry: el.country.id,
-    isDisabled: selectedReceiverCity && el.id === selectedReceiverCity.value,
+    isDisabled:
+      selectedReceiverCity && el?.city?.id === selectedReceiverCity.value,
   }));
 
   const receiverCityOptions = cities?.map((el) => ({
-    value: el.id,
-    label: `${el.nameRu}, ${el.country.nameRu}`,
+    value: el?.city?.id,
+    label: `${el?.city?.nameRu}, ${el?.country?.nameRu}`,
     toCountry: el.country.id,
-    isDisabled: selectedSenderCity && el.id === selectedSenderCity.value,
+    isDisabled: selectedSenderCity && el?.city?.id === selectedSenderCity.value,
   }));
 
   const {
