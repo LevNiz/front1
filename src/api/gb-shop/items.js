@@ -114,10 +114,10 @@ export const removeFromFavorites = async (userID, itemID) => {
   }
 };
 // Filter by supplier:
-export const fetchBrandsItem = async (id) => {
+export const fetchBrandsItem = async (id, page) => {
   try {
-    const res = await request.get(`core/item/?supplier=${id}`);
-    return { success: true, data: res?.data?.results };
+    const res = await request.get(`core/item/?page=${page}&supplier=${id}`);
+    return { success: true, data: res?.data?.results, count: res?.data?.count };
   } catch (error) {
     return { success: false, data: 'error' };
   }
