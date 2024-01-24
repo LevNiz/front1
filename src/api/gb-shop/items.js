@@ -20,10 +20,12 @@ import { request } from '../axios';
 import { db } from '../../firebase/firebase';
 
 // Fetch items
-export const fetchItems = async (dispatch, page) => {
+export const fetchItems = async (dispatch, page, category) => {
   dispatch(fetchItemsStart());
   try {
-    const res = await request.get(`/core/item/?page=${page}`);
+    const res = await request.get(
+      `/core/item/?page=${page}&category=${category || ''}`
+    );
     dispatch(fetchItemsSuccess(res?.data?.results));
     return { success: true, count: res?.data?.count };
   } catch (error) {
@@ -31,9 +33,11 @@ export const fetchItems = async (dispatch, page) => {
   }
 };
 
-export const fetchMoreItems = async (page) => {
+export const fetchMoreItems = async (page, category) => {
   try {
-    const res = await request.get(`/core/item/?page=${page}`);
+    const res = await request.get(
+      `/core/item/?page=${page}&category=${category}`
+    );
     return { success: true, data: res?.data?.results };
   } catch (error) {
     return { success: false };

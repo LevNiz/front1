@@ -192,9 +192,9 @@ const OrderDetail = () => {
                       </div>
                     </div>
                     <p className='font-medium ml-3 text-right'>
-                      $ {el?.item?.cost.toFixed(1)}
+                      $ {el?.item?.cost?.toFixed(1)}
                       <span className='text-xs ml-1'>
-                        ({(el?.item?.cost * currency).toFixed(1)} c)
+                        ({(el?.item?.cost * currency)?.toFixed(1)} c)
                       </span>
                     </p>
                   </div>
@@ -214,9 +214,9 @@ const OrderDetail = () => {
                 <div className='flex justify-between items-center'>
                   <span className='text-[#484848]'>Итого к оплате</span>
                   <span className='text-black font-bold'>
-                    {totalCost.toFixed(1)} ${' '}
+                    {totalCost?.toFixed(1)} ${' '}
                     <span className='text-sm font-medium'>
-                      ({(totalCost * currency).toFixed(1)} c)
+                      ({(totalCost * currency)?.toFixed(1)} c)
                     </span>
                   </span>
                 </div>

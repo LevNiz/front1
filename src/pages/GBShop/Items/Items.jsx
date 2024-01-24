@@ -9,10 +9,10 @@ import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 
 const Items = () => {
-  const { loading, error, items = [] } = useSelector((state) => state?.items);
+  const { loading, error, items } = useSelector((state) => state?.items);
   const { categories } = useSelector((state) => state?.categories);
 
-  const [itemsData, setItemsData] = useState(items);
+  const [itemsData, setItemsData] = useState([]);
   const [scrollLoading, setScrollLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -21,22 +21,22 @@ const Items = () => {
   const dispatch = useDispatch();
   const containerRef = useRef(null);
 
-  const filteredItems = itemsData?.filter(
-    (el) => el?.category?.id === state?.category
-  );
-
   const itemCategoryTitle = categories?.filter(
     (el) => el?.id === state?.category
   );
 
   useEffect(() => {
+    setItemsData(items);
+  }, [items]);
+
+  useEffect(() => {
     (async () => {
-      const { success, count } = await fetchItems(dispatch, 1);
+      const { success, count } = await fetchItems(dispatch, 1, state?.category);
       if (success) {
         setTotalPages(Math.ceil(count / 20));
       }
     })();
-  }, [dispatch]);
+  }, [dispatch, state?.category]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -45,7 +45,7 @@ const Items = () => {
       setScrollLoading(true);
       if (page < totalPages) {
         try {
-          const { success, data } = await fetchMoreItems(page);
+          const { success, data } = await fetchMoreItems(page, state?.category);
           if (success) {
             setItemsData((prevItems) => {
               const uniqueData = data?.filter(
@@ -80,7 +80,7 @@ const Items = () => {
         observer.disconnect();
       };
     }
-  }, [containerRef, page, state?.brandID, totalPages]);
+  }, [page, totalPages, state?.category]);
 
   useEffect(() => {
     scrollToTop();
@@ -97,10 +97,10 @@ const Items = () => {
       </div>
       {loading ? (
         <ContentLoading extraStyle={380} />
-      ) : filteredItems?.length ? (
+      ) : itemsData?.length ? (
         <>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pb-8 pt-4'>
-            {filteredItems?.map((el) => (
+            {itemsData?.map((el) => (
               <ItemsCard key={el?.id} el={el} />
             ))}
           </div>

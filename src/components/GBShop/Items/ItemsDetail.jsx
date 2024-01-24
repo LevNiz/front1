@@ -82,6 +82,12 @@ const ItemsDetail = () => {
   };
 
   useEffect(() => {
+    (async () => {
+      await fetchItems(dispatch, 1, item?.category?.id);
+    })();
+  }, [dispatch, item?.category?.id]);
+
+  useEffect(() => {
     scrollToTop();
     (async () => {
       setIsLoading(true);
@@ -93,12 +99,6 @@ const ItemsDetail = () => {
       setIsLoading(false);
     })();
   }, [id]);
-
-  useEffect(() => {
-    (async () => {
-      await fetchItems(dispatch);
-    })();
-  }, [dispatch]);
 
   return (
     <div className='py-16 md:py-24 min-h-[991px]'>
@@ -166,18 +166,21 @@ const ItemsDetail = () => {
                 </h1>
                 <div className='flex items-center'>
                   <h2 className='text-2xl font-medium'>
-                    $ {item?.costSale > 0 ? item?.costSale.toFixed(1) : item?.cost.toFixed(1)}
+                    ${' '}
+                    {item?.costSale > 0
+                      ? item?.costSale?.toFixed(1)
+                      : item?.cost?.toFixed(1)}
                   </h2>
                   {item?.costSale > 0 && (
                     <h3 className='text-[#666] line-through ml-2 mr-1'>
-                      $ {item?.cost.toFixed(1)}
+                      $ {item?.cost?.toFixed(1)}
                     </h3>
                   )}
                   <span className='ml-1 mr-3'>
                     (
                     {item?.costSale > 0
-                      ? item?.costSale.toFixed(1)
-                      : (item?.cost * currency).toFixed(1)}{' '}
+                      ? item?.costSale?.toFixed(1)
+                      : (item?.cost * currency)?.toFixed(1)}{' '}
                     с)
                   </span>
                   <span className='bg-[#DA3F3F] px-2 py-[3px] text-white rounded-3xl text-xs'>
@@ -246,7 +249,7 @@ const ItemsDetail = () => {
               </NavLink>
             </div>
             <CategorySlider
-              items={similarItems}
+              items={similarItems?.slice(0, 10)}
               loading={loading}
               error={error}
             />

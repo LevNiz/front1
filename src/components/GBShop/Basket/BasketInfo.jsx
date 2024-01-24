@@ -54,9 +54,9 @@ const BasketInfo = () => {
               <div className='flex justify-between pb-5'>
                 <span className='font-medium'>Итого</span>
                 <span className='text-xl font-bold'>
-                  $ {totalCost.toFixed(1)}{' '}
+                  $ {totalCost?.toFixed(1)}{' '}
                   <p className='text-sm font-medium'>
-                    ({(totalCost * currency).toFixed(1)} с)
+                    ({(totalCost * currency)?.toFixed(1)} с)
                   </p>
                 </span>
               </div>
