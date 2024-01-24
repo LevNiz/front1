@@ -45,7 +45,7 @@ const BasketItem = ({ el }) => {
                 {el?.item?.name || 'Не указано'}
               </NavLink>
               <span className='text-sm pt-1 opacity-70 font-medium'>
-                $ {el?.item?.cost}
+                $ {el?.item?.cost.toFixed(1)}
                 <p className='text-xs'>
                   ({(el?.item?.cost * currency).toFixed(1)} с)
                 </p>
@@ -80,7 +80,7 @@ const BasketItem = ({ el }) => {
         </div>
         <div className='hidden ld:block w-[15%]'>
           <span className='font-medium'>
-            $ {el?.item?.cost}{' '}
+            $ {el?.item?.cost.toFixed(1)}{' '}
             <p className='text-xs'>
               ({(el?.item?.cost * currency).toFixed(1)} с)
             </p>
@@ -106,7 +106,7 @@ const BasketItem = ({ el }) => {
           </div>
         </div>
         <div className='hidden ld:block w-[15%] font-medium'>
-          $ {el?.item?.cost * count}
+          $ {(el?.item?.cost * count).toFixed(1)}
           <p className='text-xs'>({(el?.item?.cost * count * currency).toFixed(1)} с)</p>
         </div>
       </div>

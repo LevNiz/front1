@@ -166,11 +166,11 @@ const ItemsDetail = () => {
                 </h1>
                 <div className='flex items-center'>
                   <h2 className='text-2xl font-medium'>
-                    $ {item?.costSale > 0 ? item?.costSale : item?.cost}
+                    $ {item?.costSale > 0 ? item?.costSale.toFixed(1) : item?.cost.toFixed(1)}
                   </h2>
                   {item?.costSale > 0 && (
                     <h3 className='text-[#666] line-through ml-2 mr-1'>
-                      $ {item?.cost}
+                      $ {item?.cost.toFixed(1)}
                     </h3>
                   )}
                   <span className='ml-1 mr-3'>

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
+import { useEffect, useRef, useState } from 'react';
+import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { ItemsCard } from '../../../components';
@@ -9,45 +9,76 @@ import { fetchBrandsItem } from '../../../api/gb-shop/items';
 
 const Brands = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [btnLoading, setBtnLoading] = useState(false);
+  const [scrollLoading, setScrollLoading] = useState(false);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  const containerRef = useRef(null);
   const { state } = useLocation();
 
   useEffect(() => {
-    setIsLoading(true);
-    (async () => {
-      const { success, data, count } = await fetchBrandsItem(state?.brandID, 1);
-      if (success) {
-        setItems(data);
-        setTotalPages(Math.ceil(count / 20));
-        setIsLoading(false);
-      } else {
-        setItems([]);
-        setIsLoading(false);
-      }
-    })();
-  }, [state?.brandID]);
-
-  const fetchNextPage = async () => {
-    setBtnLoading(true);
-    try {
-      if (page < totalPages) {
-        const { success, data } = await fetchBrandsItem(
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const { success, data, count } = await fetchBrandsItem(
           state?.brandID,
-          page + 1
+          1
         );
         if (success) {
-          setItems((prevItems) => [...prevItems, ...data]);
-          setPage((prevPage) => prevPage + 1);
+          setItems(data);
+          setTotalPages(Math.ceil(count / 20));
+        } else {
+          setItems([]);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [state?.brandID]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const fetchNextPage = async () => {
+      setScrollLoading(true);
+      if (page < totalPages) {
+        try {
+          const { success, data } = await fetchBrandsItem(
+            state?.brandID,
+            page + 1
+          );
+          if (success) {
+            setItems((prevItems) => [...prevItems, ...data]);
+            setPage((prevPage) => prevPage + 1);
+          }
+        } finally {
+          setScrollLoading(false);
         }
       }
-    } finally {
-      setBtnLoading(false);
+    };
+    if (container) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            fetchNextPage();
+          }
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      );
+      observer.observe(container);
+
+      return () => {
+        observer.disconnect();
+      };
     }
-  };
+  }, [containerRef, page, state?.brandID, totalPages]);
 
   useEffect(() => {
     scrollToTop();
@@ -67,21 +98,19 @@ const Brands = () => {
       ) : items === 'error' ? (
         <ErrorServer />
       ) : items?.length ? (
-        <div className='container mm:content'>
-          <div className='grid grid-cols-2 md:grid-cols-3 pb-8 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 pt-4'>
+        <>
+          <div
+            id='brands-container'
+            className='grid grid-cols-2 md:grid-cols-3 pb-8 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 pt-4 container mm:content'
+          >
             {items?.map((el) => (
               <ItemsCard key={el?.id} el={el} favorite={true} />
             ))}
           </div>
-          <div className='flex justify-center pt-5'>
-            <button
-              onClick={fetchNextPage}
-              className='bg-black text-white h-9 w-40 font-medium rounded hover:opacity-70 duration-100 text-sm'
-            >
-              {btnLoading ? <ButtonLoading /> : 'Загрузить еще'}
-            </button>
+          <div ref={containerRef} className='p-1'>
+            {scrollLoading && <ContentLoading />}
           </div>
-        </div>
+        </>
       ) : (
         <div className='pt-20'>
           <GBSHopEmpty
