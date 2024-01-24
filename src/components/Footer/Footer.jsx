@@ -13,6 +13,9 @@ import maestro from '../../assets/images/maestro.svg';
 import call from '../../assets/icons/call-white.svg';
 import mail from '../../assets/icons/gmail-white.svg';
 
+import documents from '../../assets/files/documents.pdf';
+import requisites from '../../assets/files/requisites.pdf'
+
 const Footer = () => {
   return (
     <footer
@@ -74,6 +77,16 @@ const Footer = () => {
             <li className='opacity-80 hover:opacity-100 duration-100'>
               <NavLink to='/refund-policy' target='_blank'>
                 Правила возврата денежных средств
+              </NavLink>
+            </li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to={documents} target='_blank'>
+                Документы
+              </NavLink>
+            </li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to={requisites} target='_blank'>
+                Реквизиты
               </NavLink>
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
