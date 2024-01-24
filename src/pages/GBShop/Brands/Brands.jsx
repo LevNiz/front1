@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ContentLoading } from '../../../helpers/Loader/Loader';
+import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { ItemsCard } from '../../../components';
@@ -9,6 +9,7 @@ import { fetchBrandsItem } from '../../../api/gb-shop/items';
 
 const Brands = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [btnLoading, setBtnLoading] = useState(false);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -30,8 +31,9 @@ const Brands = () => {
     })();
   }, [state?.brandID]);
 
-  useEffect(() => {
-    const fetchNextPage = async () => {
+  const fetchNextPage = async () => {
+    setBtnLoading(true);
+    try {
       if (page < totalPages) {
         const { success, data } = await fetchBrandsItem(
           state?.brandID,
@@ -42,22 +44,10 @@ const Brands = () => {
           setPage((prevPage) => prevPage + 1);
         }
       }
-    };
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
-      ) {
-        fetchNextPage();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [page, state?.brandID, totalPages]);
+    } finally {
+      setBtnLoading(false);
+    }
+  };
 
   useEffect(() => {
     scrollToTop();
@@ -77,12 +67,20 @@ const Brands = () => {
       ) : items === 'error' ? (
         <ErrorServer />
       ) : items?.length ? (
-        <div
-          className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pt-4 mm:content'
-        >
-          {items?.map((el) => (
-            <ItemsCard key={el?.id} el={el} favorite={true} />
-          ))}
+        <div className='container mm:content'>
+          <div className='grid grid-cols-2 md:grid-cols-3 pb-8 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 pt-4'>
+            {items?.map((el) => (
+              <ItemsCard key={el?.id} el={el} favorite={true} />
+            ))}
+          </div>
+          <div className='flex justify-center pt-5'>
+            <button
+              onClick={fetchNextPage}
+              className='bg-black text-white h-9 w-40 font-medium rounded hover:opacity-70 duration-100 text-sm'
+            >
+              {btnLoading ? <ButtonLoading /> : 'Загрузить еще'}
+            </button>
+          </div>
         </div>
       ) : (
         <div className='pt-20'>
