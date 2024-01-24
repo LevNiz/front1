@@ -194,7 +194,7 @@ const OrderDetail = () => {
                     <p className='font-medium ml-3 text-right'>
                       $ {el?.item?.cost}
                       <span className='text-xs ml-1'>
-                        ({el?.item?.cost * currency} c)
+                        ({(el?.item?.cost * currency).toFixed(1)} c)
                       </span>
                     </p>
                   </div>
@@ -216,7 +216,7 @@ const OrderDetail = () => {
                   <span className='text-black font-bold'>
                     {totalCost} ${' '}
                     <span className='text-sm font-medium'>
-                      ({totalCost * currency} c)
+                      ({(totalCost * currency).toFixed(1)} c)
                     </span>
                   </span>
                 </div>

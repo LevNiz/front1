@@ -46,7 +46,9 @@ const BasketItem = ({ el }) => {
               </NavLink>
               <span className='text-sm pt-1 opacity-70 font-medium'>
                 $ {el?.item?.cost}
-                <p className='text-xs'>({el?.item?.cost * currency} с)</p>
+                <p className='text-xs'>
+                  ({(el?.item?.cost * currency).toFixed(1)} с)
+                </p>
               </span>
               <div className='flex ld:hidden py-2'>
                 <div
@@ -79,7 +81,9 @@ const BasketItem = ({ el }) => {
         <div className='hidden ld:block w-[15%]'>
           <span className='font-medium'>
             $ {el?.item?.cost}{' '}
-            <p className='text-xs'>({el?.item?.cost * currency} с)</p>
+            <p className='text-xs'>
+              ({(el?.item?.cost * currency).toFixed(1)} с)
+            </p>
           </span>
         </div>
         <div className='hidden ld:block w-[20%] lg:w-[28%]'>
@@ -103,7 +107,7 @@ const BasketItem = ({ el }) => {
         </div>
         <div className='hidden ld:block w-[15%] font-medium'>
           $ {el?.item?.cost * count}
-          <p className='text-xs'>({el?.item?.cost * count * currency} с)</p>
+          <p className='text-xs'>({(el?.item?.cost * count * currency).toFixed(1)} с)</p>
         </div>
       </div>
     </div>

@@ -95,7 +95,7 @@ const CategorySlider = ({ items, loading, error }) => {
                       />
                       <div className='absolute bottom-2 right-2 text-center bg-colYellow py-[2px] px-2 rounded-sm z-10'>
                         <p className='font-medium'>$ {el?.cost}</p>
-                        <p className='text-xs'>({el?.cost * currency} с)</p>
+                        <p className='text-xs'>({(el?.cost * currency).toFixed(1)} с)</p>
                       </div>
                       <div className='absolute bottom-0 left-0 w-full h-12 bg-[linear-gradient(180deg,_rgba(0,_0,_0,_0.0)_0%,_rgba(0,_0,_0,_0.50)_200%)]'></div>
                     </div>

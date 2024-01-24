@@ -56,7 +56,7 @@ const BasketInfo = () => {
                 <span className='text-xl font-bold'>
                   $ {totalCost}{' '}
                   <p className='text-sm font-medium'>
-                    ({totalCost * currency} с)
+                    ({(totalCost * currency).toFixed(1)} с)
                   </p>
                 </span>
               </div>

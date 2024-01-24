@@ -176,8 +176,8 @@ const ItemsDetail = () => {
                   <span className='ml-1 mr-3'>
                     (
                     {item?.costSale > 0
-                      ? item?.costSale
-                      : item?.cost * currency}{' '}
+                      ? item?.costSale.toFixed(1)
+                      : (item?.cost * currency).toFixed(1)}{' '}
                     с)
                   </span>
                   <span className='bg-[#DA3F3F] px-2 py-[3px] text-white rounded-3xl text-xs'>
