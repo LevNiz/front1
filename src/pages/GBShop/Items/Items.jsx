@@ -1,21 +1,27 @@
 import { useLocation } from 'react-router-dom';
 import { ItemsCard } from '../../../components';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from '../../../api/gb-shop/items';
+import { fetchItems, fetchMoreItems } from '../../../api/gb-shop/items';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 
 const Items = () => {
-  const { loading, error, items } = useSelector((state) => state?.items);
+  const { loading, error, items = [] } = useSelector((state) => state?.items);
   const { categories } = useSelector((state) => state?.categories);
+
+  const [itemsData, setItemsData] = useState(items);
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const { state } = useLocation();
   const dispatch = useDispatch();
+  const containerRef = useRef(null);
 
-  const filteredItems = items?.filter(
+  const filteredItems = itemsData?.filter(
     (el) => el?.category?.id === state?.category
   );
 
@@ -25,9 +31,56 @@ const Items = () => {
 
   useEffect(() => {
     (async () => {
-      await fetchItems(dispatch);
+      const { success, count } = await fetchItems(dispatch, 1);
+      if (success) {
+        setTotalPages(Math.ceil(count / 20));
+      }
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const fetchNextPage = async () => {
+      setScrollLoading(true);
+      if (page < totalPages) {
+        try {
+          const { success, data } = await fetchMoreItems(page);
+          if (success) {
+            setItemsData((prevItems) => {
+              const uniqueData = data?.filter(
+                (item) =>
+                  !prevItems?.some((prevItem) => prevItem?.id === item?.id)
+              );
+              return [...prevItems, ...uniqueData];
+            });
+            setPage((prevPage) => prevPage + 1);
+          }
+        } finally {
+          setScrollLoading(false);
+        }
+      }
+    };
+    if (container) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            fetchNextPage();
+          }
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      );
+      observer.observe(container);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [containerRef, page, state?.brandID, totalPages]);
 
   useEffect(() => {
     scrollToTop();
@@ -45,11 +98,16 @@ const Items = () => {
       {loading ? (
         <ContentLoading extraStyle={380} />
       ) : filteredItems?.length ? (
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pt-4'>
-          {filteredItems?.map((el) => (
-            <ItemsCard key={el?.id} el={el} />
-          ))}
-        </div>
+        <>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pb-8 pt-4'>
+            {filteredItems?.map((el) => (
+              <ItemsCard key={el?.id} el={el} />
+            ))}
+          </div>
+          <div ref={containerRef} className='p-1'>
+            {scrollLoading && <ContentLoading />}
+          </div>
+        </>
       ) : error ? (
         <div className='pt-20'>
           <ErrorServer />
