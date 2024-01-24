@@ -78,7 +78,6 @@ const Brands = () => {
         <ErrorServer />
       ) : items?.length ? (
         <div
-          id='brand-items'
           className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pt-4 mm:content'
         >
           {items?.map((el) => (
