@@ -348,17 +348,15 @@ const DepotDetail = () => {
               </div>
               <div className='flex justify-between items-end'>
                 <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
-                  <img src={depotEmail} alt='*' />
+                  <img className='w-[22px]' src={depotEmail} alt='*' />
                 </span>
                 <div className='ml-3 w-full'>
                   <p className='text-sm pb-1'>Эл. почта</p>
                   <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
-                    <p>{depotItem?.contacts?.email}</p>
+                    <p>{depotItem?.email}</p>
                     <img
                       className='cursor-pointer'
-                      onClick={() =>
-                        copyToClipboard(depotItem?.contacts?.email)
-                      }
+                      onClick={() => copyToClipboard(depotItem?.email)}
                       src={copy}
                       alt='*'
                     />
@@ -587,9 +585,14 @@ const DepotDetail = () => {
               </div>
             </div>
           </div>
-          <NavLink to='/profile/tech-chat' className='flex items-center bg-black rounded-3xl pl-2 pr-5 py-2 w-max mx-auto'>
-            <img src={support} alt="*" />
-            <span className='text-white font-medium pl-2'>Связаться с нами</span>
+          <NavLink
+            to='/profile/tech-chat'
+            className='flex items-center bg-black rounded-3xl pl-2 pr-5 py-2 w-max mx-auto'
+          >
+            <img src={support} alt='*' />
+            <span className='text-white font-medium pl-2'>
+              Связаться с нами
+            </span>
           </NavLink>
           <div className='flex items-center pt-16 px-3'>
             <img src={attention} alt='*' />
