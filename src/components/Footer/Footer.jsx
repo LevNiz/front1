@@ -71,11 +71,11 @@ const Footer = () => {
                 Пользовательское соглашение
               </NavLink>
             </li>
-            <li className='opacity-80 hover:opacity-100 duration-100'>
+            {/* <li className='opacity-80 hover:opacity-100 duration-100'>
               <NavLink to='/refund-policy' target='_blank'>
                 Правила возврата денежных средств
               </NavLink>
-            </li>
+            </li> */}
             <li className='opacity-80 hover:opacity-100 duration-100'>
               <NavLink to='/prohibited-products' target='_blank'>
                 Запрещенные товары
