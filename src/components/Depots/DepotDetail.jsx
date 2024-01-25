@@ -366,7 +366,7 @@ const DepotDetail = () => {
                 </div>
               </div>
               <div className='flex items-start pt-2'>
-                <span className='w-9 h-9 min-w-[36px] mt-6 rounded-md flex items-center justify-center mt-1 bg-white p-1'>
+                <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
                   <img src={clock} alt='*' />
                 </span>
                 <div className='ml-3 w-full'>
