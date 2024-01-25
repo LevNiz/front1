@@ -10,10 +10,7 @@ export const fetchSearchRequest = async (dispatch, userID) => {
   dispatch(fetchSearchRequestStart());
   try {
     const res = await request.get(`core/item_search_request/?client=${userID}`);
-    const myRequests = res?.data?.results?.filter(
-      (el) => el?.client?.id === userID
-    );
-    dispatch(fetchSearchRequestSuccess(myRequests));
+    dispatch(fetchSearchRequestSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchSearchRequestFailure(error));
   }

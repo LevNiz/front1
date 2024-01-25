@@ -9,11 +9,8 @@ import {
 export const fetchAddresses = async (userID, dispatch) => {
   dispatch(fetchAddressStart());
   try {
-    const res = await request.get('core/addresses/');
-    const myAddresses = res?.data?.results?.filter(
-      (address) => address?.user?.id === userID
-    );
-    dispatch(fetchAddressSuccess(myAddresses));
+    const res = await request.get(`core/addresses/?user=${userID}`);
+    dispatch(fetchAddressSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchAddressFailure(error));
   }

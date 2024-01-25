@@ -12,11 +12,8 @@ import {
 export const FetchParcels = async (dispatch, userID) => {
   dispatch(fetchParcelsStart());
   try {
-    const res = await request.get(`core/package/`);
-    const filteredParcels = res?.data?.results?.filter(
-      (parcel) => parcel?.client?.id === userID
-    );
-    dispatch(fetchParcelsSuccess(filteredParcels));
+    const res = await request.get(`core/package/?client=${userID}`);
+    dispatch(fetchParcelsSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchParcelsFailure(error));
   }
@@ -126,8 +123,8 @@ export const fetchSaveParcel = async (data) => {
 export const fetchParcelCategories = async () => {
   try {
     const res = await request.get('core/package_data');
-    return { success: true, data: res?.data?.results }
+    return { success: true, data: res?.data?.results };
   } catch (error) {
-    return { success: false, data: error }
+    return { success: false, data: error };
   }
-}
+};

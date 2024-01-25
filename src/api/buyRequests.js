@@ -10,12 +10,7 @@ export const FetchBuyRequests = async (dispatch, userID) => {
   dispatch(fetchBuyRequestStart());
   try {
     const res = await request.get(`core/buyer_request/?client=${userID}`);
-    const filteredData = res?.data?.results?.filter(
-      (el) => el?.client?.id === userID
-    );
-    console.log(res?.data?.results);
-    console.log('userID', userID);
-    dispatch(fetchBuyRequestSuccess(filteredData));
+    dispatch(fetchBuyRequestSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchBuyRequestFailure(error));
   }
