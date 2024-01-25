@@ -24,6 +24,7 @@ import box from '../../assets/icons/noun-box.svg';
 import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
 import support from '../../assets/icons/support.svg';
+import depotEmail from '../../assets/icons/depot-email.svg';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
@@ -338,6 +339,25 @@ const DepotDetail = () => {
                       className='cursor-pointer'
                       onClick={() =>
                         copyToClipboard(depotItem?.contacts?.phone)
+                      }
+                      src={copy}
+                      alt='*'
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className='flex justify-between items-end'>
+                <span className='w-9 h-9 min-w-[36px] rounded-md flex items-center justify-center mt-1 bg-white p-1'>
+                  <img src={depotEmail} alt='*' />
+                </span>
+                <div className='ml-3 w-full'>
+                  <p className='text-sm pb-1'>Эл. почта</p>
+                  <div className='bg-white rounded-md py-1.5 pl-3 pr-1.5 flex justify-between items-start'>
+                    <p>{depotItem?.contacts?.email}</p>
+                    <img
+                      className='cursor-pointer'
+                      onClick={() =>
+                        copyToClipboard(depotItem?.contacts?.email)
                       }
                       src={copy}
                       alt='*'
