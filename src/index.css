@@ -118,6 +118,12 @@ input[type='number'] {
       linear-gradient(181deg, #7bd6fd -39.35%, #3793fe 99.93%)
     );
   }
+  .bg-gbChat {
+    background: var(
+      --GB-Pay,
+      linear-gradient(181deg, #30CBA4 -39.35%, #067A4D 99.93%)
+    );
+  }
 }
 .bg-alaket {
   background: var(
