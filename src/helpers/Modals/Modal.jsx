@@ -177,7 +177,7 @@ const Modal = ({
           <div className='flex px-8 mb-8'>
             <button
               className='bg-colYellow w-full py-3 font-medium rounded-lg hover:bg-colYellowHover duration-100'
-              onClick={() => navigate(-1)}
+              onClick={onClose()}
             >
               Закрыть
             </button>

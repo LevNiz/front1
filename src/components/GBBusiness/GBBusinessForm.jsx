@@ -40,6 +40,10 @@ const GBBusinessForm = () => {
         setIsLoading(false);
         setFileValue(null);
         reset();
+      } else {
+        setModalOpen(true);
+        setModalContent('errorRequest');
+        setIsLoading(false);
       }
       setIsLoading(false);
     } else {
