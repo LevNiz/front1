@@ -7,6 +7,8 @@ import { DepotMap } from './DepotMap';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 import { fetchCosts } from '../../api/costs';
 import { fetchExtraServices } from '../../api/extraServices';
+import { toastModal } from '../../helpers/Modals/toastModal';
+import ReactPlayer from 'react-player';
 import location from '../../assets/icons/new-location.svg';
 import clock from '../../assets/icons/timeSvg.svg';
 import call from '../../assets/icons/new-call.svg';
@@ -21,8 +23,7 @@ import infoIcon2 from '../../assets/icons/depot-info2.svg';
 import box from '../../assets/icons/noun-box.svg';
 import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
-import { toastModal } from '../../helpers/Modals/toastModal';
-import ReactPlayer from 'react-player';
+import support from '../../assets/icons/support.svg';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
@@ -423,7 +424,7 @@ const DepotDetail = () => {
               </NavLink>
             </h4>
           </div>
-          <div className='md:flex justify-between md:space-x-4 lg:space-x-7 content'>
+          <div className='md:flex justify-between md:space-x-4 lg:space-x-7 content pb-10'>
             <div className='w-full lg:w-1/2'>
               <div
                 onClick={() => setOpenTariff(!openTariff)}
@@ -566,6 +567,10 @@ const DepotDetail = () => {
               </div>
             </div>
           </div>
+          <NavLink to='/profile/tech-chat' className='flex items-center bg-black rounded-3xl pl-2 pr-5 py-2 w-max mx-auto'>
+            <img src={support} alt="*" />
+            <span className='text-white font-medium pl-2'>Связаться с нами</span>
+          </NavLink>
           <div className='flex items-center pt-16 px-3'>
             <img src={attention} alt='*' />
             <span className='ml-2 text-xl'>Внимание</span>
