@@ -21,6 +21,7 @@ import Favorites from './GBShop/Favorites/Favorites';
 import Brands from './GBShop/Brands/Brands';
 import ProhibitedProducts from './ProhibitedProducts/ProhibitedProducts';
 import DeliveryPolicy from './DeliveryPolicy/DeliveryPolicy';
+import PaymentPolicy from './PaymentPolicy/PaymentPolicy';
 
 export {
   Tracking,
@@ -46,4 +47,5 @@ export {
   Brands,
   ProhibitedProducts,
   DeliveryPolicy,
+  PaymentPolicy,
 };

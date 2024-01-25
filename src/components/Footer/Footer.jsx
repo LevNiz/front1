@@ -86,6 +86,11 @@ const Footer = () => {
                 Правила условия доставки
               </NavLink>
             </li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink to='/payment-policy' target='_blank'>
+                Правила оплаты и возврата денежных средств
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className='md:pl-5'>
