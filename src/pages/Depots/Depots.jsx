@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDepots, searchDepot } from '../../api/depots';
+import { fetchDepots, fetchMoreDepots, searchDepot } from '../../api/depots';
 import { DepotItem } from '../../components';
 import FilterModal from '../../components/Depots/FilterModal';
 import { ContentLoading } from '../../helpers/Loader/Loader';
@@ -12,16 +12,82 @@ import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const Depots = () => {
   const { depots, loading, error } = useSelector((state) => state?.depots);
+  const containerRef = useRef();
   const dispatch = useDispatch();
 
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
   const [depotData, setDepotData] = useState([]);
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    setDepotData(depots);
+  }, [depots]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [totalPages]);
+
+  useEffect(() => {
+    (async () => {
+      const { success, count } = await fetchDepots(dispatch);
+      if (success) {
+        setTotalPages(Math.ceil(count / 20));
+      }
+    })();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const fetchNextPage = async () => {
+      setScrollLoading(true);
+      try {
+        if (page <= totalPages) {
+          const { success, data } = await fetchMoreDepots(page);
+          if (success) {
+            setDepotData((prevItems) => {
+              const uniqueData = data?.filter(
+                (item) =>
+                  !prevItems?.some((prevItem) => prevItem?.id === item?.id)
+              );
+              return [...prevItems, ...uniqueData];
+            });
+            setPage((prevPage) => prevPage + 1);
+          }
+        }
+      } finally {
+        setScrollLoading(false);
+      }
+    };
+
+    if (container) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            fetchNextPage();
+          }
+        },
+        {
+          root: null,
+          rootMargin: '4px',
+          threshold: 0.1,
+        }
+      );
+      observer.observe(container);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [page, totalPages]);
 
   const openFilterModal = (e) => {
     e.preventDefault();
@@ -33,15 +99,8 @@ const Depots = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      await fetchDepots(dispatch);
-    })();
-  }, [dispatch]);
-
-  useEffect(() => {
     scrollToTop();
-    setDepotData(depots);
-  }, [depots]);
+  }, []);
 
   const onSubmit = async (data) => {
     await searchDepot(data.searchDepot, dispatch);
@@ -91,11 +150,16 @@ const Depots = () => {
       ) : error ? (
         <ErrorServer />
       ) : depotData?.length ? (
-        <div className='grid ss:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6'>
-          {depotData?.map((el) => (
-            <DepotItem key={el?.id} el={el} />
-          ))}
-        </div>
+        <>
+          <div className='grid ss:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6'>
+            {depotData?.map((el) => (
+              <DepotItem key={el?.id} el={el} />
+            ))}
+          </div>
+          <div ref={containerRef} className='p-1'>
+            {scrollLoading && <ContentLoading />}
+          </div>
+        </>
       ) : (
         <ErrorEmpty
           title='По вашему запросу ничего не нашли.'

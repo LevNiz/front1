@@ -11,8 +11,19 @@ export const fetchDepots = async (dispatch) => {
   try {
     const res = await request.get('core/depot/');
     dispatch(fetchDepotsSuccess(res?.data?.results));
+    return { success: true, count: res?.data?.count };
   } catch (error) {
     dispatch(fetchDepotsFailure(error));
+    return { success: false };
+  }
+};
+
+export const fetchMoreDepots = async (page) => {
+  try {
+    const res = await request.get(`/core/depot/?page=${page}`);
+    return { success: true, data: res?.data?.results };
+  } catch (error) {
+    return { success: false };
   }
 };
 
