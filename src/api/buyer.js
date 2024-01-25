@@ -92,7 +92,7 @@ export const postStayBuyer = async (data, userID, passport, passportSelfie) => {
       })
       .then((res) => res?.data?.image)
       .catch((error) => {
-        throw error;
+        throw error();
       });
   };
 

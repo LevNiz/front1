@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
+import Webcam from 'react-webcam';
 import { fetchCountries } from '../../api/countries';
 import selfie from '../../assets/images/selfie.jpeg';
 import passportImg from '../../assets/images/passport.webp';
@@ -15,7 +16,9 @@ const BecomeBuyerForm = ({
   setPassport,
   passport,
 }) => {
+  const [showWebcam, setShowWebcam] = useState(false);
   const { countries } = useSelector((state) => state?.countries);
+  const webcamRef = useRef(null);
   const dispatch = useDispatch();
 
   const countryOptions = countries?.map((country) => ({
@@ -27,6 +30,32 @@ const BecomeBuyerForm = ({
       </div>
     ),
   }));
+
+  const handleCapture = () => {
+    const screenshot = webcamRef.current.getScreenshot();
+    const isValidBase64 = /^data:image\/[a-zA-Z+]*;base64,/.test(screenshot);
+
+    if (isValidBase64) {
+      const base64WithoutPrefix = screenshot.split(',')[1];
+      const blob = base64ToBlob(base64WithoutPrefix, 'image/jpeg');
+      const file = new File([blob], 'webcam-photo.jpg', { type: 'image/jpeg' });
+
+      setPassportSelfie(file);
+      setShowWebcam(false);
+    }
+  };
+
+  const base64ToBlob = (base64, type) => {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: type });
+  };
 
   useEffect(() => {
     async () => {
@@ -289,31 +318,44 @@ const BecomeBuyerForm = ({
             </div>
             <div>
               <p className='font-medium mb-2'>Сельфи с паспортом</p>
-              <div className='h-56 border border-gray-300 rounded-lg overflow-hidden'>
-                <img
-                  className='w-full h-full object-contain'
-                  src={
-                    passportSelfie
-                      ? URL.createObjectURL(passportSelfie)
-                      : selfie
-                  }
-                  alt='*'
-                />
-              </div>
-              <label htmlFor='self'>
-                <input
-                  className='hidden'
-                  id='self'
-                  type='file'
-                  onChange={(e) => setPassportSelfie(e.target.files[0])}
-                  accept='image/jpeg, image/jpg, image/png, image/webp'
-                />
-                <div className='mt-3 border border-gray-300 p-2 flex justify-center items-center cursor-pointer rounded-md'>
-                  Загрузить фото
+              {showWebcam ? (
+                <div>
+                  <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat='image/jpeg'
+                    className='h-56 border border-gray-300 rounded-lg overflow-hidden'
+                  />
+                  <span
+                    onClick={handleCapture}
+                    className='mt-3 border border-gray-300 p-2 w-full flex justify-center items-center cursor-pointer rounded-md'
+                  >
+                    Сделать фото
+                  </span>
                 </div>
-              </label>
-              {!passportSelfie && (
-                <p className='text-red-500 text-sm mt-2'>Выберите фото *</p>
+              ) : (
+                <div>
+                  <div className='h-56 border border-gray-300 rounded-lg overflow-hidden'>
+                    <img
+                      className='w-full h-full object-contain'
+                      src={
+                        passportSelfie
+                          ? URL.createObjectURL(passportSelfie)
+                          : selfie
+                      }
+                      alt='*'
+                    />
+                  </div>
+                  <div
+                    onClick={() => setShowWebcam(!showWebcam)}
+                    className='mt-3 border border-gray-300 p-2 flex justify-center items-center cursor-pointer rounded-md'
+                  >
+                    {passportSelfie ? 'Сделать другое фото' : 'Открыть камеру'}
+                  </div>
+                  {!passportSelfie && (
+                    <p className='text-red-500 text-sm mt-2'>Выберите фото *</p>
+                  )}
+                </div>
               )}
             </div>
           </div>
