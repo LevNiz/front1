@@ -2,8 +2,9 @@ const DeliveryPolicy = () => {
   return (
     <div className='pt-24 mm:pt-28 pb-20 content'>
       <h3 className='text-xl font-medium pb-5 text-center'>
-       ВАЖНОЕ ЗАМЕЧАНИЕ
+        ПРАВИЛА УСЛОВИЯ ДОСТАВКИ GivBox
       </h3>
+      <h3 className='font-bold pb-2'>Важное замечание</h3>
       <p>
         Заказывая услуги GivBox, Вы как Грузоотправитель от своего имени, от
         имени лица, которому адресован Груз (&laquo;Грузополучатель&raquo;), и

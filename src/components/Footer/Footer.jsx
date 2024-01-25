@@ -83,7 +83,7 @@ const Footer = () => {
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
               <NavLink to='/delivery-policy' target='_blank'>
-                Правила доставки
+                Правила условия доставки
               </NavLink>
             </li>
           </ul>
