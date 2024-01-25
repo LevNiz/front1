@@ -8,7 +8,7 @@ const GBBusiness = () => {
   }, []);
 
   return (
-    <div className='pt-16 content'>
+    <div className='pt-16'>
       <GBBusinessItem />
       <GBBusinessForm />
     </div>

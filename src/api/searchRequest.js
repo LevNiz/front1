@@ -9,7 +9,7 @@ import { axiosInstance, request } from './axios';
 export const fetchSearchRequest = async (dispatch, userID) => {
   dispatch(fetchSearchRequestStart());
   try {
-    const res = await request.get('core/item_search_request/');
+    const res = await request.get(`core/item_search_request/?client=${userID}`);
     const myRequests = res?.data?.results?.filter(
       (el) => el?.client?.id === userID
     );

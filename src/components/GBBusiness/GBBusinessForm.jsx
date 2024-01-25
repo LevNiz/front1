@@ -48,8 +48,13 @@ const GBBusinessForm = () => {
   };
 
   return (
-    <div className='py-8'>
-      <h2 className='text-2xl font-medium mb-8 text-center'>Напишите нам:</h2>
+    <div className='py-8 content'>
+      <h2 className='text-2xl font-medium mb-8 text-center pt-10'>
+        Избавьтесь и вы от проблем с перевозками
+      </h2>
+      <h2 className='text-2xl font-medium mb-12 text-center bg-black text-white rounded-lg w-max mx-auto px-7 py-2'>
+        Напишите нам
+      </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='sm:shadow-[0_8px_34px_#00000026] rounded-lg sm:p-10 mb-12 max-w-4xl mx-auto'
@@ -148,7 +153,7 @@ const GBBusinessForm = () => {
             htmlFor='checkbox'
             className='text-sm flex cursor-pointer mm:items-center'
           >
-            <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-[#07AFE3] border border-white rounded'>
+            <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-black border border-white rounded'>
               {privacyPolicy ? (
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
