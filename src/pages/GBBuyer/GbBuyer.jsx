@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GBBuyerItem } from '../../components';
 import { searchBuyer } from '../../api/buyer';
 import FilterModal from '../../components/GBBuyer/FilterModal';
@@ -9,6 +9,7 @@ import sort from '../../assets/icons/sort.svg';
 import { NavLink } from 'react-router-dom';
 
 const GbBuyer = () => {
+  const { user } = useSelector((state) => state?.user);
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -58,7 +59,7 @@ const GbBuyer = () => {
             </button>
           </div>
           <NavLink
-            to='become-buyer'
+            to={`${user ? 'become-buyer' : '/auth/sign-in'}`}
             className='md:max-w-[200px] flex justify-center items-center mt-4 md:mt-0 md:ml-5 w-full bg-colYellow h-12 font-medium rounded-lg hover:opacity-80 duration-150'
             type='submit'
           >
