@@ -23,19 +23,20 @@ const Services = () => {
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service1} alt='*' />
             <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
-              Предоставляем адреса для полкупки в 7 странах
+              Предоставим вам адреса складов для покупки товаров в более чем 20
+              странах
             </p>
           </div>
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service2} alt='*' />
             <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
-              Доставляем ваши посылки до двери
+              Доставим вашу посылку до двери
             </p>
           </div>
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service3} alt='*' />
             <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
-              Выкупим за вас.
+              Выкупим любой товар за вас
             </p>
           </div>
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
@@ -47,20 +48,20 @@ const Services = () => {
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service5} alt='*' />
             <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
-              Всегда работает GB-Shop где вы можете сделать покупки оригинальных
-              брендов
+              Подарим доступ к GB-Shop, с помощью которого вы сможете купить
+              оригинальную продукцию разных брендов
             </p>
           </div>
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service6} alt='*' />
             <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
-              Предоставим GB франшизу и вы сразу сможете заработать
+              Предоставим GB франшизу на которой вы сможете заработать.
             </p>
           </div>
           <div className='md:max-w-[280px] my-3 md:my-10 w-[48%] md:w-full text-center'>
             <img className='mx-auto' src={service7} alt='*' />
             <p className='text-sm mm:text-lg text-[#1C1F35] pt-3'>
-              Осуществляем перевозку коммерческих грузов для Юридических лиц
+              Перевезем коммерческий груз для Юридических лиц
             </p>
           </div>
         </div>
