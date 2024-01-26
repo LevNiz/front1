@@ -31,13 +31,14 @@ const ItemsDetail = () => {
   const dispatch = useDispatch();
 
   const [item, setItem] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [btnIsLoading, setBtnIsLoading] = useState(false);
+  const [colorImg, setColorImg] = useState(null);
   const [itemCharacter, setItemCharacter] = useState({
     size: '',
     memory: '',
     color: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [btnIsLoading, setBtnIsLoading] = useState(false);
 
   const itemCart = cartItems?.filter((el) => el?.item?.id === Number(id));
   const currency = 89.33;
@@ -116,8 +117,6 @@ const ItemsDetail = () => {
     })();
   }, [id]);
 
-  // console.log(itemCharacter);
-
   return (
     <div className='py-16 md:py-24 min-h-[991px]'>
       <div className='content'>
@@ -135,7 +134,11 @@ const ItemsDetail = () => {
             <div className='md:flex mm:pt-5 md:space-x-5 lg:space-x-8'>
               <div className='md:w-1/2'>
                 <div className='sm:min-h-[340px] lg:min-h-[470px] border border-gray-100 rounded-md p-3'>
-                  <ItemsSlider item={item} />
+                  <ItemsSlider
+                    item={item}
+                    colorImg={colorImg}
+                    setColorImg={setColorImg}
+                  />
                 </div>
               </div>
               <div className='md:w-1/2'>
@@ -228,12 +231,13 @@ const ItemsDetail = () => {
                         <div
                           className='cursor-pointer'
                           key={el?.id}
-                          onClick={() =>
+                          onClick={() => {
                             setItemCharacter({
                               ...itemCharacter,
                               color: el?.id,
-                            })
-                          }
+                            });
+                            setColorImg(el?.image);
+                          }}
                         >
                           <div
                             style={{ background: el?.color }}

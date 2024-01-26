@@ -5,7 +5,7 @@ import { Navigation, Thumbs } from 'swiper/modules';
 import noImg from '../../../assets/images/no-image.svg';
 import { useSelector } from 'react-redux';
 
-const ItemsSlider = ({ item }) => {
+const ItemsSlider = ({ item, colorImg, setColorImg }) => {
   const { depots } = useSelector((state) => state?.depots);
 
   const [activeThumb, setActiveThumb] = useState('');
@@ -68,7 +68,9 @@ const ItemsSlider = ({ item }) => {
             )}
             <img
               src={
-                el && typeof el === 'object' && el.image
+                colorImg
+                  ? colorImg
+                  : el && typeof el === 'object' && el.image
                   ? el.image
                   : el
                   ? el
@@ -98,6 +100,7 @@ const ItemsSlider = ({ item }) => {
           {allImagesArray?.map((el, index) => (
             <SwiperSlide
               key={index}
+              onClick={() => setColorImg(null)}
               className='h-[90px] rounded-lg bg-gray-100 overflow-hidden opacity-50'
             >
               <img
