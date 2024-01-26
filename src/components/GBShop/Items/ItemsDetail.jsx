@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
@@ -30,15 +30,22 @@ const ItemsDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const mainSwiperRef = useRef(null);
+  const [activeThumb, setActiveThumb] = useState('');
   const [item, setItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [btnIsLoading, setBtnIsLoading] = useState(false);
-  const [colorImg, setColorImg] = useState(null);
   const [itemCharacter, setItemCharacter] = useState({
     size: '',
     memory: '',
     color: '',
   });
+
+  const handleSlideChange = () => {
+    const currentIndex = mainSwiperRef.current?.activeIndex;
+    const currentColor = item?.colors[currentIndex] || '';
+    setItemCharacter({ ...itemCharacter, color: currentColor });
+  };
 
   const itemCart = cartItems?.filter((el) => el?.item?.id === Number(id));
   const currency = 89.33;
@@ -95,26 +102,33 @@ const ItemsDetail = () => {
   }, [dispatch, item?.category?.id]);
 
   useEffect(() => {
-    scrollToTop();
-    (async () => {
-      setIsLoading(true);
-      const { success, data } = await fetchItemsDetail(id);
-      if (success) {
-        setItem(data);
-        data?.sizes?.length > 0 &&
+    const fetchData = async () => {
+      try {
+        scrollToTop();
+        setIsLoading(true);
+        const { success, data } = await fetchItemsDetail(id);
+
+        if (success) {
+          setItem(data);
+
+          const defaultSize = data?.sizes?.length ? data?.sizes[0] : '';
+          const defaultColor = data?.colors ? data?.colors[0] : '';
+          const defaultMemory = data?.memory?.length ? data?.memory[0] : '';
+
           setItemCharacter({
-            ...itemCharacter,
-            size: data?.sizes[0],
+            size: defaultSize,
+            color: defaultColor,
+            memory: defaultMemory,
           });
-        data?.memory?.length > 0 &&
-          setItemCharacter({
-            ...itemCharacter,
-            memory: data?.memory[0],
-          });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
         setIsLoading(false);
       }
-      setIsLoading(false);
-    })();
+    };
+
+    fetchData();
   }, [id]);
 
   return (
@@ -136,8 +150,10 @@ const ItemsDetail = () => {
                 <div className='sm:min-h-[340px] lg:min-h-[470px] border border-gray-100 rounded-md p-3'>
                   <ItemsSlider
                     item={item}
-                    colorImg={colorImg}
-                    setColorImg={setColorImg}
+                    activeThumb={activeThumb}
+                    setActiveThumb={setActiveThumb}
+                    mainSwiperRef={mainSwiperRef}
+                    handleSlideChange={handleSlideChange}
                   />
                 </div>
               </div>
@@ -192,15 +208,19 @@ const ItemsDetail = () => {
                         ${itemCharacter?.memory?.addCost?.toFixed(1)}
                       </h2>
                       <span className='ml-1 mr-3'>
-                        ({(itemCharacter?.memory?.addCost * currency)?.toFixed(1)} с)
+                        (
+                        {(itemCharacter?.memory?.addCost * currency)?.toFixed(
+                          1
+                        )}{' '}
+                        с)
                       </span>
                     </>
                   ) : (
                     <>
                       <h2 className='text-2xl font-medium'>
                         {item?.issale
-                          ? (`$${item?.costSale?.toFixed(1)}`)
-                          : (`$${item?.cost?.toFixed(1)}`)}
+                          ? `$${item?.costSale?.toFixed(1)}`
+                          : `$${item?.cost?.toFixed(1)}`}
                       </h2>
                       {item?.issale && (
                         <h3 className='text-[#666] line-through ml-2 mr-1'>
@@ -224,35 +244,42 @@ const ItemsDetail = () => {
                   )}
                 </div>
                 {item?.colors?.length > 0 && (
-                  <div className='flex items-center pt-10'>
-                    <span className='font-medium text-xl pr-7'>Цвета</span>
-                    <div className='flex space-x-4'>
-                      {item?.colors?.map((el) => (
+                  <div className='lg:flex items-start pt-10'>
+                    <h4 className='font-medium text-xl lg:pt-5 pr-7'>Цвета</h4>
+                    <div className='flex flex-wrap space-x-2 pt-2 lg:pt-0'>
+                      {item?.colors?.map((el, index) => (
                         <div
-                          className='cursor-pointer'
+                          className={`${
+                            itemCharacter?.color?.id === el?.id &&
+                            'border-gray-300 border'
+                          } cursor-pointer rounded-md min-w-[60px] max-w-[86px] w-max px-1 h-16 flex flex-col items-center justify-center`}
                           key={el?.id}
                           onClick={() => {
                             setItemCharacter({
                               ...itemCharacter,
-                              color: el?.id,
+                              color: el,
                             });
-                            setColorImg(el?.image);
+                            mainSwiperRef?.current?.slideTo(index);
                           }}
                         >
                           <div
                             style={{ background: el?.color }}
-                            className='w-8 h-8 min-w-[32px] rounded-full mx-auto'
+                            className='w-8 h-8 min-w-[32px] rounded-full'
                           ></div>
-                          <p className='text-[10px] mt-1'>{el?.nameRu}</p>
+                          <p className='text-[10px] mt-1 line-clamp-1 break-all'>
+                            {el?.nameRu}
+                          </p>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
                 {item?.sizes && (
-                  <div className='flex items-center pt-8'>
-                    <span className='font-medium text-xl pr-7'>Размер</span>
-                    <ul className='flex space-x-3'>
+                  <div className='lg:flex items-center pt-8'>
+                    <h4 className='font-medium text-xl pr-7 pb-2 lg:pb-0'>
+                      Размер
+                    </h4>
+                    <ul className='flex flex-wrap space-x-3'>
                       {item?.sizes?.map((el, index) => (
                         <li
                           className={`${
@@ -273,11 +300,13 @@ const ItemsDetail = () => {
                   </div>
                 )}
                 {item?.memory?.length > 0 && (
-                  <div className='flex items-center pt-8'>
-                    <span className='font-medium text-xl pr-7'>Память</span>
+                  <div className='lg:flex items-center pt-8'>
+                    <h4 className='font-medium text-xl pr-7 pb-2 lg:pb-0'>
+                      Память
+                    </h4>
                     <Select
                       options={item?.memory}
-                      className='max-w-[320px] w-full outline-none'
+                      className='sm:max-w-[320px] w-full outline-none'
                       defaultValue={item?.memory[0]}
                       isSearchable={false}
                       getOptionLabel={(option) => (

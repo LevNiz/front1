@@ -1,26 +1,28 @@
-import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper/modules';
 
 import noImg from '../../../assets/images/no-image.svg';
 import { useSelector } from 'react-redux';
 
-const ItemsSlider = ({ item, colorImg, setColorImg }) => {
+const ItemsSlider = ({
+  item,
+  activeThumb,
+  setActiveThumb,
+  mainSwiperRef,
+  handleSlideChange,
+}) => {
   const { depots } = useSelector((state) => state?.depots);
-
-  const [activeThumb, setActiveThumb] = useState('');
-
   const { images, image, colors, imagelink } = item;
 
   const allImagesArray = [
-    ...(images || []),
-    ...(image ? [image] : []),
-    ...(imagelink ? [imagelink] : []),
     ...(colors
       ? colors
           .map((color) => ({ id: color?.id, image: color?.image }))
           .filter(Boolean)
       : []),
+    ...(images || []),
+    ...(image ? [image] : []),
+    ...(imagelink ? [imagelink] : []),
   ];
 
   const handleOpenDepot = (cityID) => {
@@ -35,14 +37,16 @@ const ItemsSlider = ({ item, colorImg, setColorImg }) => {
   return (
     <>
       <Swiper
-        loop={true}
+        loop={false}
         spaceBetween={10}
         navigation={true}
         modules={[Navigation, Thumbs]}
         grabCursor={true}
+        onSlideChange={handleSlideChange}
         thumbs={{
           swiper: activeThumb && !activeThumb.destroyed ? activeThumb : null,
         }}
+        onSwiper={(swiper) => (mainSwiperRef.current = swiper)}
         className='gb-shop-card-main-slider'
       >
         {allImagesArray?.map((el, index) => (
@@ -68,10 +72,8 @@ const ItemsSlider = ({ item, colorImg, setColorImg }) => {
             )}
             <img
               src={
-                colorImg
-                  ? colorImg
-                  : el && typeof el === 'object' && el.image
-                  ? el.image
+                el && typeof el === 'object' && el?.image
+                  ? el?.image
                   : el
                   ? el
                   : noImg
@@ -100,13 +102,12 @@ const ItemsSlider = ({ item, colorImg, setColorImg }) => {
           {allImagesArray?.map((el, index) => (
             <SwiperSlide
               key={index}
-              onClick={() => setColorImg(null)}
-              className='h-[90px] rounded-lg bg-gray-100 overflow-hidden opacity-50'
+              className='h-12 xs:h-16 sx:h-20 mm:h-[90px] rounded-lg bg-gray-100 overflow-hidden opacity-50'
             >
               <img
                 src={
-                  el && typeof el === 'object' && el.image
-                    ? el.image
+                  el && typeof el === 'object' && el?.image
+                    ? el?.image
                     : el
                     ? el
                     : noImg
