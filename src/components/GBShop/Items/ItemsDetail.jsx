@@ -189,7 +189,7 @@ const ItemsDetail = () => {
                   {item?.memory?.length > 0 ? (
                     <>
                       <h2 className='text-2xl font-medium'>
-                        $ {itemCharacter?.memory?.addCost?.toFixed(1)}
+                        ${itemCharacter?.memory?.addCost?.toFixed(1)}
                       </h2>
                       <span className='ml-1 mr-3'>
                         ({(itemCharacter?.memory?.addCost * currency)?.toFixed(1)} с)
@@ -199,8 +199,8 @@ const ItemsDetail = () => {
                     <>
                       <h2 className='text-2xl font-medium'>
                         {item?.issale
-                          ? item?.costSale?.toFixed(1)
-                          : item?.cost?.toFixed(1)}
+                          ? (`$${item?.costSale?.toFixed(1)}`)
+                          : (`$${item?.cost?.toFixed(1)}`)}
                       </h2>
                       {item?.issale && (
                         <h3 className='text-[#666] line-through ml-2 mr-1'>
