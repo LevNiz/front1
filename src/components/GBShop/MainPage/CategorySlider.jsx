@@ -122,11 +122,21 @@ const CategorySlider = ({ items, loading, error }) => {
                     <div className='pt-[2px] pb-1 flex items-center'>
                       <p className='font-bold text-lg flex items-center'>
                         <span>$</span>
-                        <span>{el?.cost?.toFixed(1)}</span>
+                        <span>
+                          {el?.issale
+                            ? el?.costSale?.toFixed(1)
+                            : el?.cost?.toFixed(1)}
+                        </span>
                       </p>
-                      <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
-                        ({(el?.cost * currency)?.toFixed(1)} с)
-                      </p>
+                      {el?.issale ? (
+                        <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
+                          {(el?.costSale * currency)?.toFixed(1)} с
+                        </p>
+                      ) : (
+                        <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
+                          {(el?.cost * currency)?.toFixed(1)} с
+                        </p>
+                      )}
                     </div>
                     <NavLink
                       to={`items/${el?.id}`}
@@ -134,7 +144,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         from: el?.category?.nameRus,
                         category: el?.category?.id,
                       }}
-                      className='font-medium w-max mm:font-bold text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
+                      className='font-medium w-max text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
                     >
                       {el?.name}
                     </NavLink>

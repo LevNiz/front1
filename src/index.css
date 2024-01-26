@@ -121,7 +121,7 @@ input[type='number'] {
   .bg-gbChat {
     background: var(
       --GB-Pay,
-      linear-gradient(181deg, #30CBA4 -39.35%, #067A4D 99.93%)
+      linear-gradient(181deg, #30cba4 -39.35%, #067a4d 99.93%)
     );
   }
 }
@@ -217,6 +217,9 @@ input[type='number'] {
 .gb-shop-card-main-slider .swiper-button-prev:after,
 .swiper-button-next:after {
   color: #000;
+}
+.gb-shop-card-slider-thumb-two .swiper-wrapper {
+  justify-content: center !important;
 }
 @media screen and (max-width: 768px) {
   .slider .swiper-button-next,

@@ -31,6 +31,11 @@ const ItemsDetail = () => {
   const dispatch = useDispatch();
 
   const [item, setItem] = useState({});
+  const [itemCharacter, setItemCharacter] = useState({
+    size: '',
+    memory: '',
+    color: '',
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [btnIsLoading, setBtnIsLoading] = useState(false);
 
@@ -95,76 +100,23 @@ const ItemsDetail = () => {
       const { success, data } = await fetchItemsDetail(id);
       if (success) {
         setItem(data);
+        data?.sizes?.length > 0 &&
+          setItemCharacter({
+            ...itemCharacter,
+            size: data?.sizes[0],
+          });
+        data?.memory?.length > 0 &&
+          setItemCharacter({
+            ...itemCharacter,
+            memory: data?.memory[0]?.id,
+          });
         setIsLoading(false);
       }
       setIsLoading(false);
     })();
   }, [id]);
 
-  const colors = [
-    {
-      id: 1,
-      col: '#66ccf5',
-      text: 'Голубой',
-    },
-    {
-      id: 2,
-      col: '#eb6d3b',
-      text: 'Оранжевый',
-    },
-    {
-      id: 3,
-      col: '#f8fb3f',
-      text: 'Желтый',
-    },
-    {
-      id: 4,
-      col: '#c4c2c2',
-      text: 'Серебристый',
-    },
-  ];
-
-  const sizes = [
-    {
-      id: 1,
-      size: '38',
-    },
-    {
-      id: 2,
-      size: '40',
-    },
-    {
-      id: 3,
-      size: '41',
-    },
-    {
-      id: 4,
-      size: '42',
-    },
-  ];
-
-  const memory = [
-    {
-      id: 1,
-      ram: '12',
-      internal: '256',
-    },
-    {
-      id: 2,
-      ram: '8',
-      internal: '256',
-    },
-    {
-      id: 3,
-      ram: '8',
-      internal: '128',
-    },
-    {
-      id: 4,
-      ram: '4',
-      internal: '64',
-    },
-  ];
+  // console.log(itemCharacter);
 
   return (
     <div className='py-16 md:py-24 min-h-[991px]'>
@@ -182,7 +134,7 @@ const ItemsDetail = () => {
           <div className='content'>
             <div className='md:flex mm:pt-5 md:space-x-5 lg:space-x-8'>
               <div className='md:w-1/2'>
-                <div className='sm:h-[340px] lg:h-[470px] border border-gray-100 rounded-md overflow-hidden p-3'>
+                <div className='sm:min-h-[340px] lg:min-h-[470px] border border-gray-100 rounded-md p-3'>
                   <ItemsSlider item={item} />
                 </div>
               </div>
@@ -231,76 +183,112 @@ const ItemsDetail = () => {
                   {item?.name}
                 </h1>
                 <div className='flex items-center'>
-                  <h2 className='text-2xl font-medium'>
-                    ${' '}
-                    {item?.costSale > 0
-                      ? item?.costSale?.toFixed(1)
-                      : item?.cost?.toFixed(1)}
-                  </h2>
-                  {item?.costSale > 0 && (
-                    <h3 className='text-[#666] line-through ml-2 mr-1'>
-                      $ {item?.cost?.toFixed(1)}
-                    </h3>
+                  {item?.memory?.length > 0 ? (
+                    <>
+                      <h2 className='text-2xl font-medium'>
+                        $ {item?.cost?.toFixed(1)}
+                      </h2>
+                      <span className='ml-1 mr-3'>
+                        ({(item?.cost * currency)?.toFixed(1)} с)
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <h2 className='text-2xl font-medium'>
+                        {item?.issale
+                          ? item?.costSale?.toFixed(1)
+                          : item?.cost?.toFixed(1)}
+                      </h2>
+                      {item?.issale && (
+                        <h3 className='text-[#666] line-through ml-2 mr-1'>
+                          $ {item?.cost?.toFixed(1)}
+                        </h3>
+                      )}
+
+                      <span className='ml-1 mr-3'>
+                        (
+                        {item?.issale
+                          ? (item?.costSale * currency)?.toFixed(1)
+                          : (item?.cost * currency)?.toFixed(1)}{' '}
+                        с)
+                      </span>
+                      {item?.issale && (
+                        <span className='bg-[#DA3F3F] px-2 py-[3px] text-white rounded-3xl text-xs'>
+                          Эконом 30%
+                        </span>
+                      )}
+                    </>
                   )}
-                  <span className='ml-1 mr-3'>
-                    (
-                    {item?.costSale > 0
-                      ? item?.costSale?.toFixed(1)
-                      : (item?.cost * currency)?.toFixed(1)}{' '}
-                    с)
-                  </span>
-                  <span className='bg-[#DA3F3F] px-2 py-[3px] text-white rounded-3xl text-xs'>
-                    Эконом 30%
-                  </span>
-                  <span></span>
                 </div>
-                {colors && (
-                  <div className='flex items-center pt-5'>
+                {item?.colors?.length > 0 && (
+                  <div className='flex items-center pt-10'>
                     <span className='font-medium text-xl pr-7'>Цвета</span>
                     <div className='flex space-x-4'>
-                      {colors?.map((el) => (
-                        <div key={el?.id}>
+                      {item?.colors?.map((el) => (
+                        <div
+                          className='cursor-pointer'
+                          key={el?.id}
+                          onClick={() =>
+                            setItemCharacter({
+                              ...itemCharacter,
+                              color: el?.id,
+                            })
+                          }
+                        >
                           <div
-                            className={`bg-[${el?.col}] w-8 h-8 min-w-[32px] rounded-full mx-auto`}
+                            style={{ background: el?.color }}
+                            className='w-8 h-8 min-w-[32px] rounded-full mx-auto'
                           ></div>
-                          <p className='text-[10px] mt-1'>{el?.text}</p>
+                          <p className='text-[10px] mt-1'>{el?.nameRu}</p>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
-                {sizes && (
+                {item?.sizes && (
                   <div className='flex items-center pt-8'>
                     <span className='font-medium text-xl pr-7'>Размер</span>
-                    <ul className='flex space-x-4'>
-                      {sizes?.map((el) => (
+                    <ul className='flex space-x-3'>
+                      {item?.sizes?.map((el, index) => (
                         <li
-                          className='w-10 h-10 rounded-md border border-black flex justify-center items-center cursor-pointer'
-                          key={el?.id}
+                          className={`${
+                            itemCharacter?.size === el && 'bg-black text-white'
+                          } min-w-[40px] px-1 h-9 rounded-md border border-black flex justify-center items-center cursor-pointer`}
+                          key={index}
+                          onClick={() =>
+                            setItemCharacter({
+                              ...itemCharacter,
+                              size: el,
+                            })
+                          }
                         >
-                          <span className='font-medium'>{el?.size}</span>
+                          <span className='font-medium'>{el}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 )}
-                {memory && (
+                {item?.memory?.length > 0 && (
                   <div className='flex items-center pt-8'>
                     <span className='font-medium text-xl pr-7'>Память</span>
                     <Select
-                      options={memory}
+                      options={item?.memory}
                       className='max-w-[320px] w-full outline-none'
-                      defaultValue={memory[0]}
+                      defaultValue={item?.memory[0]}
+                      isSearchable={false}
                       getOptionLabel={(option) => (
                         <span>
                           RAM: <strong className='pr-3'>{option?.ram}</strong>{' '}
-                          Встроенная: <strong>{option?.internal}</strong>
+                          Встроенная: <strong>{option?.storage}</strong>
                         </span>
                       )}
                       getOptionValue={(option) => option?.id}
-                      // onChange={(selectedOption) => {
-                      //   console.log(selectedOption);
-                      // }}
+                      onChange={(selectedOption) => {
+                        setItemCharacter({
+                          ...itemCharacter,
+                          memory: selectedOption?.id,
+                        });
+                      }}
                       styles={{
                         control: (provided, state) => ({
                           ...provided,
