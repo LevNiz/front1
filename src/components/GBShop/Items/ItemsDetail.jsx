@@ -109,7 +109,7 @@ const ItemsDetail = () => {
         data?.memory?.length > 0 &&
           setItemCharacter({
             ...itemCharacter,
-            memory: data?.memory[0]?.id,
+            memory: data?.memory[0],
           });
         setIsLoading(false);
       }
@@ -189,10 +189,10 @@ const ItemsDetail = () => {
                   {item?.memory?.length > 0 ? (
                     <>
                       <h2 className='text-2xl font-medium'>
-                        $ {item?.cost?.toFixed(1)}
+                        $ {itemCharacter?.memory?.addCost?.toFixed(1)}
                       </h2>
                       <span className='ml-1 mr-3'>
-                        ({(item?.cost * currency)?.toFixed(1)} с)
+                        ({(itemCharacter?.memory?.addCost * currency)?.toFixed(1)} с)
                       </span>
                     </>
                   ) : (
@@ -290,7 +290,7 @@ const ItemsDetail = () => {
                       onChange={(selectedOption) => {
                         setItemCharacter({
                           ...itemCharacter,
-                          memory: selectedOption?.id,
+                          memory: selectedOption,
                         });
                       }}
                       styles={{
