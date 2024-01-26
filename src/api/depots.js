@@ -70,3 +70,34 @@ export const filterDepot = async (filterData, dispatch) => {
     dispatch(fetchDepotsFailure(error));
   }
 };
+
+// Fetch all depots:
+const fetchDepotsPage = async (page) => {
+  try {
+    const res = await request.get(`/core/depot/?page=${page}`);
+    return { success: true, data: res?.data?.results, next: res?.data?.next };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
+export const fetchAllDepots = async () => {
+  let allDepotsData = [];
+  let page = 1;
+
+  const fetchData = async () => {
+    const { data, next } = await fetchDepotsPage(page);
+
+    if (data) {
+      allDepotsData = [...allDepotsData, ...data];
+      page += 1;
+
+      if (next !== null) {
+        await fetchData();
+      }
+    }
+  };
+
+  await fetchData();
+  return allDepotsData;
+};

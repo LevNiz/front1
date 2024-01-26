@@ -9,7 +9,7 @@ import arrow from './../../assets/icons/arrow-white.svg';
 import notification from './../../assets/icons/notification.svg';
 import arrowRight from './../../assets/icons/right-icon.svg';
 import { fetchCountries } from '../../api/countries';
-import { fetchDepots } from '../../api/depots';
+import { fetchAllDepots } from '../../api/depots';
 import {
   Menu,
   MenuHandler,
@@ -23,8 +23,8 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [depotsID, setDepotID] = useState(null);
+  const [allDepots, setAllDepots] = useState([]);
 
-  const { depots } = useSelector((state) => state?.depots);
   const { countries } = useSelector((state) => state?.countries);
   const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
@@ -33,10 +33,10 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const modalRef = useRef();
 
   const filteredCountries = countries?.filter((el) =>
-    depots?.some((depot) => el?.id === depot?.country?.id)
+    allDepots?.some((depot) => el?.id === depot?.country?.id)
   );
 
-  const filteredDepotCities = depots?.filter(
+  const filteredDepotCities = allDepots?.filter(
     (el) => el?.country?.id === depotsID
   );
 
@@ -53,9 +53,15 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   useEffect(() => {
     (async () => {
       await fetchCountries(dispatch);
-      await fetchDepots(dispatch);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      const allDepotsData = await fetchAllDepots();
+      setAllDepots(allDepotsData);
+    })();
+  }, []);
 
   useEffect(() => {
     setScrolling(false);
@@ -83,7 +89,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
       <header
         className={`${
           scrolling ? '-translate-y-full' : 'translate-y-0'
-        } bg-black h-[58px] flex items-center fixed top-0 w-full transition-transform duration-300 ease-in-out z-[9999999]`}
+        } bg-black h-[58px] flex items-center fixed top-0 w-full transition-transform duration-300 ease-in-out z-[999999]`}
       >
         <div className='container flex justify-between items-center'>
           <NavLink to='/'>

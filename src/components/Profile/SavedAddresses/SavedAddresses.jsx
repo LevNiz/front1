@@ -82,7 +82,7 @@ const SavedAddresses = () => {
                         setModalContent('deleteAddress');
                         setAddressID(el?.id);
                       }}
-                      className='cursor-pointer ml-1 w-[26px]'
+                      className='cursor-pointer ml-2 w-[26px]'
                       src={trash}
                       alt='*'
                     />

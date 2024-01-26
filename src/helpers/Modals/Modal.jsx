@@ -34,7 +34,7 @@ const Modal = ({
         className='absolute inset-0 bg-gray-800 opacity-50'
       ></div>
       {content == 'deleteAllNotifications' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -54,7 +54,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'deleteNotification' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -74,7 +74,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'logout' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -97,7 +97,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'notFound' ? (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full text-center'>
           <div className='py-10'>
             <img className='mx-auto' src={inCorrectImg} alt='*' />
             <h4 className='text-center font-medium mt-5 text-xl'>
@@ -167,7 +167,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'successRequest' ? (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[90%] sm:w-full text-center'>
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full text-center'>
           <div className='flex justify-center py-5'>
             <img src={success} alt='*' />
           </div>
@@ -184,7 +184,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'successUpdateRequest' ? (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[90%] sm:w-full text-center'>
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full text-center'>
           <div className='flex justify-center py-5'>
             <img src={success} alt='*' />
           </div>
@@ -204,7 +204,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'errorRequest' ? (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[420px] w-[90%] sm:w-full text-center'>
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[420px] w-[92%] sm:w-full text-center'>
           <div className='flex justify-center pt-5'>
             <img src={errorImg} alt='*' />
           </div>
@@ -222,7 +222,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'deleteAddress' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -245,7 +245,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'deleteBuyRequest' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -268,7 +268,7 @@ const Modal = ({
           </div>
         </div>
       ) : content === 'deleteSearchRequest' ? (
-        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 max-w-[360px] w-full'>
+        <div className='bg-white p-6 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full'>
           <div className='flex justify-center py-5'>
             <img src={sosImg} alt='*' />
           </div>
@@ -291,7 +291,7 @@ const Modal = ({
           </div>
         </div>
       ) : (
-        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 max-w-[360px] w-full text-center'>
+        <div className='bg-white p-8 rounded-[30px] shadow-md z-10 sm:max-w-[360px] w-[92%] sm:w-full text-center'>
           <div className='flex justify-center py-5'>
             <img src={notFound} alt='*' />
           </div>

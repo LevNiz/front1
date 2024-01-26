@@ -29,11 +29,10 @@ import gbShop from './../../assets/icons/gb-shop.svg';
 import alaket from './../../assets/icons/alaket.svg';
 import gbFranchise from './../../assets/icons/gb-franchise.svg';
 import { fetchCountries } from '../../api/countries';
-import { fetchDepots } from '../../api/depots';
+import { fetchAllDepots } from '../../api/depots';
 
 const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
   const { user } = useSelector((state) => state?.user);
-  const { depots } = useSelector((state) => state?.depots);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,6 +41,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isServices, setIsServices] = useState(false);
   const [isDepots, setIsDepots] = useState(false);
+  const [allDepots, setAllDepots] = useState([]);
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen);
@@ -71,9 +71,15 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
   useEffect(() => {
     (async () => {
       await fetchCountries(dispatch);
-      await fetchDepots(dispatch);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      const allDepotsData = await fetchAllDepots();
+      setAllDepots(allDepotsData);
+    })();
+  }, []);
 
   return (
     <>
@@ -314,9 +320,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
               <ul
                 className={`${
                   isDepots ? 'flex' : 'hidden'
-                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-2 mr-2`}
+                } ml-4 bg-gray-100 p-3 rounded-b-xl rounded-tr-xl mt-1 flex-col space-y-2 mr-2 overflow-y-scroll h-96`}
               >
-                {depots?.map((el) => (
+                {allDepots?.map((el) => (
                   <li
                     key={el?.id}
                     onClick={() => onClose()}
