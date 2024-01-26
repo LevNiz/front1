@@ -4,6 +4,7 @@ import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
 import ItemsSlider from './ItemsSlider';
 import CategorySlider from '../MainPage/CategorySlider';
+import Select from 'react-select';
 import {
   addToFavorites,
   fetchItems,
@@ -78,7 +79,7 @@ const ItemsDetail = () => {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    toastModal('Ссылка на товар скопирована!');
+    toastModal('Ссылка на товар скопирована! ✅');
   };
 
   useEffect(() => {
@@ -100,10 +101,75 @@ const ItemsDetail = () => {
     })();
   }, [id]);
 
+  const colors = [
+    {
+      id: 1,
+      col: '#66ccf5',
+      text: 'Голубой',
+    },
+    {
+      id: 2,
+      col: '#eb6d3b',
+      text: 'Оранжевый',
+    },
+    {
+      id: 3,
+      col: '#f8fb3f',
+      text: 'Желтый',
+    },
+    {
+      id: 4,
+      col: '#c4c2c2',
+      text: 'Серебристый',
+    },
+  ];
+
+  const sizes = [
+    {
+      id: 1,
+      size: '38',
+    },
+    {
+      id: 2,
+      size: '40',
+    },
+    {
+      id: 3,
+      size: '41',
+    },
+    {
+      id: 4,
+      size: '42',
+    },
+  ];
+
+  const memory = [
+    {
+      id: 1,
+      ram: '12',
+      internal: '256',
+    },
+    {
+      id: 2,
+      ram: '8',
+      internal: '256',
+    },
+    {
+      id: 3,
+      ram: '8',
+      internal: '128',
+    },
+    {
+      id: 4,
+      ram: '4',
+      internal: '64',
+    },
+  ];
+
   return (
     <div className='py-16 md:py-24 min-h-[991px]'>
       <div className='content'>
-        <div className='bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-4'>
+        <div className='bg-[#fbfbfb] py-1 lg:py-2 px-3 lg:px-5 my-4'>
           <h3 className='font-bold font-ubuntu text-[#030303] text-2xl lg:text-3xl'>
             {item?.category?.nameRus}
           </h3>
@@ -188,6 +254,75 @@ const ItemsDetail = () => {
                   </span>
                   <span></span>
                 </div>
+                {colors && (
+                  <div className='flex items-center pt-5'>
+                    <span className='font-medium text-xl pr-7'>Цвета</span>
+                    <div className='flex space-x-4'>
+                      {colors?.map((el) => (
+                        <div key={el?.id}>
+                          <div
+                            className={`bg-[${el?.col}] w-8 h-8 min-w-[32px] rounded-full mx-auto`}
+                          ></div>
+                          <p className='text-[10px] mt-1'>{el?.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {sizes && (
+                  <div className='flex items-center pt-8'>
+                    <span className='font-medium text-xl pr-7'>Размер</span>
+                    <ul className='flex space-x-4'>
+                      {sizes?.map((el) => (
+                        <li
+                          className='w-10 h-10 rounded-md border border-black flex justify-center items-center cursor-pointer'
+                          key={el?.id}
+                        >
+                          <span className='font-medium'>{el?.size}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {memory && (
+                  <div className='flex items-center pt-8'>
+                    <span className='font-medium text-xl pr-7'>Память</span>
+                    <Select
+                      options={memory}
+                      className='max-w-[320px] w-full outline-none'
+                      defaultValue={memory[0]}
+                      getOptionLabel={(option) => (
+                        <span>
+                          RAM: <strong className='pr-3'>{option?.ram}</strong>{' '}
+                          Встроенная: <strong>{option?.internal}</strong>
+                        </span>
+                      )}
+                      getOptionValue={(option) => option?.id}
+                      // onChange={(selectedOption) => {
+                      //   console.log(selectedOption);
+                      // }}
+                      styles={{
+                        control: (provided, state) => ({
+                          ...provided,
+                          padding: '5px',
+                          boxShadow: state.isFocused ? 0 : 0,
+                          border: state.isFocused ? '1px solid #999' : '',
+                          '&:hover': {
+                            border: state.isFocused ? '1px solid #999' : '',
+                          },
+                        }),
+                        menuPortal: (provided) => ({
+                          ...provided,
+                          zIndex: 9999999,
+                        }),
+                        menu: (provided) => ({
+                          ...provided,
+                          position: 'absolute',
+                        }),
+                      }}
+                    />
+                  </div>
+                )}
                 <p className='py-7'>{item?.description}</p>
                 <div className='flex pb-5'>
                   {itemCart?.length ? (
