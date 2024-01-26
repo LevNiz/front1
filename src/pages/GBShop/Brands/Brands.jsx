@@ -43,8 +43,8 @@ const Brands = () => {
     const container = containerRef.current;
 
     const fetchNextPage = async () => {
-      setScrollLoading(true);
       if (page < totalPages) {
+        setScrollLoading(true);
         try {
           const { success, data } = await fetchBrandsItem(
             state?.brandID,

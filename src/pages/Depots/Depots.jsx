@@ -12,7 +12,6 @@ import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
 
 const Depots = () => {
   const { depots, loading, error } = useSelector((state) => state?.depots);
-  const containerRef = useRef();
   const dispatch = useDispatch();
 
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
@@ -20,6 +19,8 @@ const Depots = () => {
   const [scrollLoading, setScrollLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  const containerRef = useRef(null);
 
   const {
     register,
@@ -30,10 +31,6 @@ const Depots = () => {
   useEffect(() => {
     setDepotData(depots);
   }, [depots]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [totalPages]);
 
   useEffect(() => {
     (async () => {
@@ -48,26 +45,20 @@ const Depots = () => {
     const container = containerRef.current;
 
     const fetchNextPage = async () => {
-      setScrollLoading(true);
-      try {
-        if (page <= totalPages) {
-          const { success, data } = await fetchMoreDepots(page);
+      if (page < totalPages) {
+        setScrollLoading(true);
+        try {
+          const { success, data } = await fetchMoreDepots(page + 1);
           if (success) {
-            setDepotData((prevItems) => {
-              const uniqueData = data?.filter(
-                (item) =>
-                  !prevItems?.some((prevItem) => prevItem?.id === item?.id)
-              );
-              return [...prevItems, ...uniqueData];
-            });
+            setDepotData((prevItems) => [...prevItems, ...data]);
             setPage((prevPage) => prevPage + 1);
+            setScrollLoading(false);
           }
+        } finally {
+          setScrollLoading(false);
         }
-      } finally {
-        setScrollLoading(false);
       }
     };
-
     if (container) {
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -77,7 +68,7 @@ const Depots = () => {
         },
         {
           root: null,
-          rootMargin: '4px',
+          rootMargin: '0px',
           threshold: 0.1,
         }
       );

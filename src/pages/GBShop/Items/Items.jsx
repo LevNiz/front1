@@ -42,18 +42,15 @@ const Items = () => {
     const container = containerRef.current;
 
     const fetchNextPage = async () => {
-      setScrollLoading(true);
       if (page < totalPages) {
+        setScrollLoading(true);
         try {
-          const { success, data } = await fetchMoreItems(page, state?.category);
+          const { success, data } = await fetchMoreItems(
+            page + 1,
+            state?.category
+          );
           if (success) {
-            setItemsData((prevItems) => {
-              const uniqueData = data?.filter(
-                (item) =>
-                  !prevItems?.some((prevItem) => prevItem?.id === item?.id)
-              );
-              return [...prevItems, ...uniqueData];
-            });
+            setItemsData((prevItems) => [...prevItems, ...data]);
             setPage((prevPage) => prevPage + 1);
           }
         } finally {
