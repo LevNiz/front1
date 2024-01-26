@@ -78,10 +78,6 @@ const ItemsCard = ({ el }) => {
             }}
             alt='*'
           />
-          <div className='absolute bottom-2 right-2 text-center bg-colYellow py-[2px] px-2 rounded-sm z-10'>
-            <p className='font-medium'>$ {el?.cost?.toFixed(1)}</p>
-            <p className='text-xs'>({(el?.cost * currency)?.toFixed(1)} с)</p>
-          </div>
           <div className='absolute bottom-0 left-0 w-full h-12 bg-[linear-gradient(180deg,_rgba(0,_0,_0,_0.0)_0%,_rgba(0,_0,_0,_0.50)_200%)]'></div>
         </div>
       </NavLink>
@@ -106,6 +102,15 @@ const ItemsCard = ({ el }) => {
         <img src={share} alt='*' />
       </div>
       <div className='p-2'>
+        <div className='pt-[2px] pb-1 flex items-center'>
+          <p className='font-bold text-lg flex items-center'>
+            <span>$</span>
+            <span>{el?.cost?.toFixed(1)}</span>
+          </p>
+          <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
+            ({(el?.cost * currency)?.toFixed(1)} с)
+          </p>
+        </div>
         <NavLink
           to='#'
           className='font-medium mm:font-bold text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
