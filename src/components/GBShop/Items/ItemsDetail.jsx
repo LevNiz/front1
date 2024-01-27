@@ -7,11 +7,11 @@ import CategorySlider from '../MainPage/CategorySlider';
 import Select from 'react-select';
 import {
   addToFavorites,
-  fetchItems,
   fetchItemsDetail,
+  fetchSimilarItems,
   removeFromFavorites,
 } from '../../../api/gb-shop/items';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { addToCart } from '../../../api/gb-shop/basket';
 import favorite from '../../../assets/gb-shop/icons/favorite.svg';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
@@ -21,20 +21,21 @@ import { toastModal } from '../../../helpers/Modals/toastModal';
 
 const ItemsDetail = () => {
   const { userID, user } = useSelector((state) => state?.user);
-  const { items, loading, error } = useSelector((state) => state?.items);
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { favItems } = useSelector((state) => state?.favItems);
   const { userData } = useSelector((state) => state?.user);
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const mainSwiperRef = useRef(null);
   const [activeThumb, setActiveThumb] = useState('');
   const [item, setItem] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [btnIsLoading, setBtnIsLoading] = useState(false);
+  const [similarItems, setSimilarItems] = useState([]);
   const [itemCharacter, setItemCharacter] = useState({
     size: '',
     memory: '',
@@ -49,10 +50,6 @@ const ItemsDetail = () => {
 
   const itemCart = cartItems?.filter((el) => el?.item?.id === Number(id));
   const currency = 89.33;
-
-  const similarItems = items?.filter(
-    (el) => el?.category?.id === item?.category?.id
-  );
 
   const handleToggleFavorite = async () => {
     if (user) {
@@ -98,12 +95,6 @@ const ItemsDetail = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      await fetchItems(dispatch, 1, item?.category?.id);
-    })();
-  }, [dispatch, item?.category?.id]);
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         scrollToTop();
@@ -122,6 +113,18 @@ const ItemsDetail = () => {
             color: defaultColor,
             memory: defaultMemory,
           });
+
+          setLoading(true);
+          const { similarSuccess, similarData } = await fetchSimilarItems(
+            data?.category?.id
+          );
+          if (similarSuccess) {
+            setSimilarItems(similarData);
+            setLoading(false);
+          } else {
+            setError(true);
+            setLoading(false);
+          }
         }
       } catch (error) {
         console.error('Error fetching data:', error);

@@ -136,3 +136,13 @@ export const fetchBrandsItem = async (id, page) => {
     return { success: false, data: 'error' };
   }
 };
+
+// Fetch similar items:
+export const fetchSimilarItems = async (category) => {
+  try {
+    const res = await request.get(`core/item/?category=${category}`);
+    return { similarSuccess: true, similarData: res?.data?.results };
+  } catch (error) {
+    return { similarSuccess: false, similarData: 'error' };
+  }
+};
