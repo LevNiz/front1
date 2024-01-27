@@ -305,15 +305,13 @@ const ItemsDetail = () => {
                 )}
                 {item?.sizes && (
                   <div className='lg:flex items-center pt-8'>
-                    <h4 className='font-medium text-xl pr-7 pb-2 lg:pb-0'>
-                      Размер
-                    </h4>
-                    <ul className='flex flex-wrap space-x-3'>
+                    <h4 className='font-medium text-xl pr-7'>Размер</h4>
+                    <ul className='flex flex-wrap'>
                       {item?.sizes?.map((el, index) => (
                         <li
                           className={`${
                             itemCharacter?.size === el && 'bg-black text-white'
-                          } min-w-[40px] px-1 h-9 rounded-md border border-black flex justify-center items-center cursor-pointer`}
+                          } min-w-[40px] px-1 h-9 rounded-md border border-black flex justify-center items-center cursor-pointer mr-3 mt-3 lg:mt-0`}
                           key={index}
                           onClick={() =>
                             setItemCharacter({

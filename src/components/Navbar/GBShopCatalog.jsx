@@ -23,7 +23,7 @@ const GBShopCatalog = ({ isOpen, onClose }) => {
       <div
         className={`
         fixed top-0 ${isOpen ? 'left-0' : '-left-full'}
-        w-[80%] ss:w-3/4 sm:w-3/5 md:w-2/5 xl:w-1/4 h-full transition-all duration-200 bg-white z-[99999] py-6`}
+        w-[80%] sm:w-full sm:max-w-xs h-full transition-all duration-200 bg-white z-[99999] py-6`}
       >
         <h3 className='pt-16 pb-2 font-medium text-xl px-3'>Выберите товар</h3>
         <ul className='ss:ml-4 pt-4 px-3 overflow-hidden overflow-y-scroll space-y-5 h-full'>
