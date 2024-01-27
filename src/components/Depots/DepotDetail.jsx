@@ -25,6 +25,7 @@ import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
 import support from '../../assets/icons/support.svg';
 import depotEmail from '../../assets/icons/depot-email.svg';
+import sanctionImg from '../../assets/images/sanction.png';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
@@ -86,6 +87,8 @@ const DepotDetail = () => {
     })();
   }, [dispatch]);
 
+  console.log(depotItem);
+
   return (
     <div className='pt-28 pb-12 mm:content'>
       {loading ? (
@@ -107,7 +110,7 @@ const DepotDetail = () => {
           </p>
           <div className='dd:flex dd:space-x-5 pb-5'>
             <div className='w-full dd:w-3/6 mb-6 dd:mb-0 px-4 mm:px-0'>
-              <div className='w-full h-60 ss:h-72 sm:h-[320px] mm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
+              <div className='relative w-full h-60 ss:h-72 sm:h-[320px] mm:h-[400px] overflow-hidden rounded-lg mx-auto bg-colBgGray'>
                 <img
                   src={mainImg ? mainImg : noImg}
                   onError={(e) => {
@@ -117,6 +120,13 @@ const DepotDetail = () => {
                   alt='*'
                   className='w-full h-full object-cover'
                 />
+                {(depotItem?.country?.id === 21 ||
+                  depotItem?.country?.id === 1 ||
+                  depotItem?.country?.id === 14) && (
+                  <div className='absolute top-3 right-3 w-24 h-24 mm:w-28 mm:h-28 rounded-full overflow-hidden bg-white'>
+                    <img className='' src={sanctionImg} alt='*' />
+                  </div>
+                )}
               </div>
               {depotItem?.images?.length > 1 && (
                 <div className='flex justify-center space-x-3 mt-5'>
