@@ -130,7 +130,7 @@ const CategorySlider = ({ items, loading, error }) => {
                       </p>
                       {el?.issale ? (
                         <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
-                          {(el?.costSale * currency)?.toFixed(1)} с
+                          ({(el?.costSale * currency)?.toFixed(1)} с)
                         </p>
                       ) : (
                         <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
