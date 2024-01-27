@@ -19,7 +19,15 @@ const BasketInfo = () => {
   useEffect(() => {
     const calculateTotalQuantity = () => {
       const total = cartItems?.reduce((acc, item) => {
-        return acc + item?.item?.cost * item.quantity;
+        if (item?.memory !== '' && item?.memory !== null) {
+          return acc + item?.memory?.addCost * item.quantity;
+        } else {
+          if (item?.item?.issale) {
+            return acc + item?.item?.costSale * item.quantity;
+          } else {
+            return acc + item?.item?.cost * item.quantity;
+          }
+        }
       }, 0);
       setTotalCost(total);
     };

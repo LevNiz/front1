@@ -38,7 +38,13 @@ const ItemsCard = ({ el }) => {
       if (cartItems?.some((item) => item?.item?.id === el?.id)) {
         await removeFromCart(userID, el?.id);
       } else {
-        await addToCart(userID, el, userData?.fullname, user?.access);
+        await addToCart(
+          userID,
+          el,
+          userData?.fullname,
+          user?.access,
+          'addFromCards'
+        );
       }
     } else {
       navigate('/auth/sign-in');
@@ -105,9 +111,7 @@ const ItemsCard = ({ el }) => {
         <div className='pt-[2px] pb-1 flex items-center'>
           <p className='font-bold text-lg flex items-center'>
             <span>$</span>
-            <span>
-              {el?.issale ? el?.costSale?.toFixed(1) : el?.cost?.toFixed(1)}
-            </span>
+            <span>{el?.issale ? el?.costSale : el?.cost?.toFixed(1)}</span>
           </p>
           {el?.issale ? (
             <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>

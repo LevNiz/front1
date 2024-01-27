@@ -36,7 +36,14 @@ export const fetchBasketData = (userID, dispatch) => {
 };
 
 // Add item from Cart:
-export const addToCart = async (userID, item, name, access) => {
+export const addToCart = async (
+  userID,
+  item,
+  name,
+  access,
+  addedFrom,
+  itemCharacter
+) => {
   const itemData = {
     category: item?.category || [],
     cost: item?.cost || '',
@@ -54,6 +61,15 @@ export const addToCart = async (userID, item, name, access) => {
     item: itemData,
     quantity: 1,
   };
+  if (addedFrom === 'addFromCards') {
+    sendData.colors = null;
+    sendData.sizes = '';
+    sendData.memory = null;
+  } else {
+    sendData.colors = itemCharacter.color !== '' ? itemCharacter.color : null;
+    sendData.memory = itemCharacter.memory !== '' ? itemCharacter.memory : null;
+    sendData.sizes = itemCharacter.size !== '' ? itemCharacter.size : '';
+  }
   const userDocRef = doc(db, 'users', `${userID}`);
   const cartCollectionRef = collection(userDocRef, 'cart');
 

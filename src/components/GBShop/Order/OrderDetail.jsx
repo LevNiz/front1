@@ -44,7 +44,15 @@ const OrderDetail = () => {
   useEffect(() => {
     const calculateTotalQuantity = () => {
       const total = cartItems?.reduce((acc, item) => {
-        return acc + item?.item?.cost * item.quantity;
+        if (item?.memory !== '' && item?.memory !== null) {
+          return acc + item?.memory?.addCost * item.quantity;
+        } else {
+          if (item?.item?.issale) {
+            return acc + item?.item?.costSale * item.quantity;
+          } else {
+            return acc + item?.item?.cost * item.quantity;
+          }
+        }
       }, 0);
       setTotalCost(total);
     };
@@ -191,12 +199,33 @@ const OrderDetail = () => {
                         </p>
                       </div>
                     </div>
-                    <p className='font-medium ml-3 text-right'>
-                      $ {el?.item?.cost?.toFixed(1)}
-                      <span className='text-xs ml-1'>
-                        ({(el?.item?.cost * currency)?.toFixed(1)} c)
-                      </span>
-                    </p>
+                    {el && el.memory !== '' && el.memory !== null ? (
+                      <div className='font-medium ml-3 text-right'>
+                        $ {(el?.memory?.addCost * el?.quantity)?.toFixed(1)}{' '}
+                        <p className='text-xs ml-1'>
+                          (
+                          {(
+                            el?.memory?.addCost *
+                            currency *
+                            el?.quantity
+                          ).toFixed(1)}{' '}
+                          с)
+                        </p>
+                      </div>
+                    ) : (
+                      <div className='font-medium ml-3 text-right'>
+                        {el?.item?.issale
+                          ? `$${el?.item?.costSale?.toFixed(1)}`
+                          : `$${el?.item?.cost?.toFixed(1)}`}
+                        <p className='text-xs ml-1'>
+                          (
+                          {el?.item?.issale
+                            ? (el?.item?.costSale * currency)?.toFixed(1)
+                            : (el?.item?.cost * currency)?.toFixed(1)}{' '}
+                          с)
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

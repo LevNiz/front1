@@ -73,7 +73,9 @@ const ItemsDetail = () => {
         userID,
         item,
         userData?.fullname,
-        user?.access
+        user?.access,
+        'addFromDetail',
+        itemCharacter
       );
       if (success) {
         setBtnIsLoading(false);

@@ -40,16 +40,56 @@ const BasketItem = ({ el }) => {
             <div>
               <NavLink
                 to={`/gb-shop/items/${el?.item?.id}`}
-                className='font-medium lg:pt-3 line-clamp-3 text-base leading-[22px] break-all'
+                className='font-medium line-clamp-3 text-base leading-[22px] break-all'
               >
                 {el?.item?.name || 'Не указано'}
               </NavLink>
-              <span className='text-sm pt-1 opacity-70 font-medium'>
-                $ {el?.item?.cost.toFixed(1)}
-                <p className='text-xs'>
-                  ({(el?.item?.cost * currency).toFixed(1)} с)
-                </p>
-              </span>
+              {el?.memory && (
+                <div className='flex items-center space-x-1'>
+                  <span className='text-xs opacity-60'>Память:</span>
+                  <p className='text-xs font-medium'>
+                    {el?.memory?.ram} + {el?.memory?.storage}
+                  </p>
+                </div>
+              )}
+              {el?.sizes && (
+                <div className='flex items-center space-x-1'>
+                  <span className='text-xs opacity-60'>Размер:</span>
+                  <p className='text-xs font-medium'>{el?.sizes}</p>
+                </div>
+              )}
+              {el?.colors && (
+                <div className='flex items-center space-x-1'>
+                  <span
+                    style={{ background: el?.colors?.color }}
+                    className='w-2 h-2 min-w-[8px] rounded-full'
+                  ></span>
+                  <p className='text-xs'>{el?.colors?.nameRu}</p>
+                </div>
+              )}
+              {el && el.memory !== '' && el.memory !== null ? (
+                <div className='text-sm pt-1 opacity-70 font-medium flex items-center'>
+                  <span>$ {el?.memory?.addCost.toFixed(1)}</span>
+                  <p className='text-[10px] pl-[2px] pt-[1px]'>
+                    ({(el?.memory?.addCost * currency).toFixed(1)} с)
+                  </p>
+                </div>
+              ) : (
+                <div className='text-sm pt-1 opacity-70 font-medium flex items-center'>
+                  <span>
+                    {el?.item?.issale
+                      ? `$${el?.item?.costSale?.toFixed(1)}`
+                      : `$${el?.item?.cost?.toFixed(1)}`}
+                  </span>
+                  <p className='text-[10px] pl-[2px] pt-[1px]'>
+                    (
+                    {el?.item?.issale
+                      ? (el?.item?.costSale * currency)?.toFixed(1)
+                      : (el?.item?.cost * currency)?.toFixed(1)}{' '}
+                    с)
+                  </p>
+                </div>
+              )}
               <div className='flex ld:hidden py-2'>
                 <div
                   onClick={() => handelDecrement(el?.item?.id)}
@@ -72,19 +112,34 @@ const BasketItem = ({ el }) => {
               onClick={async () => {
                 await removeFromCart(userID, el?.item?.id);
               }}
-              className='text-[#8A8A8A] border-b border-gray-400 w-max cursor-pointer mt-1 lg:mb-3 text-sm mm:text-base'
+              className='text-[#8A8A8A] border-b border-gray-400 w-max cursor-pointer mt-1 text-sm mm:text-base'
             >
               Удалить
             </span>
           </div>
         </div>
         <div className='hidden ld:block w-[15%]'>
-          <span className='font-medium'>
-            $ {el?.item?.cost.toFixed(1)}{' '}
-            <p className='text-xs'>
-              ({(el?.item?.cost * currency).toFixed(1)} с)
-            </p>
-          </span>
+          {el && el.memory !== '' && el.memory !== null ? (
+            <div className='font-medium'>
+              $ {el?.memory?.addCost.toFixed(1)}{' '}
+              <p className='text-xs'>
+                ({(el?.memory?.addCost * currency).toFixed(1)} с)
+              </p>
+            </div>
+          ) : (
+            <div className='font-medium'>
+              {el?.item?.issale
+                ? `$${el?.item?.costSale?.toFixed(1)}`
+                : `$${el?.item?.cost?.toFixed(1)}`}
+              <p className='text-xs'>
+                (
+                {el?.item?.issale
+                  ? (el?.item?.costSale * currency)?.toFixed(1)
+                  : (el?.item?.cost * currency)?.toFixed(1)}{' '}
+                с)
+              </p>
+            </div>
+          )}
         </div>
         <div className='hidden ld:block w-[20%] lg:w-[28%]'>
           <div className='flex pb-5'>
@@ -105,10 +160,25 @@ const BasketItem = ({ el }) => {
             </div>
           </div>
         </div>
-        <div className='hidden ld:block w-[15%] font-medium'>
-          $ {(el?.item?.cost * count).toFixed(1)}
-          <p className='text-xs'>({(el?.item?.cost * count * currency).toFixed(1)} с)</p>
-        </div>
+        {el && el.memory !== '' && el.memory !== null ? (
+          <div className='hidden ld:block w-[15%] font-medium'>
+            $ {(el?.memory?.addCost * count).toFixed(1)}
+            <p className='text-xs'>
+              ({(el?.memory?.addCost * count * currency).toFixed(1)} с)
+            </p>
+          </div>
+        ) : (
+          <div className='hidden ld:block w-[15%] font-medium'>
+            {el?.item?.issale
+              ? `$${(el?.item?.costSale * count).toFixed(1)}`
+              : `$${(el?.item?.cost * count).toFixed(1)}`}
+            <p className='text-xs'>
+              {el?.item?.issale
+                ? `(${(el?.item?.costSale * count * currency).toFixed(1)} с)`
+                : `(${(el?.item?.cost * count * currency).toFixed(1)} с)`}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

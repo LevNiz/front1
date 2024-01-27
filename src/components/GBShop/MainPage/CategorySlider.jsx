@@ -134,7 +134,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         </p>
                       ) : (
                         <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
-                          {(el?.cost * currency)?.toFixed(1)} с
+                          ({(el?.cost * currency)?.toFixed(1)} с)
                         </p>
                       )}
                     </div>
@@ -207,7 +207,8 @@ const CategorySlider = ({ items, loading, error }) => {
                                   userID,
                                   el,
                                   userData?.fullname,
-                                  user?.access
+                                  user?.access,
+                                  'addFromCards'
                                 );
                               }
                             } else {
