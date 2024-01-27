@@ -24,6 +24,7 @@ const ItemsDetail = () => {
   const { cartItems } = useSelector((state) => state?.cartItems);
   const { favItems } = useSelector((state) => state?.favItems);
   const { userData } = useSelector((state) => state?.user);
+  const { depots } = useSelector((state) => state?.depots);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -94,6 +95,15 @@ const ItemsDetail = () => {
     toastModal('Ссылка на товар скопирована! ✅');
   };
 
+  const handleOpenDepot = (cityID) => {
+    const depotID = depots?.filter((depot) => depot?.city?.id == cityID);
+    if (depotID?.length) {
+      window.open(`/depots/${depotID[0]?.id}`, '_blank');
+    } else {
+      alert('В этом городе пока нет склада!');
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -126,8 +136,6 @@ const ItemsDetail = () => {
             setLoading(false);
           }
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
       } finally {
         setIsLoading(false);
       }
@@ -151,7 +159,23 @@ const ItemsDetail = () => {
         <>
           <div className='content'>
             <div className='md:flex mm:pt-5 md:space-x-5 lg:space-x-8'>
-              <div className='md:w-1/2'>
+              <div className='md:w-1/2 relative'>
+                {item?.country?.icon && (
+                  <div
+                    onClick={() => handleOpenDepot(item?.city?.id)}
+                    className='absolute top-3 right-3 cursor-pointer w-10 h-10 rounded-full overflow-hidden z-[999]'
+                  >
+                    <img
+                      className='w-full h-full object-cover'
+                      src={item?.country?.icon}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = noImg;
+                      }}
+                      alt='*'
+                    />
+                  </div>
+                )}
                 <div className='sm:min-h-[340px] lg:min-h-[470px] border border-gray-100 rounded-md p-3'>
                   <ItemsSlider
                     item={item}

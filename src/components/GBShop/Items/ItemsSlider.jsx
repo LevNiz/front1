@@ -2,7 +2,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper/modules';
 
 import noImg from '../../../assets/images/no-image.svg';
-import { useSelector } from 'react-redux';
 
 const ItemsSlider = ({
   item,
@@ -11,7 +10,6 @@ const ItemsSlider = ({
   mainSwiperRef,
   handleSlideChange,
 }) => {
-  const { depots } = useSelector((state) => state?.depots);
   const { images, image, colors, imagelink } = item;
 
   const allImagesArray = [
@@ -24,15 +22,6 @@ const ItemsSlider = ({
     ...(image ? [image] : []),
     ...(imagelink ? [imagelink] : []),
   ];
-
-  const handleOpenDepot = (cityID) => {
-    const depotID = depots?.filter((depot) => depot?.city?.id == cityID);
-    if (depotID?.length) {
-      window.open(`/depots/${depotID[0]?.id}`, '_blank');
-    } else {
-      alert('В этом городе пока нет склада!');
-    }
-  };
 
   return (
     <>
@@ -54,22 +43,6 @@ const ItemsSlider = ({
             key={index}
             className='relative sm:h-[340px] lg:h-[470px] rounded-lg mx-auto bg-[#f4f4f4]'
           >
-            {item?.country?.icon && (
-              <div
-                onClick={() => handleOpenDepot(item?.city?.id)}
-                className='absolute top-3 right-3 cursor-pointer w-10 h-10 rounded-full overflow-hidden'
-              >
-                <img
-                  className='w-full h-full object-cover'
-                  src={item?.country?.icon}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = noImg;
-                  }}
-                  alt='*'
-                />
-              </div>
-            )}
             <img
               src={
                 el && typeof el === 'object' && el?.image
