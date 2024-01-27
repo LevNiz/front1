@@ -62,13 +62,13 @@ export const addToCart = async (
     quantity: 1,
   };
   if (addedFrom === 'addFromCards') {
-    sendData.colors = null;
-    sendData.sizes = '';
+    sendData.color = null;
+    sendData.size = '';
     sendData.memory = null;
   } else {
-    sendData.colors = itemCharacter.color !== '' ? itemCharacter.color : null;
+    sendData.color = itemCharacter.color !== '' ? itemCharacter.color : null;
     sendData.memory = itemCharacter.memory !== '' ? itemCharacter.memory : null;
-    sendData.sizes = itemCharacter.size !== '' ? itemCharacter.size : '';
+    sendData.size = itemCharacter.size !== '' ? itemCharacter.size : '';
   }
   const userDocRef = doc(db, 'users', `${userID}`);
   const cartCollectionRef = collection(userDocRef, 'cart');
