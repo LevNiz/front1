@@ -21,6 +21,11 @@ const MainPage = () => {
   useEffect(() => {
     (async () => {
       await fetchHomeItems(dispatch);
+    })();
+  }, [dispatch]);
+
+  useEffect(() => {
+    (async () => {
       await fetchBrands(dispatch);
     })();
   }, [dispatch]);
