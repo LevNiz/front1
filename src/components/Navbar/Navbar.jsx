@@ -70,7 +70,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
+      const currentScrollPos = window.scrollY;
       const threshold = 900;
       if (currentScrollPos > threshold) {
         setScrolling(prevScrollPos < currentScrollPos);
