@@ -33,7 +33,7 @@ export const fetchItems = async (dispatch, page, category) => {
   }
 };
 
-export const fetchMoreItems = async (page, category) => {
+export const fetchMoreItems = async (category, page) => {
   try {
     const res = await request.get(
       `/core/item/?page=${page}&category=${category}`

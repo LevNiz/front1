@@ -7,6 +7,7 @@ import { fetchItems, fetchMoreItems } from '../../../api/gb-shop/items';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
+import { fetchNextPage } from '../../../helpers/fetchNextPage/fetchNextPage';
 
 const Items = () => {
   const { loading, error, items } = useSelector((state) => state?.items);
@@ -41,28 +42,19 @@ const Items = () => {
   useEffect(() => {
     const container = containerRef.current;
 
-    const fetchNextPage = async () => {
-      if (page < totalPages) {
-        setScrollLoading(true);
-        try {
-          const { success, data } = await fetchMoreItems(
-            page + 1,
-            state?.category
-          );
-          if (success) {
-            setItemsData((prevItems) => [...prevItems, ...data]);
-            setPage((prevPage) => prevPage + 1);
-          }
-        } finally {
-          setScrollLoading(false);
-        }
-      }
-    };
     if (container) {
       const observer = new IntersectionObserver(
-        ([entry]) => {
+        async ([entry]) => {
           if (entry.isIntersecting) {
-            fetchNextPage();
+            await fetchNextPage(
+              page,
+              setPage,
+              totalPages,
+              setItemsData,
+              setScrollLoading,
+              fetchMoreItems,
+              state?.category
+            );
           }
         },
         {

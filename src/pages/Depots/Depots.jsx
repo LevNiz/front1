@@ -9,6 +9,7 @@ import { ContentLoading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import { fetchNextPage } from '../../helpers/fetchNextPage/fetchNextPage';
 
 const Depots = () => {
   const { depots, loading, error } = useSelector((state) => state?.depots);
@@ -43,27 +44,19 @@ const Depots = () => {
 
   useEffect(() => {
     const container = containerRef.current;
-
-    const fetchNextPage = async () => {
-      if (page < totalPages) {
-        setScrollLoading(true);
-        try {
-          const { success, data } = await fetchMoreDepots(page + 1);
-          if (success) {
-            setDepotData((prevItems) => [...prevItems, ...data]);
-            setPage((prevPage) => prevPage + 1);
-            setScrollLoading(false);
-          }
-        } finally {
-          setScrollLoading(false);
-        }
-      }
-    };
     if (container) {
       const observer = new IntersectionObserver(
-        ([entry]) => {
+        async ([entry]) => {
           if (entry.isIntersecting) {
-            fetchNextPage();
+            await fetchNextPage(
+              page,
+              setPage,
+              totalPages,
+              setDepotData,
+              setScrollLoading,
+              fetchMoreDepots,
+              ''
+            );
           }
         },
         {

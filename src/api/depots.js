@@ -18,7 +18,7 @@ export const fetchDepots = async (dispatch) => {
   }
 };
 
-export const fetchMoreDepots = async (page) => {
+export const fetchMoreDepots = async (empty , page) => {
   try {
     const res = await request.get(`/core/depot/?page=${page}`);
     return { success: true, data: res?.data?.results };
