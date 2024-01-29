@@ -13,6 +13,7 @@ import maestro from '../../assets/images/maestro.svg';
 import call from '../../assets/icons/call-white.svg';
 import mail from '../../assets/icons/gmail-white.svg';
 import youtube from '../../assets/icons/YouTube.svg';
+import playMarket from '../../assets/images/play-market.svg';
 
 const Footer = () => {
   return (
@@ -171,6 +172,15 @@ const Footer = () => {
             <div className='w-[50px] h-[30px] bg-[#2b71b3] flex justify-center items-center'>
               <img className='w-[40px] object-contain' src={amex} alt='*' />
             </div>
+          </div>
+          <p className='text-white pt-3 pb-2'>Приложение доступно:</p>
+          <div className='flex'>
+            <NavLink
+              to='https://play.google.com/store/apps/details?id=kg.kyrgyzcoder.givboxkg'
+              target='_blank'
+            >
+              <img src={playMarket} alt='*' />
+            </NavLink>
           </div>
         </div>
       </div>
