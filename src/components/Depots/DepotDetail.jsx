@@ -87,8 +87,6 @@ const DepotDetail = () => {
     })();
   }, [dispatch]);
 
-  console.log(depotItem);
-
   return (
     <div className='pt-28 pb-12 mm:content'>
       {loading ? (
