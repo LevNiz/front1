@@ -12,6 +12,7 @@ import amex from '../../assets/images/amex.jpeg';
 import maestro from '../../assets/images/maestro.svg';
 import call from '../../assets/icons/call-white.svg';
 import mail from '../../assets/icons/gmail-white.svg';
+import youtube from '../../assets/icons/YouTube.svg';
 
 const Footer = () => {
   return (
@@ -56,7 +57,7 @@ const Footer = () => {
             </li>
             <li>
               <p>Кыргызстан, Бишкек</p>
-              <p className='opacity-80 text-sm'>724831, ул. Шопоково, д. 33.</p>
+              <p className='opacity-80 text-sm'>720021, ул. Шопоково, д. 33.</p>
             </li>
           </ul>
           <ul className='space-y-2'>
@@ -138,6 +139,15 @@ const Footer = () => {
                 className='flex justify-center items-center w-full h-full'
               >
                 <img className='w-[15px]' src={tiktok} alt='*' />
+              </NavLink>
+            </li>
+            <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
+              <NavLink
+                to='https://www.youtube.com/@GivBoxWorld'
+                target='_blank'
+                className='flex justify-center items-center w-full h-full'
+              >
+                <img className='w-5' src={youtube} alt='*' />
               </NavLink>
             </li>
           </ul>
