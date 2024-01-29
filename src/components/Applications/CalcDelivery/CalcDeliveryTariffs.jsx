@@ -17,7 +17,7 @@ const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
         Выберите тариф <span className='text-red-500'>*</span>
       </p>
       <div className='grid md:grid-cols-2 gap-5'>
-        {tariffsData.map((el) => (
+        {tariffsData?.map((el) => (
           <div
             key={el.id}
             className={`${

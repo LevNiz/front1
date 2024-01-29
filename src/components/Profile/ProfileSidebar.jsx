@@ -28,8 +28,7 @@ const ProfileSidebar = () => {
 
   const logOutUser = () => {
     logOutFetch(dispatch);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    localStorage.clear();
     navigate('/');
   };
 

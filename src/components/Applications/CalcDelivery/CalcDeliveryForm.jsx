@@ -1,17 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchParcelCategories } from '../../../api/parcels';
 import attention from '../../../assets/icons/attention.svg';
 import info from '../../../assets/icons/attention2.svg';
 import boxSize from '../../../assets/images/box-size.jpeg';
+import { fetchAllDepots } from '../../../api/depots';
 
 const CalcDeliveryForm = ({ onSubmit }) => {
-  const { depots } = useSelector((state) => state?.depots);
+  const [depots, setDepots] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const allDepotsData = await fetchAllDepots();
+      setDepots(allDepotsData);
+    })();
+  }, []);
+
   const cities = [
     ...new Set(
-      depots.map((el) => ({
+      depots?.map((el) => ({
         city: el?.city,
         country: el?.country,
       }))

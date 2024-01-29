@@ -24,7 +24,7 @@ const SApplicationTariffs = ({
         Выберите тариф <span className='text-red-500'>*</span>
       </p>
       <div className='lg:max-w-[680px] grid ld:grid-cols-2 gap-6 md:gap-10 mt-5'>
-        {tariffsData.map((el) => (
+        {tariffsData?.map((el) => (
           <div
             key={el.id}
             className={`${

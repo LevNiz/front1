@@ -51,7 +51,7 @@ export const fetchFilterSavedParcels = async (userID, dispatch, data) => {
       receiverCity: receiverCity?.value || '',
     });
     const res = await request.get(
-      `core/package/?${queryParams.toString()}&clients=${userID}&ordering=-dateCreated`
+      `core/package/?${queryParams.toString()}&client=${userID}&ordering=-dateCreated`
     );
     dispatch(fetchSavedParcelsSuccess(res?.data?.results));
     return { success: true };

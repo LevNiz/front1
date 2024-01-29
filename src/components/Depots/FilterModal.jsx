@@ -77,16 +77,7 @@ const FilterModal = ({ isOpen, onClose }) => {
                   placeholder='Выберите страну'
                   options={countries?.map((country) => ({
                     value: country?.id,
-                    label: (
-                      <div key={country?.id} className='flex items-center'>
-                        <img
-                          src={country?.icon}
-                          alt={country?.nameRu}
-                          className='w-5 mr-2'
-                        />
-                        {country?.nameRu}
-                      </div>
-                    ),
+                    label: country?.nameRu,
                   }))}
                   onChange={(selectedOption) => {
                     setValue('city', '');

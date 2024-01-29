@@ -114,7 +114,7 @@ const SApplicationItem = () => {
 
   const onSubmitForm = async (data) => {
     setIsLoading(true);
-    const serviceIds = services.map((service) => service.id);
+    const serviceIds = services?.map((service) => service.id);
     const requestData = {
       ...params,
       ...data,

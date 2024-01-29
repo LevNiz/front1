@@ -62,7 +62,7 @@ const FilterModal = ({ isOpen, onClose }) => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='fixed w-full overflow-y-scroll sm:overflow-y-hidden z-[999999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 pb-6 sm:p-6 md:p-10 md:pt-10 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
+        className='fixed w-full overflow-y-scroll sm:overflow-y-hidden z-[99999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 pb-6 sm:p-6 md:p-10 md:pt-10 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
       >
         <div className='flex justify-between mb-5'>
           <div className='sm:hidden' onClick={() => onClose()}>
@@ -85,16 +85,7 @@ const FilterModal = ({ isOpen, onClose }) => {
                     placeholder='Выберите страну'
                     options={countries?.map((country) => ({
                       value: country?.id,
-                      label: (
-                        <div key={country?.id} className='flex items-center'>
-                          <img
-                            src={country?.icon}
-                            alt={country?.nameRu}
-                            className='w-5 mr-2'
-                          />
-                          {country?.nameRu}
-                        </div>
-                      ),
+                      label: country?.nameRu,
                     }))}
                     onChange={(selectedOption) => {
                       setValue('city', '');
@@ -178,16 +169,7 @@ const FilterModal = ({ isOpen, onClose }) => {
                     placeholder='Выберите страну'
                     options={countries?.map((country) => ({
                       value: country?.id,
-                      label: (
-                        <div key={country?.id} className='flex items-center'>
-                          <img
-                            src={country?.icon}
-                            alt={country?.nameRu}
-                            className='w-5 mr-2'
-                          />
-                          {country?.nameRu}
-                        </div>
-                      ),
+                      label: country?.nameRu,
                     }))}
                     onChange={(selectedOption) => {
                       setValue('city', '');
