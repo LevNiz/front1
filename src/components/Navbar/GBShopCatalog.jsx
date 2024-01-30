@@ -1,15 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { fetchCategories } from '../../api/gb-shop/categories';
 import GBSHopEmpty from '../../helpers/Errors/GBSHopEmpty';
+import arrow from '../../assets/icons/down.svg';
 
 const GBShopCatalog = ({ isOpen, onClose }) => {
   const { categories, loading, error } = useSelector(
     (state) => state?.categories
   );
+  const [expandedCategory, setExpandedCategory] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,19 +37,64 @@ const GBShopCatalog = ({ isOpen, onClose }) => {
             <>
               {categories?.map((el) => (
                 <li key={el?.id}>
-                  <NavLink
-                    to={`/gb-shop/items`}
-                    onClick={() => onClose()}
-                    state={{ from: el?.nameRus, category: el?.id }}
-                    className='flex items-center'
-                  >
-                    <img
-                      className='min-w-[40px] w-10 h-8 object-cover'
-                      src={el?.icon}
-                      alt='*'
-                    />
-                    <span className='ml-1'>{el?.nameRus}</span>
-                  </NavLink>
+                  <div className='flex justify-between items-center'>
+                    <NavLink
+                      to={`/gb-shop/items`}
+                      onClick={() => onClose()}
+                      state={{ from: el?.nameRus, category: el?.id }}
+                      className='flex items-center'
+                    >
+                      <img
+                        className='min-w-[40px] w-10 h-8 object-cover'
+                        src={el?.icon}
+                        alt='*'
+                      />
+                      <span className='ml-1'>{el?.nameRus}</span>
+                    </NavLink>
+                    <div
+                      onClick={() =>
+                        setExpandedCategory((prevCategory) =>
+                          prevCategory === el?.id ? null : el?.id
+                        )
+                      }
+                      className={`${
+                        el?.store?.length > 0 ? '' : 'hidden'
+                      } pr-1`}
+                    >
+                      <img
+                        className={`${
+                          expandedCategory === el?.id ? 'rotate-180' : ''
+                        } duration-200 w-3 cursor-pointer`}
+                        src={arrow}
+                        alt='*'
+                      />
+                    </div>
+                  </div>
+                  {expandedCategory === el?.id && (
+                    <div className='space-y-2'>
+                      {el?.store?.map((item) => (
+                        <NavLink
+                          to='/gb-shop/brands'
+                          onClick={() => onClose()}
+                          state={{
+                            brandID: item?.id,
+                            brandName: item?.fullname,
+                          }}
+                          key={item?.id}
+                          className='flex items-center pl-8'
+                        >
+                          <img
+                            className='w-6 h-5 object-contain'
+                            src={item?.avatar}
+                            alt='*'
+                          />
+                          <p className='text-sm pl-1 line-clamp-1 break-all'>
+                            {item?.fullname}
+                          </p>
+                        </NavLink>
+                      ))}
+                    </div>
+                  )}
                 </li>
               ))}
             </>
