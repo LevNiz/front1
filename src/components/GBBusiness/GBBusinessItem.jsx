@@ -20,9 +20,10 @@ const GBBusinessItem = () => {
       <div className=''>
         <div className='md:flex items-center justify-between md:space-x-5 min-h-[520px] pt-12 md:pt-0 content'>
           <div className='md:w-1/2 text-center relative'>
-            <img className='absolute -top-14 left-20' src={square} alt='*' />
-            <h2 className='text-3xl mm:text-4xl lg:text-5xl font-bold relative'>
-              “Опять мой груз потрепанный доехал”{' '}
+            <img className='absolute -top-14 left-10' src={square} alt='*' />
+            <h2 className='text-3xl mm:text-[40px] font-bold relative max-w-[568px] w-full mx-auto leading-[42px]'>
+              {'"'}Опять не знаем через кого доставку коммерческого груза
+              оформить{'"'}
             </h2>
             <p className='mm:text-xl py-6 max-w-[446px] mx-auto relative'>
               именно так говорят 99% бизнесменов, которые не знакомы с
@@ -51,8 +52,8 @@ const GBBusinessItem = () => {
                 А вот что испытывают те, кто работают с нами!
               </h2>
               <h2 className='text-xl mm:text-3xl xl:text-[40px] xl:leading-[48px] font-bold pt-10 max-w-[480px] mx-auto'>
-                “Мой груз был доставлен по высшим стандартам и я даже не парился
-                об этом”
+                {'"'}Груз нашей компании доставили быстро и мы даже об этом не
+                беспокоились, спасибо GivBox!{'"'}
               </h2>
             </div>
           </div>
@@ -87,21 +88,19 @@ const GBBusinessItem = () => {
             </div>
             <div className='flex md:justify-around items-center w-full md:ml-10 mt-10 rounded-[20px] md:w-max px-8 py-3 shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'>
               <img src={gbBusinessImg4} alt='*' />
-              <h4 className='font-medium text-xl pl-10'>
-                Морских контейнеров{' '}
-              </h4>
+              <h4 className='font-medium text-xl pl-10'>Авиа судов</h4>
             </div>
           </div>
         </div>
+        <h3 className='text-2xl pt-5 md:text-3xl lg:text-4xl font-bold text-center'>
+          Вы хоть понимаете масштаб нашей компании ?
+        </h3>
         <div
           style={{ backgroundImage: `url(${gbBusinessBg})` }}
           className='md:min-h-[624px] bg-no-repeat py-10'
         >
           <div className='content'>
-            <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-center'>
-              Вы хоть понимаете масштаб нашей компании ?
-            </h3>
-            <h4 className='text-lg md:text-2xl lg:text-3xl font-medium text-center pt-2 md:pt-6 pb-6 md:pb-0'>
+            <h4 className='text-lg md:text-2xl lg:text-3xl text-center pt-2 md:pt-6 pb-6 md:pb-0'>
               У нас имеются свои компании и склады в{' '}
             </h4>
           </div>
