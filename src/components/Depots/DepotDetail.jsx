@@ -26,6 +26,7 @@ import instruction from '../../assets/icons/instruction.svg';
 import support from '../../assets/icons/support.svg';
 import depotEmail from '../../assets/icons/depot-email.svg';
 import sanctionImg from '../../assets/images/sanction.png';
+import noMap from '../../assets/images/no-map.png';
 
 const DepotDetail = () => {
   const [depotItem, setDepotItem] = useState({});
@@ -154,15 +155,18 @@ const DepotDetail = () => {
               <p className='dd:hidden pt-5'>{depotItem?.infoRu}</p>
             </div>
             <div className='w-full dd:w-3/6'>
-              <div className='w-full mx-auto'>
-                <div className='md:block flex flex-col'>
-                  <div className='order-1'>
-                    <DepotMap
-                      center={{ lat: depotItem?.lat, lng: depotItem?.lon }}
-                    />
+              {depotItem?.lat > 0 || depotItem?.lon > 0 ? (
+                <DepotMap
+                  center={{ lat: depotItem?.lat, lng: depotItem?.lon }}
+                />
+              ) : (
+                <div className='flex justify-center items-center h-full'>
+                  <div>
+                    <img className='w-28 mx-auto' src={noMap} alt='*' />
+                    <p className='pt-4 font-medium'>Карта склада не указана.</p>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
           <p className='px-4 mm:px-0 hidden dd:block max-w-6xl'>
