@@ -21,7 +21,7 @@ const Footer = () => {
       id='footer'
       className='bg-black py-10 lg:min-h-[252px] pb-12 md:pb-10'
     >
-      <div className='flex-col space-y-5 lg:space-y-0 lg:flex-row flex justify-between w-full container'>
+      <div className='flex-col space-y-5 lg:space-y-0 xl:flex-row flex justify-between w-full container'>
         <NavLink className='pr-5' to='/'>
           <img
             className='w-28 sm:w-32 min-w-[112px] sm:min-w-[128px]'
@@ -29,12 +29,14 @@ const Footer = () => {
             alt='*'
           />
         </NavLink>
-        <div className='flex md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
+        <div className='flex justify-between xl:justify-start pt-5 xl:pt-0 md:flex-row flex-col space-y-7 md:space-y-0 text-white md:space-x-12'>
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Контакты</li>
             <li className='opacity-80 hover:opacity-100 duration-100 flex items-center'>
               <img className='mr-2 w-5' src={call} alt='*' />
-              <NavLink to='tel:8(800)201-07-88'>8(800)201-07-88</NavLink>
+              <NavLink className='whitespace-nowrap' to='tel:8(800)201-07-88'>
+                8(800)201-07-88
+              </NavLink>
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100 flex items-center'>
               <img className='mr-2 w-5' src={mail} alt='*' />
@@ -95,8 +97,8 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className='md:pl-5'>
-          <ul className='flex md:justify-end justify-center items-center mt-5 md:mt-0 space-x-3'>
+        <div className='md:pl-5 pt-8 xl:pt-0'>
+          <ul className='flex justify-center xl:justify-end items-center mt-5 md:mt-0 space-x-3'>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink
                 to='https://www.facebook.com/givboxworld'
@@ -152,7 +154,7 @@ const Footer = () => {
               </NavLink>
             </li>
           </ul>
-          <div className='flex justify-center md:justify-end items-center pt-10 md:pt-8 space-x-2'>
+          <div className='flex justify-center xl:justify-end items-center pt-10 md:pt-8 space-x-2'>
             <div className='w-[50px] h-[30px] bg-[#4b2592] flex justify-center items-center'>
               <img
                 className='w-[40px] object-contain'
@@ -173,8 +175,10 @@ const Footer = () => {
               <img className='w-[40px] object-contain' src={amex} alt='*' />
             </div>
           </div>
-          <p className='text-white pt-3 pb-2'>Приложение доступно:</p>
-          <div className='flex'>
+          <p className='text-white pt-7 xl:pt-3 pb-2 text-center xl:text-start'>
+            Приложение доступно:
+          </p>
+          <div className='flex justify-center xl:justify-start'>
             <NavLink
               to='https://play.google.com/store/apps/details?id=kg.kyrgyzcoder.givboxkg'
               target='_blank'
