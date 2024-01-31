@@ -108,7 +108,7 @@ const SApplicationItem = () => {
     } else {
       // setIsDisabled(true);
       setParcelCost(0);
-      alert('Цена доставки не указана! Выберите другой город.');
+      alert('На данный момент выбранный маршрут недоступен');
     }
   };
 

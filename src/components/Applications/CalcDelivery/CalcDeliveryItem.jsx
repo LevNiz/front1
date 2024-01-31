@@ -59,7 +59,7 @@ const CalcDeliveryItem = () => {
       setIsClickedForm(true);
       setOrderData(data);
     } else {
-      alert('Цена доставки не указана! (из города / в город)');
+      alert('На данный момент выбранный маршрут недоступен');
       setParcelCost(0);
       setIsClickedForm(true);
     }
