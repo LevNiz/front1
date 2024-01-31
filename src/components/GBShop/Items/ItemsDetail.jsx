@@ -115,7 +115,7 @@ const ItemsDetail = () => {
           setItem(data);
 
           const defaultSize = data?.sizes?.length ? data?.sizes[0] : '';
-          const defaultColor = data?.colors ? data?.colors[0] : '';
+          const defaultColor = data?.colors?.length ? data?.colors[0] : '';
           const defaultMemory = data?.memory?.length ? data?.memory[0] : '';
 
           setItemCharacter({

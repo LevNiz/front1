@@ -72,7 +72,6 @@ export const addToCart = async (
   }
   const userDocRef = doc(db, 'users', `${userID}`);
   const cartCollectionRef = collection(userDocRef, 'cart');
-
   const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
     if (!docSnapshot.exists()) {
       setDoc(userDocRef, { name: name || '', token: access || '' });
