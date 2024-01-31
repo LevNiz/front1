@@ -74,7 +74,7 @@ const ItemsCard = ({ el }) => {
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
       <NavLink to={`/gb-shop/items/${el?.id}`}>
-        <div className='h-[120px] xs:h-[140px] sx:h-[180px] sm:h-[210px] overflow-hidden relative bg-gray-50'>
+        <div className='h-[120px] xs:h-[140px] sx:h-[185px] sm:h-[220px] overflow-hidden relative bg-gray-50'>
           <img
             className='w-full h-full object-cover'
             src={el?.image}
@@ -89,7 +89,7 @@ const ItemsCard = ({ el }) => {
       </NavLink>
       {el?.country && (
         <img
-          className='absolute top-3 left-3 cursor-pointer min-w-[28px] mm:min-w-[32px] w-7 mm:w-8 h-7 mm:h-8 object-cover rounded-full'
+          className='absolute top-2 left-2 mm:top-3 mm:left-3 cursor-pointer w-6 mm:w-8 h-6 mm:h-8 object-cover rounded-full'
           src={el?.country?.icon}
           onClick={() => handleOpenDepot(el?.city?.id)}
           onError={(e) => {
@@ -103,22 +103,22 @@ const ItemsCard = ({ el }) => {
         onClick={() =>
           copyToClipboard(`https://givbox.ru/gb-shop/items/${el?.id}`)
         }
-        className='absolute top-2 mm:top-4 right-2 mm:right-4 w-7 mm:w-8 h-7 mm:h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'
+        className='absolute top-2 mm:top-3 right-3 mm:right-4 w-6 mm:w-8 h-6 mm:h-8 cursor-pointer rounded-full bg-gray-300 bg-opacity-50 flex justify-center items-center'
       >
-        <img src={share} alt='*' />
+        <img className='w-4 h-4' src={share} alt='*' />
       </div>
       <div className='p-2'>
         <div className='pt-[2px] pb-1 flex items-center'>
-          <p className='font-bold text-lg flex items-center'>
+          <p className='font-medium mm:font-bold mm:text-lg flex items-center'>
             <span>$</span>
             <span>{el?.issale ? el?.costSale : el?.cost?.toFixed(1)}</span>
           </p>
           {el?.issale ? (
-            <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
+            <p className='text-xs mm:text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
               ({(el?.costSale * currency)?.toFixed(1)} с)
             </p>
           ) : (
-            <p className='text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
+            <p className='text-xs mm:text-sm pl-1 pt-[2px] font-light text-[#848484] line-clamp-1 break-all'>
               ({(el?.cost * currency)?.toFixed(1)} с)
             </p>
           )}
