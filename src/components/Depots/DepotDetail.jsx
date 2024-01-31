@@ -25,7 +25,8 @@ import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
 import support from '../../assets/icons/support.svg';
 import depotEmail from '../../assets/icons/depot-email.svg';
-import sanctionImg from '../../assets/images/sanction.png';
+import sanctionImg from '../../assets/images/sanction1.svg';
+import sanctionImg2 from '../../assets/images/sanction2.svg';
 import noMap from '../../assets/images/no-map.png';
 
 const DepotDetail = () => {
@@ -119,12 +120,16 @@ const DepotDetail = () => {
                   alt='*'
                   className='w-full h-full object-cover'
                 />
-                {(depotItem?.country?.id === 21 ||
-                  depotItem?.country?.id === 1 ||
-                  depotItem?.country?.id === 14) && (
-                  <div className='absolute top-3 right-3 w-24 h-24 mm:w-28 mm:h-28 rounded-full overflow-hidden bg-white'>
+                {depotItem?.id === 1 ? (
+                  <div className='absolute top-3 right-3 w-24 h-24 mm:w-28 mm:h-28 rounded-full overflow-hidden'>
                     <img className='' src={sanctionImg} alt='*' />
                   </div>
+                ) : depotItem?.id === 14 ? (
+                  <div className='absolute top-3 right-3 w-24 h-24 mm:w-28 mm:h-28 rounded-full overflow-hidden'>
+                    <img className='' src={sanctionImg2} alt='*' />
+                  </div>
+                ) : (
+                  ''
                 )}
               </div>
               {depotItem?.images?.length > 1 && (
