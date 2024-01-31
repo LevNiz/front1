@@ -7,25 +7,14 @@ import attention from '../../../assets/icons/attention.svg';
 import info from '../../../assets/icons/attention2.svg';
 import boxSize from '../../../assets/images/box-size.jpeg';
 import { fetchAllDepots } from '../../../api/depots';
+import { useSelector } from 'react-redux';
 
 const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
-  const [depots, setDepots] = useState([]);
+  const { costs } = useSelector((state) => state?.costs);
 
-  useEffect(() => {
-    (async () => {
-      const allDepotsData = await fetchAllDepots();
-      setDepots(allDepotsData);
-    })();
-  }, []);
-  const cities = [
-    ...new Set(
-      depots?.map((el) => ({
-        city: el?.city,
-        country: el?.country,
-      }))
-    ),
-  ];
-
+  const [fromDepotCity, setFromDepotCity] = useState([]);
+  const [toDepotCity, setToDepotCity] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [parcelData, setParcelData] = useState([]);
   const [parcelSize, setParcelSize] = useState(state?.orderData?.parcelSize);
   const [scopeWeight, setScopeWeight] = useState(null);
@@ -36,6 +25,22 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
   const [selectedReceiverCity, setSelectedReceiverCity] = useState(
     state?.orderData?.receiverCity
   );
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      const allDepotsData = await fetchAllDepots();
+      const fromCity = allDepotsData?.filter((depot) =>
+        costs?.some((cost) => cost?.fromCity?.id === depot?.city?.id)
+      );
+      const toCity = allDepotsData?.filter((depot) =>
+        costs?.some((cost) => cost?.toCity?.id === depot?.city?.id)
+      );
+      setFromDepotCity(fromCity);
+      setToDepotCity(toCity);
+      setIsLoading(false);
+    })();
+  }, [costs]);
 
   const handleSenderCityChange = (selectedOption) => {
     setSelectedSenderCity(selectedOption);
@@ -49,7 +54,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
     setSelectedTariff(data);
   };
 
-  const senderCityOptions = cities?.map((el) => ({
+  const senderCityOptions = fromDepotCity?.map((el) => ({
     value: el?.city?.id,
     label: `${el?.city?.nameRu}, ${el.country?.nameRu}`,
     fromCountry: el.country.id,
@@ -57,11 +62,17 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
       selectedReceiverCity && el?.city?.id === selectedReceiverCity.value,
   }));
 
-  const receiverCityOptions = cities?.map((el) => ({
+  const receiverCityOptions = toDepotCity?.map((el) => ({
     value: el?.city?.id,
     label: `${el?.city?.nameRu}, ${el?.country?.nameRu}`,
     toCountry: el.country.id,
-    isDisabled: selectedSenderCity && el?.city?.id === selectedSenderCity.value,
+    isDisabled:
+      !selectedSenderCity ||
+      !costs?.some(
+        (cost) =>
+          cost?.fromCity?.id === selectedSenderCity?.value &&
+          cost?.toCity?.id === el?.city?.id
+      ),
   }));
 
   const {
@@ -122,6 +133,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                 <Select
                   {...field}
                   options={senderCityOptions}
+                  isLoading={isLoading}
                   placeholder='Выберите город'
                   onChange={(selectedOption) => {
                     field.onChange(selectedOption);
@@ -166,6 +178,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
                 <Select
                   {...field}
                   options={receiverCityOptions}
+                  isLoading={isLoading}
                   placeholder='Выберите город'
                   onChange={(selectedOption) => {
                     field.onChange(selectedOption);
