@@ -63,12 +63,13 @@ export const addToCart = async (
   };
   if (addedFrom === 'addFromCards') {
     sendData.color = null;
-    sendData.size = '';
+    sendData.size = null;
     sendData.memory = null;
   } else {
-    sendData.color = itemCharacter.color !== '' ? itemCharacter.color : null;
-    sendData.memory = itemCharacter.memory !== '' ? itemCharacter.memory : null;
-    sendData.size = itemCharacter.size !== '' ? itemCharacter.size : null;
+    sendData.color = itemCharacter?.color !== '' ? itemCharacter?.color : null;
+    sendData.memory =
+      itemCharacter?.memory !== '' ? itemCharacter?.memory : null;
+    sendData.size = itemCharacter?.size !== '' ? itemCharacter?.size : null;
   }
   const userDocRef = doc(db, 'users', `${userID}`);
   const cartCollectionRef = collection(userDocRef, 'cart');
