@@ -25,8 +25,7 @@ import copy from '../../assets/icons/copy.svg';
 import instruction from '../../assets/icons/instruction.svg';
 import support from '../../assets/icons/support.svg';
 import depotEmail from '../../assets/icons/depot-email.svg';
-import sanctionImg from '../../assets/images/sanction1.svg';
-import sanctionImg2 from '../../assets/images/sanction2.svg';
+import sanctionImg from '../../assets/images/sanction.svg';
 import noMap from '../../assets/images/no-map.png';
 
 const DepotDetail = () => {
@@ -44,6 +43,7 @@ const DepotDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const sanctionCountryIds = [1, 13, 14, 21, 23];
 
   const filteredTariffs = costs?.filter(
     (el) => el?.fromCity?.id === depotItem?.city?.id
@@ -120,16 +120,10 @@ const DepotDetail = () => {
                   alt='*'
                   className='w-full h-full object-cover'
                 />
-                {depotItem?.id === 1 ? (
+                {sanctionCountryIds?.includes(depotItem?.country?.id) && (
                   <div className='absolute top-3 right-3 w-24 h-24 mm:w-28 mm:h-28 rounded-full overflow-hidden'>
                     <img className='' src={sanctionImg} alt='*' />
                   </div>
-                ) : depotItem?.id === 14 ? (
-                  <div className='absolute top-3 right-3 w-24 h-24 mm:w-28 mm:h-28 rounded-full overflow-hidden'>
-                    <img className='' src={sanctionImg2} alt='*' />
-                  </div>
-                ) : (
-                  ''
                 )}
               </div>
               {depotItem?.images?.length > 1 && (
