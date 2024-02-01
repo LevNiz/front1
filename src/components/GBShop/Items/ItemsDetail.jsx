@@ -37,6 +37,7 @@ const ItemsDetail = () => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [btnIsLoading, setBtnIsLoading] = useState(false);
+  const [readAll, setReadAll] = useState(false);
   const [similarItems, setSimilarItems] = useState([]);
   const [itemCharacter, setItemCharacter] = useState({
     size: '',
@@ -371,7 +372,21 @@ const ItemsDetail = () => {
                     />
                   </div>
                 )}
-                <p className='py-7'>{item?.description}</p>
+                <p
+                  className={`mt-7 ${
+                    !readAll ? 'line-clamp-6 break-all' : 'mb-7'
+                  }`}
+                >
+                  {item?.description}
+                </p>
+                {!readAll && (
+                  <div
+                    onClick={() => setReadAll(true)}
+                    className='mb-7 font-medium underline text-sm text-right cursor-pointer'
+                  >
+                    Читать дальше
+                  </div>
+                )}
                 <div className='flex pb-5'>
                   {itemCart?.length ? (
                     <NavLink
