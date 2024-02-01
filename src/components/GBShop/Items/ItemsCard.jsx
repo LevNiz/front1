@@ -10,6 +10,7 @@ import {
 } from '../../../api/gb-shop/items';
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
 import { toastModal } from '../../../helpers/Modals/toastModal';
+import { currency } from '../../../constants/currency';
 
 const ItemsCard = ({ el }) => {
   const { userID, user } = useSelector((state) => state?.user);
@@ -19,7 +20,6 @@ const ItemsCard = ({ el }) => {
   const { depots } = useSelector((state) => state?.depots);
 
   const navigate = useNavigate();
-  const currency = 89.33;
 
   const handleToggleFavorite = async () => {
     if (user) {

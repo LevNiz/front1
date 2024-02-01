@@ -6,6 +6,7 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { useEffect, useState } from 'react';
+import { currency } from '../../../constants/currency';
 
 const BasketInfo = () => {
   const [totalCost, setTotalCost] = useState(0);
@@ -14,7 +15,6 @@ const BasketInfo = () => {
     (state) => state?.cartItems
   );
   const { register } = useForm();
-  const currency = 89.33;
 
   useEffect(() => {
     const calculateTotalQuantity = () => {

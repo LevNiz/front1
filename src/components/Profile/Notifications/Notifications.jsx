@@ -1,5 +1,4 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { notifications } from '../../../constants/notificationsData';
 import noNotification from '../../../assets/images/no-notification.svg';
 import { useState } from 'react';
 import Modal from '../../../helpers/Modals/Modal';
@@ -12,6 +11,8 @@ const Notifications = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  const notifications = []
 
   return (
     <>

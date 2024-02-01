@@ -18,6 +18,7 @@ import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 import noImg from '../../../assets/images/no-image.svg';
 import share from '../../../assets/gb-shop/icons/share.svg';
 import { toastModal } from '../../../helpers/Modals/toastModal';
+import { currency } from '../../../constants/currency';
 
 const ItemsDetail = () => {
   const { userID, user } = useSelector((state) => state?.user);
@@ -50,7 +51,6 @@ const ItemsDetail = () => {
   };
 
   const itemCart = cartItems?.filter((el) => el?.item?.id === Number(id));
-  const currency = 89.33;
 
   const handleToggleFavorite = async () => {
     if (user) {

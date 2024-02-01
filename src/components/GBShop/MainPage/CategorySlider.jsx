@@ -17,6 +17,7 @@ import {
 } from '../../../api/gb-shop/items';
 import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
 import { toastModal } from '../../../helpers/Modals/toastModal';
+import { currency } from '../../../constants/currency';
 
 const CategorySlider = ({ items, loading, error }) => {
   const { userID, user } = useSelector((state) => state?.user);
@@ -26,7 +27,6 @@ const CategorySlider = ({ items, loading, error }) => {
   const { depots } = useSelector((state) => state?.depots);
 
   const navigate = useNavigate();
-  const currency = 89.33;
 
   const handleOpenDepot = (cityID) => {
     const depotID = depots?.filter((depot) => depot?.city?.id == cityID);
@@ -63,13 +63,14 @@ const CategorySlider = ({ items, loading, error }) => {
             slidesPerView={5}
             navigation={true}
             className='px-4 pb-20 sm:pb-24 pt-4'
-            spaceBetween={16}
             breakpoints={{
               260: {
                 slidesPerView: 2,
+                spaceBetween: 10,
               },
               768: {
                 slidesPerView: 3,
+                spaceBetween: 16,
               },
               992: {
                 slidesPerView: 4,
@@ -83,7 +84,7 @@ const CategorySlider = ({ items, loading, error }) => {
               <SwiperSlide modules={[Navigation]} key={el?.id}>
                 <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
                   <NavLink to={`/gb-shop/items/${el?.id}`}>
-                    <div className='h-[120px] xs:h-[140px] sx:h-[185px] sm:h-[220px] overflow-hidden relative bg-gray-50'>
+                    <div className='h-[185px] sm:h-[220px] overflow-hidden relative bg-gray-50'>
                       <img
                         className='w-full h-full object-cover'
                         src={el?.image}

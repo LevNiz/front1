@@ -6,12 +6,11 @@ import {
   removeFromCart,
 } from '../../../api/gb-shop/basket';
 import { useSelector } from 'react-redux';
+import { currency } from '../../../constants/currency';
 
 const BasketItem = ({ el }) => {
   const { userID } = useSelector((state) => state?.user);
   const [count, setCount] = useState(el?.quantity);
-
-  const currency = 89.33;
 
   const handelIncrement = async (itemID) => {
     setCount((prevCount) => prevCount + 1);

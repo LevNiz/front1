@@ -7,6 +7,7 @@ import noImg from '../../../assets/images/no-image.svg';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { payForParcel } from '../../../api/gb-shop/order';
 import { useLocation } from 'react-router-dom';
+import { currency } from '../../../constants/currency';
 
 const OrderDetail = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -16,7 +17,6 @@ const OrderDetail = () => {
   const { userID } = useSelector((state) => state?.user);
 
   const { state } = useLocation();
-  const currency = 89.33;
 
   const {
     control,
