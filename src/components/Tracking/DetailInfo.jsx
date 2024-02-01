@@ -6,7 +6,11 @@ import cargo from './../../assets/icons/cargo.svg';
 import dollar from './../../assets/icons/dollar.svg';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { fetchParcelDetail, fetchSaveParcel } from '../../api/parcels';
+import {
+  PatchParcelsPaymentStatus,
+  fetchParcelDetail,
+  fetchSaveParcel,
+} from '../../api/parcels';
 import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
 import { parcelStatus } from '../../constants/statusData';
@@ -67,6 +71,50 @@ const DetailInfo = (props) => {
     var data = {
       token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
       payment: {
+        order: `${parcelDetail?.id}`,
+        amount: 10,
+        language: 'ru',
+        currency: 'USD',
+        test: 1,
+        description: `${parcelDetail?.comment}`,
+        options: {
+          user: {
+            email: `${parcelDetail?.client?.login}`,
+            phone: `${parcelDetail?.client?.phone}`,
+          },
+        },
+      },
+      successCallback: async (payment) => {
+        console.log(`Success: ${payment}`);
+        const { success } = await PatchParcelsPaymentStatus(id);
+        if (success) {
+          setLoading(true);
+          const { success, data } = await fetchParcelDetail(
+            id,
+            parcelDetail?.client?.id
+          );
+          if (success) {
+            if (data?.clients?.includes(userID)) {
+              setSaved(true);
+            }
+            setParcelDetail(data);
+            setLoading(false);
+          }
+          setLoading(false);
+        }
+      },
+      errorCallback: function (payment) {
+        console.log(`Error: ${payment}`);
+      },
+    };
+
+    // eslint-disable-next-line no-undef
+    var widget = new PayBox(data);
+    widget.create();
+  };
+
+  /*
+      payment: {
         order: '1',
         amount: 1.1,
         currency: 'KG',
@@ -102,18 +150,7 @@ const DetailInfo = (props) => {
           ],
         },
       },
-      successCallback: function (payment) {
-        alert(payment);
-      },
-      errorCallback: function (payment) {
-        alert(payment);
-      },
-    };
-
-    // eslint-disable-next-line no-undef
-    var widget = new PayBox(data);
-    widget.create();
-  };
+  */
 
   return (
     <div className='bg-colBgGray2 pt-20'>
@@ -266,7 +303,7 @@ const DetailInfo = (props) => {
                       </span>
                     </div>
                   </div>
-                  {parcelDetail?.paymentStatus == 'paid' ? (
+                  {parcelDetail?.paymentStatus === 'paid' ? (
                     <div className='font-medium px-4 h-12 flex justify-center items-center text-lg rounded-lg bg-black opacity-50 cursor-not-allowed text-white w-full'>
                       Оплачено
                     </div>
@@ -277,6 +314,19 @@ const DetailInfo = (props) => {
                     >
                       Оплатить
                     </button>
+                    /*
+                        <button
+                      onClick={payForParcel}
+                      disabled={parcelDetail?.totalCost < 1}
+                      className={`${
+                        parcelDetail?.totalCost < 1
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'hover:opacity-80'
+                      } font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 w-full`}
+                    >
+                      Оплатить
+                    </button>
+                    */
                   )}
                 </div>
                 <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2'>

@@ -19,6 +19,17 @@ export const FetchParcels = async (dispatch, userID) => {
   }
 };
 
+export const PatchParcelsPaymentStatus = async (id) => {
+  try {
+    await axiosInstance.patch(`core/package/${id}/`, {
+      paymentStatus: 'paid',
+    });
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
 // Fetch Parcels detail:
 export const fetchParcelDetail = async (id) => {
   try {
