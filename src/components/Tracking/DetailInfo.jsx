@@ -11,6 +11,7 @@ import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
 import { useSelector } from 'react-redux';
 import { parcelStatus } from '../../constants/statusData';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
+import { currency } from '../../constants/currency';
 
 const DetailInfo = (props) => {
   const userID = useSelector((state) => state?.user?.userID);
@@ -224,9 +225,14 @@ const DetailInfo = (props) => {
                     </div>
                     <div className='ml-4'>
                       <h4 className='text-sm font-medium'>Цена за кг</h4>
-                      <p className='text-xs mb-2'>
-                        {parcelDetail?.costPerKg} $
-                      </p>
+                      <div className='flex items-center'>
+                        <p className='text-xs mb-2 whitespace-nowrap'>
+                          {parcelDetail?.costPerKg} $
+                        </p>
+                        <span className='text-[10px] font-light pl-1 whitespace-nowrap'>
+                          ({parcelDetail?.costPerKg * currency} с)
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div className='flex items-center z-10 mt-4'>
@@ -239,16 +245,26 @@ const DetailInfo = (props) => {
                       <h4 className='text-sm font-medium'>
                         Дополнительная плата
                       </h4>
-                      <p className='text-xs mb-2'>
-                        {parcelDetail?.extraCost} $
-                      </p>
+                      <div className='flex items-center'>
+                        <p className='text-xs mb-2 whitespace-nowrap'>
+                          {parcelDetail?.extraCost} $
+                        </p>
+                        <span className='text-[10px] font-light pl-1 whitespace-nowrap'>
+                          ({parcelDetail?.extraCost * currency} с)
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div className='flex justify-between items-center my-5'>
                     <h4 className='font-medium'>Итого</h4>
-                    <span className='font-bold text-colPurple'>
-                      {parcelDetail?.totalCost} $
-                    </span>
+                    <div className='flex items-center'>
+                      <h4 className='font-bold text-colPurple pr-1 whitespace-nowrap'>
+                        {parcelDetail?.totalCost} $
+                      </h4>
+                      <span className='text-xs text-colPurple whitespace-nowrap'>
+                        ({parcelDetail?.totalCost * currency} c)
+                      </span>
+                    </div>
                   </div>
                   {parcelDetail?.paymentStatus == 'paid' ? (
                     <div className='font-medium px-4 h-12 flex justify-center items-center text-lg rounded-lg bg-black opacity-50 cursor-not-allowed text-white w-full'>

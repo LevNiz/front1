@@ -13,6 +13,7 @@ import SApplicationForm from './SApplicationForm';
 import SApplicationDetail from './SApplicationDetail';
 import SApplicationReceiver from './SApplicationReceiver';
 import SApplicationComment from './SApplicationComment';
+import { currency } from '../../../constants/currency';
 
 const SApplicationItem = () => {
   const { state } = useLocation();
@@ -223,8 +224,21 @@ const SApplicationItem = () => {
             />
             <div className='md:flex justify-between items-center mt-12'>
               <div className='flex justify-end md:justify-start sm:max-w-[320px] font-medium w-full md:ml-0 ml-auto items-center p-5'>
-                <span className='text-lg'>Общая стоимость:</span>
-                <span className='text-xl mx-1 '>$ {parcelCost}</span>
+                <span className='text-lg ss:whitespace-nowrap'>
+                  Общая стоимость:
+                </span>
+                {parcelCost > 0 ? (
+                  <div className='flex items-center'>
+                    <span className='text-xl mx-1 whitespace-nowrap'>
+                      $ {parcelCost}
+                    </span>
+                    <span className='text-sm mx-1 whitespace-nowrap'>
+                      ({parcelCost * currency} c)
+                    </span>
+                  </div>
+                ) : (
+                  <span className='font-medium pl-2 text-xl'>0</span>
+                )}
               </div>
               <div className='flex justify-end items-center mt-8 md:mt-0 sm:max-w-[320px] w-full ml-auto'>
                 <button
