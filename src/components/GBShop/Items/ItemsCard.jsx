@@ -74,7 +74,7 @@ const ItemsCard = ({ el }) => {
   return (
     <div className='overflow-hidden rounded-xl border-2 border-gray-100 relative shadow-[rgba(17,_17,_26,_0.1)_0px_5px_20px]'>
       <NavLink to={`/gb-shop/items/${el?.id}`}>
-        <div className='h-[120px] xs:h-[140px] sx:h-[185px] sm:h-[220px] overflow-hidden relative bg-gray-50'>
+        <div className='h-[185px] sm:h-[220px] overflow-hidden relative bg-gray-50'>
           <img
             className='w-full h-full object-cover'
             src={el?.image}

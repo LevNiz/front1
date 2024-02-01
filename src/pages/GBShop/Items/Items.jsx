@@ -88,7 +88,7 @@ const Items = () => {
         <ContentLoading extraStyle={380} />
       ) : itemsData?.length ? (
         <>
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-7 container pb-8 pt-4'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sx:gap-5 lg:gap-7 container pb-8 pt-4'>
             {itemsData?.map((el) => (
               <ItemsCard key={el?.id} el={el} />
             ))}

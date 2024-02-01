@@ -74,9 +74,11 @@ const CategorySlider = ({ items, loading, error }) => {
               },
               992: {
                 slidesPerView: 4,
+                spaceBetween: 16,
               },
               1200: {
                 slidesPerView: 5,
+                spaceBetween: 16,
               },
             }}
           >
