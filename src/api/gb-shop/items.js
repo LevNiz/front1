@@ -78,17 +78,17 @@ export const fetchFavoriteItems = (userID, dispatch) => {
 // Add item to Favorites using setDoc:
 export const addToFavorites = async (userID, el, name, access) => {
   const sendData = {
-    category: el?.category?.id || '',
-    cost: el?.cost || '',
-    costSale: el?.costSale || '',
-    description: el?.description || '',
-    id: el?.id || '',
-    image: el?.image || '',
-    imageLink: el?.imageLink || '',
-    issale: el?.issale || '',
-    name: el?.name || '',
+    category: el?.category?.id || null,
+    cost: el?.cost || null,
+    costSale: el?.costSale || null,
+    description: el?.description || null,
+    id: el?.id || null,
+    image: el?.image || null,
+    imageLink: el?.imageLink || null,
+    issale: el?.issale || null,
+    name: el?.name || null,
     supplier: el?.supplier || [],
-    uid: `${el?.id}` || '',
+    uid: `${el?.id}` || null,
   };
 
   const userDocRef = doc(db, 'users', `${userID}`);
@@ -96,7 +96,7 @@ export const addToFavorites = async (userID, el, name, access) => {
 
   const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
     if (!docSnapshot.exists()) {
-      setDoc(userDocRef, { name: name || '', token: access || '' });
+      setDoc(userDocRef, { name: name || null, token: access || null });
     }
   });
 

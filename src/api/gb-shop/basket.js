@@ -46,16 +46,16 @@ export const addToCart = async (
 ) => {
   const itemData = {
     category: item?.category || [],
-    cost: item?.cost || '',
-    costSale: item?.costSale || '',
-    description: item?.description || '',
-    id: item?.id || '',
-    image: item?.image || '',
-    imageLink: item?.imageLink || '',
+    cost: item?.cost || null,
+    costSale: item?.costSale || null,
+    description: item?.description || null,
+    id: item?.id || null,
+    image: item?.image || null,
+    imageLink: item?.imageLink || null,
     issale: item?.issale,
-    name: item?.name || '',
+    name: item?.name || null,
     supplier: item?.supplier || [],
-    uid: `${item?.id}` || '',
+    uid: `${item?.id}` || null,
   };
   const sendData = {
     item: itemData,
@@ -68,13 +68,13 @@ export const addToCart = async (
   } else {
     sendData.color = itemCharacter.color !== '' ? itemCharacter.color : null;
     sendData.memory = itemCharacter.memory !== '' ? itemCharacter.memory : null;
-    sendData.size = itemCharacter.size !== '' ? itemCharacter.size : '';
+    sendData.size = itemCharacter.size !== '' ? itemCharacter.size : null;
   }
   const userDocRef = doc(db, 'users', `${userID}`);
   const cartCollectionRef = collection(userDocRef, 'cart');
   const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
     if (!docSnapshot.exists()) {
-      setDoc(userDocRef, { name: name || '', token: access || '' });
+      setDoc(userDocRef, { name: name || null, token: access || null });
     }
   });
 
