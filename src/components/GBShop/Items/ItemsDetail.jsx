@@ -312,7 +312,7 @@ const ItemsDetail = () => {
                         <li
                           className={`${
                             itemCharacter?.size === el && 'bg-black text-white'
-                          } min-w-[40px] px-1 h-9 rounded-md border border-black flex justify-center items-center cursor-pointer mr-3 mt-3 lg:mt-0`}
+                          } min-w-[40px] px-1 h-9 rounded-md border border-black flex justify-center items-center cursor-pointer mr-3 mt-3`}
                           key={index}
                           onClick={() =>
                             setItemCharacter({

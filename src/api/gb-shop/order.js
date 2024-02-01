@@ -1,11 +1,21 @@
+import { axiosInstance } from '../axios';
+
 // Post Order Item:
-const orderItemPost = async (data, items, userID, state) => {
+const orderItemPost = async (data, items, userData, state) => {
+  const transformedItems = items.map((item) => ({
+    color: item.color,
+    item: item.item.id,
+    memory: item.memory,
+    quantity: item.quantity,
+    size: item.size,
+  }));
+
   const sendData = {
-    items: items,
+    items: transformedItems,
     totalCost: state,
     user: null,
     addresses: data?.address?.value,
-    phone: '',
+    phone: userData?.phone || null,
     lat: null,
     lon: null,
     comment: data?.comment || '',
@@ -15,30 +25,35 @@ const orderItemPost = async (data, items, userID, state) => {
     isoptovik: false,
     bonus: 0.0,
     pay_status: true,
-    client: userID,
+    client: userData?.id,
   };
-  console.log(sendData);
+  try {
+    await axiosInstance.post('/core/order/', sendData);
+  } catch (error) {
+    alert(error);
+  }
 };
 
 // Payment FreeDomPay
-export const payForParcel = (orderData, items, userID, state) => {
-  orderItemPost(orderData, items, userID, state);
-  var data = {
+export const payForParcel = (orderData, items, userData, state) => {
+  let data = {
     token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
     payment: {
-      order: '1',
-      amount: 1.1,
-      currency: 'KG',
-      description: `sdcsc`,
-      expires_at: '2020-12-12 00:00:00',
-      param1: 'string',
-      param2: 'string',
-      param3: 'string',
-      test: 0,
-      options: items,
+      order: `${orderData?.address?.value}`,
+      amount: 5,
+      language: 'ru',
+      currency: 'USD',
+      test: 1,
+      description: `Описание заявки`,
+      options: {
+        user: {
+          email: `${userData?.login}`,
+          phone: `${userData?.phone}` || 'Не указано',
+        },
+      },
     },
     successCallback: async () => {
-      await orderItemPost();
+      await orderItemPost(orderData, items, userData, state);
     },
     errorCallback: async (payment) => {
       alert(payment);

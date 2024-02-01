@@ -216,7 +216,7 @@ input[type='number'] {
 }
 .gb-shop-card-main-slider .swiper-button-prev:after,
 .swiper-button-next:after {
-  color: #fede2b;
+  color: #000;
   font-size: 32px;
 }
 .gb-shop-card-slider-thumb-two .swiper-wrapper {

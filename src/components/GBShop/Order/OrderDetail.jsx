@@ -8,10 +8,12 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { payForParcel } from '../../../api/gb-shop/order';
 import { useLocation } from 'react-router-dom';
 import { currency } from '../../../constants/currency';
+import { fetchUser } from '../../../api/client';
 
 const OrderDetail = () => {
   const [openModal, setOpenModal] = useState(false);
   const [totalCost, setTotalCost] = useState(null);
+  const [userData, setUserData] = useState({});
   const { cartItems, loading } = useSelector((state) => state?.cartItems);
   const { addresses } = useSelector((state) => state?.addresses);
   const { userID } = useSelector((state) => state?.user);
@@ -60,8 +62,17 @@ const OrderDetail = () => {
     calculateTotalQuantity();
   }, [cartItems]);
 
+  useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setUserData(data);
+      }
+    })();
+  }, [userID]);
+
   const onSubmit = (data) => {
-    payForParcel(data, cartItems, userID, state);
+    payForParcel(data, cartItems, userData, state);
   };
 
   return (
