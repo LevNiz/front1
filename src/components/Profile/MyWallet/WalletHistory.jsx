@@ -3,12 +3,12 @@ import ruLocale from 'date-fns/locale/ru';
 
 const WalletHistory = ({ transactions }) => {
   return (
-    <ul className='max-w-xl'>
+    <ul className='grid lg:grid-cols-2 gap-5'>
       {transactions.map((transaction) => (
-        <li key={transaction?.id} className='mb-4 p-4 rounded-lg shadow-md'>
-          <div className='flex justify-between items-center'>
+        <li key={transaction?.id} className='p-4 rounded-lg shadow-md'>
+          <div className='flex justify-between items-end'>
             <div>
-              <p className='mm:text-lg font-medium pr-3 max-w-[270px] mm:max-w-full leading-[18px] mm:leading-6'>
+              <p className='font-medium pr-3 leading-[18px]'>
                 {transaction?.description}
               </p>
               <p className='text-gray-500 pt-2 text-sm'>
@@ -23,8 +23,8 @@ const WalletHistory = ({ transactions }) => {
               }-500 font-bold`}
             >
               {transaction.amount >= 0
-                ? `+${transaction?.amount?.toFixed(2)}`
-                : transaction?.amount?.toFixed(2)}
+                ? `+${transaction?.amount?.toFixed(1)}`
+                : transaction?.amount?.toFixed(1)}
             </p>
           </div>
         </li>

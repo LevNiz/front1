@@ -1,1 +1,1 @@
-export const currency = 89.33
+export const currency = 89;
