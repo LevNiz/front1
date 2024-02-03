@@ -6,7 +6,7 @@ import Modal from '../../helpers/Modals/Modal';
 import logout from './../../assets/icons/logout.svg';
 import profile from './../../assets/icons/new-profile.svg';
 import parcel from './../../assets/icons/my-parcel.svg';
-// import wallet from './../../assets/icons/wallet.svg';
+import wallet from './../../assets/icons/wallet.svg';
 import notification from './../../assets/icons/notification2.svg';
 import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
@@ -35,7 +35,7 @@ const ProfileSidebar = () => {
   return (
     <>
       <div className='bg-white z-[99999] md:min-w-[240px] md:max-w-[240px] lg:min-w-[300px] lg:max-w-[300px] w-full hidden md:block'>
-        <ul className='border-r border-colGray2 pt-6 sidebar pr-4 hidden md:flex flex-col space-y-3'>
+        <ul className='border-r border-colGray2 pt-6 sidebar pr-4 hidden md:flex flex-col space-y-2'>
           <li>
             <NavLink
               to='personal-data'
@@ -63,7 +63,7 @@ const ProfileSidebar = () => {
               <span className='text-lg'>Заявки на отправку</span>
             </NavLink>
           </li>
-          {/* <li>
+          <li>
             <NavLink
               to='my-wallet'
               className='flex items-center p-2 rounded-lg'
@@ -71,7 +71,7 @@ const ProfileSidebar = () => {
               <img className='pr-3' src={wallet} alt='*' />
               <span className='text-lg'>Мой кошелёк</span>
             </NavLink>
-          </li> */}
+          </li>
           <li>
             <NavLink
               to='buy-request'
