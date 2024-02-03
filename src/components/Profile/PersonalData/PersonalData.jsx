@@ -11,7 +11,6 @@ import noImg from '../../../assets/images/no-ava.jpeg';
 import location from '../../../assets/icons/new-location.svg';
 import profile from '../../../assets/icons/new-profile.svg';
 import call from '../../../assets/icons/new-call.svg';
-import email from '../../../assets/icons/new-email.svg';
 import country from '../../../assets/icons/new-country.svg';
 import city from '../../../assets/icons/new-city.svg';
 import edit from '../../../assets/icons/edit.svg';
@@ -148,7 +147,7 @@ const PersonalData = () => {
             </div>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='grid lg:grid-cols-2 gap-4 lg:gap-8 mt-6 sm:mt-12'>
+            <div className='grid lg:grid-cols-2 gap-4 lg:gap-6 mt-6 sm:mt-12'>
               <div>
                 <p className='font-bold mb-2'>ФИО</p>
                 <div className='relative'>
@@ -184,45 +183,6 @@ const PersonalData = () => {
                   <img
                     className='absolute top-[15px] left-[10px]'
                     src={call}
-                    alt='*'
-                  />
-                </div>
-              </div>
-              <div>
-                <p className='font-bold mb-2'>Электронная почта</p>
-                <div className='relative'>
-                  <input
-                    className='w-full border border-colGray2 p-[16px_16px_16px_44px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
-                    type='email'
-                    placeholder='Введите ваш email'
-                    {...register('email', {
-                      required: 'Поле обязательно к заполнению!',
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Введите корректный адрес электронной почты',
-                      },
-                    })}
-                  />
-                  <img
-                    className='absolute top-[15px] left-[10px]'
-                    src={email}
-                    alt='*'
-                  />
-                </div>
-              </div>
-              <div>
-                <p className='font-bold mb-2'>Место проживания</p>
-                <div className='relative'>
-                  <input
-                    className='w-full border border-colGray2 p-[16px_16px_16px_44px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
-                    placeholder='Адрес проживания'
-                    {...register('address', {
-                      required: 'Поле обязательно к заполнению!',
-                    })}
-                  />
-                  <img
-                    className='absolute top-[15px] left-[10px]'
-                    src={location}
                     alt='*'
                   />
                 </div>
@@ -342,6 +302,23 @@ const PersonalData = () => {
                       {errors?.city.message || 'Error!'}
                     </p>
                   )}
+                </div>
+              </div>
+              <div>
+                <p className='font-bold mb-2'>Место проживания</p>
+                <div className='relative'>
+                  <input
+                    className='w-full border border-colGray2 p-[16px_16px_16px_44px] mm:p-[14px_14px_14px_44px] rounded-md focus:border-black focus:outline-none'
+                    placeholder='Адрес проживания'
+                    {...register('address', {
+                      required: 'Поле обязательно к заполнению!',
+                    })}
+                  />
+                  <img
+                    className='absolute top-[15px] left-[10px]'
+                    src={location}
+                    alt='*'
+                  />
                 </div>
               </div>
             </div>

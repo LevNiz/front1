@@ -37,7 +37,7 @@ export const registerUser = async (dispatch, data) => {
     return { success: true };
   } catch (error) {
     dispatch(registerFailure(error));
-    return { success: false };
+    return { success: false, error: error?.response?.data?.login[0] };
   }
 };
 
@@ -82,7 +82,6 @@ export const UpdateProfile = async ({ userID, data, ava }) => {
     address: data?.address,
     city: data?.city?.value,
     country: data?.country?.value,
-    email: data?.email,
     fullname: data?.fullName,
     phone: data?.phone,
   };

@@ -18,6 +18,7 @@ import back from '../../assets/icons/back.svg';
 const SignUp = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const [visiblePassConfirm, setVisiblePassConfirm] = useState(false);
+  const [err, setErr] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,13 +38,14 @@ const SignUp = () => {
 
   const hasLowerCaseUpperCase = /^(?=.*[a-z])(?=.*[A-Z])/.test(password);
   const hasNumber = /^(?=.*\d)/.test(password);
-  const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
   const hasSamePassword = password !== '' && password === confirmPass;
 
   const onSubmit = async (data) => {
-    const { success } = await registerUser(dispatch, data);
+    const { success, error } = await registerUser(dispatch, data);
     if (success) {
       navigate('/');
+    } else {
+      setErr(error);
     }
   };
 
@@ -175,9 +177,6 @@ const SignUp = () => {
                     if (!/(?=.*\d)/.test(value)) {
                       return 'Требуется хотя бы одна цифра!';
                     }
-                    if (!/(?=.*[@$!%*?&#])/.test(value)) {
-                      return 'Требуется хотя бы один специальный символ!';
-                    }
                     if (value.length < 6) {
                       return 'Минимальная длина пароля - 6 символов!';
                     }
@@ -268,16 +267,6 @@ const SignUp = () => {
             <div className='flex items-center my-2'>
               <span
                 className={`min-w-[10px] h-[10px] rounded-full ${
-                  hasSpecialChar ? 'bg-colYellow' : 'bg-colGray2'
-                }`}
-              ></span>
-              <p className='text-[#AAA] ml-3 text-xs ss:text-sm sm:text-base'>
-                Минимум один спецсимвол
-              </p>
-            </div>
-            <div className='flex items-center my-2'>
-              <span
-                className={`min-w-[10px] h-[10px] rounded-full ${
                   hasSamePassword ? 'bg-colYellow' : 'bg-colGray2'
                 }`}
               ></span>
@@ -346,6 +335,7 @@ const SignUp = () => {
               </p>
             )}
           </div>
+          {err && <p className='text-red-500 mb-4'>{err}</p>}
           <button
             type='submit'
             className='hover:opacity-80 p-[17px] rounded-lg bg-black text-white flex justify-center items-center w-full font-bold duration-150'
