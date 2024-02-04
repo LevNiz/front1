@@ -45,7 +45,7 @@ const MyWallet = () => {
             <div className='flex justify-between items-center lg:max-w-sm w-full p-4 shadow-[0_0_12px_#00000026] rounded-md mb-8 lg:mb-0'>
               <div className='text-center w-[48%] flex justify-center items-center'>
                 <p className='font-medium text-lg line-clamp-1 break-all whitespace-nowrap'>
-                  {user && user?.wallet[0]?.amount}
+                  {user && user?.wallet[0]?.amount.toFixed(1)}
                 </p>
                 <span className='pl-1 pt-[2px] font-medium text-sm'>$</span>
               </div>

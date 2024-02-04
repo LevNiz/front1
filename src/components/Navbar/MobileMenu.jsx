@@ -17,7 +17,7 @@ import box from './../../assets/icons/mobile-menu/box.svg';
 import profileUser from './../../assets/icons/mobile-menu/profile-user.svg';
 import profileBox from './../../assets/icons/mobile-menu/profile-box.svg';
 import profileNotif from './../../assets/icons/mobile-menu/profile-notification.svg';
-// import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
+import profileWallet from './../../assets/icons/mobile-menu/profile-wallet.svg';
 import sendBox from './../../assets/icons/mobile-menu/send-box.svg';
 import location from './../../assets/icons/new-location.svg';
 import chat from './../../assets/icons/chat.svg';
@@ -244,7 +244,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                     </span>
                   </NavLink>
                 </li>
-                {/* <li className='flex items-center'>
+                <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
                     to='/profile/my-wallet'
@@ -257,7 +257,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                     />
                     <span className='pl-1 sm:text-[15px] leading-5'>Мой кошелёк</span>
                   </NavLink>
-                </li> */}
+                </li>
                 <li className='flex items-center'>
                   <NavLink
                     onClick={() => onClose()}
