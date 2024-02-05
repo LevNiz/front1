@@ -124,7 +124,7 @@ const ItemsCard = ({ el }) => {
           )}
         </div>
         <NavLink
-          to='#'
+          to={`/gb-shop/items/${el?.id}`}
           className='font-medium text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
         >
           {el?.name}

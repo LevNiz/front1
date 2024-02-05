@@ -33,7 +33,6 @@ const ResetPassNew = () => {
 
   const hasLowerCaseUpperCase = /^(?=.*[a-z])(?=.*[A-Z])/.test(password);
   const hasNumber = /^(?=.*\d)/.test(password);
-  const hasSpecialChar = /^(?=.*[@$!%*?&#])/.test(password);
   const hasSamePassword = password !== '' && password === confirmPass;
 
   const onSubmit = async (data) => {
@@ -95,9 +94,6 @@ const ResetPassNew = () => {
                     }
                     if (!/(?=.*\d)/.test(value)) {
                       return 'Требуется хотя бы одна цифра!';
-                    }
-                    if (!/(?=.*[@$!%*?&#])/.test(value)) {
-                      return 'Требуется хотя бы один специальный символ!';
                     }
                     if (value.length < 6) {
                       return 'Минимальная длина пароля - 6 символов!';
@@ -179,16 +175,6 @@ const ResetPassNew = () => {
               ></span>
               <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
                 Минимум одна цифра
-              </p>
-            </div>
-            <div className='flex items-center my-2'>
-              <span
-                className={`min-w-[10px] h-[10px] rounded-full ${
-                  hasSpecialChar ? 'bg-colYellow' : 'bg-colGray2'
-                }`}
-              ></span>
-              <p className='text-[#AAA] ml-3 text-xs sm:text-base'>
-                Минимум один спецсимвол
               </p>
             </div>
             <div className='flex items-center my-2'>

@@ -374,17 +374,19 @@ const ItemsDetail = () => {
                 )}
                 <p
                   className={`mt-7 ${
-                    !readAll ? 'line-clamp-6 break-all' : 'mb-7'
+                    !readAll && item?.description?.split('\n')?.length > 6
+                      ? 'line-clamp-6 break-all'
+                      : 'mb-7'
                   }`}
                 >
                   {item?.description}
                 </p>
-                {!readAll && (
+                {!readAll && item?.description?.split('\n')?.length > 6 && (
                   <div
                     onClick={() => setReadAll(true)}
                     className='mb-7 font-medium underline text-sm text-right cursor-pointer'
                   >
-                    Читать дальше
+                    Показать больше
                   </div>
                 )}
                 <div className='flex pb-5'>

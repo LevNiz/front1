@@ -147,7 +147,7 @@ const CategorySlider = ({ items, loading, error }) => {
                         from: el?.category?.nameRus,
                         category: el?.category?.id,
                       }}
-                      className='font-medium w-max text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
+                      className='font-medium text-xs ss:text-sm line-clamp-1 break-all hover:underline sm:mb-2'
                     >
                       {el?.name}
                     </NavLink>

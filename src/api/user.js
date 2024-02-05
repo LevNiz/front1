@@ -147,7 +147,7 @@ export const postResetPassword = async (data, state) => {
     };
 
     await request.patch(
-      'user/change_password/without_old_password/',
+      'user/change-password/without_old_password/',
       sendData,
       { headers }
     );

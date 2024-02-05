@@ -46,10 +46,6 @@
   }
 }
 
-.no-scroll {
-  overflow-y: hidden;
-}
-
 .scrollable::-webkit-scrollbar {
   height: 4px;
   width: 3px !important;

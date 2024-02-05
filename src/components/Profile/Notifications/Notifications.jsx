@@ -12,11 +12,11 @@ const Notifications = () => {
     setModalOpen(false);
   };
 
-  const notifications = []
+  const notifications = [];
 
   return (
     <>
-      {!notifications?.length ? (
+      {notifications?.length ? (
         <div className='content pl-0 md:pl-4 pr-0 lg:pr-4 py-4 grid mm:grid-cols-2 gap-3 md:gap-5'>
           <div className='pt-5'>
             <div className='flex justify-between items-center pb-5'>
