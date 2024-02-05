@@ -15,7 +15,6 @@ import { fetchAddresses } from '../../api/addresses';
 import ModalAddress from '../../helpers/Modals/ModalAddress';
 import Modal from '../../helpers/Modals/Modal';
 import { fetchCosts } from '../../api/costs';
-import { fetchCities } from '../../api/cities';
 
 import attention from '../../assets/icons/attention.svg';
 import attention2 from '../../assets/icons/attention.svg';
@@ -23,11 +22,15 @@ import info from '../../assets/icons/attention2.svg';
 import boxSize from '../../assets/images/box-size.jpeg';
 import receptionPoint from '../../assets/icons/receptionPoint.svg';
 import editIcon from '../../assets/icons/edit.svg';
+import { fetchAllDepots } from '../../api/depots';
 
 const ApplicationsUpdate = () => {
   const [order, setOrder] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectLoading, setSelectLoading] = useState(false);
+  const [fromDepotCity, setFromDepotCity] = useState([]);
+  const [toDepotCity, setToDepotCity] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
   const [params, setParams] = useState({});
   const [parcelData, setParcelData] = useState([]);
@@ -44,11 +47,10 @@ const ApplicationsUpdate = () => {
   const [services, setServices] = useState([]);
 
   const { costs } = useSelector((state) => state?.costs);
-  const { cities } = useSelector((state) => state?.cities);
   const { userID } = useSelector((state) => state?.user);
   const { extraServices } = useSelector((state) => state?.extraServices);
-  const dispatch = useDispatch();
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const closeModalAddress = () => {
     setModalOpenAddress(false);
@@ -76,6 +78,22 @@ const ApplicationsUpdate = () => {
     );
     setServices(updatedServices);
   };
+
+  useEffect(() => {
+    (async () => {
+      setSelectLoading(true);
+      const allDepotsData = await fetchAllDepots();
+      const fromCity = allDepotsData?.filter((depot) =>
+        costs?.some((cost) => cost?.fromCity?.id === depot?.city?.id)
+      );
+      const toCity = allDepotsData?.filter((depot) =>
+        costs?.some((cost) => cost?.toCity?.id === depot?.city?.id)
+      );
+      setFromDepotCity(fromCity);
+      setToDepotCity(toCity);
+      setSelectLoading(false);
+    })();
+  }, [costs]);
 
   const {
     handleSubmit,
@@ -113,18 +131,24 @@ const ApplicationsUpdate = () => {
             : 'Измерить на складе',
           weight: data?.packageData ? data?.packageData?.weight : null,
         });
+        setSelectedSenderCity({
+          value: data?.fromCity?.id || '',
+          fromCountry: data?.fromCity?.country,
+          label:
+            `${data?.fromCountry?.nameRu}, ${data?.fromCity?.nameRu}` || {},
+        });
         setIsLoading(false);
         return {
           senderCity: {
             value: data?.fromCity?.id || '',
             fromCountry: data?.fromCity?.country,
             label:
-              `${data?.fromCity?.nameRu}, ${data?.fromCountry?.nameRu}` || {},
+              `${data?.fromCountry?.nameRu}, ${data?.fromCity?.nameRu}` || {},
           },
           receiverCity: {
             value: data?.toCity?.id || '',
             toCountry: data?.toCity?.country,
-            label: `${data?.toCity?.nameRu}, ${data?.toCountry?.nameRu}` || {},
+            label: `${data?.toCountry?.nameRu}, ${data?.toCity?.nameRu}` || {},
           },
           length: data?.length > 0 ? data?.length : '',
           width: data?.width > 0 ? data?.width : '',
@@ -176,7 +200,6 @@ const ApplicationsUpdate = () => {
   useEffect(() => {
     (async () => {
       await fetchCosts(dispatch);
-      await fetchCities(dispatch);
     })();
   }, [dispatch]);
 
@@ -282,22 +305,19 @@ const ApplicationsUpdate = () => {
                         render={({ field }) => (
                           <Select
                             value={field.value}
-                            options={cities?.map((el) => ({
-                              value: el.id,
-                              label: `${el.nameRu}, ${el.country.nameRu}`,
+                            isLoading={selectLoading}
+                            options={fromDepotCity?.map((el) => ({
+                              value: el?.city?.id,
+                              label: `${el.country?.nameRu}, ${el?.city?.nameRu}`,
                               fromCountry: el.country.id,
                               isDisabled:
                                 selectedReceiverCity &&
-                                el.id === selectedReceiverCity.value,
+                                el?.city?.id === selectedReceiverCity.value,
                             }))}
                             placeholder='Выберите город'
                             onChange={(selectedOption) => {
-                              const modifiedOption = {
-                                ...selectedOption,
-                                fromCountry: selectedOption?.fromCountry,
-                              };
-                              field.onChange(modifiedOption);
-                              setSelectedSenderCity(modifiedOption);
+                              field.onChange(selectedOption);
+                              setSelectedSenderCity(selectedOption);
                             }}
                             menuPortalTarget={document.body}
                             styles={{
@@ -339,13 +359,19 @@ const ApplicationsUpdate = () => {
                         render={({ field }) => (
                           <Select
                             {...field}
-                            options={cities?.map((el) => ({
-                              value: el.id,
-                              label: `${el.nameRu}, ${el.country.nameRu}`,
+                            isLoading={selectLoading}
+                            options={toDepotCity?.map((el) => ({
+                              value: el?.city?.id,
+                              label: `${el?.country?.nameRu}, ${el?.city?.nameRu}`,
                               toCountry: el.country.id,
                               isDisabled:
-                                selectedSenderCity &&
-                                el.id === selectedSenderCity.value,
+                                !selectedSenderCity ||
+                                !costs?.some(
+                                  (cost) =>
+                                    cost?.fromCity?.id ===
+                                      selectedSenderCity?.value &&
+                                    cost?.toCity?.id === el?.city?.id
+                                ),
                             }))}
                             placeholder='Выберите город'
                             onChange={(selectedOption) => {

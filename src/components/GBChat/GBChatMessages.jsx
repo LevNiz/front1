@@ -87,8 +87,6 @@ const GBChatMessages = ({ chats, setChatContent }) => {
     };
   }, [id, senderData, navigate]);
 
-  console.log(messages);
-
   return (
     <div className='relative w-full'>
       <div className='flex items-center w-full p-2 bg-[#ECECEC] ld:border-r-[3px] border-[#bdbdbd]'>

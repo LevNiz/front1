@@ -56,7 +56,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
 
   const senderCityOptions = fromDepotCity?.map((el) => ({
     value: el?.city?.id,
-    label: `${el?.city?.nameRu}, ${el.country?.nameRu}`,
+    label: `${el.country?.nameRu}, ${el?.city?.nameRu}`,
     fromCountry: el.country.id,
     isDisabled:
       selectedReceiverCity && el?.city?.id === selectedReceiverCity.value,
@@ -64,7 +64,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
 
   const receiverCityOptions = toDepotCity?.map((el) => ({
     value: el?.city?.id,
-    label: `${el?.city?.nameRu}, ${el?.country?.nameRu}`,
+    label: `${el?.country?.nameRu}, ${el?.city?.nameRu}`,
     toCountry: el.country.id,
     isDisabled:
       !selectedSenderCity ||
