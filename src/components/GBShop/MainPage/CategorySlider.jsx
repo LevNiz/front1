@@ -89,7 +89,7 @@ const CategorySlider = ({ items, loading, error }) => {
                     <div className='h-[185px] sm:h-[220px] overflow-hidden relative bg-gray-50'>
                       <img
                         className='w-full h-full object-cover'
-                        src={el?.image}
+                        src={el?.imagelink ? el?.imagelink : el?.image}
                         onError={(e) => {
                           e.target.onError = null;
                           e.target.src = noImg;
