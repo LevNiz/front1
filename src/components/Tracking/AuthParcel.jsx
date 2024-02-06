@@ -1,16 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { parcelStatus } from '../../constants/statusData';
-import { FetchParcels, fetchSearchParcel } from '../../api/parcels';
+import {
+  FetchParcels,
+  fetchMoreParcels,
+  fetchSearchParcel,
+} from '../../api/parcels';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 import nounBox from './../../assets/icons/noun-box.svg';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import parcelIcon from './../../assets/images/parcel-icon.png';
+import { fetchNextPage } from '../../helpers/fetchNextPage/fetchNextPage';
 
 const Parcel = () => {
   const {
@@ -20,9 +25,13 @@ const Parcel = () => {
   } = useSelector((state) => state?.parcels);
   const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
+  const containerRef = useRef(null);
 
   const [userParcels, setUserParcels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
   const {
     register,
     handleSubmit,
@@ -45,9 +54,43 @@ const Parcel = () => {
 
   useEffect(() => {
     (async () => {
-      await FetchParcels(dispatch, userID);
+      const { success, count } = await FetchParcels(dispatch, userID);
+      if (success) {
+        setTotalPages(Math.ceil(count / 20));
+      }
     })();
   }, [dispatch, userID]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      const observer = new IntersectionObserver(
+        async ([entry]) => {
+          if (entry.isIntersecting) {
+            await fetchNextPage(
+              page,
+              setPage,
+              totalPages,
+              setUserParcels,
+              setScrollLoading,
+              fetchMoreParcels,
+              ''
+            );
+          }
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      );
+      observer.observe(container);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [page, totalPages]);
 
   return (
     <>
@@ -92,8 +135,8 @@ const Parcel = () => {
       ) : loading ? (
         <ContentLoading extraStyle='320px' />
       ) : userParcels?.length ? (
-        <div className='flex justify-center my-6 sm:my-16'>
-          <div className='max-w-[991px] w-full flex flex-col space-y-8'>
+        <div className='my-6 sm:my-16'>
+          <div className='max-w-[991px] mx-auto w-full flex flex-col space-y-8'>
             {userParcels?.map((el) => (
               <NavLink
                 to={`${el?.id}`}
@@ -116,11 +159,11 @@ const Parcel = () => {
                   </div>
                   <div
                     className={`max-w-[20%] sm:max-w-[auto] rounded-lg md:rounded-2xl flex justify-center sm:px-5 sm:py-2 px-2 py-[2px] ${
-                      parcelStatus[el?.status].statusStyle
+                      parcelStatus[el?.status]?.statusStyle
                     }`}
                   >
                     <span className='text-[9px] sm:text-xs sm:font-medium text-ellipsis overflow-hidden whitespace-nowrap'>
-                      {parcelStatus[el?.status].name || 'Не указан'}
+                      {parcelStatus[el?.status]?.name || 'Не указан'}
                     </span>
                   </div>
                 </div>
@@ -176,6 +219,9 @@ const Parcel = () => {
                 </div>
               </NavLink>
             ))}
+          </div>
+          <div ref={containerRef} className='p-1'>
+            {scrollLoading && <ContentLoading />}
           </div>
         </div>
       ) : (

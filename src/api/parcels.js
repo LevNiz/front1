@@ -14,8 +14,18 @@ export const FetchParcels = async (dispatch, userID) => {
   try {
     const res = await request.get(`core/package/?client=${userID}`);
     dispatch(fetchParcelsSuccess(res?.data?.results));
+    return { success: true, count: res?.data?.count };
   } catch (error) {
     dispatch(fetchParcelsFailure(error));
+  }
+};
+
+export const fetchMoreParcels = async (empty, page) => {
+  try {
+    const res = await request.get(`/core/depot/?page=${page}`);
+    return { success: true, data: res?.data?.results };
+  } catch (error) {
+    return { success: false };
   }
 };
 
