@@ -74,7 +74,7 @@ const Parcel = () => {
               setUserParcels,
               setScrollLoading,
               fetchMoreParcels,
-              ''
+              userID
             );
           }
         },
@@ -90,7 +90,7 @@ const Parcel = () => {
         observer.disconnect();
       };
     }
-  }, [page, totalPages]);
+  }, [page, totalPages, userID]);
 
   return (
     <>

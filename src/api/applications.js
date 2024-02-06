@@ -107,8 +107,21 @@ export const fetchApplications = async (userID, dispatch) => {
       (el) => el?.archive === false
     );
     dispatch(fetchApplicationSuccess(applications));
+    return { success: true, count: res?.data?.count };
   } catch (error) {
     dispatch(fetchApplicationFailure(error));
+    return { success: false };
+  }
+};
+
+export const fetchMoreApplications = async (userID, page) => {
+  try {
+    const res = await request.get(
+      `/core/request/?page=${page}&client=${userID}`
+    );
+    return { success: true, data: res?.data?.results };
+  } catch (error) {
+    return { success: false };
   }
 };
 

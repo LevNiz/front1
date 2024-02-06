@@ -20,9 +20,11 @@ export const FetchParcels = async (dispatch, userID) => {
   }
 };
 
-export const fetchMoreParcels = async (empty, page) => {
+export const fetchMoreParcels = async (userID, page) => {
   try {
-    const res = await request.get(`/core/depot/?page=${page}`);
+    const res = await request.get(
+      `/core/package/?page=${page}&client=${userID}`
+    );
     return { success: true, data: res?.data?.results };
   } catch (error) {
     return { success: false };

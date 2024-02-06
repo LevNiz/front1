@@ -1,12 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchApplications } from '../../api/applications';
+import {
+  fetchApplications,
+  fetchMoreApplications,
+} from '../../api/applications';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import noRequest from './../../assets/images/no-request.svg';
 import { NavLink } from 'react-router-dom';
+import { fetchNextPage } from '../../helpers/fetchNextPage/fetchNextPage';
 
 const ApplicationsItem = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -14,12 +18,56 @@ const ApplicationsItem = () => {
     (state) => state?.applications
   );
   const dispatch = useDispatch();
+  const containerRef = useRef(null);
+
+  const [applicationsData, setApplicationsData] = useState([]);
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     (async () => {
-      await fetchApplications(userID, dispatch);
+      const { success, count } = await fetchApplications(userID, dispatch);
+      if (success) {
+        setTotalPages(Math.ceil(count / 20));
+      }
     })();
   }, [dispatch, userID]);
+
+  useEffect(() => {
+    setApplicationsData(applications);
+  }, [applications]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      const observer = new IntersectionObserver(
+        async ([entry]) => {
+          if (entry.isIntersecting) {
+            await fetchNextPage(
+              page,
+              setPage,
+              totalPages,
+              setApplicationsData,
+              setScrollLoading,
+              fetchMoreApplications,
+              userID
+            );
+          }
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      );
+      observer.observe(container);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [page, totalPages, userID]);
 
   return (
     <div className='max-w-[991px] w-full flex flex-col space-y-8 mx-auto py-10'>
@@ -27,9 +75,9 @@ const ApplicationsItem = () => {
         <ContentLoading extraStyle='320px' />
       ) : error ? (
         <ErrorServer />
-      ) : applications?.length ? (
+      ) : applicationsData?.length ? (
         <>
-          {applications?.map((el) => (
+          {applicationsData?.map((el) => (
             <NavLink
               to={`${el?.id}`}
               key={el?.id}
@@ -96,6 +144,9 @@ const ApplicationsItem = () => {
               </div>
             </NavLink>
           ))}
+          <div ref={containerRef} className='p-1'>
+            {scrollLoading && <ContentLoading />}
+          </div>
         </>
       ) : (
         <ErrorEmpty
