@@ -29,10 +29,13 @@ const GBShopFooter = () => {
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Контакты</li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              Тел: +996 123 456 678
+              +996(550)-666-044
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              Эл. почта: givbox@givbox.ru
+              8(800)201-07-88
+            </li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              support@givbox.ru
             </li>
           </ul>
           <ul className='space-y-2'>
