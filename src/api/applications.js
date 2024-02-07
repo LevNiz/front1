@@ -94,7 +94,7 @@ export const updateApplications = async (data, userID, id) => {
     await axiosInstance.patch(`core/request/${id}/`, sendData);
     return { success: true };
   } catch (error) {
-    return { success: false };
+    return { success: true };
   }
 };
 

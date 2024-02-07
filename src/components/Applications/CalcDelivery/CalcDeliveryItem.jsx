@@ -7,10 +7,10 @@ import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { useDispatch, useSelector } from 'react-redux';
 
 const CalcDeliveryItem = () => {
-  const [parcelCost, setParcelCost] = useState('');
   const [isClickedForm, setIsClickedForm] = useState(false);
   const [orderData, setOrderData] = useState({});
   const [tariff, setTariff] = useState(null);
+  const [tariffCost, setTariffCost] = useState({ standart: '', premium: '' });
 
   const { costs } = useSelector((state) => state?.costs);
   const navigate = useNavigate();
@@ -24,6 +24,8 @@ const CalcDeliveryItem = () => {
   const handleGetTariff = (data) => {
     setTariff(data);
   };
+
+  console.log(tariff);
 
   useEffect(() => {
     (async () => {
@@ -40,27 +42,25 @@ const CalcDeliveryItem = () => {
     if (cityParcelCost) {
       const costPerKg = cityParcelCost.costPerKg;
       const costPerKgMy = cityParcelCost?.costPerKgMy;
-
       let cost;
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
         const parcelWeight = (width * length * height) / 5000;
-        cost =
-          Math.max(parcelWeight, data.weight) *
-          (tariff === 1 ? costPerKg : costPerKgMy);
+        cost = Math.max(parcelWeight, data.weight);
       } else if (data.parcelSize.value === 'measurement') {
         cost = 0;
       } else {
-        cost =
-          Number(data.parcelSize.weight) *
-          (tariff === 1 ? costPerKg : costPerKgMy);
+        cost = Number(data.parcelSize.weight);
       }
-      setParcelCost(cost.toFixed(2));
+      setTariffCost({
+        standart: (costPerKg * cost)?.toFixed(2),
+        premium: (costPerKgMy * cost)?.toFixed(2),
+      });
       setIsClickedForm(true);
       setOrderData(data);
     } else {
       alert('На данный момент выбранный маршрут недоступен');
-      setParcelCost(0);
+      setTariffCost(0);
       setIsClickedForm(true);
     }
   };
@@ -80,7 +80,7 @@ const CalcDeliveryItem = () => {
       {isClickedForm && (
         <div className='lg:flex mt-10'>
           <CalcDeliveryTariffs
-            parcelCost={parcelCost}
+            tariffCost={tariffCost}
             onHandleGetTariff={handleGetTariff}
           />
           <div className='lg:w-[33%] md:shadow-[0_8px_34px_#00000026] md:p-7 rounded-xl h-[fit-content]'>
@@ -100,7 +100,7 @@ const CalcDeliveryItem = () => {
                   state: {
                     orderData: orderData,
                     tariff: tariff,
-                    parcelCost: parcelCost,
+                    tariffCost: tariffCost,
                   },
                 })
               }

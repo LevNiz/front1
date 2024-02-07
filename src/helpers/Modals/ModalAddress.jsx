@@ -143,7 +143,7 @@ const ModalAddress = ({ isOpen, onClose, onReceiver }) => {
                         onClose();
                         onReceiver(el);
                       }}
-                      className='bg-colYellow hover:opacity-70 duration-200 w-full p-2 rounded-md mt-5 text-sm font-medium'
+                      className='bg-black text-white hover:opacity-70 duration-200 w-full p-2 rounded-md mt-5 text-sm font-medium'
                     >
                       Выбрать
                     </button>

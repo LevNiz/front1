@@ -48,13 +48,21 @@ const SApplicationTariffs = ({
             <div className='py-2 flex items-center'>
               <h3 className='text-2xl mm:text-3xl font-bold whitespace-nowrap'>
                 {parcelCost
-                  ? `${parseFloat(parcelCost).toFixed(2)} $`
+                  ? `${
+                      el?.id === 1
+                        ? parseFloat(parcelCost?.standart).toFixed(2)
+                        : parseFloat(parcelCost?.premium).toFixed(2)
+                    } $`
                   : '00.00 $'}
               </h3>
               <span className='text-sm font-medium pl-1 pt-2 break-all break-words'>
                 (
                 {parcelCost
-                  ? `${parseFloat(parcelCost).toFixed(2) * currency} с`
+                  ? `${
+                      el?.id === 1
+                        ? parseFloat(parcelCost?.standart).toFixed(2) * currency
+                        : parseFloat(parcelCost?.premium).toFixed(2) * currency
+                    } с`
                   : '00.00 $'}
                 )
               </span>

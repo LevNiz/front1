@@ -28,7 +28,9 @@ const SApplicationItem = () => {
     formState: { errors },
   } = useForm();
 
-  const [parcelCost, setParcelCost] = useState(state?.parcelCost);
+  const [tariffCost, setTariffCost] = useState(
+    state?.tariffCost ? state?.tariffCost : null
+  );
   const [params, setParams] = useState(state);
   const [isDisabled, setIsDisabled] = useState(
     state === null || state?.orderData?.depotTariff ? true : false
@@ -48,10 +50,6 @@ const SApplicationItem = () => {
       await fetchCosts(dispatch);
     })();
   }, [dispatch]);
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
 
   const onHandleTariff = (data) => {
     setTariff(data);
@@ -96,19 +94,18 @@ const SApplicationItem = () => {
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
         const parcelWeight = (width * length * height) / 5000;
-        parCost =
-          Math.max(parcelWeight, data.weight) *
-          (tariff === 1 ? costPerKg : costPerKgMy);
+        parCost = Math.max(parcelWeight, data.weight);
       } else if (data.parcelSize.value === 'measurement') {
         parCost = 0;
       } else {
-        parCost =
-          data.parcelSize.weight * (tariff === 1 ? costPerKg : costPerKgMy);
+        parCost = Number(data.parcelSize.weight);
       }
-      setParcelCost(parCost?.toFixed(2));
+      setTariffCost({
+        standart: (costPerKg * parCost)?.toFixed(2),
+        premium: (costPerKgMy * parCost)?.toFixed(2),
+      });
     } else {
-      // setIsDisabled(true);
-      setParcelCost(0);
+      setTariffCost(0);
       alert('На данный момент выбранный маршрут недоступен');
     }
   };
@@ -120,7 +117,10 @@ const SApplicationItem = () => {
       ...params,
       ...data,
       receiver: receiver,
-      cost: parcelCost,
+      cost:
+        tariff === 1
+          ? Number(tariffCost?.standart)
+          : Number(tariffCost?.premium),
       extraServices: serviceIds,
     };
     const { success } = await postApplications(requestData, userID);
@@ -160,7 +160,7 @@ const SApplicationItem = () => {
               state={state}
               onSubmit={onSubmitCalc}
               onHandleTariff={onHandleTariff}
-              cost={parcelCost}
+              cost={tariffCost}
             />
           </div>
           <div
@@ -227,17 +227,24 @@ const SApplicationItem = () => {
                 <span className='text-lg ss:whitespace-nowrap'>
                   Общая стоимость:
                 </span>
-                {parcelCost > 0 ? (
+                {tariffCost ? (
                   <div className='flex items-center'>
                     <span className='text-xl mx-1 whitespace-nowrap'>
-                      $ {parcelCost}
+                      ${' '}
+                      {tariff === 1
+                        ? tariffCost?.standart
+                        : tariffCost?.premium}
                     </span>
                     <span className='text-sm mx-1 whitespace-nowrap'>
-                      ({parcelCost * currency} c)
+                      (
+                      {tariff === 1
+                        ? tariffCost?.standart * currency
+                        : tariffCost?.premium * currency}{' '}
+                      c)
                     </span>
                   </div>
                 ) : (
-                  <span className='font-medium pl-2 text-xl'>0</span>
+                  <span className='font-medium pl-2 text-xl'>00.00</span>
                 )}
               </div>
               <div className='flex justify-end items-center mt-8 md:mt-0 sm:max-w-[320px] w-full ml-auto'>
@@ -258,7 +265,11 @@ const SApplicationItem = () => {
           </div>
         </div>
       </div>
-      <Modal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        content={modalContent}
+      />
       {isLoading ? <Loading /> : ''}
     </>
   );

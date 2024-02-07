@@ -3,7 +3,7 @@ import { tariffsData } from '../../../constants/tariffsData';
 import receptionPoint from '../../../assets/icons/receptionPoint.svg';
 import { currency } from '../../../constants/currency';
 
-const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
+const CalcDeliveryTariffs = ({ tariffCost, onHandleGetTariff }) => {
   const [activeTariff, setActiveTariff] = useState(null);
 
   const handleTariffClick = (id) => {
@@ -40,15 +40,21 @@ const CalcDeliveryTariffs = ({ parcelCost, onHandleGetTariff }) => {
             </div>
             <div className='py-2 flex items-center'>
               <h3 className='text-2xl mm:text-3xl font-bold whitespace-nowrap'>
-                {parcelCost
-                  ? `${parseFloat(parcelCost).toFixed(2)} $`
+                {tariffCost?.standart !== '' && tariffCost?.premium !== ''
+                  ? `${
+                      el?.id === 1 ? tariffCost?.standart : tariffCost?.premium
+                    } $`
                   : '00.00 $'}
               </h3>
               <span className='text-sm font-medium pl-1 pt-2 break-all break-words'>
                 (
-                {parcelCost
-                  ? `${parseFloat(parcelCost).toFixed(2) * currency} с`
-                  : '00.00 $'}
+                {tariffCost?.standart !== '' && tariffCost?.premium !== ''
+                  ? `${
+                      el?.id === 1
+                        ? (tariffCost?.standart * currency).toFixed(2)
+                        : (tariffCost?.premium * currency).toFixed(2)
+                    } с`
+                  : '00.00 c'}
                 )
               </span>
             </div>
