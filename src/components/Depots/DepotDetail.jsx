@@ -43,7 +43,7 @@ const DepotDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const sanctionCountryIds = [1, 13, 14, 21, 23];
+  const sanctionCountryIds = [1, 13, 14, 21, 23, 11];
 
   const filteredTariffs = costs?.filter(
     (el) => el?.fromCity?.id === depotItem?.city?.id
