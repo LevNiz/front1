@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWalletHistory } from '../../../api/wallet';
+import WalletHistory from './WalletHistory';
+import { fetchUser } from '../../../api/client';
+import { currency } from '../../../constants/currency';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import emptyWallet from '../../../assets/images/empty-wallet.png';
-import WalletHistory from './WalletHistory';
-import { fetchUser } from '../../../api/client';
-import { currency } from '../../../constants/currency';
+import usaFlag from '../../../assets/images/usa.svg';
+import ExchangeRate from './ExchangeRate';
 
 const MyWallet = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -41,42 +43,51 @@ const MyWallet = () => {
         <ErrorServer />
       ) : (
         <>
-          <div className='lg:flex justify-between items-center'>
-            <div className='flex justify-between items-center lg:max-w-sm w-full p-4 shadow-[0_0_12px_#00000026] rounded-md mb-8 lg:mb-0'>
-              <div className='text-center w-[48%] flex justify-center items-center'>
-                <p className='font-medium text-lg line-clamp-1 break-all whitespace-nowrap'>
-                  {user && user?.wallet[0]?.amount.toFixed(1)}
-                </p>
-                <span className='pl-1 pt-[2px] font-medium text-sm'>$</span>
+          <div className=''>
+            <div className='w-full p-4 shadow-[0_0_12px_#dedede] rounded-xl flex justify-between items-center'>
+              <div>
+                <p className='text-sm pb-3'>Ваш текущий баланс</p>
+                <div className='flex items-center'>
+                  <img src={usaFlag} alt='*' />
+                  <div className='pl-4 flex items-center'>
+                    <p className='font-medium text-lg line-clamp-1 break-all whitespace-nowrap'>
+                      {user && `$ ${user?.wallet[0]?.amount.toFixed(1)}`}
+                    </p>
+                    <span className='pt-[2px] pl-1 text-sm'>
+                      {user &&
+                        `(${(user?.wallet[0]?.amount * currency)?.toFixed(
+                          1
+                        )} сом)`}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className='min-w-[2px] h-10 bg-gray-300'></div>
-              <div className='text-center w-[48%] flex justify-center items-center'>
-                <p className='font-medium text-lg line-clamp-1 break-all whitespace-nowrapv'>
-                  {user && (user?.wallet[0]?.amount * currency).toFixed(1)}
-                </p>
-                <span className='pl-1 pt-[2px] font-medium text-sm underline'>
-                  C
-                </span>
-              </div>
+              <NavLink
+                to='top-up'
+                state={{ user: user }}
+                className='hover:opacity-80 p-3 rounded-xl border-2 border-colGray duration-150 sm:max-w-[200px] text-center w-full'
+              >
+                + Пополнить баланс
+              </NavLink>
             </div>
-            <NavLink
-              to='top-up'
-              state={{ user: user }}
-              className='lg:block flex justify-center font-medium hover:opacity-80 p-4 rounded-lg bg-black text-white duration-150 sm:max-w-[240px] text-center w-full'
-            >
-              Пополнить баланс
-            </NavLink>
           </div>
-          <h3 className='mt-8 mb-5 font-medium'>История операций</h3>
-          {walletHistory?.length ? (
-            <WalletHistory transactions={walletHistory} />
-          ) : (
-            <ErrorEmpty
-              title='Список пуст'
-              desc='Вы пока не делали операции по вашему кошелку'
-              image={emptyWallet}
-            />
-          )}
+          <div className='flex space-x-5 mt-5'>
+            <div className='w-[55%] shadow-[0_0_16px_#dedede] rounded-xl py-4 pl-4 pr-2'>
+              <p className='text-sm pb-2'>История операций</p>
+              {walletHistory?.length ? (
+                <WalletHistory transactions={walletHistory} />
+              ) : (
+                <ErrorEmpty
+                  title='Список пуст'
+                  desc='Вы пока не делали операции по вашему кошелку'
+                  image={emptyWallet}
+                />
+              )}
+            </div>
+            <div className='w-[45%] p-4 shadow-[0_0_12px_#dedede] rounded-xl'>
+              <ExchangeRate />
+            </div>
+          </div>
         </>
       )}
     </div>

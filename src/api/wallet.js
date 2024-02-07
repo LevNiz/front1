@@ -9,7 +9,9 @@ import { axiosInstance, request } from './axios';
 export const fetchWalletHistory = async (dispatch, userID) => {
   dispatch(fetchWalletHistoryStart());
   try {
-    const res = await request.get(`user/wallet_history/?client=${userID}`);
+    const res = await request.get(
+      `user/wallet_history/?client=${userID}&ordering=-date`
+    );
     dispatch(fetchWalletHistorySuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchWalletHistoryFailure(error));
