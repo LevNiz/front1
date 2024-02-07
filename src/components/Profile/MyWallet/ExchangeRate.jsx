@@ -6,7 +6,7 @@ const ExchangeRate = () => {
   return (
     <div>
       <h2 className='font-medium text-center text-xl mb-2'>Курсы валют</h2>
-      <div className='flex justify-between items-center py-2'>
+      <div className='ss:flex justify-between items-center py-2 space-y-1 ss:space-y-0'>
         <span className='text-lg'>Выберите валюту</span>
         <Select
           options={[
@@ -16,7 +16,7 @@ const ExchangeRate = () => {
               currencyName: 'KGZ',
             },
           ]}
-          className='sm:max-w-[140px] w-full outline-none'
+          className='ss:max-w-[140px] w-full outline-none'
           defaultValue={{
             id: 1,
             countryFlag: kgFlag,
@@ -50,7 +50,7 @@ const ExchangeRate = () => {
           }}
         />
       </div>
-      <div className='flex justify-between items-center py-1'>
+      <div className='flex justify-between items-center py-1 mt-2 ss:mt-0'>
         <span className='text-sm text-gray-700'>Текущий курс</span>
         <span className='text-sm text-colGray3'>Обновление 05.02.2024</span>
       </div>

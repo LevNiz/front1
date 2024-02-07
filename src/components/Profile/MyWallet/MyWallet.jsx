@@ -36,32 +36,32 @@ const MyWallet = () => {
 
   return (
     <div className='pt-6 md:p-4 w-full'>
-      <h3 className='ss:text-xl font-medium pb-5'>Мой кошелек</h3>
+      <h3 className='text-2xl font-medium pb-5'>Мой кошелек</h3>
       {loading ? (
         <ContentLoading extraStyle='380px' />
       ) : error ? (
         <ErrorServer />
       ) : (
         <>
-          <div className=''>
-            <div className='w-full p-4 shadow-[0_0_12px_#dedede] rounded-xl flex justify-between items-center'>
-              <div>
-                <p className='text-sm pb-3'>Ваш текущий баланс</p>
-                <div className='flex items-center'>
-                  <img src={usaFlag} alt='*' />
-                  <div className='pl-4 flex items-center'>
-                    <p className='font-medium text-lg line-clamp-1 break-all whitespace-nowrap'>
-                      {user && `$ ${user?.wallet[0]?.amount.toFixed(1)}`}
-                    </p>
-                    <span className='pt-[2px] pl-1 text-sm'>
-                      {user &&
-                        `(${(user?.wallet[0]?.amount * currency)?.toFixed(
-                          1
-                        )} сом)`}
-                    </span>
-                  </div>
+          <div className='w-full p-4 shadow-[0_0_12px_#dedede] rounded-xl mm:flex justify-between items-center'>
+            <div className='pb-5'>
+              <p className='text-sm pb-3'>Ваш текущий баланс</p>
+              <div className='flex items-center'>
+                <img src={usaFlag} alt='*' />
+                <div className='pl-4 flex items-center'>
+                  <p className='font-medium text-lg line-clamp-1 break-all whitespace-nowrap'>
+                    {user && `$ ${user?.wallet[0]?.amount.toFixed(1)}`}
+                  </p>
+                  <span className='pt-[2px] pl-1 text-sm whitespace-nowrap'>
+                    {user &&
+                      `(${(user?.wallet[0]?.amount * currency)?.toFixed(
+                        1
+                      )} сом)`}
+                  </span>
                 </div>
               </div>
+            </div>
+            <div className='flex'>
               <NavLink
                 to='top-up'
                 state={{ user: user }}
@@ -71,8 +71,8 @@ const MyWallet = () => {
               </NavLink>
             </div>
           </div>
-          <div className='flex space-x-5 mt-5'>
-            <div className='w-[55%] shadow-[0_0_16px_#dedede] rounded-xl py-4 pl-4 pr-2'>
+          <div className='xl:flex xl:space-x-5 mt-5'>
+            <div className='xl:w-[55%] shadow-[0_0_16px_#dedede] rounded-xl py-4 pl-4 pr-2'>
               <p className='text-sm pb-2'>История операций</p>
               {walletHistory?.length ? (
                 <WalletHistory transactions={walletHistory} />
@@ -84,7 +84,7 @@ const MyWallet = () => {
                 />
               )}
             </div>
-            <div className='w-[45%] p-4 shadow-[0_0_12px_#dedede] rounded-xl'>
+            <div className='xl:w-[45%] p-4 shadow-[0_0_12px_#dedede] rounded-xl mt-5 xl:mt-0'>
               <ExchangeRate />
             </div>
           </div>

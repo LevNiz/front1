@@ -13,7 +13,9 @@ const WalletHistory = ({ transactions }) => {
                 <img src={arrowImg} alt='*' />
               </div>
               <div className='pl-3'>
-                <p className='pr-2'>{transaction?.description}</p>
+                <p className='pr-2 leading-4 pb-[2px]'>
+                  {transaction?.description}
+                </p>
                 <p className='text-gray-500 text-xs'>
                   {format(new Date(transaction?.date), 'd MMMM yyyy, HH:mm', {
                     locale: ruLocale,
@@ -24,7 +26,7 @@ const WalletHistory = ({ transactions }) => {
             <p
               className={`text-${
                 transaction?.amount > 0 ? 'green' : 'red'
-              }-500 font-medium`}
+              }-500 font-medium whitespace-nowrap`}
             >
               {transaction.amount > 0
                 ? `+${transaction?.amount?.toFixed(1)} $`
