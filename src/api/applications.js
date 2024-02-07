@@ -138,11 +138,10 @@ export const fetchApplicationsDetail = async (id) => {
 export const fetchArchiveApplications = async (userID, dispatch) => {
   dispatch(fetchArchiveApplicationStart());
   try {
-    const res = await request.get(`core/request/?client=${userID}`);
-    const archiveApplications = res?.data?.results?.filter(
-      (el) => el?.archive === true
+    const res = await request.get(
+      `core/request/?client=${userID}&archive=true`
     );
-    dispatch(fetchArchiveApplicationSuccess(archiveApplications));
+    dispatch(fetchArchiveApplicationSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchArchiveApplicationFailure(error));
   }
