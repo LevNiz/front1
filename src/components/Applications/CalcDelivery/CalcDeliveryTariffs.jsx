@@ -12,12 +12,12 @@ const CalcDeliveryTariffs = ({ tariffCost, onHandleGetTariff }) => {
   };
 
   return (
-    <div className='lg:w-[66%] md:shadow-[0_8px_34px_#00000026] md:p-7 rounded-xl mb-10 lg:mb-0 lg:mr-10'>
+    <div className='md:w-3/5 xl:w-1/3 md:shadow-[0_8px_34px_#00000026] md:p-7 rounded-xl mb-10 lg:mb-0 lg:mr-10'>
       <h3 className='text-xl text-[#6747e5] pb-1 font-medium'>Выбор тарифа</h3>
       <p className='mb-3 text-xs'>
         Выберите тариф <span className='text-red-500'>*</span>
       </p>
-      <div className='grid md:grid-cols-2 gap-5'>
+      <div className=''>
         {tariffsData?.map((el) => (
           <div
             key={el.id}

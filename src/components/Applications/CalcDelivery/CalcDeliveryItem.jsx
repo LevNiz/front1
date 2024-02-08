@@ -89,7 +89,7 @@ const CalcDeliveryItem = () => {
                 handleButtonClick();
                 scrollToTop();
               }}
-              className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 sm:max-w-[320px] w-full mr-4 lg:mr-0'
+              className='font-medium hover:opacity-80 p-4 rounded-lg bg-colYellow duration-150 mm:max-w-[320px] w-full mr-4 lg:mr-0'
             >
               Изменить параматеры
             </button>
@@ -106,7 +106,7 @@ const CalcDeliveryItem = () => {
               }
               className={`${
                 !tariff ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80'
-              } font-medium p-4 rounded-lg bg-black text-white duration-150 sm:max-w-[320px] w-full mt-4`}
+              } font-medium p-4 rounded-lg bg-black text-white duration-150 mm:max-w-[320px] w-full mt-4`}
             >
               Оформить заявку
             </button>
