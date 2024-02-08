@@ -13,14 +13,14 @@ const ExchangeRate = () => {
             {
               id: 1,
               countryFlag: kgFlag,
-              currencyName: 'KGZ',
+              currencyName: 'KGS',
             },
           ]}
           className='ss:max-w-[140px] w-full outline-none'
           defaultValue={{
             id: 1,
             countryFlag: kgFlag,
-            currencyName: 'KGZ',
+            currencyName: 'KGS',
           }}
           isSearchable={false}
           getOptionLabel={(option) => (
