@@ -396,7 +396,7 @@ const SApplicationForm = ({ state, onSubmit, onHandleTariff, cost }) => {
       </form>
       <OrderDeliveryTariffs
         state={state}
-        parcelCost={cost}
+        tariffCost={cost}
         onHandleTariff={onHandleTariff}
         onChoseTariff={onChoseTariff}
       />

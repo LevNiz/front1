@@ -23,10 +23,11 @@ import boxSize from '../../assets/images/box-size.jpeg';
 import receptionPoint from '../../assets/icons/receptionPoint.svg';
 import editIcon from '../../assets/icons/edit.svg';
 import { fetchAllDepots } from '../../api/depots';
+import { currency } from '../../constants/currency';
 
 const ApplicationsUpdate = () => {
   const [order, setOrder] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [selectLoading, setSelectLoading] = useState(false);
   const [fromDepotCity, setFromDepotCity] = useState([]);
@@ -43,8 +44,8 @@ const ApplicationsUpdate = () => {
   const [receiver, setReceiver] = useState(order?.address);
   const [selectedSenderCity, setSelectedSenderCity] = useState();
   const [selectedReceiverCity, setSelectedReceiverCity] = useState();
-  const [parcelCost, setParcelCost] = useState(null);
   const [services, setServices] = useState([]);
+  const [tariffCost, setTariffCost] = useState({ standart: '', premium: '' });
 
   const { costs } = useSelector((state) => state?.costs);
   const { userID } = useSelector((state) => state?.user);
@@ -227,20 +228,18 @@ const ApplicationsUpdate = () => {
       if (data.parcelSize.value === 'custom') {
         const { width, length, height } = data;
         const parcelWeight = (width * length * height) / 5000;
-        parCost =
-          Math.max(parcelWeight, data.weight) *
-          (selectedTariff === 1 ? costPerKg : costPerKgMy);
+        parCost = Math.max(parcelWeight, data.weight);
       } else if (data.parcelSize.value === 'measurement') {
         parCost = 0;
       } else {
-        parCost =
-          data.parcelSize.weight *
-          (selectedTariff === 1 ? costPerKg : costPerKgMy);
+        parCost = data.parcelSize.weight;
       }
-      setParcelCost(parCost?.toFixed(2));
+      setTariffCost({
+        standart: (costPerKg * parCost)?.toFixed(2),
+        premium: (costPerKgMy * parCost)?.toFixed(2),
+      });
     } else {
-      setParcelCost('00.00');
-      alert('Цена доставки не указана! (из города / в город)');
+      alert('На данный момент выбранный маршрут недоступен');
     }
   };
 
@@ -251,7 +250,10 @@ const ApplicationsUpdate = () => {
       ...params,
       ...data,
       receiver: receiver,
-      cost: parcelCost,
+      cost:
+        selectedTariff === 1
+          ? Number(tariffCost?.standart)
+          : Number(tariffCost?.premium),
       extraServices: serviceIds,
     };
     const { success } = await updateApplications(requestData, userID, id);
@@ -641,9 +643,41 @@ const ApplicationsUpdate = () => {
                             {el?.status}
                           </span>
                         </div>
-                        <div className='py-2 text-2xl mm:text-3xl font-bold'>
-                          {parcelCost ? parcelCost : order?.cost} $
+                        <div className='pt-2 pb-1 flex items-center'>
+                          <h3 className='text-2xl mm:text-3xl font-bold whitespace-nowrap'>
+                            {tariffCost?.standart !== '' &&
+                            tariffCost?.premium !== ''
+                              ? `${
+                                  el?.id === 1
+                                    ? tariffCost?.standart
+                                    : tariffCost?.premium
+                                } $`
+                              : '00.00 $'}
+                          </h3>
+                          <span className='text-sm font-medium pl-1 pt-2 break-all break-words'>
+                            (
+                            {tariffCost?.standart !== '' &&
+                            tariffCost?.premium !== ''
+                              ? `${
+                                  el?.id === 1
+                                    ? (tariffCost?.standart * currency).toFixed(
+                                        2
+                                      )
+                                    : (tariffCost?.premium * currency).toFixed(
+                                        2
+                                      )
+                                } с`
+                              : '00.00 c'}
+                            )
+                          </span>
                         </div>
+                        <p className='text-xs'>
+                          Для пользователей <br />
+                          премиум <strong>{tariffCost?.premium} $</strong>{' '}
+                          <span className='text-[10px]'>
+                            ({tariffCost?.premium * currency} cом)
+                          </span>
+                        </p>
                         <div className='py-5'>
                           <div className='flex items-center'>
                             <img className='w-5' src={receptionPoint} alt='*' />
@@ -917,11 +951,27 @@ const ApplicationsUpdate = () => {
                 </div>
               </div>
               <div className='md:flex justify-between items-center mt-5 mm:mt-12'>
-                <div className='flex justify-end md:justify-start sm:max-w-[320px] font-medium w-full md:ml-0 ml-auto items-center p-5'>
+                <div className='flex justify-end md:justify-start font-medium w-full md:ml-0 ml-auto items-center p-5'>
                   <span className='text-lg'>Общая стоимость:</span>
-                  <span className='text-xl mx-1 '>
-                    {parcelCost ? parcelCost : order?.cost} $
-                  </span>
+                  {tariffCost.standart !== '' && tariffCost.premium !== '' ? (
+                    <div className='flex items-center'>
+                      <span className='text-xl mx-1 whitespace-nowrap'>
+                        ${' '}
+                        {selectedTariff === 1
+                          ? tariffCost?.standart
+                          : tariffCost?.premium}
+                      </span>
+                      <span className='text-sm mx-1 whitespace-nowrap'>
+                        (
+                        {selectedTariff === 1
+                          ? tariffCost?.standart * currency
+                          : tariffCost?.premium * currency}{' '}
+                        c)
+                      </span>
+                    </div>
+                  ) : (
+                    <span className='font-medium pl-2 text-xl'>00.00</span>
+                  )}
                 </div>
                 <div className='flex justify-end items-center mt-8 md:mt-0 sm:max-w-[320px] w-full ml-auto'>
                   <button

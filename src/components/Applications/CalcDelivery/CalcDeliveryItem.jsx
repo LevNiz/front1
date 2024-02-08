@@ -25,8 +25,6 @@ const CalcDeliveryItem = () => {
     setTariff(data);
   };
 
-  console.log(tariff);
-
   useEffect(() => {
     (async () => {
       await fetchCosts(dispatch);

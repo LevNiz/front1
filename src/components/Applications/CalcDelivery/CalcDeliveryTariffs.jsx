@@ -58,6 +58,13 @@ const CalcDeliveryTariffs = ({ tariffCost, onHandleGetTariff }) => {
                 )
               </span>
             </div>
+            <p className='text-xs'>
+              Для пользователей <br />
+              премиум <strong>{tariffCost?.premium} $</strong>{' '}
+              <span className='text-[10px]'>
+                ({tariffCost?.premium * currency} cом)
+              </span>
+            </p>
             <div className='py-5'>
               <div className='flex items-center'>
                 <img className='w-5' src={receptionPoint} alt='*' />

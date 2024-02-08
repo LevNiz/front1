@@ -5,7 +5,7 @@ import { currency } from '../../../constants/currency';
 
 const SApplicationTariffs = ({
   state,
-  parcelCost,
+  tariffCost,
   onHandleTariff,
   onChoseTariff,
 }) => {
@@ -47,26 +47,33 @@ const SApplicationTariffs = ({
             </div>
             <div className='py-2 flex items-center'>
               <h3 className='text-2xl mm:text-3xl font-bold whitespace-nowrap'>
-                {parcelCost
+                {tariffCost
                   ? `${
                       el?.id === 1
-                        ? parseFloat(parcelCost?.standart).toFixed(2)
-                        : parseFloat(parcelCost?.premium).toFixed(2)
+                        ? parseFloat(tariffCost?.standart).toFixed(2)
+                        : parseFloat(tariffCost?.premium).toFixed(2)
                     } $`
                   : '00.00 $'}
               </h3>
               <span className='text-sm font-medium pl-1 pt-2 break-all break-words'>
                 (
-                {parcelCost
+                {tariffCost
                   ? `${
                       el?.id === 1
-                        ? parseFloat(parcelCost?.standart).toFixed(2) * currency
-                        : parseFloat(parcelCost?.premium).toFixed(2) * currency
+                        ? parseFloat(tariffCost?.standart).toFixed(2) * currency
+                        : parseFloat(tariffCost?.premium).toFixed(2) * currency
                     } с`
                   : '00.00 $'}
                 )
               </span>
             </div>
+            <p className='text-xs'>
+              Для пользователей <br />
+              премиум <strong>{tariffCost?.premium} $</strong>{' '}
+              <span className='text-[10px]'>
+                ({tariffCost?.premium * currency} cом)
+              </span>
+            </p>
             <div className='py-5'>
               <div className='flex items-center'>
                 <img className='w-5' src={receptionPoint} alt='*' />

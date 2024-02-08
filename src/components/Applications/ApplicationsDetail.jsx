@@ -33,7 +33,7 @@ const ApplicationsDetail = () => {
       }
     })();
     scrollToTop();
-  }, [id]);
+  }, [id, extraServices]);
 
   useEffect(() => {
     (async () => {
