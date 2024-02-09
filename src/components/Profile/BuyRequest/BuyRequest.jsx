@@ -40,7 +40,7 @@ const BuyRequest = () => {
       ) : error ? (
         <ErrorServer />
       ) : buyRequests?.length ? (
-        <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5 xl:pr-20'>
+        <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5'>
           {buyRequests?.map((buyRequest) => (
             <BuyRequestItem key={buyRequest?.id} data={buyRequest} />
           ))}
