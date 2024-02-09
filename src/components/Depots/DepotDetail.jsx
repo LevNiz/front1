@@ -9,6 +9,7 @@ import { fetchCosts } from '../../api/costs';
 import { fetchExtraServices } from '../../api/extraServices';
 import { toastModal } from '../../helpers/Modals/toastModal';
 import ReactPlayer from 'react-player';
+import { currency } from '../../constants/currency';
 import location from '../../assets/icons/new-location.svg';
 import clock from '../../assets/icons/timeSvg.svg';
 import call from '../../assets/icons/new-call.svg';
@@ -563,7 +564,7 @@ const DepotDetail = () => {
                     {extraServices?.map((el) => (
                       <div
                         key={el?.id}
-                        className='flex justify-between border-b border-[#A7A9B7] pb-2'
+                        className='flex justify-between items-center border-b border-[#A7A9B7] pb-2'
                       >
                         <div className='flex'>
                           <img
@@ -580,10 +581,11 @@ const DepotDetail = () => {
                             )}
                           </div>
                         </div>
-                        <div className='text-xl font-bold flex'>
-                          <span>~</span>
-                          <span className='px-0.5'>{el?.cost}</span>
-                          <span>$</span>
+                        <div className='flex justify-end items-center flex-col mm:flex-row'>
+                          <span className='text-lg font-bold whitespace-nowrap'>{`~ ${el?.cost}$`}</span>
+                          <span className='text-xs mm:text-sm whitespace-nowrap mm:pl-1 mm:pt-1'>{`(${
+                            el?.cost * currency
+                          } сом)`}</span>
                         </div>
                       </div>
                     ))}
