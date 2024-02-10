@@ -1,5 +1,5 @@
-import mainBigImg1 from '../../../assets/gb-shop/images/main/mainBigImg1.jpg';
-import mainBigImg2 from '../../../assets/gb-shop/images/main/mainBigImg2.png';
+import mainBigImg1 from '../../../assets/gb-shop/images/main/mainBigImg1.jpeg';
+import mainBigImg2 from '../../../assets/gb-shop/images/main/mainBigImg2.jpeg';
 import mainImg1 from '../../../assets/gb-shop/images/main/mainImg1.jpg';
 import mainImg2 from '../../../assets/gb-shop/images/main/mainImg2.png';
 import sale from '../../../assets/gb-shop/images/main/sale.svg';
@@ -7,7 +7,7 @@ import sale from '../../../assets/gb-shop/images/main/sale.svg';
 const MainBlock = () => {
   return (
     <div className='flex md:grid grid-cols-3 gap-2 md:gap-7 pb-10 md:content'>
-      <div className='overflow-hidden rounded-tr-md rounded-br-md mm:rounded-md h-[400px] mm:h-[520px] md:h-[680px] w-[35%] mm:w-1/4 md:w-auto'>
+      <div className='overflow-hidden rounded-tr-md rounded-br-md mm:rounded-md ss:h-[400px] mm:h-[520px] md:h-[720px] w-[35%] mm:w-1/4 md:w-auto'>
         <img
           className='mx-auto w-full h-full object-cover'
           src={mainBigImg1}
@@ -40,7 +40,7 @@ const MainBlock = () => {
           />
         </div>
       </div>
-      <div className='overflow-hidden rounded-tl-md rounded-bl-md mm:rounded-md h-[400px] mm:h-[520px] md:h-[680px] w-[35%] mm:w-1/4 md:w-auto bg-gray-100'>
+      <div className='overflow-hidden rounded-tl-md rounded-bl-md mm:rounded-md ss:h-[400px] mm:h-[520px] md:h-[720px] w-[35%] mm:w-1/4 md:w-auto bg-gray-100'>
         <img
           className='mx-auto w-full h-full object-contain'
           src={mainBigImg2}
