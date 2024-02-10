@@ -491,12 +491,17 @@ const DepotDetail = () => {
                         <div>
                           <div className='flex items-center mt-3'>
                             <img className='w-5 mr-2' src={parcel} alt='*' />
-                            <span>Стандартный: 1 кг / {el?.costPerKg} $</span>
+                            <span className='text-sm'>
+                              Стандартный: 1 кг / {el?.costPerKg}$
+                            </span>
+                            <span className='text-xs pl-1'>
+                              ({el?.costPerKg * currency} с)
+                            </span>
                           </div>
-                          <div className='flex items-center mt-1'>
+                          {/* <div className='flex items-center mt-1'>
                             <img className='w-5 mr-2' src={parcel} alt='*' />
                             <span>Премиум: 1 кг / {el?.costPerKgMy} $</span>
-                          </div>
+                          </div> */}
                         </div>
                         <button
                           onClick={() =>
