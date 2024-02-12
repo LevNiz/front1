@@ -67,7 +67,7 @@ const GBServices = () => {
           </div>
         </NavLink>
         <NavLink
-          to='/gb-franchise'
+          to='/#'
           className='relative group min-h-[180px] ss:min-h-[220px] py-2 flex justify-center items-center bg-franchise'
         >
           <div>
