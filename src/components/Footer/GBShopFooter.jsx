@@ -10,6 +10,8 @@ import mastercard from '../../assets/images/mastercard.svg';
 import visa from '../../assets/images/visa.svg';
 import amex from '../../assets/images/amex.jpeg';
 import maestro from '../../assets/images/maestro.svg';
+import playMarket from '../../assets/images/play-market.svg';
+import appStore from '../../assets/images/appStore2.svg';
 
 const GBShopFooter = () => {
   return (
@@ -58,7 +60,7 @@ const GBShopFooter = () => {
           </ul>
         </div>
         <div className='md:pl-5'>
-          <ul className='flex md:justify-end justify-center items-center mt-5 md:mt-0 space-x-3'>
+          <ul className='flex md:justify-start justify-center items-center mt-5 md:mt-0 space-x-3'>
             <li className='bg-colYellow w-[38px] h-[38px] rounded-full flex justify-center items-center'>
               <NavLink
                 to='https://www.facebook.com/givboxworld'
@@ -105,7 +107,7 @@ const GBShopFooter = () => {
               </NavLink>
             </li>
           </ul>
-          <div className='flex justify-center md:justify-end items-center pt-10 md:pt-8 space-x-2'>
+          <div className='flex justify-center md:justify-end items-center pt-8 md:pt-5 space-x-2'>
             <div className='w-[50px] h-[30px] bg-[#4b2592] flex justify-center items-center'>
               <img
                 className='w-[40px] object-contain'
@@ -125,6 +127,25 @@ const GBShopFooter = () => {
             <div className='w-[50px] h-[30px] bg-[#2b71b3] flex justify-center items-center'>
               <img className='w-[40px] object-contain' src={amex} alt='*' />
             </div>
+          </div>
+          <p className='text-colBlack pt-7 xl:pt-3 pb-2 text-center xl:text-start'>
+            Приложение доступно в:
+          </p>
+          <div className='flex justify-center items-center xl:justify-start space-x-3'>
+            <NavLink
+              to='https://play.google.com/store/apps/details?id=kg.kyrgyzcoder.givboxkg'
+              target='_blank'
+              className='w-[122px] h-[47px]'
+            >
+              <img src={playMarket} alt='*' />
+            </NavLink>
+            <NavLink
+              to='https://apps.apple.com/kg/app/givbox/id6477327244'
+              target='_blank'
+              className='w-[122px] h-[47px]'
+            >
+              <img src={appStore} alt='*' />
+            </NavLink>
           </div>
         </div>
       </div>
