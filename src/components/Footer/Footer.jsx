@@ -14,6 +14,7 @@ import call from '../../assets/icons/call-white.svg';
 import mail from '../../assets/icons/gmail-white.svg';
 import youtube from '../../assets/icons/YouTube.svg';
 import playMarket from '../../assets/images/play-market.svg';
+import appStore from '../../assets/images/appStore2.svg';
 
 const Footer = () => {
   return (
@@ -176,14 +177,22 @@ const Footer = () => {
             </div>
           </div>
           <p className='text-white pt-7 xl:pt-3 pb-2 text-center xl:text-start'>
-            Приложение доступно:
+            Приложение доступно в:
           </p>
-          <div className='flex justify-center xl:justify-start'>
+          <div className='flex justify-center items-center xl:justify-start space-x-3'>
             <NavLink
               to='https://play.google.com/store/apps/details?id=kg.kyrgyzcoder.givboxkg'
               target='_blank'
+              className='w-[122px] h-[47px]'
             >
               <img src={playMarket} alt='*' />
+            </NavLink>
+            <NavLink
+              to='https://apps.apple.com/kg/app/givbox/id6477327244'
+              target='_blank'
+              className='w-[122px] h-[47px]'
+            >
+              <img src={appStore} alt='*' />
             </NavLink>
           </div>
         </div>
