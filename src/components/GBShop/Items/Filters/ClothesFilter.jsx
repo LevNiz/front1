@@ -63,7 +63,7 @@ const ClothesFilter = ({ categoryID }) => {
   }, [categoryID]);
 
   return (
-    <form className='pr-4'>
+    <form>
       <div className='pr-3'>
         <div
           onClick={() => toggleFilter('sizes')}
