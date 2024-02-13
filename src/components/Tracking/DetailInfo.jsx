@@ -113,45 +113,6 @@ const DetailInfo = (props) => {
     widget.create();
   };
 
-  /*
-      payment: {
-        order: '1',
-        amount: 1.1,
-        currency: 'KG',
-        description: `${parcelDetail?.comment}`,
-        expires_at: '2020-12-12 00:00:00',
-        param1: 'string',
-        param2: 'string',
-        param3: 'string',
-        test: 0,
-        options: {
-          callbacks: {
-            result_url: 'https://givbox.ru/result',
-            check_url: 'https://givbox.ru/check',
-          },
-          custom_params: {},
-          user: {
-            email: `${parcelDetail?.client?.login}`,
-            phone: `${parcelDetail?.client?.phone}`,
-          },
-          receipt_positions: [
-            {
-              count: 2,
-              name: 'Коврик для мыши',
-              tax_type: 3,
-              price: 1000,
-            },
-            {
-              count: 2,
-              name: 'Розетка',
-              tax_type: 3,
-              price: 1000,
-            },
-          ],
-        },
-      },
-  */
-
   return (
     <div className='bg-colBgGray2 pt-20'>
       {loading ? (
@@ -314,19 +275,6 @@ const DetailInfo = (props) => {
                     >
                       Оплатить
                     </button>
-                    /*
-                        <button
-                      onClick={payForParcel}
-                      disabled={parcelDetail?.totalCost < 1}
-                      className={`${
-                        parcelDetail?.totalCost < 1
-                          ? 'opacity-50 cursor-not-allowed'
-                          : 'hover:opacity-80'
-                      } font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 w-full`}
-                    >
-                      Оплатить
-                    </button>
-                    */
                   )}
                 </div>
                 <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2'>
