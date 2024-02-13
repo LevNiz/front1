@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { ItemsCard } from '../../../components';
+import { ClothesFilter, ItemsCard } from '../../../components';
 import { useEffect, useRef, useState } from 'react';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,6 @@ import { fetchNextPage } from '../../../helpers/fetchNextPage/fetchNextPage';
 
 const Items = () => {
   const { loading, error, items } = useSelector((state) => state?.items);
-  const { categories } = useSelector((state) => state?.categories);
 
   const [itemsData, setItemsData] = useState([]);
   const [scrollLoading, setScrollLoading] = useState(false);
@@ -21,10 +20,6 @@ const Items = () => {
   const { state } = useLocation();
   const dispatch = useDispatch();
   const containerRef = useRef(null);
-
-  const itemCategoryTitle = categories?.filter(
-    (el) => el?.id === state?.category
-  );
 
   useEffect(() => {
     setItemsData(items);
@@ -77,10 +72,10 @@ const Items = () => {
 
   return (
     <div className='py-16 mm:py-24 min-h-[991px]'>
-      <div className='content'>
+      <div className='container'>
         <div className='bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 my-4'>
           <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
-            {itemCategoryTitle[0]?.nameRus}
+            {state?.from}
           </h3>
         </div>
       </div>
@@ -88,10 +83,15 @@ const Items = () => {
         <ContentLoading extraStyle={380} />
       ) : itemsData?.length ? (
         <>
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sx:gap-5 lg:gap-7 container pb-8 pt-4'>
-            {itemsData?.map((el) => (
-              <ItemsCard key={el?.id} el={el} />
-            ))}
+          <div className='flex container pb-8 pt-4'>
+            <div className='max-w-[240px] w-full'>
+              <ClothesFilter categoryID={state?.category} />
+            </div>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sx:gap-4 lg:gap-5'>
+              {itemsData?.map((el) => (
+                <ItemsCard key={el?.id} el={el} />
+              ))}
+            </div>
           </div>
           <div ref={containerRef} className='p-1'>
             {scrollLoading && <ContentLoading />}

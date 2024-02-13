@@ -84,7 +84,7 @@ const GBFranchiseForm = ({ onSubmit }) => {
               className='text-sm flex cursor-pointer mm:items-center'
             >
               <div className='w-7 h-7 min-w-[28px] min-h-[28px] mr-2 flex justify-center items-center bg-black border border-white rounded'>
-                {privacyPolicy ? (
+                {privacyPolicy && (
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     xmlnsXlink='http://www.w3.org/1999/xlink'
@@ -107,8 +107,6 @@ const GBFranchiseForm = ({ onSubmit }) => {
                       />
                     </g>
                   </svg>
-                ) : (
-                  ''
                 )}
               </div>
               <p>

@@ -66,6 +66,7 @@ import BuyRequestUpdate from './Profile/BuyRequest/BuyRequestUpdate';
 import ItemSearchRequestUpdate from './Profile/ItemSearchRequest/ItemSearchRequestUpdate';
 import ApplicationsDetail from './Applications/ApplicationsDetail';
 import ApplicationsUpdate from './Applications/ApplicationsUpdate';
+import ClothesFilter from './GBShop/Items/Filters/ClothesFilter';
 
 export {
   Layout,
@@ -136,4 +137,5 @@ export {
   ItemSearchRequestUpdate,
   ApplicationsDetail,
   ApplicationsUpdate,
+  ClothesFilter,
 };
