@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { costs, sizes } from '../../../../constants/fakeFilterData';
+import { costs, shoesSizes } from '../../../../constants/fakeFilterData';
 import { fetchFilteredBrands } from '../../../../api/gb-shop/brands';
 import { fetchItems } from '../../../../api/gb-shop/items';
 import arrowDown from '../../../../assets/icons/down.svg';
 
-const ClothesFilter = ({ categoryID, setNextPage }) => {
+const ShoesFilter = ({ categoryID, setNextPage }) => {
   const [isShowFilter, setIsShowFilter] = useState({
     sizes: true,
     costs: true,
@@ -113,12 +113,12 @@ const ClothesFilter = ({ categoryID, setNextPage }) => {
       </div>
       <div
         className={`${
-          sizes?.length > 5 && 'overflow-y-scroll scrollable h-[172px]'
+          shoesSizes?.length > 5 && 'overflow-y-scroll scrollable h-[172px]'
         } ${
           isShowFilter?.sizes ? 'block' : 'hidden'
         } space-y-3 pb-5 border-b border-colGray2`}
       >
-        {sizes?.map((el, index) => (
+        {shoesSizes?.map((el, index) => (
           <div key={index}>
             <input
               className='hidden'
@@ -319,4 +319,4 @@ const ClothesFilter = ({ categoryID, setNextPage }) => {
   );
 };
 
-export default ClothesFilter;
+export default ShoesFilter;

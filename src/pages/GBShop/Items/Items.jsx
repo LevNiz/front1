@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { ClothesFilter, ClothesSort, ItemsCard } from '../../../components';
+import { ClothesFilter, ItemsSort, ItemsCard } from '../../../components';
 import { useEffect, useState } from 'react';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,12 +8,15 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { useInView } from 'react-intersection-observer';
+import ClothesMobFilter from '../../../components/GBShop/Items/MobileFilter/ClothesMobFilter';
+import ShoesFilter from '../../../components/GBShop/Items/Filters/ShoesFilter';
 
 const Items = () => {
   const { loading, error, items } = useSelector((state) => state?.items);
 
   const [scrollLoading, setScrollLoading] = useState(false);
   const [nextPage, setNextPage] = useState(null);
+  const [mobileFilter, setMobileFilter] = useState(false);
 
   const [ref, inView] = useInView();
   const { state } = useLocation();
@@ -65,24 +68,35 @@ const Items = () => {
       </div>
       <div
         className={`${
-          state?.category === 3 ? 'block' : 'hidden'
+          state?.category === (3 && 5) ? 'block' : 'hidden'
         } container mb-2`}
       >
-        {state?.category === 3 && (
-          <ClothesSort categoryID={state?.category} setNextPage={setNextPage} />
+        {state?.category === (3 && 5) && (
+          <ItemsSort
+            categoryID={state?.category}
+            setNextPage={setNextPage}
+            setMobileFilter={setMobileFilter}
+          />
         )}
       </div>
       <div className='flex container pb-8 pt-4'>
         <div
           className={`${
-            state?.category === 3 ? 'block' : 'hidden'
-          } hidden md:block max-w-[240px] w-full`}
+            state?.category === (3 && 5) ? 'hidden md:block' : 'hidden'
+          } max-w-[240px] w-full`}
         >
-          {state?.category === 3 && (
+          {state?.category === 3 ? (
             <ClothesFilter
               categoryID={state?.category}
               setNextPage={setNextPage}
             />
+          ) : (
+            state?.category === 5 && (
+              <ShoesFilter
+                categoryID={state?.category}
+                setNextPage={setNextPage}
+              />
+            )
           )}
         </div>
         {loading ? (
@@ -91,7 +105,7 @@ const Items = () => {
           <div className='w-full'>
             <div
               className={`${
-                state?.category === 3
+                state?.category === (3 && 5)
                   ? 'md:grid-cols-2 lg:grid-cols-3 lx:grid-cols-4'
                   : 'md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
               } grid grid-cols-2 gap-3 sx:gap-4 lg:gap-5 md:pl-4`}
@@ -118,6 +132,16 @@ const Items = () => {
             />
           </div>
         )}
+      </div>
+      <div
+        className={`${
+          mobileFilter ? 'opacity-100 visible' : 'opacity-0 invisible'
+        } fixed top-0 left-0 w-full h-full z-[999999] bg-white p-5 pt-3 pr-2 duration-200`}
+      >
+        <ClothesMobFilter
+          setMobileFilter={setMobileFilter}
+          categoryID={state?.category}
+        />
       </div>
     </div>
   );

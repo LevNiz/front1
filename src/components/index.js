@@ -67,7 +67,7 @@ import ItemSearchRequestUpdate from './Profile/ItemSearchRequest/ItemSearchReque
 import ApplicationsDetail from './Applications/ApplicationsDetail';
 import ApplicationsUpdate from './Applications/ApplicationsUpdate';
 import ClothesFilter from './GBShop/Items/Filters/ClothesFilter';
-import ClothesSort from './GBShop/Items/Sorting/ClothesSort';
+import ItemsSort from './GBShop/Items/Sorting/ItemsSort';
 
 export {
   Layout,
@@ -139,5 +139,5 @@ export {
   ApplicationsDetail,
   ApplicationsUpdate,
   ClothesFilter,
-  ClothesSort,
+  ItemsSort,
 };

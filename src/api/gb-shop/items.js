@@ -53,20 +53,14 @@ export const fetchSearchItem = async (dispatch, searchValue, categoryID) => {
   }
 };
 
-export const fetchSortItem = async (
-  dispatch,
-  categoryID,
-  selectedValue
-) => {
+export const fetchSortItem = async (dispatch, categoryID, selectedValue) => {
   dispatch(fetchItemsStart());
   try {
     let url;
     if (selectedValue && Object.keys(selectedValue).length > 0) {
       url = `core/item/?gender_type=${
         selectedValue.gender_type || ''
-      }&category=${categoryID || ''}&ordering=${
-        selectedValue.ordering || ''
-      }`;
+      }&category=${categoryID || ''}&ordering=${selectedValue.ordering || ''}`;
     }
     const res = await request.get(url);
     dispatch(fetchItemsSuccess(res?.data?.results));

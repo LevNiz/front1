@@ -6,7 +6,7 @@ import search from '../../../../assets/icons/search2.svg';
 import { fetchSearchItem, fetchSortItem } from '../../../../api/gb-shop/items';
 import filterIcon from '../../../../assets/icons/sort.svg';
 
-const ClothesSort = ({ categoryID, setNextPage }) => {
+const ItemsSort = ({ categoryID, setNextPage, setMobileFilter }) => {
   const [inputValue, setInputValue] = useState('');
   const [selectedValue, setSelectedValue] = useState({
     gender_type: '',
@@ -46,7 +46,7 @@ const ClothesSort = ({ categoryID, setNextPage }) => {
   }, [selectedValue, dispatch, categoryID, setNextPage]);
 
   return (
-    <div className='flex space-x-4 items-center'>
+    <div className='flex space-x-2 md:space-x-4 items-center'>
       <form
         onSubmit={(e) => handleSubmitSearch(e)}
         className='md:max-w-[240px] w-full relative'
@@ -64,7 +64,10 @@ const ClothesSort = ({ categoryID, setNextPage }) => {
           alt='*'
         />
       </form>
-      <button className='md:hidden flex items-center ss:min-w-[110px] bg-white border border-colGray2 outline-none h-[42px] rounded-lg px-3'>
+      <button
+        onClick={() => setMobileFilter(true)}
+        className='md:hidden flex items-center ss:min-w-[110px] bg-white border border-colGray2 outline-none h-[42px] rounded-lg px-3'
+      >
         <span className='pr-1 text-colGray ss:block hidden'>Фильтр</span>
         <img className='min-w-[24px]' src={filterIcon} alt='*' />
       </button>
@@ -124,4 +127,4 @@ const ClothesSort = ({ categoryID, setNextPage }) => {
   );
 };
 
-export default ClothesSort;
+export default ItemsSort;
