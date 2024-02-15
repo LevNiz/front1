@@ -33,6 +33,25 @@ export const fetchItems = async (dispatch, page, category) => {
   }
 };
 
+export const fetchItemsFilter = async (
+  dispatch,
+  page,
+  category,
+  sizesParam
+) => {
+  console.log(sizesParam);
+  dispatch(fetchItemsStart());
+  try {
+    const res = await request.get(
+      `/core/item/?page=${page}&category=${category || ''}&sizes=${sizesParam}`
+    );
+    dispatch(fetchItemsSuccess(res?.data?.results));
+    return { success: true, count: res?.data?.count };
+  } catch (error) {
+    dispatch(fetchItemsFailure(error));
+  }
+};
+
 export const fetchMoreItems = async (category, page) => {
   try {
     const res = await request.get(

@@ -2,6 +2,8 @@ import arrowDown from '../../../../assets/icons/down.svg';
 import { useEffect, useState } from 'react';
 import { costs, sizes } from '../../../../constants/fakeFilterData';
 import { fetchFilteredBrands } from '../../../../api/gb-shop/brands';
+import { fetchItemsFilter } from '../../../../api/gb-shop/items';
+import { useDispatch } from 'react-redux';
 
 const ClothesFilter = ({ categoryID }) => {
   const [isShowFilter, setIsShowFilter] = useState({
@@ -13,8 +15,9 @@ const ClothesFilter = ({ categoryID }) => {
   const [selectedCosts, setSelectedCosts] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [brands, setBrands] = useState([]);
+  const dispatch = useDispatch();
 
-  const handleCheckboxSizes = (size) => {
+  const handleCheckboxSizes = async (size) => {
     if (selectedSizes?.includes(size)) {
       setSelectedSizes(
         selectedSizes?.filter((selectedSize) => selectedSize !== size)
@@ -22,6 +25,8 @@ const ClothesFilter = ({ categoryID }) => {
     } else {
       setSelectedSizes([...selectedSizes, size]);
     }
+    const sizesParam = selectedSizes.join(';');
+    await fetchItemsFilter(dispatch, 1, categoryID, sizesParam);
   };
 
   const handleCheckboxCosts = (minCost, maxCost, isChecked) => {
@@ -61,6 +66,24 @@ const ClothesFilter = ({ categoryID }) => {
       }
     })();
   }, [categoryID]);
+
+  // useEffect(() => {
+  //   const sizesParam = selectedSizes.join(';');
+  //   const supplierParam = selectedBrands.join(',');
+  //   const costsParam = selectedCosts
+  //     .map((cost) => `min_cost=${cost.minCost}&max_cost=${cost.maxCost}`)
+  //     .join('&');
+  //   (async () => {
+  //     await fetchItemsFilter(
+  //       dispatch,
+  //       1,
+  //       categoryID,
+  //       sizesParam,
+  //       supplierParam,
+  //       costsParam
+  //     );
+  //   })();
+  // }, [dispatch, categoryID, selectedBrands, selectedSizes, selectedCosts]);
 
   return (
     <form>

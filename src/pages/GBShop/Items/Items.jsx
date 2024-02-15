@@ -82,36 +82,34 @@ const Items = () => {
       <div className='container mb-2'>
         <ClothesSort />
       </div>
-      {loading ? (
-        <ContentLoading extraStyle={380} />
-      ) : itemsData?.length ? (
-        <>
-          <div className='flex container pb-8 pt-4'>
-            <div className='max-w-[240px] w-full'>
-              <ClothesFilter categoryID={state?.category} />
-            </div>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sx:gap-4 lg:gap-5 pl-4'>
-              {itemsData?.map((el) => (
-                <ItemsCard key={el?.id} el={el} />
-              ))}
-            </div>
-          </div>
-          <div ref={containerRef} className='p-1'>
-            {scrollLoading && <ContentLoading />}
-          </div>
-        </>
-      ) : error ? (
-        <div className='pt-20'>
-          <ErrorServer />
+      <div className='flex container pb-8 pt-4'>
+        <div className='max-w-[240px] w-full'>
+          <ClothesFilter categoryID={state?.category} />
         </div>
-      ) : (
-        <div className='pt-20'>
-          <GBSHopEmpty
-            title='Ничего не нашли!'
-            desc='К сожалению, по вашему запросу ничего не нашли.'
-          />
-        </div>
-      )}
+        {loading ? (
+          <ContentLoading extraStyle={380} />
+        ) : itemsData?.length ? (
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sx:gap-4 lg:gap-5 pl-4'>
+            {itemsData?.map((el) => (
+              <ItemsCard key={el?.id} el={el} />
+            ))}
+          </div>
+        ) : error ? (
+          <div className='pt-20'>
+            <ErrorServer />
+          </div>
+        ) : (
+          <div className='pt-20'>
+            <GBSHopEmpty
+              title='Ничего не нашли!'
+              desc='К сожалению, по вашему запросу ничего не нашли.'
+            />
+          </div>
+        )}
+      </div>
+      <div ref={containerRef} className='p-1'>
+        {scrollLoading && <ContentLoading />}
+      </div>
     </div>
   );
 };

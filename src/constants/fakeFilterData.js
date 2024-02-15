@@ -5,46 +5,47 @@ export const sizes = [
     size: 'XS',
   },
   {
-    id: 1,
+    id: 2,
     size: 'S',
   },
   {
-    id: 1,
+    id: 3,
     size: 'M',
   },
   {
-    id: 1,
+    id: 4,
     size: 'L',
   },
   {
-    id: 1,
+    id: 5,
     size: 'XL',
   },
 ];
 
+// Cost
 export const costs = [
   {
-    id: 1,
+    id: 11,
     minCost: '100',
     maxCost: '1000',
   },
   {
-    id: 2,
+    id: 12,
     minCost: '1000',
     maxCost: '5000',
   },
   {
-    id: 3,
+    id: 13,
     minCost: '5000',
     maxCost: '10000',
   },
   {
-    id: 4,
+    id: 14,
     minCost: '10000',
     maxCost: '20000',
   },
   {
-    id: 5,
+    id: 15,
     minCost: '20000',
     maxCost: '50000',
   },
@@ -53,29 +54,31 @@ export const costs = [
 // Sort
 export const genderType = [
   {
-    id: 1,
+    id: 6,
     name: 'Мужской',
     val: 'male',
   },
   {
-    id: 1,
+    id: 7,
     name: 'Женский',
     val: 'female',
   },
   {
-    id: 1,
+    id: 8,
     name: 'Детский',
     val: 'kids',
   },
 ];
+
+// Ordering
 export const ordering = [
   {
-    id: 1,
+    id: 9,
     name: 'По возрастанию',
     val: 'cost',
   },
   {
-    id: 1,
+    id: 10,
     name: 'По убыванию',
     val: '-cost',
   },
