@@ -27,7 +27,7 @@ const Items = () => {
 
   useEffect(() => {
     (async () => {
-      const { success, count } = await fetchItems(dispatch, 1, state?.category);
+      const { success, count } = await fetchItems(dispatch, state?.category);
       if (success) {
         setTotalPages(Math.ceil(count / 20));
       }
@@ -95,11 +95,11 @@ const Items = () => {
             ))}
           </div>
         ) : error ? (
-          <div className='pt-20'>
+          <div className='pt-20 w-full'>
             <ErrorServer />
           </div>
         ) : (
-          <div className='pt-20'>
+          <div className='pt-20 w-full'>
             <GBSHopEmpty
               title='Ничего не нашли!'
               desc='К сожалению, по вашему запросу ничего не нашли.'

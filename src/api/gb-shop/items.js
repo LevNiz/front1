@@ -20,31 +20,21 @@ import { request } from '../axios';
 import { db } from '../../firebase/firebase';
 
 // Fetch items
-export const fetchItems = async (dispatch, page, category) => {
-  dispatch(fetchItemsStart());
-  try {
-    const res = await request.get(
-      `/core/item/?page=${page}&category=${category || ''}`
-    );
-    dispatch(fetchItemsSuccess(res?.data?.results));
-    return { success: true, count: res?.data?.count };
-  } catch (error) {
-    dispatch(fetchItemsFailure(error));
-  }
-};
-
-export const fetchItemsFilter = async (
+export const fetchItems = async (
   dispatch,
-  page,
   category,
-  sizesParam
+  sizesParam,
+  supplierParam,
+  costsParam
 ) => {
-  console.log(sizesParam);
   dispatch(fetchItemsStart());
   try {
     const res = await request.get(
-      `/core/item/?page=${page}&category=${category || ''}&sizes=${sizesParam}`
+      `/core/item/?category=${category || ''}&sizes=${
+        sizesParam || ''
+      }&supplier=${supplierParam || ''}&${costsParam || ''}`
     );
+    console.log('res', res?.data);
     dispatch(fetchItemsSuccess(res?.data?.results));
     return { success: true, count: res?.data?.count };
   } catch (error) {

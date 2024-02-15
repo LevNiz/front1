@@ -2,7 +2,7 @@ import arrowDown from '../../../../assets/icons/down.svg';
 import { useEffect, useState } from 'react';
 import { costs, sizes } from '../../../../constants/fakeFilterData';
 import { fetchFilteredBrands } from '../../../../api/gb-shop/brands';
-import { fetchItemsFilter } from '../../../../api/gb-shop/items';
+import { fetchItems } from '../../../../api/gb-shop/items';
 import { useDispatch } from 'react-redux';
 
 const ClothesFilter = ({ categoryID }) => {
@@ -19,23 +19,21 @@ const ClothesFilter = ({ categoryID }) => {
 
   const handleCheckboxSizes = async (size) => {
     if (selectedSizes?.includes(size)) {
-      setSelectedSizes(
-        selectedSizes?.filter((selectedSize) => selectedSize !== size)
+      setSelectedSizes((prevSizes) =>
+        prevSizes.filter((selectedSize) => selectedSize !== size)
       );
     } else {
-      setSelectedSizes([...selectedSizes, size]);
+      setSelectedSizes((prevSizes) => [...prevSizes, size]);
     }
-    const sizesParam = selectedSizes.join(';');
-    await fetchItemsFilter(dispatch, 1, categoryID, sizesParam);
   };
 
   const handleCheckboxCosts = (minCost, maxCost, isChecked) => {
     if (isChecked) {
-      setSelectedCosts([...selectedCosts, { minCost, maxCost }]);
+      setSelectedCosts((prevCosts) => [...prevCosts, { minCost, maxCost }]);
     } else {
-      setSelectedCosts(
-        selectedCosts?.filter(
-          (cost) => cost?.minCost !== minCost || cost?.maxCost !== maxCost
+      setSelectedCosts((prevCosts) =>
+        prevCosts.filter(
+          (cost) => cost.minCost !== minCost || cost.maxCost !== maxCost
         )
       );
     }
@@ -43,13 +41,32 @@ const ClothesFilter = ({ categoryID }) => {
 
   const handleCheckboxBrands = (id) => {
     if (selectedBrands?.includes(id)) {
-      setSelectedBrands(
-        selectedBrands?.filter((selectedBrands) => selectedBrands !== id)
+      setSelectedBrands((prevBrands) =>
+        prevBrands.filter((selectedBrand) => selectedBrand !== id)
       );
     } else {
-      setSelectedBrands([...selectedBrands, id]);
+      setSelectedBrands((prevBrands) => [...prevBrands, id]);
     }
   };
+
+  useEffect(() => {
+    const fetchFilteredItems = async () => {
+      const sizesParam = selectedSizes.join(';');
+      const supplierParam = selectedBrands.join(',');
+      const costsParam = selectedCosts
+        .map((cost) => `min_cost=${cost.minCost}&max_cost=${cost.maxCost}`)
+        .join('&');
+      await fetchItems(
+        dispatch,
+        categoryID,
+        sizesParam,
+        supplierParam,
+        costsParam
+      );
+    };
+
+    fetchFilteredItems();
+  }, [dispatch, categoryID, selectedSizes, selectedBrands, selectedCosts]);
 
   const toggleFilter = (filterName) => {
     setIsShowFilter((prev) => ({
@@ -66,24 +83,6 @@ const ClothesFilter = ({ categoryID }) => {
       }
     })();
   }, [categoryID]);
-
-  // useEffect(() => {
-  //   const sizesParam = selectedSizes.join(';');
-  //   const supplierParam = selectedBrands.join(',');
-  //   const costsParam = selectedCosts
-  //     .map((cost) => `min_cost=${cost.minCost}&max_cost=${cost.maxCost}`)
-  //     .join('&');
-  //   (async () => {
-  //     await fetchItemsFilter(
-  //       dispatch,
-  //       1,
-  //       categoryID,
-  //       sizesParam,
-  //       supplierParam,
-  //       costsParam
-  //     );
-  //   })();
-  // }, [dispatch, categoryID, selectedBrands, selectedSizes, selectedCosts]);
 
   return (
     <form>
