@@ -21,9 +21,11 @@ const Items = () => {
 
   useEffect(() => {
     (async () => {
-      const { success, data } = await fetchItems(dispatch, state?.category);
-      if (success) {
+      const { data } = await fetchItems(dispatch, state?.category);
+      if (data?.next) {
         setNextPage(data?.next);
+      } else {
+        setNextPage(null)
       }
     })();
   }, [dispatch, state?.category]);
@@ -31,16 +33,18 @@ const Items = () => {
   const handleIntersection = async () => {
     if (nextPage) {
       setScrollLoading(true);
-      const { success, data } = await fetchItemsNextPage(
+      const { data } = await fetchItemsNextPage(
         dispatch,
         nextPage,
         items
       );
-      if (success) {
+      if (data?.next) {
         setNextPage(data?.next);
         setScrollLoading(false);
       }
+    } else {
       setScrollLoading(false);
+      setNextPage(null)
     }
   };
 
@@ -53,7 +57,7 @@ const Items = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
-
+  
   return (
     <div className='py-16 mm:py-20 min-h-[991px]'>
       <div className='container'>
@@ -64,7 +68,7 @@ const Items = () => {
         </div>
       </div>
       <div className='container mb-2'>
-        <ClothesSort />
+        <ClothesSort categoryID={state?.category} setNextPage={setNextPage} />
       </div>
       <div className='flex container pb-8 pt-4'>
         <div className='max-w-[240px] w-full'>

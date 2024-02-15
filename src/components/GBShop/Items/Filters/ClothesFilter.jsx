@@ -56,15 +56,17 @@ const ClothesFilter = ({ categoryID, setNextPage }) => {
       const costsParam = selectedCosts
         .map((cost) => `min_cost=${cost.minCost}&max_cost=${cost.maxCost}`)
         .join('&');
-      const { success, data } = await fetchItems(
+      const { data } = await fetchItems(
         dispatch,
         categoryID,
         sizesParam,
         supplierParam,
         costsParam
       );
-      if (success) {
+      if (data?.next) {
         setNextPage(data?.next);
+      } else {
+        setNextPage(null);
       }
     };
 

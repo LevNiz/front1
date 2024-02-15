@@ -35,7 +35,42 @@ export const fetchItems = async (
       }&supplier=${supplierParam || ''}&${costsParam || ''}`
     );
     dispatch(fetchItemsSuccess(res?.data?.results));
-    return { success: true, data: res?.data };
+    return { data: res?.data };
+  } catch (error) {
+    dispatch(fetchItemsFailure(error));
+  }
+};
+
+export const fetchSearchItem = async (dispatch, searchValue, categoryID) => {
+  dispatch(fetchItemsStart());
+  try {
+    let url = `/core/item/?search=${searchValue}&category=${categoryID || ''}`;
+    const res = await request.get(url);
+    dispatch(fetchItemsSuccess(res?.data?.results));
+    return { data: res?.data };
+  } catch (error) {
+    dispatch(fetchItemsFailure(error));
+  }
+};
+
+export const fetchSortItem = async (
+  dispatch,
+  categoryID,
+  selectedValue
+) => {
+  dispatch(fetchItemsStart());
+  try {
+    let url;
+    if (selectedValue && Object.keys(selectedValue).length > 0) {
+      url = `core/item/?gender_type=${
+        selectedValue.gender_type || ''
+      }&category=${categoryID || ''}&ordering=${
+        selectedValue.ordering || ''
+      }`;
+    }
+    const res = await request.get(url);
+    dispatch(fetchItemsSuccess(res?.data?.results));
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchItemsFailure(error));
   }
@@ -47,7 +82,7 @@ export const fetchItemsNextPage = async (dispatch, next, items) => {
     const results = res?.data?.results;
     const moreItems = [...items, ...results];
     dispatch(fetchItemsSuccess(moreItems));
-    return { success: true, data: res?.data };
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchItemsFailure(error));
     return { success: false };

@@ -1,42 +1,65 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { genderType, ordering } from '../../../../constants/fakeFilterData';
 import search from '../../../../assets/icons/search2.svg';
+import { fetchSearchItem, fetchSortItem } from '../../../../api/gb-shop/items';
+import { useDispatch } from 'react-redux';
 
-const ClothesSort = () => {
-  const [formData, setFormData] = useState({
+const ClothesSort = ({ categoryID, setNextPage }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState({
     gender_type: '',
     ordering: '',
-    search: '',
   });
 
-  const handleChange = (fieldName, value) => {
-    setFormData({
-      ...formData,
+  const dispatch = useDispatch();
+
+  const handleSubmitSearch = async (e) => {
+    e.preventDefault();
+    const { data } = await fetchSearchItem(dispatch, inputValue, categoryID);
+    if (data?.next) {
+      setNextPage(data?.next);
+    } else {
+      setNextPage(null);
+    }
+  };
+
+  const handleChange = async (fieldName, value) => {
+    setSelectedValue({
+      ...selectedValue,
       [fieldName]: value,
     });
   };
 
-  const handleSubmitSearch = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await fetchSortItem(dispatch, categoryID, selectedValue);
+      if (data?.next) {
+        setNextPage(data.next);
+      } else {
+        setNextPage(null);
+      }
+    };
+
+    fetchData();
+  }, [selectedValue, dispatch, categoryID, setNextPage]);
 
   return (
     <div className='flex space-x-4 items-center'>
       <form
-        onSubmit={handleSubmitSearch}
+        onSubmit={(e) => handleSubmitSearch(e)}
         className='max-w-[240px] w-full relative'
       >
         <input
           type='text'
           placeholder='Поиск'
-          onChange={(e) => handleChange('search', e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)}
           className='border border-colGray2 pl-[10px] w-full focus:border-black outline-none h-[42px] rounded-lg pr-10'
         />
         <img
-          className='absolute top-1/2 -translate-y-1/2 right-3'
+          className='absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer'
           src={search}
+          onClick={handleSubmitSearch}
           alt='*'
         />
       </form>
