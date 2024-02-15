@@ -3,33 +3,26 @@ import { ClothesFilter, ClothesSort, ItemsCard } from '../../../components';
 import { useEffect, useRef, useState } from 'react';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems, fetchMoreItems } from '../../../api/gb-shop/items';
+import { fetchItems, fetchItemsNextPage } from '../../../api/gb-shop/items';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
-import { fetchNextPage } from '../../../helpers/fetchNextPage/fetchNextPage';
 
 const Items = () => {
   const { loading, error, items } = useSelector((state) => state?.items);
 
-  const [itemsData, setItemsData] = useState([]);
   const [scrollLoading, setScrollLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [nextPage, setNextPage] = useState(null);
 
   const { state } = useLocation();
   const dispatch = useDispatch();
   const containerRef = useRef(null);
 
   useEffect(() => {
-    setItemsData(items);
-  }, [items]);
-
-  useEffect(() => {
     (async () => {
-      const { success, count } = await fetchItems(dispatch, state?.category);
+      const { success, data } = await fetchItems(dispatch, state?.category);
       if (success) {
-        setTotalPages(Math.ceil(count / 20));
+        setNextPage(data?.next);
       }
     })();
   }, [dispatch, state?.category]);
@@ -41,15 +34,19 @@ const Items = () => {
       const observer = new IntersectionObserver(
         async ([entry]) => {
           if (entry.isIntersecting) {
-            await fetchNextPage(
-              page,
-              setPage,
-              totalPages,
-              setItemsData,
-              setScrollLoading,
-              fetchMoreItems,
-              state?.category
-            );
+            if (nextPage) {
+              setScrollLoading(true);
+              const { success, data } = await fetchItemsNextPage(
+                dispatch,
+                nextPage,
+                items,
+              );
+              if (success) {
+                setNextPage(data?.next);
+                setScrollLoading(false);
+              }
+              setScrollLoading(false);
+            }
           }
         },
         {
@@ -64,7 +61,7 @@ const Items = () => {
         observer.disconnect();
       };
     }
-  }, [page, totalPages, state?.category]);
+  }, [nextPage, dispatch, items]);
 
   useEffect(() => {
     scrollToTop();
@@ -88,9 +85,9 @@ const Items = () => {
         </div>
         {loading ? (
           <ContentLoading extraStyle={380} />
-        ) : itemsData?.length ? (
+        ) : items?.length ? (
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sx:gap-4 lg:gap-5 pl-4'>
-            {itemsData?.map((el) => (
+            {items?.map((el) => (
               <ItemsCard key={el?.id} el={el} />
             ))}
           </div>

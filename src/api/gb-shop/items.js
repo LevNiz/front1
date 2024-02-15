@@ -34,20 +34,34 @@ export const fetchItems = async (
         sizesParam || ''
       }&supplier=${supplierParam || ''}&${costsParam || ''}`
     );
-    console.log('res', res?.data);
     dispatch(fetchItemsSuccess(res?.data?.results));
-    return { success: true, count: res?.data?.count };
+    return { success: true, data: res?.data };
   } catch (error) {
     dispatch(fetchItemsFailure(error));
   }
 };
 
+export const fetchItemsNextPage = async (dispatch, next, items) => {
+  try {
+    const res = await request.get(`${next}`);
+    const results = res?.data?.results;
+    const moreItems = [...items, ...results];
+    console.log(moreItems);
+    dispatch(fetchItemsSuccess(moreItems));
+    return { success: true, data: res?.data };
+  } catch (error) {
+    dispatch(fetchItemsFailure(error));
+    return { success: false };
+  }
+};
+
+// Fetch more items:
 export const fetchMoreItems = async (category, page) => {
   try {
     const res = await request.get(
       `/core/item/?page=${page}&category=${category}`
     );
-    return { success: true, data: res?.data?.results };
+    return { success: true, data: res?.data };
   } catch (error) {
     return { success: false };
   }
