@@ -5,7 +5,7 @@ import { fetchFilteredBrands } from '../../../../api/gb-shop/brands';
 import { fetchItems } from '../../../../api/gb-shop/items';
 import { useDispatch } from 'react-redux';
 
-const ClothesFilter = ({ categoryID }) => {
+const ClothesFilter = ({ categoryID, setNextPage }) => {
   const [isShowFilter, setIsShowFilter] = useState({
     sizes: true,
     costs: true,
@@ -56,17 +56,27 @@ const ClothesFilter = ({ categoryID }) => {
       const costsParam = selectedCosts
         .map((cost) => `min_cost=${cost.minCost}&max_cost=${cost.maxCost}`)
         .join('&');
-      await fetchItems(
+      const { success, data } = await fetchItems(
         dispatch,
         categoryID,
         sizesParam,
         supplierParam,
         costsParam
       );
+      if (success) {
+        setNextPage(data?.next);
+      }
     };
 
     fetchFilteredItems();
-  }, [dispatch, categoryID, selectedSizes, selectedBrands, selectedCosts]);
+  }, [
+    dispatch,
+    categoryID,
+    selectedSizes,
+    selectedBrands,
+    selectedCosts,
+    setNextPage,
+  ]);
 
   const toggleFilter = (filterName) => {
     setIsShowFilter((prev) => ({

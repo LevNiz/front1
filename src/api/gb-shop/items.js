@@ -46,7 +46,6 @@ export const fetchItemsNextPage = async (dispatch, next, items) => {
     const res = await request.get(`${next}`);
     const results = res?.data?.results;
     const moreItems = [...items, ...results];
-    console.log(moreItems);
     dispatch(fetchItemsSuccess(moreItems));
     return { success: true, data: res?.data };
   } catch (error) {

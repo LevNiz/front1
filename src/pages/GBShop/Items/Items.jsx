@@ -1,12 +1,13 @@
 import { useLocation } from 'react-router-dom';
 import { ClothesFilter, ClothesSort, ItemsCard } from '../../../components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems, fetchItemsNextPage } from '../../../api/gb-shop/items';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
+import { useInView } from 'react-intersection-observer';
 
 const Items = () => {
   const { loading, error, items } = useSelector((state) => state?.items);
@@ -14,9 +15,9 @@ const Items = () => {
   const [scrollLoading, setScrollLoading] = useState(false);
   const [nextPage, setNextPage] = useState(null);
 
+  const [ref, inView] = useInView();
   const { state } = useLocation();
   const dispatch = useDispatch();
-  const containerRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -27,41 +28,27 @@ const Items = () => {
     })();
   }, [dispatch, state?.category]);
 
-  useEffect(() => {
-    const container = containerRef.current;
-
-    if (container) {
-      const observer = new IntersectionObserver(
-        async ([entry]) => {
-          if (entry.isIntersecting) {
-            if (nextPage) {
-              setScrollLoading(true);
-              const { success, data } = await fetchItemsNextPage(
-                dispatch,
-                nextPage,
-                items,
-              );
-              if (success) {
-                setNextPage(data?.next);
-                setScrollLoading(false);
-              }
-              setScrollLoading(false);
-            }
-          }
-        },
-        {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1,
-        }
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { success, data } = await fetchItemsNextPage(
+        dispatch,
+        nextPage,
+        items
       );
-      observer.observe(container);
-
-      return () => {
-        observer.disconnect();
-      };
+      if (success) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      }
+      setScrollLoading(false);
     }
-  }, [nextPage, dispatch, items]);
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   useEffect(() => {
     scrollToTop();
@@ -81,7 +68,7 @@ const Items = () => {
       </div>
       <div className='flex container pb-8 pt-4'>
         <div className='max-w-[240px] w-full'>
-          <ClothesFilter categoryID={state?.category} />
+          <ClothesFilter categoryID={state?.category} setNextPage={setNextPage} />
         </div>
         {loading ? (
           <ContentLoading extraStyle={380} />
@@ -104,9 +91,11 @@ const Items = () => {
           </div>
         )}
       </div>
-      <div ref={containerRef} className='p-1'>
-        {scrollLoading && <ContentLoading />}
-      </div>
+      {!loading && (
+        <div ref={ref} className='p-1'>
+          {scrollLoading && <ContentLoading />}
+        </div>
+      )}
     </div>
   );
 };
