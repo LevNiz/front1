@@ -68,15 +68,25 @@ const Items = () => {
       </div>
       <div className='flex container pb-8 pt-4'>
         <div className='max-w-[240px] w-full'>
-          <ClothesFilter categoryID={state?.category} setNextPage={setNextPage} />
+          <ClothesFilter
+            categoryID={state?.category}
+            setNextPage={setNextPage}
+          />
         </div>
         {loading ? (
           <ContentLoading extraStyle={380} />
         ) : items?.length ? (
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sx:gap-4 lg:gap-5 pl-4'>
-            {items?.map((el) => (
-              <ItemsCard key={el?.id} el={el} />
-            ))}
+          <div>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sx:gap-4 lg:gap-5 pl-4'>
+              {items?.map((el) => (
+                <ItemsCard key={el?.id} el={el} />
+              ))}
+            </div>
+            {!loading && (
+              <div ref={ref} className='p-1'>
+                {scrollLoading && <ContentLoading />}
+              </div>
+            )}
           </div>
         ) : error ? (
           <div className='pt-20 w-full'>
@@ -91,11 +101,6 @@ const Items = () => {
           </div>
         )}
       </div>
-      {!loading && (
-        <div ref={ref} className='p-1'>
-          {scrollLoading && <ContentLoading />}
-        </div>
-      )}
     </div>
   );
 };
