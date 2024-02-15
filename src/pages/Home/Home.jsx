@@ -88,7 +88,7 @@ const Home = () => {
           </form>
         </div>
       </div>
-      {loading ? <Loading /> : ''}
+      {loading && <Loading />}
       <AboutUs />
       <GBServices />
       <Services />

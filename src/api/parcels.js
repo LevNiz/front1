@@ -12,7 +12,7 @@ import {
 export const FetchParcels = async (dispatch, userID) => {
   dispatch(fetchParcelsStart());
   try {
-    const res = await request.get(`core/package/?client=${userID}`);
+    const res = await request.get(`core/package/?clients=${userID}`);
     dispatch(fetchParcelsSuccess(res?.data?.results));
     return { success: true, count: res?.data?.count };
   } catch (error) {
@@ -23,7 +23,7 @@ export const FetchParcels = async (dispatch, userID) => {
 export const fetchMoreParcels = async (userID, page) => {
   try {
     const res = await request.get(
-      `/core/package/?page=${page}&client=${userID}`
+      `/core/package/?page=${page}&clients=${userID}`
     );
     return { success: true, data: res?.data?.results };
   } catch (error) {
