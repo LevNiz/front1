@@ -32,6 +32,7 @@ export default {
       lg: '991px',
       gg: '1080px',
       xl: '1200px',
+      lx: '1280px',
       xl2: '1360px',
       xl3: '1760px',
     },

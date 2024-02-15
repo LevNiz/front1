@@ -59,7 +59,7 @@ const ItemsCard = ({ el }) => {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    toastModal('Ссылка на товар скопирована!');
+    toastModal('Ссылка на товар скопирована! ✅');
   };
 
   const handleOpenDepot = (cityID) => {

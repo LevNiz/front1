@@ -25,7 +25,7 @@ const Items = () => {
       if (data?.next) {
         setNextPage(data?.next);
       } else {
-        setNextPage(null)
+        setNextPage(null);
       }
     })();
   }, [dispatch, state?.category]);
@@ -33,18 +33,14 @@ const Items = () => {
   const handleIntersection = async () => {
     if (nextPage) {
       setScrollLoading(true);
-      const { data } = await fetchItemsNextPage(
-        dispatch,
-        nextPage,
-        items
-      );
+      const { data } = await fetchItemsNextPage(dispatch, nextPage, items);
       if (data?.next) {
         setNextPage(data?.next);
         setScrollLoading(false);
       }
     } else {
       setScrollLoading(false);
-      setNextPage(null)
+      setNextPage(null);
     }
   };
 
@@ -57,7 +53,7 @@ const Items = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
-  
+
   return (
     <div className='py-16 mm:py-20 min-h-[991px]'>
       <div className='container'>
@@ -67,21 +63,39 @@ const Items = () => {
           </h3>
         </div>
       </div>
-      <div className='container mb-2'>
-        <ClothesSort categoryID={state?.category} setNextPage={setNextPage} />
+      <div
+        className={`${
+          state?.category === 3 ? 'block' : 'hidden'
+        } container mb-2`}
+      >
+        {state?.category === 3 && (
+          <ClothesSort categoryID={state?.category} setNextPage={setNextPage} />
+        )}
       </div>
       <div className='flex container pb-8 pt-4'>
-        <div className='max-w-[240px] w-full'>
-          <ClothesFilter
-            categoryID={state?.category}
-            setNextPage={setNextPage}
-          />
+        <div
+          className={`${
+            state?.category === 3 ? 'block' : 'hidden'
+          } hidden md:block max-w-[240px] w-full`}
+        >
+          {state?.category === 3 && (
+            <ClothesFilter
+              categoryID={state?.category}
+              setNextPage={setNextPage}
+            />
+          )}
         </div>
         {loading ? (
           <ContentLoading extraStyle={380} />
         ) : items?.length ? (
-          <div>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sx:gap-4 lg:gap-5 pl-4'>
+          <div className='w-full'>
+            <div
+              className={`${
+                state?.category === 3
+                  ? 'md:grid-cols-2 lg:grid-cols-3 lx:grid-cols-4'
+                  : 'md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+              } grid grid-cols-2 gap-3 sx:gap-4 lg:gap-5 md:pl-4`}
+            >
               {items?.map((el) => (
                 <ItemsCard key={el?.id} el={el} />
               ))}
