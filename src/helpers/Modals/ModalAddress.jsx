@@ -7,6 +7,7 @@ import inCorrectImg from './../../assets/images/404.svg';
 import back from './../../assets/icons/arrow-left.svg';
 import { fetchAddresses, postAddress } from '../../api/addresses';
 import { fetchDepots } from '../../api/depots';
+import { fetchCities } from '../../api/cities';
 
 const ModalAddress = ({ isOpen, onClose, onReceiver }) => {
   const { cities } = useSelector((state) => state?.cities);
@@ -51,9 +52,10 @@ const ModalAddress = ({ isOpen, onClose, onReceiver }) => {
   };
 
   useEffect(() => {
-    async () => {
+    (async () => {
       await fetchDepots(dispatch);
-    };
+      await fetchCities(dispatch);
+    })();
   }, [dispatch]);
 
   if (!isOpen) return null;

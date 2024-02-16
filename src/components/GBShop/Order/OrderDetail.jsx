@@ -139,9 +139,7 @@ const OrderDetail = () => {
                       onClick={() => {
                         setOpenModal(true);
                       }}
-                      className={`${
-                        addresses?.length ? '' : 'hidden'
-                      } text-xs font-medium opacity-60 cursor-pointer underline text-right mt-2`}
+                      className='text-xs font-medium opacity-60 cursor-pointer underline text-right mt-2'
                     >
                       Добавить новый
                     </p>
@@ -151,9 +149,7 @@ const OrderDetail = () => {
                     onClick={() => {
                       setOpenModal(true);
                     }}
-                    className={`${
-                      addresses?.length ? 'hidden' : ''
-                    } font-medium hover:opacity-80 px-4 h-12 rounded-md bg-black text-white duration-150 sm:max-w-xs w-full mt-5 cursor-pointer flex justify-center items-center`}
+                    className='font-medium hover:opacity-80 px-4 h-12 rounded-md bg-black text-white duration-150 sm:max-w-xs w-full mt-3 cursor-pointer flex justify-center items-center'
                   >
                     Добавить новый адрес
                   </div>

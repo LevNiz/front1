@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchAddresses, postAddress } from '../../api/addresses';
 import { fetchDepots } from '../../api/depots';
+import { fetchCities } from '../../api/cities';
 import back from './../../assets/icons/arrow-left.svg';
 import { ContentLoading } from '../Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
@@ -51,9 +52,10 @@ const ModalGBShop = ({ isOpen, onClose }) => {
   };
 
   useEffect(() => {
-    async () => {
+    (async () => {
       await fetchDepots(dispatch);
-    };
+      await fetchCities(dispatch);
+    })();
   }, [dispatch]);
 
   if (!isOpen) return null;
