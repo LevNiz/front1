@@ -138,8 +138,10 @@ const Items = () => {
       </div>
       <div
         className={`${
-          mobileFilter ? 'opacity-100 visible' : 'opacity-0 invisible'
-        } fixed top-0 left-0 w-full h-full z-[999999] bg-white p-5 pt-3 pr-2 duration-200`}
+          mobileFilter
+            ? 'opacity-100 visible z-[999999]'
+            : 'opacity-0 invisible z-[-1]'
+        } fixed top-0 left-0 w-full h-full bg-white p-5 pt-3 pr-2 duration-200`}
       >
         <ClothesMobFilter
           setMobileFilter={setMobileFilter}

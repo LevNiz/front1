@@ -24,7 +24,6 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
   const { control, register, handleSubmit } = useForm();
 
   const handleCheckboxSizes = async (size) => {
-    console.log(size);
     if (selectedSizes?.includes(size)) {
       setSelectedSizes((prevSizes) =>
         prevSizes.filter((selectedSize) => selectedSize !== size)
@@ -75,8 +74,6 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
   const onSubmit = (data) => {
     console.log(data);
   };
-
-  console.log(selectedSizes);
 
   return (
     <div className='h-full'>
@@ -176,13 +173,12 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
                 <input
                   className='hidden'
                   type='checkbox'
-                  id={`checkbox-${el?.id}-${index}`}
-                  checked={selectedSizes.includes(el?.size)}
+                  id={`checkbox-${el?.id}`}
+                  {...register('sizes', { value: el?.size })}
                   onChange={() => handleCheckboxSizes(el?.size)}
-                  {...register(`size_${el?.id}`, { value: el?.size })}
                 />
                 <label
-                  htmlFor={`checkbox-${el?.id}-${index}`}
+                  htmlFor={`checkbox-${el?.id}`}
                   className='text-sm flex cursor-pointer mm:items-center w-max'
                 >
                   <div
@@ -246,8 +242,8 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
                 <input
                   className='hidden'
                   type='checkbox'
-                  id={`checkbox-${el?.id}-${index}`}
-                  {...register(`cost_${el?.id}`, {
+                  id={`checkbox-${el?.id}`}
+                  {...register('costs', {
                     value: { minCost: el?.minCost, maxCost: el?.maxCost },
                   })}
                   onChange={(e) =>
@@ -259,7 +255,7 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
                   }
                 />
                 <label
-                  htmlFor={`checkbox-${el?.id}-${index}`}
+                  htmlFor={`checkbox-${el?.id}`}
                   className='text-sm flex cursor-pointer mm:items-center w-max'
                 >
                   <div
@@ -327,18 +323,17 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
               brands?.length > 5 && 'overflow-y-scroll scrollable h-[172px]'
             } ${isShowFilter?.brands ? 'block' : 'hidden'} space-y-3 pb-3`}
           >
-            {brands?.map((el, index) => (
-              <div key={index}>
+            {brands?.map((el) => (
+              <div key={el?.el}>
                 <input
                   className='hidden'
                   type='checkbox'
-                  id={`checkbox-${el?.id}-${index}`}
-                  checked={selectedBrands?.includes(el?.id)}
+                  id={`checkbox-${el?.id}`}
+                  {...register('brands', { value: el?.size })}
                   onChange={() => handleCheckboxBrands(el?.id)}
-                  {...register(`brand_${el?.id}`, { value: el?.fullname })}
                 />
                 <label
-                  htmlFor={`checkbox-${el?.id}-${index}`}
+                  htmlFor={`checkbox-${el?.id}`}
                   className='text-sm flex cursor-pointer mm:items-center w-max'
                 >
                   <div
