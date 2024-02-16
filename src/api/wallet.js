@@ -53,8 +53,7 @@ export const payForWallet = (amount, user, currency) => {
       amount: amount,
       language: 'ru',
       currency: 'KGS',
-      test: 1,
-      description: 'Пополнение кошелка через оплату картой',
+      description: `Пополнение кошелка через оплату картой (${amount} KGS)`,
       options: {
         user: {
           email: `${user?.login}`,
@@ -66,7 +65,7 @@ export const payForWallet = (amount, user, currency) => {
       await postTopUpWallet(amount, user, currency);
     },
     errorCallback: async (payment) => {
-      alert(payment);
+      console.error(payment);
     },
   };
 

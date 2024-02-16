@@ -68,15 +68,15 @@ const DetailInfo = (props) => {
   }, []);
 
   const payForParcel = () => {
+    const amount = parcelDetail?.totalCost * currency;
     var data = {
       token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
       payment: {
         order: `${parcelDetail?.id}`,
-        amount: parcelDetail?.totalCost,
+        amount: amount,
         language: 'ru',
         currency: 'KGS',
-        test: 0,
-        description: `${parcelDetail?.comment}`,
+        description: `Оплата за услуги доставки (${parcelDetail?.orderNumber})`,
         options: {
           user: {
             email: `${parcelDetail?.client?.login}`,
@@ -110,6 +110,14 @@ const DetailInfo = (props) => {
     // eslint-disable-next-line no-undef
     var widget = new PayBox(data);
     widget.create();
+  };
+
+  const handlePayForParcel = () => {
+    if (parcelDetail?.totalCost > -20) {
+      payForParcel();
+    } else {
+      alert('Минимальная сумма оплаты 20 сомов!');
+    }
   };
 
   return (
@@ -223,7 +231,7 @@ const DetailInfo = (props) => {
                     <div className='ml-4'>
                       <h4 className='text-sm font-medium'>Цена за кг</h4>
                       <div className='flex items-center'>
-                        <p className='text-xs mb-2 whitespace-nowrap'>
+                        <p className='text-xs whitespace-nowrap'>
                           {parcelDetail?.costPerKg} $
                         </p>
                         <span className='text-[10px] font-light pl-1 whitespace-nowrap'>
@@ -243,10 +251,10 @@ const DetailInfo = (props) => {
                         Дополнительная плата
                       </h4>
                       <div className='flex items-center'>
-                        <p className='text-xs mb-2 whitespace-nowrap'>
+                        <p className='text-xs whitespace-nowrap'>
                           {parcelDetail?.extraCost} $
                         </p>
-                        <span className='text-[10px] font-light pl-1 whitespace-nowrap'>
+                        <span className='text-[10px] font-light pl-1 pt-[2px] whitespace-nowrap'>
                           ({parcelDetail?.extraCost * currency} с)
                         </span>
                       </div>
@@ -258,7 +266,7 @@ const DetailInfo = (props) => {
                       <h4 className='font-bold text-colPurple pr-1 whitespace-nowrap'>
                         {parcelDetail?.totalCost} $
                       </h4>
-                      <span className='text-xs text-colPurple whitespace-nowrap'>
+                      <span className='text-xs text-colPurple whitespace-nowrap pt-[2px]'>
                         ({parcelDetail?.totalCost * currency} c)
                       </span>
                     </div>
@@ -269,7 +277,7 @@ const DetailInfo = (props) => {
                     </div>
                   ) : (
                     <button
-                      onClick={payForParcel}
+                      onClick={handlePayForParcel}
                       className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 w-full'
                     >
                       Оплатить

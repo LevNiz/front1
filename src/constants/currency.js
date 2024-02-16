@@ -5,7 +5,7 @@ import usa from '../assets/tempImages/usa.png';
 import uk from '../assets/tempImages/uk.png';
 import china from '../assets/tempImages/china.png';
 
-export const currency = 89;
+export const currency = 93;
 
 // temp data:
 export const currencyData = [

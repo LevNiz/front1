@@ -66,7 +66,7 @@ const TopUpWallet = () => {
                 {...register('amount', {
                   required: 'Введите сумму пополнения!',
                   validate: (value) =>
-                    parseFloat(value) >= 10 || 'Минимальная сумма 10',
+                    parseFloat(value) >= 20 || 'Минимальная сумма 20',
                   pattern: {
                     value: /^[0-9]*[.,]?[0-9]+$/,
                     message: 'Введите положительное число!',

@@ -43,8 +43,7 @@ export const payForParcel = (orderData, items, userData, state, amount) => {
       amount: amount,
       language: 'ru',
       currency: 'KGS',
-      test: 0,
-      description: `Описание заявки`,
+      description: `Оплата за покупку в GB-Shop`,
       options: {
         user: {
           email: `${userData?.login}`,
