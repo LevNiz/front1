@@ -55,9 +55,9 @@ export const payForParcel = (orderData, items, userData, state, amount) => {
     successCallback: async () => {
       await orderItemPost(orderData, items, userData, state);
     },
-    // errorCallback: async (payment) => {
-    //   alert(payment);
-    // },
+    errorCallback: async (payment) => {
+      console.error(payment);
+    },
   };
 
   // eslint-disable-next-line no-undef

@@ -74,7 +74,7 @@ const DetailInfo = (props) => {
         order: `${parcelDetail?.id}`,
         amount: parcelDetail?.totalCost,
         language: 'ru',
-        currency: 'USD',
+        currency: 'KGS',
         test: 0,
         description: `${parcelDetail?.comment}`,
         options: {
