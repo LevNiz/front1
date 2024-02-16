@@ -10,6 +10,7 @@ import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { useInView } from 'react-intersection-observer';
 import ClothesMobFilter from '../../../components/GBShop/Items/MobileFilter/ClothesMobFilter';
 import ShoesFilter from '../../../components/GBShop/Items/Filters/ShoesFilter';
+import ShoesMobFilter from '../../../components/GBShop/Items/MobileFilter/ShoesMobFilter';
 
 const Items = () => {
   const { loading, error, items } = useSelector((state) => state?.items);
@@ -143,10 +144,20 @@ const Items = () => {
             : 'opacity-0 invisible z-[-1]'
         } fixed top-0 left-0 w-full h-full bg-white p-5 pt-3 pr-2 duration-200`}
       >
-        <ClothesMobFilter
-          setMobileFilter={setMobileFilter}
-          categoryID={state?.category}
-        />
+        {state?.category === 3 && (
+          <ClothesMobFilter
+            setMobileFilter={setMobileFilter}
+            categoryID={state?.category}
+            setNextPage={setNextPage}
+          />
+        )}
+        {state?.category === 5 && (
+          <ShoesMobFilter
+            setMobileFilter={setMobileFilter}
+            categoryID={state?.category}
+            setNextPage={setNextPage}
+          />
+        )}
       </div>
     </div>
   );

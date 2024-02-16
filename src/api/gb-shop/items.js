@@ -83,6 +83,30 @@ export const fetchItemsNextPage = async (dispatch, next, items) => {
   }
 };
 
+export const fetchFilterItemsMobile = async (dispatch, category, formData) => {
+  const { gender_type, ordering, selectedCosts, selectedBrands } = formData;
+
+  const sizesParam = formData.selectedSizes.join(';');
+
+  const costsParam = selectedCosts
+    .map((cost) => `min_cost=${cost.minCost}&max_cost=${cost.maxCost}`)
+    .join('&');
+
+  dispatch(fetchItemsStart());
+  try {
+    const url = `/core/item/?category=${
+      category || ''
+    }&sizes=${sizesParam}&gender_type=${gender_type?.value || ''}&ordering=${
+      ordering?.value || ''
+    }&${costsParam}&supplier=${selectedBrands || ''}`;
+    const res = await request.get(url);
+    dispatch(fetchItemsSuccess(res?.data?.results));
+    return { next: res?.data?.next };
+  } catch (error) {
+    dispatch(fetchItemsFailure(error));
+  }
+};
+
 // Fetch more items:
 export const fetchMoreItems = async (category, page) => {
   try {

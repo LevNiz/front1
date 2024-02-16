@@ -3,7 +3,7 @@ import {
   costs,
   genderType,
   ordering,
-  sizes,
+  shoesSizes,
 } from '../../../../constants/fakeFilterData';
 import { useEffect, useState } from 'react';
 import { fetchFilteredBrands } from '../../../../api/gb-shop/brands';
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchFilterItemsMobile } from '../../../../api/gb-shop/items';
 import { ContentLoading } from '../../../../helpers/Loader/Loader';
 
-const ClothesMobFilter = ({ setMobileFilter, categoryID, setNextPage }) => {
+const ShoesMobFilter = ({ setMobileFilter, categoryID, setNextPage }) => {
   const { loading } = useSelector((state) => state?.items);
   const [isShowFilter, setIsShowFilter] = useState({
     sizes: true,
@@ -200,12 +200,13 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID, setNextPage }) => {
             </div>
             <div
               className={`${
-                sizes?.length > 5 && 'overflow-y-scroll scrollable h-[172px]'
+                shoesSizes?.length > 5 &&
+                'overflow-y-scroll scrollable h-[172px]'
               } ${
                 isShowFilter?.sizes ? 'block' : 'hidden'
               } space-y-3 pb-5 border-b border-colGray2`}
             >
-              {sizes?.map((el, index) => (
+              {shoesSizes?.map((el, index) => (
                 <div key={index}>
                   <input
                     className='hidden'
@@ -421,4 +422,4 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID, setNextPage }) => {
   );
 };
 
-export default ClothesMobFilter;
+export default ShoesMobFilter;
