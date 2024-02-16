@@ -16,6 +16,7 @@ import {
   MenuItem,
   MenuList,
 } from '@material-tailwind/react';
+import { ContentLoading } from '../../helpers/Loader/Loader';
 
 const Navbar = ({ TechChatNotification, gbChatNotification }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -120,59 +121,66 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                   </MenuItem>
                 </MenuHandler>
                 <MenuList className='!p-0 rounded-sm w-60 h-60 !mt-4 bg-white text-black flex flex-col overflow-y-scroll shadow-lg scrollable'>
-                  {filteredCountries?.map((el) => (
-                    <Menu
-                      placement='right-start'
-                      allowHover
-                      offset={15}
-                      key={el?.id}
-                    >
-                      <MenuHandler className='flex items-center justify-between py-2 hover:bg-colYellow duration-200 rounded-none border-b border-[#C3C3C3]'>
-                        <MenuItem>
-                          <div
-                            key={el?.id}
-                            onMouseEnter={() => setDepotID(el?.id)}
-                            onMouseDown={() => setDepotID(el?.id)}
-                            className='relative cursor-pointer outline-none w-full flex justify-between items-center'
-                          >
-                            <div className='flex items-center'>
-                              <div className='w-6 h-6 min-w-[24px] mr-2 rounded-full overflow-hidden'>
-                                <img
-                                  className='w-full h-full object-cover'
-                                  src={el?.icon}
-                                  alt=''
-                                />
+                  {!filteredCountries?.length ? (
+                    <ContentLoading extraStyle='210px' />
+                  ) : (
+                    filteredCountries?.map((el) => (
+                      <Menu
+                        placement='right-start'
+                        allowHover
+                        offset={15}
+                        key={el?.id}
+                      >
+                        <MenuHandler className='flex items-center justify-between py-2 hover:bg-colYellow duration-200 rounded-none border-b border-[#C3C3C3]'>
+                          <MenuItem>
+                            <div
+                              key={el?.id}
+                              onMouseEnter={() => setDepotID(el?.id)}
+                              onMouseDown={() => setDepotID(el?.id)}
+                              className='relative cursor-pointer outline-none w-full flex justify-between items-center'
+                            >
+                              <div className='flex items-center'>
+                                <div className='w-6 h-6 min-w-[24px] mr-2 rounded-full overflow-hidden'>
+                                  <img
+                                    className='w-full h-full object-cover'
+                                    src={el?.icon}
+                                    alt=''
+                                  />
+                                </div>
+                                <span className='line-clamp-1 break-all font-medium text-[15px]'>
+                                  {el?.nameRu}
+                                </span>
                               </div>
-                              <span className='line-clamp-1 break-all font-medium text-[15px]'>
-                                {el?.nameRu}
-                              </span>
+                              <img
+                                className='h-[15px]'
+                                src={arrowRight}
+                                alt='*'
+                              />
                             </div>
-                            <img
-                              className='h-[15px]'
-                              src={arrowRight}
-                              alt='*'
-                            />
-                          </div>
-                        </MenuItem>
-                      </MenuHandler>
-                      <MenuList className='p-0'>
-                        {filteredDepotCities?.map((el) => (
-                          <MenuItem
-                            className={`${
-                              el?.active
-                                ? ''
-                                : 'pointer-events-none cursor-not-allowed opacity-40'
-                            } py-[10px] hover:bg-colYellow duration-200`}
-                            key={el?.id}
-                          >
-                            <NavLink className='px-2' to={`/depots/${el?.id}`}>
-                              г. {el?.city?.nameRu}
-                            </NavLink>
                           </MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-                  ))}
+                        </MenuHandler>
+                        <MenuList className='p-0'>
+                          {filteredDepotCities?.map((el) => (
+                            <MenuItem
+                              className={`${
+                                el?.active
+                                  ? ''
+                                  : 'pointer-events-none cursor-not-allowed opacity-40'
+                              } py-[10px] hover:bg-colYellow duration-200`}
+                              key={el?.id}
+                            >
+                              <NavLink
+                                className='px-2'
+                                to={`/depots/${el?.id}`}
+                              >
+                                г. {el?.city?.nameRu}
+                              </NavLink>
+                            </MenuItem>
+                          ))}
+                        </MenuList>
+                      </Menu>
+                    ))
+                  )}
                 </MenuList>
               </Menu>
             </li>
