@@ -72,10 +72,10 @@ const DetailInfo = (props) => {
       token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
       payment: {
         order: `${parcelDetail?.id}`,
-        amount: 10,
+        amount: parcelDetail?.totalCost,
         language: 'ru',
         currency: 'USD',
-        test: 1,
+        test: 0,
         description: `${parcelDetail?.comment}`,
         options: {
           user: {
@@ -84,8 +84,7 @@ const DetailInfo = (props) => {
           },
         },
       },
-      successCallback: async (payment) => {
-        console.log(`Success: ${payment}`);
+      successCallback: async () => {
         const { success } = await PatchParcelsPaymentStatus(id);
         if (success) {
           setLoading(true);

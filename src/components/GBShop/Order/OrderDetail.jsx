@@ -72,7 +72,8 @@ const OrderDetail = () => {
   }, [userID]);
 
   const onSubmit = (data) => {
-    payForParcel(data, cartItems, userData, state);
+    const amount = (totalCost * currency)?.toFixed(1);
+    payForParcel(data, cartItems, userData, state, amount);
   };
 
   return (

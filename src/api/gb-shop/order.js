@@ -35,15 +35,15 @@ const orderItemPost = async (data, items, userData, state) => {
 };
 
 // Payment FreeDomPay
-export const payForParcel = (orderData, items, userData, state) => {
+export const payForParcel = (orderData, items, userData, state, amount) => {
   let data = {
     token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
     payment: {
       order: `${orderData?.address?.value}`,
-      amount: 5,
+      amount: amount,
       language: 'ru',
-      currency: 'USD',
-      test: 1,
+      currency: 'KGS',
+      test: 0,
       description: `Описание заявки`,
       options: {
         user: {
@@ -55,9 +55,9 @@ export const payForParcel = (orderData, items, userData, state) => {
     successCallback: async () => {
       await orderItemPost(orderData, items, userData, state);
     },
-    errorCallback: async (payment) => {
-      alert(payment);
-    },
+    // errorCallback: async (payment) => {
+    //   alert(payment);
+    // },
   };
 
   // eslint-disable-next-line no-undef
