@@ -68,10 +68,10 @@ const Items = () => {
       </div>
       <div
         className={`${
-          state?.category === (3 && 5) ? 'block' : 'hidden'
+          state?.category == 3 || state?.category == 5 ? 'block' : 'hidden'
         } container mb-2`}
       >
-        {state?.category === (3 && 5) && (
+        {(state?.category == 3 || state?.category == 5) && (
           <ItemsSort
             categoryID={state?.category}
             setNextPage={setNextPage}
@@ -79,10 +79,13 @@ const Items = () => {
           />
         )}
       </div>
+
       <div className='flex container pb-8 pt-4'>
         <div
           className={`${
-            state?.category === (3 && 5) ? 'hidden md:block' : 'hidden'
+            state?.category === 3 || state?.category === 5
+              ? 'hidden md:block'
+              : 'hidden'
           } max-w-[240px] w-full`}
         >
           {state?.category === 3 ? (
@@ -90,13 +93,13 @@ const Items = () => {
               categoryID={state?.category}
               setNextPage={setNextPage}
             />
+          ) : state?.category === 5 ? (
+            <ShoesFilter
+              categoryID={state?.category}
+              setNextPage={setNextPage}
+            />
           ) : (
-            state?.category === 5 && (
-              <ShoesFilter
-                categoryID={state?.category}
-                setNextPage={setNextPage}
-              />
-            )
+            ''
           )}
         </div>
         {loading ? (
@@ -105,7 +108,7 @@ const Items = () => {
           <div className='w-full'>
             <div
               className={`${
-                state?.category === (3 && 5)
+                state?.category === 3 || state?.category === 5
                   ? 'md:grid-cols-2 lg:grid-cols-3 lx:grid-cols-4'
                   : 'md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
               } grid grid-cols-2 gap-3 sx:gap-4 lg:gap-5 md:pl-4`}

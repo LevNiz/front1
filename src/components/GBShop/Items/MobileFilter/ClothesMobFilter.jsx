@@ -23,6 +23,39 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
 
   const { control, register, handleSubmit } = useForm();
 
+  const handleCheckboxSizes = async (size) => {
+    console.log(size);
+    if (selectedSizes?.includes(size)) {
+      setSelectedSizes((prevSizes) =>
+        prevSizes.filter((selectedSize) => selectedSize !== size)
+      );
+    } else {
+      setSelectedSizes((prevSizes) => [...prevSizes, size]);
+    }
+  };
+
+  const handleCheckboxCosts = (minCost, maxCost, isChecked) => {
+    if (isChecked) {
+      setSelectedCosts((prevCosts) => [...prevCosts, { minCost, maxCost }]);
+    } else {
+      setSelectedCosts((prevCosts) =>
+        prevCosts.filter(
+          (cost) => cost.minCost !== minCost || cost.maxCost !== maxCost
+        )
+      );
+    }
+  };
+
+  const handleCheckboxBrands = (id) => {
+    if (selectedBrands?.includes(id)) {
+      setSelectedBrands((prevBrands) =>
+        prevBrands.filter((selectedBrand) => selectedBrand !== id)
+      );
+    } else {
+      setSelectedBrands((prevBrands) => [...prevBrands, id]);
+    }
+  };
+
   const toggleFilter = (filterName) => {
     setIsShowFilter((prev) => ({
       ...prev,
@@ -42,6 +75,8 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  console.log(selectedSizes);
 
   return (
     <div className='h-full'>
@@ -142,6 +177,8 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
                   className='hidden'
                   type='checkbox'
                   id={`checkbox-${el?.id}-${index}`}
+                  checked={selectedSizes.includes(el?.size)}
+                  onChange={() => handleCheckboxSizes(el?.size)}
                   {...register(`size_${el?.id}`, { value: el?.size })}
                 />
                 <label
@@ -213,6 +250,13 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
                   {...register(`cost_${el?.id}`, {
                     value: { minCost: el?.minCost, maxCost: el?.maxCost },
                   })}
+                  onChange={(e) =>
+                    handleCheckboxCosts(
+                      el.minCost,
+                      el.maxCost,
+                      e.target.checked
+                    )
+                  }
                 />
                 <label
                   htmlFor={`checkbox-${el?.id}-${index}`}
@@ -289,6 +333,8 @@ const ClothesMobFilter = ({ setMobileFilter, categoryID }) => {
                   className='hidden'
                   type='checkbox'
                   id={`checkbox-${el?.id}-${index}`}
+                  checked={selectedBrands?.includes(el?.id)}
+                  onChange={() => handleCheckboxBrands(el?.id)}
                   {...register(`brand_${el?.id}`, { value: el?.fullname })}
                 />
                 <label
