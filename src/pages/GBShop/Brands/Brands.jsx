@@ -43,23 +43,6 @@ const Brands = () => {
   useEffect(() => {
     const container = containerRef.current;
 
-    // const fetchNextPage = async () => {
-    //   if (page < totalPages) {
-    //     setScrollLoading(true);
-    //     try {
-    //       const { success, data } = await fetchBrandsItem(
-    //         state?.brandID,
-    //         page + 1
-    //       );
-    //       if (success) {
-    //         setItems((prevItems) => [...prevItems, ...data]);
-    //         setPage((prevPage) => prevPage + 1);
-    //       }
-    //     } finally {
-    //       setScrollLoading(false);
-    //     }
-    //   }
-    // };
     if (container) {
       const observer = new IntersectionObserver(
         async ([entry]) => {
