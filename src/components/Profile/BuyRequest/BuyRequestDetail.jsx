@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Modal from '../../../helpers/Modals/Modal';
 import {
   FetchBuyRequestsDetail,
   deleteBuyRequest,
+  payForBuyRequest,
 } from '../../../api/buyRequests';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import Modal from '../../../helpers/Modals/Modal';
-import { useDispatch } from 'react-redux';
-import noImg from '../../../assets/images/no-ava.jpeg';
+import { currency } from '../../../constants/currency';
+import { fetchUser } from '../../../api/client';
 import trash from '../../../assets/icons/trash.svg';
 import update from '../../../assets/icons/update.svg';
 
 const BuyRequestDetail = () => {
+  const { userID } = useSelector((state) => state?.user);
   const [item, setItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
   const [modalContent, setModalContent] = useState('');
 
   const navigate = useNavigate();
@@ -34,6 +38,10 @@ const BuyRequestDetail = () => {
     setModalOpen(false);
   };
 
+  const handlePay = () => {
+    payForBuyRequest((item?.totalCost * currency).toFixed(2), userData, item);
+  };
+
   useEffect(() => {
     setIsLoading(true);
     (async () => {
@@ -44,6 +52,15 @@ const BuyRequestDetail = () => {
       }
     })();
   }, [id]);
+
+  useEffect(() => {
+    (async () => {
+      const { success, data } = await fetchUser(userID);
+      if (success) {
+        setUserData(data);
+      }
+    })();
+  }, [userID]);
 
   return (
     <div className='w-full pt-5 md:p-4'>
@@ -70,19 +87,54 @@ const BuyRequestDetail = () => {
         <ContentLoading extraStyle={480} />
       ) : (
         <>
-          <div className='flex items-center'>
-            <div className='min-w-[64px] w-16 h-16 border border-gray-100 rounded-full overflow-hidden'>
-              <img
-                className='w-full h-full object-contain rounded-full'
-                src={item?.client?.avatar}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = noImg;
-                }}
-                alt='*'
-              />
+          <div className='ld:flex md:block lg:flex justify-between'>
+            <div>
+              <div className='flex items-center'>
+                <span>ФИО:</span>
+                <span className='ml-1 font-medium'>
+                  {item?.client?.fullname}
+                </span>
+              </div>
+              <div className='flex items-center py-1'>
+                <span>Статус оплаты:</span>
+                <span
+                  className={`${
+                    item?.paid ? 'text-green-500' : 'text-red-500'
+                  } ml-1 font-medium`}
+                >
+                  {item?.paid ? 'Оплачено' : 'Неоплачено'}
+                </span>
+              </div>
+              <div className='flex items-center'>
+                <span>Описание:</span>
+                <span className='ml-1 font-medium'>
+                  {item?.info || 'Не указано'}
+                </span>
+              </div>
             </div>
-            <span className='ml-3'>{item?.client?.fullname}</span>
+            <div>
+              <div className='flex items-center pt-3'>
+                <span className='text-lg'>Счет на оплату:</span>
+                <div className='ml-1 flex justify-end items-center'>
+                  <span className='text-lg font-bold whitespace-nowrap'>
+                    $ {item?.totalCost?.toFixed(2)}
+                  </span>
+                  <span className='whitespace-nowrap pl-1 text-sm pt-[2px]'>
+                    ({(item?.totalCost * currency)?.toFixed(2)} с)
+                  </span>
+                </div>
+              </div>
+              {item?.totalCost !== 0 &&
+                item?.totalCost !== null &&
+                item?.paid === false && (
+                  <button
+                    onClick={handlePay}
+                    className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 mt-4 w-full ld:max-w-[240px]'
+                  >
+                    Оплатить
+                  </button>
+                )}
+            </div>
           </div>
           <h3 className='pt-6 pb-4 font-medium'>Товары</h3>
           <div className='grid mm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5'>

@@ -9,9 +9,18 @@ const BuyRequestItem = ({ data = {} }) => {
         className='shadow-[0_4px_16px_#e9e9e9] p-2 sm:p-5 rounded-xl'
       >
         <div className='w-full mb-3'>
-          <h4 className='font-medium break-all line-clamp-1 pr-2'>
-            {data?.name || 'Не указана'}
-          </h4>
+          <div className='flex justify-between items-center'>
+            <h4 className='font-medium break-all line-clamp-1 pr-2'>
+              {data?.name || 'Не указана'}
+            </h4>
+            <span
+              className={`${
+                data?.paid ? 'text-green-500' : 'text-red-500'
+              } text-sm font-semibold`}
+            >
+              {data?.paid ? 'Оплачено' : 'Неоплачено'}
+            </span>
+          </div>
           <div className='flex items-center'>
             <span className='text-sm my-1 pr-1'>Ссылка:</span>
             <span className='text-sm text-blue-500 break-all line-clamp-1'>

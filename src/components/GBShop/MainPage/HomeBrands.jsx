@@ -56,7 +56,7 @@ const HomeBrands = () => {
               },
             }}
           >
-            {stores?.map((el) => (
+            {stores?.slice(0, 12)?.map((el) => (
               <SwiperSlide modules={[Navigation]} key={el?.id}>
                 <NavLink
                   to={`brands/${el?.id}`}

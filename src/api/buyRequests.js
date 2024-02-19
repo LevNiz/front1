@@ -68,3 +68,43 @@ export const deleteBuyRequest = async (dispatch, id) => {
     return { success: false };
   }
 };
+
+// PatchBuyer requests:
+export const patchPaymentStatus = async (id) => {
+  try {
+    await axiosInstance.patch(`core/buyer_request/${id}/`, { paid: true });
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
+// Pay For Buy Request:
+export const payForBuyRequest = (amount, user, item) => {
+  let data = {
+    token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
+    payment: {
+      order: `${amount}`,
+      amount: amount,
+      language: 'ru',
+      currency: 'KGS',
+      description: 'Оплата за заявку на покупку товара',
+      options: {
+        user: {
+          email: `${user?.login}`,
+          phone: `${user?.phone}` || 'Не указано',
+        },
+      },
+    },
+    successCallback: async () => {
+      await patchPaymentStatus(item?.id);
+    },
+    errorCallback: async (payment) => {
+      console.error(payment);
+    },
+  };
+
+  // eslint-disable-next-line no-undef
+  var widget = new PayBox(data);
+  widget.create();
+};
