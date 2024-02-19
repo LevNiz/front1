@@ -9,7 +9,9 @@ import { axiosInstance, request } from './axios';
 export const FetchBuyRequests = async (dispatch, userID) => {
   dispatch(fetchBuyRequestStart());
   try {
-    const res = await request.get(`core/buyer_request/?client=${userID}`);
+    const res = await request.get(
+      `core/buyer_request/?client=${userID}&ordering=-dateCreated`
+    );
     dispatch(fetchBuyRequestSuccess(res?.data?.results));
   } catch (error) {
     dispatch(fetchBuyRequestFailure(error));
