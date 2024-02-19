@@ -35,10 +35,10 @@ const Brands = () => {
       ) : error ? (
         <ErrorServer />
       ) : stores?.length ? (
-        <div className='grid grid-cols-5 gap-10'>
+        <div className='grid grid-cols-3 mm:grid-cols-4 md:grid-cols-5 gap-6 md:gap-10 pt-10'>
           {stores?.map((el) => (
             <NavLink
-              className='my-7 flex justify-center items-center'
+              className='mm:my-7 flex justify-center items-center'
               key={el?.id}
               state={{ from: el?.fullname }}
               to={`${el?.id}`}
