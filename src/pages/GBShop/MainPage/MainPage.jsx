@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchHomeItems } from '../../../api/gb-shop/homeItems';
 import {
-  Brands,
+  HomeBrands,
   MainCategories,
   MainBlock,
   CategorySlider,
@@ -38,7 +38,7 @@ const MainPage = () => {
     <div className='pt-20 md:pt-28 pb-10'>
       <MainBlock />
       <MainCategories />
-      <Brands />
+      <HomeBrands />
       {homeItems?.map(
         (el, index) =>
           el?.items?.length > 0 && (

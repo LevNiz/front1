@@ -149,7 +149,7 @@ const ItemsDetail = () => {
     <div className='py-16 md:py-24 min-h-[991px]'>
       <div className='content'>
         <div className='bg-[#fbfbfb] py-1 lg:py-2 px-3 lg:px-5 my-4'>
-          <h3 className='font-bold font-ubuntu text-[#030303] text-2xl lg:text-3xl'>
+          <h3 className='font-bold font-ubuntu text-[#030303] text-2xl lg:text-3xl min-h-[36px]'>
             {item?.category?.nameRus}
           </h3>
         </div>

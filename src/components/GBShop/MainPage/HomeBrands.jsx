@@ -4,7 +4,7 @@ import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import { NavLink } from 'react-router-dom';
 
-const Brands = () => {
+const HomeBrands = () => {
   const { stores, loading, error } = useSelector((state) => state?.stores);
 
   return (
@@ -42,4 +42,4 @@ const Brands = () => {
   );
 };
 
-export default Brands;
+export default HomeBrands;

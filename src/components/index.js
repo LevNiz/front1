@@ -53,7 +53,7 @@ import ItemSearchRequestNew from './Profile/ItemSearchRequest/ItemSearchRequestN
 import ItemSearchRequestDetail from './Profile/ItemSearchRequest/ItemSearchRequestDetail';
 import MainBlock from './GBShop/MainPage/MainBlock';
 import MainCategories from './GBShop/MainPage/MainCategories';
-import Brands from './GBShop/MainPage/Brands';
+import HomeBrands from './GBShop/MainPage/HomeBrands';
 import CategorySlider from './GBShop/MainPage/CategorySlider';
 import ItemsCard from './GBShop/Items/ItemsCard';
 import ItemsDetail from './GBShop/Items/ItemsDetail';
@@ -125,7 +125,7 @@ export {
   ItemSearchRequestDetail,
   MainBlock,
   MainCategories,
-  Brands,
+  HomeBrands,
   ItemsCard,
   CategorySlider,
   ItemsDetail,
