@@ -3,7 +3,7 @@ import { Navigation, Thumbs } from 'swiper/modules';
 
 import noImg from '../../../assets/images/no-image.svg';
 
-const ItemsSlider = ({
+const MainSlider = ({
   item,
   activeThumb,
   setActiveThumb,
@@ -100,4 +100,4 @@ const ItemsSlider = ({
   );
 };
 
-export default ItemsSlider;
+export default MainSlider;

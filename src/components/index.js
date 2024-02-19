@@ -54,7 +54,7 @@ import ItemSearchRequestDetail from './Profile/ItemSearchRequest/ItemSearchReque
 import MainBlock from './GBShop/MainPage/MainBlock';
 import MainCategories from './GBShop/MainPage/MainCategories';
 import HomeBrands from './GBShop/MainPage/HomeBrands';
-import CategorySlider from './GBShop/MainPage/CategorySlider';
+import ItemsSlider from './GBShop/MainPage/ItemsSlider';
 import ItemsCard from './GBShop/Items/ItemsCard';
 import ItemsDetail from './GBShop/Items/ItemsDetail';
 import BasketInfo from './GBShop/Basket/BasketInfo';
@@ -127,7 +127,7 @@ export {
   MainCategories,
   HomeBrands,
   ItemsCard,
-  CategorySlider,
+  ItemsSlider,
   ItemsDetail,
   BasketInfo,
   OrderDetail,

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import { ButtonLoading, ContentLoading } from '../../../helpers/Loader/Loader';
-import ItemsSlider from './ItemsSlider';
-import CategorySlider from '../MainPage/CategorySlider';
+import MainSlider from './MainSlider';
+import ItemsSlider from '../MainPage/ItemsSlider';
 import Select from 'react-select';
 import {
   addToFavorites,
@@ -178,7 +178,7 @@ const ItemsDetail = () => {
                   </div>
                 )}
                 <div className='sm:min-h-[340px] lg:min-h-[470px] border border-gray-100 rounded-md p-3'>
-                  <ItemsSlider
+                  <MainSlider
                     item={item}
                     activeThumb={activeThumb}
                     setActiveThumb={setActiveThumb}
@@ -448,7 +448,7 @@ const ItemsDetail = () => {
                 <img src={rightArrow} alt='*' />
               </NavLink>
             </div>
-            <CategorySlider
+            <ItemsSlider
               items={similarItems?.slice(0, 10)}
               loading={loading}
               error={error}

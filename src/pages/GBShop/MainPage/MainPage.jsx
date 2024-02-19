@@ -6,7 +6,7 @@ import {
   HomeBrands,
   MainCategories,
   MainBlock,
-  CategorySlider,
+  ItemsSlider,
 } from '../../../components';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
 import rightArrow from '../../../assets/gb-shop/icons/right.svg';
@@ -61,7 +61,7 @@ const MainPage = () => {
                   <img className='w-4 md:w-6' src={rightArrow} alt='*' />
                 </NavLink>
               </div>
-              <CategorySlider
+              <ItemsSlider
                 items={el?.items}
                 loading={loading}
                 error={error}

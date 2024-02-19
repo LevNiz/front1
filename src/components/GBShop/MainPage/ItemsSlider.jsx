@@ -19,7 +19,7 @@ import { addToCart, removeFromCart } from '../../../api/gb-shop/basket';
 import { toastModal } from '../../../helpers/Modals/toastModal';
 import { currency } from '../../../constants/currency';
 
-const CategorySlider = ({ items, loading, error }) => {
+const ItemsSlider = ({ items, loading, error }) => {
   const { userID, user } = useSelector((state) => state?.user);
   const { favItems } = useSelector((state) => state?.favItems);
   const { cartItems } = useSelector((state) => state?.cartItems);
@@ -250,4 +250,4 @@ const CategorySlider = ({ items, loading, error }) => {
   );
 };
 
-export default CategorySlider;
+export default ItemsSlider;
