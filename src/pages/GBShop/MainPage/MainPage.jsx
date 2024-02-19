@@ -61,11 +61,7 @@ const MainPage = () => {
                   <img className='w-4 md:w-6' src={rightArrow} alt='*' />
                 </NavLink>
               </div>
-              <ItemsSlider
-                items={el?.items}
-                loading={loading}
-                error={error}
-              />
+              <ItemsSlider items={el?.items} loading={loading} error={error} />
             </div>
           )
       )}

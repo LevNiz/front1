@@ -20,7 +20,7 @@ const GBShopFooter = () => {
       className='py-10 pb-12 md:pb-10 bg-[#FBFBFB] text-center mm:text-left'
     >
       <div className='flex-col space-y-10 lg:space-y-0 lg:flex-row flex justify-between ld:items-center w-full container'>
-        <NavLink className='lg:pr-5' to='/'>
+        <NavLink className='lg:pr-5' to='/gb-shop'>
           <img
             className='w-[64px] lg:w-[106px] mx-auto lg:mx-0'
             src={logo}

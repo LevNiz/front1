@@ -43,6 +43,7 @@ import {
   ItemSearchRequestUpdate,
   ApplicationsDetail,
   ApplicationsUpdate,
+  BrandsItems,
 } from '../components';
 import {
   Auth,
@@ -122,7 +123,10 @@ export const router = createBrowserRouter(
           <Route path='basket' element={<Basket />} />
           <Route path='favorites' element={<Favorites />} />
           <Route path='order' element={<Order />} />
-          <Route path='brands' element={<Brands />} />
+          <Route path='brands'>
+            <Route index element={<Brands />} />
+            <Route path=':id' element={<BrandsItems />} />
+          </Route>
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path='profile' element={<Profile />}>

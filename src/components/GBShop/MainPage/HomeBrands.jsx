@@ -6,9 +6,12 @@ import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import noImg from '../../../assets/images/no-image.svg';
+import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 
 const HomeBrands = () => {
   const { stores, loading, error } = useSelector((state) => state?.stores);
+
+  console.log(stores);
 
   return (
     <div className='py-10 content'>
@@ -16,6 +19,12 @@ const HomeBrands = () => {
         <h3 className='font-bold font-ubuntu text-[#030303] text-xl md:text-2xl lg:text-3xl'>
           Бренды
         </h3>
+        <NavLink to='brands' className='flex items-center justify-end'>
+          <span className='font-medium text-base md:text-xl mr-1 md:mr-2 text-[#FEDE2B]'>
+            Все
+          </span>
+          <img className='w-4 md:w-6' src={rightArrow} alt='*' />
+        </NavLink>
       </div>
       {loading ? (
         <ContentLoading extraStyle={240} />
@@ -50,8 +59,8 @@ const HomeBrands = () => {
             {stores?.map((el) => (
               <SwiperSlide modules={[Navigation]} key={el?.id}>
                 <NavLink
-                  to='brands'
-                  state={{ from: el?.nameRus, category: el?.id }}
+                  to={`brands/${el?.id}`}
+                  state={{ from: el?.fullname }}
                   className='group p-3'
                   key={el?.id}
                 >

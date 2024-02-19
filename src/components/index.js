@@ -68,6 +68,7 @@ import ApplicationsDetail from './Applications/ApplicationsDetail';
 import ApplicationsUpdate from './Applications/ApplicationsUpdate';
 import ClothesFilter from './GBShop/Items/Filters/ClothesFilter';
 import ItemsSort from './GBShop/Items/Sorting/ItemsSort';
+import BrandsItems from './GBShop/Brands/BrandsItems';
 
 export {
   Layout,
@@ -140,4 +141,5 @@ export {
   ApplicationsUpdate,
   ClothesFilter,
   ItemsSort,
+  BrandsItems,
 };
