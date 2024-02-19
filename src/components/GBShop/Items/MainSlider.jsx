@@ -41,7 +41,7 @@ const MainSlider = ({
         {allImagesArray?.map((el, index) => (
           <SwiperSlide
             key={index}
-            className='relative sm:h-[340px] lg:h-[470px] rounded-lg mx-auto bg-[#f4f4f4]'
+            className='relative sm:h-[340px] lg:h-[470px] rounded-lg mx-auto'
           >
             <img
               src={
