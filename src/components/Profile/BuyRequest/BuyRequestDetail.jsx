@@ -39,7 +39,22 @@ const BuyRequestDetail = () => {
   };
 
   const handlePay = () => {
-    payForBuyRequest((item?.totalCost * currency).toFixed(2), userData, item);
+    payForBuyRequest(
+      (item?.totalCost * currency).toFixed(2),
+      userData,
+      item,
+      handleFetchBuyRequest
+    );
+  };
+
+  const handleFetchBuyRequest = async () => {
+    setIsLoading(true);
+    const { success, data } = await FetchBuyRequestsDetail(id);
+    if (success) {
+      setItem(data);
+      setIsLoading(false);
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -87,55 +102,49 @@ const BuyRequestDetail = () => {
         <ContentLoading extraStyle={480} />
       ) : (
         <>
-          <div className='ld:flex md:block lg:flex justify-between'>
-            <div>
-              <div className='flex items-center'>
-                <span>ФИО:</span>
-                <span className='ml-1 font-medium'>
-                  {item?.client?.fullname}
-                </span>
-              </div>
-              <div className='flex items-center py-1'>
-                <span>Статус оплаты:</span>
-                <span
-                  className={`${
-                    item?.paid ? 'text-green-500' : 'text-red-500'
-                  } ml-1 font-medium`}
-                >
-                  {item?.paid ? 'Оплачено' : 'Неоплачено'}
-                </span>
-              </div>
-              <div className='flex items-center'>
-                <span>Описание:</span>
-                <span className='ml-1 font-medium'>
-                  {item?.info || 'Не указано'}
-                </span>
-              </div>
-            </div>
-            <div>
-              <div className='flex items-center pt-3'>
-                <span className='text-lg'>Счет на оплату:</span>
-                <div className='ml-1 flex justify-end items-center'>
-                  <span className='text-lg font-bold whitespace-nowrap'>
-                    $ {item?.totalCost?.toFixed(2)}
-                  </span>
-                  <span className='whitespace-nowrap pl-1 text-sm pt-[2px]'>
-                    ({(item?.totalCost * currency)?.toFixed(2)} с)
+          <div className='flex items-center'>
+            <span>ФИО:</span>
+            <span className='ml-1 font-medium'>{item?.client?.fullname}</span>
+          </div>
+          <div className='flex items-center py-1'>
+            <span>Статус оплаты:</span>
+            <span
+              className={`${
+                item?.paid ? 'text-green-500' : 'text-red-500'
+              } ml-1 font-medium`}
+            >
+              {item?.paid ? 'Оплачено' : 'Неоплачено'}
+            </span>
+          </div>
+          {item?.totalCost !== 0 &&
+            item?.totalCost !== null &&
+            item?.paid === false && (
+              <>
+                <div className='flex items-center pt-3'>
+                  <span>Счет на оплату:</span>
+                  <div className='ml-1 flex justify-end items-center'>
+                    <span className='font-bold whitespace-nowrap'>
+                      $ {item?.totalCost?.toFixed(2)}
+                    </span>
+                    <span className='whitespace-nowrap pl-1 text-sm pt-[2px]'>
+                      ({(item?.totalCost * currency)?.toFixed(2)} с)
+                    </span>
+                  </div>
+                </div>
+                <div className='flex items-center'>
+                  <span className='text-sm'>Описание:</span>
+                  <span className='ml-1 italic text-sm'>
+                    {item?.info || 'Не указано'}
                   </span>
                 </div>
-              </div>
-              {item?.totalCost !== 0 &&
-                item?.totalCost !== null &&
-                item?.paid === false && (
-                  <button
-                    onClick={handlePay}
-                    className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 mt-4 w-full ld:max-w-[240px]'
-                  >
-                    Оплатить
-                  </button>
-                )}
-            </div>
-          </div>
+                <button
+                  onClick={handlePay}
+                  className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 mt-4 w-full ld:max-w-[280px]'
+                >
+                  Оплатить
+                </button>
+              </>
+            )}
           <h3 className='pt-6 pb-4 font-medium'>Товары</h3>
           <div className='grid mm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5'>
             {item?.cart_request?.map((el, index) => (

@@ -84,12 +84,12 @@ export const patchPaymentStatus = async (id) => {
 };
 
 // Pay For Buy Request:
-export const payForBuyRequest = (amount, user, item) => {
+export const payForBuyRequest = (amount, user, item, handleFetchBuyRequest) => {
   let data = {
     token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
     payment: {
       order: `${amount}`,
-      amount: amount,
+      amount: 10,
       language: 'ru',
       currency: 'KGS',
       description: 'Оплата за заявку на покупку товара',
@@ -102,6 +102,7 @@ export const payForBuyRequest = (amount, user, item) => {
     },
     successCallback: async () => {
       await patchPaymentStatus(item?.id);
+      handleFetchBuyRequest();
     },
     errorCallback: async (payment) => {
       console.error(payment);
