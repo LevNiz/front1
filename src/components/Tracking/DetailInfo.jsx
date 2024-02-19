@@ -103,7 +103,7 @@ const DetailInfo = (props) => {
         }
       },
       errorCallback: function (payment) {
-        console.log(`Error: ${payment}`);
+        console.error(`Error: ${payment}`);
       },
     };
 
