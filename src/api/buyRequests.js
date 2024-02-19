@@ -33,6 +33,7 @@ export const postBuyRequest = async (data, userID, blocks) => {
       name: data.name,
       phone: data.phone,
       client: Number(userID),
+      info: data?.info,
       status: 'created',
       cart_request: blocks,
     };
@@ -49,6 +50,7 @@ export const updateBuyRequest = async (data, blocks, id) => {
     const sendData = {
       name: data.name,
       phone: data.phone,
+      info: data.info,
       cart_request: blocks,
     };
     await axiosInstance.patch(`core/buyer_request/${id}/`, sendData);

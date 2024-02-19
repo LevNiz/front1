@@ -13,6 +13,11 @@ const BuyRequestUpdate = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [blocks, setBlocks] = useState([]);
+  const [size, setSize] = useState(window.innerWidth);
+
+  window.addEventListener('resize', function () {
+    setSize(window.innerWidth);
+  });
 
   const {
     handleSubmit,
@@ -30,6 +35,7 @@ const BuyRequestUpdate = () => {
         return {
           name: data?.name,
           phone: data?.phone,
+          info: data?.info,
         };
       }
     },
@@ -76,40 +82,51 @@ const BuyRequestUpdate = () => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid mm:grid-cols-2 gap-5'>
-            <div>
-              <p className='font-medium mb-2'>ФИО</p>
-              <input
-                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
-                placeholder='ФИО'
-                {...register('name', {
-                  required: 'Поле обязательно к заполнению!',
-                })}
-              />
-              {errors?.name && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.name?.message || 'Поле обязательно к заполнению!'}
-                </p>
-              )}
+            <div className='space-y-2'>
+              <div>
+                <p className='font-medium mb-2'>ФИО</p>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='ФИО'
+                  {...register('name', {
+                    required: 'Поле обязательно к заполнению!',
+                  })}
+                />
+                {errors?.name && (
+                  <p className='text-red-500 mt-1 text-sm'>
+                    {errors?.name?.message || 'Поле обязательно к заполнению!'}
+                  </p>
+                )}
+              </div>
+              <div>
+                <p className='font-medium mb-2 pt-[2px]'>Номер телефона</p>
+                <input
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                  placeholder='Номер телефона'
+                  type='tel'
+                  {...register('phone', {
+                    required: 'Поле обязательно к заполнению!',
+                    pattern: {
+                      value: /^[\d()+ -]+$/,
+                      message: 'Введите только цифры!',
+                    },
+                  })}
+                />
+                {errors?.phone && (
+                  <p className='text-red-500 mt-1 text-sm'>
+                    {errors?.phone?.message || 'Поле обязательно к заполнению!'}
+                  </p>
+                )}
+              </div>
             </div>
             <div>
-              <p className='font-medium mb-2'>Номер телефона</p>
-              <input
-                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
-                placeholder='Номер телефона'
-                type='tel'
-                {...register('phone', {
-                  required: 'Поле обязательно к заполнению!',
-                  pattern: {
-                    value: /^[\d()+ -]+$/,
-                    message: 'Введите только цифры!',
-                  },
-                })}
+              <p className='font-medium mb-2'>Описание</p>
+              <textarea
+                className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
+                placeholder='Описание'
+                rows={size > 576 ? 5 : 2}
+                {...register('info')}
               />
-              {errors?.phone && (
-                <p className='text-red-500 mt-1 text-sm'>
-                  {errors?.phone?.message || 'Поле обязательно к заполнению!'}
-                </p>
-              )}
             </div>
           </div>
           <p className='font-medium mb-2 mt-4'>Товары</p>
@@ -146,8 +163,8 @@ const BuyRequestUpdate = () => {
               </div>
               <div>
                 <p className='font-medium mb-2'>Комментарий</p>
-                <input
-                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none'
+                <textarea
+                  className='w-full border border-colGray2 p-[14px] rounded-[4px] focus:border-black focus:outline-none resize-none'
                   placeholder='Комментарий'
                   {...register(`comment${index}`)}
                   onChange={(e) => handleCommentValue(index, e.target.value)}
@@ -166,7 +183,7 @@ const BuyRequestUpdate = () => {
           )}
           <button
             type='submit'
-            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 max-w-xs w-full'
+            className='mt-8 font-medium hover:opacity-80 p-3 rounded-lg bg-black text-white duration-150 mm:max-w-xs w-full'
           >
             Cохранить
           </button>
