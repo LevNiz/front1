@@ -13,14 +13,14 @@ const ItemsSlider = ({
   const { images, image, colors, imagelink } = item;
 
   const allImagesArray = [
-    ...(colors
+    ...(colors && colors?.length > 0
       ? colors
           .map((color) => ({ id: color?.id, image: color?.image }))
           .filter(Boolean)
       : []),
-    ...(images || []),
-    ...(image ? [image] : []),
-    ...(imagelink ? [imagelink] : []),
+    ...(colors && colors?.length === 0 ? images || [] : []),
+    ...(colors && colors?.length === 0 && image ? [image] : []),
+    ...(colors && colors?.length === 0 && imagelink ? [imagelink] : []),
   ];
 
   return (
