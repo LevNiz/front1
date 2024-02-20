@@ -132,7 +132,7 @@ const BuyRequestDetail = () => {
                     </span>
                   </div>
                 </div>
-                <div className='flex items-center'>
+                <div className='flex items-start pt-1'>
                   <span className='text-sm'>Описание:</span>
                   <span className='ml-1 italic text-sm'>
                     {item?.info || 'Не указано'}
