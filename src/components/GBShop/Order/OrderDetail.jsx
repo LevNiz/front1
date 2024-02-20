@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import ModalGBShop from '../../../helpers/Modals/ModalGBShop';
-import noImg from '../../../assets/images/no-image.svg';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { payForParcel } from '../../../api/gb-shop/order';
+import { payForOrder } from '../../../api/gb-shop/order';
 import { useLocation } from 'react-router-dom';
 import { currency } from '../../../constants/currency';
 import { fetchUser } from '../../../api/client';
+import noImg from '../../../assets/images/no-image.svg';
+import attention from '../../../assets/icons/attention3.svg';
 
 const OrderDetail = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -73,7 +74,7 @@ const OrderDetail = () => {
 
   const onSubmit = (data) => {
     const amount = (totalCost * currency)?.toFixed(1);
-    payForParcel(data, cartItems, userData, state, amount);
+    payForOrder(data, cartItems, userData, state, amount);
   };
 
   return (
@@ -167,112 +168,123 @@ const OrderDetail = () => {
                 />
               </div>
             </div>
-            <div className='md:w-3/5 md:p-5 rounded-md md:bg-[#F5F5F5] space-y-5'>
-              {cartItems?.map((el, index) => (
-                <div key={index} className='flex'>
-                  <div className='sm:w-32 sm:h-32 sm:min-w-[128px] w-28 h-28 min-w-[112px] rounded-md overflow-hidden bg-white'>
-                    <img
-                      className='w-full h-full object-contain'
-                      src={el?.item?.image}
-                      alt='*'
-                    />
-                  </div>
-                  <div className='flex flex-col justify-between w-full'>
-                    <div className='pl-3 pt-2'>
-                      <h5 className='font-medium line-clamp-2 break-all'>
-                        {el?.item?.name}
-                      </h5>
-                      <div className='flex items-center py-2'>
-                        <span className='text-sm text-[#888993]'>
-                          Количество:
-                        </span>
-                        <p className='ml-1 text-sm font-medium'>
-                          {el?.quantity}
-                        </p>
-                      </div>
-                      <div className='flex items-center'>
-                        <div className='min-w-[24px] w-6 h-6 rounded-full overflow-hidden border border-gray-300 bg-white'>
-                          <img
-                            className='w-full h-full object-contain rounded-full p-[2px]'
-                            src={el?.item?.supplier?.avatar}
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = noImg;
-                            }}
-                            alt='*'
-                          />
-                        </div>
-                        <p className='text-sm text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
-                          {el?.item?.supplier?.fullname}
-                        </p>
-                      </div>
+            <div className='md:w-3/5'>
+              <div className='md:p-5 rounded-md md:bg-gray-100 space-y-5'>
+                {cartItems?.map((el, index) => (
+                  <div key={index} className='flex'>
+                    <div className='sm:w-32 sm:h-32 sm:min-w-[128px] w-28 h-28 min-w-[112px] rounded-md overflow-hidden bg-white'>
+                      <img
+                        className='w-full h-full object-contain'
+                        src={el?.item?.image}
+                        alt='*'
+                      />
                     </div>
-                    {el && el.memory !== '' && el.memory !== null ? (
-                      <div className='font-medium ml-3 text-right'>
-                        $ {(el?.memory?.addCost * el?.quantity)?.toFixed(1)}{' '}
-                        <p className='text-xs ml-1'>
-                          (
-                          {(
-                            el?.memory?.addCost *
-                            currency *
-                            el?.quantity
-                          ).toFixed(1)}{' '}
-                          с)
-                        </p>
+                    <div className='flex flex-col justify-between w-full'>
+                      <div className='pl-3 pt-2'>
+                        <h5 className='font-medium line-clamp-2 break-all'>
+                          {el?.item?.name}
+                        </h5>
+                        <div className='flex items-center py-2'>
+                          <span className='text-sm text-[#888993]'>
+                            Количество:
+                          </span>
+                          <p className='ml-1 text-sm font-medium'>
+                            {el?.quantity}
+                          </p>
+                        </div>
+                        <div className='flex items-center'>
+                          <div className='min-w-[24px] w-6 h-6 rounded-full overflow-hidden border border-gray-300 bg-white'>
+                            <img
+                              className='w-full h-full object-contain rounded-full p-[2px]'
+                              src={el?.item?.supplier?.avatar}
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = noImg;
+                              }}
+                              alt='*'
+                            />
+                          </div>
+                          <p className='text-sm text-[#A7A9B7] ml-1 line-clamp-1 break-all'>
+                            {el?.item?.supplier?.fullname}
+                          </p>
+                        </div>
                       </div>
-                    ) : (
-                      <div className='font-medium ml-3 text-right'>
-                        {el?.item?.issale
-                          ? `$${el?.item?.costSale?.toFixed(1)}`
-                          : `$${el?.item?.cost?.toFixed(1)}`}
-                        <p className='text-xs ml-1'>
-                          (
+                      {el && el.memory !== '' && el.memory !== null ? (
+                        <div className='font-medium ml-3 text-right'>
+                          $ {(el?.memory?.addCost * el?.quantity)?.toFixed(1)}{' '}
+                          <p className='text-xs ml-1'>
+                            (
+                            {(
+                              el?.memory?.addCost *
+                              currency *
+                              el?.quantity
+                            ).toFixed(1)}{' '}
+                            с)
+                          </p>
+                        </div>
+                      ) : (
+                        <div className='font-medium ml-3 text-right'>
                           {el?.item?.issale
-                            ? (el?.item?.costSale * currency)?.toFixed(1)
-                            : (el?.item?.cost * currency)?.toFixed(1)}{' '}
-                          с)
-                        </p>
-                      </div>
-                    )}
+                            ? `$${el?.item?.costSale?.toFixed(1)}`
+                            : `$${el?.item?.cost?.toFixed(1)}`}
+                          <p className='text-xs ml-1'>
+                            (
+                            {el?.item?.issale
+                              ? (el?.item?.costSale * currency)?.toFixed(1)
+                              : (el?.item?.cost * currency)?.toFixed(1)}{' '}
+                            с)
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                <div className='space-y-2 pt-4'>
+                  <div className='flex justify-between items-center'>
+                    <span className='text-[#484848]'>Товары</span>
+                    <span className='text-[#484848]'>
+                      {cartItems?.length} товара
+                    </span>
+                  </div>
+                  <div className='flex justify-between items-center'>
+                    <span className='text-[#484848]'>Доставка</span>
+                    <span className='text-[#484848]'>Включено в стоимость</span>
+                  </div>
+                  <div className='flex justify-between items-center'>
+                    <span className='text-[#484848]'>Итого к оплате</span>
+                    <span className='text-black font-bold'>
+                      {totalCost?.toFixed(1)} ${' '}
+                      <span className='text-sm font-medium'>
+                        ({(totalCost * currency)?.toFixed(1)} c)
+                      </span>
+                    </span>
                   </div>
                 </div>
-              ))}
-              <div className='space-y-2 pt-4'>
-                <div className='flex justify-between items-center'>
-                  <span className='text-[#484848]'>Товары</span>
-                  <span className='text-[#484848]'>
-                    {cartItems?.length} товара
-                  </span>
+              </div>
+              <div className='pt-10 sm:max-w-sm w-full ml-auto'>
+                <div>
+                  <button
+                    type='button'
+                    onClick={handleSubmit(onSubmit)}
+                    disabled={!addresses?.length}
+                    className={`${
+                      addresses?.length
+                        ? 'hover:opacity-80'
+                        : 'opacity-60 cursor-not-allowed'
+                    } font-medium px-4 h-14 rounded-md bg-black text-white duration-150 w-full`}
+                  >
+                    Перейти к оплате
+                  </button>
                 </div>
-                <div className='flex justify-between items-center'>
-                  <span className='text-[#484848]'>Доставка</span>
-                  <span className='text-[#484848]'>Включено в стоимость</span>
-                </div>
-                <div className='flex justify-between items-center'>
-                  <span className='text-[#484848]'>Итого к оплате</span>
-                  <span className='text-black font-bold'>
-                    {totalCost?.toFixed(1)} ${' '}
-                    <span className='text-sm font-medium'>
-                      ({(totalCost * currency)?.toFixed(1)} c)
-                    </span>
-                  </span>
+                <div className='bg-gray-100 p-3 rounded-md mt-4 flex items-start'>
+                  <img className='w-4 mt-[2px] mr-1' src={attention} alt='*' />
+                  <p className='text-sm text-gray-700'>
+                    Пожалуйста, обратите внимание, что к вашей сумме будет
+                    добавлена комиссия в размере <strong>3%</strong>.
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-          <div className='flex justify-end pt-10'>
-            <button
-              type='button'
-              onClick={handleSubmit(onSubmit)}
-              disabled={!addresses?.length}
-              className={`${
-                addresses?.length
-                  ? 'hover:opacity-80'
-                  : 'opacity-60 cursor-not-allowed'
-              } font-medium px-4 h-14 rounded-md bg-black text-white duration-150 sm:max-w-xs w-full`}
-            >
-              Подтвердить
-            </button>
           </div>
         </form>
       )}

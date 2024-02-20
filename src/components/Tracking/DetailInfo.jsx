@@ -1,21 +1,22 @@
-import nounBox from './../../assets/icons/noun-box.svg';
-import mapImg from './../../assets/images/map.png';
-import sender from './../../assets/icons/sender.svg';
-import receiver from './../../assets/icons/location3.svg';
-import cargo from './../../assets/icons/cargo.svg';
-import dollar from './../../assets/icons/dollar.svg';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   PatchParcelsPaymentStatus,
   fetchParcelDetail,
   fetchSaveParcel,
 } from '../../api/parcels';
 import { ButtonLoading, ContentLoading } from '../../helpers/Loader/Loader';
-import { useSelector } from 'react-redux';
 import { parcelStatus } from '../../constants/statusData';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
-import { currency } from '../../constants/currency';
+import { currency, percentage } from '../../constants/currency';
+import nounBox from './../../assets/icons/noun-box.svg';
+import mapImg from './../../assets/images/map.png';
+import sender from './../../assets/icons/sender.svg';
+import receiver from './../../assets/icons/location3.svg';
+import cargo from './../../assets/icons/cargo.svg';
+import dollar from './../../assets/icons/dollar.svg';
+import attention from './../../assets/icons/attention3.svg';
 
 const DetailInfo = (props) => {
   const userID = useSelector((state) => state?.user?.userID);
@@ -69,11 +70,13 @@ const DetailInfo = (props) => {
 
   const payForParcel = () => {
     const amount = parcelDetail?.totalCost * currency;
+    const totalAmount = Number(amount) + Number(amount) * percentage;
+
     var data = {
       token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
       payment: {
         order: `${parcelDetail?.id}`,
-        amount: amount,
+        amount: totalAmount,
         language: 'ru',
         currency: 'KGS',
         description: `Оплата за услуги доставки (${parcelDetail?.orderNumber})`,
@@ -271,17 +274,30 @@ const DetailInfo = (props) => {
                       </span>
                     </div>
                   </div>
-                  {parcelDetail?.paymentStatus === 'paid' ? (
-                    <div className='font-medium px-4 h-12 flex justify-center items-center text-lg rounded-lg bg-black opacity-50 cursor-not-allowed text-white w-full'>
+                  {!parcelDetail?.paymentStatus === 'paid' ? (
+                    <div className='font-medium px-4 h-12 flex justify-center items-center text-md rounded-lg bg-green-300 opacity-50 cursor-not-allowed w-full'>
                       Оплачено
                     </div>
                   ) : (
-                    <button
-                      onClick={handlePayForParcel}
-                      className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 w-full'
-                    >
-                      Оплатить
-                    </button>
+                    <>
+                      <button
+                        onClick={handlePayForParcel}
+                        className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 w-full'
+                      >
+                        Оплатить
+                      </button>
+                      <div className='bg-gray-100 p-3 rounded-md mt-4 flex items-start'>
+                        <img
+                          className='w-4 mt-[2px] mr-1'
+                          src={attention}
+                          alt='*'
+                        />
+                        <p className='text-sm text-gray-700'>
+                          Пожалуйста, обратите внимание, что к вашей сумме будет
+                          добавлена комиссия в размере <strong>3%</strong>.
+                        </p>
+                      </div>
+                    </>
                   )}
                 </div>
                 <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2'>

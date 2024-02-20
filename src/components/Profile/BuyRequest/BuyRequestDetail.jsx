@@ -12,6 +12,7 @@ import { currency } from '../../../constants/currency';
 import { fetchUser } from '../../../api/client';
 import trash from '../../../assets/icons/trash.svg';
 import update from '../../../assets/icons/update.svg';
+import attention from '../../../assets/icons/attention3.svg';
 
 const BuyRequestDetail = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -143,6 +144,13 @@ const BuyRequestDetail = () => {
                 >
                   Оплатить
                 </button>
+                <div className='bg-gray-100 p-3 rounded-md mt-4 flex items-start'>
+                  <img className='w-4 mt-[2px] mr-1' src={attention} alt='*' />
+                  <p className='text-sm text-gray-700'>
+                    Пожалуйста, обратите внимание, что к вашей сумме будет
+                    добавлена комиссия в размере <strong>3%</strong>.
+                  </p>
+                </div>
               </>
             )}
           <h3 className='pt-6 pb-4 font-medium'>Товары</h3>

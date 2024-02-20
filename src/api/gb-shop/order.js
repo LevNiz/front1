@@ -1,3 +1,4 @@
+import { percentage } from '../../constants/currency';
 import { axiosInstance } from '../axios';
 
 // Post Order Item:
@@ -35,12 +36,13 @@ const orderItemPost = async (data, items, userData, state) => {
 };
 
 // Payment FreeDomPay
-export const payForParcel = (orderData, items, userData, state, amount) => {
+export const payForOrder = (orderData, items, userData, state, amount) => {
+  const totalAmount = Number(amount) + Number(amount) * percentage;
   let data = {
     token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
     payment: {
       order: `${orderData?.address?.value}`,
-      amount: amount,
+      amount: totalAmount,
       language: 'ru',
       currency: 'KGS',
       description: `Оплата за покупку в GB-Shop`,

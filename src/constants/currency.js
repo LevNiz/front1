@@ -7,6 +7,8 @@ import china from '../assets/tempImages/china.png';
 
 export const currency = 93;
 
+export const percentage = 0.03;
+
 // temp data:
 export const currencyData = [
   {

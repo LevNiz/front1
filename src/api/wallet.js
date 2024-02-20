@@ -1,3 +1,4 @@
+import { percentage } from '../constants/currency';
 import {
   fetchWalletHistoryFailure,
   fetchWalletHistoryStart,
@@ -46,11 +47,12 @@ const postTopUpWallet = async (amount, user, currency) => {
 };
 // pay for top up wallet
 export const payForWallet = (amount, user, currency) => {
+  const totalAmount = Number(amount) + Number(amount) * percentage;
   let data = {
     token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
     payment: {
       order: `${amount}`,
-      amount: amount,
+      amount: totalAmount,
       language: 'ru',
       currency: 'KGS',
       description: `Пополнение кошелка через оплату картой (${amount} KGS)`,

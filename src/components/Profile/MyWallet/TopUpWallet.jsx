@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 import { fetchCurrency, payForWallet } from '../../../api/wallet';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
-import { useLocation } from 'react-router-dom';
+import attention from '../../../assets/icons/attention3.svg';
 
 const TopUpWallet = () => {
   const [currency, setCurrency] = useState([]);
@@ -82,6 +83,13 @@ const TopUpWallet = () => {
             <button className='hover:opacity-80 font-medium px-4 h-12 text-lg rounded-lg text-white bg-black duration-150 mt-4 w-full'>
               Оплатить
             </button>
+            <div className='bg-gray-100 p-3 rounded-md mt-4 flex items-start'>
+              <img className='w-4 mt-[2px] mr-1' src={attention} alt='*' />
+              <p className='text-sm text-gray-700'>
+                Пожалуйста, обратите внимание, что к вашей сумме будет добавлена
+                комиссия в размере <strong>3%</strong>.
+              </p>
+            </div>
           </form>
           <div className='shadow-md w-full p-3 mm:p-5 rounded-lg mt-5 lg:mt-0 lg:ml-8 space-y-3'>
             <p className='font-medium'>Эквиваленты в валютах</p>

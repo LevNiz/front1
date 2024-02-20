@@ -1,3 +1,4 @@
+import { percentage } from '../constants/currency';
 import {
   fetchBuyRequestFailure,
   fetchBuyRequestStart,
@@ -83,11 +84,12 @@ export const patchPaymentStatus = async (id) => {
 
 // Pay For Buy Request:
 export const payForBuyRequest = (amount, user, item, handleFetchBuyRequest) => {
+  const totalAmount = Number(amount) + Number(amount) * percentage;
   let data = {
     token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
     payment: {
       order: `${amount + item?.id}`,
-      amount: amount,
+      amount: totalAmount,
       language: 'ru',
       currency: 'KGS',
       description: 'Оплата за заявку на покупку товара',
