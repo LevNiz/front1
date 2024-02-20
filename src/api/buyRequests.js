@@ -86,8 +86,8 @@ export const payForBuyRequest = (amount, user, item, handleFetchBuyRequest) => {
   let data = {
     token: import.meta.env.VITE_REACT_APP_FREE_DOM_PAY_TOKEN,
     payment: {
-      order: `${amount}`,
-      amount: 10,
+      order: `${amount + item?.id}`,
+      amount: amount,
       language: 'ru',
       currency: 'KGS',
       description: 'Оплата за заявку на покупку товара',
