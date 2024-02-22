@@ -17,7 +17,7 @@ import Modal from '../../helpers/Modals/Modal';
 import { fetchCosts } from '../../api/costs';
 
 import attention from '../../assets/icons/attention.svg';
-import attention2 from '../../assets/icons/attention.svg';
+import attention2 from '../../assets/icons/attention2.svg';
 import info from '../../assets/icons/attention2.svg';
 import boxSize from '../../assets/images/box-size.jpeg';
 import receptionPoint from '../../assets/icons/receptionPoint.svg';

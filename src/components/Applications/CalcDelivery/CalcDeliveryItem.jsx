@@ -18,7 +18,7 @@ const CalcDeliveryItem = () => {
 
   const handleButtonClick = () => {
     setIsClickedForm(false);
-    setTariff(!tariff);
+    setTariff(null);
   };
 
   const handleGetTariff = (data) => {
