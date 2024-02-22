@@ -313,7 +313,7 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
           </div>
         </div>
       </header>
-      {loginModal ? (
+      {loginModal && (
         <div
           onClick={(e) => handleOutSideModal(e)}
           className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 z-[999999]'
@@ -336,8 +336,6 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
             </NavLink>
           </div>
         </div>
-      ) : (
-        ''
       )}
       <MobileMenu
         TechChatNotification={TechChatNotification}
