@@ -33,17 +33,6 @@ export const fetchParcelsNextPage = async (dispatch, next, items) => {
   }
 };
 
-export const fetchMoreParcels = async (userID, page) => {
-  try {
-    const res = await request.get(
-      `/core/package/?page=${page}&clients=${userID}`
-    );
-    return { success: true, data: res?.data?.results };
-  } catch (error) {
-    return { success: false };
-  }
-};
-
 export const PatchParcelsPaymentStatus = async (id) => {
   try {
     await axiosInstance.patch(`core/package/${id}/`, {
@@ -135,11 +124,12 @@ export const fetchSortSavedParcels = async (param, userID, dispatch) => {
 export const FetchSavedParcels = async (dispatch, userID) => {
   dispatch(fetchSavedParcelsStart());
   try {
-    const res = await request.get(`core/package/`);
+    const res = await request.get('core/package/');
     const filteredParcels = res?.data?.results?.filter((parcel) =>
       parcel?.clients?.includes(userID)
     );
     dispatch(fetchSavedParcelsSuccess(filteredParcels));
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchSavedParcelsFailure(error));
   }

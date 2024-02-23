@@ -141,6 +141,7 @@ export const fetchArchiveApplications = async (userID, dispatch) => {
       `core/request/?client=${userID}&archive=true`
     );
     dispatch(fetchArchiveApplicationSuccess(res?.data?.results));
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchArchiveApplicationFailure(error));
   }

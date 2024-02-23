@@ -1,24 +1,61 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchArchiveApplications } from '../../../api/applications';
+import {
+  fetchApplicationsNextPage,
+  fetchArchiveApplications,
+} from '../../../api/applications';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { NavLink } from 'react-router-dom';
 import parcelCar from '../../../assets/images/parcel-car.svg';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
+import { useInView } from 'react-intersection-observer';
 
 const ArchiveApplications = () => {
   const { userID } = useSelector((state) => state?.user);
   const { loading, error, archiveApplications } = useSelector(
     (state) => state?.applications
   );
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [nextPage, setNextPage] = useState(null);
+
   const dispatch = useDispatch();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     (async () => {
-      await fetchArchiveApplications(userID, dispatch);
+      const { data } = await fetchArchiveApplications(userID, dispatch);
+      if (data?.next) {
+        setNextPage(data?.next);
+      } else {
+        setNextPage(null);
+      }
     })();
   }, [userID, dispatch]);
+
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchApplicationsNextPage(
+        dispatch,
+        nextPage,
+        archiveApplications
+      );
+      if (data?.next) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   return (
     <div className='flex flex-col space-y-5 py-8'>
@@ -101,6 +138,11 @@ const ArchiveApplications = () => {
           title='К сожалению, нет архивных заявок.'
           desc='Здесь будут ваши архивные заявки.'
         />
+      )}
+      {!loading && (
+        <div ref={ref} className='p-1'>
+          {scrollLoading && <ContentLoading />}
+        </div>
       )}
     </div>
   );

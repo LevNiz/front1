@@ -18,7 +18,7 @@ const ParcelItem = ({ parcel }) => {
               {parcel?.senderCity?.nameRu}, {parcel?.senderCountry?.nameRu}
             </h4>
             <p className='text-xs text-colGray font-medium mt-1'>
-              {parcel?.dateCreated.split('T')[0]}
+              {parcel?.dateCreated?.split('T')[0]}
             </p>
           </div>
         </div>
@@ -42,10 +42,10 @@ const ParcelItem = ({ parcel }) => {
       <div>
         <div
           className={`lg:p-[10px] py-1 p-2 ml-3 text-center min-w-[70px] sm:min-w-[90px] lg:min-w-[120px] cursor-pointer text-[8px] sm:text-xs rounded-[50px] ${
-            parcelStatus[parcel?.status].statusStyle
+            parcelStatus[parcel?.status]?.statusStyle
           }`}
         >
-          {parcelStatus[parcel?.status].name || 'Не указан'}
+          {parcelStatus[parcel?.status]?.name || 'Не указан'}
         </div>
       </div>
     </NavLink>

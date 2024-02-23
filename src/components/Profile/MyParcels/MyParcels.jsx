@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
   FetchSavedParcels,
+  fetchParcelsNextPage,
   fetchSearchSavedParcels,
   fetchSortSavedParcels,
 } from '../../../api/parcels';
@@ -11,6 +12,7 @@ import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import ParcelItem from './ParcelItem';
 import FilterModal from './FilterModal';
+import { useInView } from 'react-intersection-observer';
 import sort from './../../../assets/icons/sort.svg';
 import search from './../../../assets/icons/search.svg';
 
@@ -20,8 +22,11 @@ const MyParcels = () => {
   );
   const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
+  const [ref, inView] = useInView();
 
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [nextPage, setNextPage] = useState(null);
 
   const openFilterModal = (e) => {
     e.preventDefault();
@@ -48,9 +53,34 @@ const MyParcels = () => {
 
   useEffect(() => {
     (async () => {
-      await FetchSavedParcels(dispatch, userID);
+      const { data } = await FetchSavedParcels(dispatch, userID);
+      setNextPage(data?.next);
     })();
   }, [dispatch, userID]);
+
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchParcelsNextPage(
+        dispatch,
+        nextPage,
+        savedParcels
+      );
+      if (data?.next) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   return (
     <div className='py-5 sm:p-3 md:p-4 w-full overflow-hidden'>
@@ -131,6 +161,11 @@ const MyParcels = () => {
           {savedParcels?.map((el) => (
             <ParcelItem key={el?.id} parcel={el} />
           ))}
+          {!loading && (
+            <div ref={ref} className='p-1'>
+              {scrollLoading && <ContentLoading />}
+            </div>
+          )}
         </>
       ) : (
         <ErrorEmpty
