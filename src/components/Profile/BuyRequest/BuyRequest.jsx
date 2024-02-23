@@ -1,11 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BuyRequestItem from './BuyRequestItem';
-import { FetchBuyRequests } from '../../../api/buyRequests';
+import {
+  FetchBuyRequests,
+  fetchBuyRequestsNextPage,
+} from '../../../api/buyRequests';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
+import { useInView } from 'react-intersection-observer';
 
 const BuyRequest = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -15,12 +19,41 @@ const BuyRequest = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [ref, inView] = useInView();
+
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [nextPage, setNextPage] = useState(null);
 
   useEffect(() => {
     (async () => {
-      await FetchBuyRequests(dispatch, userID);
+      const { data } = await FetchBuyRequests(dispatch, userID);
+      setNextPage(data?.next);
     })();
   }, [dispatch, userID]);
+
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchBuyRequestsNextPage(
+        dispatch,
+        nextPage,
+        buyRequests
+      );
+      if (data?.next) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   return (
     <div className='w-full pt-5 md:p-4'>
@@ -40,11 +73,18 @@ const BuyRequest = () => {
       ) : error ? (
         <ErrorServer />
       ) : buyRequests?.length ? (
-        <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5'>
-          {buyRequests?.map((buyRequest) => (
-            <BuyRequestItem key={buyRequest?.id} data={buyRequest} />
-          ))}
-        </div>
+        <>
+          <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5'>
+            {buyRequests?.map((buyRequest) => (
+              <BuyRequestItem key={buyRequest?.id} data={buyRequest} />
+            ))}
+          </div>
+          {!loading && (
+            <div ref={ref} className='p-1'>
+              {scrollLoading && <ContentLoading />}
+            </div>
+          )}
+        </>
       ) : (
         <ErrorEmpty
           title='К сожалению, нет заявок.'

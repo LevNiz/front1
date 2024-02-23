@@ -14,8 +14,22 @@ export const FetchBuyRequests = async (dispatch, userID) => {
       `core/buyer_request/?client=${userID}&ordering=-dateCreated`
     );
     dispatch(fetchBuyRequestSuccess(res?.data?.results));
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchBuyRequestFailure(error));
+  }
+};
+
+export const fetchBuyRequestsNextPage = async (dispatch, next, items) => {
+  try {
+    const res = await request.get(`${next}`);
+    const results = res?.data?.results;
+    const moreItems = [...items, ...results];
+    dispatch(fetchBuyRequestSuccess(moreItems));
+    return { data: res?.data };
+  } catch (error) {
+    dispatch(fetchBuyRequestFailure(error));
+    return { success: false };
   }
 };
 

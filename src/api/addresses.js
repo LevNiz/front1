@@ -11,8 +11,22 @@ export const fetchAddresses = async (userID, dispatch) => {
   try {
     const res = await request.get(`core/addresses/?user=${userID}`);
     dispatch(fetchAddressSuccess(res?.data?.results));
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchAddressFailure(error));
+  }
+};
+
+export const fetchSavedAddressesNextPage = async (dispatch, next, items) => {
+  try {
+    const res = await request.get(`${next}`);
+    const results = res?.data?.results;
+    const moreItems = [...items, ...results];
+    dispatch(fetchAddressSuccess(moreItems));
+    return { data: res?.data };
+  } catch (error) {
+    dispatch(fetchAddressFailure(error));
+    return { success: false };
   }
 };
 

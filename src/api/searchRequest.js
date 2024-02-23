@@ -11,8 +11,22 @@ export const fetchSearchRequest = async (dispatch, userID) => {
   try {
     const res = await request.get(`core/item_search_request/?client=${userID}`);
     dispatch(fetchSearchRequestSuccess(res?.data?.results));
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchSearchRequestFailure(error));
+  }
+};
+
+export const fetchSearchRequestsNextPage = async (dispatch, next, items) => {
+  try {
+    const res = await request.get(`${next}`);
+    const results = res?.data?.results;
+    const moreItems = [...items, ...results];
+    dispatch(fetchSearchRequestSuccess(moreItems));
+    return { data: res?.data };
+  } catch (error) {
+    dispatch(fetchSearchRequestFailure(error));
+    return { success: false };
   }
 };
 

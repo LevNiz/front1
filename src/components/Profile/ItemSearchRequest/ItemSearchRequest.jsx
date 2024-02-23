@@ -1,11 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ItemSearchRequestCard from './ItemSearchRequestCard';
-import { fetchSearchRequest } from '../../../api/searchRequest';
+import {
+  fetchSearchRequest,
+  fetchSearchRequestsNextPage,
+} from '../../../api/searchRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 
 const ItemSearchRequest = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -15,12 +19,41 @@ const ItemSearchRequest = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [ref, inView] = useInView();
+
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [nextPage, setNextPage] = useState(null);
 
   useEffect(() => {
     (async () => {
-      await fetchSearchRequest(dispatch, userID);
+      const { data } = await fetchSearchRequest(dispatch, userID);
+      setNextPage(data?.next);
     })();
   }, [dispatch, userID]);
+
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchSearchRequestsNextPage(
+        dispatch,
+        nextPage,
+        searchRequests
+      );
+      if (data?.next) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   return (
     <div className='w-full pt-5 md:p-4'>
@@ -40,11 +73,18 @@ const ItemSearchRequest = () => {
       ) : error ? (
         <ErrorServer />
       ) : searchRequests?.length ? (
-        <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4'>
-          {searchRequests?.map((el) => (
-            <ItemSearchRequestCard key={el?.id} el={el} />
-          ))}
-        </div>
+        <>
+          <div className='py-4 grid ld:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4'>
+            {searchRequests?.map((el) => (
+              <ItemSearchRequestCard key={el?.id} el={el} />
+            ))}
+          </div>
+          {!loading && (
+            <div ref={ref} className='p-1'>
+              {scrollLoading && <ContentLoading />}
+            </div>
+          )}
+        </>
       ) : (
         <ErrorEmpty
           title='К сожалению, нет заявок.'
