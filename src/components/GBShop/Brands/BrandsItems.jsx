@@ -1,32 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ContentLoading } from '../../../helpers/Loader/Loader';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import GBSHopEmpty from '../../../helpers/Errors/GBSHopEmpty';
 import { ItemsCard } from '../../../components';
 import { useLocation, useParams } from 'react-router-dom';
 import { scrollToTop } from '../../../helpers/ScrollToTop/scrollToTop';
-import { fetchBrandsItem } from '../../../api/gb-shop/items';
-import { fetchNextPage } from '../../../helpers/fetchNextPage/fetchNextPage';
+import {
+  fetchBrandItemsNextPage,
+  fetchBrandsItem,
+} from '../../../api/gb-shop/items';
+import { useInView } from 'react-intersection-observer';
 
 const BrandsItems = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [scrollLoading, setScrollLoading] = useState(false);
   const [items, setItems] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [nextPage, setNextPage] = useState(null);
 
-  const containerRef = useRef(null);
   const { id } = useParams();
   const { state } = useLocation();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const { success, data, count } = await fetchBrandsItem(id, 1);
+        const { success, data } = await fetchBrandsItem(id);
         if (success) {
-          setItems(data);
-          setTotalPages(Math.ceil(count / 20));
+          setItems(data?.results);
+          setNextPage(data?.next);
         } else {
           setItems([]);
         }
@@ -38,37 +40,27 @@ const BrandsItems = () => {
     fetchData();
   }, [id]);
 
-  useEffect(() => {
-    const container = containerRef.current;
-
-    if (container) {
-      const observer = new IntersectionObserver(
-        async ([entry]) => {
-          if (entry.isIntersecting) {
-            fetchNextPage(
-              page,
-              setPage,
-              totalPages,
-              setItems,
-              setScrollLoading,
-              fetchBrandsItem,
-              id
-            );
-          }
-        },
-        {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1,
-        }
-      );
-      observer.observe(container);
-
-      return () => {
-        observer.disconnect();
-      };
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchBrandItemsNextPage(nextPage);
+      const newItems = data?.results;
+      if (data?.next) {
+        setNextPage(data?.next);
+        setItems([...items, ...newItems]);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
     }
-  }, [containerRef, page, id, totalPages]);
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   useEffect(() => {
     scrollToTop();
@@ -97,7 +89,7 @@ const BrandsItems = () => {
               <ItemsCard key={el?.id} el={el} favorite={true} />
             ))}
           </div>
-          <div ref={containerRef} className='p-1'>
+          <div ref={ref} className='p-1'>
             {scrollLoading && <ContentLoading />}
           </div>
         </>

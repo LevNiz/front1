@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -6,16 +6,16 @@ import { useState } from 'react';
 import { parcelStatus } from '../../constants/statusData';
 import {
   FetchParcels,
-  fetchMoreParcels,
+  fetchParcelsNextPage,
   fetchSearchParcel,
 } from '../../api/parcels';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
+import { useInView } from 'react-intersection-observer';
 import nounBox from './../../assets/icons/noun-box.svg';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import parcelIcon from './../../assets/images/parcel-icon.png';
-import { fetchNextPage } from '../../helpers/fetchNextPage/fetchNextPage';
 
 const Parcel = () => {
   const {
@@ -25,13 +25,13 @@ const Parcel = () => {
   } = useSelector((state) => state?.parcels);
   const userID = useSelector((state) => state?.user?.userID);
   const dispatch = useDispatch();
-  const containerRef = useRef(null);
+  const [ref, inView] = useInView();
 
   const [userParcels, setUserParcels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [scrollLoading, setScrollLoading] = useState(false);
-  const [totalPages, setTotalPages] = useState(1);
-  const [page, setPage] = useState(1);
+  const [nextPage, setNextPage] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -54,43 +54,34 @@ const Parcel = () => {
 
   useEffect(() => {
     (async () => {
-      const { success, count } = await FetchParcels(dispatch, userID);
-      if (success) {
-        setTotalPages(Math.ceil(count / 20));
+      const { data } = await FetchParcels(dispatch, userID);
+      if (data?.next) {
+        setNextPage(data?.next);
+      } else {
+        setNextPage(null);
       }
     })();
   }, [dispatch, userID]);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      const observer = new IntersectionObserver(
-        async ([entry]) => {
-          if (entry.isIntersecting) {
-            await fetchNextPage(
-              page,
-              setPage,
-              totalPages,
-              setUserParcels,
-              setScrollLoading,
-              fetchMoreParcels,
-              userID
-            );
-          }
-        },
-        {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1,
-        }
-      );
-      observer.observe(container);
-
-      return () => {
-        observer.disconnect();
-      };
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchParcelsNextPage(dispatch, nextPage, parcels);
+      if (data?.next) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
     }
-  }, [page, totalPages, userID]);
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   return (
     <>
@@ -220,9 +211,11 @@ const Parcel = () => {
               </NavLink>
             ))}
           </div>
-          <div ref={containerRef} className='p-1'>
-            {scrollLoading && <ContentLoading />}
-          </div>
+          {!loading && (
+            <div ref={ref} className='p-1'>
+              {scrollLoading && <ContentLoading />}
+            </div>
+          )}
         </div>
       ) : (
         <ErrorEmpty

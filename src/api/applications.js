@@ -98,7 +98,6 @@ export const updateApplications = async (data, userID, id) => {
   }
 };
 
-// Get applications:
 export const fetchApplications = async (userID, dispatch) => {
   dispatch(fetchApplicationStart());
   try {
@@ -107,20 +106,21 @@ export const fetchApplications = async (userID, dispatch) => {
       (el) => el?.archive === false
     );
     dispatch(fetchApplicationSuccess(applications));
-    return { success: true, count: res?.data?.count };
+    return { data: res?.data };
   } catch (error) {
     dispatch(fetchApplicationFailure(error));
-    return { success: false };
   }
 };
 
-export const fetchMoreApplications = async (userID, page) => {
+export const fetchApplicationsNextPage = async (dispatch, next, items) => {
   try {
-    const res = await request.get(
-      `/core/request/?page=${page}&client=${userID}`
-    );
-    return { success: true, data: res?.data?.results };
+    const res = await request.get(`${next}`);
+    const results = res?.data?.results;
+    const moreItems = [...items, ...results];
+    dispatch(fetchApplicationSuccess(moreItems));
+    return { data: res?.data };
   } catch (error) {
+    dispatch(fetchApplicationFailure(error));
     return { success: false };
   }
 };
@@ -134,7 +134,6 @@ export const fetchApplicationsDetail = async (id) => {
   }
 };
 
-// Get applications:
 export const fetchArchiveApplications = async (userID, dispatch) => {
   dispatch(fetchArchiveApplicationStart());
   try {

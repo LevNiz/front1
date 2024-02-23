@@ -11,8 +11,6 @@ import rightArrow from '../../../assets/gb-shop/icons/right.svg';
 const HomeBrands = () => {
   const { stores, loading, error } = useSelector((state) => state?.stores);
 
-  console.log(stores);
-
   return (
     <div className='py-10 content'>
       <div className='flex justify-between items-center bg-[#FBFBFB] py-1 lg:py-2 px-3 lg:px-5 mt-7 mm:mb-12'>

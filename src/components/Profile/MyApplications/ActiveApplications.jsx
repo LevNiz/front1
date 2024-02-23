@@ -6,6 +6,7 @@ import parcelCar from '../../../assets/images/parcel-car.svg';
 import { ErrorServer } from '../../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../../helpers/Errors/ErrorEmpty';
 import { NavLink } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 
 const ActiveApplications = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -13,6 +14,7 @@ const ActiveApplications = () => {
     (state) => state?.applications
   );
   const dispatch = useDispatch();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     (async () => {

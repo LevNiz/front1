@@ -1,15 +1,18 @@
-import { useEffect, useRef } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDepots, fetchMoreDepots, searchDepot } from '../../api/depots';
+import {
+  fetchDepots,
+  fetchDepotsNextPage,
+  searchDepot,
+} from '../../api/depots';
 import { DepotItem } from '../../components';
 import FilterModal from '../../components/Depots/FilterModal';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 import { scrollToTop } from '../../helpers/ScrollToTop/scrollToTop';
-import { fetchNextPage } from '../../helpers/fetchNextPage/fetchNextPage';
+import { useInView } from 'react-intersection-observer';
 
 const Depots = () => {
   const { depots, loading, error } = useSelector((state) => state?.depots);
@@ -18,10 +21,9 @@ const Depots = () => {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
   const [depotData, setDepotData] = useState([]);
   const [scrollLoading, setScrollLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [nextPage, setNextPage] = useState(null);
 
-  const containerRef = useRef(null);
+  const [ref, inView] = useInView();
 
   const {
     register,
@@ -35,43 +37,34 @@ const Depots = () => {
 
   useEffect(() => {
     (async () => {
-      const { success, count } = await fetchDepots(dispatch);
-      if (success) {
-        setTotalPages(Math.ceil(count / 20));
+      const { data } = await fetchDepots(dispatch);
+      if (data?.next) {
+        setNextPage(data?.next);
+      } else {
+        setNextPage(null);
       }
     })();
   }, [dispatch]);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      const observer = new IntersectionObserver(
-        async ([entry]) => {
-          if (entry.isIntersecting) {
-            await fetchNextPage(
-              page,
-              setPage,
-              totalPages,
-              setDepotData,
-              setScrollLoading,
-              fetchMoreDepots,
-              ''
-            );
-          }
-        },
-        {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1,
-        }
-      );
-      observer.observe(container);
-
-      return () => {
-        observer.disconnect();
-      };
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchDepotsNextPage(dispatch, nextPage, depots);
+      if (data?.next) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
     }
-  }, [page, totalPages]);
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   const openFilterModal = (e) => {
     e.preventDefault();
@@ -140,9 +133,11 @@ const Depots = () => {
               <DepotItem key={el?.id} el={el} />
             ))}
           </div>
-          <div ref={containerRef} className='p-1'>
-            {scrollLoading && <ContentLoading />}
-          </div>
+          {!loading && (
+            <div ref={ref} className='p-1'>
+              {scrollLoading && <ContentLoading />}
+            </div>
+          )}
         </>
       ) : (
         <ErrorEmpty

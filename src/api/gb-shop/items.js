@@ -108,12 +108,10 @@ export const fetchFilterItemsMobile = async (dispatch, category, formData) => {
 };
 
 // Fetch more items:
-export const fetchMoreItems = async (category, page) => {
+export const fetchBrandItemsNextPage = async (next) => {
   try {
-    const res = await request.get(
-      `/core/item/?page=${page}&category=${category}`
-    );
-    return { success: true, data: res?.data };
+    const res = await request.get(`${next}`);
+    return { data: res?.data };
   } catch (error) {
     return { success: false };
   }
@@ -202,11 +200,12 @@ export const removeFromFavorites = async (userID, itemID) => {
     alert(`Ошибка: ${error}`);
   }
 };
+
 // Filter by supplier:
-export const fetchBrandsItem = async (id, page) => {
+export const fetchBrandsItem = async (id) => {
   try {
-    const res = await request.get(`core/item/?page=${page}&supplier=${id}`);
-    return { success: true, data: res?.data?.results, count: res?.data?.count };
+    const res = await request.get(`core/item/?supplier=${id}`);
+    return { success: true, data: res?.data };
   } catch (error) {
     return { success: false, data: 'error' };
   }

@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchApplications,
-  fetchMoreApplications,
+  fetchApplicationsNextPage,
 } from '../../api/applications';
+import { NavLink } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 import { ErrorEmpty } from '../../helpers/Errors/ErrorEmpty';
 import { ErrorServer } from '../../helpers/Errors/ErrorServer';
 import { ContentLoading } from '../../helpers/Loader/Loader';
 import parcelCar from './../../assets/images/parcel-car.svg';
 import noRequest from './../../assets/images/no-request.svg';
-import { NavLink } from 'react-router-dom';
-import { fetchNextPage } from '../../helpers/fetchNextPage/fetchNextPage';
 
 const ApplicationsItem = () => {
   const { userID } = useSelector((state) => state?.user);
@@ -18,56 +18,45 @@ const ApplicationsItem = () => {
     (state) => state?.applications
   );
   const dispatch = useDispatch();
-  const containerRef = useRef(null);
+  const [ref, inView] = useInView();
 
-  const [applicationsData, setApplicationsData] = useState([]);
   const [scrollLoading, setScrollLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [nextPage, setNextPage] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const { success, count } = await fetchApplications(userID, dispatch);
-      if (success) {
-        setTotalPages(Math.ceil(count / 20));
+      const { data } = await fetchApplications(userID, dispatch);
+      if (data?.next) {
+        setNextPage(data?.next);
+      } else {
+        setNextPage(null);
       }
     })();
   }, [dispatch, userID]);
 
-  useEffect(() => {
-    setApplicationsData(applications);
-  }, [applications]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      const observer = new IntersectionObserver(
-        async ([entry]) => {
-          if (entry.isIntersecting) {
-            await fetchNextPage(
-              page,
-              setPage,
-              totalPages,
-              setApplicationsData,
-              setScrollLoading,
-              fetchMoreApplications,
-              userID
-            );
-          }
-        },
-        {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1,
-        }
+  const handleIntersection = async () => {
+    if (nextPage) {
+      setScrollLoading(true);
+      const { data } = await fetchApplicationsNextPage(
+        dispatch,
+        nextPage,
+        applications
       );
-      observer.observe(container);
-
-      return () => {
-        observer.disconnect();
-      };
+      if (data?.next) {
+        setNextPage(data?.next);
+        setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
+      }
     }
-  }, [page, totalPages, userID]);
+  };
+
+  useEffect(() => {
+    if (inView) {
+      handleIntersection();
+    }
+  }, [inView]);
 
   return (
     <div className='max-w-[991px] w-full flex flex-col space-y-8 mx-auto py-10'>
@@ -75,9 +64,9 @@ const ApplicationsItem = () => {
         <ContentLoading extraStyle='320px' />
       ) : error ? (
         <ErrorServer />
-      ) : applicationsData?.length ? (
+      ) : applications?.length ? (
         <>
-          {applicationsData?.map((el) => (
+          {applications?.map((el) => (
             <NavLink
               to={`${el?.id}`}
               key={el?.id}
@@ -144,9 +133,11 @@ const ApplicationsItem = () => {
               </div>
             </NavLink>
           ))}
-          <div ref={containerRef} className='p-1'>
-            {scrollLoading && <ContentLoading />}
-          </div>
+          {!loading && (
+            <div ref={ref} className='p-1'>
+              {scrollLoading && <ContentLoading />}
+            </div>
+          )}
         </>
       ) : (
         <ErrorEmpty

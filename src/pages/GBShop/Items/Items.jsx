@@ -41,10 +41,10 @@ const Items = () => {
       if (data?.next) {
         setNextPage(data?.next);
         setScrollLoading(false);
+      } else {
+        setScrollLoading(false);
+        setNextPage(null);
       }
-    } else {
-      setScrollLoading(false);
-      setNextPage(null);
     }
   };
 
