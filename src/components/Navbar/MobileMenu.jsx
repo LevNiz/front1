@@ -255,7 +255,9 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                       src={profileWallet}
                       alt='*'
                     />
-                    <span className='pl-1 sm:text-[15px] leading-5'>Мой кошелёк</span>
+                    <span className='pl-1 sm:text-[15px] leading-5'>
+                      Мой кошелёк
+                    </span>
                   </NavLink>
                 </li>
                 <li className='flex items-center'>
@@ -329,7 +331,7 @@ const MobileMenu = ({ isOpen, onClose, TechChatNotification }) => {
                     className='flex items-center'
                   >
                     <NavLink
-                      to={`/depots/${el?.id}`}
+                      to={user ? `/depots/${el?.id}` : '/auth/sign-in'}
                       className={`${
                         el?.active
                           ? ''

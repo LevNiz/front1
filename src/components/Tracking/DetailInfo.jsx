@@ -141,13 +141,13 @@ const DetailInfo = (props) => {
             </div>
             <div className='w-full mm:w-3/6 lg:w-3/5'>
               <div className='grid lg:grid-cols-2 gap-8'>
-                <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2 lg:col-span-1 flex flex-col justify-between'>
+                <div className='bg-white w-full p-6 sm:p-8 rounded-[20px] col-span-2 lg:col-span-1 flex flex-col justify-around'>
                   <div className='flex relative'>
                     <div className='flex flex-col items-center'>
                       <div className='w-[33px] min-h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
                         <img src={sender} alt='*' />
                       </div>
-                      <div className='absolute top-[33px] w-[2px] h-full bg-colYellow'></div>
+                      <div className='absolute top-[33px] w-[2px] h-[124px] bg-colYellow'></div>
                     </div>
                     <div className='ml-4 pb-7'>
                       <h4 className='text-sm font-medium'>Отправитель</h4>
@@ -166,12 +166,11 @@ const DetailInfo = (props) => {
                       </p>
                     </div>
                   </div>
-                  <div className='flex items-center z-10'>
+                  <div className='flex items-center z-10 pb-[30px] lg:pb-0'>
                     <div className='flex flex-col items-center'>
                       <div className='w-[33px] h-[33px] bg-[#EFEFEF] rounded-md flex justify-center items-center'>
                         <img src={cargo} alt='*' />
                       </div>
-                      <div className='w-[2px] h-full bg-colYellow'></div>
                     </div>
                     <div
                       className={`${

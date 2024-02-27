@@ -3,12 +3,15 @@ import time from './../../assets/icons/time.svg';
 import local from './../../assets/icons/location-outline.svg';
 import noImg from './../../assets/images/no-image.svg';
 import locked from './../../assets/images/locked.svg';
+import { useSelector } from 'react-redux';
 
 const DepotItem = ({ el }) => {
+  const { user } = useSelector((state) => state?.user);
+
   return (
     <>
       <NavLink
-        to={`${el?.id}`}
+        to={user ? `${el?.id}` : '/auth/sign-in'}
         className={`${
           el?.active ? '' : 'pointer-events-none'
         } shadow-[0px_10px_20px_2px_rgba(204,_204,_204,_0.40)] relative hover:shadow-[0px_10px_20px_10px_rgba(204,_204,_204,_0.40)] duration-150 overflow-hidden rounded-lg sm:rounded-2xl my-2 ss:my-0`}

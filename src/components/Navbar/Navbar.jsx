@@ -171,7 +171,9 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                             >
                               <NavLink
                                 className='px-2'
-                                to={`/depots/${el?.id}`}
+                                to={
+                                  user ? `/depots/${el?.id}` : '/auth/sign-in'
+                                }
                               >
                                 г. {el?.city?.nameRu}
                               </NavLink>
