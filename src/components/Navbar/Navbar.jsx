@@ -213,14 +213,14 @@ const Navbar = ({ TechChatNotification, gbChatNotification }) => {
                       GB-Business
                     </NavLink>
                   </li>
-                  {/* <li>
+                  <li>
                     <NavLink
                       className='hover:bg-colYellow px-4 py-2 border-b border-[#C3C3C3] duration-150 text-[15px] font-medium flex items-center'
                       to='/gb-franchise'
                     >
                       GB-Franchise
                     </NavLink>
-                  </li> */}
+                  </li>
                   {/* <li>
                     <NavLink
                       onClick={() => alert('В процессе разработки!')}
