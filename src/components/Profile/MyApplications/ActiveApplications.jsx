@@ -91,7 +91,7 @@ const ActiveApplications = () => {
                     </span>
                     <h4 className='text-[10px] ss:text-xs sm:text-sm font-medium mt-1'>
                       {el?.fromCity
-                        ? el?.fromCity?.nameRu + ', ' + el?.fromCountry?.nameRu
+                        ? el?.fromCountry?.nameRu + ', ' + el?.fromCity?.nameRu
                         : 'Не указано'}
                     </h4>
                   </div>
@@ -111,7 +111,7 @@ const ActiveApplications = () => {
                     </span>
                     <h4 className='text-[10px] ss:text-xs sm:text-sm font-medium mt-1'>
                       {el?.toCity
-                        ? el?.toCity?.nameRu + ', ' + el?.toCountry?.nameRu
+                        ? el?.toCountry?.nameRu + ', ' + el?.toCity?.nameRu
                         : 'Не указано'}
                     </h4>
                   </div>

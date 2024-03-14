@@ -91,7 +91,7 @@ const ApplicationsItem = () => {
                   </span>
                   <h4 className='text-xs sm:text-base md:text-base font-medium mt-1 sm:mt-2'>
                     {el?.fromCity
-                      ? el?.fromCity?.nameRu + ', ' + el?.fromCountry?.nameRu
+                      ? el?.fromCountry?.nameRu + ', ' + el?.fromCity?.nameRu
                       : 'Не указано'}
                   </h4>
                 </div>
@@ -111,7 +111,7 @@ const ApplicationsItem = () => {
                   </span>
                   <h4 className='text-xs sm:text-sm md:text-base font-medium mt-1 sm:mt-2'>
                     {el?.toCity
-                      ? el?.toCity?.nameRu + ', ' + el?.toCountry?.nameRu
+                      ? el?.toCountry?.nameRu + ', ' + el?.toCity?.nameRu
                       : 'Не указано'}
                   </h4>
                 </div>

@@ -62,13 +62,16 @@ const FilterModal = ({ isOpen, onClose }) => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='fixed w-full overflow-y-scroll sm:overflow-y-hidden z-[99999] h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 pb-6 sm:p-6 md:p-10 md:pt-10 max-w-[890px] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
+        className='fixed w-full overflow-y-scroll sm:overflow-y-hidden h-screen sm:h-auto sm:absolute top-0 left-0 bg-white px-3 py-6 sm:p-6 md:p-10 md:pt-10 max-w-[890px] z-[9999999] sm:rounded-[20px] shadow-[0px_10px_20px_0px_rgba(204,_204,_204,_0.40)]'
       >
         <div className='flex justify-between mb-5'>
           <div className='sm:hidden' onClick={() => onClose()}>
             <img src={back} alt='*' />
           </div>
-          <span onClick={clearFilter} className='cursor-pointer mb-3'>
+          <span
+            onClick={clearFilter}
+            className='cursor-pointer mb-3 font-medium'
+          >
             Сбросить
           </span>
         </div>
@@ -243,7 +246,7 @@ const FilterModal = ({ isOpen, onClose }) => {
         <div className='md:max-w-[340px] mt-5 mx-auto w-full'>
           <button
             type='submit'
-            className='md:max-w-[330px] w-full bg-colYellow mt-7 md:mt-0 h-12 rounded-lg hover:bg-colYellowHover duration-100'
+            className='md:max-w-[330px] w-full text-white bg-black mt-7 md:mt-0 h-12 rounded-lg hover:bg-opacity-80 duration-100'
           >
             {isLoading ? <ButtonLoading /> : 'Применить'}
           </button>

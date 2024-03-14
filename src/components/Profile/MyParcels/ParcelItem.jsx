@@ -15,7 +15,7 @@ const ParcelItem = ({ parcel }) => {
           </div>
           <div>
             <h4 className='text-sm font-medium'>
-              {parcel?.senderCity?.nameRu}, {parcel?.senderCountry?.nameRu}
+              {parcel?.senderCountry?.nameRu}, {parcel?.senderCity?.nameRu}
             </h4>
             <p className='text-xs text-colGray font-medium mt-1'>
               {parcel?.dateCreated?.split('T')[0]}
@@ -31,7 +31,7 @@ const ParcelItem = ({ parcel }) => {
           </div>
           <div>
             <h4 className='text-sm font-medium'>
-              {parcel?.receiverCity?.nameRu}, {parcel?.receiverCountry?.nameRu}
+              {parcel?.receiverCountry?.nameRu}, {parcel?.receiverCity?.nameRu}
             </h4>
             <p className='text-xs text-colGray font-medium mt-1'>
               {parcel?.dateArrived}
