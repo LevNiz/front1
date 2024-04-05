@@ -25,11 +25,7 @@ const ActiveApplications = () => {
   useEffect(() => {
     (async () => {
       const { data } = await fetchApplications(userID, dispatch);
-      if (data?.next) {
-        setNextPage(data?.next);
-      } else {
-        setNextPage(null);
-      }
+      setNextPage(data?.next);
     })();
   }, [dispatch, userID]);
 

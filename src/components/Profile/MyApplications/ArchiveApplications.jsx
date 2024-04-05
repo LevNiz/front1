@@ -25,11 +25,7 @@ const ArchiveApplications = () => {
   useEffect(() => {
     (async () => {
       const { data } = await fetchArchiveApplications(userID, dispatch);
-      if (data?.next) {
-        setNextPage(data?.next);
-      } else {
-        setNextPage(null);
-      }
+      setNextPage(data?.next);
     })();
   }, [userID, dispatch]);
 

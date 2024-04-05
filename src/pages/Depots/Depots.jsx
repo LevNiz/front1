@@ -38,11 +38,7 @@ const Depots = () => {
   useEffect(() => {
     (async () => {
       const { data } = await fetchDepots(dispatch);
-      if (data?.next) {
-        setNextPage(data?.next);
-      } else {
-        setNextPage(null);
-      }
+      setNextPage(data?.next);
     })();
   }, [dispatch]);
 
