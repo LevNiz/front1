@@ -67,32 +67,50 @@ const Footer = () => {
           <ul className='space-y-2'>
             <li className='text-xl font-medium mb-3'>Политика</li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/privacy-policy' target='_blank'>
+              <NavLink
+                to='https://givbox.ru/givbox/media/files/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0_%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8_16.04.2024.pdf'
+                target='_blank'
+              >
                 Политика конфиденциальности
               </NavLink>
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/user-agreement' target='_blank'>
+              <NavLink
+                to='https://givbox.ru/givbox/media/files/%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5_%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_16.04.2024.pdf'
+                target='_blank'
+              >
                 Пользовательское соглашение
               </NavLink>
             </li>
-            {/* <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/refund-policy' target='_blank'>
-                Правила возврата денежных средств
-              </NavLink>
-            </li> */}
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/prohibited-products' target='_blank'>
+              <NavLink
+                to='https://givbox.ru/givbox/media/files/%D0%94%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80_%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0.pdf'
+                target='_blank'
+              >
+                Публичная оферта
+              </NavLink>
+            </li>
+            <li className='opacity-80 hover:opacity-100 duration-100'>
+              <NavLink
+                to='https://givbox.ru/givbox/media/files/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B7%D0%B0%D0%BF%D1%80%D0%B5%D1%89%D0%B5%D0%BD%D0%BD%D1%8B%D1%85_%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2.pdf'
+                target='_blank'
+              >
                 Запрещенные товары
               </NavLink>
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/delivery-policy' target='_blank'>
+              <NavLink
+                to='https://givbox.ru/givbox/media/files/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0_%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B8.pdf'
+                target='_blank'
+              >
                 Правила условия доставки
               </NavLink>
             </li>
             <li className='opacity-80 hover:opacity-100 duration-100'>
-              <NavLink to='/payment-policy' target='_blank'>
+              <NavLink
+                to='https://givbox.ru/givbox/media/files/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0_%D0%BE%D0%BF%D0%BB%D0%B0%D1%82%D1%8B_%D0%B8_%D0%B2%D0%BE%D0%B7%D0%B2%D1%80%D0%B0%D1%82%D0%B0_%D0%B4%D0%B5%D0%BD%D0%B5%D0%B6%D0%BD%D1%8B%D1%85_%D1%81%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B2.pdf'
+                target='_blank'
+              >
                 Правила оплаты и возврата денежных средств
               </NavLink>
             </li>

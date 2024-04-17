@@ -57,9 +57,6 @@ import {
   Applications,
   GBChat,
   GBFranchises,
-  PrivacyPolicy,
-  UserAgreement,
-  RefundPolicy,
   MainPage,
   Items,
   Categories,
@@ -67,9 +64,6 @@ import {
   Order,
   Favorites,
   Brands,
-  ProhibitedProducts,
-  DeliveryPolicy,
-  PaymentPolicy,
 } from '../pages';
 
 export const router = createBrowserRouter(
@@ -105,12 +99,6 @@ export const router = createBrowserRouter(
           <Route path=':id' element={<AlaketDetail />} />
           <Route path='new' element={<AlaketNew />} />
         </Route>
-        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-        <Route path='/user-agreement' element={<UserAgreement />} />
-        <Route path='/refund-policy' element={<RefundPolicy />} />
-        <Route path='/prohibited-products' element={<ProhibitedProducts />} />
-        <Route path='/payment-policy' element={<PaymentPolicy />} />
-        <Route path='/delivery-policy' element={<DeliveryPolicy />} />
         <Route path='gb-business' element={<GBBusiness />} />
         <Route path='gb-franchise' element={<GBFranchises />} />
         <Route path='gb-shop'>

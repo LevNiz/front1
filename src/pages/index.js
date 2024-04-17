@@ -9,9 +9,6 @@ import GBBusiness from './GBBusiness/GBBusiness';
 import Applications from './Applications/Applications';
 import GBChat from './GBChat/GBChat';
 import GBFranchises from './GBFranchises/GBFranchises';
-import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
-import UserAgreement from './UserAgreement/UserAgreement';
-import RefundPolicy from './RefundPolicy/RefundPolicy';
 import MainPage from './GBShop/MainPage/MainPage';
 import Categories from './GBShop/Categories/Categories';
 import Items from './GBShop/Items/Items';
@@ -19,9 +16,6 @@ import Basket from './GBShop/Basket/Basket';
 import Order from './GBShop/Order/Order';
 import Favorites from './GBShop/Favorites/Favorites';
 import Brands from './GBShop/Brands/Brands';
-import ProhibitedProducts from './ProhibitedProducts/ProhibitedProducts';
-import DeliveryPolicy from './DeliveryPolicy/DeliveryPolicy';
-import PaymentPolicy from './PaymentPolicy/PaymentPolicy';
 
 export {
   Tracking,
@@ -35,9 +29,6 @@ export {
   Applications,
   GBChat,
   GBFranchises,
-  PrivacyPolicy,
-  UserAgreement,
-  RefundPolicy,
   MainPage,
   Categories,
   Items,
@@ -45,7 +36,4 @@ export {
   Order,
   Favorites,
   Brands,
-  ProhibitedProducts,
-  DeliveryPolicy,
-  PaymentPolicy,
 };
